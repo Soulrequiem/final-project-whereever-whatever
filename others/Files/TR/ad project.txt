@@ -1,0 +1,29 @@
+-Is Print needed in Assign Dept Rep: and Assign Temporary Department Representative?
+
+ask san la to change view stationery catalogue
+
+cannot assign again if there is somebody in the current position
+
+add remove button inside the assign temporary department representative
+
+delete price under discrepancy report
+
+clerk, 
+create discrepancy report, change to remove, change to create, add print icon
+create purchase order, make order to create, remove and add cancel
+receive order form
+
+and press enter or select the suggested search result
+
+============================================
+not yet created controller
+stationery retrieval list
+notification
+send email
+
+=============================================
+db
+add collectionmissed
+add notification
+
+delete delivery order and delivery order details

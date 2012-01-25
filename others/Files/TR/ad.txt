@@ -1,0 +1,15 @@
+add
+======================
+create disbursement
+view stationery retrieval list
+create stationery retrieval list
+
+modify
+======================
+stationery retrieval list => view stationery retrieval list
+
+
+====================================================================
+create purchase order
+create discrepancy report
+request stationery
