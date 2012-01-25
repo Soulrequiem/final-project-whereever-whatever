@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA34_Team9_StationeryStoreInventorySystem", "StationeryStoreInventorySystem\SA34_Team9_StationeryStoreInventorySystem.csproj", "{2A300C09-FD76-4530-81C0-C6AFCF859885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA34_Team9_StationeryStoreInventorySystemModel", "StationeryStoreInventorySystemModel\SA34_Team9_StationeryStoreInventorySystemModel.csproj", "{BFF5A020-3B4C-4034-8D89-3F4B7CD59ECF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA34_Team9_StationeryStoreInventorySystemController", "StationeryStoreInventorySystemController\SA34_Team9_StationeryStoreInventorySystemController.csproj", "{FCB721E3-6E46-4257-981D-35FB1321F43D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA34_Team9_SystemStoreInventorySystemUtil", "SystemStoreInventorySystemUtil\SA34_Team9_SystemStoreInventorySystemUtil.csproj", "{0B594918-2100-4169-A513-7610DE755BA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A300C09-FD76-4530-81C0-C6AFCF859885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A300C09-FD76-4530-81C0-C6AFCF859885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A300C09-FD76-4530-81C0-C6AFCF859885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A300C09-FD76-4530-81C0-C6AFCF859885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF5A020-3B4C-4034-8D89-3F4B7CD59ECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF5A020-3B4C-4034-8D89-3F4B7CD59ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF5A020-3B4C-4034-8D89-3F4B7CD59ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF5A020-3B4C-4034-8D89-3F4B7CD59ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCB721E3-6E46-4257-981D-35FB1321F43D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB721E3-6E46-4257-981D-35FB1321F43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB721E3-6E46-4257-981D-35FB1321F43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB721E3-6E46-4257-981D-35FB1321F43D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B594918-2100-4169-A513-7610DE755BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B594918-2100-4169-A513-7610DE755BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B594918-2100-4169-A513-7610DE755BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B594918-2100-4169-A513-7610DE755BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
