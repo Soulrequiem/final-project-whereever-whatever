@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode description="Menu">
+    <siteMapNode url="" title="Department Employee"  description="Department Employee">
+        <siteMapNode url="~/commonUI/ChangePassword.aspx" title="Change Password"  description="Change Password" />
+        <siteMapNode url="~/commonUI/ViewStationeryCatalogue.aspx" title="View Stationery Catalogue"  description="View Stationery Catalogue" />
+        <siteMapNode url="~/departmentUI/Employee/RequestStationery.aspx" title="Request Stationery"  description="Request Stationery" />
+        <siteMapNode url="~/departmentUI/Employee/CheckRequisition.aspx" title="Check Requisition"  description="Check Requisition" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>
