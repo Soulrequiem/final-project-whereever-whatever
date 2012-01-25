@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+<data name="AdjustmentVoucher_AuthorizedBy" xml:space="preserve">
+    <value>Authorized By:</value>
+  </data>
+  <data name="AdjustmentVoucher_BackLink" xml:space="preserve">
+    <value>&lt;&lt;Back to Issue Adjustment Voucher</value>
+  </data>
+  <data name="AdjustmentVoucher_By" xml:space="preserve">
+    <value>By:</value>
+  </data>
+  <data name="AdjustmentVoucher_IssueDate" xml:space="preserve">
+    <value>Date Issued:</value>
+  </data>
+  <data name="AdjustmentVoucher_Title" xml:space="preserve">
+    <value>Adjustment Voucher</value>
+  </data>
+  <data name="AdjustmentVoucher_Voucher" xml:space="preserve">
+    <value>Voucher#:</value>
+  </data>
+  <data name="Application_Title" xml:space="preserve">
+    <value>Stationery Store Inventory System</value>
+  </data>
+  <data name="ApproveRequisition_Title" xml:space="preserve">
+    <value>Approve Requisition</value>
+  </data>
+  <data name="AssignDeptRespresentative_Title" xml:space="preserve">
+    <value>Assign Department Representative</value>
+  </data>
+  <data name="AssignTempDeptRep_Title" xml:space="preserve">
+    <value>Assign Temporary Department Representative</value>
+  </data>
+  <data name="AssignTempDeptHead_Title" xml:space="preserve">
+    <value>Assign Temporary Department Head</value>
+</data>
+  <data name="BlackListDepartment_DepartmentList" xml:space="preserve">
+    <value>Department List</value>
+  </data>
+  <data name="BlackListDepartment_Title" xml:space="preserve">
+    <value>Black List Department</value>
+  </data>
+  <data name="ChangePassword_ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password :</value>
+  </data>
+  <data name="ChangePassword_NewPassword" xml:space="preserve">
+    <value>New Password :</value>
+  </data>
+  <data name="ChangePassword_OldPassword" xml:space="preserve">
+    <value>Old Password :</value>
+  </data>
+  <data name="ChangePassword_Title" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+<data name="CreatePurchaseOrder_Attention" xml:space="preserve">
+    <value>Attn:</value>
+  </data>
+  <data name="CreatePurchaseOrder_DeliverTo" xml:space="preserve">
+    <value>Deliver To:</value>
+  </data>
+  <data name="CreatePurchaseOrder_Description" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="CreatePurchaseOrder_ItemNumber" xml:space="preserve">
+    <value>Item No:</value>
+  </data>
+  <data name="CreatePurchaseOrder_PONo" xml:space="preserve">
+    <value>PO Number:</value>
+  </data>
+  <data name="CreatePurchaseOrder_Price" xml:space="preserve">
+    <value>Price:</value>
+  </data>
+  <data name="CreatePurchaseOrder_Quantity" xml:space="preserve">
+    <value>Quantity:</value>
+  </data>
+  <data name="CreatePurchaseOrder_Supplier" xml:space="preserve">
+    <value>Supplier:</value>
+  </data>
+  <data name="CreatePurchaseOrder_SupplyDate" xml:space="preserve">
+    <value>Please supply the following items by:</value>
+  </data>
+  <data name="CreatePurchaseOrder_Titile" xml:space="preserve">
+    <value>Create Purchase Order</value>
+  </data>
+  <data name="CreateStationeryRetrievalList_Title" xml:space="preserve">
+    <value>Create Stationery Retrieval List</value>
+  </data>
+  <data name="ForgotPassword_Email" xml:space="preserve">
+    <value>Enter email address:</value>
+  </data>
+  <data name="ForgotPassword_Title" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
+  <data name="CurrentAuthorizedPerson" xml:space="preserve">
+    <value>Current Authorized Person</value>
+  </data>
+  <data name="ManageCollectionPoint_GroupBox" xml:space="preserve">
+    <value>Current Collection Point</value>
+  </data>
+  <data name="ManageCollectionPoint_SelectNewCollectionPoint" xml:space="preserve">
+    <value>Select New Collection Point :</value>
+  </data>
+  <data name="ManageCollectionPoint_Title" xml:space="preserve">
+    <value>Manage Collection Point</value>
+  </data>
+  <data name="GenerateDisbursement_Title" xml:space="preserve">
+    <value>Generate Disbursement</value>
+  </data>
+  <data name="IssueAdjustmentVoucher_AuthorizedBy" xml:space="preserve">
+    <value>Authorized By:</value>
+  </data>
+  <data name="IssueAdjustmentVoucher_By" xml:space="preserve">
+    <value>By:</value>
+  </data>
+  <data name="IssueAdjustmentVoucher_IssueDate" xml:space="preserve">
+    <value>Date Issued:</value>
+  </data>
+  <data name="IssueAdjustmentVoucher_Title" xml:space="preserve">
+    <value>Issue Adjustment Voucher</value>
+  </data>
+  <data name="IssueAdjustmentVoucher_Voucher" xml:space="preserve">
+    <value>Voucher#:</value>
+  </data>
+  <data name="MasterPageFooter_Text" xml:space="preserve">
+    <value>@Copyright 2012-2013 Logic University. All Rights Reserved.</value>
+  </data>
+  <data name="MasterPageHeader_Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="SubmitRequisitionsToStore_SubmitToStore" xml:space="preserve">
+    <value>SubmitToStore</value>
+  </data>
+  <data name="SubmitRequisitionsToStore_Title" xml:space="preserve">
+    <value>Submit Requisitions To Store</value>
+  </data>
+  <data name="UpdateCollectionByItems_GridViewTitle" xml:space="preserve">
+    <value>Please fill in the Actual Quantity</value>
+  </data>
+  <data name="UpdateCollectionByItems_GroupBoxTitle1" xml:space="preserve">
+    <value>Item Details</value>
+  </data>
+  <data name="UpdateCollectionByItems_Header" xml:space="preserve">
+    <value>Update Collection By Items</value>
+  </data>
+  <data name="UpdateCollectionByRequisions_CollectionDateTimeLabel" xml:space="preserve">
+    <value>Collection Date/Time :</value>
+  </data>
+  <data name="UpdateCollectionByRequisions_CollectionIDLabel" xml:space="preserve">
+    <value>Collection ID :</value>
+  </data>
+  <data name="UpdateCollectionByRequisions_CollectionPointLabel" xml:space="preserve">
+    <value>Collection Point :</value>
+  </data>
+  <data name="UpdateCollectionByRequisions_GroupBoxTitle" xml:space="preserve">
+    <value>Collection List</value>
+  </data>
+  <data name="UpdateCollectionByRequisions_GroupBoxTitle1" xml:space="preserve">
+    <value>Requisition Details</value>
+  </data>
+  <data name="UpdateCollectionByRequisions_RequisitionLabel" xml:space="preserve">
+    <value>Requisition List for Selected Collection</value>
+  </data>
+  <data name="UpdateCollectionByRequisions_SelectCollectionLabel" xml:space="preserve">
+    <value>Please Select Collection </value>
+  </data>
+  <data name="UpdateCollectionByRequisitions" xml:space="preserve">
+    <value>Update Collection By Requisitions</value>
+  </data>
+  <data name="ReceiveOrderForm_DeliverDate" xml:space="preserve">
+    <value>Delivery Date:</value>
+  </data>
+  <data name="ReceiveOrderForm_DeliveryOrderNo" xml:space="preserve">
+    <value>Deliver Order No:</value>
+  </data>
+  <data name="ReceiveOrderForm_Remarks" xml:space="preserve">
+    <value>Remarks(Clerk):</value>
+  </data>
+  <data name="ReceiveOrderForm_SupplierName" xml:space="preserve">
+    <value>Supplier Name:</value>
+  </data>
+  <data name="ReceiveOrderForm_Title" xml:space="preserve">
+    <value>Receive Order Form</value>
+  </data>
+  <data name="ReceiveOrderForm_YourRefPONo" xml:space="preserve">
+    <value>Your Ref PO Number:</value>
+  </data>
+  <data name="RequisitionDetails_DeptCode" xml:space="preserve">
+    <value>Dept Code :</value>
+  </data>
+  <data name="RequisitionDetails_DeptName" xml:space="preserve">
+    <value>Dept Name :</value>
+  </data>
+  <data name="RequisitionDetails_EmployeeEmailAddress" xml:space="preserve">
+    <value>Employee Email Address :</value>
+  </data>
+  <data name="RequisitionDetails_EmployeeName" xml:space="preserve">
+    <value>Employee Name :</value>
+  </data>
+  <data name="RequisitionDetails_EmployeeNumber" xml:space="preserve">
+    <value>Employee Number :</value>
+  </data>
+  <data name="RequisitionDetails_RequisitionDates" xml:space="preserve">
+    <value>Requisition Date :</value>
+  </data>
+  <data name="RequisitionDetails_RequisitionID" xml:space="preserve">
+    <value>Requisition ID :</value>
+  </data>
+  <data name="RequisitionDetails_Title" xml:space="preserve">
+    <value>Requisition Details</value>
+  </data>
+  <data name="LogIn_Header" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="LogIn_PasswordLabel" xml:space="preserve">
+    <value>Password :</value>
+  </data>
+  <data name="LogIn_SignIn_Button_Text" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="LogIn_UserNameLabel" xml:space="preserve">
+    <value>User Name :</value>
+  </data>
+  <data name="ViewAdjustmentVoucherList_AuthorizedBy" xml:space="preserve">
+    <value>Authorized By:</value>
+  </data>
+  <data name="ViewAdjustmentVoucherList_By" xml:space="preserve">
+    <value>By:</value>
+  </data>
+  <data name="ViewAdjustmentVoucherList_DateIssue" xml:space="preserve">
+    <value>Date Issued:</value>
+  </data>
+  <data name="ViewAdjustmentVoucherList_Title" xml:space="preserve">
+    <value>View Adjustment Voucher List</value>
+  </data>
+  <data name="ViewAdjustmentVoucherList_Voucher" xml:space="preserve">
+    <value>Voucher#:</value>
+  </data>
+  <data name="ViewStationeryRetrievalList_Title" xml:space="preserve">
+    <value>View Stationery Retrieval List</value>
+  </data>
+  <data name="ViewStockCard_1stSupplier" xml:space="preserve">
+    <value>1st Supplier</value>
+  </data>
+  <data name="ViewStockCard_2ndSupplier" xml:space="preserve">
+    <value>2nd Supplier</value>
+  </data>
+  <data name="ViewStockCard_3rdSupplier" xml:space="preserve">
+    <value>3rd Supplier</value>
+  </data>
+  <data name="ViewStockCard_Bin" xml:space="preserve">
+    <value>Bin#:</value>
+  </data>
+  <data name="CheckRequisition_header_Text" xml:space="preserve">
+    <value>Check Requisition</value>
+  </data>
+  <data name="CheckRequisition_Status_Label" xml:space="preserve">
+    <value>Status :</value>
+  </data>
+  <data name="Remove_Button_text" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RequestStationery_DeptCode_Label" xml:space="preserve">
+    <value>Dept. Code :</value>
+  </data>
+  <data name="RequestStationery_DeptName_Label" xml:space="preserve">
+    <value>Dept. Name :</value>
+  </data>
+  <data name="RequestStationery_EmpEmail_Label" xml:space="preserve">
+    <value>Employee Email :</value>
+  </data>
+  <data name="RequestStationery_EmpName_Label" xml:space="preserve">
+    <value>Employee Name :</value>
+  </data>
+  <data name="RequestStationery_EmpNumber_Label" xml:space="preserve">
+    <value>Employee Number :</value>
+  </data>
+  <data name="RequestStationery_Header" xml:space="preserve">
+    <value>Request Stationery</value>
+  </data>
+  <data name="Request_Button_text" xml:space="preserve">
+    <value>Request</value>
+  </data>
+  <data name="RequisitionDetails_Label_Text" xml:space="preserve">
+    <value>Request Stationery Details</value>
+  </data>
+  <data name="Reset_Button_text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SearchResult_Label" xml:space="preserve">
+    <value>Search Result</value>
+  </data>
+  <data name="ViewStationeryCatalogue_EnterItemDescriptionLabel" xml:space="preserve">
+    <value>Item Description :</value>
+  </data>
+  <data name="ViewStationeryCatalogue_Header" xml:space="preserve">
+    <value>View Stationery Catalogue</value>
+  </data>
+  <data name="ViewStationeryCatalogue_Label" xml:space="preserve">
+    <value>Stationery List</value>
+  </data>
+  <data name="Withdraw_Button_text" xml:space="preserve">
+    <value>Withdraw</value>
+  </data>
+  <data name="ApproveButton_text" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="CreateDiscrepencyReport_AddButton" xml:space="preserve">
+    <value>Add Item</value>
+  </data>
+  <data name="CreateDiscrepencyReport_GropuBoxHeader" xml:space="preserve">
+    <value>Adjustment Voucher Form</value>
+  </data>
+  <data name="CreateDiscrepencyReport_Header" xml:space="preserve">
+    <value>Create Discrepency Report</value>
+  </data>
+  <data name="CreateDiscrepencyReport_ItemNo" xml:space="preserve">
+    <value>Item No :</value>
+  </data>
+  <data name="CreateDiscrepencyReport_ItemPrice" xml:space="preserve">
+    <value>Item Price :</value>
+  </data>
+  <data name="CreateDiscrepencyReport_Quantity" xml:space="preserve">
+    <value>Item Quantity :</value>
+  </data>
+  <data name="CreateDiscrepencyReport_Reason" xml:space="preserve">
+    <value>Reason :</value>
+  </data>
+  <data name="CreateStationeryRetreivalList_ActualQtyText" xml:space="preserve">
+    <value>Actual Qty : </value>
+  </data>
+  <data name="CreateStationeryRetreivalList_BinText" xml:space="preserve">
+    <value>Bin :</value>
+  </data>
+  <data name="CreateStationeryRetreivalList_ButtonText" xml:space="preserve">
+    <value>Set based on Request Sequence</value>
+  </data>
+  <data name="CreateStationeryRetreivalList_HyperlinkText" xml:space="preserve">
+    <value>Show automatically fulfilled Items</value>
+  </data>
+  <data name="CreateStationeryRetreivalList_NeededQtyText" xml:space="preserve">
+    <value>Needed Qty :</value>
+  </data>
+  <data name="CreateStationeryRetreivalList_RetrievalNo" xml:space="preserve">
+    <value>Retrieval No. :</value>
+  </data>
+  <data name="DeleteButton_text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="MissTime_Label" xml:space="preserve">
+    <value>Miss Time :</value>
+  </data>
+  <data name="UpdateStationeryRetrieval_Header_ButtonText" xml:space="preserve">
+    <value>Not Collected</value>
+  </data>
+  <data name="UpdateStationeryRetrieval_Header_GroupBoxTitle" xml:space="preserve">
+    <value>Stationery Retrieval List Details</value>
+  </data>
+  <data name="UpdateStationeryRetrieval_Header_RemarksTitle" xml:space="preserve">
+    <value>Clerk Remarks :</value>
+  </data>
+  <data name="UpdateStationeryRetrieval_Header_Title" xml:space="preserve">
+    <value>Update Stationery Retrieval</value>
+  </data>
+  <data name="ViewStockCard_ItemDescription" xml:space="preserve">
+    <value>Item Description:</value>
+  </data>
+  <data name="ViewStockCard_ItemNo" xml:space="preserve">
+    <value>Item No:</value>
+  </data>
+  <data name="ViewStockCard_SupplierList" xml:space="preserve">
+    <value>Supplier List:</value>
+  </data>
+  <data name="ViewStockCard_Title" xml:space="preserve">
+    <value>View Stock Card</value>
+  </data>
+  <data name="ViewStockCard_UOM" xml:space="preserve">
+    <value>UOM:</value>
+  </data>
+  <data name="ViewSupplierList_Title" xml:space="preserve">
+    <value>View Supplier List</value>
+  </data>
+</root>
