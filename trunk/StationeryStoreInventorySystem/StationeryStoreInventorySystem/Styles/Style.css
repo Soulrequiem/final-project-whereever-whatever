@@ -25,8 +25,9 @@
 {
     float:left;
     width: 220px;
+    background-color:#8DB1E2;
     /*background-color: #8DB1E2;*/
-    min-height:550px;
+    /*min-height:550px;*/
     height: 100%;
 }
 .ContentArea
