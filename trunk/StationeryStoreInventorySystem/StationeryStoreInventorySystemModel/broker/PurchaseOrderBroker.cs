@@ -17,7 +17,7 @@ using StationeryStoreInventorySystemModel.entity;
 
 namespace StationeryStoreInventorySystemModel.broker
 {
-    public class PurchaseOrderBroker: IPurchaseOrderBroker
+    public class PurchaseOrderBroker : IPurchaseOrderBroker
     {
 
         #region IPurchaseOrderBroker Members
@@ -29,7 +29,7 @@ namespace StationeryStoreInventorySystemModel.broker
         private List<PurchaseOrderDetail> purchaseOrderDetailList = null;
 
         public PurchaseOrderBroker()
-        { 
+        {
         }
         /// <summary>
         /// Retrieve the PurchaseOrder information  from PurchaseOrder Table according to the purchaseOrder Parameter
@@ -39,8 +39,8 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public PurchaseOrder GetPurchaseOrder(PurchaseOrder purchaseOrder)
         {
-            int showStatus = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
-            purchaseorder = inventory.PurchaseOrders.Where(purchaseOrderObj => purchaseOrderObj.Id == purchaseorder.Id && purchaseOrderObj.Status == showStatus).First();
+            //int showStatus = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+            purchaseorder = inventory.PurchaseOrders.Where(purchaseOrderObj => purchaseOrderObj.Id == purchaseOrder.Id).First();
             if (!purchaseorder.Equals(null))
             {
                 var purchaseOrderDetailsResult = from rd in inventory.PurchaseOrderDetails
@@ -108,10 +108,25 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                foreach (PurchaseOrderDetail purchaseOrderDetail in purchaseOrder.PurchaseOrderDetails)
-                {
-                    this.Update(purchaseOrderDetail);
-                }
+                //foreach (PurchaseOrderDetail purchaseOrderDetail in purchaseOrder.PurchaseOrderDetails)
+                //{
+                //    this.Update(purchaseOrderDetail);
+                //}
+                //inventory.SaveChanges();
+                //status = Constants.DB_STATUS.SUCCESSFULL;
+                purchaseorder = inventory.PurchaseOrders.Where(iObj => iObj.Id == purchaseOrder.Id).First();
+                Supplier supplierId = inventory.Suppliers.Where(s => s.Id == purchaseorder.Supplier.Id).First();
+               // purchaseorder.Supplier.Id = purchaseOrder.Supplier.Id;
+                purchaseorder.Supplier = supplierId;
+                purchaseorder.DeliverAddress = purchaseOrder.DeliverAddress;
+                purchaseorder.Attn = purchaseOrder.Attn;
+                purchaseorder.ExpectedDate = purchaseOrder.ExpectedDate;
+                purchaseorder.CreatedDate = purchaseOrder.CreatedDate;
+                purchaseorder.ApprovedDate = purchaseOrder.ApprovedDate;
+                purchaseorder.Status = purchaseOrder.Status;
+
+                //  supplierObj.CreatedDate = supplier.CreatedDate;
+
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -159,7 +174,7 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public PurchaseOrderDetail GetPurchaseOrderDetail(entity.PurchaseOrderDetail purchaseOrderDetail)
         {
-            
+
             purchaseorderdetail = inventory.PurchaseOrderDetails.Where(reqObj => reqObj.Id == purchaseorderdetail.Id).First();
             if (!purchaseorderdetail.Equals(null))
                 return purchaseorderdetail;
