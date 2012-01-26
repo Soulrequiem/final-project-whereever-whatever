@@ -15,13 +15,13 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Update(RequisitionCollectionDetail requisitionCollectionDetail);
         Constants.DB_STATUS Delete(RequisitionCollectionDetail requisitionCollectionDetail);
 
-        User GetRequisitionCollection(RequisitionCollection requisitionCollection);
+        RequisitionCollection GetRequisitionCollection(RequisitionCollection requisitionCollection);
         List<RequisitionCollection> GetAllRequisitionCollection();
         Constants.DB_STATUS Insert(RequisitionCollection newRequisitionCollection);
         Constants.DB_STATUS Update(RequisitionCollection requisitionCollection);
         Constants.DB_STATUS Delete(RequisitionCollection requisitionCollection);
 
-        User GetRequisitionCollectionItem(RequisitionCollectionItem requisitionCollectionItem);
+        RequisitionCollectionItem GetRequisitionCollectionItem(RequisitionCollectionItem requisitionCollectionItem);
         List<RequisitionCollectionItem> GetAllRequisitionCollectionItem();
         Constants.DB_STATUS Insert(RequisitionCollectionItem newRequisitionCollectionItem);
         Constants.DB_STATUS Update(RequisitionCollectionItem requisitionCollectionItem);
