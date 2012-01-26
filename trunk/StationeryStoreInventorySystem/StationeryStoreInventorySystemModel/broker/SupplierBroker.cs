@@ -49,6 +49,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 Employee employee = inventory.Employees.Where(eObj => eObj.Id == 1).First();
+                newSupplier.Employee = employee;
                 inventory.AddToSuppliers(newSupplier);
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
