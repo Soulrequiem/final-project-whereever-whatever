@@ -22,6 +22,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
            
            //Master.FindControl("NavigationPanel").Visible = true;
             Session["userName"] = txtUsername.Text.Trim();
+            Session["LoadFirstTime"] = true;
             Response.Redirect("~/commonUI/RequisitionDetails.aspx");
         }
     }

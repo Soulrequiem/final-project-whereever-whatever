@@ -63,11 +63,69 @@
                 runat="server">
                     <ig:WebExplorerBar ID="NavigationBar" runat="server" Width="219px" 
                         BackColor="White" BorderColor="White" EnableExpandButtons="False" 
-                        EnableViewState="False" GroupExpandBehavior="SingleExpanded" 
-                        CssClass="MenuBarstyle" StyleSetName="Office2010Blue">
+                        EnableViewState="False" StyleSetName="Office2010Blue" 
+                        onprerender="NavigationBar_PreRender" 
+                        onitemselected="NavigationBar_ItemSelected" >
                         <CollapseButton AltText="" />
+                        <AutoPostBackFlags ItemSelected="On" />
+                        <Groups>
+                            <ig:ExplorerBarGroup>
+                                <%--Employee Menu--%>
+                                <Items>
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ChangePassword.aspx"                    Text="Change Password"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ViewStationeryCatalogue.aspx"           Text="View Stationery Catalogue"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Employee/RequestStationery.aspx"    Text="Request Stationery"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx"     Text="Check Requisition"/>
+                                </Items>
+                            </ig:ExplorerBarGroup>
+                            <ig:ExplorerBarGroup>
+                                <%--Representative Menu--%>
+                                <Items>
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/SubmitRequisitionsToStore.aspx"      Text="Submit Requisition To Store"               />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/ManageCollectionPoint.aspx"          Text="Manage Collection Point"                   />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx" Text="Update Collection Details By Requisition"  />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/UpdateCollectionByItems.aspx"        Text="Update Collection Details By Items"        />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/AssignTempDeptRepresentative.aspx"   Text="Assign Temporary Department Representative"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/Report.aspx"                                            Text="Generate Reports"                          />
+                                </Items>
+                            </ig:ExplorerBarGroup>
+                            <ig:ExplorerBarGroup>
+                                <%--Head Menu--%>
+                                <Items>
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/ApproveRequisition.aspx"       Text="Approve/Reject Requisition"      />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/AssignDeptRepresentative.aspx" Text="Assign Department Representative"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/AssignTempDeptHead.aspx"       Text="Assign Temporary Department Head"/>
+                               </Items>
+                            </ig:ExplorerBarGroup>
+                            <ig:ExplorerBarGroup>
+                                <%--Clerk Menu--%>
+                                <Items>
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ChangePassword.aspx"                        Text="Change Password"                 />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewStockCard.aspx"                    Text="View Stock Card"                 />
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ViewStationeryCatalogue.aspx"               Text="View Stationery Catalogue"       />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewSupplierList.aspx"                 Text="View Supplier List"              />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ReceiveOrderForm.aspx"                 Text="Receive Order Form"              />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreatePurchaseOrder.aspx"              Text="Create Purchase Order"           />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreateDiscrepencyReport.aspx"          Text="Create Discrepency Report"       />
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/Report.aspx"                                Text="Generate Reports"                />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewStationeryRetrievalList.aspx"      Text="View Stationery Retrieval List"  />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreateStationeryRetrievalList.aspx"    Text="Create Stationery Retrieval List"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx"             Text="Generate Disbursement"           />
+                                </Items>
+                            </ig:ExplorerBarGroup>
+                            <ig:ExplorerBarGroup>
+                                <%--SuperVisor Menu--%>
+                                <Items>
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/AdjustmentVoucher.aspx"         Text="Adjustment Voucher"          />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx" Text="View Adjustment Voucher List"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx"    Text="Issue Adjustment Voucher"    />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/BlackListDepartment.aspx"       Text="Black List Department"       />
+                                </Items>
+                            </ig:ExplorerBarGroup>
+                        </Groups>
                     </ig:WebExplorerBar>
-                </asp:Panel>
+
+                    </asp:Panel>
             </div>
             <div class="ContentArea">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
