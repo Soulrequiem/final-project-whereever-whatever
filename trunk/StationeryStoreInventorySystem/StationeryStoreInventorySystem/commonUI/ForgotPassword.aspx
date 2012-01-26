@@ -13,7 +13,7 @@
        Text="<%$ Resources:WebResources, ForgotPassword_Title %>" /></h1>
 
            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
-               CssClass="GroupBoxstyle" StyleSetName="" Text="Change your password" 
+               CssClass="GroupBoxstyle" StyleSetName="" Text="<%$ Resources:WebResources, ForgotPassword_grouptext %>" 
                TitleAlignment="Left">
                <Template>
                    <br />
@@ -26,7 +26,7 @@
                        </td>
                        <td>
                            <ig:WebTextEditor ID="txtemailaddress" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" NullText="Enter Email Address">
+                            CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_email %>">
                            </ig:WebTextEditor><br />
                        </td>
                    </tr>

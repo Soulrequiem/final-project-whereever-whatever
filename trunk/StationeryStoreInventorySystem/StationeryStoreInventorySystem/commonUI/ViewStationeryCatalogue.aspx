@@ -11,7 +11,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
     <div class="print">
-        <img alt="Print" src="../../Images/Common/print.png" />
+        <asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
+          onmouseout="javascript:this.style.cursor='pointer'"  ImageUrl="~/Images/Common/print.png" 
+          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>
+        <%--<img alt="Print" src="../../Images/Common/print.png" />--%>
     </div>
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <br />
@@ -31,7 +34,7 @@
                                     CssClass="DefaultTextStyle" Width="250px">
                                 </ig:WebTextEditor><br />--%>
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
-                                     DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
+                                     DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
                                      StyleSetName="Office2010Blue">
                                     <Button Visible="False" />
                                 </ig:WebDropDown>
