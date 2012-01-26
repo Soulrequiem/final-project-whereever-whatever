@@ -19,29 +19,37 @@
             HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundCheckBoxField DataFieldName="CreateStationeryRetrievalListCheckBox" 
-                        Key="CreateStationeryRetrievalListCheckBox" Width="50px">
-                        <Header Text="BoundCheckBoxField_0" />
-                    </ig:BoundCheckBoxField>
-                    <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" Width="50px">
+                    <ig:UnboundCheckBoxField Key="CreateStationeryRetrievalListCheckBox" Width="50px">
+                    </ig:UnboundCheckBoxField>
+                    <ig:TemplateDataField Key="CollectionID" Width="120px">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("CollectionID" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                           </asp:HyperLink>
+                        </ItemTemplate>
                         <Header Text="Collection ID" />
-                    </ig:BoundDataField>
+                    </ig:TemplateDataField>
+                    <%--<ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" Width="50px">
+                        <Header Text="Collection ID" />
+                    </ig:BoundDataField>--%>
                     <ig:BoundDataField DataFieldName="CollectionDate/Time" Key="CollectionDate/Time" 
-                        Width="80px">
+                        Width="150px">
                         <Header Text="Collection Date/Time" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Department" Key="Department" Width="80px">
+                    <ig:BoundDataField DataFieldName="Department" Key="Department" Width="180px">
                         <Header Text="Department" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="DepartmentStatus" Key="DepartmentStatus" 
-                        Width="100px">
+                        Width="200px">
                         <Header Text="Department Status" />
                     </ig:BoundDataField>
                 </Columns>
                 <Behaviors>
-                    <ig:ColumnFixing>
-                    </ig:ColumnFixing>
                     <ig:Filtering>
+                        <ColumnSettings>
+                            <ig:ColumnFilteringSetting />
+                        </ColumnSettings>
                     </ig:Filtering>
                     <ig:Paging PageSize="10">
                     </ig:Paging>
@@ -49,6 +57,15 @@
                     </ig:Selection>
                     <ig:Sorting>
                     </ig:Sorting>
+                    <ig:EditingCore>
+                        <Behaviors>
+                            <ig:CellEditing>
+                                <ColumnSettings>
+                                    <ig:EditingColumnSetting ColumnKey="CreateStationeryRetrievalListCheckBox" />
+                                </ColumnSettings>
+                            </ig:CellEditing>
+                        </Behaviors>
+                    </ig:EditingCore>
                 </Behaviors>
             </ig:WebDataGrid>
             <div>

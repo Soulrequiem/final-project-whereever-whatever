@@ -49,13 +49,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::System.Web.UI.WebControls.Label lblRetrievalNo;
         
         /// <summary>
-        /// dgvCollections control.
+        /// GrpBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.WebUI.Misc.WebGroupBox dgvCollections;
+        protected global::Infragistics.WebUI.Misc.WebGroupBox GrpBox;
         
         /// <summary>
         /// lblItem control.

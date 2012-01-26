@@ -31,6 +31,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
+        /// WebGroupBox3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.WebUI.Misc.WebGroupBox WebGroupBox3;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
+        /// txtaDeliverTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtaDeliverTo;
         
         /// <summary>
         /// Label5 control.
@@ -166,13 +184,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
-        /// txtItemNumber control.
+        /// lblItemNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtItemNumber;
+        protected global::System.Web.UI.WebControls.Label lblItemNumber;
         
         /// <summary>
         /// Label9 control.

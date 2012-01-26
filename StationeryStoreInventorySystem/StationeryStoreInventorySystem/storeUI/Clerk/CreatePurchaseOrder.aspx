@@ -16,26 +16,30 @@
     </div>
     <div class="ContentDivStyle">
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
-             <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
+             <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server"
              Text="<%$ Resources:WebResources, CreatePurchaseOrder_Titile %>" /></h1>
-             <br />
+             <igmisc:WebGroupBox ID="WebGroupBox3" runat="server" Width="700px"
+                CssClass="GroupBoxstyle" StyleSetName="" Text="Create Purchase Order" 
+                TitleAlignment="Left">
+                <Template>
              <table>
                 <tr>
-                    <td>
+                    <td style="width:150px">
                         <asp:Label CssClass="DefaultLabelstyle" 
                          ID="Label2" runat="server" 
                          Text="<%$ Resources:WebResources, CreatePurchaseOrder_Supplier %>"/>
                     </td>
-                    <td style="width:200px">
-                        <ig:WebDropDown ID="DrdSupplier" runat="server" Width="150px">
+                    <td style="width:250px">
+                        <ig:WebDropDown ID="DrdSupplier" runat="server" Width="220px" 
+                            NullText="Select Supplier" CssClass="DefaultTextStyle">
                         </ig:WebDropDown>
                     </td>
-                    <td>
+                    <td style="width:150px">
                         <asp:Label CssClass="DefaultLabelstyle" 
                          ID="Label1" runat="server" 
                          Text="<%$ Resources:WebResources, CreatePurchaseOrder_PONo %>"/>
                     </td>
-                    <td>
+                    <td style="width:250px">
                         <asp:Label CssClass="DefaultLabelstyle" 
                            ID="lblPONumber" runat="server" 
                            Text="201201068"/><br />
@@ -48,7 +52,8 @@
                          Text="<%$ Resources:WebResources, CreatePurchaseOrder_SupplyDate %>"/>
                     </td>
                     <td>
-                        <ig:WebTextEditor ID="txtSupplyDate" runat="server" Width="150px">
+                        <ig:WebTextEditor ID="txtSupplyDate" runat="server" Width="220px" 
+                            NullText="Enter the Date (dd/mm/yyyy)" CssClass="DefaultTextStyle">
                         </ig:WebTextEditor>
                     </td>
                     <td>
@@ -57,7 +62,10 @@
                          Text="<%$ Resources:WebResources, CreatePurchaseOrder_DeliverTo %>"/>
                      </td>
                      <td>
-                         <textarea id="txtaRemarksClerk" cols="10" rows="1"></textarea>
+                        <ig:WebTextEditor ID="txtaDeliverTo" runat="server" Width="250px" CssClass="DefaultTextStyle"
+                            NullText="Enter the Date (dd/mm/yyyy)" Height="50px" TextMode="MultiLine">
+                        </ig:WebTextEditor>
+                         
                      </td>
                 </tr>
                 <tr>
@@ -69,19 +77,23 @@
                          Text="<%$ Resources:WebResources, CreatePurchaseOrder_Attention %>"/>
                     </td>
                     <td>
-                        <ig:WebTextEditor ID="txtAttn" runat="server" Width="150px">
+                        <ig:WebTextEditor ID="txtAttn" runat="server" Width="250px" 
+                            NullText="Enter Attention to" CssClass="DefaultTextStyle">
                         </ig:WebTextEditor>
                     </td>
                 </tr>
              </table>
-             <br />
-        <igmisc:WebGroupBox ID="WebGroupBox1" runat="server"
+             </Template>
+       </igmisc:WebGroupBox>
+       <br />
+
+        <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
           CssClass="GroupBoxstyle" StyleSetName="" Text="Purchase Order Input Form" 
           TitleAlignment="Left">
             <Template>
                 <table>
                     <tr>
-                        <td>
+                        <td style="width:150px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                              ID="Label6" runat="server" 
                              Text="<%$ Resources:WebResources, CreatePurchaseOrder_Description %>"/>
@@ -89,19 +101,20 @@
                         <td style="width:250px">
                             <%--<ig:WebTextEditor ID="txtDescription" runat="server" Width="150px">
                             </ig:WebTextEditor>--%>
-                            <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
+                            <ig:WebDropDown ID="drdItemList" runat="server" Width="220px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
                                      StyleSetName="Office2010Blue">
                                     <Button Visible="False" />
                              </ig:WebDropDown>
                         </td>
-                        <td>
+                        <td style="width:150px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                              ID="Label7" runat="server" 
                              Text="<%$ Resources:WebResources, CreatePurchaseOrder_Quantity %>"/>
                         </td>
                         <td style="width:250px">
-                            <ig:WebTextEditor ID="txtQuantity" runat="server" Width="150px">
+                            <ig:WebTextEditor ID="txtQuantity" runat="server" CssClass="DefaultTextStyle"
+                                Width="150px" NullText="Enter Item Quantity">
                             </ig:WebTextEditor>
                         </td>
                     </tr>
@@ -111,17 +124,19 @@
                              ID="Label8" runat="server" 
                              Text="<%$ Resources:WebResources, CreatePurchaseOrder_ItemNumber %>"/>
                         </td>
-                        <td style="width:200px">
-                            <ig:WebTextEditor ID="txtItemNumber" runat="server" Width="150px">
-                            </ig:WebTextEditor>
+                        <td style="width:250px">
+                            <asp:Label CssClass="DefaultLabelstyle" ID="lblItemNumber"
+                             runat="server" 
+                             Text="Blah Blah"/>
                         </td>
                         <td>
                             <asp:Label CssClass="DefaultLabelstyle" 
                              ID="Label9" runat="server" 
                              Text="<%$ Resources:WebResources, CreatePurchaseOrder_Price %>"/>
                         </td>
-                        <td style="width:200px">
-                            <ig:WebTextEditor ID="txtPrice" runat="server" Width="150px">
+                        <td style="width:100px">
+                            <ig:WebTextEditor ID="txtPrice" runat="server" CssClass="DefaultTextStyle"
+                                Width="150px" NullText="Enter Item Price">
                             </ig:WebTextEditor>
                         </td>
                         <td>
@@ -132,11 +147,11 @@
             </Template>
         </igmisc:WebGroupBox>
         <br />
-        <igmisc:WebGroupBox ID="WebGroupBox2" runat="server"
+        <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
           CssClass="GroupBoxstyle" StyleSetName="" Text="Purchase Order Input Form" 
           TitleAlignment="Left">
             <Template>
-                <ig:WebDataGrid ID="DgvPurchaseOrderInput" runat="server" Height="400px" 
+                <ig:WebDataGrid ID="DgvPurchaseOrderInput" runat="server" Height="300px" 
                     Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                     CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                     ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">

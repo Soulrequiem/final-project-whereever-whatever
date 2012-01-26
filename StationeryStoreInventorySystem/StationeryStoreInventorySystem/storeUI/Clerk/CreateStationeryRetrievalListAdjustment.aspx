@@ -38,7 +38,7 @@
           <ItemTemplate>
           </ItemTemplate>
     </asp:Repeater>--%>
-     <igmisc:WebGroupBox ID="dgvCollections" runat="server" 
+     <igmisc:WebGroupBox ID="GrpBox" runat="server" 
                 CssClass="MediumGroupBoxstyle" StyleSetName="" 
                 Text="<%$ Resources:WebResources,UpdateCollectionByRequisions_GroupBoxTitle%>" 
                 TitleAlignment="Left">
@@ -72,29 +72,31 @@
                 <div style="float:left">
                     <div style="height:10px"></div>
                     <div>
-                        <ig:WebDataGrid ID="dgvItemList" runat="server" Height="60px" Width="400px" 
+                        <ig:WebDataGrid ID="dgvItemList" runat="server" Height="100px" Width="400px" 
                             AutoGenerateColumns="False" DefaultColumnWidth="50px" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                             ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue">
                             <Columns>
                                 <ig:BoundDataField DataFieldName="DepartmentCode" Key="DepartmentCode" 
-                                    Width="80px">
+                                    Width="150px">
                                     <Header Text="Department Code" />
                                 </ig:BoundDataField>
-                                <ig:BoundDataField DataFieldName="Needed" Key="Needed" Width="50px">
-                                    <Header Text="Needed" />
+                                <ig:BoundDataField DataFieldName="Needed" Key="Needed" Width="120px">
+                                    <Header Text="Needed Quantity" />
                                 </ig:BoundDataField>
-                                <ig:BoundDataField DataFieldName="Actual" Key="Actual" Width="50px">
+                                <%--<ig:BoundDataField DataFieldName="Actual" Key="Actual" Width="50px">
                                     <Header Text="Actual" />
-                                </ig:BoundDataField>
+                                </ig:BoundDataField>--%>
+                                <ig:TemplateDataField  Key="Actual" Width="120px">
+                                    <ItemTemplate>
+                                       <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="100px"
+                                       Text='<%# Eval("Actual") %>' NullText="Enter Quantity">
+                                       </ig:WebTextEditor>
+                                    </ItemTemplate>
+                                    <Header Text="Actual Quantity" />
+                                </ig:TemplateDataField>
                             </Columns>
                             <Behaviors>
-                                <ig:ColumnFixing>
-                                </ig:ColumnFixing>
-                                <ig:Filtering>
-                                </ig:Filtering>
-                                <ig:Paging PageSize="10">
-                                </ig:Paging>
                                 <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                 </ig:Selection>
                                 <ig:Sorting>
