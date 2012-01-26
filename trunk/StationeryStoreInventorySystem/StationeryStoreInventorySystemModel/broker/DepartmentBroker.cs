@@ -33,7 +33,21 @@ namespace StationeryStoreInventorySystemModel.broker
             ////Get the Department data by Department ID
             departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id).First();
             if (!departmentObj.Equals(null))
+            {
+                departmentObj.EmployeeCreatedBy = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeCreatedBy.Id).First();
+                departmentObj.EmployeeContactId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeContactId.Id).First();
+                departmentObj.EmployeeHeadId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeHeadId.Id).First();
+                departmentObj.EmployeeRepresentativeId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeRepresentativeId.Id).First();
+                departmentObj.CollectionPoint = inventory.CollectionPoints.Where(x => x.Id == departmentObj.CollectionPoint.Id).First();
+
+                foreach (Employee e in departmentObj.EmployeeId)
+                {
+                    departmentObj.EmployeeId.Add(e);
+                }
+
+
                 return departmentObj;
+            }
             return null;
         }
         /// <summary>
@@ -81,19 +95,31 @@ namespace StationeryStoreInventorySystemModel.broker
         {
 
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
-
             try
             {
                 departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id).First();
-                departmentObj.Id = department.Id;
-                departmentObj.Name = department.Name;
-                departmentObj.PhoneNumber = department.PhoneNumber;
-                departmentObj.FaxNumber = department.FaxNumber;
-                departmentObj.CreatedDate = department.CreatedDate;
 
+                if (departmentObj != null)
+                {
+                    Employee contactId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeContactId.Id).First();
+                    Employee headId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeHeadId.Id).First();
+                    Employee representativeId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeRepresentativeId.Id).First();
+                    Employee createdBy = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeCreatedBy.Id).First();
+                    CollectionPoint collectionPId = inventory.CollectionPoints.Where(c => c.Id == departmentObj.CollectionPoint.Id).First();
+                    departmentObj.Name = department.Name;
+                    departmentObj.EmployeeContactId = contactId;
+                    departmentObj.PhoneNumber = department.PhoneNumber;
+                    departmentObj.FaxNumber = department.FaxNumber;
+                    departmentObj.EmployeeHeadId = headId;
+                    departmentObj.CollectionPoint = collectionPId;
+                    //departmentObj.CollectionPoint.Id = department.CollectionPoint.Id;
+                    departmentObj.EmployeeRepresentativeId = representativeId;
+                    departmentObj.CreatedDate = department.CreatedDate;
+                    departmentObj.EmployeeCreatedBy = createdBy;
 
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {
