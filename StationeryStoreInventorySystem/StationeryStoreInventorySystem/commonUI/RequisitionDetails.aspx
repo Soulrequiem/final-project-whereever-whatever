@@ -8,7 +8,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="print">
-        <img alt="Print" src="../Images/Common/print.png" />
+        <asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
+          onmouseout="javascript:this.style.cursor='pointer'"  ImageUrl="~/Images/Common/print.png" 
+          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>
+        <%--<img alt="Print" src="../Images/Common/print.png" />--%>
     </div>
     <div class="ContentDivStyle">
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
@@ -107,7 +110,7 @@
                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="80px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
@@ -140,7 +143,7 @@
                 </div>
                 <div style="float:right">
                     <ig:WebTextEditor ID="txtaRemarks" runat="server" Width="200px" Height="50px" 
-                        NullText="Enter Remarks">
+                        NullText="<%$ Resources:WebResources, Text_Remarks %>">
                     </ig:WebTextEditor>
                 </div>
                 <div style="float:right;margin-right:10px">

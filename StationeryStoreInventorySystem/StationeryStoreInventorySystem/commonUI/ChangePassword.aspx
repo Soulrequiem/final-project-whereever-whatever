@@ -13,7 +13,7 @@
         Text="<%$ Resources:WebResources, ChangePassword_Title %>" /></h1>
 
             <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
-                CssClass="GroupBoxstyle" StyleSetName="" Text="Change your password" 
+                CssClass="GroupBoxstyle" StyleSetName="" Text="<%$ Resources:WebResources, ChangePassword_text %>" 
                 TitleAlignment="Left">
                 <Template>
                     <br />
@@ -26,7 +26,7 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="txtOldPassword" runat="server" 
-                             CssClass="DefaultTextStyle" Width="250px" NullText="Type Old Password">
+                             CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_old%>">
                             </ig:WebTextEditor><br />
                         </td>
                     </tr>
@@ -38,7 +38,7 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="WebTextEditor2" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" NullText="Type New Password">
+                            CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_new%>">
                             </ig:WebTextEditor><br />
                         </td>
                     </tr>
@@ -50,7 +50,7 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="txtConfirmPassword" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" NullText="Type New Password">
+                            CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_new%>">
                         </ig:WebTextEditor>
                         </td>
                     </tr>
