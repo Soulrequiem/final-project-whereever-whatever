@@ -110,14 +110,14 @@
                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="200px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                            Width="150px">
+                            Width="300px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="80px">
+                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="200px">
                             <Header Text="Required Qty" />
                         </ig:BoundDataField>
                     </Columns>
@@ -128,8 +128,6 @@
                         </ig:Paging>
                         <ig:Filtering>
                         </ig:Filtering>
-                        <ig:ColumnFixing>
-                        </ig:ColumnFixing>
                         <ig:Sorting>
                         </ig:Sorting>
                     </Behaviors>
