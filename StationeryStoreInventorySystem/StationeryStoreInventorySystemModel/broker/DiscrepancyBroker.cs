@@ -17,7 +17,6 @@ namespace StationeryStoreInventorySystemModel.broker
 {
     public class DiscrepancyBroker : IDiscrepancyBroker
     {
-
         private InventoryEntities inventory = new InventoryEntities();
         private Discrepancy dis = null;
         private DiscrepancyDetail disDetail = null;
@@ -251,6 +250,7 @@ namespace StationeryStoreInventorySystemModel.broker
         throw new NotImplementedException();
     }
     }
+   
 }
 
 /****************************************/
