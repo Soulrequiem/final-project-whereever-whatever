@@ -655,7 +655,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remarks(Clerk):.
+        ///   Looks up a localized string similar to Remarks(Clerk):   .
         /// </summary>
         internal static string ReceiveOrderForm_Remarks {
             get {
