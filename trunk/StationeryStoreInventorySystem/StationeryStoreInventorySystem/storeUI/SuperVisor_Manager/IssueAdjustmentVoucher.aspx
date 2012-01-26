@@ -11,7 +11,10 @@
              <br />
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, IssueAdjustmentVoucher_Title %>" /></h1>
-             <br />
+             <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
+                CssClass="GroupBoxstyle" StyleSetName="" Text="Voucher List" 
+                TitleAlignment="Left">
+                    <Template>
              <ig:WebDataGrid ID="DgvDiscrepancyReportList" runat="server" Height="200px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
@@ -53,6 +56,8 @@
                      </ig:Sorting>
                  </Behaviors>
              </ig:WebDataGrid>
+             </Template>
+             </igmisc:WebGroupBox>
              <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Discrepancy Report" 
                 TitleAlignment="Left">
@@ -124,7 +129,8 @@
                                 </Behaviors>
                             </ig:WebDataGrid>
                             <div style="float:right">
-                                    <a class="button" href="" style="float:right">Issue</a>
+                                    <%--<a class="button" href="" style="float:right">Issue</a>--%>
+                                    <asp:Button ID="btnIssue" runat="server" CssClass="Defaultbutton" Text="Issue" />
                             </div>
                             <div style="float:left;margin-right:10px">
                                    <asp:Label CssClass="DefaultLabelstyle" 

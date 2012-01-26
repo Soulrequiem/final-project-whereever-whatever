@@ -83,10 +83,13 @@
             </Behaviors>
         </ig:WebDataGrid>
         <div style="float:right">
-               <a class="button" href="#" style="float:right">Reject</a>
+               <asp:Button ID="btnReject" CssClass="DefaultLargebutton"
+                        runat="server" Text="Reject" />
         </div>
         <div style="float:right;margin-right:10px">
-               <a class="button" href="#" style="float:right">Approve</a>
+                <asp:Button ID="btnApprove" CssClass="DefaultLargebutton"
+                        runat="server" Text="Approve" />
+               <%--<a class="button" href="#" style="float:right">Approve</a>--%>
         </div>
     </div>
 </asp:Content>

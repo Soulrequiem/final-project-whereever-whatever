@@ -31,6 +31,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager {
         protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
+        /// WebGroupBox2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.WebUI.Misc.WebGroupBox WebGroupBox2;
+        
+        /// <summary>
         /// DgvDiscrepancyReportList control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid DgvDiscrepancyReport;
+        
+        /// <summary>
+        /// btnIssue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnIssue;
         
         /// <summary>
         /// lblAuthorizedBy control.

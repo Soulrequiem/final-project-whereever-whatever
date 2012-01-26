@@ -91,7 +91,10 @@
                                 </ig:WebTextEditor>
                             </td>
                             <td>
-                                <input id="btnAdd" type="button" value="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" runat="server"/>
+                                <%--<input id="btnAdd" type="button" 
+                                    value="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" runat="server"/>--%>
+                                <asp:Button ID="btnAdd" CssClass="DefaultLargebutton"
+                                    runat="server" Text="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" />
                             </td>
                         </tr>
                     </table>
@@ -146,8 +149,10 @@
                         </Behaviors>
                  </ig:WebDataGrid><br />
                  <div style="float:right">
-                     <asp:Button ID="btnApprove" runat="server" Text="<%$ Resources:WebResources, ApproveButton_text%>" />
-                     <asp:Button ID="btnDelete" runat="server" Text="<%$ Resources:WebResources, DeleteButton_text%>" />
+                     <asp:Button ID="btnApprove" runat="server" CssClass="DefaultLargebutton"
+                        Text="<%$ Resources:WebResources, ApproveButton_text%>" />
+                     <asp:Button ID="btnDelete" runat="server" CssClass="DefaultLargebutton"
+                        Text="<%$ Resources:WebResources, DeleteButton_text%>" />
                  </div>
                 </Template>
     </igmisc:WebGroupBox>

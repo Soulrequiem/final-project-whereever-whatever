@@ -130,21 +130,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid dgvItemList;
         
         /// <summary>
-        /// btnAdd control.
+        /// btnSet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputButton btnAdd;
+        protected global::System.Web.UI.WebControls.Button btnSet;
         
         /// <summary>
-        /// Button1 control.
+        /// btnSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputButton Button1;
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
     }
 }

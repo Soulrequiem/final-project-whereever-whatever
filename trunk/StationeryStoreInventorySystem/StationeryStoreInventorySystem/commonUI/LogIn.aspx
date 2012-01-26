@@ -12,7 +12,7 @@
         <br />
         <h1 class="HeaderStyle"><asp:Literal ID="Literal19" runat="server" 
         Text="<%$ Resources:WebResources, LogIn_Header %>" /></h1>
-        <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+        <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" BorderColor="#E5E5E5"
                 CssClass="GroupBoxstyle" StyleSetName="" width="350px"
                 TitleAlignment="Left">
                 <Template>
@@ -45,7 +45,7 @@
                             <td>
                                 <a href="#" style="float:left; font-size: small;">Forgot your password?</a>
                                 <div style="float:right">
-                                    <asp:Button ID="btnSignIn" 
+                                    <asp:Button ID="btnSignIn" CssClass="Defaultbutton"
                                         runat="server" 
                                         Text="<%$ Resources:WebResources,LogIn_SignIn_Button_Text %>" onclick="btnSignIn_Click" 
                                         />

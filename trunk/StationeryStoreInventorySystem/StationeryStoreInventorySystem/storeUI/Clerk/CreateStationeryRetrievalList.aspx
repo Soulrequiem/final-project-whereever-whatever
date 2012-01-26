@@ -68,8 +68,10 @@
                     </ig:EditingCore>
                 </Behaviors>
             </ig:WebDataGrid>
-            <div>
-                <a class="buttoningrid" href="" style="float:right">Create</a>
+            <div style="float:right">
+                <%--<a class="buttoningrid" href="" style="float:right">Create</a>--%>
+                <asp:Button ID="btnApprove" runat="server" CssClass="Defaultbutton"
+                                Text="Create" />
             </div>
     </div>
 </asp:Content>

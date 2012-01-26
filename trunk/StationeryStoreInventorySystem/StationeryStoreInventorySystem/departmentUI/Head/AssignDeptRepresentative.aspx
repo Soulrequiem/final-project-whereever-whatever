@@ -64,7 +64,9 @@
                                 </Behaviors>
                             </ig:WebDataGrid>
                             <div style="float:right">
-                                    <a class="button" href="" style="float:right">Remove</a>
+                                    <%--<a class="button" href="" style="float:right">Remove</a>--%>
+                                    <asp:Button ID="btnRemove" CssClass="Defaultbutton"
+                                            runat="server" Text="Remove" />
                             </div>
                     </Template>                
             </igmisc:WebGroupBox>
@@ -134,7 +136,9 @@
                             </Behaviors>
                         </ig:WebDataGrid>
                         <div style="float:right">
-                                <a class="button" href="" style="float:right">Assign</a>
+                                <%--<a class="button" href="" style="float:right">Assign</a>--%>
+                                <asp:Button ID="btnAssign" CssClass="Defaultbutton"
+                                    runat="server" Text="Assign" />
                         </div>
                     </Template>
                 </igmisc:WebGroupBox>

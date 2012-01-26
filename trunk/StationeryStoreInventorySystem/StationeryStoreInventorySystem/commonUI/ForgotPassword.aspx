@@ -34,9 +34,10 @@
                        <td></td>
                        <td>
                            <div style="float:right" class="button">
-                               <a class="button" href="" style="float:right" onclick="javascript:return validate('MasterForm','txtemailaddress');">Send</a>
+                               <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="Defaultbutton" />
                            </div>
                        </td>
+                       
                    </tr>
                  </table>
                </Template>

@@ -140,7 +140,9 @@
                             </ig:WebTextEditor>
                         </td>
                         <td>
-                            <a class="buttoningrid" href="" style="float:right">Add</a>
+                            <%--<a class="buttoningrid" href="" style="float:right">Add</a>--%>
+                            <asp:Button ID="btnApprove" runat="server" CssClass="Defaultbutton"
+                                Text="Add" />
                         </td>
                     </tr>
                 </table>
@@ -190,10 +192,14 @@
                     </Behaviors>
                 </ig:WebDataGrid>
                 <div style="float:right">
-                     <a class="button" href="" style="float:right">Delete</a>
+                     <%--<a class="button" href="" style="float:right">Delete</a>--%>
+                     <asp:Button ID="btnDelete" runat="server" CssClass="DefaultLargebutton"
+                                Text="Delete" />
                 </div>
                 <div style="float:right;margin-right:10px">
-                     <a class="buttonlarge" href="" style="float:right">Make Order</a>
+                     <%--<a class="buttonlarge" href="" style="float:right">Make Order</a>--%>
+                     <asp:Button ID="btnOrder" runat="server" CssClass="DefaultLargebutton"
+                                Text="Create Order" />
                 </div>
             </Template>
         </igmisc:WebGroupBox>

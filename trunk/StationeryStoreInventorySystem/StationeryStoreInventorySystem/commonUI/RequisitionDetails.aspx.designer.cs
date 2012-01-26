@@ -175,6 +175,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid DgvRequisitionDetails;
         
         /// <summary>
+        /// btnReject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReject;
+        
+        /// <summary>
+        /// btnApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnApprove;
+        
+        /// <summary>
         /// txtaRemarks control.
         /// </summary>
         /// <remarks>

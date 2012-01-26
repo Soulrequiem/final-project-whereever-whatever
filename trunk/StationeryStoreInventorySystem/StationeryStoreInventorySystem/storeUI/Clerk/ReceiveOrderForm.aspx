@@ -125,7 +125,9 @@
                         </ig:WebTextEditor>
                     </div>
                     <div style="float:right">
-                        <a class="buttoningrid" href="" style="text-align:center">Received</a>
+                        <%--<a class="buttoningrid" href="" style="text-align:center">Received</a>--%>
+                        <asp:Button ID="btnReceived" runat="server" CssClass="DefaultLargebutton"
+                                Text="Received" />
                     </div>
                 </Template>
             </igmisc:WebGroupBox>
