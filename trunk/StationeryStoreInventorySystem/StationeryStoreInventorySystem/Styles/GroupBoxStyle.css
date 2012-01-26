@@ -3,18 +3,21 @@
 .GroupBoxstyle
 {
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
-    font-size:medium;
+    font-size:small;
     width:400px;
+    background-color:#F5F5F5;
 }
 .MediumGroupBoxstyle
 {
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
-    font-size:medium;
+    font-size:small;
     width:700px;
+    background-color:#F5F5F5;
 }
 .BigGroupBoxstyle
 {
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
-    font-size:medium;
+    font-size:small;
     width:800px;
+    background-color:#F5F5F5;
 }
