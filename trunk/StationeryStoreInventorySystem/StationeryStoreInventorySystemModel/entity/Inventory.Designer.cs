@@ -1411,7 +1411,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_department_employee4", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -1427,7 +1427,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -1647,7 +1647,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_discrepancy_employee1", "Employee")]
-        public Employee Employee
+        public Employee CreatedBy
         {
             get
             {
@@ -1663,7 +1663,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -3025,7 +3025,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_item_employee1", "Employee")]
-        public Employee Employee
+        public Employee CreatedBy
         {
             get
             {
@@ -3041,7 +3041,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -3338,7 +3338,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_itemprice_employee1", "Employee")]
-        public Employee Employee
+        public Employee CreatedBy
         {
             get
             {
@@ -3354,7 +3354,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -3668,7 +3668,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_purchaseorder_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -3684,7 +3684,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -4520,7 +4520,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_requisitioncollection_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -4536,7 +4536,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -4872,7 +4872,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_requisitioncollectionitems_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -4888,7 +4888,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -5910,7 +5910,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_stockadjustment_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -5926,7 +5926,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -6058,7 +6058,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_stockcard_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -6074,7 +6074,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -6370,7 +6370,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_stockcarddetails_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -6386,7 +6386,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -6736,7 +6736,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_supplier_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -6752,7 +6752,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -6980,7 +6980,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_user_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -6996,7 +6996,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
