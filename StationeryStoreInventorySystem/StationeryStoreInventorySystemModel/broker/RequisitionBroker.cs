@@ -211,7 +211,11 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        /// There is no status in RetrievalTable.
+        /// </summary>
+        /// <param name="requisitionDetail"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Delete(RequisitionDetail requisitionDetail)
         {
             throw new NotImplementedException();
