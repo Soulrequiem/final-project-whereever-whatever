@@ -22,6 +22,12 @@
                 ItemCssClass="ItemGridViewStyle">
                 <Columns>
                     <ig:TemplateDataField Key="RequisitionID" Width="150px">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("RequisitionID" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
                         <Header Text="Requisition ID" />
                     </ig:TemplateDataField>
                     <ig:BoundDataField DataFieldName="RequisitionDateTime" 
@@ -29,11 +35,11 @@
                         <Header Text="Requisition Date/Time" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="RequisitionBy" Key="RequisitionBy" 
-                        Width="120px">
+                        Width="170px">
                         <Header Text="Requisition By" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="RequisitionStatus" Key="RequisitionStatus" 
-                        Width="150px">
+                        Width="200px">
                         <Header Text="Requisition Status" />
                     </ig:BoundDataField>
                 </Columns>

@@ -13,8 +13,7 @@
         <br />
         <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
         Text="<%$ Resources:WebResources, AssignTempDeptRep_Title %>" /></h1>
-            <br />
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" 
                 Text="<%$ Resources:WebResources,CurrentAuthorizedPerson%>" 
                 TitleAlignment="Left">
@@ -47,7 +46,7 @@
                         </div>
                 </Template>
             </igmisc:WebGroupBox>
-                <br /><br />
+                <br />
                 <div style="float:left">
                      <asp:Label CssClass="DefaultLabelstyle" 
                      ID="Label15" runat="server" 
@@ -62,9 +61,9 @@
                             StyleSetName="Office2010Blue">
                         <Button Visible="False" />
                      </ig:WebDropDown>
-                     <br /><br />           
-                </div>
-                <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" 
+                     <br />
+                </div><br />
+                <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" Text="Search Result" 
                 TitleAlignment="Left">
                     <Template>
@@ -73,9 +72,13 @@
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                                <Columns>
-                                    <ig:TemplateDataField Key="TemplateField_0">
+                                    <ig:TemplateDataField Key="TemplateField_0" Width="50px">
+                                        <ItemTemplate>
+                                            <asp:RadioButton ID="RadioButton1" runat="server" />
+                                        </ItemTemplate>
+                                        <Header Text="Select" />
                                     </ig:TemplateDataField>
-                                    <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID">
+                                    <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID" Width="100px">
                                         <Header Text="Employee ID" />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="EmployeeName" Key="EmployeeName">
@@ -84,7 +87,7 @@
                                     <ig:BoundDataField DataFieldName="Designation" Key="Designation">
                                         <Header Text="Designation" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="JoiningDate" Key="JoiningDate">
+                                    <ig:BoundDataField DataFieldName="JoiningDate" Key="JoiningDate" Width="150px">
                                         <Header Text="Joining Date" />
                                     </ig:BoundDataField>
                                 </Columns>
