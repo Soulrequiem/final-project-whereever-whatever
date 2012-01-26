@@ -495,4 +495,37 @@
   <data name="ViewSupplierList_Title" xml:space="preserve">
     <value>View Supplier List</value>
   </data>
+  <data name="PrintImage_text" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ChangePassword_text" xml:space="preserve">
+    <value>Change your password</value>
+  </data>
+  <data name="Text_CollectionPoint" xml:space="preserve">
+    <value>Enter or Select Collection Point</value>
+  </data>
+  <data name="Text_email" xml:space="preserve">
+    <value>Enter Email Address</value>
+  </data>
+  <data name="Text_EmployeeName" xml:space="preserve">
+    <value>Enter Employee Name</value>
+  </data>
+  <data name="Text_grouptext" xml:space="preserve">
+    <value>Change your password</value>
+  </data>
+  <data name="Text_Item" xml:space="preserve">
+    <value>Enter Item Description</value>
+  </data>
+  <data name="Text_new" xml:space="preserve">
+    <value>Enter New Password</value>
+  </data>
+  <data name="Text_old" xml:space="preserve">
+    <value>Enter Old Password</value>
+  </data>
+  <data name="Text_Remarks" xml:space="preserve">
+    <value>Enter Remarks</value>
+  </data>
+  <data name="Text_RequisitionID" xml:space="preserve">
+    <value>Enter Requisition ID</value>
+  </data>
 </root>
