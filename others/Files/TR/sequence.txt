@@ -1,6 +1,32 @@
-Log In
+Approve/Reject Requisitions
+Assign Department Representative
+Assign Temporary Department Head
+Assign Temporary Department Representative
+Blacklist Department ; paginating
+Change Password
+Check Requisition ; paginating
+Create Discrepancy Report
+Create Purchase Order ; attn, deliver to
+Issue Stock Adjustment Voucher
+Log In ; validate user
 Log Out
 Manage Collection Point
+Notify User
+Print Form/Report
 Receive Order
 Request Stationery
+Send Email
 Submit Requisitions to Store
+View Stock Adjustment Voucher List ; paginating
+View Stationery Catalogue ; paginating
+View Stock Card ; paginating
+View Supplier List ; paginating
+
+----------------------------------------------------
+Generate Reports
+Generate Stationery Retrieval List
+Update Collection Details By Requisition
+Update Collection Details By Requisition Items
+
+-----------------------------------------------------
+type search
