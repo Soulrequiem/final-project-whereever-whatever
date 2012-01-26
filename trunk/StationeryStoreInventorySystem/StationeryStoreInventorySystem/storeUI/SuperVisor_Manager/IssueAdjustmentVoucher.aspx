@@ -22,7 +22,7 @@
                      </ig:BoundDataField>--%>
                      <ig:TemplateDataField Key="VoucherNo" Width="120px">
                         <ItemTemplate>
-                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                            <asp:HyperLink ID="VoucherNo" runat="server" 
                                 Text='<%# Eval("VoucherNo" ) %>'
                                 NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
                                 </asp:HyperLink>

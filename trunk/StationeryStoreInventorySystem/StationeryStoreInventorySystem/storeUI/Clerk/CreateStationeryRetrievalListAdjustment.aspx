@@ -38,7 +38,7 @@
           <ItemTemplate>
           </ItemTemplate>
     </asp:Repeater>--%>
-     <igmisc:WebGroupBox ID="GrpBox" runat="server" 
+     <igmisc:WebGroupBox ID="GrpBox" runat="server" Width="700px"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" 
                 Text="<%$ Resources:WebResources,UpdateCollectionByRequisions_GroupBoxTitle%>" 
                 TitleAlignment="Left">
