@@ -98,7 +98,7 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
         /// <summary>
-        /// Logically delete the Department table by setting the status to 2 in the Department table
+        /// Logically delete the Item table by setting the status to 2 in the Item table
         /// Return Constants.DB_STATUS
         /// </summary>
         /// <param name="item"></param>
