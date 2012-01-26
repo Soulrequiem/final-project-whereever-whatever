@@ -7,13 +7,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div class="ContentDivStyle">
     <div class="print">
         <asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
           onmouseout="javascript:this.style.cursor='pointer'"  ImageUrl="~/Images/Common/print.png" 
           Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>
         <%--<img alt="Print" src="../Images/Common/print.png" />--%>
     </div>
-    <div class="ContentDivStyle">
+    
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
         <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
         Text="<%$ Resources:WebResources, RequisitionDetails_Title %>" /></h1>
@@ -103,7 +104,7 @@
                         </td>
                    </tr>
                 </table>
-                <br /><br />
+                <br />
                 <ig:WebDataGrid ID="DgvRequisitionDetails" runat="server" Width="700px"
                  Height="300px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
