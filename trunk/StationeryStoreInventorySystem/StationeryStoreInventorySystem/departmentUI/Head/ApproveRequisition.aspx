@@ -71,6 +71,11 @@
                         <ig:CellEditing>
                             <ColumnSettings>
                                 <ig:EditingColumnSetting ColumnKey="ApproveRequisitionCheckBox" />
+                                <ig:EditingColumnSetting ColumnKey="RequisitionID" />
+                                <ig:EditingColumnSetting ColumnKey="RequisitionDate/Time" ReadOnly="True" />
+                                <ig:EditingColumnSetting ColumnKey="RequisitionBy" ReadOnly="True" />
+                                <ig:EditingColumnSetting ColumnKey="RequisitionQty" ReadOnly="True" />
+                                <ig:EditingColumnSetting ColumnKey="Remarks" />
                             </ColumnSettings>
                         </ig:CellEditing>
                     </Behaviors>

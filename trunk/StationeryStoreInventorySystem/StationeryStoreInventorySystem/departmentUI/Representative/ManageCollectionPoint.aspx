@@ -15,11 +15,11 @@
         <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
         Text="<%$ Resources:WebResources, ManageCollectionPoint_Title %>" /></h1>
 
-            <igmisc:WebGroupBox ID="dgvCollections" runat="server" Width="700px"
+            <igmisc:WebGroupBox ID="GroupBox" runat="server" Width="700px"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" Text="<%$ Resources:WebResources,ManageCollectionPoint_GroupBox%>" 
                 TitleAlignment="Left">
                 <Template>
-                    <ig:WebDataGrid ID="WebDataGrid1" runat="server" Height="80px" Width="700px" 
+                    <ig:WebDataGrid ID="dgvCollections" runat="server" Height="150px" Width="700px" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">

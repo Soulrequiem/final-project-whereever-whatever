@@ -18,7 +18,7 @@
                 Text="<%$ Resources:WebResources,CurrentAuthorizedPerson%>" 
                 TitleAlignment="Left">
                 <Template>
-                    <ig:WebDataGrid ID="DgvCurrentAuthorizedPersonRep" runat="server" Height="80px" 
+                    <ig:WebDataGrid ID="DgvCurrentAuthorizedPersonRep" runat="server" Height="130px" 
                         Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">

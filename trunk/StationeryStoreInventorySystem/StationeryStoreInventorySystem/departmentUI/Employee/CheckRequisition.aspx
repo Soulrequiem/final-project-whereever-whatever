@@ -44,10 +44,20 @@
                         
                         <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
                         </ig:UnboundCheckBoxField>
-                        <ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
+                        <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                             Width="110px">
                             <Header Text="Requisition ID" />
-                        </ig:BoundDataField>
+                        </ig:BoundDataField>--%>
+                        <ig:TemplateDataField Key="RequisitionID" Width="120px">
+                            <ItemTemplate>
+                                <asp:HyperLink ID="RequisitionID" runat="server"
+                                 Text='<%# Eval("RequisitionID" ) %>'
+                                 NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </asp:HyperLink>
+                             </ItemTemplate>
+                           <Header Text="Requisition ID" />
+                </ig:TemplateDataField>
                         <ig:BoundDataField DataFieldName="RequisitionDate/Time" 
                             Key="RequisitionDate/Time" Width="130px">
                             <Header Text="Requisition Date/Time" />
@@ -56,7 +66,7 @@
                             <Header Text="status" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="RemainingQty" Key="RemainingQty" 
-                            Width="110px">
+                            Width="100px">
                             <Header Text="Remaining Qty" />
                         </ig:BoundDataField>
                         <%--<ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
@@ -86,6 +96,11 @@
                                     <ig:CellEditing>
                                         <ColumnSettings>
                                             <ig:EditingColumnSetting ColumnKey="CheckRequisitionCheckBox" />
+                                            <ig:EditingColumnSetting ColumnKey="RequisitionID" />
+                                            <ig:EditingColumnSetting ColumnKey="RequisitionDate/Time" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="status" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="RemainingQty" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="Remarks" />
                                         </ColumnSettings>
                                     </ig:CellEditing>
                                 </Behaviors>
@@ -127,23 +142,25 @@
                     <ig:WebDataGrid ID="dgvRequisitionDetails" runat="server"  
                           DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                         ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue">
+                         ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue" 
+                         Height="300px" Width="700px">
                     <Columns>
                         
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="90px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                            Width="120px">
+                            Width="250px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="50px">
+                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="120px">
                             <Header Text="Required Qty" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="ReceivedQty" Key="ReceivedQty" Width="50px">
+                        <ig:BoundDataField DataFieldName="ReceivedQty" Key="ReceivedQty" Width="120px">
                             <Header Text="Received Qty" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RemainingQty" Key="RemainingQty" Width="50px">
+                        <ig:BoundDataField DataFieldName="RemainingQty" Key="RemainingQty" 
+                            Width="120px">
                             <Header Text="Remaining Qty" />
                         </ig:BoundDataField>
                         
@@ -157,8 +174,6 @@
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
                         </Behaviors>
                  </ig:WebDataGrid><br />
                 </Template>

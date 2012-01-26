@@ -35,7 +35,7 @@
                         </ItemTemplate>
                         <Header Text="Collection ID" />
                     </ig:TemplateDataField>
-                        <ig:BoundDataField DataFieldName="Collection Point" Key="Collection Point" 
+                        <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
                             VisibleIndex="1">
                             <Header Text="Collection Point" />
                         </ig:BoundDataField>

@@ -51,6 +51,10 @@
                                     <ig:CellEditing>
                                         <ColumnSettings>
                                             <ig:EditingColumnSetting ColumnKey="BoundCheckBoxField_0" />
+                                            <ig:EditingColumnSetting ColumnKey="EmployeeID" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="EmployeeName" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="Designation" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="JoiningDate" ReadOnly="True" />
                                         </ColumnSettings>
                                     </ig:CellEditing>
                                 </Behaviors>
@@ -111,6 +115,21 @@
                                         <Header Text="Joining Date" />
                                     </ig:BoundDataField>
                                 </Columns>
+                                <Behaviors>
+                                    <ig:EditingCore>
+                                        <Behaviors>
+                                            <ig:CellEditing>
+                                                <ColumnSettings>
+                                                    <ig:EditingColumnSetting ColumnKey="AssignTempDeptHeadRadio" />
+                                                    <ig:EditingColumnSetting ColumnKey="EmployeeID" ReadOnly="True" />
+                                                    <ig:EditingColumnSetting ColumnKey="EmployeeName" ReadOnly="True" />
+                                                    <ig:EditingColumnSetting ColumnKey="Designation" ReadOnly="True" />
+                                                    <ig:EditingColumnSetting ColumnKey="JoiningDate" ReadOnly="True" />
+                                                </ColumnSettings>
+                                            </ig:CellEditing>
+                                        </Behaviors>
+                                    </ig:EditingCore>
+                                </Behaviors>
                             </ig:WebDataGrid>
                             <br />
                             <div style="float:right">

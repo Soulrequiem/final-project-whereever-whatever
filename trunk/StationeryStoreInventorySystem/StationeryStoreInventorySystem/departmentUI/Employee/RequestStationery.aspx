@@ -201,6 +201,9 @@
                                     <ig:CellEditing>
                                         <ColumnSettings>
                                             <ig:EditingColumnSetting ColumnKey="RequestStationeryCheckBox" />
+                                            <ig:EditingColumnSetting ColumnKey="ItemNo" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="ItemDescription" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="RequiredQty" />
                                         </ColumnSettings>
                                     </ig:CellEditing>
                                 </Behaviors>

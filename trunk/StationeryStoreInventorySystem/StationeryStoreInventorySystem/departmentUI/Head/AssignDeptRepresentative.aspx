@@ -26,7 +26,7 @@
                                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                                 <Columns>
-                                    <ig:UnboundCheckBoxField Key="BoundCheckBoxField_0" Width="50px">
+                                    <ig:UnboundCheckBoxField Key="BoundCheckBoxField_0" Width="70px">
                                         <Header Text="" />
                                     </ig:UnboundCheckBoxField>
                                     <ig:BoundDataField DataFieldName="RepresentativeID" Key="RepresentativeID" 
@@ -54,6 +54,9 @@
                                             <ig:CellEditing>
                                                 <ColumnSettings>
                                                     <ig:EditingColumnSetting ColumnKey="BoundCheckBoxField_0" />
+                                                    <ig:EditingColumnSetting ColumnKey="RepresentativeID" ReadOnly="True" />
+                                                    <ig:EditingColumnSetting ColumnKey="RepresentativeName" ReadOnly="True" />
+                                                    <ig:EditingColumnSetting ColumnKey="Actual/Temporary" ReadOnly="True" />
                                                 </ColumnSettings>
                                             </ig:CellEditing>
                                         </Behaviors>
@@ -89,7 +92,7 @@
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Search Result" 
                 TitleAlignment="Left">
                     <Template>
-                        <ig:WebDataGrid ID="DgvRepSearchDetails" runat="server" Height="300px" 
+                        <ig:WebDataGrid ID="DgvRepSearchDetails" runat="server" Height="120px" 
                             Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
@@ -117,6 +120,17 @@
                                 </ig:Sorting>
                                 <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                 </ig:Selection>
+                                <ig:EditingCore>
+                                    <Behaviors>
+                                        <ig:CellEditing>
+                                            <ColumnSettings>
+                                                <ig:EditingColumnSetting ColumnKey="AssignDeptRepRadio" />
+                                                <ig:EditingColumnSetting ColumnKey="EmployeeID" ReadOnly="True" />
+                                                <ig:EditingColumnSetting ColumnKey="EmployeeName" ReadOnly="True" />
+                                            </ColumnSettings>
+                                        </ig:CellEditing>
+                                    </Behaviors>
+                                </ig:EditingCore>
                             </Behaviors>
                         </ig:WebDataGrid>
                         <div style="float:right">
