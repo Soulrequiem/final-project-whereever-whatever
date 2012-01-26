@@ -48,6 +48,7 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
+                Employee employee = inventory.Employees.Where(eObj => eObj.Id == 1).First();
                 inventory.AddToSuppliers(newSupplier);
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
@@ -67,7 +68,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 supplierObj = inventory.Suppliers.Where(iObj => iObj.Id == supplier.Id).First();
-                supplierObj.Id = supplier.Id;
+               // supplierObj.Id = supplier.Id;
                 supplierObj.Name = supplier.Name;
                 supplierObj.Priority = supplier.Priority;
                 supplierObj.ContactName = supplier.ContactName;
@@ -75,7 +76,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 supplierObj.FaxNumber = supplier.FaxNumber;
                 supplierObj.Address = supplier.Address;
                 supplierObj.GstRegistrationNumber = supplier.GstRegistrationNumber;
-                supplierObj.CreatedDate = supplier.CreatedDate;
+              //  supplierObj.CreatedDate = supplier.CreatedDate;
 
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
