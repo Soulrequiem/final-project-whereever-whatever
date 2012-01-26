@@ -95,6 +95,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         ///  Logically delete the ItemPrice table by setting the status to 2 in the ItemPrice table
+        ///   Return Constants.DB_STATUS
         /// </summary>
         /// <param name="itemPrice"></param>
         /// <returns></returns>
