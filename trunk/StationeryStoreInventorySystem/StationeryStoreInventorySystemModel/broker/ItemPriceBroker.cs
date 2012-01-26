@@ -3,7 +3,7 @@
 /*  Module Name     : Models
 /*  Owner           : Thazin Win
 /*  class Name      : ItemPriceBroker
-/*  Details         : Model representation of Item tabletable
+/*  Details         : Model representation of Item table
 /***************************************************************************/
 using System;
 using System.Collections.Generic;
