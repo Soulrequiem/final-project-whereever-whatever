@@ -212,3 +212,6 @@ namespace StationeryStoreInventorySystemModel.broker
         
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
