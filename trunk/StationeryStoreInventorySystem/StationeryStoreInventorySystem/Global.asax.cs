@@ -17,6 +17,10 @@ namespace StationeryStoreInventorySystem
 
         protected void Session_Start(object sender, EventArgs e)
         {
+            Session["WebExplorerState"] = new bool[5]{true,true,true,true,true};
+            Session["SelectedIndex"] = 0;
+            Session["SelectedGroup"] = 0;
+            //Session["VisibleState"] = new bool[5] { true, true, true, true, true };
             String userName = string.Empty;
         }
 
