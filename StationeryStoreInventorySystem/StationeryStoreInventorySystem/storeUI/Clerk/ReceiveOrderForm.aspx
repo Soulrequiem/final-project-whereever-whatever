@@ -18,9 +18,8 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, ReceiveOrderForm_Title %>" /></h1>
-             <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
-             CssClass="GroupBoxstyle" StyleSetName="" 
-             TitleAlignment="Left">
+             <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px" CssClass="GroupBoxstyle" 
+                    TitleAlignment="Left">
                 <Template>
              <table>
                 <tr>

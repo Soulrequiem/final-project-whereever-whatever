@@ -38,10 +38,10 @@
                         Width="150px">
                         <Header Text="BoundColumn_4" />
                     </ig:BoundDataField>--%>
-                    <ig:TemplateDataField Key="Black/UnblackList" Width="150px">
+                    <ig:TemplateDataField Key="BlackUnblackList" Width="150px">
                         <ItemTemplate>
-                            <asp:HyperLink ID="TripIDLink" runat="server" 
-                                Text='<%# Eval("RetrievalNo" ) %>'
+                            <asp:HyperLink ID="BlackUnblackList" runat="server" 
+                                Text='<%# Eval("Black/UnblackList" ) %>'
                                 NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
                                 </asp:HyperLink>
                         </ItemTemplate>

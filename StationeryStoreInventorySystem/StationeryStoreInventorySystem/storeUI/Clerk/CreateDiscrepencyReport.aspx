@@ -106,30 +106,35 @@
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundCheckBoxField DataFieldName="CreateDiscrepancyReportCheckBox" 
-                                Key="CreateDiscrepancyReportCheckBox" Width="50px">
-                                <Header Text="BoundCheckBoxField_0" />
-                            </ig:BoundCheckBoxField>
-                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                            <ig:UnboundCheckBoxField Key="CreateDiscrepancyReportCheckBox" Width="80px">
+                                <Header Text="Select" />
+                            </ig:UnboundCheckBoxField>
+                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                 <Header Text="Item No." />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                                Width="100px">
+                                Width="120px">
                                 <Header Text="ItemDescription" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="50px">
+                            <ig:TemplateDataField  Key="Quantity" Width="160px">
+                                 <ItemTemplate>
+                                      <ig:WebTextEditor ID="Quantity" runat="server" Width="150px"
+                                          Text='<%# Eval("Quantity") %>'>
+                                       </ig:WebTextEditor>
+                                  </ItemTemplate>
+                                <Header Text="Remarks" />
+                              </ig:TemplateDataField>
+                            <%--<ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="50px">
                                 <Header Text="Quantity" />
-                            </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Price" Key="Price" Width="50px">
+                            </ig:BoundDataField>--%>
+                            <ig:BoundDataField DataFieldName="Price" Key="Price" Width="120px">
                                 <Header Text="Price" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="100px">
+                            <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="120px">
                                 <Header Text="Reason" />
                             </ig:BoundDataField>
                         </Columns>
                         <Behaviors>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
                             <ig:Filtering>
                             </ig:Filtering>
                             <ig:Paging PageSize="10">
