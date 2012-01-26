@@ -63,6 +63,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         /// Insert Requisition data to the Requisition Table according to the Requisition Parameter
+        ///  Return Constants.DB_STATUS
         /// </summary>
         /// <param name="requisition"></param>
         /// <returns></returns>
@@ -90,6 +91,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         /// Update Requisition data to Requisition Table according to the Requisition Parameter
+        ///  Return Constants.DB_STATUS
         /// </summary>
         /// <param name="requisition"></param>
         /// <returns></returns>
@@ -116,6 +118,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         /// Logically delete the Requisition by setting the status to 2 in the Requisition table
+        ///  Return Constants.DB_STATUS
         /// </summary>
         /// <param name="requisiton"></param>
         /// <returns></returns>
@@ -165,6 +168,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         /// Insert Requisition dtail data to the Requisition detail Table according to the Requisition Parameter
+        ///  Return Constants.DB_STATUS
         /// </summary>
         /// <param name="requisitionDetail"></param>
         /// <returns></returns>
@@ -188,6 +192,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         /// Update Requisition detail data to Requisition detail Table according to the Requisition Parameter
+        ///  Return Constants.DB_STATUS
         /// </summary>
         /// <param name="requisitionDetail"></param>
         /// <returns></returns>
