@@ -250,3 +250,6 @@ namespace StationeryStoreInventorySystemModel.broker
         #endregion
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
