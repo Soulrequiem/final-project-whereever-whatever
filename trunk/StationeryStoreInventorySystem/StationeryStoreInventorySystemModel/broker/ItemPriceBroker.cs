@@ -22,6 +22,11 @@ namespace StationeryStoreInventorySystemModel.broker
         private ItemPrice itemPriceObj = null;
         private List<ItemPrice> itemPriceList = null;
 
+        /// <summary>
+        ///  Retrieve the ItemPrice Detail information  from ItemPrice Table according to the ItemPrice Parameter
+        /// </summary>
+        /// <param name="itemPrice"></param>
+        /// <returns></returns>
         public ItemPrice GetItemPrice(ItemPrice itemPrice)
         {
             itemPriceObj = inventory.ItemPrices.Where(iObj => iObj.ItemId == itemPrice.ItemId).First();
@@ -29,7 +34,10 @@ namespace StationeryStoreInventorySystemModel.broker
                 return itemPriceObj;
             return null;
         }
-
+        /// <summary>
+        ///  Retrieve All of the ItemPrice information from ItemPrice Table
+        /// </summary>
+        /// <returns></returns>
         public List<ItemPrice> GetAllItemPrice()
         {
             itemPriceList = inventory.ItemPrices.ToList<ItemPrice>();
@@ -37,7 +45,12 @@ namespace StationeryStoreInventorySystemModel.broker
                 return itemPriceList;
             return null;
         }
-
+        /// <summary>
+        ///  Insert ItemPrice data to the ItemPrice Table according to the ItemPrice Parameter
+        ///   Return Constants.DB_STATUS 
+        /// </summary>
+        /// <param name="newItemPrice"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Insert(ItemPrice newItemPrice)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -55,7 +68,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        ///  Update ItemPrice data to ItemPrice Table according to the ItemPrice Parameter
+        ///   Return Constants.DB_STATUS 
+        /// </summary>
+        /// <param name="itemPrice"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Update(ItemPrice itemPrice)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -75,7 +93,11 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        ///  Logically delete the ItemPrice table by setting the status to 2 in the ItemPrice table
+        /// </summary>
+        /// <param name="itemPrice"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Delete(ItemPrice itemPrice)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
