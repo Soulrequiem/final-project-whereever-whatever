@@ -58,6 +58,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         /// Insert StockCard and StockDetail data to the StockCard and StockDetail Table according to the StockCard Parameter
+        ///  Return Constants.DB_STATUS
         /// </summary>
         /// <param name="stockCard"></param>
         /// <returns></returns>
@@ -84,6 +85,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         /// Update StockCard and StockDetail data to StockCard and StockDetail Table according to the StockCard Parameter
+        ///  Return Constants.DB_STATUS
         /// </summary>
         /// <param name="stockCard"></param>
         /// <returns></returns>
@@ -157,7 +159,7 @@ namespace StationeryStoreInventorySystemModel.broker
             return null;
         }
         /// <summary>
-        /// Insert StockDetail data to StockDetail Table according to the StockDetail Parameter
+        /// Insert StockDetail data to StockDetail Table according to the StockDetail Parameter Return Constants.DB_STATUS
         /// </summary>
         /// <param name="stockCardDetail"></param>
         /// <returns></returns>
@@ -181,6 +183,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         /// <summary>
         ///  Update StockDetail data to StockDetail Table according to the StockDetail Parameter
+        ///   Return Constants.DB_STATUS
         /// </summary>
         /// <param name="stockCardDetail"></param>
         /// <returns></returns>
