@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : RetrievalBroker.cs
+/*  Module Name     : Models
+/*  Owner           : Thazin Win
+/*  class Name      : RetrievalBroker
+/*  Details         : Model representation of Retrieval table
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +22,11 @@ namespace StationeryStoreInventorySystemModel.broker
         private RetrievalDetail retrievalDetail = null;
         private List<Retrieval> retrievalList = null;
         private List<RetrievalDetail> retrievalDetailList = null;
-
+        /// <summary>
+        /// Retrieve the Retrieval Detail information  from Retrieval Table according to the Retrieval Parameter
+        /// </summary>
+        /// <param name="retrieval"></param>
+        /// <returns></returns>
         public Retrieval GetRetrieval(Retrieval retrieval)
         {
             retrieval = inventory.Retrievals.Where(robj => robj.Id == retrieval.Id).First();
@@ -33,15 +44,23 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return null; 
         }
-
-        public List<entity.Retrieval> GetAllRetrieval()
+        /// <summary>
+        ///   Retrieve All of the Retrieval information from Retrieval Table
+        /// </summary>
+        /// <returns></returns>
+        public List<Retrieval> GetAllRetrieval()
         {
             retrievalList = inventory.Retrievals.ToList<Retrieval>();
             if (!retrievalList.Equals(null))
                 return retrievalList;
             return null;
         }
-
+        /// <summary>
+        /// Insert Retrieval data to the Retrieval Table according to the Retrieval Parameter
+        ///  Return Constants.DB_STATUS 
+        /// </summary>
+        /// <param name="newRetrieval"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Insert(Retrieval newRetrieval)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -62,7 +81,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        ///  Update Retrieval data to Retrieval Table according to the Retrieval Parameter
+        ///    Return Constants.DB_STATUS 
+        /// </summary>
+        /// <param name="retrieval"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Update(Retrieval retrieval)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -84,7 +108,12 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
-
+        /// <summary>
+        /// Logically delete the Item table by setting the status to 2 in the Item table
+        ///  Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="retrieval"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Delete(Retrieval retrieval)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -102,7 +131,11 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
-
+        /// <summary>
+        /// Retrieve the RetrievalDetail information  from RetrievalDetail Table according to the RetrievalDetail Parameter
+        /// </summary>
+        /// <param name="retrievalDetail"></param>
+        /// <returns></returns>
         public RetrievalDetail GetRetrievalDetail(RetrievalDetail retrievalDetail)
         {
             retrievalDetail = inventory.RetrievalDetails.Where(rObj => rObj.Id == retrievalDetail.Id).First();
@@ -110,13 +143,21 @@ namespace StationeryStoreInventorySystemModel.broker
                 return retrievalDetail;
             return null;
         }
-
+        /// <summary>
+        /// Retrieve All of the RetrievalDetail information from RetrievalDetail Table
+        /// </summary>
+        /// <returns></returns>
        public List<RetrievalDetail> GetAllRetrievalDetail()
         {
             throw new NotImplementedException();
         }
         
-
+        /// <summary>
+       ///  Insert RetrievalDetail data to the RetrievalDetail Table according to the RetrievalDetail Parameter
+       ///  Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="newRetrievalDetail"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Insert(RetrievalDetail newRetrievalDetail)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -134,7 +175,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        /// Update RetrievalDetail data to RetrievalDetail Table according to the RetrievalDetail Parameter
+        /// Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="retrievalDetail"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Update(RetrievalDetail retrievalDetail)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -153,7 +199,11 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
 
-        
+        /// <summary>
+        /// There is no status in RetrievalTable.
+        /// </summary>
+        /// <param name="retrievalDetail"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Delete(RetrievalDetail retrievalDetail)
         {
             throw new NotImplementedException();
