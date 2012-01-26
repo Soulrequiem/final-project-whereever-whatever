@@ -26,7 +26,7 @@
                                     CssClass="DefaultTextStyle" Width="250px">
                                 </ig:WebTextEditor>--%>
                                 <ig:WebDropDown ID="drdRequisitionList" runat="server" Width="250px" 
-                                     DropDownAnimationType="EaseIn" NullText="Enter Requisition ID" 
+                                     DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_RequisitionID%>" 
                                      StyleSetName="Office2010Blue">
                                     <Button Visible="False" />
                                 </ig:WebDropDown>
@@ -42,27 +42,34 @@
                          ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         
-                        <ig:BoundCheckBoxField DataFieldName="CheckRequisitionCheckBox" 
-                            Key="CheckRequisitionCheckBox" Width="50px">
-                            <Header Text="BoundCheckBoxField_0" />
-                        </ig:BoundCheckBoxField>
+                        <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
+                        </ig:UnboundCheckBoxField>
                         <ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
-                            Width="80px">
+                            Width="110px">
                             <Header Text="Requisition ID" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="RequisitionDate/Time" 
-                            Key="RequisitionDate/Time" Width="120px">
+                            Key="RequisitionDate/Time" Width="130px">
                             <Header Text="Requisition Date/Time" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="status" Key="status" Width="80px">
+                        <ig:BoundDataField DataFieldName="status" Key="status" Width="110px">
                             <Header Text="status" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RemainingQty" Key="RemainingQty" Width="50px">
+                        <ig:BoundDataField DataFieldName="RemainingQty" Key="RemainingQty" 
+                            Width="110px">
                             <Header Text="Remaining Qty" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
+                        <%--<ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
                             <Header Text="Remarks" />
-                        </ig:BoundDataField>
+                        </ig:BoundDataField>--%>
+                        <ig:TemplateDataField  Key="Remarks" Width="150px">
+                            <ItemTemplate>
+                                <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
+                                Text='<%# Eval("Remarks") %>'>
+                                </ig:WebTextEditor>
+                            </ItemTemplate>
+                            <Header Text="Remarks" />
+                        </ig:TemplateDataField>
                         
                     </Columns>
                         <Behaviors>
@@ -74,8 +81,15 @@
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
+                            <ig:EditingCore>
+                                <Behaviors>
+                                    <ig:CellEditing>
+                                        <ColumnSettings>
+                                            <ig:EditingColumnSetting ColumnKey="CheckRequisitionCheckBox" />
+                                        </ColumnSettings>
+                                    </ig:CellEditing>
+                                </Behaviors>
+                            </ig:EditingCore>
                         </Behaviors>
                  </ig:WebDataGrid><br />
                  <div style="float:right">

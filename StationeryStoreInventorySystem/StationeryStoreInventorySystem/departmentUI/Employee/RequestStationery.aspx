@@ -8,9 +8,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="ContentDivStyle">
+    <div class="ContentDivStyle">
     <div class="print">
-        <img alt="Print" src="../../Images/Common/print.png" />
+        <asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
+          onmouseout="javascript:this.style.cursor='pointer'"  ImageUrl="~/Images/Common/print.png" 
+          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>
+        <%--<img alt="Print" src="../../Images/Common/print.png" />--%>
     </div>
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <br />
@@ -98,7 +101,7 @@
                                     CssClass="DefaultTextStyle" Width="250px">
                                 </ig:WebTextEditor>--%>
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
-                                     DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
+                                     DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
                                      StyleSetName="Office2010Blue">
                                     <Button Visible="False" />
                                 </ig:WebDropDown>
@@ -109,26 +112,33 @@
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label9" runat="server" 
                         Text="<%$ Resources:WebResources, SearchResult_Label%>"/>
                     <ig:WebDataGrid ID="dgvStationeryList" runat="server" Height="300px" 
-                         Width="515px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+                         Width="350px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="80px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                            Width="120px">
+                            Width="150px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="AddToTable" Key="BoundColumn_2" Width="50px">
-                            <Header Text="BoundColumn_2" />
-                        </ig:BoundDataField>
+                        <%--<ig:BoundDataField DataFieldName="AddToTable" Key="AddToTable" Width="80px">
+                            <Header Text="" />
+                        </ig:BoundDataField>--%>
+                        <ig:TemplateDataField Key="AddToTable" Width="120px">
+                                <ItemTemplate>
+                                   <asp:HyperLink ID="AddToTable" runat="server"
+                                       Text="Add to Table"
+                                       NavigateUrl="~/departmentUI/Employee/RequestStationery.aspx" >
+                                       </asp:HyperLink>
+                               </ItemTemplate>
+                            <Header Text="" />
+                        </ig:TemplateDataField>
                         
                     </Columns>
                         <Behaviors>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
                             <ig:Filtering>
                             </ig:Filtering>
                             <ig:Paging PageSize="10">
@@ -148,31 +158,36 @@
                 <Template>
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label11" runat="server" 
                         Text="<%$ Resources:WebResources, RequisitionDetails_Label_Text%>"/>
-                    <ig:WebDataGrid ID="WebDataGrid1" runat="server" Height="400px" Width="700px" 
+                    <ig:WebDataGrid ID="dgvStationeryDetailsList" runat="server" Height="400px" Width="550px" 
                         DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         
-                        <ig:BoundCheckBoxField DataFieldName="RequestStationeryCheckBox" 
-                            Key="RequestStationeryCheckBox" Width="50px">
-                            <Header Text="BoundCheckBoxField_0" />
-                        </ig:BoundCheckBoxField>
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                        <ig:UnboundCheckBoxField Key="RequestStationeryCheckBox" Width="60px">
+                            <Header Text="" />
+                        </ig:UnboundCheckBoxField>
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="80px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                            Width="120px">
+                            Width="250px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="50px">
+                       <%-- <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="80px">
                             <Header Text="Required Qty" />
-                        </ig:BoundDataField>
+                        </ig:BoundDataField>--%>
+                        <ig:TemplateDataField  Key="RequiredQty" Width="160px">
+                            <ItemTemplate>
+                                <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="110px"
+                                Text='<%# Eval("RequiredQty") %>'>
+                                </ig:WebTextEditor>
+                            </ItemTemplate>
+                            <Header Text="Required Qty" />
+                        </ig:TemplateDataField>
                         
                     </Columns>
                         <Behaviors>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
                             <ig:Filtering>
                             </ig:Filtering>
                             <ig:Paging PageSize="10">
@@ -181,6 +196,15 @@
                             </ig:Selection>
                             <ig:Sorting>
                             </ig:Sorting>
+                            <ig:EditingCore>
+                                <Behaviors>
+                                    <ig:CellEditing>
+                                        <ColumnSettings>
+                                            <ig:EditingColumnSetting ColumnKey="RequestStationeryCheckBox" />
+                                        </ColumnSettings>
+                                    </ig:CellEditing>
+                                </Behaviors>
+                            </ig:EditingCore>
                         </Behaviors>
                  </ig:WebDataGrid><br />
                  <div style="float:right">

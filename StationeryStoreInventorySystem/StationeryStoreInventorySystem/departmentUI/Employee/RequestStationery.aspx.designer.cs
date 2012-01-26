@@ -13,6 +13,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee {
     public partial class RequestStationery {
         
         /// <summary>
+        /// HyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        
+        /// <summary>
         /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
@@ -220,13 +229,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee {
         protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
-        /// WebDataGrid1 control.
+        /// dgvStationeryDetailsList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.GridControls.WebDataGrid WebDataGrid1;
+        protected global::Infragistics.Web.UI.GridControls.WebDataGrid dgvStationeryDetailsList;
         
         /// <summary>
         /// btnRequest control.
