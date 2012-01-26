@@ -880,7 +880,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SubmitToStore.
+        ///   Looks up a localized string similar to Submit To Store.
         /// </summary>
         internal static string SubmitRequisitionsToStore_SubmitToStore {
             get {

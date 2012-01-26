@@ -244,7 +244,7 @@
     <value>Logout</value>
   </data>
   <data name="SubmitRequisitionsToStore_SubmitToStore" xml:space="preserve">
-    <value>SubmitToStore</value>
+    <value>Submit To Store</value>
   </data>
   <data name="SubmitRequisitionsToStore_Title" xml:space="preserve">
     <value>Submit Requisitions To Store</value>
