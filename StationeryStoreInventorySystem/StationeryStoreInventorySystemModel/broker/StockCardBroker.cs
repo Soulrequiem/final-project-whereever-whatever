@@ -1,4 +1,10 @@
-﻿
+﻿/***************************************************************************/
+/*  File Name       : StockCardBroker.cs
+/*  Module Name     : Models
+/*  Owner           : Priya
+/*  class Name      : StockCard
+/*  Details         : Model Representation Stockcard and Stockcard detail table
+/***************************************************************************/
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +23,11 @@ namespace StationeryStoreInventorySystemModel.broker
         private List<StockCard> stcList = null;
         private List<StockCardDetail> stcDetailList = null;
 
+        /// <summary>
+        /// Retrieve the StockCard and StockCardDetail information according to the StockCard Parameter 
+        /// </summary>
+        /// <param name="stockCard"></param>
+        /// <returns></returns>
         public StockCard GetStockCard(StockCard stockCard)
         {
             stc = inventory.StockCards.Where(stcObj => stcObj.Id == stockCard.Id).First();
@@ -34,7 +45,10 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return stc;
         }
-
+        /// <summary>
+        /// Retrieve All of the StockCard information from StockCard Table
+        /// </summary>
+        /// <returns></returns>
         public List<StockCard> GetAllStockCard()
         {
             stcList = inventory.StockCards.ToList<StockCard>();
@@ -42,6 +56,11 @@ namespace StationeryStoreInventorySystemModel.broker
                 return stcList;
             return null;
         }
+        /// <summary>
+        /// Insert StockCard and StockDetail data to the StockCard and StockDetail Table according to the StockCard Parameter
+        /// </summary>
+        /// <param name="stockCard"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Insert(StockCard stockCard)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -63,6 +82,11 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
+        /// <summary>
+        /// Update StockCard and StockDetail data to StockCard and StockDetail Table according to the StockCard Parameter
+        /// </summary>
+        /// <param name="stockCard"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Update(StockCard stockCard)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -82,6 +106,11 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
+        /// <summary>
+        ///  Logically delete the StockCard by setting the status to 2 in the StockCard table
+        /// </summary>
+        /// <param name="stockCard"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Delete(StockCard stockCard)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -104,6 +133,11 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
 
         }
+        /// <summary>
+        ///  Retrieve the StockCardDetail information according to the stockCardDetail Parameter 
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
         public StockCardDetail GetStockCardDetail(StockCardDetail stockCardDetail)
         {
             stcDetail = inventory.StockCardDetails.Where(stcDetailObj => stcDetailObj.Id == stockCardDetail.Id).First();
@@ -111,7 +145,10 @@ namespace StationeryStoreInventorySystemModel.broker
                 return stcDetail;
             return null;
         }
-
+        /// <summary>
+        ///  Retrieve StockDetail data to the StockDetail Table according to the StockCardDetail Parameter
+        /// </summary>
+        /// <returns></returns>
         public List<StockCardDetail> GetAllStockCardDetail()
         {
             stcDetailList = inventory.StockCardDetails.ToList<StockCardDetail>();
@@ -119,6 +156,11 @@ namespace StationeryStoreInventorySystemModel.broker
                 return stcDetailList;
             return null;
         }
+        /// <summary>
+        /// Insert StockDetail data to StockDetail Table according to the StockDetail Parameter
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Insert(StockCardDetail stockCardDetail)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -137,6 +179,11 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
+        /// <summary>
+        ///  Update StockDetail data to StockDetail Table according to the StockDetail Parameter
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Update(StockCardDetail stockCardDetail)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -153,22 +200,18 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
+        /// <summary>
+        /// Don't need to set the status.There is no status in StockCardDetail Table
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Delete(StockCardDetail stockCardDetail)
         {
-            Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
-
-            try
-            {
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
-            }
-            catch (Exception e)
-            {
-                status = Constants.DB_STATUS.FAILED;
-            }
-
-            return status;
+            throw new NotImplementedException();
         }
 
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
