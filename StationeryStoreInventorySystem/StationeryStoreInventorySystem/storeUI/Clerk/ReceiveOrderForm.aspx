@@ -18,25 +18,30 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, ReceiveOrderForm_Title %>" /></h1>
-             <br />
+             <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
+             CssClass="GroupBoxstyle" StyleSetName="" 
+             TitleAlignment="Left">
+                <Template>
              <table>
                 <tr>
-                    <td>
+                    <td style="width:150px">
                         <asp:Label CssClass="DefaultLabelstyle" 
                          ID="Label2" runat="server" 
                          Text="<%$ Resources:WebResources, ReceiveOrderForm_YourRefPONo %>"/>
                     </td>
-                    <td style="width:200px">
-                        <ig:WebDropDown ID="DrdPONo" runat="server" Width="150px">
+                    <td style="width:250px">
+                        <ig:WebDropDown ID="DrdPONo" runat="server" Width="200px" 
+                            NullText="Enter or select PO number" CssClass="DefaultTextStyle">
                         </ig:WebDropDown>
                     </td>
-                    <td>
+                    <td style="width:150px">
                         <asp:Label CssClass="DefaultLabelstyle" 
                          ID="Label1" runat="server" 
                          Text="<%$ Resources:WebResources, ReceiveOrderForm_DeliveryOrderNo %>"/>
                     </td>
                     <td>
-                        <ig:WebTextEditor ID="txtDeliveryOrderNo" runat="server">
+                        <ig:WebTextEditor ID="txtDeliveryOrderNo" runat="server" Width="170px" 
+                            NullText="Enter Delivery Order No." CssClass="DefaultTextStyle">
                         </ig:WebTextEditor>
                     </td>
                 </tr>
@@ -63,7 +68,9 @@
                     </td>
                 </tr>
              </table>
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server"
+             </Template>
+             </igmisc:WebGroupBox>
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
              CssClass="GroupBoxstyle" StyleSetName="" Text="Stationery Order" 
              TitleAlignment="Left">
                 <Template>
@@ -72,24 +79,30 @@
                         CssClass="DefaultGridViewStyle" ItemCssClass="ItemGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="150px">
                                 <Header Text="Item No." />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                                Width="100px">
+                                Width="200px">
                                 <Header Text="Item Description" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="50px">
+                            <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="150px">
                                 <Header Text="Quantity" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Remarks(Supplier)" Key="Remarks(Supplier)" 
-                                Width="100px">
+                            <%--<ig:BoundDataField DataFieldName="Remarks(Supplier)" Key="Remarks(Supplier)" 
+                                Width="200px">
                                 <Header Text="Remarks(Supplier)" />
-                            </ig:BoundDataField>
+                            </ig:BoundDataField>--%>
+                            <ig:TemplateDataField Key="Remarks" Width="200px">
+                                <ItemTemplate>
+                                    <ig:WebTextEditor ID="Remarks" runat="server" Width="170px" 
+                                        CssClass="DefaultTextStyle" Text='<%# Eval("Remarks" ) %>'>
+                                    </ig:WebTextEditor>
+                                </ItemTemplate>
+                                <Header Text="Remarks(Supplier)" />
+                            </ig:TemplateDataField>
                         </Columns>
                         <Behaviors>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
                             <ig:Filtering>
                             </ig:Filtering>
                             <ig:Paging PageSize="10">
@@ -107,7 +120,10 @@
                          Text="<%$ Resources:WebResources, ReceiveOrderForm_Remarks%>"/>
                     </div>
                     <div style="float:left">
-                        <textarea id="txtaRemarksClerk" cols="35" rows="2"></textarea>
+                        <%--<textarea id="txtaRemarksClerk" cols="35" rows="2"></textarea>--%>
+                        <ig:WebTextEditor ID="txtaRemarksClerk" runat="server" Width="498px" NullText="Enter Supplier Remarks"
+                               CssClass="DefaultTextStyle" Height="50px" TextMode="MultiLine" >
+                        </ig:WebTextEditor>
                     </div>
                     <div style="float:right">
                         <a class="buttoningrid" href="" style="text-align:center">Received</a>
