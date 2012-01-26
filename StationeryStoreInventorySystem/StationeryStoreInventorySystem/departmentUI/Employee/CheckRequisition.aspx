@@ -37,7 +37,7 @@
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label9" runat="server" 
                         Text="<%$ Resources:WebResources, SearchResult_Label%>"/>
                     <ig:WebDataGrid ID="dgvRequisitionList" runat="server" Width="700px"  
-                         Height="400px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+                         Height="250px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
@@ -53,7 +53,6 @@
                                 <asp:HyperLink ID="RequisitionID" runat="server"
                                  Text='<%# Eval("RequisitionID" ) %>'
                                  NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx" >
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </asp:HyperLink>
                              </ItemTemplate>
                            <Header Text="Requisition ID" />
@@ -87,7 +86,7 @@
                             </ig:Selection>
                             <ig:Sorting>
                             </ig:Sorting>
-                            <ig:Paging PageSize="10">
+                            <ig:Paging PageSize="5">
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
@@ -143,7 +142,7 @@
                           DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue" 
-                         Height="300px" Width="700px">
+                         Height="200px" Width="700px">
                     <Columns>
                         
                         <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="90px">
@@ -170,7 +169,7 @@
                             </ig:Sorting>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
-                            <ig:Paging PageSize="10">
+                            <ig:Paging>
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
