@@ -13,12 +13,11 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, AdjustmentVoucher_Title %>" /></h1>
-             <br />
-             <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+             <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Adjustment Voucher" 
                 TitleAlignment="Left">
                     <Template>
-                            <div style="float:left">
+                        <div style="float:left;width:70px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="Label2" runat="server" 
                             Text="<%$ Resources:WebResources, AdjustmentVoucher_Voucher %>"/>
@@ -29,7 +28,8 @@
                             Text="[000/00000/99]"/><br />
                         </div>
                         <br />
-                        <div style="float:left">
+                        <div style="float:left;height:5px"></div>
+                        <div style="float:left;width:70px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="Label1" runat="server" 
                             Text="<%$ Resources:WebResources, AdjustmentVoucher_By %>"/>
@@ -39,10 +39,10 @@
                             ID="lblBy" runat="server" 
                             Text="Clerk"/><br />
                         </div>
-                        <div style="float:right">
+                        <div style="float:right;margin-right:30px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblDateIssue" runat="server" 
-                            Text="dd/mm/yy"/><br />
+                            Text="19/04/1985"/><br />
                         </div>
                         <div style="float:right">
                             <asp:Label CssClass="DefaultLabelstyle" 
@@ -50,25 +50,24 @@
                             Text="<%$ Resources:WebResources, AdjustmentVoucher_IssueDate %>"/>
                         </div>
                         <br />
+                        <br />
                             <ig:WebDataGrid ID="DgvAdjustmentVoucherDetails" runat="server" Height="300px" 
                                 Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">                                
                                 <Columns>
-                                    <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
+                                    <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="230px">
                                         <Header Text="Item No." />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="QuantityAdjusted" Key="QuantityAdjusted" 
-                                        Width="100px">
+                                        Width="230px">
                                         <Header Text="Quantity Adjusted" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="100px">
+                                    <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="240px">
                                         <Header Text="Reason" />
                                     </ig:BoundDataField>
                                 </Columns>
                                 <Behaviors>
-                                    <ig:ColumnFixing>
-                                    </ig:ColumnFixing>
                                     <ig:Filtering>
                                     </ig:Filtering>
                                     <ig:Paging PageSize="10">
@@ -97,4 +96,5 @@
                    <a href="IssueAdjustmentVoucher.aspx">Back to Issue Adjustment Voucher</a>
             </div>
     </div>
+    </a>
 </asp:Content>

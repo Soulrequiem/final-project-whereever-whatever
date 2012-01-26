@@ -13,39 +13,51 @@
              <br />
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, ViewAdjustmentVoucherList_Title %>" /></h1>
-             <br />
-            <ig:WebDataGrid ID="DgvAdjustmentVoucherList" runat="server" Height="300px" 
+             <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
+             CssClass="GroupBoxstyle" StyleSetName="" 
+             TitleAlignment="Left">
+             <Template>
+            <ig:WebDataGrid ID="DgvAdjustmentVoucherList" runat="server" Height="200px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="80px">
+                     <%--<ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="150px">
+                         <Header Text="Voucher No." />
+                     </ig:BoundDataField>--%>
+                     <ig:TemplateDataField Key="VoucherNo" Width="200px">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("VoucherNo" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
                         <Header Text="Voucher No." />
-                    </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="CreatedBy" Key="CreatedBy" Width="100px">
-                        <Header Text="Created By" />
-                    </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="CreatedDate" Key="CreatedDate" Width="100px">
-                        <Header Text="Created Date" />
-                    </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="TotalQty" Key="TotalQty" Width="50px">
-                        <Header Text="Total Qty" />
-                    </ig:BoundDataField>
-                </Columns>
-                <Behaviors>
-                    <ig:ColumnFixing>
-                    </ig:ColumnFixing>
-                    <ig:Filtering>
-                    </ig:Filtering>
-                    <ig:Paging PageSize="10">
-                    </ig:Paging>
-                    <ig:Selection CellClickAction="Row" RowSelectType="Single">
-                    </ig:Selection>
-                    <ig:Sorting>
-                    </ig:Sorting>
-                </Behaviors>
+                    </ig:TemplateDataField>
+                     <ig:BoundDataField DataFieldName="CreatedBy" Key="CreatedBy" Width="200px">
+                         <Header Text="Created By" />
+                     </ig:BoundDataField>
+                     <ig:BoundDataField DataFieldName="CreatedDate" Key="CreatedDate" Width="200px">
+                         <Header Text="Created Date" />
+                     </ig:BoundDataField>
+                     <ig:BoundDataField DataFieldName="TotalQty" Key="TotalQty" Width="100px">
+                         <Header Text="Total Qty" />
+                     </ig:BoundDataField>
+                 </Columns>
+                 <Behaviors>
+                     <ig:Filtering>
+                     </ig:Filtering>
+                     <ig:Paging PageSize="10">
+                     </ig:Paging>
+                     <ig:Selection CellClickAction="Row" RowSelectType="Single">
+                     </ig:Selection>
+                     <ig:Sorting>
+                     </ig:Sorting>
+                 </Behaviors>
             </ig:WebDataGrid>
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+            </Template>
+            </igmisc:WebGroupBox>
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
              CssClass="GroupBoxstyle" StyleSetName="" Text="Adjustment Voucher List" 
              TitleAlignment="Left">
              <Template>

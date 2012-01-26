@@ -22,26 +22,33 @@
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
                     <ig:BoundDataField DataFieldName="DepartmentName" Key="DepartmentName" 
-                        Width="80px">
+                        Width="200px">
                         <Header Text="Department Name" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="MissedTime" Key="MissedTime" Width="50px">
+                    <ig:BoundDataField DataFieldName="MissedTime" Key="MissedTime" Width="100px">
                         <Header Text="Missed Time" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="Status" Key="Status" Width="100px">
                         <Header Text="Status" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
+                    <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="150px">
                         <Header Text="Remarks" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Black/UnblackList" Key="Black/UnblackList" 
-                        Width="100px">
+                    <%--<ig:BoundDataField DataFieldName="Black/UnblackList" Key="Black/UnblackList" 
+                        Width="150px">
                         <Header Text="BoundColumn_4" />
-                    </ig:BoundDataField>
+                    </ig:BoundDataField>--%>
+                    <ig:TemplateDataField Key="Black/UnblackList" Width="150px">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("RetrievalNo" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
+                        <Header Text="Black/UnblackList" />
+                    </ig:TemplateDataField>
                 </Columns>
                 <Behaviors>
-                    <ig:ColumnFixing>
-                    </ig:ColumnFixing>
                     <ig:Filtering>
                     </ig:Filtering>
                     <ig:Paging PageSize="10">
