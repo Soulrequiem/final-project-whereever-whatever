@@ -87,9 +87,8 @@
             </td>
         </tr>
     </table>
-    <br />
     <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
-                CssClass="MediumGroupBoxstyle" StyleSetName="" width="700px"
+                CssClass="MediumGroupBoxstyle" StyleSetName="" width="600px"
                 TitleAlignment="Left">
                 <Template>
                      <table>
@@ -108,26 +107,25 @@
                             </td>
                         </tr>
                     </table>
-                    <br />
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label9" runat="server" 
                         Text="<%$ Resources:WebResources, SearchResult_Label%>"/>
-                    <ig:WebDataGrid ID="dgvStationeryList" runat="server" Height="300px" 
-                         Width="350px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+                    <ig:WebDataGrid ID="dgvStationeryList" runat="server" Height="150px" 
+                         Width="570px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="80px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="140px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                            Width="150px">
+                            Width="270px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
                         <%--<ig:BoundDataField DataFieldName="AddToTable" Key="AddToTable" Width="80px">
                             <Header Text="" />
                         </ig:BoundDataField>--%>
-                        <ig:TemplateDataField Key="AddToTable" Width="120px">
+                        <ig:TemplateDataField Key="AddToTable" Width="160px">
                                 <ItemTemplate>
                                    <asp:HyperLink ID="AddToTable" runat="server"
                                        Text="Add to Table"
@@ -151,14 +149,13 @@
                  </ig:WebDataGrid>
                 </Template>
      </igmisc:WebGroupBox>
-     <br />
      <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" 
-                CssClass="MediumGroupBoxstyle" StyleSetName="" width="700px"
+                CssClass="MediumGroupBoxstyle" StyleSetName="" width="600px"
                 TitleAlignment="Left">
                 <Template>
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label11" runat="server" 
                         Text="<%$ Resources:WebResources, RequisitionDetails_Label_Text%>"/>
-                    <ig:WebDataGrid ID="dgvStationeryDetailsList" runat="server" Height="400px" Width="550px" 
+                    <ig:WebDataGrid ID="dgvStationeryDetailsList" runat="server" Height="200px" Width="570px" 
                         DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
@@ -171,7 +168,7 @@
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                            Width="250px">
+                            Width="270px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
                        <%-- <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="80px">
@@ -179,8 +176,8 @@
                         </ig:BoundDataField>--%>
                         <ig:TemplateDataField  Key="RequiredQty" Width="160px">
                             <ItemTemplate>
-                                <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="110px"
-                                Text='<%# Eval("RequiredQty") %>'>
+                                <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="140px"
+                                Text='<%# Eval("RequiredQty") %>' NullText="Enter Required Quantity">
                                 </ig:WebTextEditor>
                             </ItemTemplate>
                             <Header Text="Required Qty" />
@@ -209,8 +206,8 @@
                                 </Behaviors>
                             </ig:EditingCore>
                         </Behaviors>
-                 </ig:WebDataGrid><br />
-                 <div style="float:right">
+                 </ig:WebDataGrid>
+                 <div style="float:right;margin-right:15px">
                     <asp:Button ID="btnRequest" 
                         runat="server" Text="<%$ Resources:WebResources,Request_Button_text %>" />
                     <asp:Button ID="btnRemove" 
