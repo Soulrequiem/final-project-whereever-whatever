@@ -20,14 +20,21 @@
                 <Template>
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label5" runat="server" 
                         Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_SelectCollectionLabel%>"/>
-                    <ig:WebDataGrid ID="dgvCollectionList" runat="server" Height="300px" 
+                    <ig:WebDataGrid ID="dgvCollectionList" runat="server" Height="200px" 
                         Width="700px" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                        AutoGenerateColumns="False">
                     <Columns>
-                        <ig:TemplateDataField Key="CollectionID">
-                            <Header Text="Collection ID" />
-                        </ig:TemplateDataField>
+                       <ig:TemplateDataField Key="CollectionID">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("CollectionID" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
+                        <Header Text="Collection ID" />
+                    </ig:TemplateDataField>
                         <ig:BoundDataField DataFieldName="Collection Point" Key="Collection Point" 
                             VisibleIndex="1">
                             <Header Text="Collection Point" />
@@ -50,8 +57,6 @@
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
-                            <ig:RowSelectors>
-                            </ig:RowSelectors>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
                             <ig:Sorting>
@@ -62,7 +67,7 @@
             </igmisc:WebGroupBox>
             <br />
             <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" 
-                CssClass="MediumGroupBoxstyle" StyleSetName="" width="700px" Height="300px"
+                CssClass="MediumGroupBoxstyle" StyleSetName="" width="700px" Height="400px"
                 Text="<%$ Resources:WebResources,UpdateCollectionByItems_GroupBoxTitle1%>" 
                 TitleAlignment="Left">
                 <Template>
@@ -107,7 +112,7 @@
                     <br />
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label4" runat="server" 
                         Text="<%$ Resources:WebResources, UpdateCollectionByItems_GridViewTitle%>"/>
-                    <ig:WebDataGrid ID="dgvItems" runat="server" Height="400px" Width="700px" 
+                    <ig:WebDataGrid ID="dgvItems" runat="server" Height="250px" Width="700px" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
@@ -119,11 +124,18 @@
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty">
-                            <Header Text="Required Qty" />
+                            <Header Text="Required Qty." />
                         </ig:BoundDataField>
-                        <ig:UnboundField Key="ActualQty">
+                       <%-- <ig:UnboundField Key="ActualQty">
                             <Header Text="Actual Qty" />
-                        </ig:UnboundField>
+                        </ig:UnboundField>--%>
+                        <ig:TemplateDataField Key="ActualQty">
+                        <ItemTemplate>
+                           <ig:WebTextEditor Width="150px" runat="server" Text='<%# Eval("ActualQty" ) %>'>
+                           </ig:WebTextEditor>
+                        </ItemTemplate>
+                        <Header Text="Actual Qty." />
+                    </ig:TemplateDataField>
                     </Columns>
                         <Behaviors>
                             <ig:Filtering>
@@ -136,6 +148,9 @@
                             </ig:Sorting>
                         </Behaviors>
                  </ig:WebDataGrid>
+                 <div style="float:right;margin-top:5px">
+                    <asp:Button ID="Button1" runat="server" Text="Save" />
+                 </div>
                 </Template>
             </igmisc:WebGroupBox>
 </div>

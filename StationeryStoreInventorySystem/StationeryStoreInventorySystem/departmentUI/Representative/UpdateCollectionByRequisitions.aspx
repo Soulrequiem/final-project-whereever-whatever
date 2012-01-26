@@ -11,14 +11,14 @@
             <br />
             <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
             Text="<%$ Resources:WebResources, UpdateCollectionByRequisitions %>" /></h1>
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" 
                 Text="<%$ Resources:WebResources,UpdateCollectionByRequisions_GroupBoxTitle%>" 
                 TitleAlignment="Left">
                 <Template>
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label5" runat="server" 
                         Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_SelectCollectionLabel%>"/>
-                    <ig:WebDataGrid ID="dgvCollectionList" runat="server" Height="300px" 
+                    <ig:WebDataGrid ID="dgvCollectionList" runat="server" Height="200px" 
                         Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
@@ -48,8 +48,6 @@
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
-                            <ig:RowSelectors>
-                            </ig:RowSelectors>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
                             <ig:Sorting>
@@ -58,9 +56,8 @@
                  </ig:WebDataGrid>
                 </Template>
             </igmisc:WebGroupBox>
-            <br />
-            <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" 
-                CssClass="MediumGroupBoxstyle" StyleSetName="" Height="300px"
+            <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
+                CssClass="MediumGroupBoxstyle" StyleSetName="" Height="400px"
                 Text="<%$ Resources:WebResources,UpdateCollectionByRequisions_GroupBoxTitle1%>" 
                 TitleAlignment="Left">
                 <Template>
@@ -105,12 +102,14 @@
                     <br />
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label4" runat="server" 
                         Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_RequisitionLabel%>"/>
-                    <ig:WebDataGrid ID="dgvRequisitions" runat="server" Height="400px" Width="700px" 
+                    
+                <ig:WebDataGrid ID="dgvRequisitions" runat="server" Height="300px" Width="700px" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
-                        <ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID">
+                        <ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
+                            Width="80px">
                             <Header Text="Requisition ID" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="RequisitionDateTime" 
@@ -124,6 +123,12 @@
                             <Header Text="Requisition Status" />
                         </ig:BoundDataField>
                         <ig:TemplateDataField Key="ModifyRequisition">
+                            <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='Modify Delivered Quantity'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
                         </ig:TemplateDataField>
                     </Columns>
                         <Behaviors>
@@ -137,7 +142,7 @@
                             </ig:Sorting>
                         </Behaviors>
                  </ig:WebDataGrid>
-                </Template>
+                 </Template>
             </igmisc:WebGroupBox>
 </div>
 </asp:Content>
