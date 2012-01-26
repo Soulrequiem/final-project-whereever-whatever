@@ -24,7 +24,11 @@ namespace StationeryStoreInventorySystemModel.broker
         private InventoryEntities inventory = new InventoryEntities();
         private Supplier supplierObj = null;
         private List<Supplier> supplierList = null;
-
+        /// <summary>
+        /// Retrieve the Supplier information according to the Supplier Parameter 
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
         public Supplier GetSupplier(Supplier supplier)
         {
 
@@ -33,7 +37,10 @@ namespace StationeryStoreInventorySystemModel.broker
                 return supplierObj;
             return null;
         }
-
+        /// <summary>
+        ///  Retrieve All of the Supplier information from Supplier Table
+        /// </summary>
+        /// <returns></returns>
         public List<Supplier> GetAllSupplier()
         {
             supplierList = inventory.Suppliers.ToList<Supplier>();
@@ -41,7 +48,12 @@ namespace StationeryStoreInventorySystemModel.broker
                 return supplierList;
             return null;
         }
-
+        /// <summary>
+        ///  Insert Supplier data to the Supplier Table according to the Supplier Parameter
+        ///   Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="newSupplier"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Insert(Supplier newSupplier)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -61,7 +73,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        /// Update Supplier data to the Supplier Table according to the Supplier Parameter
+        ///  Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Update(Supplier supplier)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -89,7 +106,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        ///  Logically delete the Supplier by setting the status to 2 in the Supplier table
+        ///   Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
         public Constants.DB_STATUS Delete(Supplier supplier)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -111,3 +133,6 @@ namespace StationeryStoreInventorySystemModel.broker
         #endregion
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
