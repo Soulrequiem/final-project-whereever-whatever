@@ -101,20 +101,18 @@
                      CssClass="DefaultGridViewStyle" ItemCssClass="ItemGridViewStyle" 
                      HeaderCaptionCssClass="HeaderGridViewStyle" StyleSetName="Office2010Blue">
                             <Columns>
-                                <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                                <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="230px">
                                     <Header Text="Item No." />
                                 </ig:BoundDataField>
                                 <ig:BoundDataField DataFieldName="QuantityAdjusted" Key="QuantityAdjusted" 
-                                    Width="50px">
+                                    Width="230px">
                                     <Header Text="Quantity Adjusted" />
                                 </ig:BoundDataField>
-                                <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="100px">
+                                <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="240px">
                                     <Header Text="Reason" />
                                 </ig:BoundDataField>
                             </Columns>
                             <Behaviors>
-                                <ig:ColumnFixing>
-                                </ig:ColumnFixing>
                                 <ig:Filtering>
                                 </ig:Filtering>
                                 <ig:Paging PageSize="10">
