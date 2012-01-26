@@ -83,5 +83,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid DgvTempDepteHeadSearchDetails;
+        
+        /// <summary>
+        /// txtaRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtaRemarks;
+        
+        /// <summary>
+        /// lblRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRemarks;
     }
 }

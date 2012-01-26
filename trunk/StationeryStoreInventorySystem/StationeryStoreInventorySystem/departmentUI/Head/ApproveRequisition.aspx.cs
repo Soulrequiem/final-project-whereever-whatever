@@ -26,7 +26,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
             dr[2] = "1213sadsad";
             dr[3] = "1ssdsfdf";
             dr[4] = "1dsfdsfsdf";
-            dr[5] = "iwojfowi";
+            //dr[5] = "iwojfowi";
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
@@ -35,7 +35,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
             dr[2] = "1213sadsad";
             dr[3] = "1ssdsfdf";
             dr[4] = "1dsfdsfsdf";
-            dr[5] = "jfiwofj";
+            //dr[5] = "jfiwofj";
             dt.Rows.Add(dr);
 
             DgvRequisitionList.DataSource = dt;
