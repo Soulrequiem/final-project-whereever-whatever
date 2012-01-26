@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-<data name="AdjustmentVoucher_AuthorizedBy" xml:space="preserve">
+  <data name="AdjustmentVoucher_AuthorizedBy" xml:space="preserve">
     <value>Authorized By:</value>
   </data>
   <data name="AdjustmentVoucher_BackLink" xml:space="preserve">
@@ -149,7 +149,7 @@
   </data>
   <data name="AssignTempDeptHead_Title" xml:space="preserve">
     <value>Assign Temporary Department Head</value>
-</data>
+  </data>
   <data name="BlackListDepartment_DepartmentList" xml:space="preserve">
     <value>Department List</value>
   </data>
@@ -168,7 +168,7 @@
   <data name="ChangePassword_Title" xml:space="preserve">
     <value>Change Password</value>
   </data>
-<data name="CreatePurchaseOrder_Attention" xml:space="preserve">
+  <data name="CreatePurchaseOrder_Attention" xml:space="preserve">
     <value>Attn:</value>
   </data>
   <data name="CreatePurchaseOrder_DeliverTo" xml:space="preserve">
@@ -289,7 +289,7 @@
     <value>Deliver Order No:</value>
   </data>
   <data name="ReceiveOrderForm_Remarks" xml:space="preserve">
-    <value>Remarks(Clerk):</value>
+    <value>Remarks(Clerk):   </value>
   </data>
   <data name="ReceiveOrderForm_SupplierName" xml:space="preserve">
     <value>Supplier Name:</value>
