@@ -59,7 +59,7 @@
         </div>
         <div id="MasterContent" class="MasterContentStyle">
             <div class="navigation" id="MasterNavigation" runat="server">
-                <asp:Panel BackColor="#8DB1E2" ID="NavigationPanel" Height="550px"
+                <asp:Panel BackColor="#8DB1E2" ID="NavigationPanel" Height="620px" 
                 runat="server">
                     <ig:WebExplorerBar ID="NavigationBar" runat="server" Width="219px" 
                         BackColor="#8DB1E2" BorderColor="#8DB1E2" EnableExpandButtons="False" 
