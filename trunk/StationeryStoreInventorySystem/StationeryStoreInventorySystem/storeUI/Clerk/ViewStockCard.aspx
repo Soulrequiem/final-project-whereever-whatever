@@ -14,7 +14,6 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, ViewStockCard_Title %>" /></h1>
-             <br />
              <table>
                 <tr>
                     <td>
@@ -120,27 +119,25 @@
                  </tr>
              </table>
             <ig:WebDataGrid ID="DgvStockCardList" runat="server" Height="400px" 
-            Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+            Width="500px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundDataField DataFieldName="Date" Key="Date" Width="80px">
+                    <ig:BoundDataField DataFieldName="Date" Key="Date" Width="100px">
                         <Header Text="Date" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="Dept/Supplier" Key="Dept/Supplier" 
-                        Width="100px">
+                        Width="200px">
                         <Header Text="Dept/Supplier" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Qty" Key="Qty" Width="50px">
+                    <ig:BoundDataField DataFieldName="Qty" Key="Qty" Width="100px">
                         <Header Text="Qty" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Balance" Key="Balance" Width="80px">
+                    <ig:BoundDataField DataFieldName="Balance" Key="Balance" Width="100px">
                         <Header Text="Balance" />
                     </ig:BoundDataField>
                 </Columns>
                 <Behaviors>
-                    <ig:ColumnFixing>
-                    </ig:ColumnFixing>
                     <ig:Filtering>
                     </ig:Filtering>
                     <ig:Paging PageSize="10">

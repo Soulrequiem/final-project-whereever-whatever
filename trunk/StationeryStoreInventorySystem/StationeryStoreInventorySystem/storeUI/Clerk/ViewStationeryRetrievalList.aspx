@@ -19,26 +19,33 @@
             HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundDataField DataFieldName="RetrievalNo" Key="RetrievalNo" Width="50px">
+                   <%-- <ig:BoundDataField DataFieldName="RetrievalNo" Key="RetrievalNo" Width="100px">
                         <Header Text="Retrieval No." />
-                    </ig:BoundDataField>
+                    </ig:BoundDataField>--%>
+                    <ig:TemplateDataField Key="RetrievalNo" Width="100px">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("RetrievalNo" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
+                        <Header Text="Retrieval No." />
+                    </ig:TemplateDataField>
                     <ig:BoundDataField DataFieldName="RetrievalDate/Time" Key="RetrievalDate/Time" 
-                        Width="100px">
+                        Width="150px">
                         <Header Text="Retrieval Date/Time" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="RetrievedBy" Width="80px">
+                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="RetrievedBy" Width="150px">
                         <Header Text="Retrieved By" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="NeededQty" Key="NeededQty" Width="50px">
+                    <ig:BoundDataField DataFieldName="NeededQty" Key="NeededQty" Width="150px">
                         <Header Text="Needed Qty" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="ActualQty" Key="ActualQty" Width="50px">
+                    <ig:BoundDataField DataFieldName="ActualQty" Key="ActualQty" Width="150px">
                         <Header Text="Actual Qty" />
                     </ig:BoundDataField>
                 </Columns>
                 <Behaviors>
-                    <ig:ColumnFixing>
-                    </ig:ColumnFixing>
                     <ig:Filtering>
                     </ig:Filtering>
                     <ig:Paging PageSize="10">

@@ -11,41 +11,36 @@
             <br />
     <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
             Text="<%$ Resources:WebResources, UpdateStationeryRetrieval_Header_Title %>" /></h1>
-            <igmisc:WebGroupBox ID="dgvCollections" runat="server" 
+            <igmisc:WebGroupBox ID="GroupBox" runat="server" Width="700px"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" 
                 Text="<%$ Resources:WebResources,UpdateCollectionByRequisions_GroupBoxTitle%>" 
                 TitleAlignment="Left">
                 <Template>
-                    <ig:WebDataGrid ID="WebDataGrid2" runat="server" Height="300px" Width="700px" 
+                    <ig:WebDataGrid ID="dgvCollections" runat="server" Height="400px" Width="700px" 
                         AutoGenerateColumns="False" DefaultColumnWidth="50px" 
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundCheckBoxField DataFieldName="UpdateStationeryRetrievalCheckBox" 
-                                Key="UpdateStationeryRetrievalCheckBox" Width="50px">
-                                <Header Text="BoundCheckBoxField_0" />
-                            </ig:BoundCheckBoxField>
-                            <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" Width="50px">
+                            <ig:UnboundCheckBoxField Key="UpdateStationeryRetrievalCheckBox" Width="50px">
+                                <Header Text="Select" />
+                            </ig:UnboundCheckBoxField>
+                            <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" Width="80px">
                                 <Header Text="Collection ID" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
-                                Width="100px">
+                                Width="120px">
                                 <Header Text="Collection Point" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionDay" Key="CollectionDay" 
-                                Width="80px">
-                                <Header Text="Collection Day" />
-                            </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionDate/Time" 
-                                Key="CollectionDate/Time" Width="80px">
+                                Key="CollectionDate/Time" Width="100px">
                                 <Header Text="Collection Date/Time" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Dept.RepresentativeName" 
-                                Key="Dept.RepresentativeName" Width="80px">
-                                <Header Text="Dept. Representative Name" />
+                            <ig:BoundDataField DataFieldName="DeptRepresentativeName" Key="DeptRepresentativeName" 
+                                Width="120px">
+                                <Header Text="Dept. Rep. Name" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="DepartmentName" Key="DepartmentName" 
-                                Width="80px">
+                            <ig:BoundDataField DataFieldName="DepartmentName" 
+                                Key="DepartmentName" Width="120px">
                                 <Header Text="Department Name" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus" 
@@ -54,8 +49,6 @@
                             </ig:BoundDataField>
                         </Columns>
                         <Behaviors>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
                             <ig:Filtering>
                             </ig:Filtering>
                             <ig:Paging PageSize="10">
