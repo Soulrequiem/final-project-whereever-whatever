@@ -31,22 +31,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative 
         protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
+        /// GroupBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.WebUI.Misc.WebGroupBox GroupBox;
+        
+        /// <summary>
         /// dgvCollections control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.WebUI.Misc.WebGroupBox dgvCollections;
-        
-        /// <summary>
-        /// WebDataGrid1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Infragistics.Web.UI.GridControls.WebDataGrid WebDataGrid1;
+        protected global::Infragistics.Web.UI.GridControls.WebDataGrid dgvCollections;
         
         /// <summary>
         /// Label3 control.

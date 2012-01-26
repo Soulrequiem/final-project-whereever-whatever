@@ -23,10 +23,19 @@
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
-                        <ig:TemplateDataField Key="CollectionID" VisibleIndex="0">
+                        <%--<ig:TemplateDataField Key="CollectionID" VisibleIndex="0">
+                            <Header Text="Collection ID" />
+                        </ig:TemplateDataField>--%>
+                        <ig:TemplateDataField Key="CollectionID">
+                            <ItemTemplate>
+                                <asp:HyperLink ID="TripIDLink" runat="server" 
+                                    Text='<%# Eval("CollectionID" ) %>'
+                                    NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                    </asp:HyperLink>
+                            </ItemTemplate>
                             <Header Text="Collection ID" />
                         </ig:TemplateDataField>
-                        <ig:BoundDataField DataFieldName="Collection Point" Key="Collection Point" 
+                        <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
                             VisibleIndex="1">
                             <Header Text="Collection Point" />
                         </ig:BoundDataField>
@@ -39,9 +48,18 @@
                         <ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus">
                             <Header Text="Collection Status" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Status" Key="Status">
+                        <ig:TemplateDataField Key="Status">
+                            <ItemTemplate>
+                            <asp:HyperLink ID="Status" runat="server" 
+                                Text='Update Status'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                                <Header Text="" />
+                        </ItemTemplate>
+                        </ig:TemplateDataField>
+                        <%--<ig:BoundDataField DataFieldName="Status" Key="Status">
                             <Header Text="Status" />
-                        </ig:BoundDataField>
+                        </ig:BoundDataField>--%>
                     </Columns>
                         <Behaviors>
                             <ig:Paging>

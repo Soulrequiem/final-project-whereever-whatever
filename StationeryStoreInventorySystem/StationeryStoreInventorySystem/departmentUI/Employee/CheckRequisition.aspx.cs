@@ -40,6 +40,36 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
             dgvRequisitionList.DataSource = dt;
             dgvRequisitionList.DataBind();
+
+
+            DataTable dtt = new DataTable();
+            dtt.Columns.Add("ItemNo");
+            dtt.Columns.Add("ItemDescription");
+            dtt.Columns.Add("RequiredQty");
+            dtt.Columns.Add("ReceivedQty");
+            dtt.Columns.Add("RemainingQty");
+            //dtt.Columns.Add("Remarks");
+
+            DataRow drr = dtt.NewRow();
+            drr[0] = "1";
+            drr[1] = "1";
+            drr[2] = "1we2we12321";
+            drr[3] = "1213sadsad";
+            //drr[4] = "1ssdsfdf";
+
+            dtt.Rows.Add(drr);
+
+            drr = dtt.NewRow();
+            drr[0] = "1";
+            drr[1] = "1";
+            drr[2] = "1we2we12321";
+            drr[3] = "1213sadsad";
+            //dr[4] = "1ssdsfdf";
+
+            dtt.Rows.Add(drr);
+
+            dgvRequisitionDetails.DataSource = dtt;
+            dgvRequisitionDetails.DataBind();
         }
     }
 }
