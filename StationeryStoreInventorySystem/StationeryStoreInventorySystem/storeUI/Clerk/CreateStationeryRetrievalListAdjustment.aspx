@@ -107,16 +107,20 @@
                     <div style="height:20px">
                     </div>
                     <div style="float:right">
-                        <input id="btnAdd" type="button" 
-                            value="<%$ Resources:WebResources, CreateStationeryRetreivalList_ButtonText%>" runat="server"/>
+                        <%--<input id="btnAdd" type="button" 
+                            value="<%$ Resources:WebResources, CreateStationeryRetreivalList_ButtonText%>" runat="server"/>--%>
+                            <asp:Button ID="btnSet" runat="server" CssClass="DefaultUltraLargebutton"
+                                Text="<%$ Resources:WebResources, CreateStationeryRetreivalList_ButtonText%>" />
                     </div>
                  </div>
                 </Template>
             </igmisc:WebGroupBox>
             <div style="height:20px"></div>
             <div style="float:right">
-                        <input id="Button1" type="button" 
-                            value="Submit Actual Quantity" runat="server"/>
+                        <%--<input id="Button1" type="button" 
+                            value="Submit Actual Quantity" runat="server"/>--%>
+                            <asp:Button ID="btnSubmit" runat="server" CssClass="DefaultUltraLargebutton"
+                                Text="Submit Actual Quantity" />
                     </div>
  </div>
 </asp:Content>

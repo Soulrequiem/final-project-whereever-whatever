@@ -58,7 +58,7 @@
                         <td></td>
                         <td>
                             <div style="float:right" class="buttons">
-                                <asp:Button id="Button1" CssClass="button"  runat="server"/>
+                                <asp:Button id="btnChange" CssClass="Defaultbutton"  runat="server" Text="Change"/>
                                 <!--<a class="button" href="" style="float:right">Reset</a>-->
                             </div>
                             <div style="float:right;margin-right:10px">

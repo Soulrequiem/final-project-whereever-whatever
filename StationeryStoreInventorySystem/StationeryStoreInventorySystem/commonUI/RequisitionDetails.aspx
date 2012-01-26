@@ -140,14 +140,16 @@
                 </ig:WebDataGrid>
                 <br />
                 <div style="float:right">
-                        <a class="button" href="" style="float:right">Reject</a>
+                        <asp:Button ID="btnReject" CssClass="Defaultbutton"
+                                        runat="server" Text="Reject"/>
                 </div>
                 <div style="float:right;margin-right:10px">
-                       <a class="button" href="" style="float:right">Approve</a>
+                       <asp:Button ID="btnApprove" CssClass="Defaultbutton"
+                                        runat="server" Text="Approve"/>
                 </div>
-                <div style="float:right">
+                <div style="float:right;margin-right:10px">
                     <ig:WebTextEditor ID="txtaRemarks" runat="server" Width="200px" Height="50px" 
-                        NullText="<%$ Resources:WebResources, Text_Remarks %>">
+                        NullText="<%$ Resources:WebResources, Text_Remarks %>" TextMode="MultiLine">
                     </ig:WebTextEditor>
                 </div>
                 <div style="float:right;margin-right:10px">

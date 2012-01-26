@@ -107,7 +107,7 @@
                         </Behaviors>
                  </ig:WebDataGrid><br />
                  <div style="float:right">
-                     <asp:Button ID="btnWithdraw" 
+                     <asp:Button ID="btnWithdraw" CssClass="DefaultLargebutton"
                         runat="server" Text="<%$ Resources:WebResources,Withdraw_Button_text %>" />
                  </div>
                 </Template>

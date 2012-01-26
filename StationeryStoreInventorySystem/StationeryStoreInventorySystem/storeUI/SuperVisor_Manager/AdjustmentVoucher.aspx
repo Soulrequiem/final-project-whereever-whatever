@@ -93,7 +93,9 @@
             </igmisc:WebGroupBox>
             <br />
             <div style="float:right">
-                   <a href="IssueAdjustmentVoucher.aspx">Back to Issue Adjustment Voucher</a>
+                   <%--<a href="IssueAdjustmentVoucher.aspx">Back to Issue Adjustment Voucher</a>--%>
+                   <asp:Button ID="btnSave" runat="server" CssClass="DefaultVeryLargebutton"
+                     Text="<< Back to Issue Adjustment Voucher" />
             </div>
     </div>
     </a>

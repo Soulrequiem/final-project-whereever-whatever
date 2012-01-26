@@ -149,7 +149,7 @@
                         </Behaviors>
                  </ig:WebDataGrid>
                  <div style="float:right;margin-top:5px">
-                    <asp:Button ID="Button1" runat="server" Text="Save" />
+                    <asp:Button ID="btnSave" runat="server" CssClass="Defaultbutton" Text="Save" />
                  </div>
                 </Template>
             </igmisc:WebGroupBox>

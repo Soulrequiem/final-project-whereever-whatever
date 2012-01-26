@@ -61,11 +61,11 @@
                     </ig:WebDataGrid>
                     <br>
                     <div style="float:right" class="buttons">
-                         <asp:Button id="Button1" CssClass="button"  runat="server" Text="Not Collected"/>
+                         <asp:Button id="btnCollected" CssClass="DefaultLargebutton"  runat="server" Text="Not Collected"/>
                          <!--<a class="button" href="" style="float:right">Reset</a>-->
-                     </div>
-                         <div style="float:right" class="button">
-                         <asp:Button ID="Button2" CssClass="button" runat="server" Text="Collected" />
+                     <%--</div>
+                         <div style="float:right" class="button">--%>
+                         <asp:Button ID="btnNotCollected" CssClass="DefaultLargebutton" runat="server" Text="Collected" />
                          <!--<a class="button" href="" style="float:right">Change</a>-->
                       </div>
                 </Template>

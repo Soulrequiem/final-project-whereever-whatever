@@ -60,7 +60,8 @@
                         </div>
                         <div style="float:left">
                         &nbsp;&nbsp;&nbsp;
-                            <asp:Button id="btnSave" CssClass="button"  runat="server" Text="Save"/>
+                            <asp:Button id="btnSave" CssClass="Defaultbutton"
+                                  runat="server" Text="Save"/>
                         </div>
                 </Template>
             </igmisc:WebGroupBox>

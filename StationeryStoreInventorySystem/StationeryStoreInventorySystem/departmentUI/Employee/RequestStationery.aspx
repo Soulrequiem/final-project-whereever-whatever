@@ -208,11 +208,11 @@
                         </Behaviors>
                  </ig:WebDataGrid>
                  <div style="float:right;margin-right:15px">
-                    <asp:Button ID="btnRequest" 
+                    <asp:Button ID="btnRequest" CssClass="DefaultLargebutton"
                         runat="server" Text="<%$ Resources:WebResources,Request_Button_text %>" />
-                    <asp:Button ID="btnRemove" 
+                    <asp:Button ID="btnRemove" CssClass="DefaultLargebutton"
                         runat="server" Text="<%$ Resources:WebResources,Remove_Button_text %>" />
-                    <asp:Button ID="btnReset" 
+                    <asp:Button ID="btnReset" CssClass="DefaultLargebutton"
                         runat="server" Text="<%$ Resources:WebResources,Reset_Button_text %>" />
                  </div>
                 </Template>

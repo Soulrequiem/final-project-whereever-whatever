@@ -62,8 +62,10 @@
                     </ig:Sorting>
                 </Behaviors>
             </ig:WebDataGrid>
-            <div>
-                <a class="buttoningrid" href="" style="float:right">Generate</a>
+            <div style="float:right">
+                <%--<a class="buttoningrid" href="" style="float:right">Generate</a>--%>
+                <asp:Button ID="btnGenerate" runat="server" CssClass="DefaultLargebutton"
+                                Text="Generate" />
             </div>
     </div>
 </asp:Content>

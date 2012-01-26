@@ -493,6 +493,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter Email Address.
+        /// </summary>
+        internal static string ForgotPassword_grouptext {
+            get {
+                return ResourceManager.GetString("ForgotPassword_grouptext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot Password.
         /// </summary>
         internal static string ForgotPassword_Title {

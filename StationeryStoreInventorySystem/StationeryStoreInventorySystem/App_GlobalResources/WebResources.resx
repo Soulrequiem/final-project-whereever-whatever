@@ -528,4 +528,7 @@
   <data name="Text_RequisitionID" xml:space="preserve">
     <value>Enter Requisition ID</value>
   </data>
+  <data name="ForgotPassword_grouptext" xml:space="preserve">
+    <value>Enter Email Address</value>
+  </data>
 </root>
