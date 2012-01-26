@@ -79,5 +79,27 @@ namespace SystemStoreInventorySystemUtil
             SUCCESS,
             FAIL
         }
+
+        public enum INPUT_FROM_TYPE // inputFrom from StockCardDetails
+        {
+            UNKNOWN = 0,
+            DEPT,
+            SUPPLIER,
+            STOCK_ADJUSTMENT
+        }
+
+        public enum EMPLOYEE_TYPE
+        {
+            UNKNOWN = 0,
+            ADMIN,
+            EMPLOYEE,
+            DEPARTMENT_REPRESENTATIVE,
+            TEMPORARY_DEPARTMENT_REPRESENTATIVE,
+            DEPARTMENT_HEAD,
+            TEMPORARY_DEPARTMENT_HEAD,
+            STORE_CLERK,
+            STORE_MANAGER,
+            STORE_SUPERVISOR
+        }
     }
 }
