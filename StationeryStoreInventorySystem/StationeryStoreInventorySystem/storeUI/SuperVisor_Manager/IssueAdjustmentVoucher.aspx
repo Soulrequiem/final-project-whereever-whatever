@@ -12,30 +12,37 @@
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, IssueAdjustmentVoucher_Title %>" /></h1>
              <br />
-             <ig:WebDataGrid ID="DgvDiscrepancyReportList" runat="server" Height="300px" 
+             <ig:WebDataGrid ID="DgvDiscrepancyReportList" runat="server" Height="200px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                  <Columns>
-                     <ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="80px">
+                     <%--<ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="150px">
                          <Header Text="Voucher No." />
-                     </ig:BoundDataField>
-                     <ig:BoundDataField DataFieldName="CreatedBy" Key="CreatedBy" Width="100px">
+                     </ig:BoundDataField>--%>
+                     <ig:TemplateDataField Key="VoucherNo" Width="120px">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("VoucherNo" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
+                        <Header Text="Voucher No." />
+                    </ig:TemplateDataField>
+                     <ig:BoundDataField DataFieldName="CreatedBy" Key="CreatedBy" Width="150px">
                          <Header Text="Created By" />
                      </ig:BoundDataField>
-                     <ig:BoundDataField DataFieldName="CreatedDate" Key="CreatedDate" Width="100px">
+                     <ig:BoundDataField DataFieldName="CreatedDate" Key="CreatedDate" Width="150px">
                          <Header Text="Created Date" />
                      </ig:BoundDataField>
-                     <ig:BoundDataField DataFieldName="TotalQty" Key="TotalQty" Width="80px">
+                     <ig:BoundDataField DataFieldName="TotalQty" Key="TotalQty" Width="100px">
                          <Header Text="Total Qty" />
                      </ig:BoundDataField>
-                     <ig:BoundDataField DataFieldName="Status" Key="Status" Width="80px">
+                     <ig:BoundDataField DataFieldName="Status" Key="Status" Width="150px">
                          <Header Text="Status" />
                      </ig:BoundDataField>
                  </Columns>
                  <Behaviors>
-                     <ig:ColumnFixing>
-                     </ig:ColumnFixing>
                      <ig:Filtering>
                      </ig:Filtering>
                      <ig:Paging PageSize="10">
@@ -45,12 +52,12 @@
                      <ig:Sorting>
                      </ig:Sorting>
                  </Behaviors>
-             </ig:WebDataGrid><br /><br />                   
-             <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+             </ig:WebDataGrid>
+             <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Discrepancy Report" 
                 TitleAlignment="Left">
                     <Template>
-                        <div style="float:left">
+                        <div style="float:left;width:70px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="Label2" runat="server" 
                             Text="<%$ Resources:WebResources, IssueAdjustmentVoucher_Voucher %>"/>
@@ -61,7 +68,7 @@
                             Text="[000/00000/99]"/><br />
                         </div>
                         <br />
-                        <div style="float:left">
+                        <div style="float:left;width:70px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="Label1" runat="server" 
                             Text="<%$ Resources:WebResources, IssueAdjustmentVoucher_By %>"/>
@@ -71,7 +78,7 @@
                             ID="lblBy" runat="server" 
                             Text="Clerk"/><br />
                         </div>
-                        <div style="float:right">
+                        <div style="float:right;margin-right:20px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblDateIssue" runat="server" 
                             Text="dd/mm/yy"/><br />
@@ -87,26 +94,25 @@
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                                 <Columns>
-                                    <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                                    <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                         <Header Text="Item No." />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                                        Width="120px">
+                                        Width="200px">
                                         <Header Text="Item Description" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="50px">
+                                    <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="120px">
                                         <Header Text="Quantity" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="PricePerItem" Key="PricePerItem" Width="50px">
+                                    <ig:BoundDataField DataFieldName="PricePerItem" Key="PricePerItem" 
+                                        Width="120px">
                                         <Header Text="Price Per Item" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="100px">
+                                    <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="150px">
                                         <Header Text="Reason" />
                                     </ig:BoundDataField>
                                 </Columns>
                                 <Behaviors>
-                                    <ig:ColumnFixing>
-                                    </ig:ColumnFixing>
                                     <ig:Filtering>
                                     </ig:Filtering>
                                     <ig:Paging PageSize="10">
