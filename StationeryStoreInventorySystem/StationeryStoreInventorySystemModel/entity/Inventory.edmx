@@ -1303,11 +1303,11 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CollectionMisseds" Relationship="InventoryModel.FK_CollectionMissed_Department1" FromRole="Department" ToRole="CollectionMissed" />
           <NavigationProperty Name="CollectionPoint" Relationship="InventoryModel.FK_department_collectionpoint1" FromRole="Department" ToRole="CollectionPoint" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_department_employee1" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_department_employee2" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee2" Relationship="InventoryModel.FK_department_employee3" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee3" Relationship="InventoryModel.FK_department_employee4" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_department1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeContactId" Relationship="InventoryModel.FK_department_employee1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeHeadId" Relationship="InventoryModel.FK_department_employee2" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeRepresentativeId" Relationship="InventoryModel.FK_department_employee3" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_department_employee4" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeId" Relationship="InventoryModel.FK_employee_department1" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Requisitions" Relationship="InventoryModel.FK_requisition_department1" FromRole="Department" ToRole="Requisition" />
           <NavigationProperty Name="RequisitionCollections" Relationship="InventoryModel.FK_requisitioncollection_department1" FromRole="Department" ToRole="RequisitionCollection" />
           <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_department1" FromRole="Department" ToRole="RetrievalDetails" />
@@ -1457,7 +1457,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CollectionPoint" Relationship="InventoryModel.FK_requisitioncollection_collectionpoint1" FromRole="RequisitionCollection" ToRole="CollectionPoint" />
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_requisitioncollection_department1" FromRole="RequisitionCollection" ToRole="Department" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_requisitioncollection_employee1" FromRole="RequisitionCollection" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_requisitioncollection_employee1" FromRole="RequisitionCollection" ToRole="Employee" />
           <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionDetails" />
           <NavigationProperty Name="RequisitionCollectionItems" Relationship="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionItems" />
         </EntityType>
@@ -1477,7 +1477,7 @@
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_requisitioncollectionitems_employee1" FromRole="RequisitionCollectionItems" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_requisitioncollectionitems_employee1" FromRole="RequisitionCollectionItems" ToRole="Employee" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_requisitioncollectionitems_item1" FromRole="RequisitionCollectionItems" ToRole="Item" />
           <NavigationProperty Name="RequisitionCollection" Relationship="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" FromRole="RequisitionCollectionItems" ToRole="RequisitionCollection" />
         </EntityType>
@@ -1498,7 +1498,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_retrieval_employee1" FromRole="Retrieval" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_retrieval_employee1" FromRole="Retrieval" ToRole="Employee" />
           <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_retrieval1" FromRole="Retrieval" ToRole="RetrievalDetails" />
         </EntityType>
         <EntityType Name="RetrievalDetail">
@@ -1531,7 +1531,7 @@
           <Property Name="createddate" Type="DateTime" Nullable="false" />
           <Property Name="status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Discrepancy" Relationship="InventoryModel.FK_stockadjustment_discrepancy1" FromRole="StockAdjustment" ToRole="Discrepancy" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_stockadjustment_employee1" FromRole="StockAdjustment" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_stockadjustment_employee1" FromRole="StockAdjustment" ToRole="Employee" />
         </EntityType>
         <EntityType Name="StockCard">
           <Key>
@@ -1540,7 +1540,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_stockcard_employee1" FromRole="StockCard" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_stockcard_employee1" FromRole="StockCard" ToRole="Employee" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_stockcard_item1" FromRole="StockCard" ToRole="Item" />
           <NavigationProperty Name="StockCardDetails" Relationship="InventoryModel.FK_stockcarddetails_stockcard1" FromRole="StockCard" ToRole="StockCardDetails" />
         </EntityType>
@@ -1555,7 +1555,7 @@
           <Property Name="Balance" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_stockcarddetails_employee1" FromRole="StockCardDetails" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_stockcarddetails_employee1" FromRole="StockCardDetails" ToRole="Employee" />
           <NavigationProperty Name="StockCard" Relationship="InventoryModel.FK_stockcarddetails_stockcard1" FromRole="StockCardDetails" ToRole="StockCard" />
         </EntityType>
         <EntityType Name="Supplier">
@@ -1572,7 +1572,7 @@
           <Property Name="GstRegistrationNumber" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_supplier_employee1" FromRole="Supplier" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_supplier_employee1" FromRole="Supplier" ToRole="Employee" />
           <NavigationProperty Name="PurchaseOrders" Relationship="InventoryModel.FK_purchaseorder_supplier1" FromRole="Supplier" ToRole="PurchaseOrder" />
         </EntityType>
         <EntityType Name="User">
@@ -1584,8 +1584,8 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_user1" FromRole="User" ToRole="Employee" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_user_employee1" FromRole="User" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeId" Relationship="InventoryModel.FK_employee_user1" FromRole="User" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeCreatedBy" Relationship="InventoryModel.FK_user_employee1" FromRole="User" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_CollectionMissed_Department1">
           <End Role="Department" Type="InventoryModel.Department" Multiplicity="1" />
