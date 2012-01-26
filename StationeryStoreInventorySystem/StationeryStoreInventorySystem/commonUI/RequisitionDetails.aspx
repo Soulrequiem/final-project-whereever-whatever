@@ -17,7 +17,6 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
         <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
         Text="<%$ Resources:WebResources, RequisitionDetails_Title %>" /></h1>
-              <br />
                 <table>
                     <tr>
                         <td>
