@@ -1,0 +1,10 @@
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\StationeryStoreInventorySystemModel.dll
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\SystemStoreInventorySystemUtil.dll
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\StationeryStoreInventorySystemModel.pdb
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\SystemStoreInventorySystemUtil.pdb
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.exe
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.pdb
+C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
