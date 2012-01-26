@@ -5,6 +5,12 @@
 <%@ Register Assembly="Infragistics35.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
     Namespace="Infragistics.Web.UI.GridControls" TagPrefix="ig" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .style1
+        {
+            width: 251px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
@@ -25,7 +31,7 @@
                             ID="Label2" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_RequisitionDates %>"/>
                         </td>
-                        <td>
+                        <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblRequisitionDate" runat="server" 
                             Text="11/01/2012"/><br />
@@ -37,7 +43,7 @@
                             ID="Label3" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_RequisitionID %>"/>
                         </td>
-                        <td>
+                        <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblRequisitionID" runat="server" 
                             Text="DDS/121/12"/><br />
@@ -49,7 +55,7 @@
                             ID="Label1" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_DeptCode %>"/>
                         </td>
-                        <td>
+                        <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblDeptCode" runat="server" 
                             Text="DDS"/><br />
@@ -61,7 +67,7 @@
                             ID="Label7" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_DeptName %>"/>
                         </td>
-                        <td>
+                        <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="LblDeptName" runat="server" 
                             Text="Department of Registrar"/><br />
@@ -73,7 +79,7 @@
                             ID="Label9" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_EmployeeName %>"/>
                         </td>
-                        <td>
+                        <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblEmployeeName" runat="server" 
                             Text="Jenny Wong Mei Lin"/><br />
@@ -85,7 +91,7 @@
                             ID="Label11" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_EmployeeNumber %>"/>
                         </td>
-                        <td>
+                        <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblEmployeeNumber" runat="server" 
                             Text="11233"/><br />
@@ -97,7 +103,7 @@
                             ID="Label13" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_EmployeeEmailAddress %>"/>
                         </td>
-                        <td>
+                        <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblEmpEmailAddress" runat="server" 
                             Text="jenny@LogicUniversity.com"/><br />
