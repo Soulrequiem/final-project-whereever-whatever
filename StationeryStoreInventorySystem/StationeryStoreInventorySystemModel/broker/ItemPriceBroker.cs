@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : ItemPriceBroker.cs
+/*  Module Name     : Models
+/*  Owner           : Thazin Win
+/*  class Name      : ItemPriceBroker
+/*  Details         : Model representation of Item tabletable
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -90,3 +97,6 @@ namespace StationeryStoreInventorySystemModel.broker
         #endregion
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
