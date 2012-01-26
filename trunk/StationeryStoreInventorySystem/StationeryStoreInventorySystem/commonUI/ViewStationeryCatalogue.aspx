@@ -50,18 +50,18 @@
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle">
                         <Columns>
-                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="80px">
+                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="150px">
                                 <Header Text="Item No." />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="100px">
+                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="150px">
                                 <Header Text="Category" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                                Width="150px">
+                                Width="250px">
                                 <Header Text="Item Description" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="UnitOfMeasure" Key="UnitOfMeasure" 
-                                Width="100px">
+                                Width="150px">
                                 <Header Text="UnitOfMeasure" />
                             </ig:BoundDataField>
                         </Columns>
@@ -72,10 +72,6 @@
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
-                            <ig:ColumnFixing>
-                            </ig:ColumnFixing>
-                            <ig:ColumnResizing>
-                            </ig:ColumnResizing>
                             <ig:Sorting>
                             </ig:Sorting>
                         </Behaviors>
