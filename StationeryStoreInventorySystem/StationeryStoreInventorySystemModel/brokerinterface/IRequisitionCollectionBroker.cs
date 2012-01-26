@@ -21,11 +21,11 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Update(RequisitionCollection requisitionCollection);
         Constants.DB_STATUS Delete(RequisitionCollection requisitionCollection);
 
-        RequisitionCollectionItem GetRequisitionCollectionItem(RequisitionCollectionItem requisitionCollectionItem);
-        List<RequisitionCollectionItem> GetAllRequisitionCollectionItem();
-        Constants.DB_STATUS Insert(RequisitionCollectionItem newRequisitionCollectionItem);
-        Constants.DB_STATUS Update(RequisitionCollectionItem requisitionCollectionItem);
-        Constants.DB_STATUS Delete(RequisitionCollectionItem requisitionCollectionItem);
+        //RequisitionCollectionItem GetRequisitionCollectionItem(RequisitionCollectionItem requisitionCollectionItem);
+        //List<RequisitionCollectionItem> GetAllRequisitionCollectionItem();
+        //Constants.DB_STATUS Insert(RequisitionCollectionItem newRequisitionCollectionItem);
+        //Constants.DB_STATUS Update(RequisitionCollectionItem requisitionCollectionItem);
+        //Constants.DB_STATUS Delete(RequisitionCollectionItem requisitionCollectionItem);
 
 
     }
