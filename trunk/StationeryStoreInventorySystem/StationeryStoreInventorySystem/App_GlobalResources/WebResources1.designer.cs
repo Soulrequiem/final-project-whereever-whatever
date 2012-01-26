@@ -214,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change your password.
+        /// </summary>
+        internal static string ChangePassword_text {
+            get {
+                return ResourceManager.GetString("ChangePassword_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Password.
         /// </summary>
         internal static string ChangePassword_Title {
@@ -637,6 +646,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print.
+        /// </summary>
+        internal static string PrintImage_text {
+            get {
+                return ResourceManager.GetString("PrintImage_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delivery Date:.
         /// </summary>
         internal static string ReceiveOrderForm_DeliverDate {
@@ -876,6 +894,87 @@ namespace Resources {
         internal static string SubmitRequisitionsToStore_Title {
             get {
                 return ResourceManager.GetString("SubmitRequisitionsToStore_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter or Select Collection Point.
+        /// </summary>
+        internal static string Text_CollectionPoint {
+            get {
+                return ResourceManager.GetString("Text_CollectionPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Email Address.
+        /// </summary>
+        internal static string Text_email {
+            get {
+                return ResourceManager.GetString("Text_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Employee Name.
+        /// </summary>
+        internal static string Text_EmployeeName {
+            get {
+                return ResourceManager.GetString("Text_EmployeeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change your password.
+        /// </summary>
+        internal static string Text_grouptext {
+            get {
+                return ResourceManager.GetString("Text_grouptext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Item Description.
+        /// </summary>
+        internal static string Text_Item {
+            get {
+                return ResourceManager.GetString("Text_Item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter New Password.
+        /// </summary>
+        internal static string Text_new {
+            get {
+                return ResourceManager.GetString("Text_new", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Old Password.
+        /// </summary>
+        internal static string Text_old {
+            get {
+                return ResourceManager.GetString("Text_old", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Remarks.
+        /// </summary>
+        internal static string Text_Remarks {
+            get {
+                return ResourceManager.GetString("Text_Remarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Requisition ID.
+        /// </summary>
+        internal static string Text_RequisitionID {
+            get {
+                return ResourceManager.GetString("Text_RequisitionID", resourceCulture);
             }
         }
         
