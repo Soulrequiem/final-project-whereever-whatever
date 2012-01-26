@@ -2337,7 +2337,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Inventory">
+      <Diagram Name="Inventory" ZoomLevel="82">
         <EntityTypeShape EntityType="InventoryModel.CollectionMissed" Width="1.5" PointX="5.25" PointY="27.375" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.CollectionPoint" Width="1.5" PointX="0.75" PointY="27.25" Height="2.172587890624996" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.Department" Width="1.5" PointX="3" PointY="26.25" Height="4.0956022135416674" IsExpanded="true" />
