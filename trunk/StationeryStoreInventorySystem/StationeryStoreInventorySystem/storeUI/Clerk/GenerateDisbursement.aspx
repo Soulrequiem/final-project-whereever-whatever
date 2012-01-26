@@ -18,28 +18,40 @@
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundCheckBoxField DataFieldName="GenerateReports" 
-                        Key="GenerateReports" Width="50px">
-                        <Header Text="BoundCheckBoxField_0" />
-                    </ig:BoundCheckBoxField>
-                    <ig:BoundDataField DataFieldName="RetrievalNo" Key="RetrievalNo" Width="50px">
+                    <%--<ig:BoundCheckBoxField DataFieldName="GenerateReports" 
+                        Key="GenerateReports" Width="80px">
+                        <Header Text="Select" />
+                    </ig:BoundCheckBoxField>--%>
+                    <ig:TemplateDataField Key="Select" Width="80px">
+                        <ItemTemplate>
+                            <asp:RadioButton ID="RadioButton1" runat="server" />
+                        </ItemTemplate>
+                    </ig:TemplateDataField>
+                    <%--<ig:BoundDataField DataFieldName="RetrievalNo" Key="RetrievalNo" Width="120px">
                         <Header Text="Retrieval No." />
-                    </ig:BoundDataField>
+                    </ig:BoundDataField>--%>
+                    <ig:TemplateDataField Key="RetrievalNo" Width="120px">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                                Text='<%# Eval("RetrievalNo" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                </asp:HyperLink>
+                        </ItemTemplate>
+                        <Header Text="Retrieval No." />
+                    </ig:TemplateDataField>
                     <ig:BoundDataField DataFieldName="RetrievalDate/Time" Key="RetrievalDate/Time" 
-                        Width="100px">
+                        Width="200px">
                         <Header Text="Retrieval Date/Time" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="RetrievedQty" Key="RetrievedQty" 
-                        Width="80px">
+                        Width="150px">
                         <Header Text="Retrieved Qty" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="RetrievedBy" Width="80px">
+                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="RetrievedBy" Width="150px">
                         <Header Text="Retrieved By" />
                     </ig:BoundDataField>
                 </Columns>
                 <Behaviors>
-                    <ig:ColumnFixing>
-                    </ig:ColumnFixing>
                     <ig:Filtering>
                     </ig:Filtering>
                     <ig:Paging PageSize="10">

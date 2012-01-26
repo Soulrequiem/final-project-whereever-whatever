@@ -29,10 +29,34 @@
                                 </ig:WebTextEditor>--%>
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
-                                     StyleSetName="Office2010Blue">
+                                     StyleSetName="Office2010Blue" AutoFilterQueryType="Contains" 
+                                    AutoFilterResultSize="5" AutoFilterSortOrder="Ascending">
                                     <Button Visible="False" />
+                                    <Items>
+                                        <ig:DropDownItem Selected="False" Text="Hello" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Awesome" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Super" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Admin" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="namaskar" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Namaste" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Hiiii" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="wowwwww" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Mast" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Aiyaaaaa" Value="">
+                                        </ig:DropDownItem>
+                                        <ig:DropDownItem Selected="False" Text="Hello1" Value="">
+                                        </ig:DropDownItem>
+                                    </Items>
                                 </ig:WebDropDown>
-                                <br />
                             </td>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label1" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_ItemNo%>"/>
@@ -46,7 +70,7 @@
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_Quantity%>"/>
                             </td>
                             <td><ig:WebTextEditor ID="txtQuantity" runat="server" 
-                                 CssClass="DefaultTextStyle" Width="250px">
+                                 CssClass="DefaultTextStyle" Width="250px" NullText="Enter Item Quantity">
                                 </ig:WebTextEditor><br />
                             </td>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label4" runat="server" 
@@ -61,8 +85,10 @@
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_Reason%>"/>
                             </td>
                             <td>
-                                <textarea id="txtReason" cols="20" rows="2" style="resize: none;width:250px"
-                                    runat="server"></textarea>
+                                <ig:WebTextEditor ID="txtReason" runat="server" 
+                                 CssClass="DefaultTextStyle" Width="250px" NullText="Enter Reason" 
+                                    Height="55px" TextMode="MultiLine">
+                                </ig:WebTextEditor>
                             </td>
                             <td>
                                 <input id="btnAdd" type="button" value="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" runat="server"/>
