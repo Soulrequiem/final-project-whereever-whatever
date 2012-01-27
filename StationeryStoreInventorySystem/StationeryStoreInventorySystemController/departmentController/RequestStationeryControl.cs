@@ -13,21 +13,23 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class RequestStationeryControl
     {
-        private Employee employee;
+        private Employee currentEmployee;
         private Requisition requisition;
-        IRequisitionBroker requisitionBroker;
-        List<RequisitionDetail> requisitionDetailList;
-        IItemBroker itemBroker;
+        private IRequisitionBroker requisitionBroker;
+        private List<RequisitionDetail> requisitionDetailList;
+        private IItemBroker itemBroker;
 
         public RequestStationeryControl()
         {
-            employee = Util.GetEmployee();
-            requisition = new Requisition();
-            requisition.Employee = employee;
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.EMPLOYEE);
             requisitionBroker = new RequisitionBroker();
-            requisitionDetailList = new List<RequisitionDetail>();
             itemBroker = new ItemBroker();
+            requisitionDetailList = new List<RequisitionDetail>();
 
+            requisition = new Requisition();
+            requisition.Employee = currentEmployee;
+            requisition.Department = currentEmployee.Department;
+            requisition.Id = requisitionBroker.GetRequisitionId(requisition);
         }
 
         public Requisition Requisition
@@ -35,14 +37,6 @@ namespace StationeryStoreInventorySystemController.departmentController
             get { return requisition; }
             set { requisition = value; }
         }
-
-        public Employee Employee
-        {
-            get { return employee; }
-            set { employee = value; }
-        }
-
-     
 
         //public DataTable TypeItemDescription(String itemDescription)
         //{
@@ -60,41 +54,90 @@ namespace StationeryStoreInventorySystemController.departmentController
         //}
 
 
-        public DataTable EnterItemDescription(String itemDescription)
+        public DataTable SelectItemDescription(string itemDescription)
         {
-            IItemBroker itemBroker = new ItemBroker();
             Item item = new Item();
             item.Description = itemDescription;
-            Item resultItem = itemBroker.GetItem(item);
-            DataTable dt = new DataTable();
-            DataRow dr;
-            dt.NewRow();
-            dr = new DataRow();
-            dr["itemNo"] = item.Id;
-            dr["itemDescription"] = item.Description;
-            dt.Rows.Add(dr);
-            return dt;
+            item = itemBroker.GetItem(item);
             
+            DataTable dt = new DataTable();
+
+            if (item != null)
+            {
+                DataRow dr = new DataRow();
+                
+                dt.NewRow();
+                dr["itemNo"] = item.Id;
+                dr["itemDescription"] = item.Description;
+                dt.Rows.Add(dr);
+            }
+            return dt;
         }
 
-        public Constants.ACTION_STATUS AddToTable(String itemId){
+        public Constants.ACTION_STATUS AddToTable(string itemId){
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             RequisitionDetail requisitionDetail = new RequisitionDetail();
+            
             Item item = new Item();
             item.Id = itemId;
             item = itemBroker.GetItem(item);
-            requisitionDetail.Id = requisitionBroker.GetRequisitionDetailId();
-            requisitionDetail.Item = item;
-            requisitionDetailList.Add(requisitionDetail);
-            return Constants.ACTION_STATUS.SUCCESS;
 
+            if (item != null)
+            {
+                requisitionDetail.Id = requisitionBroker.GetRequisitionDetailId();
+                requisitionDetail.Item = item;
+                requisitionDetailList.Add(requisitionDetail);
+
+                status = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                status = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return status;
         }
 
+        public DataTable RequisitionDetailList
+        {
+            get 
+            {
+                DataTable dt = new DataTable();
+
+                if (requisitionDetailList.Count > 0)
+                {
+                    DataRow dr;
+
+                    foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
+                    {
+                        dr = new DataRow();
+                        
+                        dt.NewRow();
+                        dr["itemNo"] = requisitionDetail.Item.Id;
+                        dr["itemDescription"] = requisitionDetail.Item.Description;
+                        dr["requiredQty"] = requisitionDetail.Qty;
+                        dt.Rows.Add(dr);
+                    }
+                }
+
+                return dt;
+            }
+        }
+        ----
         public Constants.ACTION_STATUS SelectRequest(){
-            Requisition requisition = new Requisition();
-            requisition.Id = requisitionBroker.GetRequisitionId();
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+
             requisition.RequisitionDetails = requisitionDetailList;
-            requisitionBroker.Insert(requisition);
-            return Constants.ACTION_STATUS.SUCCESS;
+            if (requisitionBroker.Insert(requisition) == Constants.DB_STATUS.SUCCESSFULL)
+            {
+                status = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                status = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return status;
         }
 
         public Constants.ACTION_STATUS SelectRemove(int requisitionDetailId)

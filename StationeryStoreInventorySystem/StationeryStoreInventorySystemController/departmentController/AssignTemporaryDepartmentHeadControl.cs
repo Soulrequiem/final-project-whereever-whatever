@@ -20,9 +20,10 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class AssignTemporaryDepartmentHeadControl
     {
-        IEmployeeBroker employeeBroker;
-        Employee currentEmployee;
-        Employee temporaryDepartmentHead;
+        private IEmployeeBroker employeeBroker;
+        private Employee currentEmployee;
+        private Employee temporaryDepartmentHead;
+
         /// <summary>
         ///     To show the Current Temporary Department Head
         ///     Created By: SanLaPyaye
