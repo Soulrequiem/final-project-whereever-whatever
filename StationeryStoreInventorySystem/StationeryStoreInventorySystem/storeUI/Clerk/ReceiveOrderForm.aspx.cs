@@ -81,8 +81,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             try
             {
-                DgvStationeryOrder.DataSource = dtOrders;
-                DgvStationeryOrder.DataBind();
+                if(dtOrders!=null)
+                    DgvStationeryOrder.DataSource = dtOrders;
+                    DgvStationeryOrder.DataBind();
             }
             catch (Exception ex)
             {
