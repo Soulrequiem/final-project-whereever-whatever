@@ -24,7 +24,7 @@ namespace StationeryStoreInventorySystemController.commonController
             User user = new User();
             user.UserName = username;
             user.Password = password;
-            user = employeeBroker.GetUser(user); // validate user
+            user = employeeBroker.GetUser(user); // get user object
             
             // if user is null means username and password is incorrect
             if (user != null)
@@ -33,7 +33,7 @@ namespace StationeryStoreInventorySystemController.commonController
                 employee.User = user;
                 employee = employeeBroker.GetEmployee(employee);
 
-                Util.PutSession("employee", employee);
+                Util.PutSession(Util.employeeSessionKey, employee); // put employee object to session for validating user later
 
                 isLogin = Constants.ACTION_STATUS.SUCCESS;
             }
