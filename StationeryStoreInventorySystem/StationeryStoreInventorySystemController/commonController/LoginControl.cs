@@ -9,7 +9,7 @@ using StationeryStoreInventorySystemModel.brokerinterface;
 
 namespace StationeryStoreInventorySystemController.commonController
 {
-    class LoginControl
+    public class LoginControl
     {
         IEmployeeBroker employeeBroker;
         public LoginControl()
