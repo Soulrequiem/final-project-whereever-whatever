@@ -14,7 +14,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
-                //LoadNavigationMenu();
+                LoadNavigationMenu();
             }
         }
         /// <summary>
@@ -110,25 +110,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         /// <param name="e"></param>
         protected void NavigationBar_PreRender(object sender, EventArgs e)
         {
-            //LoadNavigationMenu();
-            //bool[] state = (bool[])(Session["WebExplorerState"]);
-            ////bool[] VisibleState = (bool[])(Session["VisibleState"]);
+            LoadNavigationMenu();
+            bool[] state = (bool[])(Session["WebExplorerState"]);
+            //bool[] VisibleState = (bool[])(Session["VisibleState"]);
 
-            //if (state != null)
-            //{
-            //    for (int i = 0; i < NavigationBar.Groups.Count; i++)
-            //    {
-            //        NavigationBar.Groups[i].Expanded = state[i];
-            //        //NavigationBar.Groups[i].Visible = VisibleState[i];
-            //    }
-            //}
+            if (state != null)
+            {
+                for (int i = 0; i < NavigationBar.Groups.Count; i++)
+                {
+                    NavigationBar.Groups[i].Expanded = state[i];
+                    //NavigationBar.Groups[i].Visible = VisibleState[i];
+                }
+            }
 
-            //if (Session["SelectedIndex"] != null && NavigationBar.Groups.Count > 0)
-            //{
-            //    int selIndex = (int)Session["SelectedIndex"];
-            //    int selGroup = (int)Session["SelectedGroup"];
-            //    NavigationBar.Groups[selGroup].Items[selIndex].Selected = true;
-            //}
+            if (Session["SelectedIndex"] != null && NavigationBar.Groups.Count > 0)
+            {
+                int selIndex = (int)Session["SelectedIndex"];
+                int selGroup = (int)Session["SelectedGroup"];
+                NavigationBar.Groups[selGroup].Items[selIndex].Selected = true;
+            }
         }
 
         /// <summary>
@@ -139,28 +139,28 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         protected void NavigationBar_ItemSelected(object sender,
             Infragistics.Web.UI.NavigationControls.ExplorerBarItemSelectedEventArgs e)
         {
-            //if (e.IsExplorerBarGroup() != true)
-            //{
-            //    Session["SelectedGroup"] = e.NewSelectedItem.ParentItem.Index;
-            //    Session["SelectedIndex"] = e.NewSelectedItem.Index;
-            //}
+            if (e.IsExplorerBarGroup() != true)
+            {
+                Session["SelectedGroup"] = e.NewSelectedItem.ParentItem.Index;
+                Session["SelectedIndex"] = e.NewSelectedItem.Index;
+            }
 
-            //int cnt = NavigationBar.Groups.Count;
-            //string redirectURL = e.NewSelectedItem.Value.ToString();
+            int cnt = NavigationBar.Groups.Count;
+            string redirectURL = e.NewSelectedItem.Value.ToString();
 
-            //bool[] state = new bool[cnt];
-            ////bool[] VisibleState = new bool[cnt];
+            bool[] state = new bool[cnt];
+            //bool[] VisibleState = new bool[cnt];
 
-            //for (int i = 0; i < cnt; i++)
-            //{
-            //    state[i] = NavigationBar.Groups[i].Expanded;
-            //    //VisibleState[i] = NavigationBar.Groups[i].Visible;
-            //}
+            for (int i = 0; i < cnt; i++)
+            {
+                state[i] = NavigationBar.Groups[i].Expanded;
+                //VisibleState[i] = NavigationBar.Groups[i].Visible;
+            }
 
-            //Session["WebExplorerState"] = state;
-            ////Session["VisibleState"] = VisibleState;
-            //if (redirectURL != "")
-            //    Response.Redirect(redirectURL);
+            Session["WebExplorerState"] = state;
+            //Session["VisibleState"] = VisibleState;
+            if (redirectURL != "")
+                Response.Redirect(redirectURL);
         }
     }
 }
