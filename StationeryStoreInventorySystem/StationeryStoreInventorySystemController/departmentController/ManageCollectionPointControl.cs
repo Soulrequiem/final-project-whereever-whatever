@@ -49,7 +49,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         //}
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show the collectionPoint according to the employee's department who log in
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -89,7 +89,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show the new collectionPoint and replace after selected and save the new collectionPoint
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:

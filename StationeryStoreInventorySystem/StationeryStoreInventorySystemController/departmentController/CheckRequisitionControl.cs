@@ -37,7 +37,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         //}
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show all requisition.
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -79,7 +79,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         //}
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show one requisition according to requisitionId parameter
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -121,7 +121,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         //}
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show requisition detail according to the selected requisition
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -155,7 +155,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         }
 
         /// <summary>
-        ///     The usage of this method
+        ///     Refresh requisition list after withdraw one requisition
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
