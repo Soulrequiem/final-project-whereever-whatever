@@ -17,15 +17,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             if (!IsPostBack)
             {
-                
-                FillGridView();
+                //GenerateDisbursementControl GDobj = new GenerateDisbursementControl();
+                //DataTable dt = GDobj.GetDisbursementList();
+                //FillDisbursementList();
             }
         }
 
-        private void FillGridView(DataTable dt)
+        private void FillDisbursementList(DataTable dtDisbursementList)
         {
-            DgvGenerateDisbursement.DataSource = dt;
-            DgvGenerateDisbursement.DataBind();
+            try
+            {
+                if (dtDisbursementList != null)
+                    DgvGenerateDisbursement.DataSource = dtDisbursementList;
+                DgvGenerateDisbursement.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteErrorLog(ex);
+            }
         }
     }
 }
