@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : ViewStockCardControl.cs
+/*  Module Name     : Controller
+/*  Owner           : JinChengCheng
+/*  class Name      : ViewStockCardControl
+/*  Details         : Controller representation of ViewStockCard 
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,37 +22,54 @@ namespace StationeryStoreInventorySystemController.storeController
         IItemBroker itemBroker;
         IStockCardBroker stockCardBroker;
         Employee employee;
+        List<Item> itemList;
         public ViewStockCardControl()
         {
-            employee = Util.ValidateUser();
+            //employee = SystemStoreInventorySystemUtil.Validatio
             itemBroker = new ItemBroker();
             stockCardBroker = new StockCardBroker();
         }
-
-        public StockCard GetStockCard(string itemDescription)
-        {
-            Item item = new Item();
-            item.Description = itemDescription;
+        //public StockCard GetStockCard(string itemDescription)
+        //{
+        //    Item item = new Item();
+        //    item.Description = itemDescription;
             
-            item = itemBroker.GetItem(item);
+        //    item = itemBroker.GetItem(item);
             
-            StockCard stockCard = null;
-            if (item != null)
-            {
-                stockCard = new StockCard();
-                stockCard.Item = item;
+        //    StockCard stockCard = null;
+        //    if (item != null)
+        //    {
+        //        stockCard = new StockCard();
+        //        stockCard.Item = item;
 
-                stockCard = stockCardBroker.GetStockCard(stockCard);
+        //        stockCard = stockCardBroker.GetStockCard(stockCard);
 
-            }
+        //    }
             
-            return stockCard;
-        }
+        //    return stockCard;
+        //}
 
-        public DataTable GetStockCardDetails(StockCard stockCard)
+
+        /// <summary>
+        ///     The usage of this method
+        ///     Created By:JinChengCheng
+        ///     Created Date:26-01-2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="itemDescription"></param>
+        /// <returns>The return type of this method is datatable.</returns>
+        public DataTable GetStockCardDetails(string itemDescription)
         {
             DataTable dt = new DataTable();
             DataRow dr = null;
+            StockCard stockCard;
+            stockCard.Item.Description = itemDescription;
+            stockCard=stockCardBroker.GetStockCard(stockCard);
             List<StockCardDetail> stockCardDetailList = (List<StockCardDetail>)stockCard.StockCardDetails;
             string name = null;
             foreach(StockCardDetail temp in stockCardDetailList){
@@ -82,8 +106,10 @@ namespace StationeryStoreInventorySystemController.storeController
                 dr["balance"] = temp.Balance;
                 dt.Rows.Add(dr);
             }
-
             return dt;
         }
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
