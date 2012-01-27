@@ -33,7 +33,7 @@ namespace StationeryStoreInventorySystemController.storeController
         }
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show the item according the item description entered
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -64,7 +64,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show the added item in the table
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -106,7 +106,7 @@ namespace StationeryStoreInventorySystemController.storeController
         //}
 
         /// <summary>
-        ///     The usage of this method
+        ///     Refresh the discrepancy list after remove one
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -138,7 +138,7 @@ namespace StationeryStoreInventorySystemController.storeController
         }
 
         /// <summary>
-        ///     The usage of this method
+        ///     Create discrepancy
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:

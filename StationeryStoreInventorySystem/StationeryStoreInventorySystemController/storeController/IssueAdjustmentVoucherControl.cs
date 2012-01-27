@@ -42,7 +42,7 @@ namespace StationeryStoreInventorySystemController.storeController
         //}
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show all discrepancies
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -90,7 +90,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show one discrepancy detail according the discrepancyId selected
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -124,35 +124,23 @@ namespace StationeryStoreInventorySystemController.storeController
             return dt;
         }
 
-        /// <summary>
-        ///     The usage of this method
-        ///     Created By:JinChengCheng
-        ///     Created Date:25-01-2012
-        ///     Modified By:JinChengCheng
-        ///     Modified Date:26-01-2012
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="discrepancy"></param>
-        /// <returns>The return type of this method is status.</returns>
-        public Constants.ACTION_STATUS SelectDiscrepancyApprove(Discrepancy discrepancy)
-        {
-            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            StockAdjustment stockAdjustment = new StockAdjustment();
-            stockAdjustment.Discrepancy = discrepancy;
-            Constants.DB_STATUS dbStatus = discrepancyBroker.Insert(stockAdjustment);
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
-                status = Constants.ACTION_STATUS.SUCCESS;
-            else
-                status = Constants.ACTION_STATUS.FAIL;
-            return status;
-        }
+
+        //public Constants.ACTION_STATUS SelectDiscrepancyIssue(Discrepancy discrepancy)
+        //{
+        //    Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+        //    StockAdjustment stockAdjustment = new StockAdjustment();
+        //    stockAdjustment.Discrepancy = discrepancy;
+        //    Constants.DB_STATUS dbStatus = discrepancyBroker.Insert(stockAdjustment);
+        //    if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+        //        status = Constants.ACTION_STATUS.SUCCESS;
+        //    else
+        //        status = Constants.ACTION_STATUS.FAIL;
+        //    return status;
+        //}
 
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show the discrepancy detail after issueing the selected discrepancy
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
