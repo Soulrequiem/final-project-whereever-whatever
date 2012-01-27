@@ -17,10 +17,14 @@ namespace StationeryStoreInventorySystemModel.broker
 {
     public class CollectionPointBroker : ICollectionPointBroker
     {
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private CollectionPoint cop = null;
         private List<CollectionPoint> copList = null;
 
+        public CollectionPointBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
+        }
         /// <summary>
         /// Retrieve the collection point information from CollectionPoint Table according to the collectionPoint Parameter
         /// </summary>
@@ -81,6 +85,11 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
+                cop = inventory.CollectionPoints.Where(iObj => iObj.Id == collectionPoint.Id).First();
+                cop.Id = collectionPoint.Id;
+                cop.Name = collectionPoint.Name;
+                cop.Time = collectionPoint.Time;
+                cop.ClerkId = collectionPoint.ClerkId;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
