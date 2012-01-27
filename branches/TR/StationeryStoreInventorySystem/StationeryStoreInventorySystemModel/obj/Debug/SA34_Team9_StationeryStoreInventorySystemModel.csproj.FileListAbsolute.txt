@@ -29,3 +29,11 @@ D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySyste
 D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\ResolveAssemblyReference.cache
 D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.dll
 D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.pdb
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\StationeryStoreInventorySystemModel.dll.config
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\StationeryStoreInventorySystemModel.dll
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\StationeryStoreInventorySystemModel.pdb
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\SystemStoreInventorySystemUtil.dll
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\SystemStoreInventorySystemUtil.pdb
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.dll
+C:\Users\User\Desktop\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.pdb
