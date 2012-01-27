@@ -51,7 +51,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show stockCardDetail according to the entered itemDescription
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:

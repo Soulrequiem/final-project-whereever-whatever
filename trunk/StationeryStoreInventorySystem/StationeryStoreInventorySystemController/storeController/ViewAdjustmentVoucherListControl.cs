@@ -35,7 +35,7 @@ namespace StationeryStoreInventorySystemController.storeController
         //}
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show adjustment voucher List
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -47,7 +47,7 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name=""></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable GetStockAdjustment()
+        public DataTable GetStockAdjustmentList()
         {
             DataTable dt = new DataTable();
             DataRow dr = new DataRow();
@@ -76,7 +76,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
 
         /// <summary>
-        ///     The usage of this method
+        ///     Show the adjustment voucher detail according to the selected stockAdjustmentId
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
         ///     Modified By:
@@ -88,7 +88,7 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="stockAdjustmentId"></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable SelectAdjustmentVoucherList(string stockAdjustmentId)
+        public DataTable SelectAdjustmentVoucher(string stockAdjustmentId)
         {
             DataTable dt = new DataTable();
             DataRow dr = new DataRow();
