@@ -68,6 +68,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 NavigationBar.Groups[1].Visible = false;
                 NavigationBar.Groups[2].Visible = false;
                 NavigationBar.Groups[3].Visible = true;
+                NavigationBar.Groups[4].Text = "Supervisor";
+                NavigationBar.Groups[4].Visible = true;
+                SetDefaultMenuSelection(2, 4);
+                //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
+            }
+            else if (Session["userName"].ToString() == "manager")
+            {
+                NavigationBar.Groups[0].Visible = false;
+                NavigationBar.Groups[1].Visible = false;
+                NavigationBar.Groups[2].Visible = false;
+                NavigationBar.Groups[3].Visible = true;
+                NavigationBar.Groups[4].Text = "Manager";
                 NavigationBar.Groups[4].Visible = true;
                 SetDefaultMenuSelection(2, 4);
                 //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
