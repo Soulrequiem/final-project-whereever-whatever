@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : AssignTemporaryDepartmentRepresentativeControl.cs
+/*  Module Name     : Controller
+/*  Owner           : SanLaPyaye
+/*  class Name      : AssignTemporaryDepartmentRepresentativeControl
+/*  Details         : Controller representation of AssignTemporaryDepartmentRepresentativeControl
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +24,17 @@ namespace StationeryStoreInventorySystemController.departmentController
         Employee currentEmployee;
         Employee temporaryDepartmentRepresentative;
 
+        /// <summary>
+        ///     To get all the Employee with role name as "Temporary Department Representative"
+        ///     Created By: SanLaPyaye 
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
         public AssignTemporaryDepartmentRepresentativeControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
@@ -65,6 +83,19 @@ namespace StationeryStoreInventorySystemController.departmentController
         //    return e;
         //}
 
+        /// <summary>
+        ///     The usage of this method is to remove the selected Employee
+        ///     Created By: SanLaPyaye 
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="employeeId"> Employee Id which selected from UI.</param>
+        /// <returns>Return the Employee list to show</returns>
         public Constants.ACTION_STATUS SelectRemove(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
@@ -76,6 +107,19 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
+        /// <summary>
+        ///     The usage of this method is to search the Employee by EmployeeName
+        ///     Created By: SanLaPyaye 
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="employeeName"> Employee Name which enter from UI.</param>
+        /// <returns>Return the Employee to show.</returns>
         public DataTable SelectEmployeeName(string employeeName)
         {
             Employee emp = new Employee();
@@ -99,6 +143,19 @@ namespace StationeryStoreInventorySystemController.departmentController
             return dt;
         }
 
+        /// <summary>
+        ///     The usage of this method is to assign the selected Employee as a "Temporary Department Head"
+        ///     Created By: SanLaPyaye 
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="employeeId"> Employee Id which selected from UI</param>
+        /// <returns>Return the Employee list to show</returns>
         public Constants.ACTION_STATUS SelectAssign(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
