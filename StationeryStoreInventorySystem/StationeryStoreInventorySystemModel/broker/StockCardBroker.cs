@@ -17,11 +17,27 @@ namespace StationeryStoreInventorySystemModel.broker
 {
     public class StockCardBroker : IStockCardBroker
     {
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private StockCard stc = null;
         private StockCardDetail stcDetail = null;
         private List<StockCard> stcList = null;
         private List<StockCardDetail> stcDetailList = null;
+        public StockCardBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
+        }
+        /// <summary>
+        /// Get the last Record of the StockCard table
+        /// </summary>
+        /// <returns></returns>
+        public int GetStockCardId()
+        {
+            // return GetAllStockCard().Last().Id + 1;
+
+            var maxStockcardId = inventory.StockCards.Max(xObj => xObj.Id) + 1;
+            return maxStockcardId;
+
+        }
 
         /// <summary>
         /// Retrieve the StockCard and StockCardDetail information according to the StockCard Parameter 
@@ -31,7 +47,7 @@ namespace StationeryStoreInventorySystemModel.broker
         public StockCard GetStockCard(StockCard stockCard)
         {
             stc = inventory.StockCards.Where(stcObj => stcObj.Id == stockCard.Id).First();
-            stc.ItemReference = stockCard.ItemReference;
+           // stc.ItemReference = stockCard.ItemReference;
             if (!stc.Equals(null))
             {
                 var stockCardDetailResult = from sc in inventory.StockCardDetails

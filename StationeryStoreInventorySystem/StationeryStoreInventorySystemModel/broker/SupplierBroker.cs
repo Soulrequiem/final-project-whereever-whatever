@@ -1,10 +1,10 @@
 ﻿
 /***************************************************************************/
-/*  File Name       : PurchaseOrderBroker.cs
+/*  File Name       : SupplierBroker.cs
 /*  Module Name     : Models
 /*  Owner           : Su Lai Naing
-/*  class Name      : PurchaseOrderBroker
-/*  Details         : Model PurchaseOrderBroker of PurchaseOrder and PurchaseOrderDetail table
+/*  class Name      : Supplier
+/*  Details         : Model Implementation of Supplier table
 /***************************************************************************/
 
 using System;
@@ -21,9 +21,13 @@ namespace StationeryStoreInventorySystemModel.broker
     {
         #region ISupplierBroker Members
 
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private Supplier supplierObj = null;
         private List<Supplier> supplierList = null;
+        public SupplierBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
+        }
         /// <summary>
         /// Retrieve the Supplier information according to the Supplier Parameter 
         /// </summary>
