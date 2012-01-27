@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : AssignTemporaryDepartmentHeadControl.cs
+/*  Module Name     : Controller
+/*  Owner           : SanLaPyaye
+/*  class Name      : AssignTemporaryDepartmentHeadControl
+/*  Details         : Controller representation of AssignTemporaryDepartmentHeadControl
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +23,17 @@ namespace StationeryStoreInventorySystemController.departmentController
         IEmployeeBroker employeeBroker;
         Employee currentEmployee;
         Employee temporaryDepartmentHead;
+        /// <summary>
+        ///     To show the Current Temporary Department Head
+        ///     Created By: SanLaPyaye
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
         public AssignTemporaryDepartmentHeadControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
@@ -67,6 +85,19 @@ namespace StationeryStoreInventorySystemController.departmentController
         //    return e;
         //}
 
+        /// <summary>
+        ///     The usage of this method is to remove the selected Current Temporary Department Head
+        ///     Created By: SanLaPyaye
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="employeeId"> Selected Employee Id from UI</param>
+        /// <returns>Return the status of remove  whether Successful or Fail. </returns>
         public Constants.ACTION_STATUS SelectRemove(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
@@ -78,6 +109,19 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
+        /// <summary>
+        ///     The usage of this method is to search the Employee by enter the Employee Name
+        ///     Created By: SanLaPyaye
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="employeeName"> Employee name which type from UI.</param>
+        /// <returns>Return the Employee which search by employee name.</returns>
         public DataTable SelectEmployeeName(string employeeName)
         {
             Employee emp = new Employee();
@@ -100,6 +144,20 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             return dt;
         }
+
+        /// <summary>
+        ///     The usage of this method is to assign the selected Department Head from Search Result
+        ///     Created By: SanLaPyaye
+        ///     Created Date: 25/01/2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="employeeId"> To update the selected employeeId</param>
+        /// <returns>Return the status of assign  whether Successful or Fail. </returns>
 
         public Constants.ACTION_STATUS SelectAssign(int employeeId)
         {
