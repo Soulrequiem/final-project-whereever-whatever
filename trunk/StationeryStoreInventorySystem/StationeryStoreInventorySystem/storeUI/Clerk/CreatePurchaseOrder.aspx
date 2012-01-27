@@ -99,8 +99,6 @@
                              Text="<%$ Resources:WebResources, CreatePurchaseOrder_Description %>"/>
                         </td>
                         <td style="width:250px">
-                            <%--<ig:WebTextEditor ID="txtDescription" runat="server" Width="150px">
-                            </ig:WebTextEditor>--%>
                             <ig:WebDropDown ID="drdItemList" runat="server" Width="220px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
                                      StyleSetName="Office2010Blue">
@@ -113,9 +111,9 @@
                              Text="<%$ Resources:WebResources, CreatePurchaseOrder_Quantity %>"/>
                         </td>
                         <td style="width:250px">
-                            <ig:WebTextEditor ID="txtQuantity" runat="server" CssClass="DefaultTextStyle"
+                            <ig:WebNumericEditor ID="txtQuantity" runat="server" CssClass="DefaultTextStyle"
                                 Width="150px" NullText="Enter Item Quantity">
-                            </ig:WebTextEditor>
+                            </ig:WebNumericEditor>
                         </td>
                     </tr>
                     <tr>
@@ -142,7 +140,7 @@
                         <td>
                             <%--<a class="buttoningrid" href="" style="float:right">Add</a>--%>
                             <asp:Button ID="btnApprove" runat="server" CssClass="Defaultbutton"
-                                Text="Add" />
+                                Text="Add" onclick="btnApprove_Click" />
                         </td>
                     </tr>
                 </table>

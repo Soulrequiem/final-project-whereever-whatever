@@ -172,7 +172,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtQuantity;
+        protected global::Infragistics.Web.UI.EditorControls.WebNumericEditor txtQuantity;
         
         /// <summary>
         /// Label8 control.
