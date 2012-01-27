@@ -18,7 +18,7 @@ using System.Data;
 
 namespace StationeryStoreInventorySystemController.commonController
 {
-    class ViewStationeryCatalogueControl
+    public class ViewStationeryCatalogueControl
     {
         ItemBroker itembroker;
         DataTable dt;
