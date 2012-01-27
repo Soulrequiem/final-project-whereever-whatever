@@ -13,7 +13,7 @@ namespace StationeryStoreInventorySystemModel.broker
     {
 
         #region IEmployeeBroker Members
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private Employee empObj = null;
         private User userObj = null;
         private Role roleObj = null;
@@ -164,7 +164,7 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
         /// <summary>
-        /// Get Employee Name According to the Employee Name parameter
+        /// Get Employee Name According to the Employee Name
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
