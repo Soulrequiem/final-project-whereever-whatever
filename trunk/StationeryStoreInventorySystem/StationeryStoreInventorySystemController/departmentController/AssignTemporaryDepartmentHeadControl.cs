@@ -16,7 +16,7 @@ using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
-    class AssignTemporaryDepartmentHeadControl
+    public class AssignTemporaryDepartmentHeadControl
     {
         EmployeeBroker employeeBroker = new EmployeeBroker();
         DataTable dt;
@@ -138,7 +138,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             dr = new DataRow();
             dr["employeeId"] = emp.Id;
             dr["employeeName"] = emp.Name;
-            dr["designation"] = emp.Designation;
+            dr["designation"] = emp.Designation; //check designation field in database got or not
             dr["joiningDate"] = emp.CreatedDate;
             dt.Rows.Add(dr);
 
@@ -160,18 +160,19 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// </summary>
         /// <param name="remarks"> Remark to update the employee.</param>
         /// <returns>Return the status of assign  whether Successful or Fail. </returns>
-        public DataTable SelectAssign(string remarks)
+        public DataTable SelectAssign(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             Employee employee=new Employee();
-            employee.Role.Name="Temporary Department Head";
+            employee.Role.Id=6;
+            employee.Department.EmployeeHeadId.Id = employeeId;
             // employee. = remarks; //There is no field in database to store remarks.
             Constants.DB_STATUS dbStatus= employeeBroker.Update(employee);
             if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
                 status = Constants.ACTION_STATUS.FAIL;
-
+            
             //return status;
             return GetHead();
         }
