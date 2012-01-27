@@ -5,7 +5,7 @@ using System.Web;
 using System.IO;
 using System.Diagnostics;
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Logger
+namespace SA34_Team9_StationeryStoreInventorySystem
 {
     public class Logger
     {
@@ -51,8 +51,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Logger
                         DateTime.Now.ToLongTimeString());
                 sw.WriteLine("Time        : " + 
                         DateTime.Now.ToShortDateString());
-                sw.WriteLine("Computer    : " + 
-                        Dns.GetHostName().ToString());
+                //sw.WriteLine("Computer    : " + 
+                //        Dns.GetHostName().ToString());
                 sw.WriteLine("Error        : " +  
                         objException.Message.ToString().Trim());
                 sw.WriteLine("Stack Trace    : " + 
