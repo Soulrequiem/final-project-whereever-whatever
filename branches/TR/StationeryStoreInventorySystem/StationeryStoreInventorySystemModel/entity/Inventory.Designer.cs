@@ -2037,30 +2037,6 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Designation
-        {
-            get
-            {
-                return _Designation;
-            }
-            set
-            {
-                OnDesignationChanging(value);
-                ReportPropertyChanging("Designation");
-                _Designation = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Designation");
-                OnDesignationChanged();
-            }
-        }
-        private global::System.String _Designation;
-        partial void OnDesignationChanging(global::System.String value);
-        partial void OnDesignationChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String Email
         {
             get

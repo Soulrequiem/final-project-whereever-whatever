@@ -8,3 +8,13 @@ C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86
 C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.exe
 C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.pdb
 C:\Users\User\Desktop\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.exe
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.pdb
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\StationeryStoreInventorySystemModel.dll
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\SystemStoreInventorySystemUtil.dll
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\StationeryStoreInventorySystemModel.pdb
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\bin\Debug\SystemStoreInventorySystemUtil.pdb
+D:\TR\final-project-whereever-whatever\branches\TR\StationeryStoreInventorySystem\ConsoleApplication1\obj\x86\Debug\ResolveAssemblyReference.cache

@@ -18,7 +18,8 @@ namespace StationeryStoreInventorySystemModel.broker
     public class EmployeeBroker : IEmployeeBroker
     {
         #region IEmployeeBroker Members
-        private InventoryEntities inventory = new InventoryEntities();
+        //private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private Employee empObj = null;
         private User userObj = null;
         private Role roleObj = null;
@@ -26,8 +27,9 @@ namespace StationeryStoreInventorySystemModel.broker
         private List<User> userList = null;
         private List<Role> roleList = null;
 
-        public EmployeeBroker()
-        { 
+        public EmployeeBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
         }
         /// <summary>
         /// Retrieve the Employee from Employee Table according to the employee Parameter
