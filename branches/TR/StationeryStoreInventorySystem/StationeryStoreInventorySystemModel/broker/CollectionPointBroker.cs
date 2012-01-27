@@ -25,8 +25,9 @@ namespace StationeryStoreInventorySystemModel.broker
         public CollectionPointBroker(InventoryEntities inventory)
         {
             this.inventory = inventory;
+            
         }
-
+       
         /// <summary>
         /// Retrieve the collection point information from CollectionPoint Table according to the collectionPoint Parameter
         /// </summary>
