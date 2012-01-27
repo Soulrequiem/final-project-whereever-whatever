@@ -35,7 +35,8 @@
                                 </ig:WebTextEditor><br />--%>
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
-                                     StyleSetName="Office2010Blue">
+                                     StyleSetName="Office2010Blue" 
+                                     onselectionchanged="drdItemList_SelectionChanged">
                                     <Button Visible="False" />
                                 </ig:WebDropDown>
                             </td>
