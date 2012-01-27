@@ -1,192 +1,146 @@
-﻿/***************************************************************************/
-/*  File Name       : AssignDepartmentRepresentativeControl.cs
-/*  Module Name     : Controller
-/*  Owner           : SanLaPyaye
-/*  class Name      : AssignDepartmentRepresentativeControl
-/*  Details         : Controller representation of AssignDepartmentRepresentativeControl
-/***************************************************************************/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
+using StationeryStoreInventorySystemController.commonController;
 using SystemStoreInventorySystemUtil;
 using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
-    class AssignDepartmentRepresentativeControl
+    public class AssignDepartmentRepresentativeControl
     {
-        DataTable dt;
-        DataRow dr;
-        EmployeeBroker employeeBroker=new EmployeeBroker();
-
-        /// <summary>
-        ///     The usage of this method to call GetEmployee() for show the Current Department Representative
-        ///     Created By: SanLaPyaye
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
+        private IEmployeeBroker employeeBroker;
+        private Employee currentEmployee;
+        private Employee departmentRepresentative;
+        private Employee temporaryDepartmentRepresentative;
+        
         public AssignDepartmentRepresentativeControl()
         {
-            GetEmployee();
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
+            departmentRepresentative = currentEmployee.Department.Employee2;
+            
+            employeeBroker = new EmployeeBroker();
 
+            temporaryDepartmentRepresentative = new Employee();
+            temporaryDepartmentRepresentative.Role = new Role();
+            temporaryDepartmentRepresentative.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE);
+            temporaryDepartmentRepresentative.Department = currentEmployee.Department;
+
+            temporaryDepartmentRepresentative = employeeBroker.GetEmployee(temporaryDepartmentRepresentative);
         }
 
-        /// <summary>
-        ///     The usage of this method is to show the Current Department Representative
-        ///     Created By: SanLaPyaye 
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <returns>Return Employee status with "Department Representative" or "Temporary Department Representative" </returns>
-        public DataTable GetEmployee()
+        public DataTable DepartmentRepresentative
         {
-            dt = new DataTable();
-            dr = null;
-
-            string positionStatus = null;
-            //List<Employee> emp=null;
-            List<Employee> empList=employeeBroker.GetAllEmployee();
-                       foreach (Employee employee in empList)
+            get 
             {
-                if(employee.Role.Name.Equals("Department Representative") || employee.Role.Name.Equals("Temporary Department Representative"))
+                DataTable dt = new DataTable();
+                DataRow dr;
+
+                if (departmentRepresentative != null)
                 {
-                    Employee e=new Employee();
-                    
-                    if (employee.Role.Name.Equals("Department Representative"))
-                    {
-                        e=employee;
-                        positionStatus="Actual"; 
-                    }
-                    else if(employee.Role.Name.Equals("Temporary Department Representative"))
-                    {
-                        e=employee;
-                        positionStatus = "Temporary";
-                    }
-                    //emp.Add(e);
+                    dr = new DataRow();
 
                     dt.NewRow();
-                    dr["representativeId"] = e.Id;
-                    dr["representativeName"] = e.Name;
-                    dr["actual/Temporary"] = positionStatus;
+                    dr["representativeId"] = departmentRepresentative.Id;
+                    dr["reprensentativeName"] = departmentRepresentative.Name;
+                    dr["actual/temporary"] = "Actual";
                     dt.Rows.Add(dr);
                 }
 
+                if (temporaryDepartmentRepresentative != null)
+                {
+                    dr  = new DataRow();
+
+                    dt.NewRow();
+                    dr["representativeId"] = temporaryDepartmentRepresentative.Id;
+                    dr["reprensentativeName"] = temporaryDepartmentRepresentative.Name;
+                    dr["actual/temporary"] = "Temporary";
+                    dt.Rows.Add(dr);
+                }
+
+                return dt; 
             }
-                                   
-            //return emp;
-                       return dt;
         }
 
+        //public Employee TemporaryRepresentative
+        //{
+        //    get { return temporaryRepresentative; }
+        //}
 
-        /// <summary>
-        ///     The usage of this method is to remove the selected Actual Department Representative
-        ///     Created By: SanLaPyaye 
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="employeeID"> Selected Employee ID from the UI</param>
-        /// <returns>Return the status of remove  whether Successful or Fail. </returns>
-        public Constants.ACTION_STATUS SelectRemove(int employeeID)
+        //public Employee GetRepresentative()
+        //{
+        //    List<Employee> employeeList = employeeBroker.GetAllEmployee();
+        //    Employee e = null;
+        //    foreach(Employee employee in employeeList){
+        //        if(employee.Role.Name.Equals("Representative")){
+        //            e = employee;
+        //            break;
+        //        }
+        //    }
+        //    return e;
+        // }
+
+        //public Employee GetEmployee(Constants.EMPLOYEE_ROLE employeeRole)
+        //{
+        //    List<Employee> employeeList = employeeBroker.GetAllEmployee();
+        //    Employee e = null;
+        //    foreach (Employee employee in employeeList)
+        //    {
+        //        if (employee.Role.Name.Equals("Representative"))
+        //        {
+        //            e = employee;
+        //            break;
+        //        }
+        //    }
+        //    return e;
+        //}
+
+        public Constants.ACTION_STATUS SelectRemove(int employeeId)
         {
-            Constants.ACTION_STATUS status=Constants.ACTION_STATUS.UNKNOWN;
-            Employee emp=new Employee();
-            emp.Id=employeeID;
-            emp.Role.Name="Employee";
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
-            Constants.DB_STATUS dbStatus =employeeBroker.Update(emp);
-            
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
-            {
+            if (Util.Assign(employeeBroker, employeeId, Constants.EMPLOYEE_ROLE.EMPLOYEE) == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
-            }
-
             else
                 status = Constants.ACTION_STATUS.FAIL;
-
             return status;
         }
 
-        /// <summary>
-        ///     The usage of this method is to search the Employee by enter the Employee Name
-        ///     Created By: SanLaPyaye 
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="employeeName"> Employee name which type from UI.</param>
-        /// <returns>Return the Employee which search by employee name.</returns>
-        public DataTable EnterEmployeeName(string employeeName)
+        public DataTable SelectEmployeeName(string employeeName)
         {
-             Employee employee = new Employee();
-            employee.Name = employeeName;
-            Employee e= employeeBroker.GetEmployee(employee);
+            Employee emp = new Employee();
+            emp.Name = employeeName;
+            emp = employeeBroker.GetEmployee(emp);
 
-            dt = new DataTable();
-            dr = null;
-            dt.NewRow();
-            dr["employeeId"] = e.Id;
-            dr["employeeName"] = e.Name;
+            DataTable dt = new DataTable();
 
-            dt.Rows.Add(dr);
+            if (emp != null)
+            {
+                DataRow dr = new DataRow();
+
+                dt.NewRow();
+                dr["employeeID"] = emp.Id;
+                dr["employeeName"] = emp.Name;
+                dt.Rows.Add(dr);
+            }
 
             return dt;
-                        
         }
 
-
-         /// <summary>
-         ///     The usage of this method is to assign the Department Representative from Search Result
-        ///     Created By: SanLaPyaye 
-         ///     Created Date: 25/01/2012
-         ///     Modified By:
-         ///     Modified Date:
-         ///     Modification Reason:
-         ///     Modified By:
-         ///     Modified Date:
-         ///     Modification Reason:
-         /// </summary>
-        /// <returns>Return the status of assign  whether Successful or Fail. </returns>
-        public DataTable SelectAssign()
+        public Constants.ACTION_STATUS SelectAssign(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            Employee employee=new Employee();
-            employee.Role.Name="Department Representative";
-            Constants.DB_STATUS dbStatus= employeeBroker.Update(employee);
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+            
+            if (Util.Assign(employeeBroker, employeeId, Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE) == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
                 status = Constants.ACTION_STATUS.FAIL;
+            return status;
 
-            //return status;
-
-             return GetEmployee();
         }
     }
 }
-
-/****************************************/
-/********* End of the Class *****************/
-/****************************************/

@@ -1,11 +1,4 @@
-﻿/***************************************************************************/
-/*  File Name       : ManageCollectionPointControl.cs
-/*  Module Name     : Controller
-/*  Owner           : JinChengCheng
-/*  class Name      : ManageCollectionPointControl
-/*  Details         : Controller representation of ManageCollectionPoint 
-/***************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,104 +12,65 @@ using StationeryStoreInventorySystemController.commonController;
 using SystemStoreInventorySystemUtil;
 using System.Data;
 
-
 namespace StationeryStoreInventorySystemController.departmentController
 {
     class ManageCollectionPointControl
     {
         ICollectionPointBroker collectionPointBroker;
-        IDepartmentBroker departmentBroker;
-        List<CollectionPoint> collectionPointList;
-        CollectionPoint collectionPoint;
-        CollectionPoint newCollectionPoint;
-        Employee employee;
+        Employee currentEmployee;
+        List<CollectionPoint> allCollectionPoint;
+        CollectionPoint currentCollectionPoint;
+
         public ManageCollectionPointControl()
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
             collectionPointBroker = new CollectionPointBroker();
-            collectionPoint = new CollectionPoint();
-            //collectionPoint = new CollectionPoint();
-            //collectionPoint=collectionPointBroker.GetCollectionPoint(collectionPoint);
+            allCollectionPoint = collectionPointBroker.GetAllCollectionPoint();
+
+            currentCollectionPoint = currentEmployee.Department.CollectionPoint;
         }
 
-        //public CollectionPoint GetCollectionPoint()
-        //{
-        //    return collectionPoint;
-        //}
-        //public List<CollectionPoint> CollectionPointList()
-        //{
-        //    collectionPointList = collectionPointBroker.GetAllCollectionPoint();
-        //    return collectionPointList;
-        //}
-
-        /// <summary>
-        ///     Show the collectionPoint according to the employee's department who log in
-        ///     Created By:JinChengCheng
-        ///     Created Date:26-01-2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="employeeId"></param>
-        /// <returns>The return type of this method is datatable.</returns>
-        public DataTable GetCollectionPoint(int employeeId)
+        public DataTable AllCollectionPoint()
         {
             DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
-            collectionPoint.Id = employee.Department.CollectionPoint.Id;
-            collectionPoint=collectionPointBroker.GetCollectionPoint(collectionPoint);
-            dt.NewRow();
-            dr["collectionId"] = collectionPoint.Id;
-            dr["collectionPoint"] = collectionPoint.Name;
-            dr["collectionTime"] = collectionPoint.Time;
-            dt.Rows.Add(dr);
+
+            if (allCollectionPoint.Count > 0)
+            {
+                DataRow dr;
+                foreach (CollectionPoint collectionPoint in allCollectionPoint)
+                {
+                    dr = new DataRow();
+
+                    dt.NewRow();
+                    dr["value"] = collectionPoint.Id;
+                    dr["text"] = collectionPoint.Name + " (" + collectionPoint.Time.ToString("hh:ss tt") + ")";
+                    dt.Rows.Add(dr);
+                }
+            }
+
             return dt;
         }
 
-        //public Constants.ACTION_STATUS SelectSave(int collectionPoint)
+        //public List<CollectionPoint> GetAllCollectionPoint()
         //{
-        //    Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-        //    CollectionPoint collectionpoint = new CollectionPoint();
-        //    Constants.DB_STATUS dbStatus = collectionPointBroker.Insert(collectionpoint);
-        //    if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
-        //        status = Constants.ACTION_STATUS.SUCCESS;
-        //    else
-        //        status = Constants.ACTION_STATUS.FAIL;
-        //    return status;
+            
+
+        //    return collectionPointBroker.GetAllCollectionPoint();
         //}
 
-
-        /// <summary>
-        ///     Show the new collectionPoint and replace after selected and save the new collectionPoint
-        ///     Created By:JinChengCheng
-        ///     Created Date:26-01-2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="collectionPointId"></param>
-        /// <returns>The return type of this method is datatable.</returns>
-        public DataTable SelectSave(int collectionPointId)
+        public Constants.ACTION_STATUS SelectSave(int collectionPointId)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
-            newCollectionPoint = new CollectionPoint();
-            newCollectionPoint.Id = collectionPointId;
-            employee.Department.CollectionPoint.Id = newCollectionPoint.Id;
-            dt.NewRow();
-            dr["collectionId"] = newCollectionPoint.Id;
-            dr["collectionPoint"] = newCollectionPoint.Name;
-            dr["collectionTime"] = newCollectionPoint.Time;
-            dt.Rows.Add(dr);
-            return dt;
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+
+            CollectionPoint collectionPoint = new CollectionPoint();
+
+            return status;
+        }
+
+        public CollectionPoint GetCurrentCollectionPoint(User user)
+        {
+           
+            
         }
     }
 }
-/****************************************/
-/********* End of the Class *****************/
-/****************************************/
