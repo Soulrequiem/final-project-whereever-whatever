@@ -33,6 +33,8 @@ namespace StationeryStoreInventorySystemController.commonController
                 employee.User = user;
                 employee = employeeBroker.GetEmployee(employee);
 
+                Util.PutSession("employee", employee);
+
                 isLogin = Constants.ACTION_STATUS.SUCCESS;
             }
             else
