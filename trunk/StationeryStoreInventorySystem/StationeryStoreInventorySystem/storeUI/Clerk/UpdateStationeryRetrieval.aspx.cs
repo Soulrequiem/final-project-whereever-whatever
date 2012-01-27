@@ -5,13 +5,21 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.storeController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class UpdateStationeryRetrieval : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                //UpdateStationeryRetrievalControl USRobj=new UpdateStationeryRetrievalControl();
+                //DataTable dt = USRobj.GetCollectionList();
+                //FillCollectionList();
+            }
             DataTable dt = new DataTable();
             dt.Columns.Add("CollectionID");
             dt.Columns.Add("CollectionPoint");
@@ -41,6 +49,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             dgvCollections.ClearDataSource();
             dgvCollections.DataSource = dt;
             dgvCollections.DataBind();
+        }
+
+        private void FillCollectionList(DataTable dtCollectionList)
+        {
+            try
+            {
+                if (dtCollectionList != null)
+                    dgvCollections.DataSource = dtCollectionList;
+                    dgvCollections.DataBind();
+            }
+            catch(Exception ex)
+            {
+                Logger.WriteErrorLog(ex);
+            }
         }
     }
 }
