@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.storeController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
@@ -12,6 +13,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                //ViewStationeryRetrievalListControl VSRLobj=new ViewStationeryRetrievalListControl();
+                //DataTable dt=VSRLobj.
+                //FillStationeryRetrivalList(dt);
+            }
             DataTable dt = new DataTable();
             dt.Columns.Add("RetrievalNo");
             dt.Columns.Add("RetrievalDate/Time");
@@ -38,6 +45,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             DgvViewStationeryRetrievalList.DataSource = dt;
             DgvViewStationeryRetrievalList.DataBind();
 
+        }
+
+        public void FillStationeryRetrivalList(DataTable dtStationeryRetrivalList)
+        {
+            try
+            {
+                if (dtStationeryRetrivalList != null)
+                {
+                    DgvViewStationeryRetrievalList.DataSource = dtStationeryRetrivalList;
+                    DgvViewStationeryRetrievalList.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteErrorLog(ex);
+            }
         }
     }
 }

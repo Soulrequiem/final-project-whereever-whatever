@@ -28,7 +28,7 @@
                          </ig:WebTextEditor>--%>
                          <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
-                                     StyleSetName="Office2010Blue">
+                                     StyleSetName="Office2010Blue" OnSelectionChanged="drdItemList_SelectionChanged">
                                     <Button Visible="False" />
                           </ig:WebDropDown>
                      </td>
@@ -123,17 +123,17 @@
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundDataField DataFieldName="Date" Key="Date" Width="100px">
+                    <ig:BoundDataField DataFieldName="Date" Key="date" Width="100px">
                         <Header Text="Date" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Dept/Supplier" Key="Dept/Supplier" 
+                    <ig:BoundDataField DataFieldName="Dept/Supplier" Key="dept/supplier" 
                         Width="200px">
                         <Header Text="Dept/Supplier" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Qty" Key="Qty" Width="100px">
+                    <ig:BoundDataField DataFieldName="Qty" Key="qty" Width="100px">
                         <Header Text="Qty" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Balance" Key="Balance" Width="100px">
+                    <ig:BoundDataField DataFieldName="Balance" Key="balance" Width="100px">
                         <Header Text="Balance" />
                     </ig:BoundDataField>
                 </Columns>
