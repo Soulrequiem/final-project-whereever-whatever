@@ -1,22 +1,17 @@
-﻿/***************************************************************************/
-/*  File Name       : EmployeeBroker.cs
-/*  Module Name     : Models
-/*  Owner           : Thazin
-/*  class Name      : EmployeeBroker
-/*  Details         : Model Employee of Employee table
-/***************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using StationeryStoreInventorySystemModel.brokerinterface;
 using SystemStoreInventorySystemUtil;
 using StationeryStoreInventorySystemModel.entity;
-
 namespace StationeryStoreInventorySystemModel.broker
 {
-    public class EmployeeBroker : IEmployeeBroker
+    using StationeryStoreInventorySystemModel.entity;
+
+    public class EmployeeBroker : brokerinterface.IEmployeeBroker
     {
+
         #region IEmployeeBroker Members
         private InventoryEntities inventory = new InventoryEntities();
         private Employee empObj = null;
@@ -26,12 +21,24 @@ namespace StationeryStoreInventorySystemModel.broker
         private List<User> userList = null;
         private List<Role> roleList = null;
 
-        public EmployeeBroker()
-        { 
+        public EmployeeBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
         }
         /// <summary>
-        /// Retrieve the Employee from Employee Table according to the employee Parameter
-        /// Return Employee
+        /// Get the last record of the employee table
+        /// </summary>
+        /// <returns></returns>
+        public int GetEmployeeId()
+        {
+
+            var maxEmployeeId = inventory.Employees.Max(xObj => xObj.Id) + 1;
+            return maxEmployeeId;
+
+        }
+
+        /// <summary>
+        /// Retrieve the Employee data from Employee,User and Role Table
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
@@ -39,26 +46,23 @@ namespace StationeryStoreInventorySystemModel.broker
         {
 
             empObj = inventory.Employees.Where(eObj => eObj.Name == employee.Name || eObj.Id == employee.Id).First();
+
+            // if (!empObj.Equals(null) && empObj.CreatedBy != employee.Id)
             if (!empObj.Equals(null))
             {
                 User userDetail = inventory.Users.Where(uObj => uObj.Id == empObj.User.Id).First();
                 Role roleDetail = inventory.Roles.Where(rObj => rObj.Id == empObj.Role.Id).First();
-                //empObj.User.Id = userDetail.Id;
                 empObj.User = userDetail;
                 empObj.Role = roleDetail;
-                //empObj.Role.Id = roleDetail.Id;
+
                 return empObj;
             }
             return null;
         }
-
-
         /// <summary>
-        /// Retrieve All of the Employee information from Employee Table
-        /// Return Employee Collection
+        /// Get all of the Employee record from Employee table
         /// </summary>
         /// <returns></returns>
-        
         public List<Employee> GetAllEmployee()
         {
             empList = inventory.Employees.ToList<Employee>();
@@ -66,10 +70,9 @@ namespace StationeryStoreInventorySystemModel.broker
                 return empList;
             return null;
         }
-
         /// <summary>
-        ///  Insert Employee data to the Employee Table according to the newEmployee Parameter
-        ///  Return Constants.DB_STATUS
+        /// Insert the employee infomation to the Employee table
+        /// return the Constants.DB_STATUS
         /// </summary>
         /// <param name="newEmployee"></param>
         /// <returns></returns>
@@ -80,8 +83,8 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
 
-                this.Insert(newEmployee.User);
-                this.Insert(newEmployee.Role);
+                //this.Insert(newEmployee.User);
+                //this.Insert(newEmployee.Role);
                 inventory.AddToEmployees(newEmployee);
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
@@ -94,12 +97,11 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
         /// <summary>
-        /// Update Employee data to the employee Table according to the employee Parameter
-        /// Return Constans.DB_STATUS
+        /// Update the Employee information to employee table
+        /// Return Constants.DB_STATUS
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-
         public Constants.DB_STATUS Update(Employee employee)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -107,12 +109,23 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 empObj = inventory.Employees.Where(eObj => eObj.Id == employee.Id).First();
+                User userId = inventory.Users.Where(u => u.Id == empObj.User.Id).First();
+                Role roleId = inventory.Roles.Where(r => r.Id == empObj.Role.Id).First();
+                Department deptId = inventory.Departments.Where(d => d.Id == empObj.Department.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == empObj.Employee2.Id).First();
                 if (empObj != null)
                 {
+                    empObj.Id = employee.Id;
+                    empObj.User = userId;
+                    empObj.Role = roleId;
+                    empObj.Department = deptId;
                     empObj.Name = employee.Name;
+                    empObj.Designation = employee.Designation;
                     empObj.Email = employee.Email;
-                    this.Update(empObj.User);
-                    this.Update(empObj.Role);
+                    empObj.CreatedDate = employee.CreatedDate;
+                    empObj.Employee2 = createdBy;
+                    //this.Update(empObj.User);
+                    //this.Update(empObj.Role);
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
                 }
@@ -124,8 +137,7 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
         /// <summary>
-        ///  Logically delete the Employee table by setting the status to 2 in the Employee table
-        ///  Return Constants.DB_STATUS
+        /// Logically delete to the status of Employee table
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
@@ -152,8 +164,20 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
         /// <summary>
-        /// Retrieve the User information  from User Table according to the user Parameter
-        /// Return User
+        /// Get Employee Name According to the Employee Name parameter
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
+        public List<Employee> GetEmployeeName(Employee employee)
+        {
+
+            List<Employee> empObj = inventory.Employees.Where(r => r.Name.Contains(employee.Name)).ToList();
+
+            return empObj;
+
+        }
+        /// <summary>
+        /// Get user data of ther User table according to the User parameter
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -164,12 +188,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 return userObj;
             return null;
         }
-        /// <summary>
-        /// Retrieve All of the User information from User Table
-        /// Return User Collection
-        /// </summary>
-        /// <returns></returns>
-        
+
         public List<User> GetAllUser()
         {
             userList = inventory.Users.ToList<User>();
@@ -177,13 +196,6 @@ namespace StationeryStoreInventorySystemModel.broker
                 return userList;
             return null;
         }
-
-        /// <summary>
-        ///  Insert User data to the User Table according to the newUser Parameter
-        ///  Return Constants.DB_STATUS
-        /// </summary>
-        /// <param name="newUser"></param>
-        /// <returns></returns>
 
         public Constants.DB_STATUS Insert(User newUser)
         {
@@ -202,12 +214,6 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-        /// <summary>
-        /// Update User data to the User Table according to the user Parameter
-        /// Return Constans.DB_STATUS
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
 
         public Constants.DB_STATUS Update(User user)
         {
@@ -218,8 +224,10 @@ namespace StationeryStoreInventorySystemModel.broker
                 userObj = inventory.Users.Where(uObj => uObj.Id == user.Id).First();
                 if (userObj != null)
                 {
+                    userObj.Id = user.Id;
                     userObj.UserName = user.UserName;
                     userObj.Password = user.Password;
+                    userObj.CreatedDate = user.CreatedDate;
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
                 }
@@ -231,12 +239,6 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-        /// <summary>
-        ///  Logically delete the User table by setting the status to 2 in the user table
-        ///  Return Constants.DB_STATUS
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
 
         public Constants.DB_STATUS Delete(User user)
         {
@@ -258,12 +260,7 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
-        /// <summary>
-        /// Retrieve the Role  information  from Role Table according to the role Parameter
-        /// Return Role
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
+
         public Role GetRole(Role role)
         {
             roleObj = inventory.Roles.Where(rObj => rObj.Id == role.Id).First();
@@ -271,12 +268,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 return roleObj;
             return null;
         }
-        /// <summary>
-        /// Retrieve All of the Role information from Role Table
-        /// Return Role Collection
-        /// </summary>
-        /// <returns></returns>
-        
+
         public List<Role> GetAllRole()
         {
             roleList = inventory.Roles.ToList<Role>();
@@ -284,12 +276,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 return roleList;
             return null;
         }
-        /// <summary>
-        ///  Insert Role data to the Role Table according to the newRole Parameter
-        ///  Return Constants.DB_STATUS
-        /// </summary>
-        /// <param name="newRole"></param>
-        /// <returns></returns>
+
         public Constants.DB_STATUS Insert(Role newRole)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -307,12 +294,6 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-        /// <summary>
-        /// Update Role data to the Role Table according to the role Parameter
-        /// Return Constans.DB_STATUS
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
 
         public Constants.DB_STATUS Update(Role role)
         {
@@ -321,9 +302,13 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 roleObj = inventory.Roles.Where(rObj => rObj.Id == role.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == roleObj.CreatedBy.Id).First();
                 if (roleObj != null)
                 {
+                    roleObj.Id = role.Id;
                     roleObj.Name = role.Name;
+                    roleObj.CreatedDate = role.CreatedDate;
+                    roleObj.CreatedBy = createdBy;
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
                 }
@@ -335,12 +320,7 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-        /// <summary>
-        ///  Logically delete the Role table by setting the status to 2 in the Role table
-        ///  Return Constants.DB_STATUS
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
+
         public Constants.DB_STATUS Delete(Role role)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -350,7 +330,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 roleObj = inventory.Roles.Where(rObj => rObj.Id == role.Id).First();
                 if (roleObj != null)
                 {
-                    roleObj.Status = 2;
+                    userObj.Status = 2;
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
                 }
@@ -361,11 +341,7 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
-
+      
         #endregion
     }
 }
-
-/****************************************/
-/********* End of the Class *****************/
-/****************************************/

@@ -22,15 +22,27 @@ namespace StationeryStoreInventorySystemModel.broker
 
         #region IPurchaseOrderBroker Members
 
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private PurchaseOrder purchaseorder = null;
         private List<PurchaseOrder> purchaseOrderList = null;
         private PurchaseOrderDetail purchaseorderdetail = null;
         private List<PurchaseOrderDetail> purchaseOrderDetailList = null;
 
-        public PurchaseOrderBroker()
+        public PurchaseOrderBroker(InventoryEntities inventory)
         {
+            this.inventory = inventory;
         }
+        /// <summary>
+        /// Get the last record of the PurchaserOrder Id from the Purchase Order table
+        /// </summary>
+        /// <returns></returns>
+        public int GetPurchaseOrderId()
+        {
+            var maxPurchaseOrderId = inventory.PurchaseOrders.Max(xObj => xObj.Id) + 1;
+            return maxPurchaseOrderId;
+
+        }
+
         /// <summary>
         /// Retrieve the PurchaseOrder information  from PurchaseOrder Table according to the purchaseOrder Parameter
         /// Return purchaseorder
@@ -141,7 +153,7 @@ namespace StationeryStoreInventorySystemModel.broker
         ///  Logically delete the PurchaseOrder table by setting the status to 2 in the PurchaseOrder table
         ///  Return Constants.DB_STATUS
         /// </summary>
-        /// <param name="purchaseOrder"></param>
+        /// <param name="purchaseOrder"></param>i
         /// <returns></returns>
         public Constants.DB_STATUS Delete(PurchaseOrder purchaseOrder)
         {
@@ -150,12 +162,8 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                //req=inventory.Requisitions.Include(reqObj=>reqObj.
-                foreach (PurchaseOrderDetail purchaseOrderDetail in purchaseOrder.PurchaseOrderDetails)
-                {
-
-                    this.Update(purchaseOrderDetail);
-                }
+                PurchaseOrder purchase = inventory.PurchaseOrders.Where(p => p.Id == purchaseorder.Id).First();
+                purchase.Status = 2;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -246,20 +254,20 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Constants.DB_STATUS Delete(PurchaseOrderDetail purchaseOrderDetail)
         {
-            // throw new NotImplementedException();
-            Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
+             throw new NotImplementedException();
+            //Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
-            try
-            {
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
-            }
-            catch (Exception e)
-            {
-                status = Constants.DB_STATUS.FAILED;
-            }
+            //try
+            //{
+            //    inventory.SaveChanges();
+            //    status = Constants.DB_STATUS.SUCCESSFULL;
+            //}
+            //catch (Exception e)
+            //{
+            //    status = Constants.DB_STATUS.FAILED;
+            //}
 
-            return status;
+            //return status;
         }
 
         #endregion

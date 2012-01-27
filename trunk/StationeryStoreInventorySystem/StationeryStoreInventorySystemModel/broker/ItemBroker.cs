@@ -18,10 +18,14 @@ namespace StationeryStoreInventorySystemModel.broker
     public class ItemBroker: IItemBroker
     {
         #region IItemBroker Members
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private Item itemObj = null;
         private List<Item> itemList = null;
 
+        public ItemBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
+        }
         /// <summary>
         ///  Retrieve the Item Detail information  from Item Table according to the Item Parameter
         /// </summary>
@@ -82,13 +86,20 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 itemObj = inventory.Items.Where(iObj => iObj.Id == item.Id).First();
-                itemObj.Description = item.Description;
-                itemObj.ReorderLevel = item.ReorderLevel;
-                itemObj.ReorderQty = item.ReorderQty;
-                itemObj.Cost = item.Cost;
-                itemObj.UnitOfMeasureId = item.UnitOfMeasureId;
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                if(!itemObj.Equals(null))
+                {
+                    Employee createdBy = inventory.Employees.Where(eObj => eObj.Id == itemObj.CreatedBy.Id).First();
+                    itemObj.ItemCategoryId = item.ItemCategoryId;
+                    itemObj.Description = item.Description;
+                    itemObj.ReorderLevel = item.ReorderLevel;
+                    itemObj.ReorderQty = item.ReorderQty;
+                    itemObj.Cost = item.Cost;
+                    itemObj.UnitOfMeasureId = item.UnitOfMeasureId;
+                    itemObj.CreatedDate = item.CreatedDate;
+                    itemObj.CreatedBy = createdBy;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {
@@ -119,6 +130,17 @@ namespace StationeryStoreInventorySystemModel.broker
                 status = Constants.DB_STATUS.FAILED;
             }
             return status;
+        }
+        /// <summary>
+        /// Get the Item List by Item Description
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public List<Item> GetItemReference(Item item)
+        {
+            List<Item> itemObj = inventory.Items.Where(r => r.Description.Contains(item.Description)).ToList();
+            return itemObj;
+
         }
 
         #endregion

@@ -17,14 +17,15 @@ namespace StationeryStoreInventorySystemModel.broker
 
     public class RequisitionBroker : brokerinterface.IRequisitionBroker
     {
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private Requisition req = null;
         private RequisitionDetail reqDetail = null;
         private List<Requisition> reqList = null;
         private List<RequisitionDetail> reqDetailList = null;
 
-        public RequisitionBroker()
+        public RequisitionBroker(InventoryEntities inventory)
         {
+            this.inventory = inventory;
         }
         /// <summary>
         /// Retrieve the Requisition and RequisitionDetail information according to the Requisition Parameter 
@@ -103,6 +104,14 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
+                Employee empId=inventory.Employees.Where(e=>e.Id==requisition.Employee.Id).First();
+                Employee approvedBy=inventory.Employees.Where(e=>e.Id==requisition.Employee1.Id).First();
+                req.Id = requisition.Id;
+                req.Department = requisition.Department;
+                req.Employee = empId;
+                req.Employee1 = approvedBy;
+                req.ApprovedDate = req.ApprovedDate;
+                req.CreatedDate = req.CreatedDate;
                 foreach (RequisitionDetail requisitionDetail in req.RequisitionDetails)
                 {
                     this.Update(requisitionDetail);
@@ -204,8 +213,13 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 reqDetail = inventory.RequisitionDetails.Where(reqObj => reqObj.Id == requisitionDetail.Id).First();
+                Item itemId = inventory.Items.Where(i => i.Id == requisitionDetail.Item.Id).First();
+                Requisition reqId = inventory.Requisitions.Where(r => r.Id == requisitionDetail.Requisition.Id).First();
+                reqDetail.Id = requisitionDetail.Id;
+                reqDetail.Requisition = reqId;
                 reqDetail.Qty = requisitionDetail.Qty;
                 reqDetail.DeliveredQty = requisitionDetail.DeliveredQty;
+                reqDetail.Item = itemId;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }

@@ -16,7 +16,18 @@ namespace StationeryStoreInventorySystemModel.broker
         private RequisitionCollectionDetail reqCollectionDetail = null;
         private List<RequisitionCollection> reqList = null;
         private List<RequisitionCollectionDetail> reqDetailList = null;
-      
+
+        public RequisitionCollectionBroker(InventoryEntities inventory)
+        { 
+            this.inventory=inventory;
+        }
+        public int GetRequisitionCollectionId()
+        {
+            var maxStockcardId = inventory.StockCards.Max(xObj => xObj.Id) + 1;
+            return maxStockcardId;
+
+        }
+
         public RequisitionCollection GetRequisitionCollection(RequisitionCollection requisitionCollection)
         {
           reqCollection = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();

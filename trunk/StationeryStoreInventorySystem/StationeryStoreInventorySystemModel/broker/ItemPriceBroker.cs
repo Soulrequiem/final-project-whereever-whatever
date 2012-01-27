@@ -18,10 +18,14 @@ namespace StationeryStoreInventorySystemModel.broker
     public class ItemPriceBroker : IItemPriceBroker
     {
         #region IItemPriceBroker Members
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private ItemPrice itemPriceObj = null;
         private List<ItemPrice> itemPriceList = null;
 
+        public ItemPriceBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
+        }
         /// <summary>
         ///  Retrieve the ItemPrice Detail information  from ItemPrice Table according to the ItemPrice Parameter
         /// </summary>
@@ -81,10 +85,16 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 itemPriceObj = inventory.ItemPrices.Where(iObj => iObj.ItemId == itemPrice.ItemId).First();
-
-                itemPriceObj.Price = itemPrice.Price;
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                if (!itemPriceObj.Equals(null))
+                {
+                    Employee createdBy = inventory.Employees.Where(eObj => eObj.Id == itemPriceObj.CreatedBy.Id).First();
+                    itemPriceObj.SupplierId = itemPrice.SupplierId;
+                    itemPriceObj.Price = itemPrice.Price;
+                    itemPriceObj.CreatedDate = itemPrice.CreatedDate;
+                    itemPriceObj.CreatedBy = itemPrice.CreatedBy;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {

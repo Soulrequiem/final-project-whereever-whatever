@@ -20,9 +20,13 @@ namespace StationeryStoreInventorySystemModel.broker
         #region IDepartmentBroker Members
 
 
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private Department departmentObj = null;
         private List<Department> departmentList = null;
+        public DepartmentBroker(InventoryEntities inventory)
+        {
+            this.inventory = inventory;
+        }
         /// <summary>
         ///  Retrieve the Department information  from Department Table according to the department Parameter
         /// </summary>
@@ -34,16 +38,16 @@ namespace StationeryStoreInventorySystemModel.broker
             departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id).First();
             if (!departmentObj.Equals(null))
             {
-                departmentObj.CreatedBy = inventory.Employees.Where(x => x.Id == departmentObj.CreatedBy.Id).First();
-                departmentObj.EmployeeContactId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeContactId.Id).First();
-                departmentObj.EmployeeHeadId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeHeadId.Id).First();
-                departmentObj.EmployeeRepresentativeId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeRepresentativeId.Id).First();
-                departmentObj.CollectionPoint = inventory.CollectionPoints.Where(x => x.Id == departmentObj.CollectionPoint.Id).First();
+                //departmentObj.CreatedBy = inventory.Employees.Where(x => x.Id == departmentObj.CreatedBy.Id).First();
+                //departmentObj.EmployeeContactId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeContactId.Id).First();
+                //departmentObj.EmployeeHeadId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeHeadId.Id).First();
+                //departmentObj.EmployeeRepresentativeId = inventory.Employees.Where(x => x.Id == departmentObj.EmployeeRepresentativeId.Id).First();
+                //departmentObj.CollectionPoint = inventory.CollectionPoints.Where(x => x.Id == departmentObj.CollectionPoint.Id).First();
 
-                foreach (Employee e in departmentObj.EmployeeId)
-                {
-                    departmentObj.EmployeeId.Add(e);
-                }
+                //foreach (Employee e in departmentObj.Employees)
+                //{
+                //    departmentObj.Employees.Add(e);
+                //}
 
 
                 return departmentObj;
@@ -101,21 +105,21 @@ namespace StationeryStoreInventorySystemModel.broker
 
                 if (departmentObj != null)
                 {
-                    Employee contactId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeContactId.Id).First();
-                    Employee headId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeHeadId.Id).First();
-                    Employee representativeId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeRepresentativeId.Id).First();
-                    Employee createdBy = inventory.Employees.Where(e => e.Id == departmentObj.CreatedBy.Id).First();
-                    CollectionPoint collectionPId = inventory.CollectionPoints.Where(c => c.Id == departmentObj.CollectionPoint.Id).First();
+                    //Employee contactId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeContactId.Id).First();
+                    //Employee headId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeHeadId.Id).First();
+                    //Employee representativeId = inventory.Employees.Where(e => e.Id == departmentObj.EmployeeRepresentativeId.Id).First();
+                    //Employee createdBy = inventory.Employees.Where(e => e.Id == departmentObj.CreatedBy.Id).First();
+                    //CollectionPoint collectionPId = inventory.CollectionPoints.Where(c => c.Id == departmentObj.CollectionPoint.Id).First();
                     departmentObj.Name = department.Name;
-                    departmentObj.EmployeeContactId = contactId;
+                    departmentObj.EmployeeContactId = department.EmployeeContactId;
                     departmentObj.PhoneNumber = department.PhoneNumber;
                     departmentObj.FaxNumber = department.FaxNumber;
-                    departmentObj.EmployeeHeadId = headId;
-                    departmentObj.CollectionPoint = collectionPId;
+                    departmentObj.EmployeeHeadId = department.EmployeeHeadId;
+                    departmentObj.CollectionPoint = department.CollectionPoint;
                     //departmentObj.CollectionPoint.Id = department.CollectionPoint.Id;
-                    departmentObj.EmployeeRepresentativeId = representativeId;
+                    departmentObj.EmployeeRepresentativeId = department.EmployeeRepresentativeId;
                     departmentObj.CreatedDate = department.CreatedDate;
-                    departmentObj.CreatedBy = createdBy;
+                    departmentObj.CreatedBy = department.CreatedBy ;
 
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
