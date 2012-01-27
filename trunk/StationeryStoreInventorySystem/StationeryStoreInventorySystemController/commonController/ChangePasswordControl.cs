@@ -11,7 +11,7 @@ namespace StationeryStoreInventorySystemController.commonController
 {
     public class ChangePasswordControl
     {
-        Employee currentEmployee;
+        private Employee currentEmployee;
 
         public ChangePasswordControl()
         {

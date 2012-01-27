@@ -20,9 +20,9 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class AssignTemporaryDepartmentRepresentativeControl
     {
-        IEmployeeBroker employeeBroker;
-        Employee currentEmployee;
-        Employee temporaryDepartmentRepresentative;
+        private IEmployeeBroker employeeBroker;
+        private Employee currentEmployee;
+        private Employee temporaryDepartmentRepresentative;
 
         /// <summary>
         ///     To get all the Employee with role name as "Temporary Department Representative"
@@ -49,23 +49,26 @@ namespace StationeryStoreInventorySystemController.departmentController
             temporaryDepartmentRepresentative = employeeBroker.GetEmployee(temporaryDepartmentRepresentative);
         }
 
-        public DataTable TemporaryDepartmentRepresentative()
+        public DataTable TemporaryDepartmentRepresentative
         {
-            DataTable dt = new DataTable();
-
-            if (temporaryDepartmentRepresentative != null)
+            get
             {
-                DataRow dr = new DataRow();
+                DataTable dt = new DataTable();
 
-                dt.NewRow();
-                dr["employeeId"] = temporaryDepartmentRepresentative.Id;
-                dr["employeeName"] = temporaryDepartmentRepresentative.Name;
-                //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(temporaryDepartmentHead.Designation));
-                dr["joiningDate"] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, temporaryDepartmentRepresentative.CreatedDate);
-                dt.Rows.Add(dr);
+                if (temporaryDepartmentRepresentative != null)
+                {
+                    DataRow dr = new DataRow();
+
+                    dt.NewRow();
+                    dr["employeeId"] = temporaryDepartmentRepresentative.Id;
+                    dr["employeeName"] = temporaryDepartmentRepresentative.Name;
+                    //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(temporaryDepartmentHead.Designation));
+                    dr["joiningDate"] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, temporaryDepartmentRepresentative.CreatedDate);
+                    dt.Rows.Add(dr);
+                }
+
+                return dt;
             }
-
-            return dt;
         }
 
         //public Employee GetTemporaryDepartmentRepresentative()

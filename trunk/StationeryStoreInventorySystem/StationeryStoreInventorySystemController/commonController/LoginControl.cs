@@ -11,7 +11,7 @@ namespace StationeryStoreInventorySystemController.commonController
 {
     public class LoginControl
     {
-        IEmployeeBroker employeeBroker;
+        private IEmployeeBroker employeeBroker;
         public LoginControl()
         {
             employeeBroker = new EmployeeBroker();

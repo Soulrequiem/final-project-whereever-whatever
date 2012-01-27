@@ -12,7 +12,7 @@ namespace StationeryStoreInventorySystemController.commonController
 {
     public class RequisitionDetailsControl
     {
-        IRequisitionBroker requisitionBroker = new RequisitionBroker();
+        private IRequisitionBroker requisitionBroker = new RequisitionBroker();
         public RequisitionDetailsControl()
         {
         }

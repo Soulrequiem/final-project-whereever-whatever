@@ -34,11 +34,13 @@ namespace StationeryStoreInventorySystemController.commonController
 
         IItemBroker itemBroker;
         Employee currentEmployee;
+		private List<Item> itemList;
 
         public ViewStationeryCatalogueControl()
         {
             currentEmployee = Util.ValidateUser();
             itemBroker = new ItemBroker();
+            itemList = itemBroker.GetAllItem();
         }
 
         ///     The usage of this method is to show the all stationery catalogue
@@ -52,44 +54,46 @@ namespace StationeryStoreInventorySystemController.commonController
         ///     Modification Reason:
         /// </summary>
         /// <returns>Return the list of stationery catalogue. </returns>
-        public DataTable GetAllItem()
+        public DataTable ItemList
         {
-            DataTable dt = new DataTable();
-            DataRow dr;
-            List<Item> itemList = itemBroker.GetAllItem();
-
-            // for store
-            if (Util.CheckPermission(Converter.objToEmployeeRole(employee.Role.Id), Util.GetRolePermission(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD)))
+            get
             {
-                foreach (Item item in itemList)
-                {
-                    dt.NewRow();
-                    dr = new DataRow();
-                    dr["itemNo"] = item.Id;
-                    dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
-                    dr["itemDescription"] = item.Description;
-                    dr["reorderLevel"] = item.ReorderLevel;
-                    dr["reorderQty"] = item.ReorderQty;
-                    dr["unitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
-                    dt.Rows.Add(dr);
-                }
-            }
-            // for department
-            else
-            {
-                foreach (Item item in itemList)
-                {
-                    dt.NewRow();
-                    dr = new DataRow();
-                    dr["itemNo"] = item.Id;
-                    dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
-                    dr["itemDescription"] = item.Description;
-                    dr["unitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
-                    dt.Rows.Add(dr);
-                }
-            }
+                DataTable dt = new DataTable();
+                DataRow dr;
 
-            return dt;
+                // for store
+                if (Util.CheckPermission(Converter.objToEmployeeRole(currentEmployee.Role.Id), Util.GetRolePermission(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD)))
+                {
+                    foreach (Item item in itemList)
+                    {
+                        dt.NewRow();
+                        dr = new DataRow();
+                        dr["itemNo"] = item.Id;
+                        dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
+                        dr["itemDescription"] = item.Description;
+                        dr["reorderLevel"] = item.ReorderLevel;
+                        dr["reorderQty"] = item.ReorderQty;
+                        dr["unitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                        dt.Rows.Add(dr);
+                    }
+                }
+                // for department
+                else
+                {
+                    foreach (Item item in itemList)
+                    {
+                        dt.NewRow();
+                        dr = new DataRow();
+                        dr["itemNo"] = item.Id;
+                        dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
+                        dr["itemDescription"] = item.Description;
+                        dr["unitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                        dt.Rows.Add(dr);
+                    }
+                }
+
+                return dt;
+            }
         }
 
 
@@ -115,16 +119,12 @@ namespace StationeryStoreInventorySystemController.commonController
         //}
         public Item SelectItemDescription(string itemDescription)
         {
-            return Util.GetItem(itemDescription);
+            return Util.GetItem(itemBroker, itemDescription);
         }
 
-        //public Item GetItem(Item item)
-        //{
-        //    ItemBroker itembroker = new ItemBroker();
-        //    return itembroker.GetItem(item);
-        //}
-
-
+        public void SelectPrint()
+        {
+        }
     }
 }
 /****************************************/
