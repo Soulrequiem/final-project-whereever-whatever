@@ -72,54 +72,54 @@
                             <ig:ExplorerBarGroup>
                                 <%--Employee Menu--%>
                                 <Items>
-                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ChangePassword.aspx"                    Text="Change Password"/>
-                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ViewStationeryCatalogue.aspx"           Text="View Stationery Catalogue"/>
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Employee/RequestStationery.aspx"    Text="Request Stationery"/>
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx"     Text="Check Requisition"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ChangePassword.aspx"                    Text="Change Password"              ToolTip="Change Password"             />
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ViewStationeryCatalogue.aspx"           Text="View Stationery Catalogue"    ToolTip="View Stationery Catalogue"   />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Employee/RequestStationery.aspx"    Text="Request Stationery"           ToolTip="Request Stationery"          />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx"     Text="Check Requisition"            ToolTip="Check Requisition"           />
                                 </Items>
                             </ig:ExplorerBarGroup>
                             <ig:ExplorerBarGroup>
                                 <%--Representative Menu--%>
                                 <Items>
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/SubmitRequisitionsToStore.aspx"      Text="Submit Requisition To Store"               />
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/ManageCollectionPoint.aspx"          Text="Manage Collection Point"                   />
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx" Text="Update Collection Details By Requisition"  />
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/UpdateCollectionByItems.aspx"        Text="Update Collection Details By Items"        />
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/AssignTempDeptRepresentative.aspx"   Text="Assign Temporary Department Representative"/>
-                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/Report.aspx"                                            Text="Generate Reports"                          />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/SubmitRequisitionsToStore.aspx"      Text="Submit Requisition To Store"                  ToolTip="Submit Requisition To Store"                    />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/ManageCollectionPoint.aspx"          Text="Manage Collection Point"                      ToolTip="Manage Collection Point"                        />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx" Text="Update Collection Details By Requisition"     ToolTip="Update Collection Details By Requisition"       />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/UpdateCollectionByItems.aspx"        Text="Update Collection Details By Items"           ToolTip="Update Collection Details By Items"             />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Representative/AssignTempDeptRepresentative.aspx"   Text="Assign Temporary Department Representative"   ToolTip="Assign Temporary Department Representative"     />
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/Report.aspx"                                            Text="Generate Reports"                             ToolTip="Generate Reports"                               />
                                 </Items>
                             </ig:ExplorerBarGroup>
                             <ig:ExplorerBarGroup>
                                 <%--Head Menu--%>
                                 <Items>
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/ApproveRequisition.aspx"       Text="Approve/Reject Requisition"      />
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/AssignDeptRepresentative.aspx" Text="Assign Department Representative"/>
-                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/AssignTempDeptHead.aspx"       Text="Assign Temporary Department Head"/>
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/ApproveRequisition.aspx"       Text="Approve/Reject Requisition"              ToolTip="Approve/Reject Requisition"              />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/AssignDeptRepresentative.aspx" Text="Assign Department Representative"        ToolTip="Assign Department Representative"        />
+                                    <ig:ExplorerBarItem NavigateUrl="~/departmentUI/Head/AssignTempDeptHead.aspx"       Text="Assign Temporary Department Head"        ToolTip="Assign Temporary Department Head"        />
                                </Items>
                             </ig:ExplorerBarGroup>
                             <ig:ExplorerBarGroup>
                                 <%--Clerk Menu--%>
                                 <Items>
-                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ChangePassword.aspx"                        Text="Change Password"                 />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewStockCard.aspx"                    Text="View Stock Card"                 />
-                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ViewStationeryCatalogue.aspx"               Text="View Stationery Catalogue"       />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewSupplierList.aspx"                 Text="View Supplier List"              />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ReceiveOrderForm.aspx"                 Text="Receive Order Form"              />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreatePurchaseOrder.aspx"              Text="Create Purchase Order"           />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreateDiscrepencyReport.aspx"          Text="Create Discrepency Report"       />
-                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/Report.aspx"                                Text="Generate Reports"                />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewStationeryRetrievalList.aspx"      Text="View Stationery Retrieval List"  />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreateStationeryRetrievalList.aspx"    Text="Create Stationery Retrieval List"/>
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx"             Text="Generate Disbursement"           />
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ChangePassword.aspx"                        Text="Change Password"                         ToolTip="Change Password"                         />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewStockCard.aspx"                    Text="View Stock Card"                         ToolTip="View Stock Card"                         />
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/ViewStationeryCatalogue.aspx"               Text="View Stationery Catalogue"               ToolTip="View Stationery Catalogue"               />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewSupplierList.aspx"                 Text="View Supplier List"                      ToolTip="View Supplier List"                      />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ReceiveOrderForm.aspx"                 Text="Receive Order Form"                      ToolTip="Receive Order Form"                      />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreatePurchaseOrder.aspx"              Text="Create Purchase Order"                   ToolTip="Create Purchase Order"                   />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreateDiscrepencyReport.aspx"          Text="Create Discrepency Report"               ToolTip="Create Discrepency Report"               />
+                                    <ig:ExplorerBarItem NavigateUrl="~/commonUI/Report.aspx"                                Text="Generate Reports"                        ToolTip="Generate Reports"                        />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewStationeryRetrievalList.aspx"      Text="View Stationery Retrieval List"          ToolTip="View Stationery Retrieval List"          />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreateStationeryRetrievalList.aspx"    Text="Create Stationery Retrieval List"        ToolTip="Create Stationery Retrieval List"        />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx"             Text="Generate Disbursement"                   ToolTip="Generate Disbursement"                   />
                                 </Items>
                             </ig:ExplorerBarGroup>
                             <ig:ExplorerBarGroup>
                                 <%--SuperVisor Menu--%>
                                 <Items>
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/AdjustmentVoucher.aspx"         Text="Adjustment Voucher"          />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx" Text="View Adjustment Voucher List"/>
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx"    Text="Issue Adjustment Voucher"    />
-                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/BlackListDepartment.aspx"       Text="Black List Department"       />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/AdjustmentVoucher.aspx"         Text="Adjustment Voucher"               ToolTip="Adjustment Voucher"                  />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx" Text="View Adjustment Voucher List"     ToolTip="View Adjustment Voucher List"        />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx"    Text="Issue Adjustment Voucher"         ToolTip="Issue Adjustment Voucher"            />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/BlackListDepartment.aspx"       Text="Black List Department"            ToolTip="Black List Department"               />
                                 </Items>
                             </ig:ExplorerBarGroup>
                         </Groups>

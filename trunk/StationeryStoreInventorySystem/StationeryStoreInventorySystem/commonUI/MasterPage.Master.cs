@@ -98,7 +98,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         /// <param name="e"></param>
         protected void NavigationBar_PreRender(object sender, EventArgs e)
         {
-            //LoadNavigationMenu();
+            LoadNavigationMenu();
             bool[] state = (bool[])(Session["WebExplorerState"]);
             //bool[] VisibleState = (bool[])(Session["VisibleState"]);
 
