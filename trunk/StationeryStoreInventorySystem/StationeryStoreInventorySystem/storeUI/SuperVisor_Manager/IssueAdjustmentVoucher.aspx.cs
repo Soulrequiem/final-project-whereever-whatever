@@ -1,71 +1,113 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : IssueAdjustmentVoucher.cs
+/*  Module Name     : View
+/*  Owner           : Wai Yan Ko Ko
+/*  class Name      : IssueAdjustmentVoucher
+/*  Details         : Form for Issue Adjustment Voucher
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.storeController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
 {
     public partial class IssueAdjustmentVoucher : System.Web.UI.Page
     {
+        IssueAdjustmentVoucherControl iavCtrl;
+        String voucherNo;
+        /// <summary>
+        /// Loads the IssueAdjustmentVoucher form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("VoucherNo");
-            dt.Columns.Add("CreatedBy");
-            dt.Columns.Add("CreatedDate");
-            dt.Columns.Add("TotalQty");
-            dt.Columns.Add("Status");
+            if (!IsPostBack)
+            {
+                FillDiscrepancy();
+                //FillReportDetails();
+                //FillReport();
+            }
+        }
 
-            DataRow dr = dt.NewRow();
-            dr[0] = "Hello";
-            dr[1] = "1";
-            dr[2] = "1";
-            dr[3] = "1";
-            dr[4] = "1";
-            dt.Rows.Add(dr);
+        /// <summary>
+        /// Fills Discrepancy Reports to Datagrid
+        /// </summary>
+        /// <param name="dtDiscrepancy"></param>
+        private void FillDiscrepancy()
+        {
+            try
+            {
+                iavCtrl = GetControl();
+                DataTable dtDiscrepancy = iavCtrl.GetDiscrepancyList();
+                DgvDiscrepancyReportList.DataSource = dtDiscrepancy;
+                DgvDiscrepancyReportList.DataBind();
+            }
+            catch (Exception e)
+            {
+                Logger.WriteErrorLog(e);
+            }
+        }
 
-            dr = dt.NewRow();
-            dr[0] = "Hello";
-            dr[1] = "1";
-            dr[2] = "1";
-            dr[3] = "1";
-            dr[4] = "1";
-            dt.Rows.Add(dr);
+        /// <summary>
+        /// Fills Report Details to Label
+        /// </summary>
+        /// <param name="dtReportDetails"></param>
+        private void FillReportDetails(DataTable dtReportDetails)
+        {
+            try
+            {
+                lblVoucher.Text = "Text";
+                lblBy.Text = "By";
+                lblDateIssue.Text = "Date";
+                //drdItemList.ValueField = "ID";
+                //drdItemList.DataSource = dtDetails;
+                //drdItemList.DataBind();
+            }
+            catch (Exception e)
+            {
+                Logger.WriteErrorLog(e);
+            }
+        }
 
-            DgvDiscrepancyReportList.ClearDataSource();
-            DgvDiscrepancyReportList.DataSource = dt;
-            DgvDiscrepancyReportList.DataBind();
+        /// <summary>
+        /// Fills Report Data to Datagrid
+        /// </summary>
+        /// <param name="dtReport"></param>
+        private void FillReport()
+        {
+            try
+            {
+                iavCtrl = GetControl();
+                DataTable dtReport = iavCtrl.SelectDiscrepancy(Convert.ToInt16(voucherNo));
+                DgvDiscrepancyReport.DataSource = dtReport;
+                DgvDiscrepancyReport.DataBind();
+            }
+            catch (Exception e)
+            {
+                Logger.WriteErrorLog(e);
+            }
+        }
 
+        private IssueAdjustmentVoucherControl GetControl()
+        {
+            if (iavCtrl == null)
+                iavCtrl = new IssueAdjustmentVoucherControl();
+            return iavCtrl;
+        }
 
-            DataTable dtt = new DataTable();
-            dtt.Columns.Add("ItemNo");
-            dtt.Columns.Add("ItemDescription");
-            dtt.Columns.Add("Quantity");
-            dtt.Columns.Add("PricePerItem");
-            dtt.Columns.Add("Reason");
-
-            DataRow drr = dtt.NewRow();
-            drr[0] = "Hello";
-            drr[1] = "1";
-            drr[2] = "1";
-            drr[3] = "1";
-            drr[4] = "1";
-            dtt.Rows.Add(drr);
-
-            drr = dtt.NewRow();
-            drr[0] = "Hello";
-            drr[1] = "1";
-            drr[2] = "1";
-            drr[3] = "1fadf";
-            drr[4] = "1fdfd";
-            dtt.Rows.Add(drr);
-
-            DgvDiscrepancyReport.ClearDataSource();
-            DgvDiscrepancyReport.DataSource = dtt;
-            DgvDiscrepancyReport.DataBind();
+        protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender, 
+            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        {
+            voucherNo = e.CurrentSelectedRows[0].Attributes["VoucherNo"].ToString();
         }
     }
 }
+/********************************************/
+/********* End of the Class *****************/
+/********************************************/

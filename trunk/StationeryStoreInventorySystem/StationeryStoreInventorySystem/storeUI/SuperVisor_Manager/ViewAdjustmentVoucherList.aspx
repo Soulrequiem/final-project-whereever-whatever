@@ -20,7 +20,8 @@
             <ig:WebDataGrid ID="DgvAdjustmentVoucherList" runat="server" Height="200px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                     onrowselectionchanged="DgvAdjustmentVoucherList_RowSelectionChanged">
                 <Columns>
                      <%--<ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="150px">
                          <Header Text="Voucher No." />
