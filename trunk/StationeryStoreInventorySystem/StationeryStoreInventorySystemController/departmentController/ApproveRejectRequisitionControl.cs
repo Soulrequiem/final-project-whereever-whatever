@@ -16,7 +16,7 @@ using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
-    class ApproveRejectRequisitionControl
+    public class ApproveRejectRequisitionControl
     {
         commonController.RequisitionDetailsControl requisitionDetailsControl;
         RequisitionBroker requisitionBroker = new RequisitionBroker();
