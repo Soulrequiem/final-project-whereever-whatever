@@ -12,11 +12,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class ManageCollectionPoint : System.Web.UI.Page
     {
+        
         /// <summary>
         /// Loads the ManageCollectionPoint form
         /// </summary>

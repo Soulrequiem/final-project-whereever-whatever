@@ -24,7 +24,8 @@
                             <ig:WebDataGrid ID="DgvCurrentDeptRepresentative" runat="server" Height="150px" 
                                 Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                                onrowselectionchanged="DgvCurrentDeptRepresentative_RowSelectionChanged">
                                 <Columns>
                                     <ig:UnboundCheckBoxField Key="BoundCheckBoxField_0" Width="70px">
                                         <Header Text="" />
@@ -66,7 +67,7 @@
                             <div style="float:right">
                                     <%--<a class="button" href="" style="float:right">Remove</a>--%>
                                     <asp:Button ID="btnRemove" CssClass="Defaultbutton"
-                                            runat="server" Text="Remove" />
+                                            runat="server" Text="Remove" onclick="btnRemove_Click" />
                             </div>
                     </Template>                
             </igmisc:WebGroupBox>
@@ -98,7 +99,8 @@
                         <ig:WebDataGrid ID="DgvRepSearchDetails" runat="server" Height="120px" 
                             Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                            onrowselectionchanged="DgvRepSearchDetails_RowSelectionChanged">
                             <Columns>
                                 <%--<ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
                                     Key="BoundCheckBoxField_0" Width="50px">
@@ -139,7 +141,7 @@
                         <div style="float:right">
                                 <%--<a class="button" href="" style="float:right">Assign</a>--%>
                                 <asp:Button ID="btnAssign" CssClass="Defaultbutton"
-                                    runat="server" Text="Assign" />
+                                    runat="server" Text="Assign" onclick="btnAssign_Click" />
                         </div>
                     </Template>
                 </igmisc:WebGroupBox>

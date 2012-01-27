@@ -21,7 +21,8 @@
                     <ig:WebDataGrid ID="DgvCurrentAuthorizedPersonRep" runat="server" Height="130px" 
                         Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                        onrowselectionchanged="DgvCurrentAuthorizedPersonRep_RowSelectionChanged">
                     <Columns>
                         <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID">
                             <Header Text="Employee ID" />
@@ -44,7 +45,7 @@
                          <div style="float:right">
                                 <%--<a class="button" href="" style="float:right">Remove</a>--%>
                                 <asp:Button ID="btnRemove" CssClass="Defaultbutton"
-                                    runat="server" Text="Remove" />
+                                    runat="server" Text="Remove" onclick="btnRemove_Click" />
                         </div>
                 </Template>
             </igmisc:WebGroupBox>
@@ -73,7 +74,8 @@
                             <ig:WebDataGrid ID="DgvTempDepteHeadSearchDetails" runat="server" Height="150px" 
                                 Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
-                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged">
                                <Columns>
                                     <ig:TemplateDataField Key="TemplateField_0" Width="50px">
                                         <ItemTemplate>
@@ -102,7 +104,7 @@
                             <div style="float:right">
                                     <%--<a class="button" href="" style="float:right">Assign</a>--%>
                                     <asp:Button ID="btnAssign" CssClass="Defaultbutton"
-                                        runat="server" Text="Assign" />
+                                        runat="server" Text="Assign" onclick="btnAssign_Click" />
                             </div>
                     </Template>
                 </igmisc:WebGroupBox>

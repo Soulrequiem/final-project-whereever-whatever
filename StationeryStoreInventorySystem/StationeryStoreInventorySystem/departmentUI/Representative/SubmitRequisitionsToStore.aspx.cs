@@ -12,11 +12,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class SubmitRequisitionsToStore : System.Web.UI.Page
     {
+        SubmitRequestToStoreControl srtsCtrl;
         /// <summary>
         /// Loads the SubmitRequisitionsToStore form
         /// </summary>
@@ -24,36 +26,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            //DataTable dt = new DataTable();
-            ////dt.Columns.Add("EmployeeID");
-            //dt.Columns.Add("RequisitionID");
-            //dt.Columns.Add("RequisitionDateTime");
-            //dt.Columns.Add("RequisitionBy");
-            //dt.Columns.Add("RequisitionStatus");
-            ////dt.Columns.Add("RemainingQty");
-            ////dt.Columns.Add("Remarks");
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "1vdvd";
-            //dr[1] = "1dvd";
-            //dr[2] = "1dvdv";
-            //dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "1dafd";
-            //dr[1] = "1vdv";
-            //dr[2] = "1vdvd";
-            //dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dgvRequisitions.DataSource = dt;
-            //dgvRequisitions.DataBind();
-
             if (!IsPostBack)
             {
                 //FillRequisitionList();
@@ -94,10 +66,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// Fills Requisition list to DataGrid
         /// </summary>
         /// <param name="dtCollection"></param>
-        private void FillRequisitionList(DataTable dtRequisition)
+        private void FillRequisitionList()
         {
             try
             {
+                srtsCtrl = GetControl();
+                DataTable dtReuqisition = srtsCtrl.SelectRequisition();
                 dgvRequisitions.DataSource = dtRequisition;
                 dgvRequisitions.DataBind();
             }
@@ -105,6 +79,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 Logger.WriteErrorLog(e);
             }
+        }
+
+        private SubmitRequestToStoreControl GetControl()
+        {
+            if (srtsCtrl == null)
+                srtsCtrl = new SubmitRequestToStoreControl();
+            return srtsCtrl;
         }
     }
 }

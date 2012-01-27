@@ -49,6 +49,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head {
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid DgvCurrentAuthorizedPerson;
         
         /// <summary>
+        /// btnRemove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRemove;
+        
+        /// <summary>
         /// Label19 control.
         /// </summary>
         /// <remarks>
@@ -85,21 +94,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head {
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid DgvTempDepteHeadSearchDetails;
         
         /// <summary>
-        /// txtaRemarks control.
+        /// btnAssign control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtaRemarks;
-        
-        /// <summary>
-        /// lblRemarks control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRemarks;
+        protected global::System.Web.UI.WebControls.Button btnAssign;
     }
 }
