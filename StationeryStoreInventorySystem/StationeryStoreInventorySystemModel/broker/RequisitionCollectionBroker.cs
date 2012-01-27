@@ -11,7 +11,7 @@ namespace StationeryStoreInventorySystemModel.broker
     public class RequisitionCollectionBroker: IRequisitionCollectionBroker
     {
         #region IRequisitionCollectionBroker Members
-        private InventoryEntities inventory = new InventoryEntities();
+        private InventoryEntities inventory;
         private RequisitionCollection reqCollection = null;
         private RequisitionCollectionDetail reqCollectionDetail = null;
         private List<RequisitionCollection> reqList = null;
