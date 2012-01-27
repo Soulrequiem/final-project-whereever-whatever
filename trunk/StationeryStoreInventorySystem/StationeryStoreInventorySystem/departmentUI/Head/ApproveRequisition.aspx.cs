@@ -12,11 +12,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 {
     public partial class ApproveRequisition : System.Web.UI.Page
     {
+        ApproveRejectRequisitionControl aprCtrl;
         /// <summary>
         /// Loads the ApproveRequisition form
         /// </summary>
@@ -24,38 +26,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ApproveRequisitionCheckBox");
-            //dt.Columns.Add("RequisitionID");
-            //dt.Columns.Add("RequisitionDate/Time");
-            //dt.Columns.Add("RequisitionBy");
-            //dt.Columns.Add("RequisitionQty");
-            //dt.Columns.Add("Remarks");
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1we2we12321";
-            //dr[2] = "1213sadsad";
-            //dr[3] = "1ssdsfdf";
-            //dr[4] = "1dsfdsfsdf";
-            ////dr[5] = "iwojfowi";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1we2we12321";
-            //dr[2] = "1213sadsad";
-            //dr[3] = "1ssdsfdf";
-            //dr[4] = "1dsfdsfsdf";
-            ////dr[5] = "jfiwofj";
-            //dt.Rows.Add(dr);
-
-            //DgvRequisitionList.DataSource = dt;
-            //DgvRequisitionList.DataBind();
-
             if (!IsPostBack)
             {
-                //FillRequisitionList();
+                FillRequisitionList();
             }
         }
 
@@ -63,10 +36,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         /// Fill data to DataGrid
         /// </summary>
         /// <param name="dtApprove"></param>
-        private void FillRequisitionList(DataTable dtApprove)
+        private void FillRequisitionList()
         {
             try
             {
+                aprCtrl = GetControl();
+                DataTable dtApprove = aprCtrl.GetRequisition();
                 DgvRequisitionList.DataSource = dtApprove;
                 DgvRequisitionList.DataBind();
             }
@@ -74,6 +49,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
             {
                 Logger.WriteErrorLog(e);
             }
+        }
+
+        private ApproveRejectRequisitionControl GetControl()
+        {
+            if (aprCtrl == null)
+                aprCtrl = new ApproveRejectRequisitionControl();
+            return aprCtrl;
+        }
+
+        protected void btnApprove_Click(object sender, EventArgs e)
+        {
+            //aprCtrl = GetControl();
+            //aprCtrl.SelectApproveRequisition(
         }
     }
 }

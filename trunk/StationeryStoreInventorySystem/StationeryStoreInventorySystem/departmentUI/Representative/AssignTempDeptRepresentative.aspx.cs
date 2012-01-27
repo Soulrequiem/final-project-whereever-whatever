@@ -12,11 +12,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class AssignTempDeptHead : System.Web.UI.Page
     {
+        AssignTemporaryDepartmentRepresentativeControl atdrCtrl;
+        String remove_employeeID;
+        String assign_employeeID;
         /// <summary>
         /// Loads the AssignTempDeptHead form
         /// </summary>
@@ -24,67 +28,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            //DataTable dt = new DataTable();
-            ////dt.Columns.Add("EmployeeID");
-            //dt.Columns.Add("EmployeeID");
-            //dt.Columns.Add("EmployeeName");
-            //dt.Columns.Add("Designation");
-            //dt.Columns.Add("JoiningDate");
-            ////dt.Columns.Add("RemainingQty");
-            ////dt.Columns.Add("Remarks");
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1";
-            //dr[2] = "1";
-            //dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1";
-            //dr[2] = "1";
-            //dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //DgvCurrentAuthorizedPersonRep.DataSource = dt;
-            //DgvCurrentAuthorizedPersonRep.DataBind();
-
-
-            //DataTable dtt = new DataTable();
-            //dtt.Columns.Add("TemplateField_0");
-            //dtt.Columns.Add("EmployeeID");
-            //dtt.Columns.Add("EmployeeName");
-            //dtt.Columns.Add("Designation");
-            //dtt.Columns.Add("JoiningDate");
-            ////dt.Columns.Add("RemainingQty");
-            ////dt.Columns.Add("Remarks");
-
-            //DataRow drr = dtt.NewRow();
-            //drr[0] = "1";
-            //drr[1] = "1";
-            //drr[2] = "1we2we12321";
-            //drr[3] = "1213sadsad";
-            //drr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dtt.Rows.Add(drr);
-
-            //drr = dtt.NewRow();
-            //drr[0] = "1";
-            //drr[1] = "1";
-            //drr[2] = "1we2we12321";
-            //drr[3] = "1213sadsad";
-            //drr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dtt.Rows.Add(drr);
-
-            //DgvTempDepteHeadSearchDetails.DataSource = dtt;
-            //DgvTempDepteHeadSearchDetails.DataBind();
-
             if (!IsPostBack)
             {
                 //FillCurrentRepresentativeList();
@@ -96,10 +39,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// Fills current Representative list
         /// </summary>
         /// <param name="dtApprove"></param>
-        private void FillCurrentRepresentativeList(DataTable dtRepresentative)
+        private void FillCurrentRepresentativeList()
         {
             try
             {
+                atdrCtrl = GetControl();
+                DataTable dtRepresentative = atdrCtrl.TemporaryDepartmentRepresentative();
                 DgvCurrentAuthorizedPersonRep.DataSource = dtRepresentative;
                 DgvCurrentAuthorizedPersonRep.DataBind();
             }
@@ -116,13 +61,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             try
             {
-                if (dtEmployee != null)
-                {
+                //if (dtEmployee != null)
+               
+                   //To be done
+                   //adrCtrl = new AssignDepartmentRepresentativeControl();
+                   //adrCtrl.
                     drdEmployeeList.TextField = "Employee";
                     drdEmployeeList.ValueField = "Name";
-                    drdEmployeeList.DataSource = dtEmployee;
+                    drdEmployeeList.DataSource = null; // dtEmployee;
                     drdEmployeeList.DataBind();
-                }
+                
             }
             catch (Exception e)
             {
@@ -141,13 +89,46 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             try
             {
                 String selectedEmployee = drdEmployeeList.SelectedItem.Text;
-                //Pass to the controller get Datatable
-                //Call FillStationeryList function
+                atdrCtrl = GetControl();
+                DataTable dt = atdrCtrl.SelectEmployeeName(selectedEmployee);
+                DgvTempDepteHeadSearchDetails.DataSource = dt;
+                DgvTempDepteHeadSearchDetails.DataBind();
             }
             catch (Exception ex)
             {
                 Logger.WriteErrorLog(ex);
             }
+        }
+
+        private AssignTemporaryDepartmentRepresentativeControl GetControl()
+        {
+            if (atdrCtrl == null)
+                atdrCtrl = new AssignTemporaryDepartmentRepresentativeControl();
+            return atdrCtrl;
+        }
+
+        protected void DgvCurrentAuthorizedPersonRep_RowSelectionChanged(object sender,
+            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        {
+            remove_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"];
+        }
+
+        protected void DgvTempDepteHeadSearchDetails_RowSelectionChanged(object sender,
+            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        {
+            assign_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"];
+        }
+
+        protected void btnRemove_Click(object sender, EventArgs e)
+        {
+            atdrCtrl = GetControl();
+            //atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
+        }
+
+        protected void btnAssign_Click(object sender, EventArgs e)
+        {
+            atdrCtrl = GetControl();
+            atdrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
         }
     }
 }
