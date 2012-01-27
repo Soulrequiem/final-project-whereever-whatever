@@ -1,185 +1,117 @@
-﻿/***************************************************************************/
-/*  File Name       : AssignTemporaryDepartmentHeadControl.cs
-/*  Module Name     : Controller
-/*  Owner           : SanLaPyaye
-/*  class Name      : AssignTemporaryDepartmentHeadControl
-/*  Details         : Controller representation of AssignTemporaryDepartmentHeadControl
-/***************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SystemStoreInventorySystemUtil;
+using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
+using StationeryStoreInventorySystemController.commonController;
+using SystemStoreInventorySystemUtil;
 using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
     public class AssignTemporaryDepartmentHeadControl
     {
-        EmployeeBroker employeeBroker = new EmployeeBroker();
-        DataTable dt;
-        DataRow dr;
-
-        /// <summary>
-        ///     The usage of this method to call GetHead() for show the Current Temporary Department Head
-        ///     Created By: SanLaPyaye
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        
+        IEmployeeBroker employeeBroker;
+        Employee currentEmployee;
+        Employee temporaryDepartmentHead;
         public AssignTemporaryDepartmentHeadControl()
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
+            
+            employeeBroker = new EmployeeBroker();
+
+            temporaryDepartmentHead = new Employee();
+            temporaryDepartmentHead.Role = new Role();
+            temporaryDepartmentHead.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD);
+            temporaryDepartmentHead.Department = currentEmployee.Department;
+
+            temporaryDepartmentHead = employeeBroker.GetEmployee(temporaryDepartmentHead);
         }
 
-        /// <summary>
-        ///     The usage of this method is to show the Current Temporary Department Head.
-        ///     Created By: SanLaPyaye
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <returns>Return Employee status with "Temporary Department Head"</returns>
-        public DataTable GetHead()
+        public DataTable TemporaryDepartmentHead
         {
-            dt = new DataTable();
-            dr = null;
-
-            //Employee emp = null;
-            List<Employee> empList = employeeBroker.GetAllEmployee();
-            foreach(Employee employee in empList )
+            get
             {
-                if (employee.Role.Name.Equals("Temporary Department Head"))
+                DataTable dt = new DataTable();
+                
+                if (temporaryDepartmentHead != null)
                 {
+                    DataRow dr = new DataRow();
+
                     dt.NewRow();
-                    dr = new DataRow();
-                    dr["employeeId"] = employee.Id;
-                    dr["employeeName"] = employee.Name;
-                    dr["designation"] = employee.Designation;
-                    dr["joiningDate"] = employee.CreatedDate;
+                    dr["employeeId"] = temporaryDepartmentHead.Id;
+                    dr["employeeName"] = temporaryDepartmentHead.Name;
+                    //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(temporaryDepartmentHead.Designation));
+                    dr["joiningDate"] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, temporaryDepartmentHead.CreatedDate);
                     dt.Rows.Add(dr);
-                    //emp = employee;
-                    //break;
                 }
 
+                return dt;
             }
-                 
-            return dt;         
-
         }
 
-        /// <summary>
-        ///     The usage of this method is to remove the selected Current Temporary Department Head
-        ///     Created By: SanLaPyaye
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="employee"> Selected Employee from the UI</param>
-        /// <returns>Return the status of remove  whether Successful or Fail. </returns>
-        public DataTable SelectRemove(Employee employee)
+        //public Employee GetTemporaryDepartmentHead()
+        //{
+        //    List<Employee> employeeList = employeeBroker.GetAllEmployee();
+        //    Employee e = null;
+        //    foreach (Employee employee in employeeList)
+        //    {
+        //        if (employee.Role.Name.Equals("TemporaryDepartmentHead"))
+        //        {
+        //            e = employee;
+        //            break;
+        //        }
+        //    }
+        //    return e;
+        //}
+
+        public Constants.ACTION_STATUS SelectRemove(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            Role role = new Role();
-            role.Name = "Employee";
             
-            Constants.DB_STATUS dbStatus = employeeBroker.Update(employee);
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+            if (Util.Assign(employeeBroker, employeeId, Constants.EMPLOYEE_ROLE.EMPLOYEE) == Constants.DB_STATUS.SUCCESSFULL)
+                status = Constants.ACTION_STATUS.SUCCESS;
+            else
+                status = Constants.ACTION_STATUS.FAIL;
+            return status;
+        }
+
+        public DataTable SelectEmployeeName(string employeeName)
+        {
+            Employee emp = new Employee();
+            emp.Name = employeeName;
+            emp = employeeBroker.GetEmployee(emp);
+
+            DataTable dt = new DataTable();
+
+            if (emp != null)
             {
-                status = Constants.ACTION_STATUS.SUCCESS;
+                DataRow dr = new DataRow();
+
+                dt.NewRow();
+                dr["employeeId"] = emp.Id;
+                dr["employeeName"] = emp.Name;
+                //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(emp.Designation));
+                dr["joiningDate"] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, emp.CreatedDate);
+                dt.Rows.Add(dr);
             }
 
-            else
-                status = Constants.ACTION_STATUS.FAIL;
-
-            //return status;
-            return GetHead();
+            return dt;
         }
 
-
-        /// <summary>
-        ///     The usage of this method is to search the Employee by enter the Employee Name
-        ///     Created By: SanLaPyaye
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="employeeName"> Employee name which type from UI.</param>
-        /// <returns>Return the Employee which search by employee name.</returns>
-        public DataTable EnterEmployeeName(string employeeName)
-        {
-            dt = new DataTable();
-            dr = null;
-            
-            Employee emp = null;
-            Employee employee = new Employee();
-            employee.Name = employeeName;
-            emp= employeeBroker.GetEmployee(employee);
-
-            dt.NewRow();
-            dr = new DataRow();
-            dr["employeeId"] = emp.Id;
-            dr["employeeName"] = emp.Name;
-            dr["designation"] = emp.Designation; //check designation field in database got or not
-            dr["joiningDate"] = emp.CreatedDate;
-            dt.Rows.Add(dr);
-
-            return dt;         
-                        
-        }
-
-
-        /// <summary>
-        ///     The usage of this method is to assign the selected Department Head from Search Result
-        ///     Created By: SanLaPyaye
-        ///     Created Date: 25/01/2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="remarks"> Remark to update the employee.</param>
-        /// <returns>Return the status of assign  whether Successful or Fail. </returns>
-        public DataTable SelectAssign(int employeeId)
+        public Constants.ACTION_STATUS SelectAssign(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            Employee employee=new Employee();
-            employee.Role.Id=6;
-            employee.Department.EmployeeHeadId.Id = employeeId;
-            // employee. = remarks; //There is no field in database to store remarks.
-            Constants.DB_STATUS dbStatus= employeeBroker.Update(employee);
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+            
+            if (Util.Assign(employeeBroker, employeeId, Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD) == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
                 status = Constants.ACTION_STATUS.FAIL;
-            
-            //return status;
-            return GetHead();
+            return status;
+
         }
 
-        
     }
 }
-/****************************************/
-/********* End of the Class *****************/
-/****************************************/

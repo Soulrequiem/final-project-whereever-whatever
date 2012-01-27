@@ -6,7 +6,7 @@ using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
 using SystemStoreInventorySystemUtil;
-
+using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
@@ -17,8 +17,10 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
         }
 
-        public List<Requisition> GetApprovedRequisition()
+        public DataTable GetApprovedRequisition()
         {
+            DataTable dt = new DataTable();
+            DataRow dr;
             List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
             List<Requisition> resultList = new List<Requisition>();
             foreach (Requisition requisition in requisitionList)
@@ -28,7 +30,17 @@ namespace StationeryStoreInventorySystemController.departmentController
                     resultList.Add(requisition);
                 }
             }
-            return resultList;
+            
+            foreach(Requisition requisition in resultList){
+                dt.NewRow();
+                dr = new DataRow();
+                dr["requisitionId"] = requisition.Id;
+                dr["requisitionDateTime"] = requisition.ApprovedDate;
+                dr["requisitionBy"] = requisition.Employee.Name;
+                dr["requisitionStatus"] = requisition.Status;
+                dt.Rows.Add(dr);
+            }
+            return dt;
         }
 
         public Requisition SelectRequisition(String requisitionID)
