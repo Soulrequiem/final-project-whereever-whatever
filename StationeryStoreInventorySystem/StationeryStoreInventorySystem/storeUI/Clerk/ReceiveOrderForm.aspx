@@ -127,7 +127,7 @@
                     <div style="float:right">
                         <%--<a class="buttoningrid" href="" style="text-align:center">Received</a>--%>
                         <asp:Button ID="btnReceived" runat="server" CssClass="DefaultLargebutton"
-                                Text="Received" />
+                                Text="Received" onclick="btnReceived_Click" />
                     </div>
                 </Template>
             </igmisc:WebGroupBox>
