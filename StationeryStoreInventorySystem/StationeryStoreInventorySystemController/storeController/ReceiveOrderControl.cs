@@ -14,6 +14,7 @@ namespace StationeryStoreInventorySystemController.storeController
     public class ReceiveOrderControl
     {
         IPurchaseOrderBroker purchaseOrderBroker;
+
         public ReceiveOrderControl()
         {
             purchaseOrderBroker = new PurchaseOrderBroker();
