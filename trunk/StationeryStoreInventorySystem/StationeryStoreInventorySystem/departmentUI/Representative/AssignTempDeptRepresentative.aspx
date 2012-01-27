@@ -60,7 +60,8 @@
                      </ig:WebTextEditor>--%>
                      <ig:WebDropDown ID="drdEmployeeList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="Enter Employee Name" 
-                            StyleSetName="Office2010Blue">
+                            StyleSetName="Office2010Blue" 
+                         onselectionchanged="drdEmployeeList_SelectionChanged">
                         <Button Visible="False" />
                      </ig:WebDropDown>
                      <br />

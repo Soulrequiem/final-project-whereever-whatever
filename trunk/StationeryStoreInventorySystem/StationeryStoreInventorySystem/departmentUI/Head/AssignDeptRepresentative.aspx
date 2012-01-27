@@ -82,9 +82,10 @@
                      <%--<ig:WebTextEditor ID="txtEmployeeName" runat="server" 
                      CssClass="DefaultTextStyle" Width="150px">
                      </ig:WebTextEditor>--%>
-                     <ig:WebDropDown ID="drdEmployeeList" runat="server" Width="250px" 
+                     <ig:WebDropDown ID="drdRepEmployeeList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_EmployeeName %>" 
-                            StyleSetName="Office2010Blue">
+                            StyleSetName="Office2010Blue" 
+                        onselectionchanged="drdRepEmployeeList_SelectionChanged">
                         <Button Visible="False" />
                      </ig:WebDropDown>
                      <br /><br />           
