@@ -17,7 +17,7 @@ using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
-    class AssignTemporaryDepartmentRepresentativeControl
+    public class AssignTemporaryDepartmentRepresentativeControl
     {
         DataTable dt;
         DataRow dr;
@@ -108,6 +108,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// </summary>
         /// <param name="employee"> Employee Name which enter from UI.</param>
         /// <returns>Return the Employee to show.</returns>
+        
         public DataTable EnterEmployeeName(string employeeName)
         {
             dt = new DataTable();
@@ -129,6 +130,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             return dt;
 
         }
+              
 
         /// <summary>
         ///     The usage of this method is to assign the selected Employee as a "Temporary Department Head"
@@ -143,14 +145,15 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// </summary>
         /// <param name="employee"> Employee Name which enter from UI</param>
         /// <returns>Return the Employee list to show</returns>
-        public DataTable SelectAssign(string remarks)
+        public DataTable SelectAssign(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             Employee employee = new Employee();
-            employee.Role.Name = "Temporary Department Head";
-           // employee. = remarks; //There is no field in database to store remarks.
+            employee.Role.Id = 4;
+            employee.Department.EmployeeRepresentativeId.Id= employeeId;
+            // employee. = remarks; //There is no field in database to store remarks.
             Constants.DB_STATUS dbStatus = employeeBroker.Update(employee);
-
+                        
             if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
