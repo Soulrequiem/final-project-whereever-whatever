@@ -9,11 +9,13 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
 {
     public interface IEmployeeBroker
     {
+        int GetEmployeeId();
         Employee GetEmployee(Employee employee);
         List<Employee> GetAllEmployee();
         Constants.DB_STATUS Insert(Employee newEmployee);
         Constants.DB_STATUS Update(Employee employee);
         Constants.DB_STATUS Delete(Employee employee);
+        List<Employee> GetEmployeeName(Employee employee);
 
         User GetUser(User user);
         List<User> GetAllUser();

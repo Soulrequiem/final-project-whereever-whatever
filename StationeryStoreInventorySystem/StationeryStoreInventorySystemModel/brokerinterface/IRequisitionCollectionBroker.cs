@@ -9,6 +9,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
 {
     public interface IRequisitionCollectionBroker
     {
+        int GetRequisitionCollectionId();
         RequisitionCollectionDetail GetRequisitionCollectionDetail(RequisitionCollectionDetail requisitionCollectionDetail);
         List<RequisitionCollectionDetail> GetAllRequisitionCollectionDetail();
         Constants.DB_STATUS Insert(RequisitionCollectionDetail newRequisitionCollectionDetail);

@@ -9,6 +9,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
 {
     public interface IPurchaseOrderBroker
     {
+        int GetPurchaseOrderId();
         PurchaseOrder GetPurchaseOrder(PurchaseOrder purchaseOrder);
         List<PurchaseOrder> GetAllPurchaseOrder();
         Constants.DB_STATUS Insert(PurchaseOrder newPurchaseOrder);
