@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using StationeryStoreInventorySystemController.commonController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class LogIn : System.Web.UI.Page
     {
+        LoginControl lgCtrl;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,6 +26,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             Session["userName"] = txtUsername.Text.Trim();
             Session["LoadFirstTime"] = true;
             Response.Redirect("~/commonUI/RequisitionDetails.aspx");
+
+            lgCtrl.SelectLogin(txtUsername.Text, txtPassword.Text); 
+        }
+        private LoginControl GetControl()
+        { 
+            if (lgCtrl == null)
+                lgCtrl = new LoginControl();
+            return lgCtrl;
         }
     }
 
