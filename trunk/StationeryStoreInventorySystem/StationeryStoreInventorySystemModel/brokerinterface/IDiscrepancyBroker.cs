@@ -14,6 +14,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Insert(Discrepancy newDiscrepancy);
         Constants.DB_STATUS Update(Discrepancy discrepancy);
         Constants.DB_STATUS Delete(Discrepancy discrepancy);
+        int GetDiscrepancyId();
 
         DiscrepancyDetail GetDiscrepancyDetail(DiscrepancyDetail discrepancyDetail);
         List<DiscrepancyDetail> GetAllDiscrepancyDetail();
