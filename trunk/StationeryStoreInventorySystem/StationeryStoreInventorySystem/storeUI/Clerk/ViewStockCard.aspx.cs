@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.storeController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
@@ -35,15 +36,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         }
 
         /// <summary>
-        /// 
+        /// Selected item from item drop down list
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void drdItemList_SelectionChanged(object sender,
         Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
-            String selectedItem = drdItemList.SelectedItem.Text;
-            //Pass to the controller
+            try
+            {
+                String selectedItem = drdItemList.SelectedItem.Text;
+                ViewStockCardControl VSCobj = new ViewStockCardControl();
+                DataTable dt = VSCobj.GetStockCardDetails(selectedItem);
+                FillStockCardDetails(dt);
+            }
+            catch(Exception ex)
+            {
+                Logger.WriteErrorLog(ex);
+            }
 
         }
 

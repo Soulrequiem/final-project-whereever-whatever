@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.storeController;
+
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class ViewSupplierList : System.Web.UI.Page
@@ -14,8 +15,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             if (!IsPostBack)
             {
-                ViewSupplierListControl VSobj = new ViewSupplierListControl();
-                DataTable dt = VSobj.GetAllSuppliers();
+                ViewSupplierListControl VSLobj = new ViewSupplierListControl();
+                DataTable dt = VSLobj.GetSupplierList();
                 FillSupplierList(dt);
             }
         }
