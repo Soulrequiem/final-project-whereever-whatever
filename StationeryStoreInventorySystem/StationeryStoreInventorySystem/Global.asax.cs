@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Data;
 
 namespace StationeryStoreInventorySystem
 {
@@ -22,6 +23,14 @@ namespace StationeryStoreInventorySystem
             Session["SelectedGroup"] = 0;
             //Session["VisibleState"] = new bool[5] { true, true, true, true, true };
             String userName = string.Empty;
+            Session["DiscrepencyItems"] = new DataTable();
+            DataTable dtGridItems = (DataTable)Session["DiscrepencyItems"];
+            dtGridItems.Columns.Add("CreateDiscrepancyReportCheckBox");
+            dtGridItems.Columns.Add("ItemNo");
+            dtGridItems.Columns.Add("ItemDescription");
+            dtGridItems.Columns.Add("Quantity");
+            dtGridItems.Columns.Add("Price");
+            dtGridItems.Columns.Add("Reason");
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
