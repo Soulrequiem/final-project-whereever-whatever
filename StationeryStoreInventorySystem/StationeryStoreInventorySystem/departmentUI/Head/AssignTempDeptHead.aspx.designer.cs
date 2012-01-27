@@ -58,13 +58,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head {
         protected global::System.Web.UI.WebControls.Label Label19;
         
         /// <summary>
-        /// drdEmployeeList control.
+        /// drdHeadEmployeeList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.ListControls.WebDropDown drdEmployeeList;
+        protected global::Infragistics.Web.UI.ListControls.WebDropDown drdHeadEmployeeList;
         
         /// <summary>
         /// WebGroupBox2 control.

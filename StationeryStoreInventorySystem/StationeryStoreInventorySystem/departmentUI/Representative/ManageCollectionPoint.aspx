@@ -53,9 +53,10 @@
                         <div style="float:left">
                             <%--<ig:WebDropDown ID="drpCollectionList" runat="server" Width="300px">
                             </ig:WebDropDown>--%>
-                            <ig:WebDropDown ID="drpCollectionList" runat="server" Width="250px" 
+                            <ig:WebDropDown ID="drdCollectionList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="Enter or Select Collection Point" 
-                            StyleSetName="Office2010Blue">
+                            StyleSetName="Office2010Blue" 
+                                onselectionchanged="drdCollectionList_SelectionChanged">
                      </ig:WebDropDown>
                         </div>
                         <div style="float:left">
