@@ -17,7 +17,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 LoadNavigationMenu();
             }
         }
-
+        /// <summary>
+        /// Loads the navigation as per user level
+        /// </summary>
         private void LoadNavigationMenu()
         {
             if (Session["userName"].ToString() == "emp")
@@ -74,7 +76,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             //NavigationBar.DataSource = SSISSiteMapDataSource;
             //NavigationBar.DataBind();
         }
-
+        /// <summary>
+        /// Sets the default selection
+        /// </summary>
+        /// <param name="Index"></param>
+        /// <param name="GroupIndex"></param>
         private void SetDefaultMenuSelection(int Index, int GroupIndex)
         {
             if((bool)Session["LoadFirstTime"] == true)
@@ -84,11 +90,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 Session["LoadFirstTime"] = false;
             }
         }
-        public void ShowMenu()
-        {
-            //this.NavigationPanel.Visible = true;
-        }
-
+        
+        /// <summary>
+        /// Reders the Webexplorerbar menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void NavigationBar_PreRender(object sender, EventArgs e)
         {
             //LoadNavigationMenu();
@@ -112,6 +119,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             }
         }
 
+        /// <summary>
+        /// Handles Item selected menu event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void NavigationBar_ItemSelected(object sender,
             Infragistics.Web.UI.NavigationControls.ExplorerBarItemSelectedEventArgs e)
         {
