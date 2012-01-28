@@ -58,6 +58,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_requisitioncollectionitems_item1", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Item), "RequisitionCollectionItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollectionItem))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_requisitiondetails_item1", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Item), "RequisitionDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RequisitionDetail))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_retrievaldetails_item1", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Item), "RetrievalDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RetrievalDetail))]
+[assembly: EdmRelationshipAttribute("InventoryModel", "FK_StockCardDetails_Item1", "Item", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Item), "StockCardDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.StockCardDetail))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_purchaseorder_supplier1", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Supplier), "PurchaseOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.PurchaseOrder))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_purchaseorderdetails_purchaseorder1", "PurchaseOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.PurchaseOrder), "PurchaseOrderDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.PurchaseOrderDetail))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_requisitioncollectiondetails_requisition1", "Requisition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Requisition), "RequisitionCollectionDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollectionDetail))]
@@ -2201,7 +2202,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_department_employee2", "Department")]
-        public EntityCollection<Department> DepartmenHead
+        public EntityCollection<Department> Departments1
         {
             get
             {
@@ -2223,7 +2224,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_department_employee3", "Department")]
-        public EntityCollection<Department> DepartmentRepresentative
+        public EntityCollection<Department> Departments2
         {
             get
             {
@@ -2245,7 +2246,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_department_employee4", "Department")]
-        public EntityCollection<Department> DepartmentCreatedBy
+        public EntityCollection<Department> Departments3
         {
             get
             {
@@ -2349,7 +2350,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_employee_employee1", "Employee")]
-        public Employee EmployeeCreatedBy
+        public Employee CreatedBy
         {
             get
             {
@@ -2365,7 +2366,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeCreatedByReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -3221,6 +3222,28 @@ namespace StationeryStoreInventorySystemModel.entity
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_StockCardDetails_Item1", "StockCardDetails")]
+        public EntityCollection<StockCardDetail> StockCardDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StockCardDetail>("InventoryModel.FK_StockCardDetails_Item1", "StockCardDetails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StockCardDetail>("InventoryModel.FK_StockCardDetails_Item1", "StockCardDetails", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -3568,7 +3591,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_Notification_Employee1", "Employee")]
-        public Employee CreatedBy
+        public Employee Employee
         {
             get
             {
@@ -3584,7 +3607,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> CreatedByReference
+        public EntityReference<Employee> EmployeeReference
         {
             get
             {
@@ -4446,7 +4469,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_requisition_employee1", "Employee")]
-        public Employee CreatedBy
+        public Employee Employee
         {
             get
             {
@@ -4462,7 +4485,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> CreatedByReference
+        public EntityReference<Employee> EmployeeReference
         {
             get
             {
@@ -6184,17 +6207,15 @@ namespace StationeryStoreInventorySystemModel.entity
         /// Create a new StockCardDetail object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="itemId">Initial value of the ItemId property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="qty">Initial value of the Qty property.</param>
         /// <param name="balance">Initial value of the Balance property.</param>
         /// <param name="createdDate">Initial value of the CreatedDate property.</param>
         /// <param name="status">Initial value of the Status property.</param>
-        public static StockCardDetail CreateStockCardDetail(global::System.Int32 id, global::System.String itemId, global::System.String description, global::System.Int32 qty, global::System.Int32 balance, global::System.DateTime createdDate, global::System.Int32 status)
+        public static StockCardDetail CreateStockCardDetail(global::System.Int32 id, global::System.String description, global::System.Int32 qty, global::System.Int32 balance, global::System.DateTime createdDate, global::System.Int32 status)
         {
             StockCardDetail stockCardDetail = new StockCardDetail();
             stockCardDetail.Id = id;
-            stockCardDetail.ItemId = itemId;
             stockCardDetail.Description = description;
             stockCardDetail.Qty = qty;
             stockCardDetail.Balance = balance;
@@ -6232,30 +6253,6 @@ namespace StationeryStoreInventorySystemModel.entity
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ItemId
-        {
-            get
-            {
-                return _ItemId;
-            }
-            set
-            {
-                OnItemIdChanging(value);
-                ReportPropertyChanging("ItemId");
-                _ItemId = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ItemId");
-                OnItemIdChanged();
-            }
-        }
-        private global::System.String _ItemId;
-        partial void OnItemIdChanging(global::System.String value);
-        partial void OnItemIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -6415,6 +6412,44 @@ namespace StationeryStoreInventorySystemModel.entity
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("InventoryModel.FK_stockcarddetails_employee1", "Employee", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_StockCardDetails_Item1", "Item")]
+        public Item Item
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Item>("InventoryModel.FK_StockCardDetails_Item1", "Item").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Item>("InventoryModel.FK_StockCardDetails_Item1", "Item").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Item> ItemReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Item>("InventoryModel.FK_StockCardDetails_Item1", "Item");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Item>("InventoryModel.FK_StockCardDetails_Item1", "Item", value);
                 }
             }
         }
