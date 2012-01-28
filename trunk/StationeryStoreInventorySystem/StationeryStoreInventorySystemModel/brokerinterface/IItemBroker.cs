@@ -15,5 +15,11 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Update(Item item);
         Constants.DB_STATUS Delete(Item item);
         List<Item> GetItemReference(Item item);
+
+        StockCardDetail GetStockCardDetail(StockCardDetail stockCardDetail);
+        List<StockCardDetail> GetAllStockCardDetail();
+        Constants.DB_STATUS Insert(StockCardDetail newStockCardDetail);
+        Constants.DB_STATUS Update(StockCardDetail stockCardDetail);
+        Constants.DB_STATUS Delete(StockCardDetail stockCardDetail);
     }
 }
