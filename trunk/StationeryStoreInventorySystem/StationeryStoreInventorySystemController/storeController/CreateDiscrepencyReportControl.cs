@@ -20,16 +20,19 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class CreateDiscrepencyReportControl
     {
-        IItemBroker itemBroker;
+        IItemBroker itemBroker; 
         List<DiscrepancyDetail> discrepancyDetailList;
         IDiscrepancyBroker discrepancyBroker;
         Discrepancy discrepancy;
 
         public CreateDiscrepencyReportControl()
         {
-            itemBroker = new ItemBroker();
+            
+            discrepancy = new Discrepancy();
             discrepancyDetailList = new List<DiscrepancyDetail>();
-            discrepancyBroker = new DiscrepancyBroker();
+            InventoryEntities inventoryEntities = new InventoryEntities();
+            discrepancyBroker = new DiscrepancyBroker(inventoryEntities);
+            itemBroker = new ItemBroker(inventoryEntities);
         }
 
         /// <summary>
@@ -45,7 +48,7 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return value of this method is resultItem.</returns>
-        public Item EnterItemDescription(String itemDescription)
+        public Item SelectItemDescription(string itemDescription)
         {
             Item item = new Item();
             item.Description = itemDescription;
@@ -81,7 +84,7 @@ namespace StationeryStoreInventorySystemController.storeController
             DataTable dt = new DataTable();
             DataRow dr = new DataRow();
             //discrepancy = new Discrepancy();
-            discrepancyDetailList = new List<DiscrepancyDetail>();
+           
             discrepancyDetailList.Add(discrepancyDetail);
             foreach (DiscrepancyDetail temp in discrepancyDetailList)
             {
@@ -153,9 +156,8 @@ namespace StationeryStoreInventorySystemController.storeController
         public Constants.ACTION_STATUS SelectCreate()
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            Discrepancy discrepancy = new Discrepancy();
+            
             discrepancy.DiscrepancyDetails = discrepancyDetailList;
-           
             Constants.DB_STATUS dbStatus = discrepancyBroker.Insert(discrepancy);
             if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;

@@ -22,24 +22,68 @@ namespace StationeryStoreInventorySystemController.storeController
     {
         IDiscrepancyBroker discrepancyBroker;
         List<Discrepancy> discrepancyList;
-        Discrepancy discrepancy;
+        
+        public DataTable DiscrepancyList
+        {
+            get
+            {
+                DataTable dt = new DataTable();
+                DataRow dr = new DataRow();
+                foreach (Discrepancy temp in discrepancyList)
+                {
+                   
+                    dt.NewRow();
+                    dr = new DataRow();
+                    dr["voucherNo"] = null;
+                    dr["createdBy"] = temp.CreatedBy.Name;
+                    dr["createdDate"] = temp.createddate;
+                    int totalQty = 0 ;
+                    //List<DiscrepancyDetail> list = (List<DiscrepancyDetail>)temp.DiscrepancyDetails;
+                    foreach (DiscrepancyDetail tempDetail in temp.DiscrepancyDetails.ToList())
+                    {
+                        totalQty += tempDetail.Qty;
+                    }
+                    dr["totalQty"] = totalQty;
+                    dr["status"] = temp.status;
+                    dt.Rows.Add(dr);
+                }
+                return dt; 
+            }
+           
+        }
+       
         public IssueAdjustmentVoucherControl()
         {
-            discrepancyBroker = new DiscrepancyBroker();
+            InventoryEntities inventoryEntities = new InventoryEntities();
+            discrepancyBroker = new DiscrepancyBroker(inventoryEntities);
+            discrepancyList = GetDiscrepancyList();
         }
 
-        //public List<Discrepancy> GetDiscrepancyList()
-        //{
-        //    discrepancyList = discrepancyBroker.GetAllDiscrepancy();
+        /// <summary>
+        ///     Show all discrepancy list which status is show
+        ///     Created By:Zin Mar Thwin
+        ///     Created Date:28-01-2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="itemDescription"></param>
+        /// <returns>The return value of this method is resultItem.</returns>
+        public List<Discrepancy> GetDiscrepancyList()
+        {
+            List<Discrepancy> list = discrepancyBroker.GetAllDiscrepancy();
 
-        //    List<Discrepancy> newDiscrepancyDetailList = new List<Discrepancy>();
-        //    foreach (Discrepancy discrepancy in newDiscrepancyDetailList)
-        //    {
-        //        if (discrepancy.status == (int)Constants.VISIBILITY_STATUS.SHOW)
-        //            newDiscrepancyDetailList.Add(discrepancy);
-        //    }
-        //    return newDiscrepancyDetailList;
-        //}
+            List<Discrepancy> newList = new List<Discrepancy>();
+            foreach (Discrepancy discrepancy in list)
+            {
+                if (discrepancy.status == (int)Constants.VISIBILITY_STATUS.SHOW)
+                    newList.Add(discrepancy);
+            }
+            return newList;
+        }
 
         /// <summary>
         ///     Show all discrepancies
@@ -54,32 +98,32 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name=""></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable GetDiscrepancyList()
-        {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
-            discrepancyList = new List<Discrepancy>();
-            List<Discrepancy> newDiscrepancyDetailList = new List<Discrepancy>();
-            discrepancyList = discrepancyBroker.GetAllDiscrepancy();
-            foreach (Discrepancy temp in discrepancyList)
-            {
-                if (discrepancy.status == (int)Constants.VISIBILITY_STATUS.SHOW)
-                    newDiscrepancyDetailList.Add(discrepancy);
-                dt.NewRow();
-                dr["voucherNo"] = null;
-                dr["createdBy"] = temp.Employee.Name;
-                dr["createdDate"] = temp.createddate;
-                int totalQty;
-               //List<DiscrepancyDetail> list = (List<DiscrepancyDetail>)temp.DiscrepancyDetails;
-                foreach (DiscrepancyDetail tempDetail in temp.DiscrepancyDetails.list)
-                {
-                    totalQty+=tempDetail.Qty;
-                }
-                dr["totalQty"] = totalQty;
-                dr["status"] = temp.status;
-                dt.Rows.Add(dt);
-            }
-        }
+        //public DataTable GetDiscrepancyList()
+        //{
+        //    DataTable dt = new DataTable();
+        //    DataRow dr = new DataRow();
+        //    discrepancyList = new List<Discrepancy>();
+        //    List<Discrepancy> newDiscrepancyDetailList = new List<Discrepancy>();
+        //    discrepancyList = discrepancyBroker.GetAllDiscrepancy();
+        //    foreach (Discrepancy temp in discrepancyList)
+        //    {
+        //        if (discrepancy.status == (int)Constants.VISIBILITY_STATUS.SHOW)
+        //            newDiscrepancyDetailList.Add(discrepancy);
+        //        dt.NewRow();
+        //        dr["voucherNo"] = null;
+        //        dr["createdBy"] = temp.Employee.Name;
+        //        dr["createdDate"] = temp.createddate;
+        //        int totalQty;
+        //       //List<DiscrepancyDetail> list = (List<DiscrepancyDetail>)temp.DiscrepancyDetails;
+        //        foreach (DiscrepancyDetail tempDetail in temp.DiscrepancyDetails.list)
+        //        {
+        //            totalQty+=tempDetail.Qty;
+        //        }
+        //        dr["totalQty"] = totalQty;
+        //        dr["status"] = temp.status;
+        //        dt.Rows.Add(dt);
+        //    }
+        //}
 
         //public Discrepancy SelectDiscrepancy(int discrepancyId)
         //{
@@ -105,15 +149,16 @@ namespace StationeryStoreInventorySystemController.storeController
         public DataTable SelectDiscrepancy(int discrepancyId)
         {
             DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
-            discrepancy = new Discrepancy();
+            DataRow dr;
+            Discrepancy discrepancy = new Discrepancy();
             discrepancy.id = discrepancyId;
             discrepancy = discrepancyBroker.GetDiscrepancy(discrepancy);
             List<DiscrepancyDetail> discrepancyDetailList = (List<DiscrepancyDetail>)discrepancy.DiscrepancyDetails;
-            //discrepancyDetailList = (List<DiscrepancyDetail>)discrepancy.DiscrepancyDetails;
+          
             foreach (DiscrepancyDetail temp in discrepancyDetailList)
             {
                 dt.NewRow();
+                dr = new DataRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["itemDescription"] = temp.Item.Description;
                 dr["quantity"] = temp.Qty;
@@ -152,18 +197,22 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="discrepancy"></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable SelectDiscrepancyIssue(Discrepancy discrepancy)
+        public DataTable SelectIssue(int discrepancyId)
         {
+            Discrepancy discrepancy = new Discrepancy();
+            discrepancy.id = discrepancyId;
+            discrepancy = discrepancyBroker.GetDiscrepancy(discrepancy);
             DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            DataRow dr ;
             StockAdjustment stockAdjustment = new StockAdjustment();
             stockAdjustment.Discrepancy = discrepancy;
             discrepancyBroker.Insert(stockAdjustment);
-            List<DiscrepancyDetail> discrepancyDetailList = (List<DiscrepancyDetail>)discrepancy.DiscrepancyDetails;
-            discrepancyDetailList = stockAdjustment.Discrepancy.DiscrepancyDetails.ToList();
+          
+            List<DiscrepancyDetail> discrepancyDetailList = stockAdjustment.Discrepancy.DiscrepancyDetails.ToList();
             foreach (DiscrepancyDetail temp in discrepancyDetailList)
             {
                 dt.NewRow();
+                dr = new DataRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["quantityAdjusted"] = temp.Qty;
                 dr["reason"] = temp.Remarks;
