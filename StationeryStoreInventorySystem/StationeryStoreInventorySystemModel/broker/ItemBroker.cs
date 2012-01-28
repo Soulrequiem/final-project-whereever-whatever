@@ -226,5 +226,5 @@ namespace StationeryStoreInventorySystemModel.broker
         #endregion
     }
 /****************************************/
-/********* End of the Class *****************/
+/********* End of the Class *************/
 /****************************************/

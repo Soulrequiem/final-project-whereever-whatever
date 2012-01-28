@@ -271,6 +271,22 @@ namespace StationeryStoreInventorySystemModel.broker
         }
 
         #endregion
+
+
+        public int GetPurchaseOrderId()
+        {
+            int lastPurchaseOrderNumber = inventory.PurchaseOrders.Last().Id + 1;
+            if (lastPurchaseOrderNumber.ToString().Substring(0, 4).CompareTo(DateTime.Now.Year.ToString()) != 0)
+            {
+                lastPurchaseOrderNumber = Converter.objToInt(DateTime.Now.Year.ToString() + "1".PadLeft(5, '0'));
+            }
+            return lastPurchaseOrderNumber;
+        }
+
+        public int GetPurchaseOrderDetailId()
+        {
+            return GetAllPurchaseOrderDetail().Last().Id + 1;
+        }
     }
 }
 /****************************************/

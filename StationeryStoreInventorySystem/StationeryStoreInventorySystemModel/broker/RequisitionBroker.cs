@@ -239,9 +239,54 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             throw new NotImplementedException();
         }
-        
+
+
+
+        public string GetRequisitionId(Requisition requisition)
+        {
+            Requisition lastRequisition = inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).OrderBy(r => r.Id).Last();
+            
+            int idInt;
+            string newYr;
+            if (lastRequisition != null)
+            {
+                string requisitionId = lastRequisition.Id;
+                string[] stringList = requisitionId.Split('/');
+                string idString = stringList[1];
+                idInt = Converter.objToInt(idString);
+
+                int yearInt = DateTime.Now.Year;
+                string yrString = yearInt.ToString();
+                char[] charYr = yrString.ToCharArray();
+                newYr = charYr[2].ToString() + charYr[3].ToString();
+                if (newYr.Equals(stringList[2]))
+                {
+                    idInt++;
+                }
+                else
+                {
+                    idInt = 1;
+                }
+            }
+            else
+            {
+                idInt = 1;
+                newYr = DateTime.Now.Year.ToString().Substring(2);
+            }
+            return requisition.Department.Id + "/" + idInt + "/" + newYr;
+        }
+
+        public int GetRequisitionDetailId()
+        {
+            //List<RequisitionDetail> list = GetAllRequisitionDetail();
+            //RequisitionDetail requisitionDetail = list.Last();
+            //int id = requisitionDetail.Id;
+            //id++;
+            //return id;
+            return inventory.RetrievalDetails.Last().Id + 1;
+        }
     }
 }
 /****************************************/
-/********* End of the Class *****************/
+/********* End of the Class *************/
 /****************************************/
