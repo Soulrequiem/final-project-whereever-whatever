@@ -7,7 +7,8 @@ namespace StationeryStoreInventorySystemModel.entity
 {
     public partial class RequisitionCollection
     {
-        public RequisitionCollection():this(0,new Department(),new CollectionPoint(),DateTime.Now,new Employee(),0)
+        public RequisitionCollection()
+            : this(0, null, null, DateTime.Now, null, 0)
         {
         }
         public RequisitionCollection(int id, Department departmentId, CollectionPoint collectionPointId, DateTime createdDate,

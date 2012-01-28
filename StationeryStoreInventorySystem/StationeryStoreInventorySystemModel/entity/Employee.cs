@@ -8,7 +8,7 @@ namespace StationeryStoreInventorySystemModel.entity
     public partial class Employee
     {
         public Employee()
-            : this(0, new User(), new Role(), new Department(), " ", 0, " ", DateTime.Now, new Employee(), 0)
+            : this(0, null, null, null, " ", 0, " ", DateTime.Now, null, 0)
         {
         }
         public Employee(int id, User userId, Role roleId, Department departmentId, string name, int designation,
