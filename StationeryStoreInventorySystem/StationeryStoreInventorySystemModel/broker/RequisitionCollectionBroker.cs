@@ -23,8 +23,8 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         public int GetRequisitionCollectionId()
         {
-            var maxStockcardId = inventory.StockCards.Max(xObj => xObj.Id) + 1;
-            return maxStockcardId;
+            var maxRequistionId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
+            return maxRequistionId;
 
         }
 
