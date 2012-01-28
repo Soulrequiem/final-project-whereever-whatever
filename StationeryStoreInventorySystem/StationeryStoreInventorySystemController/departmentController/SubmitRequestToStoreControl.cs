@@ -12,6 +12,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class SubmitRequestToStoreControl
     {
+        DataTable dt;
         IRequisitionBroker requisitionBroker = new RequisitionBroker();
         public SubmitRequestToStoreControl()
         {
@@ -19,7 +20,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         public DataTable GetApprovedRequisition()
         {
-            DataTable dt = new DataTable();
+            dt = new DataTable();
             DataRow dr;
             List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
             List<Requisition> resultList = new List<Requisition>();
@@ -51,18 +52,22 @@ namespace StationeryStoreInventorySystemController.departmentController
             return resultRequisition;
         }
 
-        public Constants.ACTION_STATUS SelectSubmit(String requisitionID)
+        public Constants.ACTION_STATUS SelectSubmit()
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            Requisition requisition = new Requisition();
-            requisition.Id = requisitionID;
-            Requisition resultRequisition = requisitionBroker.GetRequisition(requisition);
-            resultRequisition.Status = (int) Constants.REQUISITION_STATUS.SUBMITTED;
-            Constants.DB_STATUS dbStatus = requisitionBroker.Update(resultRequisition);
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
-                status = Constants.ACTION_STATUS.SUCCESS;
-            else
-                status = Constants.ACTION_STATUS.FAIL;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string requisitionID = dt.Rows[i].ItemArray[0].ToString();
+                Requisition requisition = new Requisition();
+                requisition.Id = requisitionID;
+                Requisition resultRequisition = requisitionBroker.GetRequisition(requisition);
+                resultRequisition.Status = (int)Constants.REQUISITION_STATUS.SUBMITTED;
+                Constants.DB_STATUS dbStatus = requisitionBroker.Update(resultRequisition);
+                if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+                    status = Constants.ACTION_STATUS.SUCCESS;
+                else
+                    status = Constants.ACTION_STATUS.FAIL;
+            }
             return status;
         }
     }
