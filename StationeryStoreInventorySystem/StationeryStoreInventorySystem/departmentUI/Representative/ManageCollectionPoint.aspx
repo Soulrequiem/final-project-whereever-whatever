@@ -24,15 +24,15 @@
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" 
+                            <ig:BoundDataField DataFieldName="CollectionID" Key="collectionID" 
                                 Width="150px">
                                 <Header Text="CollectionID" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
+                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="collectionPoint" 
                                 Width="350px">
                                 <Header Text="Collection Point" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionTime" Key="CollectionTime" 
+                            <ig:BoundDataField DataFieldName="CollectionTime" Key="collectionTime" 
                                 Width="200px">
                                 <Header Text="Collection Time" />
                             </ig:BoundDataField>
@@ -62,7 +62,7 @@
                         <div style="float:left">
                         &nbsp;&nbsp;&nbsp;
                             <asp:Button id="btnSave" CssClass="Defaultbutton"
-                                  runat="server" Text="Save"/>
+                                  runat="server" Text="Save" onclick="drdCollectionList_SelectionChanged"/>
                         </div>
                 </Template>
             </igmisc:WebGroupBox>
