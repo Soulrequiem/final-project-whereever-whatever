@@ -13,17 +13,20 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class RequestStationeryControl
     {
+        private IRequisitionBroker requisitionBroker;
+        private IItemBroker itemBroker;
         private Employee currentEmployee;
         private Requisition requisition;
-        private IRequisitionBroker requisitionBroker;
         private List<RequisitionDetail> requisitionDetailList;
-        private IItemBroker itemBroker;
+        
 
         public RequestStationeryControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.EMPLOYEE);
-            requisitionBroker = new RequisitionBroker();
-            itemBroker = new ItemBroker();
+            InventoryEntities inventory = new InventoryEntities();
+
+            requisitionBroker = new RequisitionBroker(inventory);
+            itemBroker = new ItemBroker(inventory); 
             requisitionDetailList = new List<RequisitionDetail>();
 
             requisition = new Requisition();
@@ -35,7 +38,32 @@ namespace StationeryStoreInventorySystemController.departmentController
         public Requisition Requisition
         {
             get { return requisition; }
-            set { requisition = value; }
+        }
+
+        public DataTable RequisitionDetailList
+        {
+            get
+            {
+                DataTable dt = new DataTable();
+
+                if (requisitionDetailList.Count > 0)
+                {
+                    DataRow dr;
+
+                    foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
+                    {
+                        dr = new DataRow();
+
+                        dt.NewRow();
+                        dr["itemNo"] = requisitionDetail.Item.Id;
+                        dr["itemDescription"] = requisitionDetail.Item.Description;
+                        dr["requiredQty"] = requisitionDetail.Qty;
+                        dt.Rows.Add(dr);
+                    }
+                }
+
+                return dt;
+            }
         }
 
         //public DataTable TypeItemDescription(String itemDescription)
@@ -140,19 +168,23 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
-        public Constants.ACTION_STATUS SelectRemove(int requisitionDetailId)
+        public Constants.ACTION_STATUS SelectRemove(List<int> requisitionDetailId)
         {
-            foreach (RequisitionDetail temp in requisitionDetailList)
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+
+            foreach (int id in requisitionDetailId)
             {
-                if (temp.Id == requisitionDetailId)
+                foreach (RequisitionDetail temp in requisitionDetailList)
                 {
-                    requisitionDetailList.Remove(temp);
-                    return Constants.ACTION_STATUS.SUCCESS;
-                    
+                    if (temp.Id == id)
+                    {
+                        requisitionDetailList.Remove(temp);
+                        status = Constants.ACTION_STATUS.SUCCESS;
+                    }
                 }
             }
-            return Constants.ACTION_STATUS.FAIL;
-            
+
+            return status;            
         }
     }
 }

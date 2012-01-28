@@ -13,9 +13,15 @@ namespace StationeryStoreInventorySystemController.departmentController
     public class SubmitRequestToStoreControl
     {
         DataTable dt;
-        IRequisitionBroker requisitionBroker = new RequisitionBroker();
+        IRequisitionBroker requisitionBroker;
+        Employee currentEmployee;
+
         public SubmitRequestToStoreControl()
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
+            InventoryEntities inventory = new InventoryEntities();
+
+            requisitionBroker = new RequisitionBroker(inventory);
         }
 
         public DataTable GetApprovedRequisition()

@@ -77,7 +77,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                 dr = new DataRow();
                 dr["requisitionId"] = r.Id;
                 dr["requisitionDate/Time"] = Convert.ToDateTime(r.CreatedDate);
-                dr["requisitionBy"] = r.Employee.Name;
+                dr["requisitionBy"] = r.Employee1.Name;
 
                 
             //List<RequisitionDetail> requisitionDetailList=requisitionBroker.GetRequisitionDetail(r.RequisitionDetails);

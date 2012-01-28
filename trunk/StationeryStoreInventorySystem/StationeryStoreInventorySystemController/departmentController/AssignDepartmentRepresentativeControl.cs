@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
+using StationeryStoreInventorySystemModel.brokerinterface;
 using SystemStoreInventorySystemUtil;
 using System.Data;
 
@@ -23,6 +24,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         private Employee currentEmployee;
         private Employee departmentRepresentative;
         private Employee temporaryDepartmentRepresentative;
+
         /// <summary>
         ///     The usage of this method to call GetEmployee() for show the Current Department Representative
         ///     Created By: SanLaPyaye
@@ -38,9 +40,11 @@ namespace StationeryStoreInventorySystemController.departmentController
         public AssignDepartmentRepresentativeControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
-            departmentRepresentative = currentEmployee.Department.Employee2;
+            InventoryEntities inventory = new InventoryEntities();
 
-            employeeBroker = new EmployeeBroker();
+            departmentRepresentative = currentEmployee.Department.EmployeeRepresentativeId;
+
+            employeeBroker = new EmployeeBroker(inventory);
 
             temporaryDepartmentRepresentative = new Employee();
             temporaryDepartmentRepresentative.Role = new Role();
