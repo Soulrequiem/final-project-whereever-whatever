@@ -26,16 +26,13 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             this.inventory = inventory;
         }
-        /// <summary>
-        /// Get the last RetrievalId from the Retrieval Table
-        /// </summary>
-        /// <returns></returns>
-        public int GetRetrievalId()
-        {
-            var maxRetrievalId = inventory.Retrievals.Max(xObj => xObj.Id) + 1;
-            return maxRetrievalId;
+       
+        //public int GetRetrievalId()
+        //{
+        //    var maxRetrievalId = inventory.Retrievals.Max(xObj => xObj.Id) + 1;
+        //    return maxRetrievalId;
 
-        }
+        //}
 
         /// <summary>
         /// Retrieve the Retrieval Detail information  from Retrieval Table according to the Retrieval Parameter
@@ -224,9 +221,10 @@ namespace StationeryStoreInventorySystemModel.broker
             throw new NotImplementedException();
         }
 
-
-
-
+        /// <summary>
+        /// Get the last RetrievalId from the Retrieval Table
+        /// </summary>
+        /// <returns></returns>
         public int GetRetrievalId()
         {
             List<Retrieval> list = GetAllRetrieval();
