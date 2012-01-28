@@ -90,18 +90,23 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 supplierObj = inventory.Suppliers.Where(iObj => iObj.Id == supplier.Id).First();
-               // supplierObj.Id = supplier.Id;
-                supplierObj.Name = supplier.Name;
-                supplierObj.Priority = supplier.Priority;
-                supplierObj.ContactName = supplier.ContactName;
-                supplierObj.PhoneNumber = supplier.PhoneNumber;
-                supplierObj.FaxNumber = supplier.FaxNumber;
-                supplierObj.Address = supplier.Address;
-                supplierObj.GstRegistrationNumber = supplier.GstRegistrationNumber;
-              //  supplierObj.CreatedDate = supplier.CreatedDate;
+                if (!supplierObj.Equals(null))
+                {
+                    Employee createdBy = inventory.Employees.Where(e => e.Id == supplier.CreatedBy.Id).First();
+                    supplierObj.Id = supplier.Id;
+                    supplierObj.Name = supplier.Name;
+                    supplierObj.Priority = supplier.Priority;
+                    supplierObj.ContactName = supplier.ContactName;
+                    supplierObj.PhoneNumber = supplier.PhoneNumber;
+                    supplierObj.FaxNumber = supplier.FaxNumber;
+                    supplierObj.Address = supplier.Address;
+                    supplierObj.GstRegistrationNumber = supplier.GstRegistrationNumber;
+                    supplierObj.CreatedDate = supplier.CreatedDate;
+                    supplierObj.CreatedBy = createdBy;
 
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {

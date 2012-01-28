@@ -72,14 +72,21 @@ namespace StationeryStoreInventorySystemModel.broker
             {
 
                 reqCollectionItem = inventory.RequisitionCollectionItems.Where(r => r.Id == requisitionCollectionItem.Id).First();
-                reqCollectionItem.Id = requisitionCollectionItem.Id;
-                reqCollectionItem.RequisitionCollection = requisitionCollectionItem.RequisitionCollection;
-                reqCollectionItem.Item = requisitionCollectionItem.Item;
-                reqCollectionItem.CreatedDate = requisitionCollectionItem.CreatedDate;
-                reqCollectionItem.CreatedBy = requisitionCollectionItem.CreatedBy;
-                reqCollectionItem.Qty = requisitionCollectionItem.Qty;
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                if (!reqCollectionItem.Equals(null))
+                {
+                    RequisitionCollection requisitionCollectionId = inventory.RequisitionCollections.Where(r => r.Id == requisitionCollectionItem.RequisitionCollection.Id).First();
+                    Item item = inventory.Items.Where(i => i.Id == requisitionCollectionItem.Item.Id).First();
+                    Employee createdBy = inventory.Employees.Where(e => e.Id == requisitionCollectionItem.CreatedBy.Id).First();
+
+                    reqCollectionItem.Id = requisitionCollectionItem.Id;
+                    reqCollectionItem.RequisitionCollection = requisitionCollectionId;
+                    reqCollectionItem.Item = item;
+                    reqCollectionItem.CreatedDate = requisitionCollectionItem.CreatedDate;
+                    reqCollectionItem.CreatedBy = createdBy;
+                    reqCollectionItem.Qty = requisitionCollectionItem.Qty;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {
