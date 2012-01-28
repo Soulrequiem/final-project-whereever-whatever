@@ -24,9 +24,9 @@ namespace SystemStoreInventorySystemUtil
             return designationText;
         }
 
-        public static string GetDepartmentText(Constants.DEPARTMENT_STATUS departmentStatus)
+        public static string GetDepartmentStatusText(Constants.DEPARTMENT_STATUS departmentStatus)
         {
-
+            return "";
         }
 
         public static Constants.EMPLOYEE_ROLE objToEmployeeRole(object obj)
