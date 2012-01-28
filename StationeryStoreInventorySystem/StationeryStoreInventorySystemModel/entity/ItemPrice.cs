@@ -8,14 +8,14 @@ namespace StationeryStoreInventorySystemModel.entity
     public partial class ItemPrice
     {
         public ItemPrice()
-            : this("", "", 0, DateTime.Now, null, 0)
+            : this("", "", 0, DateTime.Now,new Employee(), 0)
         {
         }
-        public ItemPrice(string id, string supplierId, decimal money, DateTime createdDate, Employee createdBy, int status)
+        public ItemPrice(string itemId, string supplierId, decimal price, DateTime createdDate, Employee createdBy, int status)
         {
-            this.ItemId = id;
+            this.ItemId = itemId;
             this.SupplierId = supplierId;
-            this.Price = money;
+            this.Price = price;
             this.CreatedDate = createdDate;
             this.CreatedBy = createdBy;
         }
