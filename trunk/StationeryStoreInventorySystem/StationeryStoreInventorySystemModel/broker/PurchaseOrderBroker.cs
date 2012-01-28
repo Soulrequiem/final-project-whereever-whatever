@@ -209,6 +209,8 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
+
+                inventory.AddToPurchaseOrderDetails(newPurchaseOrderDetail);
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -233,8 +235,20 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+               PurchaseOrderDetail purchasedetail = inventory.PurchaseOrderDetails.Where(p => p.Id == purchaseOrderDetail.Id).First();
+                if(!purchaseorderdetail.Equals(null))
+                {
+                    purchaseorder = inventory.PurchaseOrders.Where(p => p.Id == purchaseOrderDetail.PurchaseOrder.Id).First();
+                    Item item = inventory.Items.Where(i => i.Id == purchaseOrderDetail.Item.Id).First();
+
+                    purchasedetail.Id = purchaseOrderDetail.Id;
+                    purchasedetail.PurchaseOrder = purchaseorder;
+                    purchasedetail.Price = purchaseOrderDetail.Price;
+                    purchasedetail.Qty = purchaseOrderDetail.Qty;
+                    purchasedetail.AcceptedQty = purchaseOrderDetail.AcceptedQty;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {
