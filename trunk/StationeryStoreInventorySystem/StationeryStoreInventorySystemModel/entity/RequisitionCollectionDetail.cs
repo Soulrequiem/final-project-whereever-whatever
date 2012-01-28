@@ -7,7 +7,7 @@ namespace StationeryStoreInventorySystemModel.entity
 {
     public partial class RequisitionCollectionDetail
     {
-        public RequisitionCollectionDetail():this(0,null,null)
+        public RequisitionCollectionDetail():this(0,new Requisition(),new RequisitionCollection())
         {
         }
         public RequisitionCollectionDetail(int id, Requisition requisitionId, RequisitionCollection requisitionCollectionId)

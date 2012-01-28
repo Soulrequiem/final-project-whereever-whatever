@@ -9,7 +9,7 @@ namespace StationeryStoreInventorySystemModel.entity
     {
 
         public StockAdjustment()
-            : this(null, null, DateTime.Now, null, -1)
+            : this("", new Discrepancy(), DateTime.Now, new Employee(), 0)
         {
         }
         public StockAdjustment(string id, Discrepancy disId, DateTime createdDate, Employee createdBy, int status)

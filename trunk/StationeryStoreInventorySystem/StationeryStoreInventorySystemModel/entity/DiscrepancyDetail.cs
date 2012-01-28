@@ -9,7 +9,7 @@ namespace StationeryStoreInventorySystemModel.entity
     {
 
         public DiscrepancyDetail()
-            : this(0, null, null, 0, 0, null)
+            : this(0, new Discrepancy(), new Item(), 0, 0, null)
         {
         }
         public DiscrepancyDetail(int id, Discrepancy disId, Item itemId, int disType, int qty, string remark)
