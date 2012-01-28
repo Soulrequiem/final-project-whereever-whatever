@@ -8,7 +8,7 @@ namespace StationeryStoreInventorySystemModel.entity
     public partial class User
     {
         public User()
-            : this(0, "", "", DateTime.Now, null, 0)
+            : this(0, "", "", DateTime.Now, new Employee(), 0)
         {
         }
         public User(int id, string userName, string password, DateTime createdDate, Employee createdBy, int status)

@@ -7,7 +7,8 @@ namespace StationeryStoreInventorySystemModel.entity
 {
    public partial  class Requisition
     {
-       public Requisition():this("",null,null,"",null,DateTime.Now,0)
+       public Requisition()
+           : this("", new Department(), new Employee(), "", new Employee(), DateTime.Now, 0)
        {
        }
        public Requisition(string id,Department departmentId,Employee employeeId,string remarks,Employee approvedBy,
@@ -15,9 +16,9 @@ namespace StationeryStoreInventorySystemModel.entity
        {
            this.Id = id;
            this.Department = departmentId;
-           this.Employee = employeeId;
+           this.EmployeeId = employeeId;
            this.Remarks = remarks;
-           this.Employee = approvedBy;
+           this.Employee1 = approvedBy;
            this.CreatedDate = createDate;
            this.Status = status;
        }

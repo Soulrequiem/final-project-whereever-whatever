@@ -9,7 +9,7 @@ namespace StationeryStoreInventorySystemModel.entity
     {
 
         public Supplier()
-            : this(null, null, 0, null, null, null, null, null, DateTime.Now, null, 0)
+            : this("", "", 0, "", "", "", "", "", DateTime.Now,new Employee(), 0)
         {
         }
         public Supplier(string id, string name, int priority, string contactName, string phoneNo, string faxNo, string address, string gstRegistrationNo, DateTime createdDate, Employee createdBy, int status)

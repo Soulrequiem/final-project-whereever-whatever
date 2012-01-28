@@ -8,7 +8,7 @@ namespace StationeryStoreInventorySystemModel.entity
     public partial class Item
     {
         public Item()
-            : this(" ", 0, " ", 0, 0, 0, 0, DateTime.Now, null, 0)
+            : this(" ", 0, " ", 0, 0, 0, 0, DateTime.Now, new Employee(), 0)
         {
         }
         public Item(string id, int categoryId, string description, int reorderLevel, int reorderQty, decimal money,
@@ -22,6 +22,7 @@ namespace StationeryStoreInventorySystemModel.entity
             this.Cost = money;
             this.UnitOfMeasureId = UOM;
             this.CreatedDate = createdDate;
+            this.CreatedBy = createdBy;
             this.Status = status;
         }
     }
