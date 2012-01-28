@@ -6,21 +6,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.storeController;
-using StationeryStoreInventorySystemModel.entity;
+
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class ReceiveOrderForm : System.Web.UI.Page
     {
         ReceiveOrderControl ROobj;
-        PurchaseOrder purchaseOrder;
-        Supplier supplier;
         PurchaseOrderControl purchaseOrderControl;
         ReceiveOrderControl receiveOrderControl;
         protected void Page_Load(object sender, EventArgs e)
         {
-            purchaseOrder = new PurchaseOrder();
-            supplier = new Supplier();
             if (!IsPostBack)
             {
                 FillPOList();
@@ -61,14 +57,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             try
             {
-                String selectedItem = DrdPONo.SelectedItem.Value;
+                string selectedItem = DrdPONo.SelectedItem.Value;
                 ROobj = new ReceiveOrderControl();
                 //********Plz check this
                 //DataTable dt = ROobj.SelectPurchaseOrderDetails(Convert.ToInt32(selectedItem));
                 //FillStationeryOrder(dt);
 
-                //get supplier name
-                Label1.Text = purchaseOrder.Supplier.Name;
+                //********get supplier name by PONumber
+                //Label1.Text = ReceiveOrderControl.GetSupplierName(selectedItem);
             }
             catch (Exception ex)
             {
@@ -111,10 +107,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnReceived_Click(object sender, EventArgs e)
         {
-
-            int purchaseOrderId;
-            purchaseOrderId = purchaseOrder.Id;
-            //purchaseOrderControl.SelectCreate(purchaseOrderId);
+            //*********update purchase order
+            //purchaseOrderControl.SelectCreate(selectedItem);
+            //*********insert stock card details in stock card
             receiveOrderControl.SelectReceive();//pass the datatable to broker
         } 
     }
