@@ -90,7 +90,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 inventory.AddToPurchaseOrders(newPurchaseOrder);
-                foreach (PurchaseOrderDetail puchaseOrderDetail in purchaseorder.PurchaseOrderDetails)
+                foreach (PurchaseOrderDetail puchaseOrderDetail in newPurchaseOrder.PurchaseOrderDetails)
                 {
                     this.Insert(puchaseOrderDetail);
                 }
