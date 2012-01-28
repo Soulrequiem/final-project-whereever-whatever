@@ -302,7 +302,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 roleObj = inventory.Roles.Where(rObj => rObj.Id == role.Id).First();
-                Employee createdBy = inventory.Employees.Where(e => e.Id == roleObj.CreatedBy.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == role.CreatedBy.Id).First();
                 if (roleObj != null)
                 {
                     roleObj.Id = role.Id;
