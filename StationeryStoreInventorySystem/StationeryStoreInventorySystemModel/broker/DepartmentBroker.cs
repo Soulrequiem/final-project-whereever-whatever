@@ -111,13 +111,13 @@ namespace StationeryStoreInventorySystemModel.broker
                     //Employee createdBy = inventory.Employees.Where(e => e.Id == departmentObj.CreatedBy.Id).First();
                     //CollectionPoint collectionPId = inventory.CollectionPoints.Where(c => c.Id == departmentObj.CollectionPoint.Id).First();
                     departmentObj.Name = department.Name;
-                    departmentObj.EmployeeContactId = department.EmployeeContactId;
+                    departmentObj.Contact = department.Contact;
                     departmentObj.PhoneNumber = department.PhoneNumber;
                     departmentObj.FaxNumber = department.FaxNumber;
-                    departmentObj.EmployeeHeadId = department.EmployeeHeadId;
+                    departmentObj.Head = department.Head;
                     departmentObj.CollectionPoint = department.CollectionPoint;
                     //departmentObj.CollectionPoint.Id = department.CollectionPoint.Id;
-                    departmentObj.EmployeeRepresentativeId = department.EmployeeRepresentativeId;
+                    departmentObj.Representative = department.Representative;
                     departmentObj.CreatedDate = department.CreatedDate;
                     departmentObj.CreatedBy = department.CreatedBy ;
 
