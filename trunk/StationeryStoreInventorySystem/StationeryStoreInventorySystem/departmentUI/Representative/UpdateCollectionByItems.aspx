@@ -131,7 +131,7 @@
                         </ig:UnboundField>--%>
                         <ig:TemplateDataField Key="ActualQty">
                         <ItemTemplate>
-                           <ig:WebTextEditor Width="150px" runat="server" Text='<%# Eval("ActualQty" ) %>'>
+                           <ig:WebTextEditor Width="150px" runat="server" Text='<%# Eval("ActualQty" ) %>' NullText="0">
                            </ig:WebTextEditor>
                         </ItemTemplate>
                         <Header Text="Actual Qty." />

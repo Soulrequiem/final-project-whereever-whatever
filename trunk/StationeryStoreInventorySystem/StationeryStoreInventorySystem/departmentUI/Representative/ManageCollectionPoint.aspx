@@ -7,6 +7,15 @@
 <%@ Register assembly="Infragistics35.WebUI.WebResizingExtender.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI" tagprefix="igui" %>
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<script type = "text/javascript" id = "igClientScript">
+    function btnSave_Click(name) 
+    {
+        if (name.drdCollectionList.value == "")
+            document.getElementById["lblStatusMessage"].Text = "Enter Collection Point.";
+        else
+            name.submit();
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="ContentDivStyle">
@@ -58,12 +67,18 @@
                             StyleSetName="Office2010Blue" 
                                 onselectionchanged="drdCollectionList_SelectionChanged">
                      </ig:WebDropDown>
+                     <br />
+                        <div style = "float:left">
+                            <asp:Label CssClass="DefaultLabelstyle"  
+                            ID="lblStatusMessage" runat="server"/>
+                        </div>
                         </div>
                         <div style="float:left">
                         &nbsp;&nbsp;&nbsp;
                             <asp:Button id="btnSave" CssClass="Defaultbutton"
-                                  runat="server" Text="Save" onclick="drdCollectionList_SelectionChanged"/>
-                        </div>
+<<<<<<< .mine                                  runat="server" Text="Save" onclick="btnSave_Click(this.form)"/>
+=======                                  runat="server" Text="Save" onclick="drdCollectionList_SelectionChanged"/>
+>>>>>>> .theirs                        </div>
                 </Template>
             </igmisc:WebGroupBox>
 </div>
