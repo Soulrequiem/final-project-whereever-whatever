@@ -19,6 +19,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
     public partial class SubmitRequisitionsToStore : System.Web.UI.Page
     {
         SubmitRequestToStoreControl srtsCtrl;
+
+        private SubmitRequestToStoreControl GetsrtsControl()
+        {
+            if(srtsCtrl==null)
+            srtsCtrl = new SubmitRequestToStoreControl();
+            return srtsCtrl;
+        }
         /// <summary>
         /// Loads the SubmitRequisitionsToStore form
         /// </summary>
@@ -28,7 +35,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             if (!IsPostBack)
             {
-                //FillRequisitionList();
+                DataTable dt = GetsrtsControl().GetApprovedRequisition();
+                FillRequisitionList(dt);
                 //FillRequsitionData();
             }
         }
@@ -66,12 +74,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// Fills Requisition list to DataGrid
         /// </summary>
         /// <param name="dtCollection"></param>
-        private void FillRequisitionList()
+        private void FillRequisitionList(DataTable dtRequisition)
         {
             try
             {
-                srtsCtrl = GetControl();
-                DataTable dtReuqisition = srtsCtrl.SelectRequisition();
                 dgvRequisitions.DataSource = dtRequisition;
                 dgvRequisitions.DataBind();
             }
@@ -81,12 +87,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             }
         }
 
-        private SubmitRequestToStoreControl GetControl()
-        {
-            if (srtsCtrl == null)
-                srtsCtrl = new SubmitRequestToStoreControl();
-            return srtsCtrl;
-        }
     }
 }
 /********************************************/
