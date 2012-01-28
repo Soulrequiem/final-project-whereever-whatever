@@ -41,17 +41,9 @@ namespace StationeryStoreInventorySystemModel.broker
             dis = inventory.Discrepancies.Where(disObj => disObj.Id == discrepancy.Id).First();
             if (!dis.Equals(null))
             {
-                var discrepancyDetailResult = from dd in inventory.DiscrepancyDetails
-                                              where dd.Discrepancy.Id == dis.Id
-                                              select dd;
-
-                foreach (DiscrepancyDetail dd in discrepancyDetailResult)
-                {
-                    dis.DiscrepancyDetails.Add(dd);
-                }
-
+                return dis;
             }
-            return dis;
+            return null;
 
         }
         /// <summary>
