@@ -10,6 +10,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
     public interface IRetrievalBroker
     {
         int GetRetrievalId();
+        int GetRetrievalDetailId();
         Retrieval GetRetrieval(Retrieval retrieval);
         List<Retrieval> GetAllRetrieval();
         Constants.DB_STATUS Insert(Retrieval newRetrieval);
