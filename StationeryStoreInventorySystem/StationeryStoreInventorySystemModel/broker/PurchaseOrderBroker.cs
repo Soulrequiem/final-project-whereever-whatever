@@ -32,16 +32,13 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             this.inventory = inventory;
         }
-        /// <summary>
-        /// Get the last record of the PurchaserOrder Id from the Purchase Order table
-        /// </summary>
-        /// <returns></returns>
-        public int GetPurchaseOrderId()
-        {
-            var maxPurchaseOrderId = inventory.PurchaseOrders.Max(xObj => xObj.Id) + 1;
-            return maxPurchaseOrderId;
+        
+        //public int GetPurchaseOrderId()
+        //{
+        //    var maxPurchaseOrderId = inventory.PurchaseOrders.Max(xObj => xObj.Id) + 1;
+        //    return maxPurchaseOrderId;
 
-        }
+        //}
 
         /// <summary>
         /// Retrieve the PurchaseOrder information  from PurchaseOrder Table according to the purchaseOrder Parameter
@@ -270,9 +267,10 @@ namespace StationeryStoreInventorySystemModel.broker
             //return status;
         }
 
-        #endregion
-
-
+        /// <summary>
+        /// Get the last record of the PurchaserOrder Id from the Purchase Order table
+        /// </summary>
+        /// <returns></returns>
         public int GetPurchaseOrderId()
         {
             int lastPurchaseOrderNumber = inventory.PurchaseOrders.Last().Id + 1;
@@ -289,6 +287,7 @@ namespace StationeryStoreInventorySystemModel.broker
         }
     }
 }
+        #endregion
 /****************************************/
 /********* End of the Class *****************/
 /****************************************/
