@@ -1309,7 +1309,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_department_employee1", "Employee")]
-        public Employee Employee
+        public Employee EmployeeContactId
         {
             get
             {
@@ -1325,7 +1325,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeReference
+        public EntityReference<Employee> EmployeeContactIdReference
         {
             get
             {
@@ -1347,7 +1347,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_department_employee2", "Employee")]
-        public Employee Employee1
+        public Employee EmployeeHeadId
         {
             get
             {
@@ -1363,7 +1363,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> Employee1Reference
+        public EntityReference<Employee> EmployeeHeadIdReference
         {
             get
             {
@@ -1385,7 +1385,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_department_employee3", "Employee")]
-        public Employee Employee2
+        public Employee EmployeeRepresentativeId
         {
             get
             {
@@ -1401,7 +1401,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> Employee2Reference
+        public EntityReference<Employee> EmployeeRepresentativeIdReference
         {
             get
             {

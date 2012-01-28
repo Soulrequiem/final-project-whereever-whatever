@@ -1303,9 +1303,9 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CollectionMisseds" Relationship="InventoryModel.FK_CollectionMissed_Department1" FromRole="Department" ToRole="CollectionMissed" />
           <NavigationProperty Name="CollectionPoint" Relationship="InventoryModel.FK_department_collectionpoint1" FromRole="Department" ToRole="CollectionPoint" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_department_employee1" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_department_employee2" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee2" Relationship="InventoryModel.FK_department_employee3" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeContactId" Relationship="InventoryModel.FK_department_employee1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeHeadId" Relationship="InventoryModel.FK_department_employee2" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeRepresentativeId" Relationship="InventoryModel.FK_department_employee3" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_department_employee4" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_department1" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Requisitions" Relationship="InventoryModel.FK_requisition_department1" FromRole="Department" ToRole="Requisition" />
