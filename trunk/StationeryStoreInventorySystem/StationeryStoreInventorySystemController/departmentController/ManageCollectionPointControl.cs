@@ -26,10 +26,29 @@ namespace StationeryStoreInventorySystemController.departmentController
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
             collectionPointBroker = new CollectionPointBroker();
             allCollectionPoint = collectionPointBroker.GetAllCollectionPoint();
-
             currentCollectionPoint = currentEmployee.Department.CollectionPoint;
         }
 
+        public DataTable CurentCollectionPoint
+        {
+            get
+            {
+                DataTable dt = new DataTable();
+
+                if (currentCollectionPoint != null)
+                {
+                    DataRow dr = new DataRow();
+                    dt.NewRow();
+                    dr["collectionId"] = currentCollectionPoint.Id;
+                    dr["collectionPoint"] = currentCollectionPoint.Name;
+                    dr["collectionTime"] = currentCollectionPoint.Time;
+
+                    dt.Rows.Add(dr);
+                }
+
+                return dt;
+            }
+        }
         public DataTable AllCollectionPoint
         {
             get
@@ -54,13 +73,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             }
         }
 
-        //public List<CollectionPoint> GetAllCollectionPoint()
-        //{
-            
-
-        //    return collectionPointBroker.GetAllCollectionPoint();
-        //}
-
+        
         public Constants.ACTION_STATUS SelectSave(int collectionPointId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
