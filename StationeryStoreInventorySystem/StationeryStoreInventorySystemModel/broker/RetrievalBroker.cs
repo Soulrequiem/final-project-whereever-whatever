@@ -105,8 +105,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                retrieval = inventory.Retrievals.Where(rObj => rObj.Id == retrieval.Id).First();
+                Retrieval retrievalObj = inventory.Retrievals.Where(rObj => rObj.Id == retrieval.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == retrieval.CreatedBy.Id).First();
 
+                retrievalObj.Id = retrieval.Id;
+                retrievalObj.CreatedBy = createdBy;
+                retrievalObj.CreatedDate = retrieval.CreatedDate;
                 foreach (RetrievalDetail retrievalDetail in retrieval.RetrievalDetails)
                 {
                     this.Update(retrievalDetail);
@@ -199,10 +203,20 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 RetrievalDetail rDetail = inventory.RetrievalDetails.Where(rObj => rObj.Id == retrievalDetail.Id).First();
-                rDetail.NeededQty = retrievalDetail.NeededQty;
-                rDetail.ActualQty = retrievalDetail.ActualQty;
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                if (!rDetail.Equals(null))
+                {
+                    retrieval = inventory.Retrievals.Where(r => r.Id == retrievalDetail.Retrieval.Id).First();
+                    Item item = inventory.Items.Where(i => i.Id == retrievalDetail.Item.Id).First();
+                    Department department = inventory.Departments.Where(d => d.Id == retrievalDetail.Department.Id).First();
+
+                    rDetail.Retrieval = retrieval;
+                    rDetail.Item = item;
+                    rDetail.Department = department;
+                    rDetail.NeededQty = retrievalDetail.NeededQty;
+                    rDetail.ActualQty = retrievalDetail.ActualQty;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {

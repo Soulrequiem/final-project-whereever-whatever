@@ -38,13 +38,13 @@ namespace StationeryStoreInventorySystemModel.broker
           reqCollection = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
           if (!reqCollection.Equals(null))
            {
-                var reqCollectionDetailsResult = from rd in inventory.RequisitionCollectionDetails
-                                                 where rd.RequisitionCollection.Id==reqCollection.Id
-                                                 select rd;
-                foreach (RequisitionCollectionDetail rd in reqCollectionDetailsResult)
-                {
-                    reqCollection.RequisitionCollectionDetails.Add(rd);
-                }
+                //var reqCollectionDetailsResult = from rd in inventory.RequisitionCollectionDetails
+                //                                 where rd.RequisitionCollection.Id==reqCollection.Id
+                //                                 select rd;
+                //foreach (RequisitionCollectionDetail rd in reqCollectionDetailsResult)
+                //{
+                //    reqCollection.RequisitionCollectionDetails.Add(rd);
+                //}
                 return reqCollection;
             }
 
@@ -91,7 +91,14 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 reqCollection = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
-
+                Department dept = inventory.Departments.Where(d => d.Id == requisitionCollection.Department.Id).First();
+                CollectionPoint collectionPoint = inventory.CollectionPoints.Where(c => c.Id == requisitionCollection.CollectionPoint.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == requisitionCollection.CreatedBy.Id).First();
+                reqCollection.Id = requisitionCollection.Id;
+                reqCollection.Department = dept;
+                reqCollection.CollectionPoint = collectionPoint;
+                reqCollection.CreatedDate = requisitionCollection.CreatedDate;
+                reqCollection.CreatedBy = createdBy;
                 foreach (RequisitionCollectionDetail rd in reqCollection.RequisitionCollectionDetails)
                 {
                     this.Update(rd);
@@ -146,17 +153,17 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
-            // try
-            // {
+            try
+            {
 
-            inventory.AddToRequisitionCollectionDetails(newRequisitionCollectionDetail);
-            inventory.SaveChanges();
-            status = Constants.DB_STATUS.SUCCESSFULL;
-            //}
-            //catch (Exception e)
-            //{
-            //    status = Constants.DB_STATUS.FAILED;
-            //}
+                inventory.AddToRequisitionCollectionDetails(newRequisitionCollectionDetail);
+                inventory.SaveChanges();
+                status = Constants.DB_STATUS.SUCCESSFULL;
+            }
+            catch (Exception e)
+            {
+                status = Constants.DB_STATUS.FAILED;
+            }
 
             return status;
         }
@@ -168,10 +175,17 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 reqCollectionDetail = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Id == requisitionCollectionDetail.Id).First();
-                reqCollectionDetail.Requisition.Id = requisitionCollectionDetail.Requisition.Id;
-                reqCollectionDetail.RequisitionCollection.Id = requisitionCollectionDetail.RequisitionCollection.Id;
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                if(!reqCollectionDetail.Equals(null))
+                {
+                    Requisition requistionId=inventory.Requisitions.Where(r=>r.Id==requisitionCollectionDetail.Requisition.Id).First();
+                    reqCollection = inventory.RequisitionCollections.Where(r => r.Id == requisitionCollectionDetail.RequisitionCollection.Id).First();
+                    
+                    reqCollectionDetail.Id = requisitionCollectionDetail.Id;
+                    reqCollectionDetail.Requisition=requistionId;
+                    reqCollectionDetail.RequisitionCollection = reqCollection;
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {
