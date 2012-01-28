@@ -4446,7 +4446,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_requisition_employee1", "Employee")]
-        public Employee CreatedBy
+        public Employee EmployeeId
         {
             get
             {
@@ -4462,7 +4462,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> CreatedByReference
+        public EntityReference<Employee> EmployeeIdReference
         {
             get
             {

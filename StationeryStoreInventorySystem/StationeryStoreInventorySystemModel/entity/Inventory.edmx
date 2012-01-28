@@ -1455,7 +1455,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_requisition_department1" FromRole="Requisition" ToRole="Department" />
-          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisition_employee1" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeId" Relationship="InventoryModel.FK_requisition_employee1" FromRole="Requisition" ToRole="Employee" />
           <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_requisition_employee2" FromRole="Requisition" ToRole="Employee" />
           <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_requisitioncollectiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionCollectionDetails" />
           <NavigationProperty Name="RequisitionDetails" Relationship="InventoryModel.FK_requisitiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionDetails" />
