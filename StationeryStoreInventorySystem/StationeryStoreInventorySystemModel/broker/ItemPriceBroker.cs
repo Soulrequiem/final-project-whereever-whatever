@@ -87,11 +87,11 @@ namespace StationeryStoreInventorySystemModel.broker
                 itemPriceObj = inventory.ItemPrices.Where(iObj => iObj.ItemId == itemPrice.ItemId).First();
                 if (!itemPriceObj.Equals(null))
                 {
-                    Employee createdBy = inventory.Employees.Where(eObj => eObj.Id == itemPriceObj.CreatedBy.Id).First();
+                    Employee createdBy = inventory.Employees.Where(eObj => eObj.Id == itemPrice.CreatedBy.Id).First();
                     itemPriceObj.SupplierId = itemPrice.SupplierId;
                     itemPriceObj.Price = itemPrice.Price;
                     itemPriceObj.CreatedDate = itemPrice.CreatedDate;
-                    itemPriceObj.CreatedBy = itemPrice.CreatedBy;
+                    itemPriceObj.CreatedBy = createdBy;
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
                 }
