@@ -18,7 +18,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class ManageCollectionPoint : System.Web.UI.Page
     {
-        
+        ManageCollectionPointControl mngColPntCtrl;
+         private ManageCollectionPointControl GetMcpControl()
+                 {
+                     if (mngColPntCtrl == null)
+                    mngColPntCtrl = new ManageCollectionPointControl();
+                    return mngColPntCtrl;
+               
+                 }
         /// <summary>
         /// Loads the ManageCollectionPoint form
         /// </summary>
@@ -26,6 +33,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+                
             //DataTable dt = new DataTable();
             ////dt.Columns.Add("EmployeeID");
             //dt.Columns.Add("CollectionID");
@@ -58,8 +66,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 
             if (!IsPostBack)
             {
-                //FillCollectionList();
-                //FillCollectionPoints();
+                DataTable dtColLst = GetMcpControl().CurentCollectionPoint;
+                DataTable dtColPnts = GetMcpControl().AllCollectionPoint;
+
+                FillCollectionList(dtColLst);
+                FillCollectionPoints(dtColPnts);
             }
         }
 
@@ -90,8 +101,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 if (dtPoint != null)
                 {
-                    drdCollectionList.TextField = "Collection Point";
-                    drdCollectionList.ValueField = "Name";
+                    //drdCollectionList.TextField = "Collection Point";
+                    //drdCollectionList.ValueField = "Name";
                     drdCollectionList.DataSource = dtPoint;
                     drdCollectionList.DataBind();
                 }
@@ -105,15 +116,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <summary>
         /// Fills changed data to Datagrid
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender"></param>   
         /// <param name="e"></param>
-        protected void drdCollectionList_SelectionChanged(object sender,
-            Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+       
+        protected void drdCollectionList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
-            try
+           try
             {
                 String selectedCollection = drdCollectionList.SelectedItem.Text;
-                //Pass to the controller get Datatable
+               //Pass the collectionPointId to controller
+               
+               GetMcpControl().SelectSave(collectionPointId);
+               //Pass to the controller get Datatable
                 //Call FillStationeryList function
             }
             catch (Exception ex)
@@ -122,6 +136,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             }           
             
         }
+              
     }
 }
 /********************************************/
