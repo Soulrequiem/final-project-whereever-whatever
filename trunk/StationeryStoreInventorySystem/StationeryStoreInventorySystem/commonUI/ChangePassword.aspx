@@ -4,6 +4,27 @@
 <%@ Register assembly="Infragistics35.WebUI.WebResizingExtender.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI" tagprefix="igui" %>
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<script type="text/javascript" id="igClientScript">
+    function btnReset_Click(name)
+    {
+        name.txtOldPassword.value = "";
+        name.txtNewPassword.value = "";
+        name.txtConfirmPassword.value = "";
+
+    }
+
+    function btnChange_Click1(name) 
+    {
+        if (name.txtOldPassword.value == "" || name.txtNewPassword.value == "" || name.txtConfirmPassword.value == "")
+            document.getElementById["lblStatusMessage"].Text = "Enter required fields.";
+        else if (name.txtNewPassword <= 7)
+            document.getElementById["lblStatusMessage"].Text = "Password should be at least 7 charaters";
+        else if (name.txtNewPassword.value != name.txtConfirmPassword.value)
+            document.getElementById["lblStatusMessage"].Text = "New & Confirm not matched.";
+        else
+            name.submit();
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
@@ -67,11 +88,11 @@
                             <div style="float:right">
                                 <!--<a class="button" href="" style="float:right">Change</a>-->
                                 <asp:Button id="btnReset" CssClass="Defaultbutton"  runat="server" 
-                                    Text="Reset"/>
+                                    Text="Reset" onclick="btnReset_Click(this.form)"/>
                             </div>
                             <div style="float:right;margin-right:10px" class="buttons">
                                 <asp:Button id="btnChange" CssClass="Defaultbutton"  runat="server" 
-                                    Text="Change Password" onclick="btnChange_Click"/>
+                                    Text="Change Password" onclick="btnChange_Click1(this.form)"/>
                                 <!--<a class="button" href="" style="float:right">Reset</a>-->
                             </div>
                             
