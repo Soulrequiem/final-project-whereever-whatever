@@ -23,11 +23,11 @@ namespace StationeryStoreInventorySystemModel.entity
             this.CreatedDate = createdDate;
             this.CreatedBy = createdBy;
             this.ApprovedDate = approvedDate;
-            this.Employee1 = approvedBy;
+            this.ApprovedBy = approvedBy;
             this.Status = status;
             this.DeliveryOrderNumber = deliveryOrderNo;
             this.DeliveryDate = deliveryDate;
-            this.Employee2 = acceptedBy;
+            this.AcceptedBy = acceptedBy;
         }
 
     }

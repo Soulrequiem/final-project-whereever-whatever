@@ -16,9 +16,9 @@ namespace StationeryStoreInventorySystemModel.entity
        {
            this.Id = id;
            this.Department = departmentId;
-           this.EmployeeId = employeeId;
+           this.CreatedBy = employeeId;
            this.Remarks = remarks;
-           this.Employee1 = approvedBy;
+           this.ApprovedBy = approvedBy;
            this.CreatedDate = createDate;
            this.Status = status;
        }
