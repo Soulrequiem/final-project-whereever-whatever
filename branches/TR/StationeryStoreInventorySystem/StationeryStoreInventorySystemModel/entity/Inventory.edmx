@@ -14,6 +14,7 @@
           <EntitySet Name="Employee" EntityType="InventoryModel.Store.Employee" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Item" EntityType="InventoryModel.Store.Item" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ItemPrice" EntityType="InventoryModel.Store.ItemPrice" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="InventoryModel.Store.Notification" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PurchaseOrder" EntityType="InventoryModel.Store.PurchaseOrder" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PurchaseOrderDetails" EntityType="InventoryModel.Store.PurchaseOrderDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Requisition" EntityType="InventoryModel.Store.Requisition" store:Type="Tables" Schema="dbo" />
@@ -25,7 +26,6 @@
           <EntitySet Name="RetrievalDetails" EntityType="InventoryModel.Store.RetrievalDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role" EntityType="InventoryModel.Store.Role" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StockAdjustment" EntityType="InventoryModel.Store.StockAdjustment" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="StockCard" EntityType="InventoryModel.Store.StockCard" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StockCardDetails" EntityType="InventoryModel.Store.StockCardDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Supplier" EntityType="InventoryModel.Store.Supplier" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="InventoryModel.Store.User" store:Type="Tables" Schema="dbo" />
@@ -96,6 +96,10 @@
           <AssociationSet Name="FK_itemprice_employee1" Association="InventoryModel.Store.FK_itemprice_employee1">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="ItemPrice" EntitySet="ItemPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Employee1" Association="InventoryModel.Store.FK_Notification_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
           <AssociationSet Name="FK_purchaseorder_employee1" Association="InventoryModel.Store.FK_purchaseorder_employee1">
             <End Role="Employee" EntitySet="Employee" />
@@ -201,20 +205,12 @@
             <End Role="Employee" EntitySet="Employee" />
             <End Role="StockAdjustment" EntitySet="StockAdjustment" />
           </AssociationSet>
-          <AssociationSet Name="FK_stockcard_employee1" Association="InventoryModel.Store.FK_stockcard_employee1">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="StockCard" EntitySet="StockCard" />
-          </AssociationSet>
-          <AssociationSet Name="FK_stockcard_item1" Association="InventoryModel.Store.FK_stockcard_item1">
-            <End Role="Item" EntitySet="Item" />
-            <End Role="StockCard" EntitySet="StockCard" />
-          </AssociationSet>
           <AssociationSet Name="FK_stockcarddetails_employee1" Association="InventoryModel.Store.FK_stockcarddetails_employee1">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="StockCardDetails" EntitySet="StockCardDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_stockcarddetails_stockcard1" Association="InventoryModel.Store.FK_stockcarddetails_stockcard1">
-            <End Role="StockCard" EntitySet="StockCard" />
+          <AssociationSet Name="FK_StockCardDetails_Item1" Association="InventoryModel.Store.FK_StockCardDetails_Item1">
+            <End Role="Item" EntitySet="Item" />
             <End Role="StockCardDetails" EntitySet="StockCardDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_supplier_employee1" Association="InventoryModel.Store.FK_supplier_employee1">
@@ -251,10 +247,10 @@
           </Key>
           <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="ContactId" Type="int" Nullable="false" />
+          <Property Name="ContactId" Type="int" />
           <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
           <Property Name="FaxNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
-          <Property Name="HeadId" Type="int" Nullable="false" />
+          <Property Name="HeadId" Type="int" />
           <Property Name="CollectionPointId" Type="int" />
           <Property Name="RepresentativeId" Type="int" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -279,7 +275,7 @@
           <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="DiscrepancyType" Type="int" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
-          <Property Name="Remarks" Type="text" Nullable="false" />
+          <Property Name="Remarks" Type="text" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -290,7 +286,7 @@
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Designation" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -323,6 +319,16 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="text" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PurchaseOrder">
           <Key>
             <PropertyRef Name="Id" />
@@ -350,7 +356,7 @@
           <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
-          <Property Name="AcceptedByQty" Type="int" Nullable="false" />
+          <Property Name="AcceptedQty" Type="int" />
         </EntityType>
         <EntityType Name="Requisition">
           <Key>
@@ -359,7 +365,7 @@
           <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="15" />
           <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
-          <Property Name="Remarks" Type="text" Nullable="false" />
+          <Property Name="Remarks" Type="text" />
           <Property Name="ApprovedBy" Type="int" />
           <Property Name="ApprovedDate" Type="datetime" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -391,7 +397,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="RequisitionCollectionId" Type="int" Nullable="false" />
           <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
-          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="int" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
@@ -404,7 +410,7 @@
           <Property Name="RequisitionId" Type="nvarchar" Nullable="false" MaxLength="15" />
           <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="Qty" Type="int" Nullable="false" />
-          <Property Name="DeliveredQty" Type="int" Nullable="false" />
+          <Property Name="DeliveredQty" Type="int" />
         </EntityType>
         <EntityType Name="Retrieval">
           <Key>
@@ -424,7 +430,7 @@
           <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
           <Property Name="NeededQty" Type="int" Nullable="false" />
-          <Property Name="ActualQty" Type="int" Nullable="false" />
+          <Property Name="ActualQty" Type="int" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -446,24 +452,13 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="StockCard">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="StockCardDetails">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="StockCardId" Type="int" Nullable="false" />
-          <Property Name="InputFrom" Type="int" Nullable="false" />
-          <Property Name="InputFromId" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Description" Type="text" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="Balance" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -546,7 +541,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_department_employee1">
-          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
           <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
@@ -558,7 +553,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_department_employee2">
-          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
           <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
@@ -698,6 +693,18 @@
             </Principal>
             <Dependent Role="ItemPrice">
               <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Notification" Type="InventoryModel.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1013,30 +1020,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_stockcard_employee1">
-          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
-          <End Role="StockCard" Type="InventoryModel.Store.StockCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StockCard">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_stockcard_item1">
-          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
-          <End Role="StockCard" Type="InventoryModel.Store.StockCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StockCard">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_stockcarddetails_employee1">
           <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
           <End Role="StockCardDetails" Type="InventoryModel.Store.StockCardDetails" Multiplicity="*" />
@@ -1049,15 +1032,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_stockcarddetails_stockcard1">
-          <End Role="StockCard" Type="InventoryModel.Store.StockCard" Multiplicity="1" />
+        <Association Name="FK_StockCardDetails_Item1">
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
           <End Role="StockCardDetails" Type="InventoryModel.Store.StockCardDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="StockCard">
+            <Principal Role="Item">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StockCardDetails">
-              <PropertyRef Name="StockCardId" />
+              <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1099,6 +1082,7 @@
           <EntitySet Name="Employees" EntityType="InventoryModel.Employee" />
           <EntitySet Name="Items" EntityType="InventoryModel.Item" />
           <EntitySet Name="ItemPrices" EntityType="InventoryModel.ItemPrice" />
+          <EntitySet Name="Notifications" EntityType="InventoryModel.Notification" />
           <EntitySet Name="PurchaseOrders" EntityType="InventoryModel.PurchaseOrder" />
           <EntitySet Name="PurchaseOrderDetails" EntityType="InventoryModel.PurchaseOrderDetail" />
           <EntitySet Name="Requisitions" EntityType="InventoryModel.Requisition" />
@@ -1110,7 +1094,6 @@
           <EntitySet Name="RetrievalDetails" EntityType="InventoryModel.RetrievalDetail" />
           <EntitySet Name="Roles" EntityType="InventoryModel.Role" />
           <EntitySet Name="StockAdjustments" EntityType="InventoryModel.StockAdjustment" />
-          <EntitySet Name="StockCards" EntityType="InventoryModel.StockCard" />
           <EntitySet Name="StockCardDetails" EntityType="InventoryModel.StockCardDetail" />
           <EntitySet Name="Suppliers" EntityType="InventoryModel.Supplier" />
           <EntitySet Name="Users" EntityType="InventoryModel.User" />
@@ -1202,6 +1185,10 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="ItemPrice" EntitySet="ItemPrices" />
           </AssociationSet>
+          <AssociationSet Name="FK_Notification_Employee1" Association="InventoryModel.FK_Notification_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
           <AssociationSet Name="FK_purchaseorder_employee1" Association="InventoryModel.FK_purchaseorder_employee1">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
@@ -1242,10 +1229,6 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="StockAdjustment" EntitySet="StockAdjustments" />
           </AssociationSet>
-          <AssociationSet Name="FK_stockcard_employee1" Association="InventoryModel.FK_stockcard_employee1">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="StockCard" EntitySet="StockCards" />
-          </AssociationSet>
           <AssociationSet Name="FK_stockcarddetails_employee1" Association="InventoryModel.FK_stockcarddetails_employee1">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="StockCardDetails" EntitySet="StockCardDetails" />
@@ -1274,9 +1257,9 @@
             <End Role="Item" EntitySet="Items" />
             <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_stockcard_item1" Association="InventoryModel.FK_stockcard_item1">
+          <AssociationSet Name="FK_StockCardDetails_Item1" Association="InventoryModel.FK_StockCardDetails_Item1">
             <End Role="Item" EntitySet="Items" />
-            <End Role="StockCard" EntitySet="StockCards" />
+            <End Role="StockCardDetails" EntitySet="StockCardDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_purchaseorder_supplier1" Association="InventoryModel.FK_purchaseorder_supplier1">
             <End Role="Supplier" EntitySet="Suppliers" />
@@ -1306,9 +1289,9 @@
             <End Role="Retrieval" EntitySet="Retrievals" />
             <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_stockcarddetails_stockcard1" Association="InventoryModel.FK_stockcarddetails_stockcard1">
-            <End Role="StockCard" EntitySet="StockCards" />
-            <End Role="StockCardDetails" EntitySet="StockCardDetails" />
+          <AssociationSet Name="DepartmentShowCollectionMissed" Association="InventoryModel.DepartmentShowCollectionMissed">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="ShowCollectionMissed" EntitySet="CollectionMisseds" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CollectionMissed">
@@ -1319,7 +1302,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_CollectionMissed_Department1" FromRole="CollectionMissed" ToRole="Department" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_CollectionMissed_Employee1" FromRole="CollectionMissed" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_CollectionMissed_Employee1" FromRole="CollectionMissed" ToRole="Employee" />
         </EntityType>
         <EntityType Name="CollectionPoint">
           <Key>
@@ -1328,7 +1311,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
           <Property Name="Time" Type="Time" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_CollectionPoint_Employee1" FromRole="CollectionPoint" ToRole="Employee" />
+          <NavigationProperty Name="Clerk" Relationship="InventoryModel.FK_CollectionPoint_Employee1" FromRole="CollectionPoint" ToRole="Employee" />
           <NavigationProperty Name="Departments" Relationship="InventoryModel.FK_department_collectionpoint1" FromRole="CollectionPoint" ToRole="Department" />
           <NavigationProperty Name="RequisitionCollections" Relationship="InventoryModel.FK_requisitioncollection_collectionpoint1" FromRole="CollectionPoint" ToRole="RequisitionCollection" />
         </EntityType>
@@ -1344,14 +1327,15 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CollectionMisseds" Relationship="InventoryModel.FK_CollectionMissed_Department1" FromRole="Department" ToRole="CollectionMissed" />
           <NavigationProperty Name="CollectionPoint" Relationship="InventoryModel.FK_department_collectionpoint1" FromRole="Department" ToRole="CollectionPoint" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_department_employee1" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_department_employee2" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee2" Relationship="InventoryModel.FK_department_employee3" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee3" Relationship="InventoryModel.FK_department_employee4" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Contact" Relationship="InventoryModel.FK_department_employee1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Head" Relationship="InventoryModel.FK_department_employee2" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Representative" Relationship="InventoryModel.FK_department_employee3" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_department_employee4" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_department1" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Requisitions" Relationship="InventoryModel.FK_requisition_department1" FromRole="Department" ToRole="Requisition" />
           <NavigationProperty Name="RequisitionCollections" Relationship="InventoryModel.FK_requisitioncollection_department1" FromRole="Department" ToRole="RequisitionCollection" />
           <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_department1" FromRole="Department" ToRole="RetrievalDetails" />
+          <NavigationProperty Name="ShowCollectionMisseds" Relationship="InventoryModel.DepartmentShowCollectionMissed" FromRole="Department" ToRole="ShowCollectionMissed" />
         </EntityType>
         <EntityType Name="Discrepancy">
           <Key>
@@ -1360,7 +1344,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_discrepancy_employee1" FromRole="Discrepancy" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_discrepancy_employee1" FromRole="Discrepancy" ToRole="Employee" />
           <NavigationProperty Name="DiscrepancyDetails" Relationship="InventoryModel.FK_discrepancydetails_discrepancy1" FromRole="Discrepancy" ToRole="DiscrepancyDetails" />
           <NavigationProperty Name="StockAdjustments" Relationship="InventoryModel.FK_stockadjustment_discrepancy1" FromRole="Discrepancy" ToRole="StockAdjustment" />
         </EntityType>
@@ -1371,7 +1355,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DiscrepancyType" Type="Int32" Nullable="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Discrepancy" Relationship="InventoryModel.FK_discrepancydetails_discrepancy1" FromRole="DiscrepancyDetails" ToRole="Discrepancy" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_discrepancydetails_item1" FromRole="DiscrepancyDetails" ToRole="Item" />
         </EntityType>
@@ -1381,6 +1365,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Designation" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
@@ -1393,11 +1378,12 @@
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_employee_department1" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Discrepancies" Relationship="InventoryModel.FK_discrepancy_employee1" FromRole="Employee" ToRole="Discrepancy" />
           <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_employee_employee1" FromRole="Employee" ToRole="Employee1" />
-          <NavigationProperty Name="Employee2" Relationship="InventoryModel.FK_employee_employee1" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_employee_employee1" FromRole="Employee1" ToRole="Employee" />
           <NavigationProperty Name="Role" Relationship="InventoryModel.FK_employee_role1" FromRole="Employee" ToRole="Role" />
           <NavigationProperty Name="User" Relationship="InventoryModel.FK_employee_user1" FromRole="Employee" ToRole="User" />
           <NavigationProperty Name="Items" Relationship="InventoryModel.FK_item_employee1" FromRole="Employee" ToRole="Item" />
           <NavigationProperty Name="ItemPrices" Relationship="InventoryModel.FK_itemprice_employee1" FromRole="Employee" ToRole="ItemPrice" />
+          <NavigationProperty Name="Notifications" Relationship="InventoryModel.FK_Notification_Employee1" FromRole="Employee" ToRole="Notification" />
           <NavigationProperty Name="PurchaseOrders" Relationship="InventoryModel.FK_purchaseorder_employee1" FromRole="Employee" ToRole="PurchaseOrder" />
           <NavigationProperty Name="PurchaseOrders1" Relationship="InventoryModel.FK_purchaseorder_employee2" FromRole="Employee" ToRole="PurchaseOrder" />
           <NavigationProperty Name="PurchaseOrders2" Relationship="InventoryModel.FK_PurchaseOrder_Employee3" FromRole="Employee" ToRole="PurchaseOrder" />
@@ -1408,7 +1394,6 @@
           <NavigationProperty Name="Retrievals" Relationship="InventoryModel.FK_retrieval_employee1" FromRole="Employee" ToRole="Retrieval" />
           <NavigationProperty Name="Roles" Relationship="InventoryModel.FK_role_employee1" FromRole="Employee" ToRole="Role" />
           <NavigationProperty Name="StockAdjustments" Relationship="InventoryModel.FK_stockadjustment_employee1" FromRole="Employee" ToRole="StockAdjustment" />
-          <NavigationProperty Name="StockCards" Relationship="InventoryModel.FK_stockcard_employee1" FromRole="Employee" ToRole="StockCard" />
           <NavigationProperty Name="StockCardDetails" Relationship="InventoryModel.FK_stockcarddetails_employee1" FromRole="Employee" ToRole="StockCardDetails" />
           <NavigationProperty Name="Suppliers" Relationship="InventoryModel.FK_supplier_employee1" FromRole="Employee" ToRole="Supplier" />
           <NavigationProperty Name="Users" Relationship="InventoryModel.FK_user_employee1" FromRole="Employee" ToRole="User" />
@@ -1427,12 +1412,12 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DiscrepancyDetails" Relationship="InventoryModel.FK_discrepancydetails_item1" FromRole="Item" ToRole="DiscrepancyDetails" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_item_employee1" FromRole="Item" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_item_employee1" FromRole="Item" ToRole="Employee" />
           <NavigationProperty Name="PurchaseOrderDetails" Relationship="InventoryModel.FK_purchaseorderdetails_item1" FromRole="Item" ToRole="PurchaseOrderDetails" />
           <NavigationProperty Name="RequisitionCollectionItems" Relationship="InventoryModel.FK_requisitioncollectionitems_item1" FromRole="Item" ToRole="RequisitionCollectionItems" />
           <NavigationProperty Name="RequisitionDetails" Relationship="InventoryModel.FK_requisitiondetails_item1" FromRole="Item" ToRole="RequisitionDetails" />
           <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_item1" FromRole="Item" ToRole="RetrievalDetails" />
-          <NavigationProperty Name="StockCards" Relationship="InventoryModel.FK_stockcard_item1" FromRole="Item" ToRole="StockCard" />
+          <NavigationProperty Name="StockCardDetails" Relationship="InventoryModel.FK_StockCardDetails_Item1" FromRole="Item" ToRole="StockCardDetails" />
         </EntityType>
         <EntityType Name="ItemPrice">
           <Key>
@@ -1444,7 +1429,17 @@
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_itemprice_employee1" FromRole="ItemPrice" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_itemprice_employee1" FromRole="ItemPrice" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_Notification_Employee1" FromRole="Notification" ToRole="Employee" />
         </EntityType>
         <EntityType Name="PurchaseOrder">
           <Key>
@@ -1459,9 +1454,9 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="DeliveryOrderNumber" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
           <Property Name="DeliveryDate" Type="DateTime" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_purchaseorder_employee1" FromRole="PurchaseOrder" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_purchaseorder_employee2" FromRole="PurchaseOrder" ToRole="Employee" />
-          <NavigationProperty Name="Employee2" Relationship="InventoryModel.FK_PurchaseOrder_Employee3" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_purchaseorder_employee1" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="ApprovedBy" Relationship="InventoryModel.FK_purchaseorder_employee2" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="AcceptedBy" Relationship="InventoryModel.FK_PurchaseOrder_Employee3" FromRole="PurchaseOrder" ToRole="Employee" />
           <NavigationProperty Name="Supplier" Relationship="InventoryModel.FK_purchaseorder_supplier1" FromRole="PurchaseOrder" ToRole="Supplier" />
           <NavigationProperty Name="PurchaseOrderDetails" Relationship="InventoryModel.FK_purchaseorderdetails_purchaseorder1" FromRole="PurchaseOrder" ToRole="PurchaseOrderDetails" />
         </EntityType>
@@ -1472,7 +1467,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
-          <Property Name="AcceptedByQty" Type="Int32" Nullable="false" />
+          <Property Name="AcceptedQty" Type="Int32" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_purchaseorderdetails_item1" FromRole="PurchaseOrderDetails" ToRole="Item" />
           <NavigationProperty Name="PurchaseOrder" Relationship="InventoryModel.FK_purchaseorderdetails_purchaseorder1" FromRole="PurchaseOrderDetails" ToRole="PurchaseOrder" />
         </EntityType>
@@ -1481,13 +1476,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="ApprovedDate" Type="DateTime" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_requisition_department1" FromRole="Requisition" ToRole="Department" />
           <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_requisition_employee1" FromRole="Requisition" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_requisition_employee2" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="ApprovedBy" Relationship="InventoryModel.FK_requisition_employee2" FromRole="Requisition" ToRole="Employee" />
           <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_requisitioncollectiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionCollectionDetails" />
           <NavigationProperty Name="RequisitionDetails" Relationship="InventoryModel.FK_requisitiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionDetails" />
         </EntityType>
@@ -1500,7 +1495,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CollectionPoint" Relationship="InventoryModel.FK_requisitioncollection_collectionpoint1" FromRole="RequisitionCollection" ToRole="CollectionPoint" />
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_requisitioncollection_department1" FromRole="RequisitionCollection" ToRole="Department" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_requisitioncollection_employee1" FromRole="RequisitionCollection" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisitioncollection_employee1" FromRole="RequisitionCollection" ToRole="Employee" />
           <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionDetails" />
           <NavigationProperty Name="RequisitionCollectionItems" Relationship="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionItems" />
         </EntityType>
@@ -1517,10 +1512,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_requisitioncollectionitems_employee1" FromRole="RequisitionCollectionItems" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisitioncollectionitems_employee1" FromRole="RequisitionCollectionItems" ToRole="Employee" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_requisitioncollectionitems_item1" FromRole="RequisitionCollectionItems" ToRole="Item" />
           <NavigationProperty Name="RequisitionCollection" Relationship="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" FromRole="RequisitionCollectionItems" ToRole="RequisitionCollection" />
         </EntityType>
@@ -1530,7 +1525,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
-          <Property Name="DeliveredQty" Type="Int32" Nullable="false" />
+          <Property Name="DeliveredQty" Type="Int32" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_requisitiondetails_item1" FromRole="RequisitionDetails" ToRole="Item" />
           <NavigationProperty Name="Requisition" Relationship="InventoryModel.FK_requisitiondetails_requisition1" FromRole="RequisitionDetails" ToRole="Requisition" />
         </EntityType>
@@ -1541,7 +1536,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_retrieval_employee1" FromRole="Retrieval" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_retrieval_employee1" FromRole="Retrieval" ToRole="Employee" />
           <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_retrieval1" FromRole="Retrieval" ToRole="RetrievalDetails" />
         </EntityType>
         <EntityType Name="RetrievalDetail">
@@ -1550,7 +1545,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="NeededQty" Type="Int32" Nullable="false" />
-          <Property Name="ActualQty" Type="Int32" Nullable="false" />
+          <Property Name="ActualQty" Type="Int32" />
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_retrievaldetails_department1" FromRole="RetrievalDetails" ToRole="Department" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_retrievaldetails_item1" FromRole="RetrievalDetails" ToRole="Item" />
           <NavigationProperty Name="Retrieval" Relationship="InventoryModel.FK_retrievaldetails_retrieval1" FromRole="RetrievalDetails" ToRole="Retrieval" />
@@ -1564,7 +1559,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_role1" FromRole="Role" ToRole="Employee" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_role_employee1" FromRole="Role" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_role_employee1" FromRole="Role" ToRole="Employee" />
         </EntityType>
         <EntityType Name="StockAdjustment">
           <Key>
@@ -1574,32 +1569,20 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Discrepancy" Relationship="InventoryModel.FK_stockadjustment_discrepancy1" FromRole="StockAdjustment" ToRole="Discrepancy" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_stockadjustment_employee1" FromRole="StockAdjustment" ToRole="Employee" />
-        </EntityType>
-        <EntityType Name="StockCard">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_stockcard_employee1" FromRole="StockCard" ToRole="Employee" />
-          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_stockcard_item1" FromRole="StockCard" ToRole="Item" />
-          <NavigationProperty Name="StockCardDetails" Relationship="InventoryModel.FK_stockcarddetails_stockcard1" FromRole="StockCard" ToRole="StockCardDetails" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_stockadjustment_employee1" FromRole="StockAdjustment" ToRole="Employee" />
         </EntityType>
         <EntityType Name="StockCardDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="InputFrom" Type="Int32" Nullable="false" />
-          <Property Name="InputFromId" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="Balance" Type="Int32" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_stockcarddetails_employee1" FromRole="StockCardDetails" ToRole="Employee" />
-          <NavigationProperty Name="StockCard" Relationship="InventoryModel.FK_stockcarddetails_stockcard1" FromRole="StockCardDetails" ToRole="StockCard" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_stockcarddetails_employee1" FromRole="StockCardDetails" ToRole="Employee" />
+          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_StockCardDetails_Item1" FromRole="StockCardDetails" ToRole="Item" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1615,7 +1598,7 @@
           <Property Name="GstRegistrationNumber" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_supplier_employee1" FromRole="Supplier" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_supplier_employee1" FromRole="Supplier" ToRole="Employee" />
           <NavigationProperty Name="PurchaseOrders" Relationship="InventoryModel.FK_purchaseorder_supplier1" FromRole="Supplier" ToRole="PurchaseOrder" />
         </EntityType>
         <EntityType Name="User">
@@ -1628,7 +1611,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_user1" FromRole="User" ToRole="Employee" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_user_employee1" FromRole="User" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_user_employee1" FromRole="User" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_CollectionMissed_Department1">
           <End Role="Department" Type="InventoryModel.Department" Multiplicity="1" />
@@ -1651,11 +1634,11 @@
           <End Role="RequisitionCollection" Type="InventoryModel.RequisitionCollection" Multiplicity="*" />
         </Association>
         <Association Name="FK_department_employee1">
-          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
           <End Role="Department" Type="InventoryModel.Department" Multiplicity="*" />
         </Association>
         <Association Name="FK_department_employee2">
-          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
           <End Role="Department" Type="InventoryModel.Department" Multiplicity="*" />
         </Association>
         <Association Name="FK_department_employee3">
@@ -1718,6 +1701,10 @@
           <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
           <End Role="ItemPrice" Type="InventoryModel.ItemPrice" Multiplicity="*" />
         </Association>
+        <Association Name="FK_Notification_Employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Notification" Type="InventoryModel.Notification" Multiplicity="*" />
+        </Association>
         <Association Name="FK_purchaseorder_employee1">
           <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
           <End Role="PurchaseOrder" Type="InventoryModel.PurchaseOrder" Multiplicity="*" />
@@ -1758,10 +1745,6 @@
           <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
           <End Role="StockAdjustment" Type="InventoryModel.StockAdjustment" Multiplicity="*" />
         </Association>
-        <Association Name="FK_stockcard_employee1">
-          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
-          <End Role="StockCard" Type="InventoryModel.StockCard" Multiplicity="*" />
-        </Association>
         <Association Name="FK_stockcarddetails_employee1">
           <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
           <End Role="StockCardDetails" Type="InventoryModel.StockCardDetail" Multiplicity="*" />
@@ -1790,9 +1773,9 @@
           <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
           <End Role="RetrievalDetails" Type="InventoryModel.RetrievalDetail" Multiplicity="*" />
         </Association>
-        <Association Name="FK_stockcard_item1">
+        <Association Name="FK_StockCardDetails_Item1">
           <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
-          <End Role="StockCard" Type="InventoryModel.StockCard" Multiplicity="*" />
+          <End Role="StockCardDetails" Type="InventoryModel.StockCardDetail" Multiplicity="*" />
         </Association>
         <Association Name="FK_purchaseorder_supplier1">
           <End Role="Supplier" Type="InventoryModel.Supplier" Multiplicity="1" />
@@ -1822,9 +1805,13 @@
           <End Role="Retrieval" Type="InventoryModel.Retrieval" Multiplicity="1" />
           <End Role="RetrievalDetails" Type="InventoryModel.RetrievalDetail" Multiplicity="*" />
         </Association>
-        <Association Name="FK_stockcarddetails_stockcard1">
-          <End Role="StockCard" Type="InventoryModel.StockCard" Multiplicity="1" />
-          <End Role="StockCardDetails" Type="InventoryModel.StockCardDetail" Multiplicity="*" />
+        <EntityType Name="PendingRequisition" BaseType="InventoryModel.Requisition" />
+        <EntityType Name="ShowCollectionMissed" BaseType="InventoryModel.CollectionMissed" >
+          <NavigationProperty Name="Department_1" Relationship="InventoryModel.DepartmentShowCollectionMissed" FromRole="ShowCollectionMissed" ToRole="Department" />
+        </EntityType>
+        <Association Name="DepartmentShowCollectionMissed">
+          <End Type="InventoryModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="InventoryModel.ShowCollectionMissed" Role="ShowCollectionMissed" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1832,11 +1819,20 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
-          <EntitySetMapping Name="CollectionMisseds"><EntityTypeMapping TypeName="InventoryModel.CollectionMissed"><MappingFragment StoreEntitySet="CollectionMissed">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-            <ScalarProperty Name="Status" ColumnName="Status" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CollectionMisseds">
+            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.CollectionMissed)">
+              <MappingFragment StoreEntitySet="CollectionMissed">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.ShowCollectionMissed)">
+              <MappingFragment StoreEntitySet="CollectionMissed">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition ColumnName="Status" Value="1" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="CollectionPoints"><EntityTypeMapping TypeName="InventoryModel.CollectionPoint"><MappingFragment StoreEntitySet="CollectionPoint">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1864,6 +1860,7 @@
           <EntitySetMapping Name="Employees"><EntityTypeMapping TypeName="InventoryModel.Employee"><MappingFragment StoreEntitySet="Employee">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Designation" ColumnName="Designation" />
             <ScalarProperty Name="Email" ColumnName="Email" />
             <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
             <ScalarProperty Name="Status" ColumnName="Status" />
@@ -1886,6 +1883,12 @@
             <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
             <ScalarProperty Name="Status" ColumnName="Status" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Notifications"><EntityTypeMapping TypeName="InventoryModel.Notification"><MappingFragment StoreEntitySet="Notification">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Message" ColumnName="Message" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PurchaseOrders"><EntityTypeMapping TypeName="InventoryModel.PurchaseOrder"><MappingFragment StoreEntitySet="PurchaseOrder">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="DeliverAddress" ColumnName="DeliverAddress" />
@@ -1901,15 +1904,24 @@
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Price" ColumnName="Price" />
             <ScalarProperty Name="Qty" ColumnName="Qty" />
-            <ScalarProperty Name="AcceptedByQty" ColumnName="AcceptedByQty" />
+            <ScalarProperty Name="AcceptedQty" ColumnName="AcceptedQty" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Requisitions"><EntityTypeMapping TypeName="InventoryModel.Requisition"><MappingFragment StoreEntitySet="Requisition">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-            <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
-            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-            <ScalarProperty Name="Status" ColumnName="Status" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Requisitions">
+            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.Requisition)">
+              <MappingFragment StoreEntitySet="Requisition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.PendingRequisition)">
+              <MappingFragment StoreEntitySet="Requisition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition ColumnName="Status" Value="1" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="RequisitionCollections"><EntityTypeMapping TypeName="InventoryModel.RequisitionCollection"><MappingFragment StoreEntitySet="RequisitionCollection">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1950,15 +1962,9 @@
             <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
             <ScalarProperty Name="Status" ColumnName="Status" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="StockCards"><EntityTypeMapping TypeName="InventoryModel.StockCard"><MappingFragment StoreEntitySet="StockCard">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-            <ScalarProperty Name="Status" ColumnName="Status" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="StockCardDetails"><EntityTypeMapping TypeName="InventoryModel.StockCardDetail"><MappingFragment StoreEntitySet="StockCardDetails">
             <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="InputFrom" ColumnName="InputFrom" />
-            <ScalarProperty Name="InputFromId" ColumnName="InputFromId" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
             <ScalarProperty Name="Qty" ColumnName="Qty" />
             <ScalarProperty Name="Balance" ColumnName="Balance" />
             <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -2031,6 +2037,7 @@
             <EndProperty Name="Department">
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
+            <Condition ColumnName="ContactId" IsNull="false" />
           </AssociationSetMapping>
           <AssociationSetMapping Name="FK_department_employee2" TypeName="InventoryModel.FK_department_employee2" StoreEntitySet="Department">
             <EndProperty Name="Employee">
@@ -2039,6 +2046,7 @@
             <EndProperty Name="Department">
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
+            <Condition ColumnName="HeadId" IsNull="false" />
           </AssociationSetMapping>
           <AssociationSetMapping Name="FK_department_employee3" TypeName="InventoryModel.FK_department_employee3" StoreEntitySet="Department">
             <EndProperty Name="Employee">
@@ -2162,6 +2170,14 @@
               <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Notification_Employee1" TypeName="InventoryModel.FK_Notification_Employee1" StoreEntitySet="Notification">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="EmployeeId" />
+            </EndProperty>
+            <EndProperty Name="Notification">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_purchaseorder_employee1" TypeName="InventoryModel.FK_purchaseorder_employee1" StoreEntitySet="PurchaseOrder">
             <EndProperty Name="Employee">
               <ScalarProperty Name="Id" ColumnName="CreatedBy" />
@@ -2246,14 +2262,6 @@
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_stockcard_employee1" TypeName="InventoryModel.FK_stockcard_employee1" StoreEntitySet="StockCard">
-            <EndProperty Name="Employee">
-              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
-            </EndProperty>
-            <EndProperty Name="StockCard">
-              <ScalarProperty Name="Id" ColumnName="Id" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_stockcarddetails_employee1" TypeName="InventoryModel.FK_stockcarddetails_employee1" StoreEntitySet="StockCardDetails">
             <EndProperty Name="Employee">
               <ScalarProperty Name="Id" ColumnName="CreatedBy" />
@@ -2312,11 +2320,11 @@
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_stockcard_item1" TypeName="InventoryModel.FK_stockcard_item1" StoreEntitySet="StockCard">
+          <AssociationSetMapping Name="FK_StockCardDetails_Item1" TypeName="InventoryModel.FK_StockCardDetails_Item1" StoreEntitySet="StockCardDetails">
             <EndProperty Name="Item">
               <ScalarProperty Name="Id" ColumnName="ItemId" />
             </EndProperty>
-            <EndProperty Name="StockCard">
+            <EndProperty Name="StockCardDetails">
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
           </AssociationSetMapping>
@@ -2376,13 +2384,14 @@
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_stockcarddetails_stockcard1" TypeName="InventoryModel.FK_stockcarddetails_stockcard1" StoreEntitySet="StockCardDetails">
-            <EndProperty Name="StockCard">
-              <ScalarProperty Name="Id" ColumnName="StockCardId" />
-            </EndProperty>
-            <EndProperty Name="StockCardDetails">
+          <AssociationSetMapping Name="DepartmentShowCollectionMissed" TypeName="InventoryModel.DepartmentShowCollectionMissed" StoreEntitySet="CollectionMissed">
+            <EndProperty Name="ShowCollectionMissed">
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+            </EndProperty>
+            <Condition ColumnName="DepartmentId" IsNull="false" />
           </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
@@ -2405,390 +2414,453 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Inventory">
-        <EntityTypeShape EntityType="InventoryModel.CollectionMissed" Width="1.5" PointX="5.25" PointY="27.375" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.CollectionPoint" Width="1.5" PointX="0.75" PointY="27.25" Height="2.172587890624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Department" Width="1.5" PointX="3" PointY="26.25" Height="4.0956022135416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Discrepancy" Width="1.5" PointX="10.5" PointY="17" Height="2.172587890624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.DiscrepancyDetail" Width="1.5" PointX="12.75" PointY="19.375" Height="2.172587890624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Employee" Width="1.5" PointX="8.25" PointY="24.625" Height="6.3583789062500031" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Item" Width="1.5" PointX="10.5" PointY="19.875" Height="4.0956022135416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.ItemPrice" Width="1.5" PointX="10.5" PointY="24.75" Height="2.172587890624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.PurchaseOrder" Width="1.5" PointX="12.75" PointY="34.5" Height="3.7109993489583246" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.PurchaseOrderDetail" Width="1.5" PointX="15.75" PointY="20.875" Height="2.1725878906250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Requisition" Width="1.5" PointX="10.5" PointY="27.875" Height="2.9417936197916674" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.RequisitionCollection" Width="1.5" PointX="10.5" PointY="32.125" Height="2.5571907552083246" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.RequisitionCollectionDetail" Width="1.5" PointX="15.75" PointY="30.5" Height="1.595683593749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.RequisitionCollectionItem" Width="1.5" PointX="12.75" PointY="26.875" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.RequisitionDetail" Width="1.5" PointX="15.75" PointY="18" Height="1.9802864583333388" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Retrieval" Width="1.5" PointX="10.5" PointY="39.125" Height="1.9802864583333388" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.RetrievalDetail" Width="1.5" PointX="12.75" PointY="30.375" Height="2.1725878906250067" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Role" Width="1.5" PointX="10.5" PointY="41.875" Height="2.172587890624996" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.StockAdjustment" Width="1.5" PointX="12.75" PointY="23.5" Height="1.9802864583333388" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.StockCard" Width="1.5" PointX="15.75" PointY="24.875" Height="2.1725878906250031" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.StockCardDetail" Width="1.5" PointX="18" PointY="27" Height="2.7494921875000031" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Supplier" Width="1.5" PointX="10.5" PointY="44.75" Height="3.3263964843750102" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.User" Width="1.5" PointX="10.5" PointY="48.875" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.CollectionMissed" Width="1.5" PointX="5.25" PointY="26.25" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.CollectionPoint" Width="1.5" PointX="0.75" PointY="26.125" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Department" Width="1.5" PointX="3" PointY="25.375" Height="3.564474283854171" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Discrepancy" Width="1.5" PointX="10.5" PointY="15.5" Height="1.9210009765624978" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.DiscrepancyDetail" Width="1.5" PointX="12.75" PointY="17.75" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Employee" Width="1.5" PointX="8.25" PointY="23.875" Height="6.5227262369791674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Item" Width="1.5" PointX="10.5" PointY="18.25" Height="3.5644742838541674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.ItemPrice" Width="1.5" PointX="10.5" PointY="22.5" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Notification" Width="1.5" PointX="10.5" PointY="25.25" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.PurchaseOrder" Width="1.5" PointX="12.75" PointY="33.375" Height="3.2357796223958388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.PurchaseOrderDetail" Width="1.5" PointX="15.75" PointY="19" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Requisition" Width="1.5" PointX="10.5" PointY="27.875" Height="2.5783902994791674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionCollection" Width="1.5" PointX="15.5" PointY="27" Height="2.2496956380208388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionCollectionDetail" Width="1.5" PointX="17.75" PointY="28" Height="1.427958984374996" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionCollectionItem" Width="1.5" PointX="12.75" PointY="25.25" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionDetail" Width="1.5" PointX="15.75" PointY="16.125" Height="1.7566536458333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Retrieval" Width="1.5" PointX="10.5" PointY="38" Height="1.7566536458333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RetrievalDetail" Width="1.5" PointX="12.75" PointY="29" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Role" Width="1.5" PointX="10.5" PointY="40.5" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.StockAdjustment" Width="1.5" PointX="12.75" PointY="22.125" Height="1.7566536458333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.StockCardDetail" Width="1.5" PointX="15.75" PointY="23.125" Height="2.2496956380208388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Supplier" Width="1.5" PointX="10.5" PointY="43.25" Height="2.9070849609375102" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.User" Width="1.5" PointX="10.5" PointY="46.875" Height="2.0853483072916674" IsExpanded="true" />
         <AssociationConnector Association="InventoryModel.FK_CollectionMissed_Department1" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="28.365143229166666" />
-          <ConnectorPoint PointX="5.25" PointY="28.365143229166666" />
+          <ConnectorPoint PointX="4.5" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="5.25" PointY="27.128326822916666" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_CollectionMissed_Employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="28.253326822916669" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="28.253326822916669" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="28.253326822916669" />
-          <ConnectorPoint PointX="6.75" PointY="28.253326822916669" />
+          <ConnectorPoint PointX="8.25" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="6.75" PointY="27.128326822916666" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_CollectionPoint_Employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="4.0364598333333337" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="3.8697931666666667" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="3.5286440833333335" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="3.3619774166666665" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="1.8880227083333334" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="1.7213560416666669" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="1.2460921875" PointY="30.430176595052085" />
-          <ConnectorPoint PointX="1.2460921875" PointY="29.171000976562503" />
+          <ConnectorPoint PointX="8.25" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="3.8020808333333354" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="3.6354141666666684" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="1.5" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="1.5" PointY="28.046000976562503" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_department_collectionpoint1" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="28.336293945312498" />
-          <ConnectorPoint PointX="3" PointY="28.336293945312498" />
+          <ConnectorPoint PointX="2.25" PointY="27.085500488281252" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="27.085500488281252" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="27.085500488281252" />
+          <ConnectorPoint PointX="3" PointY="27.085500488281252" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollection_collectionpoint1" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.8046893750000002" PointY="29.171000976562503" />
-          <ConnectorPoint PointX="1.8046893750000002" PointY="33.552395878265145" />
-          <ConnectorPoint PointX="3.8697931666666667" PointY="33.552395878265145" />
-          <ConnectorPoint PointX="4.0364598333333337" PointY="33.552395878265145" />
-          <ConnectorPoint PointX="8.25045791065705" PointY="33.552395878265145" />
-          <ConnectorPoint PointX="9.1547610076121781" PointY="33.552395878265145" />
-          <ConnectorPoint PointX="9.2922243529647428" PointY="33.552395878265145" />
-          <ConnectorPoint PointX="9.7519759835737165" PointY="33.552395878265145" />
-          <ConnectorPoint PointX="10.5" PointY="33.552395878265145" />
+          <ConnectorPoint PointX="1.5" PointY="26.125" />
+          <ConnectorPoint PointX="1.5" PointY="25.875" />
+          <ConnectorPoint PointX="2.75" PointY="25.875" />
+          <ConnectorPoint PointX="2.75" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="3.6354141666666684" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="3.8020808333333354" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="8.2156169310897429" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="8.7166493910256424" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="10.222330729166666" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="10.388997395833334" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="12.5" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="12.5" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="15.166666666666666" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="15.333333333333334" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="15.5" PointY="28.518568154144287" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_department_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="26.886515102891057" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="26.886515102891057" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="26.886515102891057" />
-          <ConnectorPoint PointX="4.5" PointY="26.886515102891057" />
+          <ConnectorPoint PointX="8.25" PointY="28.44015172129313" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.44015172129313" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.44015172129313" />
+          <ConnectorPoint PointX="4.5" PointY="28.44015172129313" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_department_employee2" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="29.649801495702388" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="29.649801495702388" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="29.649801495702388" />
-          <ConnectorPoint PointX="4.5" PointY="29.649801495702388" />
+          <ConnectorPoint PointX="8.25" PointY="28.871031949971517" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.871031949971517" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.871031949971517" />
+          <ConnectorPoint PointX="4.5" PointY="28.871031949971517" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_department_employee3" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="27.162007551445527" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="27.162007551445527" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="27.162007551445527" />
-          <ConnectorPoint PointX="4.5" PointY="27.162007551445527" />
+          <ConnectorPoint PointX="8.25" PointY="28.192152683563229" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.192152683563229" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.192152683563229" />
+          <ConnectorPoint PointX="4.5" PointY="28.192152683563229" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_department_employee4" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.25" PointY="26.505757551445527" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="26.505757551445527" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="26.505757551445527" />
-          <ConnectorPoint PointX="4.5" PointY="26.505757551445527" />
+          <ConnectorPoint PointX="8.25" PointY="28.655591835632322" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.655591835632322" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.655591835632322" />
+          <ConnectorPoint PointX="4.5" PointY="28.655591835632322" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_employee_department1" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="29.359477570767865" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="29.359477570767865" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="29.359477570767865" />
-          <ConnectorPoint PointX="8.25" PointY="29.359477570767865" />
+          <ConnectorPoint PointX="4.5" PointY="25.8986669921875" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="25.8986669921875" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="25.8986669921875" />
+          <ConnectorPoint PointX="8.25" PointY="25.8986669921875" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisition_department1" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.75" PointY="26.25" />
-          <ConnectorPoint PointX="3.75" PointY="26" />
-          <ConnectorPoint PointX="8" PointY="26" />
-          <ConnectorPoint PointX="8" PointY="31.233378906250003" />
-          <ConnectorPoint PointX="8.25045791065705" PointY="31.23337890625" />
-          <ConnectorPoint PointX="9.75197598357372" PointY="31.233378906250003" />
-          <ConnectorPoint PointX="10.125" PointY="31.233378906250003" />
-          <ConnectorPoint PointX="10.125" PointY="29.255045979817709" />
-          <ConnectorPoint PointX="10.5" PointY="29.255045979817709" />
+          <ConnectorPoint PointX="4.5000000000000036" PointY="28.939474283854171" />
+          <ConnectorPoint PointX="4.875" PointY="29.314474283854167" />
+          <ConnectorPoint PointX="4.875" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="8.2156169310897429" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="8.7166493910256424" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="10.125" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="10.5" PointY="30.453390299479167" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollection_department1" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.9531265" PointY="29.814474283854171" />
-          <ConnectorPoint PointX="3.9531265" PointY="33.994798258142993" />
-          <ConnectorPoint PointX="8.25045791065705" PointY="33.994798258142993" />
-          <ConnectorPoint PointX="9.1547610076121781" PointY="33.994798258142993" />
-          <ConnectorPoint PointX="9.2922243529647428" PointY="33.994798258142993" />
-          <ConnectorPoint PointX="9.7519759835737165" PointY="33.994798258142993" />
-          <ConnectorPoint PointX="10.5" PointY="33.994798258142993" />
+          <ConnectorPoint PointX="3.75" PointY="25.375" />
+          <ConnectorPoint PointX="3.75" PointY="25.125" />
+          <ConnectorPoint PointX="5" PointY="25.125" />
+          <ConnectorPoint PointX="5" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="8.2156169310897429" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="8.7166493910256424" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="10.222330729166666" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="10.388997395833334" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="12.4375" PointY="30.647726236979167" />
+          <ConnectorPoint PointX="12.4375" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="15.166666666666666" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="15.333333333333334" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="15.5" PointY="28.041381644268036" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_retrievaldetails_department1" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.44531075" PointY="29.814474283854171" />
-          <ConnectorPoint PointX="3.44531075" PointY="31.550075491373704" />
-          <ConnectorPoint PointX="3.8697931666666667" PointY="31.550075491373704" />
-          <ConnectorPoint PointX="4.0364598333333337" PointY="31.550075491373704" />
-          <ConnectorPoint PointX="8.25045791065705" PointY="31.5500754913737" />
-          <ConnectorPoint PointX="9.75197598357372" PointY="31.550075491373704" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="31.550075491373704" />
-          <ConnectorPoint PointX="12.458333333333334" PointY="31.550075491373704" />
-          <ConnectorPoint PointX="12.75" PointY="31.550075491373704" />
+          <ConnectorPoint PointX="3.7187475000000019" PointY="28.939474283854171" />
+          <ConnectorPoint PointX="3.7187475000000019" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="8.2156169310897429" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="8.7166493910256424" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="10.131998697916666" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="10.298665364583334" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="11.166666666666666" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="11.333333333333334" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="12.75" PointY="30.738058268229167" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_discrepancy_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.8337909735576936" PointY="24.625" />
-          <ConnectorPoint PointX="8.8337909735576936" PointY="17.960500488281252" />
-          <ConnectorPoint PointX="10.5" PointY="17.960500488281252" />
+          <ConnectorPoint PointX="9" PointY="23.875" />
+          <ConnectorPoint PointX="9" PointY="16.460500488281248" />
+          <ConnectorPoint PointX="10.5" PointY="16.460500488281248" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_discrepancydetails_discrepancy1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="18.086293945312498" />
-          <ConnectorPoint PointX="13.5" PointY="18.086293945312498" />
-          <ConnectorPoint PointX="13.5" PointY="19.375" />
+          <ConnectorPoint PointX="12" PointY="16.460500488281248" />
+          <ConnectorPoint PointX="13.5" PointY="16.460500488281248" />
+          <ConnectorPoint PointX="13.5" PointY="17.75" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_stockadjustment_discrepancy1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="19.172587890624996" />
-          <ConnectorPoint PointX="12.375" PointY="19.547587890624996" />
-          <ConnectorPoint PointX="12.375" PointY="24.490143229166669" />
-          <ConnectorPoint PointX="12.416666666666666" PointY="24.490143229166669" />
-          <ConnectorPoint PointX="12.708333333333334" PointY="24.490143229166669" />
-          <ConnectorPoint PointX="12.75" PointY="24.490143229166669" />
+          <ConnectorPoint PointX="12.000000000000002" PointY="17.421000976562496" />
+          <ConnectorPoint PointX="12.375" PointY="17.796000976562496" />
+          <ConnectorPoint PointX="12.375" PointY="23.003326822916669" />
+          <ConnectorPoint PointX="12.385416666666666" PointY="23.003326822916669" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="23.003326822916669" />
+          <ConnectorPoint PointX="12.75" PointY="23.003326822916669" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_discrepancydetails_item1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="20.711293945312498" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="20.711293945312498" />
-          <ConnectorPoint PointX="12.520833333333334" PointY="20.711293945312498" />
-          <ConnectorPoint PointX="12.75" PointY="20.711293945312498" />
+          <ConnectorPoint PointX="12" PointY="18.960500488281248" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="18.960500488281248" />
+          <ConnectorPoint PointX="12.614583333333334" PointY="18.960500488281248" />
+          <ConnectorPoint PointX="12.75" PointY="18.960500488281248" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_employee_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="24.625" />
-          <ConnectorPoint PointX="9" PointY="24.34375" />
-          <ConnectorPoint PointX="9.3323076923076922" PointY="24.34375" />
-          <ConnectorPoint PointX="9.3323076923076922" PointY="24.625" />
+          <ConnectorPoint PointX="8.7819230769230767" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.7819230769230767" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="9.2284615384615378" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="9.2284615384615378" PointY="30.397726236979167" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_employee_role1" ManuallyRouted="false">
-          <ConnectorPoint PointX="10.5" PointY="43.171366267658613" />
-          <ConnectorPoint PointX="9.7519759835737183" PointY="43.171366267658613" />
-          <ConnectorPoint PointX="9.441446967147435" PointY="43.171366267658613" />
-          <ConnectorPoint PointX="9.004195478766027" PointY="43.171366267658613" />
-          <ConnectorPoint PointX="8.83752881209936" PointY="43.171366267658613" />
-          <ConnectorPoint PointX="8.4800874879807679" PointY="43.171366267658613" />
-          <ConnectorPoint PointX="8.4800874879807679" PointY="30.983378906250003" />
+          <ConnectorPoint PointX="10.5" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="9.4578057371794877" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.692174258814104" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.4385274599359" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.4104055288461552" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.4104055288461552" PointY="30.397726236979167" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_employee_user1" ManuallyRouted="false">
-          <ConnectorPoint PointX="10.5" PointY="50.280975726656443" />
-          <ConnectorPoint PointX="9.524780300480769" PointY="50.280975726656443" />
-          <ConnectorPoint PointX="9.524780300480769" PointY="30.983378906250003" />
+          <ConnectorPoint PointX="10.5" PointY="47.917674153645834" />
+          <ConnectorPoint PointX="8.5218607932692318" PointY="47.917674153645834" />
+          <ConnectorPoint PointX="8.5218607932692318" PointY="30.397726236979167" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_item_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.52048326923077" PointY="24.625" />
-          <ConnectorPoint PointX="9.52048326923077" PointY="21.657237141927084" />
-          <ConnectorPoint PointX="10.5" PointY="21.657237141927084" />
+          <ConnectorPoint PointX="9.4062525" PointY="23.875" />
+          <ConnectorPoint PointX="9.4062525" PointY="20.032237141927084" />
+          <ConnectorPoint PointX="10.5" PointY="20.032237141927084" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_itemprice_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="25.710500488281252" />
-          <ConnectorPoint PointX="10.5" PointY="25.710500488281252" />
+          <ConnectorPoint PointX="9.75" PointY="24.148000488281248" />
+          <ConnectorPoint PointX="10.5" PointY="24.148000488281248" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_Notification_Employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="26.128326822916666" />
+          <ConnectorPoint PointX="10.5" PointY="26.128326822916666" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_purchaseorder_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.7702966165865384" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="8.7702966165865384" PointY="36.290033835966781" />
-          <ConnectorPoint PointX="8.83752881209936" PointY="36.290033835966781" />
-          <ConnectorPoint PointX="9.1547610076121781" PointY="36.290033835966781" />
-          <ConnectorPoint PointX="9.2922243529647428" PointY="36.290033835966781" />
-          <ConnectorPoint PointX="9.7519759835737165" PointY="36.290033835966781" />
-          <ConnectorPoint PointX="12.354166666666666" PointY="36.290033835966781" />
-          <ConnectorPoint PointX="12.520833333333334" PointY="36.290033835966781" />
-          <ConnectorPoint PointX="12.75" PointY="36.290033835966781" />
+          <ConnectorPoint PointX="9.0051923076923082" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.0051923076923082" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="12.75" PointY="34.992889811197919" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_purchaseorder_employee2" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.6251920522836532" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="8.6251920522836532" PointY="35.36376441798339" />
-          <ConnectorPoint PointX="8.6869632832532044" PointY="35.36376441798339" />
-          <ConnectorPoint PointX="9.1547610076121817" PointY="35.36376441798339" />
-          <ConnectorPoint PointX="9.2922243529647428" PointY="35.36376441798339" />
-          <ConnectorPoint PointX="9.7519759835737165" PointY="35.36376441798339" />
-          <ConnectorPoint PointX="12.354166666666666" PointY="35.36376441798339" />
-          <ConnectorPoint PointX="12.520833333333334" PointY="35.36376441798339" />
-          <ConnectorPoint PointX="12.75" PointY="35.36376441798339" />
+          <ConnectorPoint PointX="8.6333160576923085" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.6333160576923085" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="12.75" PointY="34.152692405598955" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_PurchaseOrder_Employee3" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.3337912439903832" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="8.3337912439903832" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="8.396754154647434" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="8.5634208213141019" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="8.83752881209936" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="9.1547610076121781" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="9.2922243529647428" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="9.7519759835737165" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="12.354166666666666" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="12.520833333333334" PointY="37.044159229181311" />
-          <ConnectorPoint PointX="12.75" PointY="37.044159229181311" />
+          <ConnectorPoint PointX="8.2989502644230768" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.2989502644230768" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="8.3270721955128213" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="8.692174258814104" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="12.75" PointY="35.496447405598957" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisition_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="28.502522989908854" />
-          <ConnectorPoint PointX="10.5" PointY="28.502522989908854" />
+          <ConnectorPoint PointX="9.75" PointY="29.136363118489584" />
+          <ConnectorPoint PointX="10.5" PointY="29.136363118489584" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisition_employee2" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="29.916718139648438" />
-          <ConnectorPoint PointX="10.041666666666666" PointY="29.916718139648438" />
-          <ConnectorPoint PointX="10.208333333333334" PointY="29.916718139648438" />
-          <ConnectorPoint PointX="10.5" PointY="29.916718139648438" />
+          <ConnectorPoint PointX="9.75" PointY="28.443181559244792" />
+          <ConnectorPoint PointX="10.5" PointY="28.443181559244792" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollection_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.2263350721153845" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="9.2263350721153845" PointY="32.807445439132572" />
-          <ConnectorPoint PointX="9.2922243529647428" PointY="32.807445439132572" />
-          <ConnectorPoint PointX="9.7519759835737165" PointY="32.807445439132572" />
-          <ConnectorPoint PointX="10.5" PointY="32.807445439132572" />
+          <ConnectorPoint PointX="9.75" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.310640993940302" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.47730766060697" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="15.5" PointY="27.512178518880209" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollectionitems_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="27.34375" />
-          <ConnectorPoint PointX="12.229166666666666" PointY="27.34375" />
-          <ConnectorPoint PointX="12.536458333333334" PointY="27.34375" />
-          <ConnectorPoint PointX="12.75" PointY="27.34375" />
+          <ConnectorPoint PointX="9.75" PointY="27.2022509765625" />
+          <ConnectorPoint PointX="12.447916666666666" PointY="27.2022509765625" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="27.2022509765625" />
+          <ConnectorPoint PointX="12.75" PointY="27.2022509765625" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_retrieval_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.3755576862980767" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="9.3755576862980767" PointY="40.003326822916669" />
-          <ConnectorPoint PointX="9.441446967147435" PointY="40.003326822916669" />
-          <ConnectorPoint PointX="9.7519759835737183" PointY="40.003326822916669" />
-          <ConnectorPoint PointX="10.5" PointY="40.003326822916669" />
+          <ConnectorPoint PointX="9.52048326923077" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.52048326923077" PointY="38.878326822916669" />
+          <ConnectorPoint PointX="9.58316080128205" PointY="38.878326822916669" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="38.878326822916669" />
+          <ConnectorPoint PointX="10.5" PointY="38.878326822916669" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_role_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.071427674278846" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="9.071427674278846" PointY="42.491930633829305" />
-          <ConnectorPoint PointX="9.441446967147435" PointY="42.491930633829305" />
-          <ConnectorPoint PointX="9.7519759835737183" PointY="42.491930633829305" />
-          <ConnectorPoint PointX="10.5" PointY="42.491930633829305" />
+          <ConnectorPoint PointX="9.6664941346153839" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.6664941346153839" PointY="40.948997744140627" />
+          <ConnectorPoint PointX="10.5" PointY="40.948997744140627" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_stockadjustment_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="24.65625" />
-          <ConnectorPoint PointX="12.229166666666666" PointY="24.65625" />
-          <ConnectorPoint PointX="12.630208333333334" PointY="24.65625" />
-          <ConnectorPoint PointX="12.75" PointY="24.65625" />
-        </AssociationConnector>
-        <AssociationConnector Association="InventoryModel.FK_stockcard_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.75" PointY="26.764750976562503" />
-          <ConnectorPoint PointX="12.229166666666666" PointY="26.764750976562503" />
-          <ConnectorPoint PointX="12.536458333333334" PointY="26.764750976562503" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="26.764750976562503" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="26.764750976562503" />
-          <ConnectorPoint PointX="15.75" PointY="26.764750976562503" />
+          <ConnectorPoint PointX="8.5937475" PointY="23.875" />
+          <ConnectorPoint PointX="8.5937475" PointY="22.28125" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="22.28125" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="22.28125" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="22.28125" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="22.28125" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="22.28125" />
+          <ConnectorPoint PointX="12.614583333333334" PointY="22.28125" />
+          <ConnectorPoint PointX="12.75" PointY="22.28125" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_stockcarddetails_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.1771371213942317" PointY="24.625" />
-          <ConnectorPoint PointX="9.1771371213942317" PointY="24.375" />
-          <ConnectorPoint PointX="9.4371499358974358" PointY="24.375" />
-          <ConnectorPoint PointX="9.6038166025641036" PointY="24.375" />
-          <ConnectorPoint PointX="12.3125" PointY="24.375" />
-          <ConnectorPoint PointX="12.3125" PointY="29.210348307291667" />
-          <ConnectorPoint PointX="12.322916666666666" PointY="29.210348307291667" />
-          <ConnectorPoint PointX="12.489583333333334" PointY="29.210348307291667" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="29.210348307291667" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="29.210348307291667" />
-          <ConnectorPoint PointX="17.625" PointY="29.210348307291667" />
-          <ConnectorPoint PointX="17.625" PointY="28.207021484374998" />
-          <ConnectorPoint PointX="18" PointY="28.207021484374998" />
+          <ConnectorPoint PointX="9.75" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="12.447916666666666" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="12.770833333333334" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="15.75" PointY="24.835500488281248" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_supplier_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.9208621454326931" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="8.9208621454326931" PointY="46.203542480468755" />
-          <ConnectorPoint PointX="9.441446967147435" PointY="46.203542480468755" />
-          <ConnectorPoint PointX="9.7519759835737183" PointY="46.203542480468755" />
-          <ConnectorPoint PointX="10.5" PointY="46.203542480468755" />
+          <ConnectorPoint PointX="9.3744724038461538" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.3744724038461538" PointY="44.703542480468755" />
+          <ConnectorPoint PointX="10.5" PointY="44.703542480468755" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_user_employee1" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.6686426502403844" PointY="30.983378906250003" />
-          <ConnectorPoint PointX="9.6686426502403844" PointY="49.546735363328224" />
-          <ConnectorPoint PointX="10.5" PointY="49.546735363328224" />
+          <ConnectorPoint PointX="8.60884092548077" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.60884092548077" PointY="47.365084576822923" />
+          <ConnectorPoint PointX="10.5" PointY="47.365084576822923" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_purchaseorderdetails_item1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="22.328837890625" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="22.328837890625" />
-          <ConnectorPoint PointX="12.520833333333334" PointY="22.328837890625" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="22.328837890625" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="22.328837890625" />
-          <ConnectorPoint PointX="15.75" PointY="22.328837890625" />
+          <ConnectorPoint PointX="12" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="12.614583333333334" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="15.75" PointY="20.327250976562496" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollectionitems_item1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.000000000000004" PointY="23.439474283854171" />
-          <ConnectorPoint PointX="12.331699434901122" PointY="23.771173718755289" />
-          <ConnectorPoint PointX="12.449550565098878" PointY="23.889024848953046" />
-          <ConnectorPoint PointX="12.453125" PointY="23.892599283854167" />
-          <ConnectorPoint PointX="12.453125" PointY="28.039669149721767" />
-          <ConnectorPoint PointX="12.75" PointY="28.039669149721767" />
+          <ConnectorPoint PointX="12" PointY="21.814474283854167" />
+          <ConnectorPoint PointX="12.316074434901122" PointY="22.130548718755289" />
+          <ConnectorPoint PointX="12.433925565098878" PointY="22.248399848953046" />
+          <ConnectorPoint PointX="12.472324434901122" PointY="22.286798718755289" />
+          <ConnectorPoint PointX="12.590175565098878" PointY="22.404649848953046" />
+          <ConnectorPoint PointX="12.6875" PointY="22.501974283854167" />
+          <ConnectorPoint PointX="12.6875" PointY="26.19487348828125" />
+          <ConnectorPoint PointX="12.75" PointY="26.19487348828125" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitiondetails_item1" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.25" PointY="19.875" />
-          <ConnectorPoint PointX="11.25" PointY="19.422587890624996" />
-          <ConnectorPoint PointX="12.25" PointY="19.422587890624996" />
-          <ConnectorPoint PointX="12.25" PointY="18.699396972656249" />
-          <ConnectorPoint PointX="13.416666666666666" PointY="18.699396972656249" />
-          <ConnectorPoint PointX="13.583333333333334" PointY="18.699396972656249" />
-          <ConnectorPoint PointX="15.75" PointY="18.699396972656249" />
+          <ConnectorPoint PointX="11.25" PointY="18.25" />
+          <ConnectorPoint PointX="11.25" PointY="17.671000976562496" />
+          <ConnectorPoint PointX="12.25" PointY="17.671000976562496" />
+          <ConnectorPoint PointX="12.25" PointY="17.074000244140624" />
+          <ConnectorPoint PointX="13.416666666666666" PointY="17.074000244140624" />
+          <ConnectorPoint PointX="13.583333333333334" PointY="17.074000244140624" />
+          <ConnectorPoint PointX="15.75" PointY="17.074000244140624" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_retrievaldetails_item1" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.963076923076928" PointY="23.439474283854171" />
-          <ConnectorPoint PointX="12.40625" PointY="23.882647360777241" />
-          <ConnectorPoint PointX="12.40625" PointY="30.906272588216147" />
-          <ConnectorPoint PointX="12.75" PointY="30.906272588216147" />
+          <ConnectorPoint PointX="11.963076923076924" PointY="21.814474283854167" />
+          <ConnectorPoint PointX="12.316074434901122" PointY="22.167471795678363" />
+          <ConnectorPoint PointX="12.590175565098878" PointY="22.44157292587612" />
+          <ConnectorPoint PointX="12.59375" PointY="22.445147360777241" />
+          <ConnectorPoint PointX="12.59375" PointY="29.823863618489582" />
+          <ConnectorPoint PointX="12.75" PointY="29.823863618489582" />
         </AssociationConnector>
-        <AssociationConnector Association="InventoryModel.FK_stockcard_item1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="23.387550206931088" />
-          <ConnectorPoint PointX="12.331699434901122" PointY="23.71924964183221" />
-          <ConnectorPoint PointX="12.449550565098878" PointY="23.837100772029967" />
-          <ConnectorPoint PointX="12.546875" PointY="23.934425206931088" />
-          <ConnectorPoint PointX="12.546875" PointY="26.010699811197927" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="26.010699811197927" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="26.010699811197927" />
-          <ConnectorPoint PointX="15.75" PointY="26.010699811197927" />
+        <AssociationConnector Association="InventoryModel.FK_StockCardDetails_Item1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="21.746396360777243" />
+          <ConnectorPoint PointX="12.316074434901122" PointY="22.062470795678365" />
+          <ConnectorPoint PointX="12.433925565098878" PointY="22.180321925876122" />
+          <ConnectorPoint PointX="12.46875" PointY="22.215146360777243" />
+          <ConnectorPoint PointX="12.46875" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="12.770833333333334" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="15.75" PointY="24.3585745670573" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_purchaseorder_supplier1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="46.413198242187505" />
-          <ConnectorPoint PointX="13.5" PointY="46.413198242187505" />
-          <ConnectorPoint PointX="13.5" PointY="38.210999348958325" />
+          <ConnectorPoint PointX="12" PointY="44.703542480468755" />
+          <ConnectorPoint PointX="13.5" PointY="44.703542480468755" />
+          <ConnectorPoint PointX="13.5" PointY="36.610779622395839" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_purchaseorderdetails_purchaseorder1" ManuallyRouted="false">
-          <ConnectorPoint PointX="14.250000000000002" PointY="34.5" />
-          <ConnectorPoint PointX="14.625" PointY="34.125" />
-          <ConnectorPoint PointX="14.625" PointY="21.524849937691087" />
-          <ConnectorPoint PointX="15.75" PointY="21.524849937691087" />
+          <ConnectorPoint PointX="14.250000000000002" PointY="33.375" />
+          <ConnectorPoint PointX="14.625" PointY="33" />
+          <ConnectorPoint PointX="14.625" PointY="19.632373488281246" />
+          <ConnectorPoint PointX="15.75" PointY="19.632373488281246" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollectiondetails_requisition1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="29.901194661458334" />
-          <ConnectorPoint PointX="12.322916666666666" PointY="29.901194661458334" />
-          <ConnectorPoint PointX="12.583333333333334" PointY="29.901194661458334" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="29.901194661458334" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="29.901194661458334" />
-          <ConnectorPoint PointX="16.5" PointY="29.901194661458334" />
-          <ConnectorPoint PointX="16.5" PointY="30.5" />
+          <ConnectorPoint PointX="11.25" PointY="27.875" />
+          <ConnectorPoint PointX="11.25" PointY="27.625" />
+          <ConnectorPoint PointX="12.197819512820511" PointY="27.625" />
+          <ConnectorPoint PointX="12.364486179487178" PointY="27.625" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="27.625" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="27.625" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="27.625" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="27.625" />
+          <ConnectorPoint PointX="15.25" PointY="27.625" />
+          <ConnectorPoint PointX="15.25" PointY="29.499695638020839" />
+          <ConnectorPoint PointX="17.375" PointY="29.499695638020839" />
+          <ConnectorPoint PointX="17.375" PointY="28.713979492187498" />
+          <ConnectorPoint PointX="17.75" PointY="28.713979492187498" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitiondetails_requisition1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="27.889999" />
-          <ConnectorPoint PointX="12.25357443490112" PointY="27.636424565098881" />
-          <ConnectorPoint PointX="12.37142556509888" PointY="27.518573434901125" />
-          <ConnectorPoint PointX="12.390625" PointY="27.499374000000003" />
-          <ConnectorPoint PointX="12.390625" PointY="18.929848194020902" />
-          <ConnectorPoint PointX="13.416666666666666" PointY="18.929848194020902" />
-          <ConnectorPoint PointX="13.583333333333334" PointY="18.929848194020902" />
-          <ConnectorPoint PointX="15.75" PointY="18.929848194020902" />
+          <ConnectorPoint PointX="12" PointY="27.906152846153844" />
+          <ConnectorPoint PointX="12.53125" PointY="27.374902846153844" />
+          <ConnectorPoint PointX="12.53125" PointY="17.412002622070311" />
+          <ConnectorPoint PointX="13.416666666666666" PointY="17.412002622070311" />
+          <ConnectorPoint PointX="13.583333333333334" PointY="17.412002622070311" />
+          <ConnectorPoint PointX="15.75" PointY="17.412002622070311" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="33.523793945312505" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="33.523793945312505" />
-          <ConnectorPoint PointX="12.458333333333334" PointY="33.523793945312505" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="33.523793945312505" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="33.523793945312505" />
-          <ConnectorPoint PointX="16.5" PointY="33.523793945312505" />
-          <ConnectorPoint PointX="16.5" PointY="32.095683593749996" />
+          <ConnectorPoint PointX="17" PointY="28.294489746093749" />
+          <ConnectorPoint PointX="17.75" PointY="28.294489746093749" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.000000000000002" PointY="32.125" />
-          <ConnectorPoint PointX="12.375" PointY="31.75" />
-          <ConnectorPoint PointX="12.375" PointY="28.531260728506716" />
-          <ConnectorPoint PointX="12.75" PointY="28.531260728506716" />
+          <ConnectorPoint PointX="15.5" PointY="27.167674153645834" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="27.167674153645834" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="27.167674153645834" />
+          <ConnectorPoint PointX="14.25" PointY="27.167674153645834" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_retrievaldetails_retrieval1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12" PointY="39.187306692307693" />
-          <ConnectorPoint PointX="12.4375" PointY="38.749806692307693" />
-          <ConnectorPoint PointX="12.4375" PointY="31.929277076497403" />
-          <ConnectorPoint PointX="12.75" PointY="31.929277076497403" />
+          <ConnectorPoint PointX="12.000000000000002" PointY="38" />
+          <ConnectorPoint PointX="12.375" PointY="37.625" />
+          <ConnectorPoint PointX="12.375" PointY="30.267047427734376" />
+          <ConnectorPoint PointX="12.416666666666666" PointY="30.267047427734376" />
+          <ConnectorPoint PointX="12.583333333333334" PointY="30.267047427734376" />
+          <ConnectorPoint PointX="12.75" PointY="30.267047427734376" />
         </AssociationConnector>
-        <AssociationConnector Association="InventoryModel.FK_stockcarddetails_stockcard1" ManuallyRouted="false">
-          <ConnectorPoint PointX="17.25" PointY="25.9374995" />
-          <ConnectorPoint PointX="18.75" PointY="25.9374995" />
-          <ConnectorPoint PointX="18.75" PointY="27" />
+        <EntityTypeShape EntityType="InventoryModel.PendingRequisition" Width="1.5" PointX="16.125" PointY="30.625" Height="0.9549169921875027" />
+        <InheritanceConnector EntityType="InventoryModel.PendingRequisition" >
+          <ConnectorPoint PointX="11.25" PointY="30.453390299479167" />
+          <ConnectorPoint PointX="11.25" PointY="31.171000976562503" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="31.171000976562503" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="31.171000976562503" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="31.171000976562503" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="31.171000976562503" />
+          <ConnectorPoint PointX="15.875" PointY="31.171000976562503" />
+          <ConnectorPoint PointX="15.875" PointY="30.375" />
+          <ConnectorPoint PointX="16.875" PointY="30.375" />
+          <ConnectorPoint PointX="16.875" PointY="30.625" />
+        </InheritanceConnector>
+        <EntityTypeShape EntityType="InventoryModel.ShowCollectionMissed" Width="1.5" PointX="5.75" PointY="24.875" Height="0.93491699218750313" />
+        <InheritanceConnector EntityType="InventoryModel.ShowCollectionMissed" >
+          <ConnectorPoint PointX="6" PointY="26.25" />
+          <ConnectorPoint PointX="6" PointY="26.0499169921875" />
+          <ConnectorPoint PointX="6.5" PointY="26.0499169921875" />
+          <ConnectorPoint PointX="6.5" PointY="25.809916992187503" />
+        </InheritanceConnector>
+        <AssociationConnector Association="InventoryModel.DepartmentShowCollectionMissed">
+          <ConnectorPoint PointX="4.5" PointY="25.674632161458334" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="25.674632161458334" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="25.674632161458334" />
+          <ConnectorPoint PointX="5.75" PointY="25.674632161458334" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
