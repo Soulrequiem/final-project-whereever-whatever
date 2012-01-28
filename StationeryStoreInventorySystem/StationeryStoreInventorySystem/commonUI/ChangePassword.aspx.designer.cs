@@ -67,13 +67,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// WebTextEditor2 control.
+        /// txtNewPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor WebTextEditor2;
+        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtNewPassword;
         
         /// <summary>
         /// Label1 control.
@@ -92,6 +92,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtConfirmPassword;
+        
+        /// <summary>
+        /// lblStatusMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStatusMessage;
+        
+        /// <summary>
+        /// btnReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReset;
         
         /// <summary>
         /// btnChange control.
