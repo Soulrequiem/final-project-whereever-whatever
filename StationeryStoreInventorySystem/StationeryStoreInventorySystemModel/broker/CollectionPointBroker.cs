@@ -87,7 +87,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 cop = inventory.CollectionPoints.Where(iObj => iObj.Id == collectionPoint.Id).First();
-                Employee empId = inventory.Employees.Where(e => e.Id == cop.Clerk.Id).First();
+                Employee empId = inventory.Employees.Where(e => e.Id == collectionPoint.Clerk.Id).First();
                 cop.Id = collectionPoint.Id;
                 cop.Name = collectionPoint.Name;
                 cop.Time = collectionPoint.Time;
