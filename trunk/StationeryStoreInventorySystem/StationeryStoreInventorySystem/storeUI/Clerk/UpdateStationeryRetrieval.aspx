@@ -19,31 +19,32 @@
                     <ig:WebDataGrid ID="dgvCollections" runat="server" Height="400px" Width="700px" 
                         AutoGenerateColumns="False" DefaultColumnWidth="50px" 
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                        onrowselectionchanged="dgvCollections_RowSelectionChanged">
                         <Columns>
                             <ig:UnboundCheckBoxField Key="UpdateStationeryRetrievalCheckBox" Width="50px">
                                 <Header Text="Select" />
                             </ig:UnboundCheckBoxField>
-                            <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" Width="80px">
+                            <ig:BoundDataField DataFieldName="CollectionID" Key="collectionId" Width="80px">
                                 <Header Text="Collection ID" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
+                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="collectionPoint" 
                                 Width="120px">
                                 <Header Text="Collection Point" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionDate/Time" 
-                                Key="CollectionDate/Time" Width="100px">
+                                Key="collectionDate/Time" Width="100px">
                                 <Header Text="Collection Date/Time" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="DeptRepresentativeName" Key="DeptRepresentativeName" 
+                            <ig:BoundDataField DataFieldName="DeptRepresentativeName" Key="departmentRepresentativeName" 
                                 Width="120px">
                                 <Header Text="Dept. Rep. Name" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="DepartmentName" 
-                                Key="DepartmentName" Width="120px">
+                                Key="departmentName" Width="120px">
                                 <Header Text="Department Name" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus" 
+                            <ig:BoundDataField DataFieldName="CollectionStatus" Key="collectionStatus" 
                                 Width="100px">
                                 <Header Text="Collection Status" />
                             </ig:BoundDataField>
@@ -61,11 +62,13 @@
                     </ig:WebDataGrid>
                     <br>
                     <div style="float:right" class="buttons">
-                         <asp:Button id="btnCollected" CssClass="DefaultLargebutton"  runat="server" Text="Not Collected"/>
+                         <asp:Button id="btnCollected" CssClass="DefaultLargebutton"  runat="server" 
+                             Text="Not Collected" onclick="btnCollected_Click"/>
                          <!--<a class="button" href="" style="float:right">Reset</a>-->
                      <%--</div>
                          <div style="float:right" class="button">--%>
-                         <asp:Button ID="btnNotCollected" CssClass="DefaultLargebutton" runat="server" Text="Collected" />
+                         <asp:Button ID="btnNotCollected" CssClass="DefaultLargebutton" runat="server" 
+                             Text="Collected" onclick="btnNotCollected_Click" />
                          <!--<a class="button" href="" style="float:right">Change</a>-->
                       </div>
                 </Template>

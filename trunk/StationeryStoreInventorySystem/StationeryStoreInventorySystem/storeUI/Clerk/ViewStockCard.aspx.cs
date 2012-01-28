@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : ViewStockCard.cs
+/*  Module Name     : UI
+/*  Owner           : JinChengCheng
+/*  class Name      : ViewStockCard
+/*  Details         : UI representation of ViewStockCardUI 
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -71,3 +78,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         }
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
