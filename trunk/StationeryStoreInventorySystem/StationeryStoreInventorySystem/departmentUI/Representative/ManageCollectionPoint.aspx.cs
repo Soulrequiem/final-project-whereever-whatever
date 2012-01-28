@@ -66,12 +66,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 
             if (!IsPostBack)
             {
-                DataTable dtColLst = GetMcpControl().CurentCollectionPoint;
-                DataTable dtColPnts = GetMcpControl().AllCollectionPoint;
-
-                FillCollectionList(dtColLst);
-                FillCollectionPoints(dtColPnts);
+                FillCollectionList(GetCurrentCollectionPoint());
+                FillCollectionPoints(GetMcpControl().AllCollectionPoint);
             }
+        }
+
+        private DataTable GetCurrentCollectionPoint()
+        {
+            DataTable dtColLst = GetMcpControl().CurentCollectionPoint;
+            return dtColLst;
         }
 
         /// <summary>
@@ -101,8 +104,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 if (dtPoint != null)
                 {
-                    //drdCollectionList.TextField = "Collection Point";
-                    //drdCollectionList.ValueField = "Name";
+                    drdCollectionList.TextField = "text";
+                    drdCollectionList.ValueField = "value";
                     drdCollectionList.DataSource = dtPoint;
                     drdCollectionList.DataBind();
                 }
@@ -119,16 +122,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <param name="sender"></param>   
         /// <param name="e"></param>
        
-        protected void drdCollectionList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        protected void drdCollectionList_SelectionChanged(object sender, 
+            Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
            try
             {
-                String selectedCollection = drdCollectionList.SelectedItem.Text;
-               //Pass the collectionPointId to controller
-               
+               //Get Selected ID
+               int collectionPointId = Convert.ToInt16(e.NewSelection.ToString());
+
+               //Save it into DB
                GetMcpControl().SelectSave(collectionPointId);
-               //Pass to the controller get Datatable
-                //Call FillStationeryList function
+
+               //Cleare datasource
+               dgvCollections.ClearDataSource();
+
+               //Fill current collection point
+               FillCollectionPoints(GetCurrentCollectionPoint());
             }
             catch (Exception ex)
             {
