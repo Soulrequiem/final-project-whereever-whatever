@@ -109,10 +109,10 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 empObj = inventory.Employees.Where(eObj => eObj.Id == employee.Id).First();
-                User userId = inventory.Users.Where(u => u.Id == empObj.User.Id).First();
-                Role roleId = inventory.Roles.Where(r => r.Id == empObj.Role.Id).First();
-                Department deptId = inventory.Departments.Where(d => d.Id == empObj.Department.Id).First();
-                Employee createdBy = inventory.Employees.Where(e => e.Id == empObj.CreatedBy.Id).First();
+                User userId = inventory.Users.Where(u => u.Id == employee.User.Id).First();
+                Role roleId = inventory.Roles.Where(r => r.Id == employee.Role.Id).First();
+                Department deptId = inventory.Departments.Where(d => d.Id == employee.Department.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == employee.CreatedBy.Id).First();
                 if (empObj != null)
                 {
                     empObj.Id = employee.Id;
