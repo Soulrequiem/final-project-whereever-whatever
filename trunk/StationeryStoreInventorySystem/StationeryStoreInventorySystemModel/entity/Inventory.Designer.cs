@@ -686,6 +686,7 @@ namespace StationeryStoreInventorySystemModel.entity
     [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="CollectionMissed")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
+    [KnownTypeAttribute(typeof(ShowCollectionMissed))]
     public partial class CollectionMissed : EntityObject
     {
         #region Factory Method
@@ -3628,6 +3629,35 @@ namespace StationeryStoreInventorySystemModel.entity
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="PendingRequisition")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PendingRequisition : Requisition
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PendingRequisition object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
+        public static PendingRequisition CreatePendingRequisition(global::System.String id, global::System.DateTime createdDate, global::System.Int32 status)
+        {
+            PendingRequisition pendingRequisition = new PendingRequisition();
+            pendingRequisition.Id = id;
+            pendingRequisition.CreatedDate = createdDate;
+            pendingRequisition.Status = status;
+            return pendingRequisition;
+        }
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="PurchaseOrder")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -4275,6 +4305,7 @@ namespace StationeryStoreInventorySystemModel.entity
     [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="Requisition")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
+    [KnownTypeAttribute(typeof(PendingRequisition))]
     public partial class Requisition : EntityObject
     {
         #region Factory Method
@@ -6005,6 +6036,35 @@ namespace StationeryStoreInventorySystemModel.entity
         }
 
         #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="ShowCollectionMissed")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ShowCollectionMissed : CollectionMissed
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ShowCollectionMissed object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
+        public static ShowCollectionMissed CreateShowCollectionMissed(global::System.Int32 id, global::System.DateTime createdDate, global::System.Int32 status)
+        {
+            ShowCollectionMissed showCollectionMissed = new ShowCollectionMissed();
+            showCollectionMissed.Id = id;
+            showCollectionMissed.CreatedDate = createdDate;
+            showCollectionMissed.Status = status;
+            return showCollectionMissed;
+        }
+
+        #endregion
+    
     }
     
     /// <summary>
