@@ -16,12 +16,12 @@ namespace StationeryStoreInventorySystemModel.entity
         {
             this.Id = id;
             this.Name = name;
-            this.EmployeeContactId = contactId;
+            this.Contact = contactId;
             this.PhoneNumber = phoneNumer;
             this.FaxNumber = faxNumer;
-            this.EmployeeHeadId = headId;
+            this.Head = headId;
             this.CollectionPoint = collectionPointId;
-            this.EmployeeRepresentativeId = representativId;
+            this.Representative = representativId;
             this.CreatedDate = createdDate;
             this.CreatedBy = createdBy;
             this.Status = status;

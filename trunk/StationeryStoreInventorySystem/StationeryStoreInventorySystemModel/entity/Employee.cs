@@ -22,7 +22,7 @@ namespace StationeryStoreInventorySystemModel.entity
             this.Designation = designation;
             this.Email = email;
             this.CreatedDate = createdDate;
-            this.Employee2 = createdBy;
+            this.EmployeeCreatedBy = createdBy;
             this.Status = status;
         }
     }
