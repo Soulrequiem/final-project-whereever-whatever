@@ -35,7 +35,7 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Item GetItem(Item item)
         {
-            itemObj = inventory.Items.Where(iObj => iObj.Description == item.Description || iObj.Id == item.Id).First();
+            itemObj = inventory.Items.Where(iObj =>iObj.Id == item.Id).First();
             if (!itemObj.Equals(null))
                 return itemObj;
             return null;
