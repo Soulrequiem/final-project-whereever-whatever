@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using StationeryStoreInventorySystemModel.entity;
 using SystemStoreInventorySystemUtil;
+using System.Data.Objects.DataClasses;
 
 namespace StationeryStoreInventorySystemModel.brokerinterface
 {

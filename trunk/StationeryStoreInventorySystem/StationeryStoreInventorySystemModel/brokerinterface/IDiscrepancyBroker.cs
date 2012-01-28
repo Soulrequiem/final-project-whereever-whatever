@@ -21,11 +21,13 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Insert(DiscrepancyDetail newDiscrepancyDetail);
         Constants.DB_STATUS Update(DiscrepancyDetail discrepancyDetail);
         Constants.DB_STATUS Delete(DiscrepancyDetail discrepancyDetail);
+        int GetDiscrepancyDetailId();
 
         StockAdjustment GetStockAdjustment(StockAdjustment stockAdjustment);
         List<StockAdjustment> GetAllStockAdjustment();
         Constants.DB_STATUS Insert(StockAdjustment newStockAdjustment);
         Constants.DB_STATUS Update(StockAdjustment stockAdjustment);
         Constants.DB_STATUS Delete(StockAdjustment stockAdjustment);
+        string GetStockAdjustmentId();
     }
 }
