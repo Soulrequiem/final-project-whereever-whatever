@@ -21,10 +21,15 @@ namespace StationeryStoreInventorySystemModel.broker
         { 
             this.inventory=inventory;
         }
+        /// <summary>
+        /// Get the last RequisitionCollectionId from the RequisitionCollection Table
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int GetRequisitionCollectionId()
         {
-            var maxRequistionId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
-            return maxRequistionId;
+            var maxRequistionCollectionId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
+            return maxRequistionCollectionId;
 
         }
 
