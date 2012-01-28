@@ -9,14 +9,14 @@ namespace StationeryStoreInventorySystemModel.entity
     {
         StockCardDetail stockDetial = new StockCardDetail();
         public StockCardDetail()
-            : this(0, "", "", 0, 0, DateTime.Now, new Employee(), 0)
+            : this(0, new Item(), "", 0, 0, DateTime.Now, new Employee(), 0)
         {
 
         }
-        public StockCardDetail(int id, string itemId, string description, int qty, int balance, DateTime createdDate, Employee createdBy, int status)
+        public StockCardDetail(int id, Item itemId, string description, int qty, int balance, DateTime createdDate, Employee createdBy, int status)
         {
             this.Id = id;
-            this.ItemId = itemId;
+            this.Item = itemId;
             this.Description = description;
             this.Qty = qty;
             this.Balance = balance;
