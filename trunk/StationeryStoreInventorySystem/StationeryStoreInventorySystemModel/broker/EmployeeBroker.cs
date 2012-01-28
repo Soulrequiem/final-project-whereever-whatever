@@ -112,7 +112,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 User userId = inventory.Users.Where(u => u.Id == empObj.User.Id).First();
                 Role roleId = inventory.Roles.Where(r => r.Id == empObj.Role.Id).First();
                 Department deptId = inventory.Departments.Where(d => d.Id == empObj.Department.Id).First();
-                Employee createdBy = inventory.Employees.Where(e => e.Id == empObj.Employee2.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == empObj.CreatedBy.Id).First();
                 if (empObj != null)
                 {
                     empObj.Id = employee.Id;
@@ -123,7 +123,7 @@ namespace StationeryStoreInventorySystemModel.broker
                     empObj.Designation = employee.Designation;
                     empObj.Email = employee.Email;
                     empObj.CreatedDate = employee.CreatedDate;
-                    empObj.Employee2 = createdBy;
+                    empObj.CreatedBy = createdBy;
                     //this.Update(empObj.User);
                     //this.Update(empObj.Role);
                     inventory.SaveChanges();
