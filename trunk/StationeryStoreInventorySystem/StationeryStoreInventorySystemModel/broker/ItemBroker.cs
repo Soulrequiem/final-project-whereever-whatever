@@ -21,6 +21,8 @@ namespace StationeryStoreInventorySystemModel.broker
         private InventoryEntities inventory;
         private Item itemObj = null;
         private List<Item> itemList = null;
+        private StockCardDetail stcDetail = null;
+        private List<StockCardDetail> stcDetailList = null;
 
         public ItemBroker(InventoryEntities inventory)
         {
@@ -142,7 +144,85 @@ namespace StationeryStoreInventorySystemModel.broker
             return itemObj;
 
         }
+        /// <summary>
+        ///  Retrieve the StockCardDetail information according to the stockCardDetail Parameter 
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
+        public StockCardDetail GetStockCardDetail(StockCardDetail stockCardDetail)
+        {
+            stcDetail = inventory.StockCardDetails.Where(stcDetailObj => stcDetailObj.Id == stockCardDetail.Id).First();
+            if (!stcDetail.Equals(null))
+                return stcDetail;
+            return null;
+        }
+        /// <summary>
+        ///  Retrieve StockDetail data to the StockDetail Table according to the StockCardDetail Parameter
+        /// </summary>
+        /// <returns></returns>
+        public List<StockCardDetail> GetAllStockCardDetail()
+        {
+            stcDetailList = inventory.StockCardDetails.ToList<StockCardDetail>();
+            if (!stcDetailList.Equals(null))
+                return stcDetailList;
+            return null;
+        }
+        /// <summary>
+        /// Insert StockDetail data to StockDetail Table according to the StockDetail Parameter Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
+        public Constants.DB_STATUS Insert(StockCardDetail stockCardDetail)
+        {
+            Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
+
+            try
+            {
+                inventory.AddToStockCardDetails(stockCardDetail);
+                inventory.SaveChanges();
+                status = Constants.DB_STATUS.SUCCESSFULL;
+            }
+            catch (Exception e)
+            {
+                status = Constants.DB_STATUS.FAILED;
+            }
+
+            return status;
+        }
+        /// <summary>
+        ///  Update StockDetail data to StockDetail Table according to the StockDetail Parameter
+        ///   Return Constants.DB_STATUS
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
+        public Constants.DB_STATUS Update(StockCardDetail stockCardDetail)
+        {
+            Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
+
+            try
+            {
+                inventory.SaveChanges();
+                status = Constants.DB_STATUS.SUCCESSFULL;
+            }
+            catch (Exception e)
+            {
+                status = Constants.DB_STATUS.FAILED;
+            }
+
+            return status;
+        }
+        /// <summary>
+        /// Don't need to set the status.There is no status in StockCardDetail Table
+        /// </summary>
+        /// <param name="stockCardDetail"></param>
+        /// <returns></returns>
+        public Constants.DB_STATUS Delete(StockCardDetail stockCardDetail)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
         #endregion
     }
 }
