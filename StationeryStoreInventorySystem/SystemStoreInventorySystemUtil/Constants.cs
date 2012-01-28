@@ -7,13 +7,20 @@ namespace SystemStoreInventorySystemUtil
 {
     public class Constants
     {
-        public static readonly string loginPage = "LogIn.aspx";
-
         public enum VISIBILITY_STATUS
         {
             UNKNOWN = 0,
             SHOW,
             HIDDEN
+        }
+
+        public enum DEPARTMENT_STATUS
+        {
+            UNKNOWN = 0,
+            SHOW,
+            HIDDEN,
+            BLACKLIST,
+            UNBLACKLIST
         }
 
         public enum REQUISITION_STATUS
@@ -29,7 +36,8 @@ namespace SystemStoreInventorySystemUtil
         {
             UNKNOWN = 0,
             NEED_TO_COLLECT,
-            COLLECTED
+            COLLECTED,
+            UNCOLLECTED
         }
 
         public enum ITEM_CATEGORY
@@ -88,7 +96,7 @@ namespace SystemStoreInventorySystemUtil
             STOCK_ADJUSTMENT
         }
 
-        public enum EMPLOYEE_TYPE
+        public enum EMPLOYEE_ROLE
         {
             UNKNOWN = 0,
             ADMIN,
@@ -100,6 +108,11 @@ namespace SystemStoreInventorySystemUtil
             STORE_CLERK,
             STORE_MANAGER,
             STORE_SUPERVISOR
+        }
+
+        public enum DESIGNATION
+        {
+            UNKNOWN = 0
         }
     }
 }
