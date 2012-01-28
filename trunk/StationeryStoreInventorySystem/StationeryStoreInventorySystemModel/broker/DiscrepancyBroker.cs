@@ -108,7 +108,7 @@ namespace StationeryStoreInventorySystemModel.broker
             {
 
                 dis = inventory.Discrepancies.Where(d => d.Id == discrepancy.Id).First();
-                Employee createdBy = inventory.Employees.Where(e => e.Id == dis.CreatedBy.Id).First();
+                Employee createdBy = inventory.Employees.Where(e => e.Id == discrepancy.CreatedBy.Id).First();
                 dis.Id = discrepancy.Id;
                 dis.CreatedDate = discrepancy.CreatedDate;
                 dis.CreatedBy = createdBy;
