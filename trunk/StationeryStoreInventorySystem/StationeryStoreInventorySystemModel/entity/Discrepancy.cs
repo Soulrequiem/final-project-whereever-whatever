@@ -9,7 +9,7 @@ namespace StationeryStoreInventorySystemModel.entity
     {
 
         public Discrepancy()
-            : this(0, DateTime.Now, new Employee(), 0)
+            : this(0, DateTime.Now, null, 0)
         {
         }
         public Discrepancy(int id, DateTime createdDate, Employee createdBy, int status)

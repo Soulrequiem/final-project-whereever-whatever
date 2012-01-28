@@ -7,9 +7,10 @@ namespace StationeryStoreInventorySystemModel.entity
 {
     public partial class PurchaseOrderDetail
     {
-     
 
-        public PurchaseOrderDetail():this(0,new PurchaseOrder(),new Item(),0,0,0)
+
+        public PurchaseOrderDetail()
+            : this(0, null, null, 0, 0, 0)
         { 
         }
         public PurchaseOrderDetail(int id, PurchaseOrder purchaseid, Item itemId, decimal price, int qty, int acceptedQty)

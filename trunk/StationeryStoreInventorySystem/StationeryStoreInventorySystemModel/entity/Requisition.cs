@@ -8,7 +8,7 @@ namespace StationeryStoreInventorySystemModel.entity
    public partial  class Requisition
     {
        public Requisition()
-           : this("", new Department(), new Employee(), "", new Employee(), DateTime.Now, 0)
+           : this("", null, null, "", null, DateTime.Now, 0)
        {
        }
        public Requisition(string id,Department departmentId,Employee employeeId,string remarks,Employee approvedBy,

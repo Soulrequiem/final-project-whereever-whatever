@@ -9,7 +9,7 @@ namespace StationeryStoreInventorySystemModel.entity
     {
 
         public Retrieval()
-            : this(0, DateTime.Now, new Employee(), 0)
+            : this(0, DateTime.Now, null, 0)
         {
         }
         public Retrieval(int id, DateTime createdDate, Employee createdBy, int status)
