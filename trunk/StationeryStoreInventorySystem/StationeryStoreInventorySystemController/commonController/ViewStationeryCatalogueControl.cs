@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
+using StationeryStoreInventorySystemModel.brokerinterface;
 using SystemStoreInventorySystemUtil;
 using System.Data;
 
@@ -32,14 +33,16 @@ namespace StationeryStoreInventorySystemController.commonController
         ///     Modification Reason:
         /// </summary>
 
-        IItemBroker itemBroker;
-        Employee currentEmployee;
+        private IItemBroker itemBroker;
+        private Employee currentEmployee;
 		private List<Item> itemList;
 
         public ViewStationeryCatalogueControl()
         {
             currentEmployee = Util.ValidateUser();
-            itemBroker = new ItemBroker();
+            InventoryEntities inventory = new InventoryEntities();
+
+            itemBroker = new ItemBroker(inventory);
             itemList = itemBroker.GetAllItem();
         }
 

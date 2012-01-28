@@ -12,9 +12,12 @@ namespace StationeryStoreInventorySystemController.commonController
     public class LoginControl
     {
         private IEmployeeBroker employeeBroker;
+
         public LoginControl()
         {
-            employeeBroker = new EmployeeBroker();
+            InventoryEntities inventory = new InventoryEntities();
+            
+            employeeBroker = new EmployeeBroker(inventory);
         }
 
         public Constants.ACTION_STATUS SelectLogin(string username, string password)
