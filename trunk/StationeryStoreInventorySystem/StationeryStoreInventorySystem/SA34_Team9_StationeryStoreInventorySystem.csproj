@@ -48,6 +48,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Infragistics35.WebUI.WebResizingExtender.v11.2.dll</HintPath>
     </Reference>
+    <Reference Include="Infragistics4.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics4.WebUI.WebDataInput.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -83,8 +89,10 @@
     <Content Include="departmentUI\Representative\UpdateCollectionByItems.aspx" />
     <Content Include="departmentUI\Representative\UpdateCollectionByRequisitions.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Common\Excel_Logo.jpg" />
     <Content Include="Images\Common\GroupBox_bg.png" />
     <Content Include="Images\Common\GroupBox_bg1.png" />
+    <Content Include="Images\Common\PDF Icon.gif" />
     <Content Include="Images\Common\print.png" />
     <Content Include="Images\MasterPage\logo.png" />
     <Content Include="storeUI\Clerk\CreateDiscrepencyReport.aspx" />
@@ -361,6 +369,10 @@
     <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StationeryStoreInventorySystemController\SA34_Team9_StationeryStoreInventorySystemController.csproj">
+      <Project>{FCB721E3-6E46-4257-981D-35FB1321F43D}</Project>
+      <Name>SA34_Team9_StationeryStoreInventorySystemController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SystemStoreInventorySystemUtil\SA34_Team9_SystemStoreInventorySystemUtil.csproj">
       <Project>{0B594918-2100-4169-A513-7610DE755BA0}</Project>
       <Name>SA34_Team9_SystemStoreInventorySystemUtil</Name>
@@ -399,7 +411,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>24596</DevelopmentServerPort>
+          <DevelopmentServerPort>1189</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
