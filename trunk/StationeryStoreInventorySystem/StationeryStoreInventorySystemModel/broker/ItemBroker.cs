@@ -90,7 +90,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 itemObj = inventory.Items.Where(iObj => iObj.Id == item.Id).First();
                 if(!itemObj.Equals(null))
                 {
-                    Employee createdBy = inventory.Employees.Where(eObj => eObj.Id == itemObj.CreatedBy.Id).First();
+                    Employee createdBy = inventory.Employees.Where(eObj => eObj.Id == item.CreatedBy.Id).First();
                     itemObj.ItemCategoryId = item.ItemCategoryId;
                     itemObj.Description = item.Description;
                     itemObj.ReorderLevel = item.ReorderLevel;
