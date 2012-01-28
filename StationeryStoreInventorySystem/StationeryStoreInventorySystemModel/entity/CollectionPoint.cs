@@ -16,7 +16,7 @@ namespace StationeryStoreInventorySystemModel.entity
             this.Id = id;
             this.Name = name;
             this.Time = time;
-            this.Employee = clerk;
+            this.Clerk = clerk;
         }
     }
 }
