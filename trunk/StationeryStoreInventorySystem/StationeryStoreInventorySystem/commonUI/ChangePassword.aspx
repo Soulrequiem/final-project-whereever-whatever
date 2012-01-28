@@ -37,8 +37,9 @@
                             Text="<%$ Resources:WebResources, ChangePassword_NewPassword %>"/>
                         </td>
                         <td>
-                            <ig:WebTextEditor ID="WebTextEditor2" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_new%>">
+                            <ig:WebTextEditor ID="txtNewPassword" runat="server" 
+                            CssClass="DefaultTextStyle" Width="250px" 
+                                NullText="<%$ Resources:WebResources, Text_new%>">
                             </ig:WebTextEditor><br />
                         </td>
                     </tr>
@@ -55,15 +56,25 @@
                         </td>
                     </tr>
                     <tr>
+                        <td colspan="2">
+                            <asp:Label CssClass="DefaultLabelstyle" 
+                            ID="lblStatusMessage" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td></td>
                         <td>
-                            <div style="float:right" class="buttons">
-                                <asp:Button id="btnChange" CssClass="Defaultbutton"  runat="server" Text="Change"/>
+                            <div style="float:right">
+                                <!--<a class="button" href="" style="float:right">Change</a>-->
+                                <asp:Button id="btnReset" CssClass="Defaultbutton"  runat="server" 
+                                    Text="Reset"/>
+                            </div>
+                            <div style="float:right;margin-right:10px" class="buttons">
+                                <asp:Button id="btnChange" CssClass="Defaultbutton"  runat="server" 
+                                    Text="Change Password" onclick="btnChange_Click"/>
                                 <!--<a class="button" href="" style="float:right">Reset</a>-->
                             </div>
-                            <div style="float:right;margin-right:10px">
-                                <!--<a class="button" href="" style="float:right">Change</a>-->
-                            </div>
+                            
                         </td>
                     </tr>
                   </table>
