@@ -11,11 +11,15 @@ namespace StationeryStoreInventorySystemController.commonController
 {
     public class ChangePasswordControl
     {
+        private IEmployeeBroker employeeBroker;
         private Employee currentEmployee;
 
         public ChangePasswordControl()
         {
             currentEmployee = Util.ValidateUser();
+            InventoryEntities inventory = new InventoryEntities();
+
+            employeeBroker = new EmployeeBroker(inventory);
         }
 
         public Constants.ACTION_STATUS SelectChange(string oldPassword, string newPassword)
@@ -24,7 +28,6 @@ namespace StationeryStoreInventorySystemController.commonController
 
             if (currentEmployee.User.Password.CompareTo(oldPassword) == 0)
             {
-                IEmployeeBroker employeeBroker = new EmployeeBroker();
                 currentEmployee.User.Password = newPassword;
                 if (employeeBroker.Update(currentEmployee.User) == Constants.DB_STATUS.SUCCESSFULL)
                 {

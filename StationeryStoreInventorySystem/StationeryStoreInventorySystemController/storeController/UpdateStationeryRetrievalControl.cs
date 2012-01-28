@@ -21,9 +21,10 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class UpdateStationeryRetrievalControl
     {
-        IRetrievalBroker retrievalBroker;
-        InventoryEntities inventory;
-        IRequisitionCollectionBroker requisitionCollectionBroker;
+        private IRetrievalBroker retrievalBroker;
+        private InventoryEntities inventory;
+        private IRequisitionCollectionBroker requisitionCollectionBroker;
+
         public UpdateStationeryRetrievalControl()
         {
             inventory = new InventoryEntities();
