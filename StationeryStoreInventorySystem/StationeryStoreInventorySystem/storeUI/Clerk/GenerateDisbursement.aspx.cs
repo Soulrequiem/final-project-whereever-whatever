@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : GenerateDisbursement.cs
+/*  Module Name     : UI
+/*  Owner           : JinChengCheng
+/*  class Name      : GenerateDisbursement
+/*  Details         : UI representation of GenerateDisbursementUI 
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,6 +30,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             }
         }
 
+        /// <summary>
+        ///     Show disbursement list
+        ///     Created By:JinChengCheng
+        ///     Created Date:28-01-2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="dtDisbursementList"></param>
+        /// <returns>The return type of this method is datatable.</returns>
         private void FillDisbursementList(DataTable dtDisbursementList)
         {
             try
@@ -38,3 +58,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         }
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/

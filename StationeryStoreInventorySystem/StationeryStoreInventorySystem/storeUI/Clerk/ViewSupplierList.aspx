@@ -17,28 +17,28 @@
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundDataField DataFieldName="SupplierCode" Key="SupplierCode" 
+                    <ig:BoundDataField DataFieldName="SupplierCode" Key="supplierCode" 
                         Width="80px">
                         <Header Text="Supplier Code" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="GSTRegistrationNo" Key="GSTRegistrationNo" 
+                    <ig:BoundDataField DataFieldName="GSTRegistrationNo" Key="gstRegistrationNo" 
                         Width="80px">
                         <Header Text="GST Registration No" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="SupplierName" Key="SupplierName" 
+                    <ig:BoundDataField DataFieldName="SupplierName" Key="supplierName" 
                         Width="120px">
                         <Header Text="Supplier Name" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="ContactName" Key="ContactName" Width="120px">
+                    <ig:BoundDataField DataFieldName="ContactName" Key="contactName" Width="120px">
                         <Header Text="Contact Name" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="PhoneNo" Key="PhoneNo" Width="100px">
+                    <ig:BoundDataField DataFieldName="PhoneNo" Key="phoneNo" Width="100px">
                         <Header Text="Phone No" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="FaxNo" Key="FaxNo" Width="100px">
+                    <ig:BoundDataField DataFieldName="FaxNo" Key="faxNo" Width="100px">
                         <Header Text="Fax No" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Address" Key="Address" Width="100px">
+                    <ig:BoundDataField DataFieldName="Address" Key="address" Width="100px">
                         <Header Text="Address" />
                     </ig:BoundDataField>
                 </Columns>

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : ReceiveOrderForm.cs
+/*  Module Name     : UI
+/*  Owner           : JinChengCheng
+/*  class Name      : ReceiveOrderForm
+/*  Details         : UI representation of ReceiveOrderFormUI 
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,36 +22,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         ReceiveOrderControl ROobj;
         PurchaseOrderControl purchaseOrderControl;
         ReceiveOrderControl receiveOrderControl;
+        int selectedItem;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 FillPOList();
-                
             }
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ItemNo");
-            //dt.Columns.Add("ItemDescription");
-            //dt.Columns.Add("Quantity");
-            //dt.Columns.Add("Remarks");
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "Hello";
-            //dr[1] = "1";
-            //dr[2] = "1";
-            //dr[3] = "1";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "Hello";
-            //dr[1] = "1";
-            //dr[2] = "1";
-            //dr[3] = "1";
-            //dt.Rows.Add(dr);
-
-            //DgvStationeryOrder.ClearDataSource();
-            //DgvStationeryOrder.DataSource = dt;
-            //DgvStationeryOrder.DataBind();
         }
 
         /// <summary>
@@ -57,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             try
             {
-                string selectedItem = DrdPONo.SelectedItem.Value;
+                selectedItem = Convert.ToInt32(DrdPONo.SelectedItem.Value);
                 ROobj = new ReceiveOrderControl();
                 //********Plz check this
                 //DataTable dt = ROobj.SelectPurchaseOrderDetails(Convert.ToInt32(selectedItem));
@@ -108,9 +92,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         protected void btnReceived_Click(object sender, EventArgs e)
         {
             //*********update purchase order
-            //purchaseOrderControl.SelectCreate(selectedItem);
             //*********insert stock card details in stock card
-            receiveOrderControl.SelectReceive();//pass the datatable to broker
+            receiveOrderControl.SelectReceive(selectedItem); 
         } 
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
