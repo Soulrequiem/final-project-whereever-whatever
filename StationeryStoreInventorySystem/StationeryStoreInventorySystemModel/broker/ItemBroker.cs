@@ -176,12 +176,13 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
-
             try
             {
-                inventory.AddToStockCardDetails(stockCardDetail);
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                
+                    inventory.AddToStockCardDetails(stockCardDetail);
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                
             }
             catch (Exception e)
             {
@@ -199,17 +200,29 @@ namespace StationeryStoreInventorySystemModel.broker
         public Constants.DB_STATUS Update(StockCardDetail stockCardDetail)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
-
             try
             {
-                inventory.SaveChanges();
-                status = Constants.DB_STATUS.SUCCESSFULL;
+                StockCardDetail stcDetail = inventory.StockCardDetails.Where(s => s.Id == stockCardDetail.Id).First();
+                if (!stcDetail.Equals(null))
+                {
+                    Item item = inventory.Items.Where(i => i.Id == stockCardDetail.Item.Id).First();
+                    Employee createdBy = inventory.Employees.Where(e => e.Id == stockCardDetail.CreatedBy.Id).First();
+                    stcDetail.Id = stockCardDetail.Id;
+                    stcDetail.Item = item;
+                    stcDetail.Description = stockCardDetail.Description;
+                    stcDetail.Qty = stockCardDetail.Qty;
+                    stcDetail.Balance = stockCardDetail.Balance;
+                    stcDetail.CreatedDate = stockCardDetail.CreatedDate;
+                    stcDetail.CreatedBy = createdBy;
+                    inventory.AddToStockCardDetails(stockCardDetail);
+                    inventory.SaveChanges();
+                    status = Constants.DB_STATUS.SUCCESSFULL;
+                }
             }
             catch (Exception e)
             {
                 status = Constants.DB_STATUS.FAILED;
             }
-
             return status;
         }
         /// <summary>
