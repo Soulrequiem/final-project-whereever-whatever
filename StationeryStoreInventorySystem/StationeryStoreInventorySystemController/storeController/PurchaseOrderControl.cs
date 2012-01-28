@@ -7,6 +7,7 @@ using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
 using StationeryStoreInventorySystemController.commonController;
 using SystemStoreInventorySystemUtil;
+using System.Data;
 
 namespace StationeryStoreInventorySystemController.storeController
 {
@@ -24,8 +25,10 @@ namespace StationeryStoreInventorySystemController.storeController
             stockCardBroker = new StockCardBroker();
         }
 
-        public List<PurchaseOrderDetail> GetAllOrders()
+        public DataTable GetAllOrders()
         {
+            DataTable dt = new DataTable();
+            DataRow dr = null;
             List<PurchaseOrderDetail> orderList = new List<PurchaseOrderDetail>();
             List<Item> itemList = itemBroker.GetAllItem();
             foreach (Item item in itemList)
@@ -39,7 +42,18 @@ namespace StationeryStoreInventorySystemController.storeController
                     orderList.Add(purchaseOrderDetail);
                 }
             }
-            return orderList;
+
+            foreach(PurchaseOrderDetail temp in orderList){
+                dt.NewRow();
+                dr = new DataRow();
+                dr["itemNo"] = temp.Item.Id;
+                dr["description"] = temp.Item.Description;
+                dr["quantity"] = temp.Qty;
+                dr["price"] = temp.Price;
+                dr["amount"] = temp.Qty * temp.Price;
+                dt.Rows.Add(dr);
+            }
+            return dt;
         }
 
         public Item EnterDescription(string itemDescription)
@@ -50,25 +64,46 @@ namespace StationeryStoreInventorySystemController.storeController
 
         }
 
-        public Constants.ACTION_STATUS SelectAdd(Item item)
+        public DataTable SelectAdd(Item item)
         {
-            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+            DataTable dt = new DataTable();
+            DataRow dr = null;
             PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
             purchaseOrderDetail.Item = item;
             orderList.Add(purchaseOrderDetail);
-            status = Constants.ACTION_STATUS.SUCCESS;
-            return status;
+            foreach (PurchaseOrderDetail temp in orderList)
+            {
+                dt.NewRow();
+                dr = new DataRow();
+                dr["itemNo"] = temp.Item.Id;
+                dr["description"] = temp.Item.Description;
+                dr["quantity"] = temp.Qty;
+                dr["price"] = temp.Price;
+                dr["amount"] = temp.Qty * temp.Price;
+                dt.Rows.Add(dr);
+            }
+            return dt;
+           
         }
 
-        public Constants.ACTION_STATUS SelectRemove(PurchaseOrderDetail purchaseOrderDetail)
+        public DataTable SelectRemove(PurchaseOrderDetail purchaseOrderDetail)
         {
-            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            bool flag =orderList.Remove(purchaseOrderDetail);
-            if (flag == true)
-                status = Constants.ACTION_STATUS.SUCCESS;
-            else
-                status = Constants.ACTION_STATUS.FAIL;
-            return status;
+            DataTable dt = new DataTable();
+            DataRow dr = null;
+            
+            orderList.Remove(purchaseOrderDetail);
+            foreach (PurchaseOrderDetail temp in orderList)
+            {
+                dt.NewRow();
+                dr = new DataRow();
+                dr["itemNo"] = temp.Item.Id;
+                dr["description"] = temp.Item.Description;
+                dr["quantity"] = temp.Qty;
+                dr["price"] = temp.Price;
+                dr["amount"] = temp.Qty * temp.Price;
+                dt.Rows.Add(dr);
+            }
+            return dt;
         }
 
         public Constants.ACTION_STATUS SelectCreate()
