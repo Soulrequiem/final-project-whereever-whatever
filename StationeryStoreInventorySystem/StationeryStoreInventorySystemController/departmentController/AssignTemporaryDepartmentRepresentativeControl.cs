@@ -38,8 +38,9 @@ namespace StationeryStoreInventorySystemController.departmentController
         public AssignTemporaryDepartmentRepresentativeControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
+            InventoryEntities inventory = new InventoryEntities();
 
-            employeeBroker = new EmployeeBroker();
+            employeeBroker = new EmployeeBroker(inventory);
 
             temporaryDepartmentRepresentative = new Employee();
             temporaryDepartmentRepresentative.Role = new Role();

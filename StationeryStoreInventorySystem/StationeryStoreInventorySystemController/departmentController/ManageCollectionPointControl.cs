@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SystemStoreInventorySystemUtil;
-using StationeryStoreInventorySystemModel.broker;
-using StationeryStoreInventorySystemModel.entity;
 using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
-using StationeryStoreInventorySystemController.commonController;
 using SystemStoreInventorySystemUtil;
 using System.Data;
 
@@ -18,13 +15,15 @@ namespace StationeryStoreInventorySystemController.departmentController
     {
         private ICollectionPointBroker collectionPointBroker;
         private Employee currentEmployee;
-        private List<CollectionPoint> allCollectionPoint;
         private CollectionPoint currentCollectionPoint;
-
+        private List<CollectionPoint> allCollectionPoint;
+        
         public ManageCollectionPointControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
-            collectionPointBroker = new CollectionPointBroker();
+            InventoryEntities inventory = new InventoryEntities();
+
+            collectionPointBroker = new CollectionPointBroker(inventory);
             allCollectionPoint = collectionPointBroker.GetAllCollectionPoint();
             currentCollectionPoint = currentEmployee.Department.CollectionPoint;
         }
@@ -39,7 +38,6 @@ namespace StationeryStoreInventorySystemController.departmentController
                 {
                     DataRow dr = new DataRow();
                     dt.NewRow();
-                    dr["collectionId"] = currentCollectionPoint.Id;
                     dr["collectionPoint"] = currentCollectionPoint.Name;
                     dr["collectionTime"] = currentCollectionPoint.Time;
 
