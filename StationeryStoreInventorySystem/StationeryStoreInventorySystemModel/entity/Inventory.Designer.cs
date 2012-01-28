@@ -66,6 +66,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_RequisitionCollectionDetails_RequisitionCollection1", "RequisitionCollection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollection), "RequisitionCollectionDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollectionDetail))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_requisitioncollectionitems_requisitioncollection1", "RequisitionCollection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollection), "RequisitionCollectionItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollectionItem))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_retrievaldetails_retrieval1", "Retrieval", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Retrieval), "RetrievalDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RetrievalDetail))]
+[assembly: EdmRelationshipAttribute("InventoryModel", "DepartmentShowCollectionMissed", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Department), "ShowCollectionMissed", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.ShowCollectionMissed))]
 
 #endregion
 
@@ -1540,6 +1541,28 @@ namespace StationeryStoreInventorySystemModel.entity
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RetrievalDetail>("InventoryModel.FK_retrievaldetails_department1", "RetrievalDetails", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "DepartmentShowCollectionMissed", "ShowCollectionMissed")]
+        public EntityCollection<ShowCollectionMissed> ShowCollectionMisseds
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ShowCollectionMissed>("InventoryModel.DepartmentShowCollectionMissed", "ShowCollectionMissed");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ShowCollectionMissed>("InventoryModel.DepartmentShowCollectionMissed", "ShowCollectionMissed", value);
                 }
             }
         }
@@ -6065,6 +6088,47 @@ namespace StationeryStoreInventorySystemModel.entity
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "DepartmentShowCollectionMissed", "Department")]
+        public Department Department_1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Department> Department_1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
