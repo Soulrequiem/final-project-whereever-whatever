@@ -223,8 +223,27 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             throw new NotImplementedException();
         }
-        
-        
+
+
+
+
+        public int GetRetrievalId()
+        {
+            List<Retrieval> list = GetAllRetrieval();
+            Retrieval retrieval = list.Last();
+            int id = retrieval.Id;
+            id++;
+            return id;
+        }
+
+        public int GetRetrievalDetailId()
+        {
+            List<RetrievalDetail> list = GetAllRetrievalDetail();
+            RetrievalDetail retrievalDetail = list.Last();
+            int id = retrievalDetail.Id;
+            id++;
+            return id;
+        }
     }
 }
 /****************************************/
