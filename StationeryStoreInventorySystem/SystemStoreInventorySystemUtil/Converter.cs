@@ -24,13 +24,29 @@ namespace SystemStoreInventorySystemUtil
             return designationText;
         }
 
+        
+
         public static string GetDepartmentStatusText(Constants.DEPARTMENT_STATUS departmentStatus)
         {
+            string departmentStatusText = null;
+
             switch (departmentStatus)
             {
-                case(Constants.DEPARTMENT_STATUS.)
+                case Constants.DEPARTMENT_STATUS.BLACKLIST:
+                    departmentStatusText = "Blacklist";
+                    break;
+                case Constants.DEPARTMENT_STATUS.HIDDEN:
+                    departmentStatusText = "Hidden";
+                    break;
+                case Constants.DEPARTMENT_STATUS.SHOW:
+                    departmentStatusText = "Show";
+                    break;
+                case Constants.DEPARTMENT_STATUS.UNBLACKLIST:
+                    departmentStatusText = "Unblacklist";
+                    break;
             }
-            return "";
+
+            return departmentStatusText;
         }
 
         public static Constants.EMPLOYEE_ROLE objToEmployeeRole(object obj)
