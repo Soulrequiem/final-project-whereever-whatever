@@ -37,7 +37,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 DataTable dt = GetsrtsControl().GetApprovedRequisition();
                 FillRequisitionList(dt);
-                //FillRequsitionData();
             }
         }
 
@@ -54,14 +53,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
                 {
                     lblCollectionID.Text = "ID";
                     lblCollectionPoint.Text = "Point";
-                    //lblDeptCode.Text = "Department Code";
-                    //LblDeptName.Text = "Department Name";
-                    //LblDeptName.Text = "Employee Name";
-                    //lblEmployeeNumber.Text = "Employee Number";
-                    //lblEmpEmailAddress.Text = "Employee EmailAddress";
-                    //drdItemList.ValueField = "ID";
-                    //drdItemList.DataSource = dtDetails;
-                    //drdItemList.DataBind();
                 }
             }
             catch (Exception e)
@@ -84,6 +75,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             catch (Exception e)
             {
                 Logger.WriteErrorLog(e);
+            }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GetsrtsControl().SelectSubmit();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteErrorLog(ex);
             }
         }
 
