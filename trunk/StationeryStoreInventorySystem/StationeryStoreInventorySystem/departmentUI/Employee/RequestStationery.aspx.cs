@@ -12,11 +12,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 {
     public partial class RequestStationery : System.Web.UI.Page
     {
+        RequestStationeryControl resCtrl;
         /// <summary>
         /// Loads the RequestStationery form
         /// </summary>
@@ -24,6 +26,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                lblRequisitionDate.Text = System.DateTime.Now.Date.ToString();
+                lblRequisitionID.Text = "ID";
+                lblDepartmentCode.Text = "Department Code";
+                lblDepartmentName.Text = "Department Name";
+                lblEmployeeName.Text = "Employee Name";
+                lblEmployeeID.Text = "Employee Number";
+                lblEmployeeEmailID.Text = "Employee Email ID";
+            }
             //DataTable dt = new DataTable();
             //dt.Columns.Add("ItemNo");
             //dt.Columns.Add("ItemDescription");
@@ -84,29 +96,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             //dgvStationeryDetailsList.DataSource = dtt;
             //dgvStationeryDetailsList.DataBind();
 
-            if (!IsPostBack)
-            {
-                //FillDetails();
-            }
+           
         }
 
         /// <summary>
-        /// Fills Details to Label
+        /// Fill selected Item Description into GridView
+        /// Method Name: FillDetails()
+        /// Modified by: SanLaPyaye
+        /// Modified Date: 27/01/2012
         /// </summary>
-        /// <param name="dtItems"></param>
+        /// <param name="dtDetails"></param>
         private void FillDetails(DataTable dtDetails)
         {
             try
             {
                 if (dtDetails != null)
                 {
-                    lblRequisitionDate.Text = "Date";
-                    lblRequisitionID.Text = "ID";
-                    lblDepartmentCode.Text = "Department Code";
-                    lblDepartmentName.Text = "Department Name";
-                    lblEmployeeName.Text = "Employee Name";
-                    lblEmployeeID.Text = "Employee Number";
-                    lblEmployeeEmailID.Text = "Employee Email ID";
+                    dgvStationeryList.DataSource = dtDetails;
+                    dgvStationeryList.DataBind();
                 }
             }
             catch (Exception e)
@@ -155,25 +162,67 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             }
         }
 
-        /// <summary>
-        /// Fills the change Items to Datagrid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void drdItemList_SelectionChanged(object sender,
-            Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        protected void drdItemList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
             try
             {
                 String selectedItem = drdItemList.SelectedItem.Text;
-                //Pass to the controller get Datatable
-                //Call FillStationeryList function
+                resCtrl = GetControl();
+                DataTable dtItemDescription = resCtrl.SelectItemDescription(selectedItem);
+                FillDetails(dtItemDescription);
             }
             catch (Exception ex)
             {
                 Logger.WriteErrorLog(ex);
             }
         }
+
+        private RequestStationeryControl GetControl()
+        {
+            if (resCtrl == null)
+                resCtrl = new RequestStationeryControl();
+            return resCtrl;
+        }
+
+        protected void btnRequest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnRemove_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            dgvStationeryDetailsList.ClearDataSource();
+        }
+
+        ///// <summary>
+        ///// Fills the change Items to Datagrid
+        ///// Modified By: SanLaPyaye
+        ///// Modified Date: 27/01/2012
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //protected void drdItemList_SelectionChanged(object sender,
+        //    Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        //{
+        //    try
+        //    {
+        //            String selectedItem = drdItemList.SelectedItem.Text;
+        //            res = new RequestStationeryControl();
+        //            DataTable dtItemDescription = res.SelectItemDescription(selectedItem);
+        //            FillDetails(dtItemDescription);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.WriteErrorLog(ex);
+        //    }
+        //}
+
+        
     }
 }
 /********************************************/
