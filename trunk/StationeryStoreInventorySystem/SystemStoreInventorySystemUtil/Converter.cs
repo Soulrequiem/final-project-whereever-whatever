@@ -26,6 +26,10 @@ namespace SystemStoreInventorySystemUtil
 
         public static string GetDepartmentStatusText(Constants.DEPARTMENT_STATUS departmentStatus)
         {
+            switch (departmentStatus)
+            {
+                case(Constants.DEPARTMENT_STATUS.)
+            }
             return "";
         }
 
@@ -277,6 +281,28 @@ namespace SystemStoreInventorySystemUtil
                     break;
             }
             return category;
+        }
+
+        public static Constants.DEPARTMENT_STATUS objToDepartmentStatus(object obj)
+        {
+            Constants.DEPARTMENT_STATUS status = Constants.DEPARTMENT_STATUS.UNKNOWN;
+
+            switch (objToShort(obj))
+            {
+                case 1:
+                    status = Constants.DEPARTMENT_STATUS.SHOW;
+                    break;
+                case 2:
+                    status = Constants.DEPARTMENT_STATUS.HIDDEN;
+                    break;
+                case 3:
+                    status = Constants.DEPARTMENT_STATUS.BLACKLIST;
+                    break;
+                case 4:
+                    status = Constants.DEPARTMENT_STATUS.UNBLACKLIST;
+                    break;
+            }
+            return status;
         }
 
         public static Constants.UNIT_OF_MEASURE objToUnitOfMeasure(object obj)
