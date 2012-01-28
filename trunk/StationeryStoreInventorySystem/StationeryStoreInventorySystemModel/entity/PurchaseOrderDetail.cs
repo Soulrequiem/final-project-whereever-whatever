@@ -12,7 +12,7 @@ namespace StationeryStoreInventorySystemModel.entity
         public PurchaseOrderDetail():this(0,null,null,0,0,0)
         { 
         }
-        public PurchaseOrderDetail(int id, PurchaseOrder purchaseid, Item itemId, decimal price, int qty, int acceptedByQty)
+        public PurchaseOrderDetail(int id, PurchaseOrder purchaseid, Item itemId, decimal price, int qty, int acceptedQty)
         {
             this.Id = id;
             this.PurchaseOrder = purchaseid;
@@ -20,7 +20,7 @@ namespace StationeryStoreInventorySystemModel.entity
             this.Item = itemId;
             this.Price = price;
             this.Qty = qty;
-            this.AcceptedByQty = acceptedByQty;
+            this.AcceptedQty = acceptedQty;
 
         }
     }
