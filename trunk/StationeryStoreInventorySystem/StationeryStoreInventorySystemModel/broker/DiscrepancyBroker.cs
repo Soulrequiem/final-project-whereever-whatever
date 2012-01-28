@@ -196,8 +196,8 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 disDetail = inventory.DiscrepancyDetails.Where(disDetailObj => disDetailObj.Id == discrepancyDetail.Id).First();
-                Discrepancy disId = inventory.Discrepancies.Where(d => d.Id == disDetail.Discrepancy.Id).First();
-                Item item = inventory.Items.Where(i => i.Id == disDetail.Item.Id).First();
+                Discrepancy disId = inventory.Discrepancies.Where(d => d.Id == discrepancyDetail.Discrepancy.Id).First();
+                Item item = inventory.Items.Where(i => i.Id == discrepancyDetail.Item.Id).First();
                 disDetail.Qty = discrepancyDetail.Qty;
                 disDetail.Discrepancy = disId;
                 disDetail.Item = item;
