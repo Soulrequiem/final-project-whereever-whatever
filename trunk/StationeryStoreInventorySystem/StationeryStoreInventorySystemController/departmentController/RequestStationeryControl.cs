@@ -31,6 +31,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             requisitionBroker = new RequisitionBroker(inventory);
             itemBroker = new ItemBroker(inventory);
+
             requisitionDetailList = new System.Data.Objects.DataClasses.EntityCollection<RequisitionDetail>();
 
             requisition = new Requisition();
@@ -84,9 +85,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         public DataTable SelectItemDescription(string itemDescription)
         {
-            Item item = new Item();
-            item.Description = itemDescription;
-            item = itemBroker.GetItem(item);
+            Item item = Util.GetItem(itemBroker, itemDescription);
             
             dt = new DataTable();
 
@@ -102,6 +101,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         public Constants.ACTION_STATUS AddToTable(string itemId){
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+
             RequisitionDetail requisitionDetail = new RequisitionDetail();
             
             Item item = new Item();
@@ -124,7 +124,6 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
-        //----
         public Constants.ACTION_STATUS SelectRequest(){
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
@@ -145,16 +144,13 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
+            RequisitionDetail requisitionDetail;
+
             foreach (int id in requisitionDetailId)
             {
-                foreach (RequisitionDetail temp in requisitionDetailList)
-                {
-                    if (temp.Id == id)
-                    {
-                        requisitionDetailList.Remove(temp);
-                        status = Constants.ACTION_STATUS.SUCCESS;
-                    }
-                }
+                requisitionDetail = requisitionDetailList.Where(reqDetail => reqDetail.Id == id).First();
+                requisitionDetailList.Remove(requisitionDetail);
+                status = Constants.ACTION_STATUS.SUCCESS;
             }
 
             return status;            

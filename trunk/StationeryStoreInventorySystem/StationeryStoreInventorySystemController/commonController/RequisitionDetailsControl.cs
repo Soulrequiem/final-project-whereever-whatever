@@ -30,7 +30,7 @@ namespace StationeryStoreInventorySystemController.commonController
             return requisitionDetailList;
         }
 
-        public void SelectRequisitionID(Requisition requisition){
+        public void SelectRequisition(Requisition requisition){
         
             
             RequisitionDetail requisitionDetail = new RequisitionDetail();

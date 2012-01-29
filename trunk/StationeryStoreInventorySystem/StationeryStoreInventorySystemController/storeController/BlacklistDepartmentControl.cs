@@ -12,25 +12,41 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class BlacklistDepartmentControl
     {
-        private List<Department> departmentList;
         private IDepartmentBroker departmentBroker;
+        private ICollectionMissed collectionMissedBroker;
+        
+        private Employee currentEmployee;
+
+        private List<Department> cleanDepartmentList;
+        private List<Department> unblacklistDepartmentList;
+        private List<Department> blacklistDepartmentList;
 
         private DataTable dt;
         private DataRow dr;
 
         public BlacklistDepartmentControl()
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_MANAGER);
             InventoryEntities inventory = new InventoryEntities();
+            
             departmentBroker = new DepartmentBroker(inventory);
-            departmentList = GetDepaermentList();
+
+            cleanDepartmentList = departmentBroker.GetAllDepartment(Constants.DEPARTMENT_STATUS.SHOW);
+            unblacklistDepartmentList = departmentBroker.GetAllDepartment(Constants.DEPARTMENT_STATUS.UNBLACKLIST);
+            blacklistDepartmentList = departmentBroker.GetAllDepartment(Constants.DEPARTMENT_STATUS.BLACKLIST);
         }
 
         public DataTable DepartmentList
         {
             get
             {
-              
-                return ListToDataTable(departmentList);
+                dt = new DataTable();
+
+                this.ListToDataTable(cleanDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
+                this.ListToDataTable(unblacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
+                this.ListToDataTable(blacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
+
+                return dt;
             }
         }
 
@@ -48,21 +64,16 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return value of this method is resultItem.</returns>
-        private DataTable ListToDataTable(List<Department> deptList){
-            dt = new DataTable();
-            
+        private DataTable ListToDataTable(List<Department> deptList, Constants.VISIBILITY_STATUS collectionMissedStatus){
             foreach (Department dep in deptList)
             {
                 dr = dt.NewRow();
                 dr["departmentName"] = dep.Name;
-                List<CollectionMissed> missedTime = dep.CollectionMisseds.ToList();
+                List<CollectionMissed> missedTime = collectionMissedBroker.GetAllCollectionMissed(dep, collectionMissedStatus);
                 int count = 0;
                 foreach (CollectionMissed times in missedTime)
                 {
-                    if (times.Status != (int)Constants.VISIBILITY_STATUS.HIDDEN)
-                    {
-                        count++;
-                    }
+                    count++;
                 }
                 dr["missedTime"] = count;
                 dr["status"] = Converter.GetDepartmentStatusText(Converter.objToDepartmentStatus(dep.Status));
@@ -73,36 +84,36 @@ namespace StationeryStoreInventorySystemController.storeController
 
 
 
-     /// <summary>
-     ///     Show all departments list except hidden departments
-     ///     Created By:Zin Mar Thwin
-     ///     Created Date:28-01-2012
-     ///     Modified By:
-     ///     Modified Date:
-     ///     Modification Reason:
-     ///     Modified By:
-     ///     Modified Date:
-     ///     Modification Reason:
-     /// </summary>
-     /// <param name="itemDescription"></param>
-     /// <returns>The return value of this method is resultItem.</returns>
-        private List<Department> GetDepaermentList()
-        {
+         /// <summary>
+         ///     Show all departments list except hidden departments
+         ///     Created By:Zin Mar Thwin
+         ///     Created Date:28-01-2012
+         ///     Modified By:
+         ///     Modified Date:
+         ///     Modification Reason:
+         ///     Modified By:
+         ///     Modified Date:
+         ///     Modification Reason:
+         /// </summary>
+         /// <param name="itemDescription"></param>
+         /// <returns>The return value of this method is resultItem.</returns>
+        //private List<Department> GetDepaermentList()
+        //{
            
-            List<Department> list = new List<Department>();
-            List<Department> newList = new List<Department>();
-            list = departmentBroker.GetAllDepartment();
-            foreach (Department dep in list)
-            {
-                if (dep.Status != (int)Constants.DEPARTMENT_STATUS.HIDDEN)
-                {
-                    newList.Add(dep);
+        //    List<Department> list = new List<Department>();
+        //    List<Department> newList = new List<Department>();
+        //    list = departmentBroker.GetAllDepartment();
+        //    foreach (Department dep in list)
+        //    {
+        //        if (dep.Status != (int)Constants.DEPARTMENT_STATUS.HIDDEN)
+        //        {
+        //            newList.Add(dep);
 
-                }
-            }
+        //        }
+        //    }
 
-            return newList;
-        }
+        //    return newList;
+        //}
 
 
         /// <summary>
@@ -118,18 +129,41 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return value of this method is resultItem.</returns>
-        public DataTable SelectLink(string departmentId){
+        public Constants.ACTION_STATUS SelectLink(string departmentId){
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+
             Department department = new Department();
             department.Id = departmentId;
             department = departmentBroker.GetDepartment(department);
-            if(department.Status == (int)Constants.DEPARTMENT_STATUS.UNBLACKLIST || department.Status == (int)Constants.DEPARTMENT_STATUS.SHOW){
-                department.Status = (int) Constants.DEPARTMENT_STATUS.BLACKLIST;
+
+            if (department != null)
+            {
+
+                switch (Converter.objToDepartmentStatus(department.Status))
+                {
+                    case Constants.DEPARTMENT_STATUS.BLACKLIST:
+                        department = blacklistDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
+                        department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.UNBLACKLIST);
+                        break;
+                    case Constants.DEPARTMENT_STATUS.UNBLACKLIST:
+                        department = unblacklistDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
+                        department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.BLACKLIST);
+                        break;
+                    case Constants.DEPARTMENT_STATUS.SHOW:
+                        department = cleanDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
+                        department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.BLACKLIST);
+                        break;
+                }
+
+                departmentBroker.Update(department);
+                status = Constants.ACTION_STATUS.SUCCESS;
             }
-            else{
-                department.Status = (int) Constants.DEPARTMENT_STATUS.UNBLACKLIST;
+            else
+            {
+                status = Constants.ACTION_STATUS.FAIL;
             }
-            departmentBroker.Update(department);
-            return ListToDataTable(GetDepaermentList());
+            
+            return status;
 
         }
 

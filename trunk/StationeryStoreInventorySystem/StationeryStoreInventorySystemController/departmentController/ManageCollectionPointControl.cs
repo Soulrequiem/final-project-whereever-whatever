@@ -13,9 +13,14 @@ namespace StationeryStoreInventorySystemController.departmentController
     public class ManageCollectionPointControl
     {
         private ICollectionPointBroker collectionPointBroker;
+        
         private Employee currentEmployee;
         private CollectionPoint currentCollectionPoint;
+        
         private List<CollectionPoint> allCollectionPoint;
+
+        private DataTable dt;
+        private DataRow dr;
         
         public ManageCollectionPointControl()
         {
@@ -23,6 +28,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             InventoryEntities inventory = new InventoryEntities();
 
             collectionPointBroker = new CollectionPointBroker(inventory);
+
             allCollectionPoint = collectionPointBroker.GetAllCollectionPoint();
             currentCollectionPoint = currentEmployee.Department.CollectionPoint;
         }
@@ -31,11 +37,11 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                DataTable dt = new DataTable();
+                dt = new DataTable();
                 
                 if (currentCollectionPoint != null)
                 {
-                    DataRow dr = dt.NewRow();
+                    dr = dt.NewRow();
                     dr["collectionPoint"] = currentCollectionPoint.Name;
                     dr["collectionTime"] = currentCollectionPoint.Time;
 
@@ -49,11 +55,10 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                DataTable dt = new DataTable();
+                dt = new DataTable();
 
                 if (allCollectionPoint.Count > 0)
                 {
-                    DataRow dr;
                     foreach (CollectionPoint collectionPoint in allCollectionPoint)
                     {
                         dr = dt.NewRow();

@@ -31,6 +31,7 @@ namespace StationeryStoreInventorySystemController.commonController
                 currentEmployee.User.Password = newPassword;
                 if (employeeBroker.Update(currentEmployee.User) == Constants.DB_STATUS.SUCCESSFULL)
                 {
+                    Util.PutSession(Util.employeeSessionKey, currentEmployee);
                     status = Constants.ACTION_STATUS.SUCCESS;
                 }
                 else
