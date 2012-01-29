@@ -78,7 +78,9 @@
             <div style="float:right">
                         &nbsp;&nbsp;&nbsp;
                             <asp:Button id="btnSave" CssClass="DefaultLargebutton"  runat="server" 
-                            Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_SubmitToStore %>"/>
+                            
+                            Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_SubmitToStore %>" 
+                            onclick="btnSave_Click"/>
                         </div>
         </Template>
     </igmisc:WebGroupBox>

@@ -44,7 +44,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             try
             {
                 iavCtrl = GetControl();
-                DataTable dtDiscrepancy = iavCtrl.GetDiscrepancyList();
+                DataTable dtDiscrepancy = iavCtrl.DiscrepancyList;
                 DgvDiscrepancyReportList.DataSource = dtDiscrepancy;
                 DgvDiscrepancyReportList.DataBind();
             }
