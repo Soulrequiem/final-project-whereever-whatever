@@ -87,8 +87,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 
             if (!IsPostBack)
             {
-                FillCollectionDetails();
-                FillItems();
+                //FillCollectionDetails();
+                //FillItems();
                 //FillCollectionDetails();
             }
         }
