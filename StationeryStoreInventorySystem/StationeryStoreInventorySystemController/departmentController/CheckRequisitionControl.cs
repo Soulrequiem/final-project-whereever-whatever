@@ -20,14 +20,24 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class CheckRequisitionControl
     {
-        IRequisitionBroker requisitionBroker;
-        Requisition requisition;
-        List<Requisition> requisitionList;
-        RequisitionDetail requisitionDetail;
+        private IRequisitionBroker requisitionBroker;
+        
+        private Employee currentEmployee;
+        private Requisition requisition;
+        private RequisitionDetail requisitionDetail;
+        
+        private System.Data.Objects.DataClasses.EntityCollection<Requisition> requisitionList;
+
+        private DataTable dt;
+        private DataRow dr;
+        
         public CheckRequisitionControl()
         {
-            requisitionBroker = new RequisitionBroker();
-            requisitionList = new List<Requisition>();
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.EMPLOYEE);
+            InventoryEntities inventory = new InventoryEntities();
+
+            requisitionBroker = new RequisitionBroker(inventory);
+            requisitionList = new System.Data.Objects.DataClasses.EntityCollection<Requisition>();
             //requisitionList = requisitionBroker.GetAllRequisition();
         }
 
@@ -51,15 +61,14 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable GetRequisitionList()
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            dt = new DataTable();
             List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
             foreach (Requisition temp in requisitionList)
             {
                 requisitionDetail = new RequisitionDetail();
                 requisitionDetail.Requisition.Id = temp.Id;
                 RequisitionDetail resultRequisitionDetail= requisitionBroker.GetRequisitionDetail(requisitionDetail);
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["requsitionId"] = temp.Id;
                 dr["requisitionDate"] = temp.CreatedDate;
                 dr["status"] = temp.Status; 
@@ -98,10 +107,10 @@ namespace StationeryStoreInventorySystemController.departmentController
             requisition=requisitionBroker.GetRequisition(requisition);
             requisitionDetail=new RequisitionDetail();
             requisitionDetail.Requisition.Id=requisitionId;
-            requisitionDetail=requisitionBroker.GetRequisitionDetail(requisitionDetail);
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
-            dt.NewRow();
+            requisitionDetail = requisitionBroker.GetRequisitionDetail(requisitionDetail);
+            dt = new DataTable();
+            
+            dr = dt.NewRow();
             dr["requisitionId"] = requisition.Id;
             dr["requisitionDate/Time"] = requisition.CreatedDate;
             dr["status"] = requisition.Status;
@@ -135,15 +144,15 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable SelectRequisitionID(string requisitionId)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            dt = new DataTable();
+            
             requisition =new Requisition();
             requisition.Id=requisitionId;
             requisition=requisitionBroker.GetRequisition(requisition);
-            List<RequisitionDetail> requisitionDetailList=(List<RequisitionDetail>)requisition.RequisitionDetails;
-            foreach(RequisitionDetail temp in requisitionDetailList)
+            //List<RequisitionDetail> requisitionDetailList=(List<RequisitionDetail>)requisition.RequisitionDetails;
+            foreach(RequisitionDetail temp in requisition.RequisitionDetails)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["itemDescription"] = temp.Item.Description;
                 dr["requiredQty"] = temp.Qty;

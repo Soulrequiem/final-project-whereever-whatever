@@ -25,6 +25,9 @@ namespace StationeryStoreInventorySystemController.storeController
         private InventoryEntities inventory;
         private IRequisitionCollectionBroker requisitionCollectionBroker;
 
+        private DataTable dt;
+        private DataRow dr;
+
         public UpdateStationeryRetrievalControl()
         {
             inventory = new InventoryEntities();
@@ -45,13 +48,12 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable GetCollectionIDList()
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            dt = new DataTable();
             requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
             List<RequisitionCollection> collectionList = requisitionCollectionBroker.GetAllRequisitionCollection();
             foreach (RequisitionCollection temp in collectionList)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["collectionId"]=temp.Id;
                 dr["collectionPoint"] = temp.CollectionPoint.Name;
                 dr["collectionDate/Time"] = temp.CollectionPoint.Time;
@@ -65,6 +67,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
         public Constants.ACTION_STATUS SetCollectionStatus(Constants.COLLECTION_STATUS collectionStatus, List<string> collectionIdList)
         {
+            return SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.UNKNOWN;
         }
     }
 }

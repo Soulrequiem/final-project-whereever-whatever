@@ -6,7 +6,6 @@ using SystemStoreInventorySystemUtil;
 using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
-using SystemStoreInventorySystemUtil;
 using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
@@ -33,11 +32,10 @@ namespace StationeryStoreInventorySystemController.departmentController
             get
             {
                 DataTable dt = new DataTable();
-
+                
                 if (currentCollectionPoint != null)
                 {
-                    DataRow dr = new DataRow();
-                    dt.NewRow();
+                    DataRow dr = dt.NewRow();
                     dr["collectionPoint"] = currentCollectionPoint.Name;
                     dr["collectionTime"] = currentCollectionPoint.Time;
 
@@ -58,9 +56,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                     DataRow dr;
                     foreach (CollectionPoint collectionPoint in allCollectionPoint)
                     {
-                        dr = new DataRow();
-
-                        dt.NewRow();
+                        dr = dt.NewRow();
                         dr["value"] = collectionPoint.Id;
                         dr["text"] = collectionPoint.Name + " (" + collectionPoint.Time.ToString("hh:ss tt") + ")";
                         dt.Rows.Add(dr);

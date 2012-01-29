@@ -18,8 +18,12 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class ViewSupplierListControl
     {
-        ISupplierBroker supplierBroker;
-        List<Supplier> supplierList;
+        private ISupplierBroker supplierBroker;
+        private List<Supplier> supplierList;
+
+        private DataTable dt;
+        private DataRow dr;
+
         public ViewSupplierListControl()
         {
             supplierList = new List<Supplier>();
@@ -45,12 +49,12 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable GetSupplierList()
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            dt = new DataTable();
+            
             supplierList = supplierBroker.GetAllSupplier();
             foreach (Supplier temp in supplierList)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["supplierCode"] = temp.Id;
                 dr["gstRegistrationNo"] = temp.GstRegistrationNumber;
                 dr["supplierName"] = temp.Name;

@@ -12,9 +12,12 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class SubmitRequestToStoreControl
     {
-        DataTable dt;
-        IRequisitionBroker requisitionBroker;
-        Employee currentEmployee;
+        
+        private IRequisitionBroker requisitionBroker;
+        private Employee currentEmployee;
+
+        private DataTable dt;
+        private DataRow dr;
 
         public SubmitRequestToStoreControl()
         {
@@ -27,7 +30,6 @@ namespace StationeryStoreInventorySystemController.departmentController
         public DataTable GetApprovedRequisition()
         {
             dt = new DataTable();
-            DataRow dr;
             List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
             List<Requisition> resultList = new List<Requisition>();
             foreach (Requisition requisition in requisitionList)
@@ -39,11 +41,10 @@ namespace StationeryStoreInventorySystemController.departmentController
             }
             
             foreach(Requisition requisition in resultList){
-                dt.NewRow();
-                dr = new DataRow();
+                dr = dt.NewRow();
                 dr["requisitionId"] = requisition.Id;
                 dr["requisitionDateTime"] = requisition.ApprovedDate;
-                dr["requisitionBy"] = requisition.Employee.Name;
+                dr["requisitionBy"] = requisition.CreatedBy.Name;
                 dr["requisitionStatus"] = requisition.Status;
                 dt.Rows.Add(dr);
             }

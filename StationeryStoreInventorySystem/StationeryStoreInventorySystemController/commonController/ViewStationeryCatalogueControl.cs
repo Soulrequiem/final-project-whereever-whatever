@@ -37,6 +37,9 @@ namespace StationeryStoreInventorySystemController.commonController
         private Employee currentEmployee;
 		private List<Item> itemList;
 
+        private DataTable dt;
+        private DataRow dr;
+
         public ViewStationeryCatalogueControl()
         {
             currentEmployee = Util.ValidateUser();
@@ -61,16 +64,14 @@ namespace StationeryStoreInventorySystemController.commonController
         {
             get
             {
-                DataTable dt = new DataTable();
-                DataRow dr;
-
+                dt = new DataTable();
+                
                 // for store
-                if (Util.CheckPermission(Converter.objToEmployeeRole(currentEmployee.Role.Id), Util.GetRolePermission(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD)))
+                if (Util.CheckPermission(Converter.objToEmployeeRole(currentEmployee.Role.Id), Util.GetRolePermission(Constants.EMPLOYEE_ROLE.STORE_CLERK)))
                 {
                     foreach (Item item in itemList)
                     {
-                        dt.NewRow();
-                        dr = new DataRow();
+                        dr = dt.NewRow();
                         dr["itemNo"] = item.Id;
                         dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
                         dr["itemDescription"] = item.Description;
@@ -85,8 +86,7 @@ namespace StationeryStoreInventorySystemController.commonController
                 {
                     foreach (Item item in itemList)
                     {
-                        dt.NewRow();
-                        dr = new DataRow();
+                        dr = dt.NewRow(); ;
                         dr["itemNo"] = item.Id;
                         dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
                         dr["itemDescription"] = item.Description;

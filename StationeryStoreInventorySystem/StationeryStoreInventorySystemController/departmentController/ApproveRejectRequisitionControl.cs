@@ -12,16 +12,21 @@ using System.Text;
 using SystemStoreInventorySystemUtil;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
+using StationeryStoreInventorySystemModel.brokerinterface;
 using System.Data;
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
     public class ApproveRejectRequisitionControl
     {
-        commonController.RequisitionDetailsControl requisitionDetailsControl;
-        RequisitionBroker requisitionBroker = new RequisitionBroker();
-        DataTable dt;
-        DataRow dr;
+        private commonController.RequisitionDetailsControl requisitionDetailsControl;
+        
+        private IRequisitionBroker requisitionBroker;
+        
+        private Employee currentEmployee;
+        
+        private DataTable dt;
+        private DataRow dr;
 
 
         /// <summary>
@@ -38,6 +43,10 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         public ApproveRejectRequisitionControl() 
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
+            InventoryEntities inventory = new InventoryEntities();
+
+            requisitionBroker = new RequisitionBroker(inventory);
              requisitionDetailsControl = new commonController.RequisitionDetailsControl();
                      
         }
@@ -65,19 +74,16 @@ namespace StationeryStoreInventorySystemController.departmentController
         public DataTable GetRequisition()
         {
             dt = new DataTable();
-            dr = null;
-
             List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
 
             int qty;
             foreach (Requisition r in requisitionList)
             {
                 qty=0;
-                dt.NewRow();
-                dr = new DataRow();
+                dr = dt.NewRow();
                 dr["requisitionId"] = r.Id;
                 dr["requisitionDate/Time"] = Convert.ToDateTime(r.CreatedDate);
-                dr["requisitionBy"] = r.Employee1.Name;
+                dr["requisitionBy"] = r.CreatedBy.Name;
 
                 
             //List<RequisitionDetail> requisitionDetailList=requisitionBroker.GetRequisitionDetail(r.RequisitionDetails);

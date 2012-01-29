@@ -13,39 +13,51 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class PurchaseOrderControl
     {
-        IItemBroker itemBroker;
-        IStockCardBroker stockCardBroker;
-        List<PurchaseOrderDetail> orderList;
-        IPurchaseOrderBroker purchaseOrderBroker;
+        private IItemBroker itemBroker;
+        private IPurchaseOrderBroker purchaseOrderBroker;
+        
+        private Employee currentEmployee;
+        private PurchaseOrder purchaseOrder;
+        
+        private System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail> purchaseOrderDetails;
 
+        private DataTable dt;
+        private DataRow dr;
+        
         public PurchaseOrderControl()
         {
-            orderList = new List<PurchaseOrderDetail>();
-            itemBroker = new ItemBroker();
-            stockCardBroker = new StockCardBroker();
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
+            InventoryEntities inventory = new InventoryEntities();
+
+            itemBroker = new ItemBroker(inventory);
+            purchaseOrderBroker = new PurchaseOrderBroker(inventory);
+
+            purchaseOrder = new PurchaseOrder();
+            purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
+
+            purchaseOrderDetails = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
         }
 
         public DataTable GetAllOrders()
         {
-            DataTable dt = new DataTable();
-            DataRow dr = null;
-            List<PurchaseOrderDetail> orderList = new List<PurchaseOrderDetail>();
-            List<Item> itemList = itemBroker.GetAllItem();
-            foreach (Item item in itemList)
-            {
-                StockCard stockCard = new StockCard();
-                stockCard.Item = item;
-                StockCard newStockCard = stockCardBroker.GetStockCard(stockCard);
-                if(item.ReorderLevel < 111){// how to get bal from stock card details???
-                    PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
-                    purchaseOrderDetail.Item = item;
-                    orderList.Add(purchaseOrderDetail);
-                }
-            }
+            dt = new DataTable();
+            //List<PurchaseOrderDetail> orderList = new List<PurchaseOrderDetail>();
+            //List<Item> itemList = itemBroker.GetAllItem();
+            //foreach (Item item in itemList)
+            //{
+            //    StockCard stockCard = new StockCard();
+            //    stockCard.Item = item;
+            //    StockCard newStockCard = stockCardBroker.GetStockCard(stockCard);
+            //    if(item.ReorderLevel < 111){// how to get bal from stock card details???
+            //        PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
+            //        purchaseOrderDetail.Item = item;
+            //        orderList.Add(purchaseOrderDetail);
+            //    }
+            //}
 
-            foreach(PurchaseOrderDetail temp in orderList){
-                dt.NewRow();
-                dr = new DataRow();
+            foreach (PurchaseOrderDetail temp in purchaseOrderDetails)
+            {
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["description"] = temp.Item.Description;
                 dr["quantity"] = temp.Qty;
@@ -66,15 +78,14 @@ namespace StationeryStoreInventorySystemController.storeController
 
         public DataTable SelectAdd(Item item)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = null;
+            dt = new DataTable();
+            
             PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
             purchaseOrderDetail.Item = item;
-            orderList.Add(purchaseOrderDetail);
-            foreach (PurchaseOrderDetail temp in orderList)
+            purchaseOrderDetails.Add(purchaseOrderDetail);
+            foreach (PurchaseOrderDetail temp in purchaseOrderDetails)
             {
-                dt.NewRow();
-                dr = new DataRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["description"] = temp.Item.Description;
                 dr["quantity"] = temp.Qty;
@@ -88,14 +99,12 @@ namespace StationeryStoreInventorySystemController.storeController
 
         public DataTable SelectRemove(PurchaseOrderDetail purchaseOrderDetail)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = null;
+            dt = new DataTable();
             
-            orderList.Remove(purchaseOrderDetail);
-            foreach (PurchaseOrderDetail temp in orderList)
+            purchaseOrderDetails.Remove(purchaseOrderDetail);
+            foreach (PurchaseOrderDetail temp in purchaseOrderDetails)
             {
-                dt.NewRow();
-                dr = new DataRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["description"] = temp.Item.Description;
                 dr["quantity"] = temp.Qty;
@@ -110,7 +119,7 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             PurchaseOrder purchaseOrder = new PurchaseOrder();
-            purchaseOrder.PurchaseOrderDetails = orderList;
+            purchaseOrder.PurchaseOrderDetails = purchaseOrderDetails;
             Constants.DB_STATUS dbStatus = purchaseOrderBroker.Insert(purchaseOrder);
             if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
@@ -121,7 +130,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
         public Constants.ACTION_STATUS SelectCancel()
         {
-            orderList = null;
+            purchaseOrderDetails = null;
             return Constants.ACTION_STATUS.SUCCESS;
         }
 

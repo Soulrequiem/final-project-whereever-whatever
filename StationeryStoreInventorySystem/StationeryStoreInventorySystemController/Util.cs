@@ -170,13 +170,11 @@ namespace StationeryStoreInventorySystemController
             DataTable dt = new DataTable();
             DataRow dr;
 
-            List<Item> itemList = (new ItemBroker()).GetAllItem();
+            List<Item> itemList = (new ItemBroker(new InventoryEntities())).GetAllItem();
 
             foreach (Item item in itemList)
             {
-                dr = new DataRow();
-                
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = item.Id;
                 dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
                 dr["itemDescription"] = item.Description;
