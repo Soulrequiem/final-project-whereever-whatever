@@ -60,7 +60,7 @@
                                     <asp:Button ID="btnSignIn" CssClass="Defaultbutton"
                                         runat="server" 
                                         Text="<%$ Resources:WebResources,LogIn_SignIn_Button_Text %>"
-                                         onclick="btnSignIn_Click(this.form)"/>
+                                         onclick="btnSignIn_Click"/>
                                 </div>
                             </td>
                         </tr>
