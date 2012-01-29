@@ -13,6 +13,42 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
     public partial class Report {
         
         /// <summary>
+        /// script control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager script;
+        
+        /// <summary>
+        /// PDFExporter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.Web.UI.GridControls.WebDocumentExporter PDFExporter;
+        
+        /// <summary>
+        /// ExcelExporter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.Web.UI.GridControls.WebExcelExporter ExcelExporter;
+        
+        /// <summary>
+        /// Literal1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal Literal1;
+        
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -29,6 +65,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.ListControls.WebDropDown drdReportList;
+        
+        /// <summary>
+        /// reportpanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel reportpanel;
         
         /// <summary>
         /// WebDataGrid1 control.
@@ -56,5 +101,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton PDFDownload;
+        
+        /// <summary>
+        /// chkTrendAnalysis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkTrendAnalysis;
+        
+        /// <summary>
+        /// UltraChart1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.WebUI.UltraWebChart.UltraChart UltraChart1;
     }
 }
