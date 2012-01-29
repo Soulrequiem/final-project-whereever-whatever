@@ -24,6 +24,9 @@ namespace StationeryStoreInventorySystemController.departmentController
         private Employee currentEmployee;
         private Employee temporaryDepartmentRepresentative;
 
+        private DataTable dt;
+        private DataRow dr;
+
         /// <summary>
         ///     To get all the Employee with role name as "Temporary Department Representative"
         ///     Created By: SanLaPyaye 
@@ -54,13 +57,11 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                DataTable dt = new DataTable();
+               dt = new DataTable();
 
                 if (temporaryDepartmentRepresentative != null)
                 {
-                    DataRow dr = new DataRow();
-
-                    dt.NewRow();
+                    dr = dt.NewRow();
                     dr["employeeId"] = temporaryDepartmentRepresentative.Id;
                     dr["employeeName"] = temporaryDepartmentRepresentative.Name;
                     //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(temporaryDepartmentHead.Designation));
@@ -130,13 +131,11 @@ namespace StationeryStoreInventorySystemController.departmentController
             emp.Name = employeeName;
             emp = employeeBroker.GetEmployee(emp);
 
-            DataTable dt = new DataTable();
+            dt = new DataTable();
 
             if (emp != null)
             {
-                DataRow dr = new DataRow();
-
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["employeeId"] = emp.Id;
                 dr["employeeName"] = emp.Name;
                 //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(emp.Designation));

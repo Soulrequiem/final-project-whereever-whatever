@@ -20,12 +20,16 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     class ViewStationeryRetrievalListControl
     {
-        IRetrievalBroker retrievalBroker;
-        InventoryEntities inventory;
-        List<RetrievalDetail> retrievalDetailList;
+        private IRetrievalBroker retrievalBroker;
+        
+        private List<RetrievalDetail> retrievalDetailList;
+
+        private DataTable dt;
+        private DataRow dr;
+
         public ViewStationeryRetrievalListControl()
         {
-            inventory=new InventoryEntities();
+            InventoryEntities inventory=new InventoryEntities();
             retrievalBroker=new RetrievalBroker(inventory);
         }
 
@@ -44,12 +48,11 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable GetStationeryRetrievalList()
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            dt = new DataTable();
             retrievalDetailList = retrievalBroker.GetAllRetrievalDetail();
             foreach (RetrievalDetail temp in retrievalDetailList)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["retrievalNo"] = temp.Retrieval.Id;
                 dr["retrievalDate/Time"] = temp.Retrieval.CreatedDate;
                 dr["retrievedBy"] = temp.Retrieval.CreatedBy;

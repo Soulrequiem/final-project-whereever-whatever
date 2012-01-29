@@ -6,14 +6,12 @@
 /*  Details         : Control representation of ReceiveOrderControl 
 /***************************************************************************/
 using System;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
-using StationeryStoreInventorySystemController.commonController;
 using SystemStoreInventorySystemUtil;
 using System.Data;
 
@@ -22,15 +20,24 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class ReceiveOrderControl
     {
-        IPurchaseOrderBroker purchaseOrderBroker;
-        PurchaseOrder purchaseOrder;
-        Supplier supplier;
-        InventoryEntities inventory;
+        private IPurchaseOrderBroker purchaseOrderBroker;
+        private IItemBroker itemBroker;
         
+        private Employee currentEmployee;
+        private PurchaseOrder purchaseOrder;
+        private Supplier supplier;
+
+        private DataTable dt;
+        private DataRow dr;
+
         public ReceiveOrderControl()
         {
-            inventory = new InventoryEntities();
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
+
+            InventoryEntities inventory = new InventoryEntities();
+
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
+            itemBroker = new ItemBroker(inventory);
         }
 
         public void SelectAllPurchaseOrderDetails(int purchaseOrderNumber)
@@ -46,12 +53,11 @@ namespace StationeryStoreInventorySystemController.storeController
             purchaseOrder.Id = purchaseOrderNumber;
             purchaseOrder = purchaseOrderBroker.GetPurchaseOrder(purchaseOrder);
             List<PurchaseOrderDetail> list = purchaseOrder.PurchaseOrderDetails.ToList();
-            DataTable dt = new DataTable();
-            DataRow dr = null;
+            dt = new DataTable();
+            
             foreach (PurchaseOrderDetail temp in list)
             {
-                dt.NewRow();
-                dr = new DataRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["itemDescription"] = temp.Item.Description;
                 dr["quantity"] = temp.Qty;
@@ -78,11 +84,6 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             //update which one in purchase order table????
-            PurchaseOrderBroker purchaseOrderBroker = new PurchaseOrderBroker(inventory);
-            PurchaseOrder purchaseOrder = new PurchaseOrder();
-            purchaseOrder.Id = purchaseOrderNumber;
-            purchaseOrderBroker.Update(purchaseOrder);
-            ItemBroker itemBroker = new ItemBroker(inventory);
             DataTable dt=PurchaseOrder(purchaseOrderNumber);
             for (int i = 0; i < dt.Rows.Count;i++ )
                {

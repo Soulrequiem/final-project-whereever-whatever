@@ -24,6 +24,9 @@ namespace StationeryStoreInventorySystemController.departmentController
         private Employee currentEmployee;
         private Employee temporaryDepartmentHead;
 
+        private DataTable dt;
+        private DataRow dr;
+
         /// <summary>
         ///     To show the Current Temporary Department Head
         ///     Created By: SanLaPyaye
@@ -54,13 +57,11 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                DataTable dt = new DataTable();
+                dt = new DataTable();
                 
                 if (temporaryDepartmentHead != null)
                 {
-                    DataRow dr = new DataRow();
-
-                    dt.NewRow();
+                    dr = dt.NewRow();
                     dr["employeeId"] = temporaryDepartmentHead.Id;
                     dr["employeeName"] = temporaryDepartmentHead.Name;
                     //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(temporaryDepartmentHead.Designation));
@@ -130,13 +131,11 @@ namespace StationeryStoreInventorySystemController.departmentController
             emp.Name = employeeName;
             emp = employeeBroker.GetEmployee(emp);
 
-            DataTable dt = new DataTable();
+            dt = new DataTable();
 
             if (emp != null)
             {
-                DataRow dr = new DataRow();
-
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["employeeId"] = emp.Id;
                 dr["employeeName"] = emp.Name;
                 //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(emp.Designation));

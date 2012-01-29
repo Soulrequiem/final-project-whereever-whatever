@@ -20,19 +20,27 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class CreateDiscrepencyReportControl
     {
-        IItemBroker itemBroker; 
-        List<DiscrepancyDetail> discrepancyDetailList;
-        IDiscrepancyBroker discrepancyBroker;
-        Discrepancy discrepancy;
+        private IItemBroker itemBroker;
+        private IDiscrepancyBroker discrepancyBroker;
+        
+        private Employee currentEmployee;
+        private Discrepancy discrepancy;
+        
+        private System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail> discrepancyDetailList;
+
+        private DataTable dt;
+        private DataRow dr;
 
         public CreateDiscrepencyReportControl()
         {
-            
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
+            InventoryEntities inventory = new InventoryEntities();
+
+            discrepancyBroker = new DiscrepancyBroker(inventory);
+            itemBroker = new ItemBroker(inventory);
+
             discrepancy = new Discrepancy();
-            discrepancyDetailList = new List<DiscrepancyDetail>();
-            InventoryEntities inventoryEntities = new InventoryEntities();
-            discrepancyBroker = new DiscrepancyBroker(inventoryEntities);
-            itemBroker = new ItemBroker(inventoryEntities);
+            discrepancyDetailList = new System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail>();
         }
 
         /// <summary>
@@ -81,14 +89,13 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable SelectAdd(DiscrepancyDetail discrepancyDetail)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            dt = new DataTable();
             //discrepancy = new Discrepancy();
            
             discrepancyDetailList.Add(discrepancyDetail);
             foreach (DiscrepancyDetail temp in discrepancyDetailList)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["itemDescription"] = temp.Item.Description;
                 dr["quantity"] = temp.Qty;
@@ -123,13 +130,13 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable SelectRemove(DiscrepancyDetail discrepancyDetail)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
-            discrepancyDetailList = new List<DiscrepancyDetail>();
+            dt = new DataTable();
+            
+            //discrepancyDetailList = new List<DiscrepancyDetail>();
             discrepancyDetailList.Remove(discrepancyDetail);
             foreach (DiscrepancyDetail temp in discrepancyDetailList)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["itemDescription"] = temp.Item.Description;
                 dr["quantity"] = temp.Qty;

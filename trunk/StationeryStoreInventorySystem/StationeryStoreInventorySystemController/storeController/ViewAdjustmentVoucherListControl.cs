@@ -18,10 +18,14 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class ViewAdjustmentVoucherListControl
     {
-        IDiscrepancyBroker discrepancyBroker;
-        List<StockAdjustment> stockAdjustmentList;
-        StockAdjustment stockAdjustment;
-        Discrepancy discrepancy;
+        private IDiscrepancyBroker discrepancyBroker;
+        private List<StockAdjustment> stockAdjustmentList;
+        private StockAdjustment stockAdjustment;
+        private Discrepancy discrepancy;
+
+        private DataTable dt;
+        private DataRow dr;
+
         //List<Discrepancy> discrepancyList;
         //public ViewAdjustmentVoucherListControl()
         //{
@@ -49,16 +53,15 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable GetStockAdjustmentList()
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
+            dt = new DataTable();
             stockAdjustmentList = discrepancyBroker.GetAllStockAdjustment();
             foreach(StockAdjustment temp in stockAdjustmentList)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["voucherNo"] = null;
-                dr["createdBy"] = temp.Employee.Name;
-                dr["createdDate"] = temp.createddate;
-                dr["totalqty"] = temp.Discrepancy.DiscrepancyDetails.Qty;
+                dr["createdBy"] = temp.CreatedBy.Name;
+                dr["createdDate"] = temp.CreatedDate;
+                //dr["totalQty"] = temp.Discrepancy.DiscrepancyDetails;
                 dt.Rows.Add(dr);
             }
             return dt;
@@ -90,15 +93,15 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable SelectAdjustmentVoucher(string stockAdjustmentId)
         {
-            DataTable dt = new DataTable();
-            DataRow dr = new DataRow();
-            stockAdjustment.id = stockAdjustmentId;
+            dt = new DataTable();
+
+            stockAdjustment.Id = stockAdjustmentId;
             List<DiscrepancyDetail> discrepancyDetailList;
             //List<DiscrepancyDetail> discrepancyDetailList = (List<DiscrepancyDetail>)discrepancy.DiscrepancyDetails;
             discrepancyDetailList = stockAdjustment.Discrepancy.DiscrepancyDetails.ToList();
             foreach (DiscrepancyDetail temp in discrepancyDetailList)
             {
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
                 dr["quantityAdjusted"] = temp.Qty;
                 dr["reason"] = temp.Remarks;

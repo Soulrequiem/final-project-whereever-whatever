@@ -12,8 +12,11 @@ namespace StationeryStoreInventorySystemController.storeController
 {
     public class BlacklistDepartmentControl
     {
-        List<Department> departmentList = null;
-        IDepartmentBroker departmentBroker;
+        private List<Department> departmentList;
+        private IDepartmentBroker departmentBroker;
+
+        private DataTable dt;
+        private DataRow dr;
 
         public BlacklistDepartmentControl()
         {
@@ -45,29 +48,28 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return value of this method is resultItem.</returns>
-     private DataTable ListToDataTable(List<Department> deptList){
-          DataTable dt = new DataTable();
-                DataRow dr;
-                foreach (Department dep in deptList)
+        private DataTable ListToDataTable(List<Department> deptList){
+            dt = new DataTable();
+            
+            foreach (Department dep in deptList)
+            {
+                dr = dt.NewRow();
+                dr["departmentName"] = dep.Name;
+                List<CollectionMissed> missedTime = dep.CollectionMisseds.ToList();
+                int count = 0;
+                foreach (CollectionMissed times in missedTime)
                 {
-                    dt.NewRow();
-                    dr = new DataRow();
-                    dr["departmentName"] = dep.Name;
-                    List<CollectionMissed> missedTime = dep.CollectionMisseds.ToList();
-                    int count = 0;
-                    foreach (CollectionMissed times in missedTime)
+                    if (times.Status != (int)Constants.VISIBILITY_STATUS.HIDDEN)
                     {
-                        if (times.Status != (int)Constants.VISIBILITY_STATUS.HIDDEN)
-                        {
-                            count++;
-                        }
+                        count++;
                     }
-                    dr["missedTime"] = count;
-                    dr["status"] = Converter.GetDepartmentStatusText(Converter.objToDepartmentStatus(dep.Status));
-                    dt.Rows.Add(dr);
                 }
-                return dt;
-     }
+                dr["missedTime"] = count;
+                dr["status"] = Converter.GetDepartmentStatusText(Converter.objToDepartmentStatus(dep.Status));
+                dt.Rows.Add(dr);
+            }
+            return dt;
+        }
 
 
 

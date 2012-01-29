@@ -15,22 +15,26 @@ namespace StationeryStoreInventorySystemController.departmentController
     {
         private IRequisitionBroker requisitionBroker;
         private IItemBroker itemBroker;
+        
         private Employee currentEmployee;
         private Requisition requisition;
-        private List<RequisitionDetail> requisitionDetailList;
         
+        private System.Data.Objects.DataClasses.EntityCollection<RequisitionDetail> requisitionDetailList;
 
+        private DataTable dt;
+        private DataRow dr;
+        
         public RequestStationeryControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.EMPLOYEE);
             InventoryEntities inventory = new InventoryEntities();
 
             requisitionBroker = new RequisitionBroker(inventory);
-            itemBroker = new ItemBroker(inventory); 
-            requisitionDetailList = new List<RequisitionDetail>();
+            itemBroker = new ItemBroker(inventory);
+            requisitionDetailList = new System.Data.Objects.DataClasses.EntityCollection<RequisitionDetail>();
 
             requisition = new Requisition();
-            requisition.Employee = currentEmployee;
+            requisition.CreatedBy = currentEmployee;
             requisition.Department = currentEmployee.Department;
             requisition.Id = requisitionBroker.GetRequisitionId(requisition);
         }
@@ -44,17 +48,13 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                DataTable dt = new DataTable();
+                dt = new DataTable();
 
                 if (requisitionDetailList.Count > 0)
                 {
-                    DataRow dr;
-
                     foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
                     {
-                        dr = new DataRow();
-
-                        dt.NewRow();
+                        dr = dt.NewRow();
                         dr["itemNo"] = requisitionDetail.Item.Id;
                         dr["itemDescription"] = requisitionDetail.Item.Description;
                         dr["requiredQty"] = requisitionDetail.Qty;
@@ -88,13 +88,11 @@ namespace StationeryStoreInventorySystemController.departmentController
             item.Description = itemDescription;
             item = itemBroker.GetItem(item);
             
-            DataTable dt = new DataTable();
+            dt = new DataTable();
 
             if (item != null)
             {
-                DataRow dr = new DataRow();
-                
-                dt.NewRow();
+                dr = dt.NewRow();
                 dr["itemNo"] = item.Id;
                 dr["itemDescription"] = item.Description;
                 dt.Rows.Add(dr);
@@ -126,31 +124,6 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
-        public DataTable RequisitionDetailList
-        {
-            get 
-            {
-                DataTable dt = new DataTable();
-
-                if (requisitionDetailList.Count > 0)
-                {
-                    DataRow dr;
-
-                    foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
-                    {
-                        dr = new DataRow();
-                        
-                        dt.NewRow();
-                        dr["itemNo"] = requisitionDetail.Item.Id;
-                        dr["itemDescription"] = requisitionDetail.Item.Description;
-                        dr["requiredQty"] = requisitionDetail.Qty;
-                        dt.Rows.Add(dr);
-                    }
-                }
-
-                return dt;
-            }
-        }
         //----
         public Constants.ACTION_STATUS SelectRequest(){
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
