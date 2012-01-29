@@ -35,7 +35,14 @@ namespace StationeryStoreInventorySystemModel.broker
         public Department GetDepartment(Department department)
         {
             ////Get the Department data by Department ID
-            departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id).First();
+            if (department.Status != null)
+            {
+                departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id && department.Status == Converter.objToInt(department.Status)).First();
+            }
+            else
+            {
+                departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id).First();
+            }
             if (!departmentObj.Equals(null))
             {
                 //departmentObj.CreatedBy = inventory.Employees.Where(x => x.Id == departmentObj.CreatedBy.Id).First();
@@ -61,11 +68,14 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<Department> GetAllDepartment()
         {
-            departmentList = inventory.Departments.ToList<Department>();
-            if (!departmentList.Equals(null))
-                return departmentList;
-            return null;
+            return inventory.Departments.ToList<Department>();
         }
+
+        public List<Department> GetAllDepartment(Constants.DEPARTMENT_STATUS departmentStatus)
+        {
+            return inventory.Departments.Where(iObj => iObj.Status == Converter.objToInt(departmentStatus)).ToList<Department>();
+        }
+
         /// <summary>
         /// Insert Department data to the Department Table according to the department Parameter
         /// Return Constants.DB_STATUS
