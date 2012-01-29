@@ -24,6 +24,8 @@ namespace StationeryStoreInventorySystemController.departmentController
         private IRequisitionBroker requisitionBroker;
         
         private Employee currentEmployee;
+
+        private List<Requisition> pendingRequisitionList;
         
         private DataTable dt;
         private DataRow dr;
@@ -44,10 +46,13 @@ namespace StationeryStoreInventorySystemController.departmentController
         public ApproveRejectRequisitionControl() 
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
+            requisitionDetailsControl = new commonController.RequisitionDetailsControl();
             InventoryEntities inventory = new InventoryEntities();
 
             requisitionBroker = new RequisitionBroker(inventory);
-             requisitionDetailsControl = new commonController.RequisitionDetailsControl();
+
+            pendingRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.PENDING);
+
                      
         }
 
@@ -71,34 +76,37 @@ namespace StationeryStoreInventorySystemController.departmentController
         //}
         //***********
 
-        public DataTable GetRequisition()
+        public DataTable PendingRequisitionList
         {
-            dt = new DataTable();
-            List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
-
-            int qty;
-            foreach (Requisition r in requisitionList)
+            get
             {
-                qty=0;
-                dr = dt.NewRow();
-                dr["requisitionId"] = r.Id;
-                dr["requisitionDate/Time"] = Convert.ToDateTime(r.CreatedDate);
-                dr["requisitionBy"] = r.CreatedBy.Name;
+                dt = new DataTable();
+                List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
 
-                
-            //List<RequisitionDetail> requisitionDetailList=requisitionBroker.GetRequisitionDetail(r.RequisitionDetails);
-            foreach(RequisitionDetail reqDetail in r.RequisitionDetails.ToList())
-            {
-               qty += reqDetail.Qty;
+                int qty;
+                foreach (Requisition r in requisitionList)
+                {
+                    qty = 0;
+                    dr = dt.NewRow();
+                    dr["requisitionId"] = r.Id;
+                    dr["requisitionDate/Time"] = Convert.ToDateTime(r.CreatedDate);
+                    dr["requisitionBy"] = r.CreatedBy.Name;
+
+
+                    //List<RequisitionDetail> requisitionDetailList=requisitionBroker.GetRequisitionDetail(r.RequisitionDetails);
+                    foreach (RequisitionDetail reqDetail in r.RequisitionDetails)
+                    {
+                        qty += reqDetail.Qty;
+                    }
+                    dr["requiredQty"] = qty;
+                    dr["remarks"] = r.Remarks;
+
+                    dt.Rows.Add(dr);
+
+                }
+
+                return dt;
             }
-                dr["requiredQty"] = qty;
-                dr["remarks"] = r.Remarks;
-
-                dt.Rows.Add(dr);
-
-            }
-
-            return dt;
         }
 
         /// <summary>
@@ -113,15 +121,12 @@ namespace StationeryStoreInventorySystemController.departmentController
         ///     Modification Reason:
         /// </summary>
         /// <param name="requisitionID">Get the "Requisition ID" when user click "Requisition ID" link. </param>
-        public void SelectRequisitionID(string requisitionID)
+        public void SelectRequisition(string requisitionId)
         {
-            Requisition requisition=new Requisition();
-            requisition.Id = requisitionID;
-            requisitionDetailsControl=new commonController.RequisitionDetailsControl();
-            requisitionDetailsControl.SelectRequisitionID(requisition);
+            requisitionDetailsControl = new commonController.RequisitionDetailsControl();
+            requisitionDetailsControl.SelectRequisition(pendingRequisitionList.Find(delegate(Requisition req) { return requisitionId == req.Id; }));
         }
-
-
+        
         /// <summary>
         ///     The usage of this method is to approve the selected "Requisition ID" 
         ///     Created By: SanLaPyaye 

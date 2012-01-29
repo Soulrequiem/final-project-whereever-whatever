@@ -21,6 +21,7 @@ namespace StationeryStoreInventorySystemController.departmentController
     public class AssignDepartmentRepresentativeControl
     {
         private IEmployeeBroker employeeBroker;
+
         private Employee currentEmployee;
         private Employee departmentRepresentative;
         private Employee temporaryDepartmentRepresentative;
@@ -45,9 +46,9 @@ namespace StationeryStoreInventorySystemController.departmentController
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
             InventoryEntities inventory = new InventoryEntities();
 
-            departmentRepresentative = currentEmployee.Department.Representative;
-
             employeeBroker = new EmployeeBroker(inventory);
+
+            departmentRepresentative = currentEmployee.Department.Representative;
 
             temporaryDepartmentRepresentative = new Employee();
             temporaryDepartmentRepresentative.Role = new Role();

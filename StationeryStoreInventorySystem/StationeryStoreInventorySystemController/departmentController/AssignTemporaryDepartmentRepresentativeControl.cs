@@ -21,6 +21,7 @@ namespace StationeryStoreInventorySystemController.departmentController
     public class AssignTemporaryDepartmentRepresentativeControl
     {
         private IEmployeeBroker employeeBroker;
+
         private Employee currentEmployee;
         private Employee temporaryDepartmentRepresentative;
 
