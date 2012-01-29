@@ -35,21 +35,28 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Requisition GetRequisition(Requisition requisition)
         {
-            int showStatus = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
-            req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id && reqObj.Status == showStatus).First();
-            if (!req.Equals(null))
+            if (requisition.Status != null)
             {
-                var requisitionDetailsResult = from rd in inventory.RequisitionDetails
-                                               where rd.Requisition.Id == req.Id
-                                               select rd;
-                foreach (RequisitionDetail rd in requisitionDetailsResult)
-                {
-                    req.RequisitionDetails.Add(rd);
-                }
-                return req;
+                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id && reqObj.Status == Converter.objToInt(requisition.Status)).First();
             }
+            else
+            {
+                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
+            }
+            //if (!req.Equals(null))
+            //{
+            //    var requisitionDetailsResult = from rd in inventory.RequisitionDetails
+            //                                   where rd.Requisition.Id == req.Id
+            //                                   select rd;
+            //    foreach (RequisitionDetail rd in requisitionDetailsResult)
+            //    {
+            //        req.RequisitionDetails.Add(rd);
+            //    }
+            //    return req;
+            //}
             return null;
         }
+
         /// <summary>
         ///  Retrieve All of the Requisition information from Requisition Table
         /// </summary>
@@ -62,6 +69,13 @@ namespace StationeryStoreInventorySystemModel.broker
                 return reqList;
             return null;
         }
+
+        public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus)
+         {
+             reqList = inventory.Requisitions.Where(reqObj => reqObj.Status == Converter.objToInt(requisitionStatus)).ToList<Requisition>();
+             return reqList;
+         }
+
         /// <summary>
         /// Insert Requisition data to the Requisition Table according to the Requisition Parameter
         ///  Return Constants.DB_STATUS
