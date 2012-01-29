@@ -28,6 +28,7 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             this.inventory = inventory;
         }
+
         /// <summary>
         ///  Retrieve the Item Detail information  from Item Table according to the Item Parameter
         /// </summary>
@@ -40,6 +41,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 return itemObj;
             return null;
         }
+
         /// <summary>
         ///  Retrieve All of the item information from Item Table
         /// </summary>
@@ -51,6 +53,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 return itemList;
             return null;
         }
+
         /// <summary>
         /// Insert Item data to the Item Table according to the Item Parameter
         /// Return Constants.DB_STATUS 
@@ -75,7 +78,6 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
         /// <summary>
-        /// 
         /// Update Item data to Item Table according to the Item Parameter
         /// Return Constants.DB_STATUS
         /// </summary>

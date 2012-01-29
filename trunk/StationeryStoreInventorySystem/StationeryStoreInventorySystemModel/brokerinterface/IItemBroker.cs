@@ -11,12 +11,12 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
     public interface IItemBroker
     {
         Item GetItem(Item item);
+        List<Item> GetAllItem();
         List<Item> GetItemReference(Item item);
         Constants.DB_STATUS Insert(Item newItem);
         Constants.DB_STATUS Update(Item item);
         Constants.DB_STATUS Delete(Item item);
-        List<Item> GetItemReference(Item item);
-
+        
         StockCardDetail GetStockCardDetail(StockCardDetail stockCardDetail);
         List<StockCardDetail> GetAllStockCardDetail();
         Constants.DB_STATUS Insert(StockCardDetail newStockCardDetail);

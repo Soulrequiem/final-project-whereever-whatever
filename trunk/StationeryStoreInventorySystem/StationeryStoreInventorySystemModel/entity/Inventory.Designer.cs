@@ -66,7 +66,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_RequisitionCollectionDetails_RequisitionCollection1", "RequisitionCollection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollection), "RequisitionCollectionDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollectionDetail))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_requisitioncollectionitems_requisitioncollection1", "RequisitionCollection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollection), "RequisitionCollectionItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RequisitionCollectionItem))]
 [assembly: EdmRelationshipAttribute("InventoryModel", "FK_retrievaldetails_retrieval1", "Retrieval", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Retrieval), "RetrievalDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.RetrievalDetail))]
-[assembly: EdmRelationshipAttribute("InventoryModel", "DepartmentShowCollectionMissed", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(StationeryStoreInventorySystemModel.entity.Department), "ShowCollectionMissed", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(StationeryStoreInventorySystemModel.entity.ShowCollectionMissed))]
 
 #endregion
 
@@ -687,7 +686,6 @@ namespace StationeryStoreInventorySystemModel.entity
     [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="CollectionMissed")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    [KnownTypeAttribute(typeof(ShowCollectionMissed))]
     public partial class CollectionMissed : EntityObject
     {
         #region Factory Method
@@ -1541,28 +1539,6 @@ namespace StationeryStoreInventorySystemModel.entity
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RetrievalDetail>("InventoryModel.FK_retrievaldetails_department1", "RetrievalDetails", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "DepartmentShowCollectionMissed", "ShowCollectionMissed")]
-        public EntityCollection<ShowCollectionMissed> ShowCollectionMisseds
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ShowCollectionMissed>("InventoryModel.DepartmentShowCollectionMissed", "ShowCollectionMissed");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ShowCollectionMissed>("InventoryModel.DepartmentShowCollectionMissed", "ShowCollectionMissed", value);
                 }
             }
         }
@@ -3652,35 +3628,6 @@ namespace StationeryStoreInventorySystemModel.entity
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="PendingRequisition")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class PendingRequisition : Requisition
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new PendingRequisition object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="status">Initial value of the Status property.</param>
-        public static PendingRequisition CreatePendingRequisition(global::System.String id, global::System.DateTime createdDate, global::System.Int32 status)
-        {
-            PendingRequisition pendingRequisition = new PendingRequisition();
-            pendingRequisition.Id = id;
-            pendingRequisition.CreatedDate = createdDate;
-            pendingRequisition.Status = status;
-            return pendingRequisition;
-        }
-
-        #endregion
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="PurchaseOrder")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -4328,7 +4275,6 @@ namespace StationeryStoreInventorySystemModel.entity
     [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="Requisition")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    [KnownTypeAttribute(typeof(PendingRequisition))]
     public partial class Requisition : EntityObject
     {
         #region Factory Method
@@ -4523,7 +4469,7 @@ namespace StationeryStoreInventorySystemModel.entity
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "FK_requisition_employee1", "Employee")]
-        public Employee Employee
+        public Employee CreatedBy
         {
             get
             {
@@ -4539,7 +4485,7 @@ namespace StationeryStoreInventorySystemModel.entity
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeReference
+        public EntityReference<Employee> CreatedByReference
         {
             get
             {
@@ -6054,76 +6000,6 @@ namespace StationeryStoreInventorySystemModel.entity
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("InventoryModel.FK_role_employee1", "Employee", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="InventoryModel", Name="ShowCollectionMissed")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class ShowCollectionMissed : CollectionMissed
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new ShowCollectionMissed object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
-        /// <param name="status">Initial value of the Status property.</param>
-        public static ShowCollectionMissed CreateShowCollectionMissed(global::System.Int32 id, global::System.DateTime createdDate, global::System.Int32 status)
-        {
-            ShowCollectionMissed showCollectionMissed = new ShowCollectionMissed();
-            showCollectionMissed.Id = id;
-            showCollectionMissed.CreatedDate = createdDate;
-            showCollectionMissed.Status = status;
-            return showCollectionMissed;
-        }
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InventoryModel", "DepartmentShowCollectionMissed", "Department")]
-        public Department Department_1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Department> Department_1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Department>("InventoryModel.DepartmentShowCollectionMissed", "Department", value);
                 }
             }
         }

@@ -1289,11 +1289,7 @@
             <End Role="Retrieval" EntitySet="Retrievals" />
             <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
           </AssociationSet>
-          <AssociationSet Name="DepartmentShowCollectionMissed" Association="InventoryModel.DepartmentShowCollectionMissed">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="ShowCollectionMissed" EntitySet="CollectionMisseds" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="CollectionMissed">
           <Key>
             <PropertyRef Name="Id" />
@@ -1335,7 +1331,6 @@
           <NavigationProperty Name="Requisitions" Relationship="InventoryModel.FK_requisition_department1" FromRole="Department" ToRole="Requisition" />
           <NavigationProperty Name="RequisitionCollections" Relationship="InventoryModel.FK_requisitioncollection_department1" FromRole="Department" ToRole="RequisitionCollection" />
           <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_department1" FromRole="Department" ToRole="RetrievalDetails" />
-          <NavigationProperty Name="ShowCollectionMisseds" Relationship="InventoryModel.DepartmentShowCollectionMissed" FromRole="Department" ToRole="ShowCollectionMissed" />
         </EntityType>
         <EntityType Name="Discrepancy">
           <Key>
@@ -1481,7 +1476,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="InventoryModel.FK_requisition_department1" FromRole="Requisition" ToRole="Department" />
-          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_requisition_employee1" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisition_employee1" FromRole="Requisition" ToRole="Employee" />
           <NavigationProperty Name="ApprovedBy" Relationship="InventoryModel.FK_requisition_employee2" FromRole="Requisition" ToRole="Employee" />
           <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_requisitioncollectiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionCollectionDetails" />
           <NavigationProperty Name="RequisitionDetails" Relationship="InventoryModel.FK_requisitiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionDetails" />
@@ -1805,14 +1800,6 @@
           <End Role="Retrieval" Type="InventoryModel.Retrieval" Multiplicity="1" />
           <End Role="RetrievalDetails" Type="InventoryModel.RetrievalDetail" Multiplicity="*" />
         </Association>
-        <EntityType Name="PendingRequisition" BaseType="InventoryModel.Requisition" />
-        <EntityType Name="ShowCollectionMissed" BaseType="InventoryModel.CollectionMissed" >
-          <NavigationProperty Name="Department_1" Relationship="InventoryModel.DepartmentShowCollectionMissed" FromRole="ShowCollectionMissed" ToRole="Department" />
-        </EntityType>
-        <Association Name="DepartmentShowCollectionMissed">
-          <End Type="InventoryModel.Department" Role="Department" Multiplicity="1" />
-          <End Type="InventoryModel.ShowCollectionMissed" Role="ShowCollectionMissed" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1827,12 +1814,7 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
-            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.ShowCollectionMissed)">
-              <MappingFragment StoreEntitySet="CollectionMissed">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <Condition ColumnName="Status" Value="1" />
-              </MappingFragment>
-            </EntityTypeMapping></EntitySetMapping>
+            </EntitySetMapping>
           <EntitySetMapping Name="CollectionPoints"><EntityTypeMapping TypeName="InventoryModel.CollectionPoint"><MappingFragment StoreEntitySet="CollectionPoint">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1916,12 +1898,7 @@
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
               </MappingFragment>
             </EntityTypeMapping>
-            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.PendingRequisition)">
-              <MappingFragment StoreEntitySet="Requisition">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <Condition ColumnName="Status" Value="1" />
-              </MappingFragment>
-            </EntityTypeMapping></EntitySetMapping>
+            </EntitySetMapping>
           <EntitySetMapping Name="RequisitionCollections"><EntityTypeMapping TypeName="InventoryModel.RequisitionCollection"><MappingFragment StoreEntitySet="RequisitionCollection">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -2384,15 +2361,7 @@
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="DepartmentShowCollectionMissed" TypeName="InventoryModel.DepartmentShowCollectionMissed" StoreEntitySet="CollectionMissed">
-            <EndProperty Name="ShowCollectionMissed">
-              <ScalarProperty Name="Id" ColumnName="Id" />
-            </EndProperty>
-            <EndProperty Name="Department">
-              <ScalarProperty Name="Id" ColumnName="Id" />
-            </EndProperty>
-          </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -2467,32 +2436,26 @@
           <ConnectorPoint PointX="1.5" PointY="26.125" />
           <ConnectorPoint PointX="1.5" PointY="25.875" />
           <ConnectorPoint PointX="2.75" PointY="25.875" />
-          <ConnectorPoint PointX="2.75" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="3.6354141666666684" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="3.8020808333333354" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="8.2156169310897429" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="8.7166493910256424" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="8.9218589743589742" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="9.0885256410256421" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="9.29113907051282" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="9.74982746794872" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="10.222330729166666" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="10.388997395833334" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="11.166666666666666" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="11.333333333333334" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="12.458333333333334" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="12.5" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="12.5" PointY="28.518568154144287" />
-          <ConnectorPoint PointX="12.510416666666666" PointY="28.518568154144287" />
-          <ConnectorPoint PointX="12.677083333333334" PointY="28.518568154144287" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="28.518568154144287" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="28.518568154144287" />
-          <ConnectorPoint PointX="15.166666666666666" PointY="28.518568154144287" />
-          <ConnectorPoint PointX="15.333333333333334" PointY="28.518568154144287" />
-          <ConnectorPoint PointX="15.5" PointY="28.518568154144287" />
+          <ConnectorPoint PointX="2.75" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.237361964142627" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.5372289282852574" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.5994617207532063" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.9025875160256422" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.9212099358974353" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="9.0878766025641031" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="9.1064990224358962" PointY="31.682027994791664" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="12.354166666666666" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="12.520833333333334" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.875" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.875" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="14.916666666666666" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.083333333333334" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.104166666666666" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.270833333333334" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.5" PointY="29.153594877604171" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_department_employee1" ManuallyRouted="false">
           <ConnectorPoint PointX="8.25" PointY="28.44015172129313" />
@@ -2540,46 +2503,40 @@
         <AssociationConnector Association="InventoryModel.FK_requisitioncollection_department1" ManuallyRouted="false">
           <ConnectorPoint PointX="3.75" PointY="25.375" />
           <ConnectorPoint PointX="3.75" PointY="25.125" />
-          <ConnectorPoint PointX="5" PointY="25.125" />
-          <ConnectorPoint PointX="5" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="8.2156169310897429" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="8.7166493910256424" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="8.9218589743589742" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="9.0885256410256421" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="9.29113907051282" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="9.74982746794872" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="10.222330729166666" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="10.388997395833334" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="11.166666666666666" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="11.333333333333334" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="12.4375" PointY="30.647726236979167" />
-          <ConnectorPoint PointX="12.4375" PointY="28.041381644268036" />
-          <ConnectorPoint PointX="12.510416666666666" PointY="28.041381644268036" />
-          <ConnectorPoint PointX="12.677083333333334" PointY="28.041381644268036" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="28.041381644268036" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="28.041381644268036" />
-          <ConnectorPoint PointX="15.166666666666666" PointY="28.041381644268036" />
-          <ConnectorPoint PointX="15.333333333333334" PointY="28.041381644268036" />
-          <ConnectorPoint PointX="15.5" PointY="28.041381644268036" />
+          <ConnectorPoint PointX="8" PointY="25.125" />
+          <ConnectorPoint PointX="8" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.237361964142627" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.5372289282852574" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.5994617207532063" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.9025875160256422" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.9212099358974353" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="9.0878766025641031" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="9.1064990224358962" PointY="31.713277994791664" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="12.354166666666666" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="12.520833333333334" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="15" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="15" PointY="28.27343656283999" />
+          <ConnectorPoint PointX="15.5" PointY="28.27343656283999" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_retrievaldetails_department1" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.7187475000000019" PointY="28.939474283854171" />
-          <ConnectorPoint PointX="3.7187475000000019" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="8.2156169310897429" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="8.7166493910256424" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="8.9218589743589742" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="9.0885256410256421" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="9.29113907051282" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="9.74982746794872" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="10.131998697916666" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="10.298665364583334" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="11.166666666666666" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="11.333333333333334" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="12.458333333333334" PointY="30.738058268229167" />
-          <ConnectorPoint PointX="12.75" PointY="30.738058268229167" />
+          <ConnectorPoint PointX="3.4902326562500003" PointY="29.470602213541671" />
+          <ConnectorPoint PointX="3.4902326562500003" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.237361964142627" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.5372289282852574" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.5994617207532063" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.9025875160256422" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.9212099358974353" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="9.0878766025641031" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="9.1064990224358962" PointY="31.728902994791664" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="12.25" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="12.25" PointY="30.714926942793472" />
+          <ConnectorPoint PointX="12.354166666666666" PointY="30.714926942793472" />
+          <ConnectorPoint PointX="12.520833333333334" PointY="30.714926942793472" />
+          <ConnectorPoint PointX="12.75" PointY="30.714926942793472" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_discrepancy_employee1" ManuallyRouted="false">
           <ConnectorPoint PointX="9" PointY="23.875" />
@@ -2791,8 +2748,8 @@
         <AssociationConnector Association="InventoryModel.FK_purchaseorderdetails_purchaseorder1" ManuallyRouted="false">
           <ConnectorPoint PointX="14.250000000000002" PointY="33.375" />
           <ConnectorPoint PointX="14.625" PointY="33" />
-          <ConnectorPoint PointX="14.625" PointY="19.632373488281246" />
-          <ConnectorPoint PointX="15.75" PointY="19.632373488281246" />
+          <ConnectorPoint PointX="14.625" PointY="19.758166945312496" />
+          <ConnectorPoint PointX="15.75" PointY="19.758166945312496" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_requisitioncollectiondetails_requisition1" ManuallyRouted="false">
           <ConnectorPoint PointX="11.25" PointY="27.875" />
@@ -2828,40 +2785,12 @@
           <ConnectorPoint PointX="14.25" PointY="27.167674153645834" />
         </AssociationConnector>
         <AssociationConnector Association="InventoryModel.FK_retrievaldetails_retrieval1" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.000000000000002" PointY="38" />
-          <ConnectorPoint PointX="12.375" PointY="37.625" />
-          <ConnectorPoint PointX="12.375" PointY="30.267047427734376" />
-          <ConnectorPoint PointX="12.416666666666666" PointY="30.267047427734376" />
-          <ConnectorPoint PointX="12.583333333333334" PointY="30.267047427734376" />
-          <ConnectorPoint PointX="12.75" PointY="30.267047427734376" />
+          <ConnectorPoint PointX="12" PointY="38.062306692307693" />
+          <ConnectorPoint PointX="12.4375" PointY="37.624806692307693" />
+          <ConnectorPoint PointX="12.4375" PointY="30.196347909024439" />
+          <ConnectorPoint PointX="12.75" PointY="30.196347909024439" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="InventoryModel.PendingRequisition" Width="1.5" PointX="16.125" PointY="30.625" Height="0.9549169921875027" />
-        <InheritanceConnector EntityType="InventoryModel.PendingRequisition" >
-          <ConnectorPoint PointX="11.25" PointY="30.453390299479167" />
-          <ConnectorPoint PointX="11.25" PointY="31.171000976562503" />
-          <ConnectorPoint PointX="12.291666666666666" PointY="31.171000976562503" />
-          <ConnectorPoint PointX="12.458333333333334" PointY="31.171000976562503" />
-          <ConnectorPoint PointX="14.541666666666666" PointY="31.171000976562503" />
-          <ConnectorPoint PointX="14.708333333333334" PointY="31.171000976562503" />
-          <ConnectorPoint PointX="15.875" PointY="31.171000976562503" />
-          <ConnectorPoint PointX="15.875" PointY="30.375" />
-          <ConnectorPoint PointX="16.875" PointY="30.375" />
-          <ConnectorPoint PointX="16.875" PointY="30.625" />
-        </InheritanceConnector>
-        <EntityTypeShape EntityType="InventoryModel.ShowCollectionMissed" Width="1.5" PointX="5.75" PointY="24.875" Height="0.93491699218750313" />
-        <InheritanceConnector EntityType="InventoryModel.ShowCollectionMissed" >
-          <ConnectorPoint PointX="6" PointY="26.25" />
-          <ConnectorPoint PointX="6" PointY="26.0499169921875" />
-          <ConnectorPoint PointX="6.5" PointY="26.0499169921875" />
-          <ConnectorPoint PointX="6.5" PointY="25.809916992187503" />
-        </InheritanceConnector>
-        <AssociationConnector Association="InventoryModel.DepartmentShowCollectionMissed">
-          <ConnectorPoint PointX="4.5" PointY="25.674632161458334" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="25.674632161458334" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="25.674632161458334" />
-          <ConnectorPoint PointX="5.75" PointY="25.674632161458334" />
-        </AssociationConnector>
-      </Diagram>
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>
