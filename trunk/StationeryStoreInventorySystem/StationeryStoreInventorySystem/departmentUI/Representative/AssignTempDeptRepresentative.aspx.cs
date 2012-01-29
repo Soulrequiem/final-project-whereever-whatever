@@ -44,7 +44,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             try
             {
                 atdrCtrl = GetControl();
-                DataTable dtRepresentative = atdrCtrl.TemporaryDepartmentRepresentative();
+                DataTable dtRepresentative = atdrCtrl.TemporaryDepartmentRepresentative;
                 DgvCurrentAuthorizedPersonRep.DataSource = dtRepresentative;
                 DgvCurrentAuthorizedPersonRep.DataBind();
             }

@@ -87,8 +87,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 
             if (!IsPostBack)
             {
-                //FillCollectionDetails();
-                //FillItems();
+                FillCollectionDetails();
+                FillItems();
                 //FillCollectionDetails();
             }
         }
@@ -135,7 +135,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// Fills Items Details to Datagrid
         /// </summary>
         /// <param name="dtItemsDetails"></param>
-        private void FillCollectionDetails(DataTable dtCollectionDetails)
+        private void FillRequisitionDetails(DataTable dtCollectionDetails)
         {
             try
             {
