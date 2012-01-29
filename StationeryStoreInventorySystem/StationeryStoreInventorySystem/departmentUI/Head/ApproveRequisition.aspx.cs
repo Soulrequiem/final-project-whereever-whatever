@@ -41,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
             try
             {
                 aprCtrl = GetControl();
-                DataTable dtApprove = aprCtrl.GetRequisition();
+                DataTable dtApprove = aprCtrl.PendingRequisitionList;
                 DgvRequisitionList.DataSource = dtApprove;
                 DgvRequisitionList.DataBind();
             }
