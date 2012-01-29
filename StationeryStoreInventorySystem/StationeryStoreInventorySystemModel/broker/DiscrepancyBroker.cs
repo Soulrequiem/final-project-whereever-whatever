@@ -275,6 +275,17 @@ namespace StationeryStoreInventorySystemModel.broker
             return maxDiscrepacnyId;
         }
 
+
+
+        public int GetDiscrepancyDetailId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetStockAdjustmentId()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
         #endregion

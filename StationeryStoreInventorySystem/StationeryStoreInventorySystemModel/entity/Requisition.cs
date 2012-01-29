@@ -11,12 +11,11 @@ namespace StationeryStoreInventorySystemModel.entity
            : this("", null, null, "", null, DateTime.Now, 0)
        {
        }
-       public Requisition(string id,Department departmentId,Employee employeeId,string remarks,Employee approvedBy,
-           DateTime createDate,int status)
+       public Requisition(string id,Department department,Employee employee,string remarks,Employee approvedBy, DateTime createDate,int status)
        {
            this.Id = id;
-           this.Department = departmentId;
-           this.Employee = employeeId;
+           this.Department = department;
+           this.CreatedBy = employee;
            this.Remarks = remarks;
            this.ApprovedBy = approvedBy;
            this.CreatedDate = createDate;

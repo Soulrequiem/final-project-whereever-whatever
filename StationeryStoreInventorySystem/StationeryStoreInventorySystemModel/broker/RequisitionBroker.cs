@@ -104,11 +104,11 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
-                Employee empId=inventory.Employees.Where(e=>e.Id==requisition.Employee.Id).First();
+                Employee empId=inventory.Employees.Where(e=>e.Id==requisition.CreatedBy.Id).First();
                 Employee approvedBy=inventory.Employees.Where(e=>e.Id==requisition.ApprovedBy.Id).First();
                 req.Id = requisition.Id;
                 req.Department = requisition.Department;
-                req.Employee = empId;
+                req.CreatedBy = empId;
                 req.ApprovedBy = approvedBy;
                 req.ApprovedDate = req.ApprovedDate;
                 req.CreatedDate = req.CreatedDate;
