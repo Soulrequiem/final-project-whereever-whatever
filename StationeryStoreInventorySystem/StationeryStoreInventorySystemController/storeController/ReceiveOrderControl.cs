@@ -51,8 +51,7 @@ namespace StationeryStoreInventorySystemController.storeController
                 List<PurchaseOrder> list = purchaseOrderBroker.GetAllPurchaseOrder();
                 foreach (PurchaseOrder po in list)
                 {
-                    dt.NewRow();
-                    dr = new DataRow();
+                    dr = dt.NewRow();
                     dr["poNumber"] = po.Id;
                     dt.Rows.Add(dr);
                 }

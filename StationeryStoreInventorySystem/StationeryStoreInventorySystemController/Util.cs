@@ -18,7 +18,7 @@ namespace StationeryStoreInventorySystemController
         public static readonly string itemApplicationKey = "item";
         public static readonly string employeeApplicationKey = "employee";
 
-        public static readonly string loginPage = "LogIn.aspx";
+        public static readonly string loginPage = "~/commonUI/LogIn.aspx";
 
         public static void PutSession(string key, object obj)
         {
@@ -110,41 +110,44 @@ namespace StationeryStoreInventorySystemController
             List<Constants.EMPLOYEE_ROLE> permission = new List<Constants.EMPLOYEE_ROLE>();
 
             // Department
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
-            {
-                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
-                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD);
-                employeeType = SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE;
-            }
-
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE){
-                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
-                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE);
-                employeeType = SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.EMPLOYEE;
-            }
-            
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.EMPLOYEE)
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.EMPLOYEE || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
             {
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.EMPLOYEE);
+                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE : employeeType;
             }
+
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            {
+                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
+                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE);
+                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD : employeeType;
+            }
+
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            {
+                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
+                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD);                
+            }
+
+            
             // end of Department
 
             // Store
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER)
-            {
-                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER);
-                employeeType = SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR;
-            }
-
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
-            {
-                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
-                employeeType = SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_CLERK;
-            }
-
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_CLERK)
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_CLERK || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
             {
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_CLERK);
+                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR : employeeType;
+            }
+
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            {
+                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
+                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER : employeeType;
+            }
+
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            {
+                permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER);
             }
             // end of Store
 

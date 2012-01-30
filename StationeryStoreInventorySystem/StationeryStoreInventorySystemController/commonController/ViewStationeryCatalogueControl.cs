@@ -40,6 +40,9 @@ namespace StationeryStoreInventorySystemController.commonController
         private DataTable dt;
         private DataRow dr;
 
+        private DataColumn[] storeDataColumn;
+        private DataColumn[] departmentDataColumn;
+
         public ViewStationeryCatalogueControl()
         {
             currentEmployee = Util.ValidateUser();
@@ -47,6 +50,18 @@ namespace StationeryStoreInventorySystemController.commonController
 
             itemBroker = new ItemBroker(inventory);
             itemList = itemBroker.GetAllItem();
+
+            storeDataColumn = new DataColumn[] { new DataColumn("ItemNo"), 
+                                                 new DataColumn("Category"), 
+                                                 new DataColumn("ItemDescription"),
+                                                 new DataColumn("ReorderLevel"),
+                                                 new DataColumn("ReorderQty"),
+                                                 new DataColumn("UnitOfMeasure") };
+
+            departmentDataColumn = new DataColumn[] { new DataColumn("ItemNo"), 
+                                                      new DataColumn("Category"), 
+                                                      new DataColumn("ItemDescription"), 
+                                                      new DataColumn("UnitOfMeasure") };
         }
 
         ///     The usage of this method is to show the all stationery catalogue
@@ -65,32 +80,36 @@ namespace StationeryStoreInventorySystemController.commonController
             get
             {
                 dt = new DataTable();
-                
+
                 // for store
                 if (Util.CheckPermission(Converter.objToEmployeeRole(currentEmployee.Role.Id), Util.GetRolePermission(Constants.EMPLOYEE_ROLE.STORE_CLERK)))
                 {
+                    dt.Columns.AddRange(storeDataColumn);
+
                     foreach (Item item in itemList)
                     {
                         dr = dt.NewRow();
-                        dr["itemNo"] = item.Id;
-                        dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
-                        dr["itemDescription"] = item.Description;
-                        dr["reorderLevel"] = item.ReorderLevel;
-                        dr["reorderQty"] = item.ReorderQty;
-                        dr["unitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                        dr["ItemNo"] = item.Id;
+                        dr["Category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
+                        dr["ItemDescription"] = item.Description;
+                        dr["ReorderLevel"] = item.ReorderLevel;
+                        dr["ReorderQty"] = item.ReorderQty;
+                        dr["UnitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
                         dt.Rows.Add(dr);
                     }
                 }
                 // for department
                 else
                 {
+                    dt.Columns.AddRange(departmentDataColumn);
+
                     foreach (Item item in itemList)
                     {
-                        dr = dt.NewRow(); ;
-                        dr["itemNo"] = item.Id;
-                        dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
-                        dr["itemDescription"] = item.Description;
-                        dr["unitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                        dr = dt.NewRow();
+                        dr["ItemNo"] = item.Id;
+                        dr["Category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
+                        dr["ItemDescription"] = item.Description;
+                        dr["UnitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
                         dt.Rows.Add(dr);
                     }
                 }

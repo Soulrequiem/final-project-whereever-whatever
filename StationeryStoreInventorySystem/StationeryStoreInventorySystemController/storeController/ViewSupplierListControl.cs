@@ -12,6 +12,7 @@ using System.Text;
 using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
+using SystemStoreInventorySystemUtil;
 using System.Data;
 
 namespace StationeryStoreInventorySystemController.storeController
@@ -19,55 +20,62 @@ namespace StationeryStoreInventorySystemController.storeController
     public class ViewSupplierListControl
     {
         private ISupplierBroker supplierBroker;
-        private DataTable supplierList;
+
         private Employee currentEmployee;
+
+        private List<Supplier> supplierList;
+
         private DataTable dt;
         private DataRow dr;
-        InventoryEntities inventoryEntities;
+
+        private DataColumn[] dataColumn;
 
         public ViewSupplierListControl()
         {
-            inventoryEntities = new InventoryEntities();
-            supplierBroker = new SupplierBroker(inventoryEntities);
-            currentEmployee = Util.ValidateUser();
-            List<Supplier> list = GetSupplierList();
-            supplierList = ListToTable(list);
-          
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
+            InventoryEntities inventory = new InventoryEntities();
+
+            supplierBroker = new SupplierBroker(inventory);
+
+            supplierList = supplierBroker.GetAllSupplier();
+
+            dataColumn = new DataColumn[] { new DataColumn("supplierCode"),
+                                            new DataColumn("gstRegistrationNo"),
+                                            new DataColumn("supplierName"),
+                                            new DataColumn("contactName"),
+                                            new DataColumn("phoneNo"),
+                                            new DataColumn("faxNo"),
+                                            new DataColumn("address")};
         }
 
         public DataTable SupplierList
         {
-            get { return supplierList; }
-           
+            get 
+            {
+                dt = new DataTable();
+
+                dt.Columns.AddRange(dataColumn);
+
+                foreach (Supplier temp in supplierList)
+                {
+                    dr = dt.NewRow();
+                    dr["supplierCode"] = temp.Id;
+                    dr["gstRegistrationNo"] = temp.GstRegistrationNumber;
+                    dr["supplierName"] = temp.Name;
+                    dr["contactName"] = temp.ContactName;
+                    dr["phoneNo"] = temp.PhoneNumber;
+                    dr["faxNo"] = temp.FaxNumber;
+                    dr["address"] = temp.Address;
+                    dt.Rows.Add(dr);
+                }
+                return dt;
+            }
+        }
+
+        public void SelectPrint()
+        {
         }
       
-       
-
-        public List<Supplier> GetSupplierList()
-        {
-            return supplierBroker.GetAllSupplier();
-        }
-
-        public DataTable ListToTable(List<Supplier> supplierList)
-        {
-            dt = new DataTable();
-
-            
-            foreach (Supplier temp in supplierList)
-            {
-                dr = dt.NewRow();
-                dr["supplierCode"] = temp.Id;
-                dr["gstRegistrationNo"] = temp.GstRegistrationNumber;
-                dr["supplierName"] = temp.Name;
-                dr["contactName"] = temp.ContactName;
-                dr["phoneNo"] = temp.PhoneNumber;
-                dr["faxNo"] = temp.FaxNumber;
-                dr["address"] = temp.Address;
-                dt.Rows.Add(dr);
-            }
-            return dt;
-        }
-
         /// <summary>
         ///     Show all supplier List
         ///     Created By:JinChengCheng

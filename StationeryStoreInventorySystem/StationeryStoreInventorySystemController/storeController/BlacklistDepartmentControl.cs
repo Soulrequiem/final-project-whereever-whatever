@@ -28,7 +28,7 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_MANAGER);
             InventoryEntities inventory = new InventoryEntities();
-            
+
             departmentBroker = new DepartmentBroker(inventory);
 
             cleanDepartmentList = departmentBroker.GetAllDepartment(Constants.DEPARTMENT_STATUS.SHOW);
