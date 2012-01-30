@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode  description="Menu">
+      <siteMapNode url="" title="Department Head"  description="Department Head">
+          <siteMapNode url="~/departmentUI/Head/ApproveRequisition.aspx" title="Approve/Reject Requisition"  description="Approve/Reject Requisition" />
+          <siteMapNode url="~/departmentUI/Head/AssignDeptRepresentative.aspx" title="Assign Department Representative"  description="Assign Department Representative" />
+          <siteMapNode url="~/departmentUI/Head/AssignTempDeptHead.aspx" title="Assign Temporary Department Head"  description="Assign Temporary Department Head" />
+      </siteMapNode>  
+      <siteMapNode url="" title="Department Employee"  description="Department Employee">
+          <siteMapNode url="~/commonUI/ChangePassword.aspx" title="Change Password"  description="Change Password" />
+          <siteMapNode url="~/commonUI/ViewStationeryCatalogue.aspx" title="View Stationery Catalogue"  description="View Stationery Catalogue" />
+          <siteMapNode url="~/departmentUI/Employee/RequestStationery.aspx" title="Request Stationery"  description="Request Stationery" />
+          <siteMapNode url="~/departmentUI/Employee/CheckRequisition.aspx" title="Check Requisition"  description="Check Requisition" />
+        </siteMapNode>
+      <siteMapNode url="" title="Department Representative"  description="Department Representative">
+          <siteMapNode url="~/departmentUI/Representative/SubmitRequisitionsToStore.aspx" title="Submit Requisition To Store"  description="Submit Requisition To Store" />
+          <siteMapNode url="~/departmentUI/Representative/ManageCollectionPoint.aspx" title="Manage Collection Point"  description="Manage Collection Point" />
+          <siteMapNode url="~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx" title="Update Collection Details By Requisition"  description="Update Collection Details By Requisition" />
+          <siteMapNode url="~/departmentUI/Representative/UpdateCollectionByItems.aspx" title="Update Collection Details By Items"  description="Update Collection Details By Items" />
+          <siteMapNode url="~/departmentUI/Representative/AssignTempDeptRepresentative.aspx" title="Assign Temporary Department Representative"  description="Assign Temporary Department Representative" />
+          <siteMapNode url="~/commonUI/Report.aspx" title="Generate Reports"  description="Generate Reports" />
+      </siteMapNode>
+  </siteMapNode>
+</siteMap>

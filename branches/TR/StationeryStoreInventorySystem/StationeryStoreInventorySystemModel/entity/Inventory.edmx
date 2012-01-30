@@ -1,0 +1,2796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventoryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="InventoryModelStoreContainer">
+          <EntitySet Name="CollectionMissed" EntityType="InventoryModel.Store.CollectionMissed" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CollectionPoint" EntityType="InventoryModel.Store.CollectionPoint" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Department" EntityType="InventoryModel.Store.Department" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Discrepancy" EntityType="InventoryModel.Store.Discrepancy" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DiscrepancyDetails" EntityType="InventoryModel.Store.DiscrepancyDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employee" EntityType="InventoryModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Item" EntityType="InventoryModel.Store.Item" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemPrice" EntityType="InventoryModel.Store.ItemPrice" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="InventoryModel.Store.Notification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PurchaseOrder" EntityType="InventoryModel.Store.PurchaseOrder" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PurchaseOrderDetails" EntityType="InventoryModel.Store.PurchaseOrderDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Requisition" EntityType="InventoryModel.Store.Requisition" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RequisitionCollection" EntityType="InventoryModel.Store.RequisitionCollection" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RequisitionCollectionDetails" EntityType="InventoryModel.Store.RequisitionCollectionDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RequisitionCollectionItems" EntityType="InventoryModel.Store.RequisitionCollectionItems" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RequisitionDetails" EntityType="InventoryModel.Store.RequisitionDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Retrieval" EntityType="InventoryModel.Store.Retrieval" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RetrievalDetails" EntityType="InventoryModel.Store.RetrievalDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="InventoryModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StockAdjustment" EntityType="InventoryModel.Store.StockAdjustment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StockCardDetails" EntityType="InventoryModel.Store.StockCardDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Supplier" EntityType="InventoryModel.Store.Supplier" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="InventoryModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CollectionMissed_Department1" Association="InventoryModel.Store.FK_CollectionMissed_Department1">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="CollectionMissed" EntitySet="CollectionMissed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionMissed_Employee1" Association="InventoryModel.Store.FK_CollectionMissed_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CollectionMissed" EntitySet="CollectionMissed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionPoint_Employee1" Association="InventoryModel.Store.FK_CollectionPoint_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="CollectionPoint" EntitySet="CollectionPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_collectionpoint1" Association="InventoryModel.Store.FK_department_collectionpoint1">
+            <End Role="CollectionPoint" EntitySet="CollectionPoint" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee1" Association="InventoryModel.Store.FK_department_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee2" Association="InventoryModel.Store.FK_department_employee2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee3" Association="InventoryModel.Store.FK_department_employee3">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee4" Association="InventoryModel.Store.FK_department_employee4">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discrepancy_employee1" Association="InventoryModel.Store.FK_discrepancy_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Discrepancy" EntitySet="Discrepancy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discrepancydetails_discrepancy1" Association="InventoryModel.Store.FK_discrepancydetails_discrepancy1">
+            <End Role="Discrepancy" EntitySet="Discrepancy" />
+            <End Role="DiscrepancyDetails" EntitySet="DiscrepancyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discrepancydetails_item1" Association="InventoryModel.Store.FK_discrepancydetails_item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="DiscrepancyDetails" EntitySet="DiscrepancyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_department1" Association="InventoryModel.Store.FK_employee_department1">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_employee1" Association="InventoryModel.Store.FK_employee_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_role1" Association="InventoryModel.Store.FK_employee_role1">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_user1" Association="InventoryModel.Store.FK_employee_user1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_employee1" Association="InventoryModel.Store.FK_item_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_itemprice_employee1" Association="InventoryModel.Store.FK_itemprice_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ItemPrice" EntitySet="ItemPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Employee1" Association="InventoryModel.Store.FK_Notification_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorder_employee1" Association="InventoryModel.Store.FK_purchaseorder_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorder_employee2" Association="InventoryModel.Store.FK_purchaseorder_employee2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Employee3" Association="InventoryModel.Store.FK_PurchaseOrder_Employee3">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorder_supplier1" Association="InventoryModel.Store.FK_purchaseorder_supplier1">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorderdetails_item1" Association="InventoryModel.Store.FK_purchaseorderdetails_item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorderdetails_purchaseorder1" Association="InventoryModel.Store.FK_purchaseorderdetails_purchaseorder1">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+            <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisition_department1" Association="InventoryModel.Store.FK_requisition_department1">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Requisition" EntitySet="Requisition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisition_employee1" Association="InventoryModel.Store.FK_requisition_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requisition" EntitySet="Requisition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisition_employee2" Association="InventoryModel.Store.FK_requisition_employee2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requisition" EntitySet="Requisition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollection_collectionpoint1" Association="InventoryModel.Store.FK_requisitioncollection_collectionpoint1">
+            <End Role="CollectionPoint" EntitySet="CollectionPoint" />
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollection_department1" Association="InventoryModel.Store.FK_requisitioncollection_department1">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollection_employee1" Association="InventoryModel.Store.FK_requisitioncollection_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectiondetails_requisition1" Association="InventoryModel.Store.FK_requisitioncollectiondetails_requisition1">
+            <End Role="Requisition" EntitySet="Requisition" />
+            <End Role="RequisitionCollectionDetails" EntitySet="RequisitionCollectionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequisitionCollectionDetails_RequisitionCollection1" Association="InventoryModel.Store.FK_RequisitionCollectionDetails_RequisitionCollection1">
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
+            <End Role="RequisitionCollectionDetails" EntitySet="RequisitionCollectionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectionitems_employee1" Association="InventoryModel.Store.FK_requisitioncollectionitems_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="RequisitionCollectionItems" EntitySet="RequisitionCollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectionitems_item1" Association="InventoryModel.Store.FK_requisitioncollectionitems_item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="RequisitionCollectionItems" EntitySet="RequisitionCollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectionitems_requisitioncollection1" Association="InventoryModel.Store.FK_requisitioncollectionitems_requisitioncollection1">
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
+            <End Role="RequisitionCollectionItems" EntitySet="RequisitionCollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitiondetails_item1" Association="InventoryModel.Store.FK_requisitiondetails_item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="RequisitionDetails" EntitySet="RequisitionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitiondetails_requisition1" Association="InventoryModel.Store.FK_requisitiondetails_requisition1">
+            <End Role="Requisition" EntitySet="Requisition" />
+            <End Role="RequisitionDetails" EntitySet="RequisitionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrieval_employee1" Association="InventoryModel.Store.FK_retrieval_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Retrieval" EntitySet="Retrieval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrievaldetails_department1" Association="InventoryModel.Store.FK_retrievaldetails_department1">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrievaldetails_item1" Association="InventoryModel.Store.FK_retrievaldetails_item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrievaldetails_retrieval1" Association="InventoryModel.Store.FK_retrievaldetails_retrieval1">
+            <End Role="Retrieval" EntitySet="Retrieval" />
+            <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_employee1" Association="InventoryModel.Store.FK_role_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stockadjustment_discrepancy1" Association="InventoryModel.Store.FK_stockadjustment_discrepancy1">
+            <End Role="Discrepancy" EntitySet="Discrepancy" />
+            <End Role="StockAdjustment" EntitySet="StockAdjustment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stockadjustment_employee1" Association="InventoryModel.Store.FK_stockadjustment_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="StockAdjustment" EntitySet="StockAdjustment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stockcarddetails_employee1" Association="InventoryModel.Store.FK_stockcarddetails_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="StockCardDetails" EntitySet="StockCardDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockCardDetails_Item1" Association="InventoryModel.Store.FK_StockCardDetails_Item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="StockCardDetails" EntitySet="StockCardDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_employee1" Association="InventoryModel.Store.FK_supplier_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Supplier" EntitySet="Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_employee1" Association="InventoryModel.Store.FK_user_employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CollectionMissed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CollectionPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Time" Type="time" Nullable="false" />
+          <Property Name="ClerkId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="ContactId" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="FaxNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="HeadId" Type="int" />
+          <Property Name="CollectionPointId" Type="int" />
+          <Property Name="RepresentativeId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Discrepancy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiscrepancyDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DiscrepancyId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="DiscrepancyType" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="Remarks" Type="text" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Designation" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="ItemCategoryId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="ReorderLevel" Type="int" Nullable="false" />
+          <Property Name="ReorderQty" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="money" Nullable="false" />
+          <Property Name="UnitOfMeasureId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemPrice">
+          <Key>
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="SupplierId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="text" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SupplierId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="DeliverAddress" Type="text" Nullable="false" />
+          <Property Name="Attn" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="ExpectedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DeliveryOrderNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="AcceptedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PurchaseOrderId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="AcceptedQty" Type="int" />
+        </EntityType>
+        <EntityType Name="Requisition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Remarks" Type="text" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequisitionCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="CollectionPointId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequisitionCollectionDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="RequisitionId" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="RequisitionCollectionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequisitionCollectionItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="RequisitionCollectionId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequisitionDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="RequisitionId" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="DeliveredQty" Type="int" />
+        </EntityType>
+        <EntityType Name="Retrieval">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RetrievalDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="RetrievalId" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="NeededQty" Type="int" Nullable="false" />
+          <Property Name="ActualQty" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockAdjustment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="DiscrepancyId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockCardDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="Balance" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="FaxNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="Address" Type="text" Nullable="false" />
+          <Property Name="GstRegistrationNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CollectionMissed_Department1">
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
+          <End Role="CollectionMissed" Type="InventoryModel.Store.CollectionMissed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CollectionMissed">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionMissed_Employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="CollectionMissed" Type="InventoryModel.Store.CollectionMissed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CollectionMissed">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionPoint_Employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="CollectionPoint" Type="InventoryModel.Store.CollectionPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CollectionPoint">
+              <PropertyRef Name="ClerkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_collectionpoint1">
+          <End Role="CollectionPoint" Type="InventoryModel.Store.CollectionPoint" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CollectionPointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_employee2">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="HeadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_employee3">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="RepresentativeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_department_employee4">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_discrepancy_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Discrepancy" Type="InventoryModel.Store.Discrepancy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Discrepancy">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_discrepancydetails_discrepancy1">
+          <End Role="Discrepancy" Type="InventoryModel.Store.Discrepancy" Multiplicity="1" />
+          <End Role="DiscrepancyDetails" Type="InventoryModel.Store.DiscrepancyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discrepancy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiscrepancyDetails">
+              <PropertyRef Name="DiscrepancyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_discrepancydetails_item1">
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
+          <End Role="DiscrepancyDetails" Type="InventoryModel.Store.DiscrepancyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiscrepancyDetails">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_department1">
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Employee1" Type="InventoryModel.Store.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_role1">
+          <End Role="Role" Type="InventoryModel.Store.Role" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_user1">
+          <End Role="User" Type="InventoryModel.Store.User" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_itemprice_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="ItemPrice" Type="InventoryModel.Store.ItemPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemPrice">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Notification" Type="InventoryModel.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchaseorder_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.Store.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchaseorder_employee2">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.Store.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_Employee3">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.Store.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="AcceptedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchaseorder_supplier1">
+          <End Role="Supplier" Type="InventoryModel.Store.Supplier" Multiplicity="1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.Store.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchaseorderdetails_item1">
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
+          <End Role="PurchaseOrderDetails" Type="InventoryModel.Store.PurchaseOrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetails">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchaseorderdetails_purchaseorder1">
+          <End Role="PurchaseOrder" Type="InventoryModel.Store.PurchaseOrder" Multiplicity="1" />
+          <End Role="PurchaseOrderDetails" Type="InventoryModel.Store.PurchaseOrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetails">
+              <PropertyRef Name="PurchaseOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisition_department1">
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
+          <End Role="Requisition" Type="InventoryModel.Store.Requisition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Requisition">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisition_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Requisition" Type="InventoryModel.Store.Requisition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Requisition">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisition_employee2">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="Requisition" Type="InventoryModel.Store.Requisition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Requisition">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitioncollection_collectionpoint1">
+          <End Role="CollectionPoint" Type="InventoryModel.Store.CollectionPoint" Multiplicity="1" />
+          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollection">
+              <PropertyRef Name="CollectionPointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitioncollection_department1">
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
+          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollection">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitioncollection_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollection">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitioncollectiondetails_requisition1">
+          <End Role="Requisition" Type="InventoryModel.Store.Requisition" Multiplicity="1" />
+          <End Role="RequisitionCollectionDetails" Type="InventoryModel.Store.RequisitionCollectionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollectionDetails">
+              <PropertyRef Name="RequisitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequisitionCollectionDetails_RequisitionCollection1">
+          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="1" />
+          <End Role="RequisitionCollectionDetails" Type="InventoryModel.Store.RequisitionCollectionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequisitionCollection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollectionDetails">
+              <PropertyRef Name="RequisitionCollectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitioncollectionitems_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="RequisitionCollectionItems" Type="InventoryModel.Store.RequisitionCollectionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollectionItems">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitioncollectionitems_item1">
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
+          <End Role="RequisitionCollectionItems" Type="InventoryModel.Store.RequisitionCollectionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollectionItems">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitioncollectionitems_requisitioncollection1">
+          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="1" />
+          <End Role="RequisitionCollectionItems" Type="InventoryModel.Store.RequisitionCollectionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequisitionCollection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionCollectionItems">
+              <PropertyRef Name="RequisitionCollectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitiondetails_item1">
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
+          <End Role="RequisitionDetails" Type="InventoryModel.Store.RequisitionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionDetails">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_requisitiondetails_requisition1">
+          <End Role="Requisition" Type="InventoryModel.Store.Requisition" Multiplicity="1" />
+          <End Role="RequisitionDetails" Type="InventoryModel.Store.RequisitionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequisitionDetails">
+              <PropertyRef Name="RequisitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_retrieval_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Retrieval" Type="InventoryModel.Store.Retrieval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Retrieval">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_retrievaldetails_department1">
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
+          <End Role="RetrievalDetails" Type="InventoryModel.Store.RetrievalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RetrievalDetails">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_retrievaldetails_item1">
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
+          <End Role="RetrievalDetails" Type="InventoryModel.Store.RetrievalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RetrievalDetails">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_retrievaldetails_retrieval1">
+          <End Role="Retrieval" Type="InventoryModel.Store.Retrieval" Multiplicity="1" />
+          <End Role="RetrievalDetails" Type="InventoryModel.Store.RetrievalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Retrieval">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RetrievalDetails">
+              <PropertyRef Name="RetrievalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="Role" Type="InventoryModel.Store.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stockadjustment_discrepancy1">
+          <End Role="Discrepancy" Type="InventoryModel.Store.Discrepancy" Multiplicity="1" />
+          <End Role="StockAdjustment" Type="InventoryModel.Store.StockAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discrepancy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockAdjustment">
+              <PropertyRef Name="DiscrepancyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stockadjustment_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="StockAdjustment" Type="InventoryModel.Store.StockAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockAdjustment">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stockcarddetails_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="StockCardDetails" Type="InventoryModel.Store.StockCardDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockCardDetails">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockCardDetails_Item1">
+          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
+          <End Role="StockCardDetails" Type="InventoryModel.Store.StockCardDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockCardDetails">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="Supplier" Type="InventoryModel.Store.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_employee1">
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="User" Type="InventoryModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CollectionMisseds" EntityType="InventoryModel.CollectionMissed" />
+          <EntitySet Name="CollectionPoints" EntityType="InventoryModel.CollectionPoint" />
+          <EntitySet Name="Departments" EntityType="InventoryModel.Department" />
+          <EntitySet Name="Discrepancies" EntityType="InventoryModel.Discrepancy" />
+          <EntitySet Name="DiscrepancyDetails" EntityType="InventoryModel.DiscrepancyDetail" />
+          <EntitySet Name="Employees" EntityType="InventoryModel.Employee" />
+          <EntitySet Name="Items" EntityType="InventoryModel.Item" />
+          <EntitySet Name="ItemPrices" EntityType="InventoryModel.ItemPrice" />
+          <EntitySet Name="Notifications" EntityType="InventoryModel.Notification" />
+          <EntitySet Name="PurchaseOrders" EntityType="InventoryModel.PurchaseOrder" />
+          <EntitySet Name="PurchaseOrderDetails" EntityType="InventoryModel.PurchaseOrderDetail" />
+          <EntitySet Name="Requisitions" EntityType="InventoryModel.Requisition" />
+          <EntitySet Name="RequisitionCollections" EntityType="InventoryModel.RequisitionCollection" />
+          <EntitySet Name="RequisitionCollectionDetails" EntityType="InventoryModel.RequisitionCollectionDetail" />
+          <EntitySet Name="RequisitionCollectionItems" EntityType="InventoryModel.RequisitionCollectionItem" />
+          <EntitySet Name="RequisitionDetails" EntityType="InventoryModel.RequisitionDetail" />
+          <EntitySet Name="Retrievals" EntityType="InventoryModel.Retrieval" />
+          <EntitySet Name="RetrievalDetails" EntityType="InventoryModel.RetrievalDetail" />
+          <EntitySet Name="Roles" EntityType="InventoryModel.Role" />
+          <EntitySet Name="StockAdjustments" EntityType="InventoryModel.StockAdjustment" />
+          <EntitySet Name="StockCardDetails" EntityType="InventoryModel.StockCardDetail" />
+          <EntitySet Name="Suppliers" EntityType="InventoryModel.Supplier" />
+          <EntitySet Name="Users" EntityType="InventoryModel.User" />
+          <AssociationSet Name="FK_CollectionMissed_Department1" Association="InventoryModel.FK_CollectionMissed_Department1">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="CollectionMissed" EntitySet="CollectionMisseds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionMissed_Employee1" Association="InventoryModel.FK_CollectionMissed_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CollectionMissed" EntitySet="CollectionMisseds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionPoint_Employee1" Association="InventoryModel.FK_CollectionPoint_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="CollectionPoint" EntitySet="CollectionPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_collectionpoint1" Association="InventoryModel.FK_department_collectionpoint1">
+            <End Role="CollectionPoint" EntitySet="CollectionPoints" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollection_collectionpoint1" Association="InventoryModel.FK_requisitioncollection_collectionpoint1">
+            <End Role="CollectionPoint" EntitySet="CollectionPoints" />
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee1" Association="InventoryModel.FK_department_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee2" Association="InventoryModel.FK_department_employee2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee3" Association="InventoryModel.FK_department_employee3">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_department_employee4" Association="InventoryModel.FK_department_employee4">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_department1" Association="InventoryModel.FK_employee_department1">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisition_department1" Association="InventoryModel.FK_requisition_department1">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Requisition" EntitySet="Requisitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollection_department1" Association="InventoryModel.FK_requisitioncollection_department1">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrievaldetails_department1" Association="InventoryModel.FK_retrievaldetails_department1">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discrepancy_employee1" Association="InventoryModel.FK_discrepancy_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Discrepancy" EntitySet="Discrepancies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discrepancydetails_discrepancy1" Association="InventoryModel.FK_discrepancydetails_discrepancy1">
+            <End Role="Discrepancy" EntitySet="Discrepancies" />
+            <End Role="DiscrepancyDetails" EntitySet="DiscrepancyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stockadjustment_discrepancy1" Association="InventoryModel.FK_stockadjustment_discrepancy1">
+            <End Role="Discrepancy" EntitySet="Discrepancies" />
+            <End Role="StockAdjustment" EntitySet="StockAdjustments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_discrepancydetails_item1" Association="InventoryModel.FK_discrepancydetails_item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="DiscrepancyDetails" EntitySet="DiscrepancyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_employee1" Association="InventoryModel.FK_employee_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_role1" Association="InventoryModel.FK_employee_role1">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_user1" Association="InventoryModel.FK_employee_user1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_employee1" Association="InventoryModel.FK_item_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_itemprice_employee1" Association="InventoryModel.FK_itemprice_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ItemPrice" EntitySet="ItemPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Employee1" Association="InventoryModel.FK_Notification_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorder_employee1" Association="InventoryModel.FK_purchaseorder_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorder_employee2" Association="InventoryModel.FK_purchaseorder_employee2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Employee3" Association="InventoryModel.FK_PurchaseOrder_Employee3">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisition_employee1" Association="InventoryModel.FK_requisition_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Requisition" EntitySet="Requisitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisition_employee2" Association="InventoryModel.FK_requisition_employee2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Requisition" EntitySet="Requisitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollection_employee1" Association="InventoryModel.FK_requisitioncollection_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectionitems_employee1" Association="InventoryModel.FK_requisitioncollectionitems_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="RequisitionCollectionItems" EntitySet="RequisitionCollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrieval_employee1" Association="InventoryModel.FK_retrieval_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Retrieval" EntitySet="Retrievals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_employee1" Association="InventoryModel.FK_role_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stockadjustment_employee1" Association="InventoryModel.FK_stockadjustment_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="StockAdjustment" EntitySet="StockAdjustments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stockcarddetails_employee1" Association="InventoryModel.FK_stockcarddetails_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="StockCardDetails" EntitySet="StockCardDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_employee1" Association="InventoryModel.FK_supplier_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_employee1" Association="InventoryModel.FK_user_employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorderdetails_item1" Association="InventoryModel.FK_purchaseorderdetails_item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectionitems_item1" Association="InventoryModel.FK_requisitioncollectionitems_item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="RequisitionCollectionItems" EntitySet="RequisitionCollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitiondetails_item1" Association="InventoryModel.FK_requisitiondetails_item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="RequisitionDetails" EntitySet="RequisitionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrievaldetails_item1" Association="InventoryModel.FK_retrievaldetails_item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockCardDetails_Item1" Association="InventoryModel.FK_StockCardDetails_Item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="StockCardDetails" EntitySet="StockCardDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorder_supplier1" Association="InventoryModel.FK_purchaseorder_supplier1">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchaseorderdetails_purchaseorder1" Association="InventoryModel.FK_purchaseorderdetails_purchaseorder1">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+            <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectiondetails_requisition1" Association="InventoryModel.FK_requisitioncollectiondetails_requisition1">
+            <End Role="Requisition" EntitySet="Requisitions" />
+            <End Role="RequisitionCollectionDetails" EntitySet="RequisitionCollectionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitiondetails_requisition1" Association="InventoryModel.FK_requisitiondetails_requisition1">
+            <End Role="Requisition" EntitySet="Requisitions" />
+            <End Role="RequisitionDetails" EntitySet="RequisitionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequisitionCollectionDetails_RequisitionCollection1" Association="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1">
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollections" />
+            <End Role="RequisitionCollectionDetails" EntitySet="RequisitionCollectionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_requisitioncollectionitems_requisitioncollection1" Association="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1">
+            <End Role="RequisitionCollection" EntitySet="RequisitionCollections" />
+            <End Role="RequisitionCollectionItems" EntitySet="RequisitionCollectionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_retrievaldetails_retrieval1" Association="InventoryModel.FK_retrievaldetails_retrieval1">
+            <End Role="Retrieval" EntitySet="Retrievals" />
+            <End Role="RetrievalDetails" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="CollectionMissed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="InventoryModel.FK_CollectionMissed_Department1" FromRole="CollectionMissed" ToRole="Department" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_CollectionMissed_Employee1" FromRole="CollectionMissed" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="CollectionPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Time" Type="Time" Nullable="false" />
+          <NavigationProperty Name="Clerk" Relationship="InventoryModel.FK_CollectionPoint_Employee1" FromRole="CollectionPoint" ToRole="Employee" />
+          <NavigationProperty Name="Departments" Relationship="InventoryModel.FK_department_collectionpoint1" FromRole="CollectionPoint" ToRole="Department" />
+          <NavigationProperty Name="RequisitionCollections" Relationship="InventoryModel.FK_requisitioncollection_collectionpoint1" FromRole="CollectionPoint" ToRole="RequisitionCollection" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CollectionMisseds" Relationship="InventoryModel.FK_CollectionMissed_Department1" FromRole="Department" ToRole="CollectionMissed" />
+          <NavigationProperty Name="CollectionPoint" Relationship="InventoryModel.FK_department_collectionpoint1" FromRole="Department" ToRole="CollectionPoint" />
+          <NavigationProperty Name="Contact" Relationship="InventoryModel.FK_department_employee1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Head" Relationship="InventoryModel.FK_department_employee2" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Representative" Relationship="InventoryModel.FK_department_employee3" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_department_employee4" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_department1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Requisitions" Relationship="InventoryModel.FK_requisition_department1" FromRole="Department" ToRole="Requisition" />
+          <NavigationProperty Name="RequisitionCollections" Relationship="InventoryModel.FK_requisitioncollection_department1" FromRole="Department" ToRole="RequisitionCollection" />
+          <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_department1" FromRole="Department" ToRole="RetrievalDetails" />
+        </EntityType>
+        <EntityType Name="Discrepancy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_discrepancy_employee1" FromRole="Discrepancy" ToRole="Employee" />
+          <NavigationProperty Name="DiscrepancyDetails" Relationship="InventoryModel.FK_discrepancydetails_discrepancy1" FromRole="Discrepancy" ToRole="DiscrepancyDetails" />
+          <NavigationProperty Name="StockAdjustments" Relationship="InventoryModel.FK_stockadjustment_discrepancy1" FromRole="Discrepancy" ToRole="StockAdjustment" />
+        </EntityType>
+        <EntityType Name="DiscrepancyDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DiscrepancyType" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Discrepancy" Relationship="InventoryModel.FK_discrepancydetails_discrepancy1" FromRole="DiscrepancyDetails" ToRole="Discrepancy" />
+          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_discrepancydetails_item1" FromRole="DiscrepancyDetails" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Designation" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CollectionMisseds" Relationship="InventoryModel.FK_CollectionMissed_Employee1" FromRole="Employee" ToRole="CollectionMissed" />
+          <NavigationProperty Name="CollectionPoints" Relationship="InventoryModel.FK_CollectionPoint_Employee1" FromRole="Employee" ToRole="CollectionPoint" />
+          <NavigationProperty Name="Departments" Relationship="InventoryModel.FK_department_employee1" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Departments1" Relationship="InventoryModel.FK_department_employee2" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Departments2" Relationship="InventoryModel.FK_department_employee3" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Departments3" Relationship="InventoryModel.FK_department_employee4" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Department" Relationship="InventoryModel.FK_employee_department1" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Discrepancies" Relationship="InventoryModel.FK_discrepancy_employee1" FromRole="Employee" ToRole="Discrepancy" />
+          <NavigationProperty Name="Employee1" Relationship="InventoryModel.FK_employee_employee1" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_employee_employee1" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="Role" Relationship="InventoryModel.FK_employee_role1" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="InventoryModel.FK_employee_user1" FromRole="Employee" ToRole="User" />
+          <NavigationProperty Name="Items" Relationship="InventoryModel.FK_item_employee1" FromRole="Employee" ToRole="Item" />
+          <NavigationProperty Name="ItemPrices" Relationship="InventoryModel.FK_itemprice_employee1" FromRole="Employee" ToRole="ItemPrice" />
+          <NavigationProperty Name="Notifications" Relationship="InventoryModel.FK_Notification_Employee1" FromRole="Employee" ToRole="Notification" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="InventoryModel.FK_purchaseorder_employee1" FromRole="Employee" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="PurchaseOrders1" Relationship="InventoryModel.FK_purchaseorder_employee2" FromRole="Employee" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="PurchaseOrders2" Relationship="InventoryModel.FK_PurchaseOrder_Employee3" FromRole="Employee" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="Requisitions" Relationship="InventoryModel.FK_requisition_employee1" FromRole="Employee" ToRole="Requisition" />
+          <NavigationProperty Name="Requisitions1" Relationship="InventoryModel.FK_requisition_employee2" FromRole="Employee" ToRole="Requisition" />
+          <NavigationProperty Name="RequisitionCollections" Relationship="InventoryModel.FK_requisitioncollection_employee1" FromRole="Employee" ToRole="RequisitionCollection" />
+          <NavigationProperty Name="RequisitionCollectionItems" Relationship="InventoryModel.FK_requisitioncollectionitems_employee1" FromRole="Employee" ToRole="RequisitionCollectionItems" />
+          <NavigationProperty Name="Retrievals" Relationship="InventoryModel.FK_retrieval_employee1" FromRole="Employee" ToRole="Retrieval" />
+          <NavigationProperty Name="Roles" Relationship="InventoryModel.FK_role_employee1" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="StockAdjustments" Relationship="InventoryModel.FK_stockadjustment_employee1" FromRole="Employee" ToRole="StockAdjustment" />
+          <NavigationProperty Name="StockCardDetails" Relationship="InventoryModel.FK_stockcarddetails_employee1" FromRole="Employee" ToRole="StockCardDetails" />
+          <NavigationProperty Name="Suppliers" Relationship="InventoryModel.FK_supplier_employee1" FromRole="Employee" ToRole="Supplier" />
+          <NavigationProperty Name="Users" Relationship="InventoryModel.FK_user_employee1" FromRole="Employee" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="ItemCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ReorderLevel" Type="Int32" Nullable="false" />
+          <Property Name="ReorderQty" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="UnitOfMeasureId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DiscrepancyDetails" Relationship="InventoryModel.FK_discrepancydetails_item1" FromRole="Item" ToRole="DiscrepancyDetails" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_item_employee1" FromRole="Item" ToRole="Employee" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="InventoryModel.FK_purchaseorderdetails_item1" FromRole="Item" ToRole="PurchaseOrderDetails" />
+          <NavigationProperty Name="RequisitionCollectionItems" Relationship="InventoryModel.FK_requisitioncollectionitems_item1" FromRole="Item" ToRole="RequisitionCollectionItems" />
+          <NavigationProperty Name="RequisitionDetails" Relationship="InventoryModel.FK_requisitiondetails_item1" FromRole="Item" ToRole="RequisitionDetails" />
+          <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_item1" FromRole="Item" ToRole="RetrievalDetails" />
+          <NavigationProperty Name="StockCardDetails" Relationship="InventoryModel.FK_StockCardDetails_Item1" FromRole="Item" ToRole="StockCardDetails" />
+        </EntityType>
+        <EntityType Name="ItemPrice">
+          <Key>
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="ItemId" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="SupplierId" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_itemprice_employee1" FromRole="ItemPrice" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="InventoryModel.FK_Notification_Employee1" FromRole="Notification" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DeliverAddress" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Attn" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="ExpectedDate" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="ApprovedDate" Type="DateTime" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryOrderNumber" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="DeliveryDate" Type="DateTime" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_purchaseorder_employee1" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="ApprovedBy" Relationship="InventoryModel.FK_purchaseorder_employee2" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="AcceptedBy" Relationship="InventoryModel.FK_PurchaseOrder_Employee3" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="Supplier" Relationship="InventoryModel.FK_purchaseorder_supplier1" FromRole="PurchaseOrder" ToRole="Supplier" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="InventoryModel.FK_purchaseorderdetails_purchaseorder1" FromRole="PurchaseOrder" ToRole="PurchaseOrderDetails" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="AcceptedQty" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_purchaseorderdetails_item1" FromRole="PurchaseOrderDetails" ToRole="Item" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="InventoryModel.FK_purchaseorderdetails_purchaseorder1" FromRole="PurchaseOrderDetails" ToRole="PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="Requisition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ApprovedDate" Type="DateTime" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="InventoryModel.FK_requisition_department1" FromRole="Requisition" ToRole="Department" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisition_employee1" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="ApprovedBy" Relationship="InventoryModel.FK_requisition_employee2" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_requisitioncollectiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionCollectionDetails" />
+          <NavigationProperty Name="RequisitionDetails" Relationship="InventoryModel.FK_requisitiondetails_requisition1" FromRole="Requisition" ToRole="RequisitionDetails" />
+        </EntityType>
+        <EntityType Name="RequisitionCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CollectionPoint" Relationship="InventoryModel.FK_requisitioncollection_collectionpoint1" FromRole="RequisitionCollection" ToRole="CollectionPoint" />
+          <NavigationProperty Name="Department" Relationship="InventoryModel.FK_requisitioncollection_department1" FromRole="RequisitionCollection" ToRole="Department" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisitioncollection_employee1" FromRole="RequisitionCollection" ToRole="Employee" />
+          <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionDetails" />
+          <NavigationProperty Name="RequisitionCollectionItems" Relationship="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionItems" />
+        </EntityType>
+        <EntityType Name="RequisitionCollectionDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Requisition" Relationship="InventoryModel.FK_requisitioncollectiondetails_requisition1" FromRole="RequisitionCollectionDetails" ToRole="Requisition" />
+          <NavigationProperty Name="RequisitionCollection" Relationship="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" FromRole="RequisitionCollectionDetails" ToRole="RequisitionCollection" />
+        </EntityType>
+        <EntityType Name="RequisitionCollectionItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisitioncollectionitems_employee1" FromRole="RequisitionCollectionItems" ToRole="Employee" />
+          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_requisitioncollectionitems_item1" FromRole="RequisitionCollectionItems" ToRole="Item" />
+          <NavigationProperty Name="RequisitionCollection" Relationship="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" FromRole="RequisitionCollectionItems" ToRole="RequisitionCollection" />
+        </EntityType>
+        <EntityType Name="RequisitionDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="DeliveredQty" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_requisitiondetails_item1" FromRole="RequisitionDetails" ToRole="Item" />
+          <NavigationProperty Name="Requisition" Relationship="InventoryModel.FK_requisitiondetails_requisition1" FromRole="RequisitionDetails" ToRole="Requisition" />
+        </EntityType>
+        <EntityType Name="Retrieval">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_retrieval_employee1" FromRole="Retrieval" ToRole="Employee" />
+          <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_retrieval1" FromRole="Retrieval" ToRole="RetrievalDetails" />
+        </EntityType>
+        <EntityType Name="RetrievalDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NeededQty" Type="Int32" Nullable="false" />
+          <Property Name="ActualQty" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="InventoryModel.FK_retrievaldetails_department1" FromRole="RetrievalDetails" ToRole="Department" />
+          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_retrievaldetails_item1" FromRole="RetrievalDetails" ToRole="Item" />
+          <NavigationProperty Name="Retrieval" Relationship="InventoryModel.FK_retrievaldetails_retrieval1" FromRole="RetrievalDetails" ToRole="Retrieval" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_role1" FromRole="Role" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_role_employee1" FromRole="Role" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="StockAdjustment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Discrepancy" Relationship="InventoryModel.FK_stockadjustment_discrepancy1" FromRole="StockAdjustment" ToRole="Discrepancy" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_stockadjustment_employee1" FromRole="StockAdjustment" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="StockCardDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="Balance" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_stockcarddetails_employee1" FromRole="StockCardDetails" ToRole="Employee" />
+          <NavigationProperty Name="Item" Relationship="InventoryModel.FK_StockCardDetails_Item1" FromRole="StockCardDetails" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="GstRegistrationNumber" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_supplier_employee1" FromRole="Supplier" ToRole="Employee" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="InventoryModel.FK_purchaseorder_supplier1" FromRole="Supplier" ToRole="PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="InventoryModel.FK_employee_user1" FromRole="User" ToRole="Employee" />
+          <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_user_employee1" FromRole="User" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_CollectionMissed_Department1">
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="1" />
+          <End Role="CollectionMissed" Type="InventoryModel.CollectionMissed" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CollectionMissed_Employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="CollectionMissed" Type="InventoryModel.CollectionMissed" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CollectionPoint_Employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="CollectionPoint" Type="InventoryModel.CollectionPoint" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_department_collectionpoint1">
+          <End Role="CollectionPoint" Type="InventoryModel.CollectionPoint" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitioncollection_collectionpoint1">
+          <End Role="CollectionPoint" Type="InventoryModel.CollectionPoint" Multiplicity="1" />
+          <End Role="RequisitionCollection" Type="InventoryModel.RequisitionCollection" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_department_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_department_employee2">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_department_employee3">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_department_employee4">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_employee_department1">
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisition_department1">
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="1" />
+          <End Role="Requisition" Type="InventoryModel.Requisition" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitioncollection_department1">
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="1" />
+          <End Role="RequisitionCollection" Type="InventoryModel.RequisitionCollection" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_retrievaldetails_department1">
+          <End Role="Department" Type="InventoryModel.Department" Multiplicity="1" />
+          <End Role="RetrievalDetails" Type="InventoryModel.RetrievalDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_discrepancy_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Discrepancy" Type="InventoryModel.Discrepancy" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_discrepancydetails_discrepancy1">
+          <End Role="Discrepancy" Type="InventoryModel.Discrepancy" Multiplicity="1" />
+          <End Role="DiscrepancyDetails" Type="InventoryModel.DiscrepancyDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_stockadjustment_discrepancy1">
+          <End Role="Discrepancy" Type="InventoryModel.Discrepancy" Multiplicity="1" />
+          <End Role="StockAdjustment" Type="InventoryModel.StockAdjustment" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_discrepancydetails_item1">
+          <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
+          <End Role="DiscrepancyDetails" Type="InventoryModel.DiscrepancyDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_employee_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Employee1" Type="InventoryModel.Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_employee_role1">
+          <End Role="Role" Type="InventoryModel.Role" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_employee_user1">
+          <End Role="User" Type="InventoryModel.User" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_item_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Item" Type="InventoryModel.Item" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_itemprice_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="ItemPrice" Type="InventoryModel.ItemPrice" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Notification_Employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Notification" Type="InventoryModel.Notification" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_purchaseorder_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.PurchaseOrder" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_purchaseorder_employee2">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.PurchaseOrder" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PurchaseOrder_Employee3">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.PurchaseOrder" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisition_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Requisition" Type="InventoryModel.Requisition" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisition_employee2">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="Requisition" Type="InventoryModel.Requisition" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitioncollection_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="RequisitionCollection" Type="InventoryModel.RequisitionCollection" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitioncollectionitems_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="RequisitionCollectionItems" Type="InventoryModel.RequisitionCollectionItem" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_retrieval_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="Retrieval" Type="InventoryModel.Retrieval" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_role_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="Role" Type="InventoryModel.Role" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_stockadjustment_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="StockAdjustment" Type="InventoryModel.StockAdjustment" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_stockcarddetails_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="1" />
+          <End Role="StockCardDetails" Type="InventoryModel.StockCardDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_supplier_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="Supplier" Type="InventoryModel.Supplier" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_user_employee1">
+          <End Role="Employee" Type="InventoryModel.Employee" Multiplicity="0..1" />
+          <End Role="User" Type="InventoryModel.User" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_purchaseorderdetails_item1">
+          <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
+          <End Role="PurchaseOrderDetails" Type="InventoryModel.PurchaseOrderDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitioncollectionitems_item1">
+          <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
+          <End Role="RequisitionCollectionItems" Type="InventoryModel.RequisitionCollectionItem" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitiondetails_item1">
+          <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
+          <End Role="RequisitionDetails" Type="InventoryModel.RequisitionDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_retrievaldetails_item1">
+          <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
+          <End Role="RetrievalDetails" Type="InventoryModel.RetrievalDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_StockCardDetails_Item1">
+          <End Role="Item" Type="InventoryModel.Item" Multiplicity="1" />
+          <End Role="StockCardDetails" Type="InventoryModel.StockCardDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_purchaseorder_supplier1">
+          <End Role="Supplier" Type="InventoryModel.Supplier" Multiplicity="1" />
+          <End Role="PurchaseOrder" Type="InventoryModel.PurchaseOrder" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_purchaseorderdetails_purchaseorder1">
+          <End Role="PurchaseOrder" Type="InventoryModel.PurchaseOrder" Multiplicity="1" />
+          <End Role="PurchaseOrderDetails" Type="InventoryModel.PurchaseOrderDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitioncollectiondetails_requisition1">
+          <End Role="Requisition" Type="InventoryModel.Requisition" Multiplicity="1" />
+          <End Role="RequisitionCollectionDetails" Type="InventoryModel.RequisitionCollectionDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitiondetails_requisition1">
+          <End Role="Requisition" Type="InventoryModel.Requisition" Multiplicity="1" />
+          <End Role="RequisitionDetails" Type="InventoryModel.RequisitionDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_RequisitionCollectionDetails_RequisitionCollection1">
+          <End Role="RequisitionCollection" Type="InventoryModel.RequisitionCollection" Multiplicity="1" />
+          <End Role="RequisitionCollectionDetails" Type="InventoryModel.RequisitionCollectionDetail" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_requisitioncollectionitems_requisitioncollection1">
+          <End Role="RequisitionCollection" Type="InventoryModel.RequisitionCollection" Multiplicity="1" />
+          <End Role="RequisitionCollectionItems" Type="InventoryModel.RequisitionCollectionItem" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_retrievaldetails_retrieval1">
+          <End Role="Retrieval" Type="InventoryModel.Retrieval" Multiplicity="1" />
+          <End Role="RetrievalDetails" Type="InventoryModel.RetrievalDetail" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+          <EntitySetMapping Name="CollectionMisseds">
+            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.CollectionMissed)">
+              <MappingFragment StoreEntitySet="CollectionMissed">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            </EntitySetMapping>
+          <EntitySetMapping Name="CollectionPoints"><EntityTypeMapping TypeName="InventoryModel.CollectionPoint"><MappingFragment StoreEntitySet="CollectionPoint">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Time" ColumnName="Time" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Departments"><EntityTypeMapping TypeName="InventoryModel.Department"><MappingFragment StoreEntitySet="Department">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+            <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Discrepancies"><EntityTypeMapping TypeName="InventoryModel.Discrepancy"><MappingFragment StoreEntitySet="Discrepancy">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="DiscrepancyDetails"><EntityTypeMapping TypeName="InventoryModel.DiscrepancyDetail"><MappingFragment StoreEntitySet="DiscrepancyDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="DiscrepancyType" ColumnName="DiscrepancyType" />
+            <ScalarProperty Name="Qty" ColumnName="Qty" />
+            <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Employees"><EntityTypeMapping TypeName="InventoryModel.Employee"><MappingFragment StoreEntitySet="Employee">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Designation" ColumnName="Designation" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Items"><EntityTypeMapping TypeName="InventoryModel.Item"><MappingFragment StoreEntitySet="Item">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+            <ScalarProperty Name="ReorderQty" ColumnName="ReorderQty" />
+            <ScalarProperty Name="Cost" ColumnName="Cost" />
+            <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ItemPrices"><EntityTypeMapping TypeName="InventoryModel.ItemPrice"><MappingFragment StoreEntitySet="ItemPrice">
+            <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+            <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Notifications"><EntityTypeMapping TypeName="InventoryModel.Notification"><MappingFragment StoreEntitySet="Notification">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Message" ColumnName="Message" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrders"><EntityTypeMapping TypeName="InventoryModel.PurchaseOrder"><MappingFragment StoreEntitySet="PurchaseOrder">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="DeliverAddress" ColumnName="DeliverAddress" />
+            <ScalarProperty Name="Attn" ColumnName="Attn" />
+            <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+            <ScalarProperty Name="DeliveryOrderNumber" ColumnName="DeliveryOrderNumber" />
+            <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderDetails"><EntityTypeMapping TypeName="InventoryModel.PurchaseOrderDetail"><MappingFragment StoreEntitySet="PurchaseOrderDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="Qty" ColumnName="Qty" />
+            <ScalarProperty Name="AcceptedQty" ColumnName="AcceptedQty" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Requisitions">
+            <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.Requisition)">
+              <MappingFragment StoreEntitySet="Requisition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            </EntitySetMapping>
+          <EntitySetMapping Name="RequisitionCollections"><EntityTypeMapping TypeName="InventoryModel.RequisitionCollection"><MappingFragment StoreEntitySet="RequisitionCollection">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="RequisitionCollectionDetails"><EntityTypeMapping TypeName="InventoryModel.RequisitionCollectionDetail"><MappingFragment StoreEntitySet="RequisitionCollectionDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="RequisitionCollectionItems"><EntityTypeMapping TypeName="InventoryModel.RequisitionCollectionItem"><MappingFragment StoreEntitySet="RequisitionCollectionItems">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Qty" ColumnName="Qty" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="RequisitionDetails"><EntityTypeMapping TypeName="InventoryModel.RequisitionDetail"><MappingFragment StoreEntitySet="RequisitionDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Qty" ColumnName="Qty" />
+            <ScalarProperty Name="DeliveredQty" ColumnName="DeliveredQty" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Retrievals"><EntityTypeMapping TypeName="InventoryModel.Retrieval"><MappingFragment StoreEntitySet="Retrieval">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="RetrievalDetails"><EntityTypeMapping TypeName="InventoryModel.RetrievalDetail"><MappingFragment StoreEntitySet="RetrievalDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="NeededQty" ColumnName="NeededQty" />
+            <ScalarProperty Name="ActualQty" ColumnName="ActualQty" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Roles"><EntityTypeMapping TypeName="InventoryModel.Role"><MappingFragment StoreEntitySet="Role">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="StockAdjustments"><EntityTypeMapping TypeName="InventoryModel.StockAdjustment"><MappingFragment StoreEntitySet="StockAdjustment">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="StockCardDetails"><EntityTypeMapping TypeName="InventoryModel.StockCardDetail"><MappingFragment StoreEntitySet="StockCardDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Qty" ColumnName="Qty" />
+            <ScalarProperty Name="Balance" ColumnName="Balance" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Suppliers"><EntityTypeMapping TypeName="InventoryModel.Supplier"><MappingFragment StoreEntitySet="Supplier">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Priority" ColumnName="Priority" />
+            <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+            <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+            <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="GstRegistrationNumber" ColumnName="GstRegistrationNumber" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="InventoryModel.User"><MappingFragment StoreEntitySet="User">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_CollectionMissed_Department1" TypeName="InventoryModel.FK_CollectionMissed_Department1" StoreEntitySet="CollectionMissed">
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+            </EndProperty>
+            <EndProperty Name="CollectionMissed">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CollectionMissed_Employee1" TypeName="InventoryModel.FK_CollectionMissed_Employee1" StoreEntitySet="CollectionMissed">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="CollectionMissed">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CollectionPoint_Employee1" TypeName="InventoryModel.FK_CollectionPoint_Employee1" StoreEntitySet="CollectionPoint">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="ClerkId" />
+            </EndProperty>
+            <EndProperty Name="CollectionPoint">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_department_collectionpoint1" TypeName="InventoryModel.FK_department_collectionpoint1" StoreEntitySet="Department">
+            <EndProperty Name="CollectionPoint">
+              <ScalarProperty Name="Id" ColumnName="CollectionPointId" />
+            </EndProperty>
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="CollectionPointId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitioncollection_collectionpoint1" TypeName="InventoryModel.FK_requisitioncollection_collectionpoint1" StoreEntitySet="RequisitionCollection">
+            <EndProperty Name="CollectionPoint">
+              <ScalarProperty Name="Id" ColumnName="CollectionPointId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollection">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_department_employee1" TypeName="InventoryModel.FK_department_employee1" StoreEntitySet="Department">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="ContactId" />
+            </EndProperty>
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="ContactId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_department_employee2" TypeName="InventoryModel.FK_department_employee2" StoreEntitySet="Department">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="HeadId" />
+            </EndProperty>
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="HeadId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_department_employee3" TypeName="InventoryModel.FK_department_employee3" StoreEntitySet="Department">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="RepresentativeId" />
+            </EndProperty>
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="RepresentativeId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_department_employee4" TypeName="InventoryModel.FK_department_employee4" StoreEntitySet="Department">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_employee_department1" TypeName="InventoryModel.FK_employee_department1" StoreEntitySet="Employee">
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+            </EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisition_department1" TypeName="InventoryModel.FK_requisition_department1" StoreEntitySet="Requisition">
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+            </EndProperty>
+            <EndProperty Name="Requisition">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitioncollection_department1" TypeName="InventoryModel.FK_requisitioncollection_department1" StoreEntitySet="RequisitionCollection">
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollection">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_retrievaldetails_department1" TypeName="InventoryModel.FK_retrievaldetails_department1" StoreEntitySet="RetrievalDetails">
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+            </EndProperty>
+            <EndProperty Name="RetrievalDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_discrepancy_employee1" TypeName="InventoryModel.FK_discrepancy_employee1" StoreEntitySet="Discrepancy">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="Discrepancy">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_discrepancydetails_discrepancy1" TypeName="InventoryModel.FK_discrepancydetails_discrepancy1" StoreEntitySet="DiscrepancyDetails">
+            <EndProperty Name="Discrepancy">
+              <ScalarProperty Name="Id" ColumnName="DiscrepancyId" />
+            </EndProperty>
+            <EndProperty Name="DiscrepancyDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_stockadjustment_discrepancy1" TypeName="InventoryModel.FK_stockadjustment_discrepancy1" StoreEntitySet="StockAdjustment">
+            <EndProperty Name="Discrepancy">
+              <ScalarProperty Name="Id" ColumnName="DiscrepancyId" />
+            </EndProperty>
+            <EndProperty Name="StockAdjustment">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_discrepancydetails_item1" TypeName="InventoryModel.FK_discrepancydetails_item1" StoreEntitySet="DiscrepancyDetails">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="ItemId" />
+            </EndProperty>
+            <EndProperty Name="DiscrepancyDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_employee_employee1" TypeName="InventoryModel.FK_employee_employee1" StoreEntitySet="Employee">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="Employee1">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_employee_role1" TypeName="InventoryModel.FK_employee_role1" StoreEntitySet="Employee">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_employee_user1" TypeName="InventoryModel.FK_employee_user1" StoreEntitySet="Employee">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_item_employee1" TypeName="InventoryModel.FK_item_employee1" StoreEntitySet="Item">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_itemprice_employee1" TypeName="InventoryModel.FK_itemprice_employee1" StoreEntitySet="ItemPrice">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="ItemPrice">
+              <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+              <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Notification_Employee1" TypeName="InventoryModel.FK_Notification_Employee1" StoreEntitySet="Notification">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="EmployeeId" />
+            </EndProperty>
+            <EndProperty Name="Notification">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_purchaseorder_employee1" TypeName="InventoryModel.FK_purchaseorder_employee1" StoreEntitySet="PurchaseOrder">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="PurchaseOrder">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_purchaseorder_employee2" TypeName="InventoryModel.FK_purchaseorder_employee2" StoreEntitySet="PurchaseOrder">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="ApprovedBy" />
+            </EndProperty>
+            <EndProperty Name="PurchaseOrder">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="ApprovedBy" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PurchaseOrder_Employee3" TypeName="InventoryModel.FK_PurchaseOrder_Employee3" StoreEntitySet="PurchaseOrder">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="AcceptedBy" />
+            </EndProperty>
+            <EndProperty Name="PurchaseOrder">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="AcceptedBy" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisition_employee1" TypeName="InventoryModel.FK_requisition_employee1" StoreEntitySet="Requisition">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="EmployeeId" />
+            </EndProperty>
+            <EndProperty Name="Requisition">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisition_employee2" TypeName="InventoryModel.FK_requisition_employee2" StoreEntitySet="Requisition">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="ApprovedBy" />
+            </EndProperty>
+            <EndProperty Name="Requisition">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="ApprovedBy" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitioncollection_employee1" TypeName="InventoryModel.FK_requisitioncollection_employee1" StoreEntitySet="RequisitionCollection">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollection">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitioncollectionitems_employee1" TypeName="InventoryModel.FK_requisitioncollectionitems_employee1" StoreEntitySet="RequisitionCollectionItems">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollectionItems">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_retrieval_employee1" TypeName="InventoryModel.FK_retrieval_employee1" StoreEntitySet="Retrieval">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="Retrieval">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_role_employee1" TypeName="InventoryModel.FK_role_employee1" StoreEntitySet="Role">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="CreatedBy" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_stockadjustment_employee1" TypeName="InventoryModel.FK_stockadjustment_employee1" StoreEntitySet="StockAdjustment">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="StockAdjustment">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_stockcarddetails_employee1" TypeName="InventoryModel.FK_stockcarddetails_employee1" StoreEntitySet="StockCardDetails">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="StockCardDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_supplier_employee1" TypeName="InventoryModel.FK_supplier_employee1" StoreEntitySet="Supplier">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="Supplier">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="CreatedBy" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_user_employee1" TypeName="InventoryModel.FK_user_employee1" StoreEntitySet="User">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="Id" ColumnName="CreatedBy" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="CreatedBy" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_purchaseorderdetails_item1" TypeName="InventoryModel.FK_purchaseorderdetails_item1" StoreEntitySet="PurchaseOrderDetails">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="ItemId" />
+            </EndProperty>
+            <EndProperty Name="PurchaseOrderDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitioncollectionitems_item1" TypeName="InventoryModel.FK_requisitioncollectionitems_item1" StoreEntitySet="RequisitionCollectionItems">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="ItemId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollectionItems">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitiondetails_item1" TypeName="InventoryModel.FK_requisitiondetails_item1" StoreEntitySet="RequisitionDetails">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="ItemId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_retrievaldetails_item1" TypeName="InventoryModel.FK_retrievaldetails_item1" StoreEntitySet="RetrievalDetails">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="ItemId" />
+            </EndProperty>
+            <EndProperty Name="RetrievalDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_StockCardDetails_Item1" TypeName="InventoryModel.FK_StockCardDetails_Item1" StoreEntitySet="StockCardDetails">
+            <EndProperty Name="Item">
+              <ScalarProperty Name="Id" ColumnName="ItemId" />
+            </EndProperty>
+            <EndProperty Name="StockCardDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_purchaseorder_supplier1" TypeName="InventoryModel.FK_purchaseorder_supplier1" StoreEntitySet="PurchaseOrder">
+            <EndProperty Name="Supplier">
+              <ScalarProperty Name="Id" ColumnName="SupplierId" />
+            </EndProperty>
+            <EndProperty Name="PurchaseOrder">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_purchaseorderdetails_purchaseorder1" TypeName="InventoryModel.FK_purchaseorderdetails_purchaseorder1" StoreEntitySet="PurchaseOrderDetails">
+            <EndProperty Name="PurchaseOrder">
+              <ScalarProperty Name="Id" ColumnName="PurchaseOrderId" />
+            </EndProperty>
+            <EndProperty Name="PurchaseOrderDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitioncollectiondetails_requisition1" TypeName="InventoryModel.FK_requisitioncollectiondetails_requisition1" StoreEntitySet="RequisitionCollectionDetails">
+            <EndProperty Name="Requisition">
+              <ScalarProperty Name="Id" ColumnName="RequisitionId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollectionDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitiondetails_requisition1" TypeName="InventoryModel.FK_requisitiondetails_requisition1" StoreEntitySet="RequisitionDetails">
+            <EndProperty Name="Requisition">
+              <ScalarProperty Name="Id" ColumnName="RequisitionId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_RequisitionCollectionDetails_RequisitionCollection1" TypeName="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" StoreEntitySet="RequisitionCollectionDetails">
+            <EndProperty Name="RequisitionCollection">
+              <ScalarProperty Name="Id" ColumnName="RequisitionCollectionId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollectionDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_requisitioncollectionitems_requisitioncollection1" TypeName="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" StoreEntitySet="RequisitionCollectionItems">
+            <EndProperty Name="RequisitionCollection">
+              <ScalarProperty Name="Id" ColumnName="RequisitionCollectionId" />
+            </EndProperty>
+            <EndProperty Name="RequisitionCollectionItems">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_retrievaldetails_retrieval1" TypeName="InventoryModel.FK_retrievaldetails_retrieval1" StoreEntitySet="RetrievalDetails">
+            <EndProperty Name="Retrieval">
+              <ScalarProperty Name="Id" ColumnName="RetrievalId" />
+            </EndProperty>
+            <EndProperty Name="RetrievalDetails">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Inventory">
+        <EntityTypeShape EntityType="InventoryModel.CollectionMissed" Width="1.5" PointX="5.25" PointY="26.25" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.CollectionPoint" Width="1.5" PointX="0.75" PointY="26.125" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Department" Width="1.5" PointX="3" PointY="25.375" Height="3.564474283854171" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Discrepancy" Width="1.5" PointX="10.5" PointY="15.5" Height="1.9210009765624978" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.DiscrepancyDetail" Width="1.5" PointX="12.75" PointY="17.75" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Employee" Width="1.5" PointX="8.25" PointY="23.875" Height="6.5227262369791674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Item" Width="1.5" PointX="10.5" PointY="18.25" Height="3.5644742838541674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.ItemPrice" Width="1.5" PointX="10.5" PointY="22.5" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Notification" Width="1.5" PointX="10.5" PointY="25.25" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.PurchaseOrder" Width="1.5" PointX="12.75" PointY="33.375" Height="3.2357796223958388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.PurchaseOrderDetail" Width="1.5" PointX="15.75" PointY="19" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Requisition" Width="1.5" PointX="10.5" PointY="27.875" Height="2.5783902994791674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionCollection" Width="1.5" PointX="15.5" PointY="27" Height="2.2496956380208388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionCollectionDetail" Width="1.5" PointX="17.75" PointY="28" Height="1.427958984374996" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionCollectionItem" Width="1.5" PointX="12.75" PointY="25.25" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RequisitionDetail" Width="1.5" PointX="15.75" PointY="16.125" Height="1.7566536458333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Retrieval" Width="1.5" PointX="10.5" PointY="38" Height="1.7566536458333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.RetrievalDetail" Width="1.5" PointX="12.75" PointY="29" Height="1.9210009765625031" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Role" Width="1.5" PointX="10.5" PointY="40.5" Height="1.921000976562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.StockAdjustment" Width="1.5" PointX="12.75" PointY="22.125" Height="1.7566536458333388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.StockCardDetail" Width="1.5" PointX="15.75" PointY="23.125" Height="2.2496956380208388" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Supplier" Width="1.5" PointX="10.5" PointY="43.25" Height="2.9070849609375102" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.User" Width="1.5" PointX="10.5" PointY="46.875" Height="2.0853483072916674" IsExpanded="true" />
+        <AssociationConnector Association="InventoryModel.FK_CollectionMissed_Department1" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="5.25" PointY="27.128326822916666" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_CollectionMissed_Employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="27.128326822916666" />
+          <ConnectorPoint PointX="6.75" PointY="27.128326822916666" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_CollectionPoint_Employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="3.8020808333333354" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="3.6354141666666684" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="1.5" PointY="29.782023925781253" />
+          <ConnectorPoint PointX="1.5" PointY="28.046000976562503" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_department_collectionpoint1" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="27.085500488281252" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="27.085500488281252" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="27.085500488281252" />
+          <ConnectorPoint PointX="3" PointY="27.085500488281252" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitioncollection_collectionpoint1" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="26.125" />
+          <ConnectorPoint PointX="1.5" PointY="25.875" />
+          <ConnectorPoint PointX="2.75" PointY="25.875" />
+          <ConnectorPoint PointX="2.75" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.237361964142627" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.5372289282852574" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.5994617207532063" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.9025875160256422" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="8.9212099358974353" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="9.0878766025641031" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="9.1064990224358962" PointY="31.682027994791664" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="12.354166666666666" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="12.520833333333334" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.875" PointY="31.682027994791667" />
+          <ConnectorPoint PointX="14.875" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="14.916666666666666" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.083333333333334" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.104166666666666" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.270833333333334" PointY="29.153594877604171" />
+          <ConnectorPoint PointX="15.5" PointY="29.153594877604171" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_department_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="28.44015172129313" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.44015172129313" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.44015172129313" />
+          <ConnectorPoint PointX="4.5" PointY="28.44015172129313" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_department_employee2" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="28.871031949971517" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.871031949971517" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.871031949971517" />
+          <ConnectorPoint PointX="4.5" PointY="28.871031949971517" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_department_employee3" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="28.192152683563229" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.192152683563229" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.192152683563229" />
+          <ConnectorPoint PointX="4.5" PointY="28.192152683563229" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_department_employee4" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.25" PointY="28.655591835632322" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="28.655591835632322" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="28.655591835632322" />
+          <ConnectorPoint PointX="4.5" PointY="28.655591835632322" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_employee_department1" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="25.8986669921875" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="25.8986669921875" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="25.8986669921875" />
+          <ConnectorPoint PointX="8.25" PointY="25.8986669921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisition_department1" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5000000000000036" PointY="28.939474283854171" />
+          <ConnectorPoint PointX="4.875" PointY="29.314474283854167" />
+          <ConnectorPoint PointX="4.875" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="8.2156169310897429" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="8.7166493910256424" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="10.125" PointY="30.828390299479167" />
+          <ConnectorPoint PointX="10.5" PointY="30.453390299479167" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitioncollection_department1" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.75" PointY="25.375" />
+          <ConnectorPoint PointX="3.75" PointY="25.125" />
+          <ConnectorPoint PointX="8" PointY="25.125" />
+          <ConnectorPoint PointX="8" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.237361964142627" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.5372289282852574" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.5994617207532063" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.9025875160256422" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="8.9212099358974353" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="9.0878766025641031" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="9.1064990224358962" PointY="31.713277994791664" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="12.354166666666666" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="12.520833333333334" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="15" PointY="31.713277994791667" />
+          <ConnectorPoint PointX="15" PointY="28.27343656283999" />
+          <ConnectorPoint PointX="15.5" PointY="28.27343656283999" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_retrievaldetails_department1" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.4902326562500003" PointY="29.470602213541671" />
+          <ConnectorPoint PointX="3.4902326562500003" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.237361964142627" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.5372289282852574" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.5994617207532063" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.9025875160256422" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="8.9212099358974353" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="9.0878766025641031" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="9.1064990224358962" PointY="31.728902994791664" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="12.25" PointY="31.728902994791667" />
+          <ConnectorPoint PointX="12.25" PointY="30.714926942793472" />
+          <ConnectorPoint PointX="12.354166666666666" PointY="30.714926942793472" />
+          <ConnectorPoint PointX="12.520833333333334" PointY="30.714926942793472" />
+          <ConnectorPoint PointX="12.75" PointY="30.714926942793472" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_discrepancy_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="23.875" />
+          <ConnectorPoint PointX="9" PointY="16.460500488281248" />
+          <ConnectorPoint PointX="10.5" PointY="16.460500488281248" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_discrepancydetails_discrepancy1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="16.460500488281248" />
+          <ConnectorPoint PointX="13.5" PointY="16.460500488281248" />
+          <ConnectorPoint PointX="13.5" PointY="17.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_stockadjustment_discrepancy1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12.000000000000002" PointY="17.421000976562496" />
+          <ConnectorPoint PointX="12.375" PointY="17.796000976562496" />
+          <ConnectorPoint PointX="12.375" PointY="23.003326822916669" />
+          <ConnectorPoint PointX="12.385416666666666" PointY="23.003326822916669" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="23.003326822916669" />
+          <ConnectorPoint PointX="12.75" PointY="23.003326822916669" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_discrepancydetails_item1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="18.960500488281248" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="18.960500488281248" />
+          <ConnectorPoint PointX="12.614583333333334" PointY="18.960500488281248" />
+          <ConnectorPoint PointX="12.75" PointY="18.960500488281248" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_employee_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.7819230769230767" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.7819230769230767" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="9.2284615384615378" PointY="30.522726236979167" />
+          <ConnectorPoint PointX="9.2284615384615378" PointY="30.397726236979167" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_employee_role1" ManuallyRouted="false">
+          <ConnectorPoint PointX="10.5" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="9.4578057371794877" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.692174258814104" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.4385274599359" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.4104055288461552" PointY="41.460500488281248" />
+          <ConnectorPoint PointX="8.4104055288461552" PointY="30.397726236979167" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_employee_user1" ManuallyRouted="false">
+          <ConnectorPoint PointX="10.5" PointY="47.917674153645834" />
+          <ConnectorPoint PointX="8.5218607932692318" PointY="47.917674153645834" />
+          <ConnectorPoint PointX="8.5218607932692318" PointY="30.397726236979167" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_item_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.4062525" PointY="23.875" />
+          <ConnectorPoint PointX="9.4062525" PointY="20.032237141927084" />
+          <ConnectorPoint PointX="10.5" PointY="20.032237141927084" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_itemprice_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="24.148000488281248" />
+          <ConnectorPoint PointX="10.5" PointY="24.148000488281248" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_Notification_Employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="26.128326822916666" />
+          <ConnectorPoint PointX="10.5" PointY="26.128326822916666" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_purchaseorder_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.0051923076923082" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.0051923076923082" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="34.992889811197919" />
+          <ConnectorPoint PointX="12.75" PointY="34.992889811197919" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_purchaseorder_employee2" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.6333160576923085" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.6333160576923085" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="8.9218589743589742" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="9.0885256410256421" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="34.152692405598955" />
+          <ConnectorPoint PointX="12.75" PointY="34.152692405598955" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_PurchaseOrder_Employee3" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.2989502644230768" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.2989502644230768" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="8.3270721955128213" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="8.692174258814104" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="9.29113907051282" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="9.74982746794872" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="35.496447405598957" />
+          <ConnectorPoint PointX="12.75" PointY="35.496447405598957" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisition_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="29.136363118489584" />
+          <ConnectorPoint PointX="10.5" PointY="29.136363118489584" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisition_employee2" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="28.443181559244792" />
+          <ConnectorPoint PointX="10.5" PointY="28.443181559244792" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitioncollection_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.310640993940302" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.47730766060697" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="27.512178518880209" />
+          <ConnectorPoint PointX="15.5" PointY="27.512178518880209" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitioncollectionitems_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="27.2022509765625" />
+          <ConnectorPoint PointX="12.447916666666666" PointY="27.2022509765625" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="27.2022509765625" />
+          <ConnectorPoint PointX="12.75" PointY="27.2022509765625" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_retrieval_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.52048326923077" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.52048326923077" PointY="38.878326822916669" />
+          <ConnectorPoint PointX="9.58316080128205" PointY="38.878326822916669" />
+          <ConnectorPoint PointX="9.7498274679487178" PointY="38.878326822916669" />
+          <ConnectorPoint PointX="10.5" PointY="38.878326822916669" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_role_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.6664941346153839" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.6664941346153839" PointY="40.948997744140627" />
+          <ConnectorPoint PointX="10.5" PointY="40.948997744140627" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_stockadjustment_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.5937475" PointY="23.875" />
+          <ConnectorPoint PointX="8.5937475" PointY="22.28125" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="22.28125" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="22.28125" />
+          <ConnectorPoint PointX="9.3229191666666669" PointY="22.28125" />
+          <ConnectorPoint PointX="9.4895858333333347" PointY="22.28125" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="22.28125" />
+          <ConnectorPoint PointX="12.614583333333334" PointY="22.28125" />
+          <ConnectorPoint PointX="12.75" PointY="22.28125" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_stockcarddetails_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.75" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="12.447916666666666" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="12.770833333333334" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="24.835500488281248" />
+          <ConnectorPoint PointX="15.75" PointY="24.835500488281248" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_supplier_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.3744724038461538" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="9.3744724038461538" PointY="44.703542480468755" />
+          <ConnectorPoint PointX="10.5" PointY="44.703542480468755" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_user_employee1" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.60884092548077" PointY="30.397726236979167" />
+          <ConnectorPoint PointX="8.60884092548077" PointY="47.365084576822923" />
+          <ConnectorPoint PointX="10.5" PointY="47.365084576822923" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_purchaseorderdetails_item1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="12.614583333333334" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="20.327250976562496" />
+          <ConnectorPoint PointX="15.75" PointY="20.327250976562496" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitioncollectionitems_item1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="21.814474283854167" />
+          <ConnectorPoint PointX="12.316074434901122" PointY="22.130548718755289" />
+          <ConnectorPoint PointX="12.433925565098878" PointY="22.248399848953046" />
+          <ConnectorPoint PointX="12.472324434901122" PointY="22.286798718755289" />
+          <ConnectorPoint PointX="12.590175565098878" PointY="22.404649848953046" />
+          <ConnectorPoint PointX="12.6875" PointY="22.501974283854167" />
+          <ConnectorPoint PointX="12.6875" PointY="26.19487348828125" />
+          <ConnectorPoint PointX="12.75" PointY="26.19487348828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitiondetails_item1" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.25" PointY="18.25" />
+          <ConnectorPoint PointX="11.25" PointY="17.671000976562496" />
+          <ConnectorPoint PointX="12.25" PointY="17.671000976562496" />
+          <ConnectorPoint PointX="12.25" PointY="17.074000244140624" />
+          <ConnectorPoint PointX="13.416666666666666" PointY="17.074000244140624" />
+          <ConnectorPoint PointX="13.583333333333334" PointY="17.074000244140624" />
+          <ConnectorPoint PointX="15.75" PointY="17.074000244140624" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_retrievaldetails_item1" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.963076923076924" PointY="21.814474283854167" />
+          <ConnectorPoint PointX="12.316074434901122" PointY="22.167471795678363" />
+          <ConnectorPoint PointX="12.590175565098878" PointY="22.44157292587612" />
+          <ConnectorPoint PointX="12.59375" PointY="22.445147360777241" />
+          <ConnectorPoint PointX="12.59375" PointY="29.823863618489582" />
+          <ConnectorPoint PointX="12.75" PointY="29.823863618489582" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_StockCardDetails_Item1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="21.746396360777243" />
+          <ConnectorPoint PointX="12.316074434901122" PointY="22.062470795678365" />
+          <ConnectorPoint PointX="12.433925565098878" PointY="22.180321925876122" />
+          <ConnectorPoint PointX="12.46875" PointY="22.215146360777243" />
+          <ConnectorPoint PointX="12.46875" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="12.770833333333334" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="24.3585745670573" />
+          <ConnectorPoint PointX="15.75" PointY="24.3585745670573" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_purchaseorder_supplier1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="44.703542480468755" />
+          <ConnectorPoint PointX="13.5" PointY="44.703542480468755" />
+          <ConnectorPoint PointX="13.5" PointY="36.610779622395839" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_purchaseorderdetails_purchaseorder1" ManuallyRouted="false">
+          <ConnectorPoint PointX="14.250000000000002" PointY="33.375" />
+          <ConnectorPoint PointX="14.625" PointY="33" />
+          <ConnectorPoint PointX="14.625" PointY="19.758166945312496" />
+          <ConnectorPoint PointX="15.75" PointY="19.758166945312496" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitioncollectiondetails_requisition1" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.25" PointY="27.875" />
+          <ConnectorPoint PointX="11.25" PointY="27.625" />
+          <ConnectorPoint PointX="12.197819512820511" PointY="27.625" />
+          <ConnectorPoint PointX="12.364486179487178" PointY="27.625" />
+          <ConnectorPoint PointX="12.510416666666666" PointY="27.625" />
+          <ConnectorPoint PointX="12.677083333333334" PointY="27.625" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="27.625" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="27.625" />
+          <ConnectorPoint PointX="15.25" PointY="27.625" />
+          <ConnectorPoint PointX="15.25" PointY="29.499695638020839" />
+          <ConnectorPoint PointX="17.375" PointY="29.499695638020839" />
+          <ConnectorPoint PointX="17.375" PointY="28.713979492187498" />
+          <ConnectorPoint PointX="17.75" PointY="28.713979492187498" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitiondetails_requisition1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="27.906152846153844" />
+          <ConnectorPoint PointX="12.53125" PointY="27.374902846153844" />
+          <ConnectorPoint PointX="12.53125" PointY="17.412002622070311" />
+          <ConnectorPoint PointX="13.416666666666666" PointY="17.412002622070311" />
+          <ConnectorPoint PointX="13.583333333333334" PointY="17.412002622070311" />
+          <ConnectorPoint PointX="15.75" PointY="17.412002622070311" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" ManuallyRouted="false">
+          <ConnectorPoint PointX="17" PointY="28.294489746093749" />
+          <ConnectorPoint PointX="17.75" PointY="28.294489746093749" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" ManuallyRouted="false">
+          <ConnectorPoint PointX="15.5" PointY="27.167674153645834" />
+          <ConnectorPoint PointX="14.708333333333334" PointY="27.167674153645834" />
+          <ConnectorPoint PointX="14.541666666666666" PointY="27.167674153645834" />
+          <ConnectorPoint PointX="14.25" PointY="27.167674153645834" />
+        </AssociationConnector>
+        <AssociationConnector Association="InventoryModel.FK_retrievaldetails_retrieval1" ManuallyRouted="false">
+          <ConnectorPoint PointX="12" PointY="38.062306692307693" />
+          <ConnectorPoint PointX="12.4375" PointY="37.624806692307693" />
+          <ConnectorPoint PointX="12.4375" PointY="30.196347909024439" />
+          <ConnectorPoint PointX="12.75" PointY="30.196347909024439" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
