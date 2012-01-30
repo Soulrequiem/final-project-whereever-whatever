@@ -19,10 +19,14 @@ namespace StationeryStoreInventorySystemController.storeController
         private Employee currentEmployee;
         private PurchaseOrder purchaseOrder;
         
-        private System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail> purchaseOrderDetails;
+        private System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail> purchaseOrderDetailList;
 
         private DataTable dt;
         private DataRow dr;
+
+        private string[] columnName = { "ItemNo", "Description", "Quantity", "Price", "Amount" };
+
+        private DataColumn[] dataColumn;
         
         public PurchaseOrderControl()
         {
@@ -35,103 +39,123 @@ namespace StationeryStoreInventorySystemController.storeController
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
 
-            purchaseOrderDetails = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
+            purchaseOrderDetailList = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
+
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]), 
+                                            new DataColumn(columnName[1]), 
+                                            new DataColumn(columnName[2]), 
+                                            new DataColumn(columnName[3]), 
+                                            new DataColumn(columnName[4])};
         }
 
-        public DataTable GetAllOrders()
+        public DataTable PurchaseOrderDetailList
         {
-            dt = new DataTable();
-            //List<PurchaseOrderDetail> orderList = new List<PurchaseOrderDetail>();
-            //List<Item> itemList = itemBroker.GetAllItem();
-            //foreach (Item item in itemList)
-            //{
-            //    StockCard stockCard = new StockCard();
-            //    stockCard.Item = item;
-            //    StockCard newStockCard = stockCardBroker.GetStockCard(stockCard);
-            //    if(item.ReorderLevel < 111){// how to get bal from stock card details???
-            //        PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
-            //        purchaseOrderDetail.Item = item;
-            //        orderList.Add(purchaseOrderDetail);
-            //    }
-            //}
-
-            foreach (PurchaseOrderDetail temp in purchaseOrderDetails)
+            get
             {
-                dr = dt.NewRow();
-                dr["itemNo"] = temp.Item.Id;
-                dr["description"] = temp.Item.Description;
-                dr["quantity"] = temp.Qty;
-                dr["price"] = temp.Price;
-                dr["amount"] = temp.Qty * temp.Price;
-                dt.Rows.Add(dr);
+                dt = new DataTable();
+                dt.Columns.AddRange(dataColumn);
+                
+                foreach (PurchaseOrderDetail temp in purchaseOrderDetailList)
+                {
+                    dr = dt.NewRow();
+                    dr[columnName[0]] = temp.Item.Id;
+                    dr[columnName[1]] = temp.Item.Description;
+                    dr[columnName[2]] = temp.Qty;
+                    dr[columnName[3]] = temp.Price;
+                    dr[columnName[4]] = temp.Qty * temp.Price;
+                    dt.Rows.Add(dr);
+                }
+                return dt;
             }
-            return dt;
         }
 
-        public Item EnterDescription(string itemDescription)
+        public Item SelectItemDescription(string itemDescription)
         {
-            Item item = new Item();
-            item.Description = itemDescription;
-            return itemBroker.GetItem(item);
+            return Util.GetItem(itemBroker, itemDescription);
 
         }
 
-        public DataTable SelectAdd(Item item)
+        public Constants.ACTION_STATUS SelectAdd(string itemId)
         {
-            dt = new DataTable();
+            Constants.ACTION_STATUS addStatus = Constants.ACTION_STATUS.UNKNOWN;
             
-            PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
-            purchaseOrderDetail.Item = item;
-            purchaseOrderDetails.Add(purchaseOrderDetail);
-            foreach (PurchaseOrderDetail temp in purchaseOrderDetails)
+            bool isFound = false;
+
+            foreach (PurchaseOrderDetail purchaseOrderDetailTemp in purchaseOrderDetailList)
             {
-                dr = dt.NewRow();
-                dr["itemNo"] = temp.Item.Id;
-                dr["description"] = temp.Item.Description;
-                dr["quantity"] = temp.Qty;
-                dr["price"] = temp.Price;
-                dr["amount"] = temp.Qty * temp.Price;
-                dt.Rows.Add(dr);
+                if (purchaseOrderDetailTemp.Item.Id == itemId)
+                {
+                    isFound = true;
+                }
             }
-            return dt;
+
+            if (!isFound)
+            {
+                PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
+                purchaseOrderDetail.Id = purchaseOrderBroker.GetPurchaseOrderDetailId();
+                Item item = new Item();
+                item.Id = itemId;
+                purchaseOrderDetail.Item = itemBroker.GetItem(item);
+
+                purchaseOrderDetailList.Add(purchaseOrderDetail);
+
+                addStatus = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                addStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return addStatus;
            
         }
 
-        public DataTable SelectRemove(PurchaseOrderDetail purchaseOrderDetail)
+        public Constants.ACTION_STATUS SelectRemove(int index)
         {
-            dt = new DataTable();
-            
-            purchaseOrderDetails.Remove(purchaseOrderDetail);
-            foreach (PurchaseOrderDetail temp in purchaseOrderDetails)
+            Constants.ACTION_STATUS removeStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            if (purchaseOrderDetailList.Count >= index)
             {
-                dr = dt.NewRow();
-                dr["itemNo"] = temp.Item.Id;
-                dr["description"] = temp.Item.Description;
-                dr["quantity"] = temp.Qty;
-                dr["price"] = temp.Price;
-                dr["amount"] = temp.Qty * temp.Price;
-                dt.Rows.Add(dr);
+                PurchaseOrderDetail purchaseOrderDetail = purchaseOrderDetailList.ElementAt(index - 1);
+
+                purchaseOrderDetailList.Remove(purchaseOrderDetail);
+                removeStatus = Constants.ACTION_STATUS.SUCCESS;
             }
-            return dt;
+            else
+            {
+                removeStatus = Constants.ACTION_STATUS.FAIL;
+            }
+            
+            return removeStatus;
         }
 
         public Constants.ACTION_STATUS SelectCreate()
         {
-            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            PurchaseOrder purchaseOrder = new PurchaseOrder();
-            purchaseOrder.PurchaseOrderDetails = purchaseOrderDetails;
-            Constants.DB_STATUS dbStatus = purchaseOrderBroker.Insert(purchaseOrder);
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
-                status = Constants.ACTION_STATUS.SUCCESS;
+            Constants.ACTION_STATUS createStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            purchaseOrder.PurchaseOrderDetails = purchaseOrderDetailList;
+
+            if (purchaseOrderBroker.Insert(purchaseOrder) == Constants.DB_STATUS.SUCCESSFULL)
+                createStatus = Constants.ACTION_STATUS.SUCCESS;
             else
-                status = Constants.ACTION_STATUS.FAIL;
-            return status;
+                createStatus = Constants.ACTION_STATUS.FAIL;
+            return createStatus;
         }
 
         public Constants.ACTION_STATUS SelectCancel()
         {
-            purchaseOrderDetails = null;
-            return Constants.ACTION_STATUS.SUCCESS;
+            Constants.ACTION_STATUS cancelStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            if (purchaseOrderDetailList.Count > 0)
+            {
+                purchaseOrderDetailList = null;
+                cancelStatus = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                cancelStatus = Constants.ACTION_STATUS.FAIL;
+            }
+            return cancelStatus;
         }
 
     }

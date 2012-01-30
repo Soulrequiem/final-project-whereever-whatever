@@ -28,6 +28,8 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable dt;
         private DataRow dr;
 
+        private string[] columnName = { "supplierCode", "gstRegistrationNo", "supplierName", "contactName", "phoneNo", "faxNo", "address" };
+
         private DataColumn[] dataColumn;
 
         public ViewSupplierListControl()
@@ -39,13 +41,13 @@ namespace StationeryStoreInventorySystemController.storeController
 
             supplierList = supplierBroker.GetAllSupplier();
 
-            dataColumn = new DataColumn[] { new DataColumn("supplierCode"),
-                                            new DataColumn("gstRegistrationNo"),
-                                            new DataColumn("supplierName"),
-                                            new DataColumn("contactName"),
-                                            new DataColumn("phoneNo"),
-                                            new DataColumn("faxNo"),
-                                            new DataColumn("address")};
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]),
+                                            new DataColumn(columnName[2]),
+                                            new DataColumn(columnName[3]),
+                                            new DataColumn(columnName[4]),
+                                            new DataColumn(columnName[5]),
+                                            new DataColumn(columnName[6])};
         }
 
         public DataTable SupplierList
@@ -59,13 +61,13 @@ namespace StationeryStoreInventorySystemController.storeController
                 foreach (Supplier temp in supplierList)
                 {
                     dr = dt.NewRow();
-                    dr["supplierCode"] = temp.Id;
-                    dr["gstRegistrationNo"] = temp.GstRegistrationNumber;
-                    dr["supplierName"] = temp.Name;
-                    dr["contactName"] = temp.ContactName;
-                    dr["phoneNo"] = temp.PhoneNumber;
-                    dr["faxNo"] = temp.FaxNumber;
-                    dr["address"] = temp.Address;
+                    dr[columnName[0]] = temp.Id;
+                    dr[columnName[1]] = temp.GstRegistrationNumber;
+                    dr[columnName[2]] = temp.Name;
+                    dr[columnName[3]] = temp.ContactName;
+                    dr[columnName[4]] = temp.PhoneNumber;
+                    dr[columnName[5]] = temp.FaxNumber;
+                    dr[columnName[6]] = temp.Address;
                     dt.Rows.Add(dr);
                 }
                 return dt;
