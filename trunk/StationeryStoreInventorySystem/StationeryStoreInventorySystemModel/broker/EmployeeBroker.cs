@@ -45,7 +45,7 @@ namespace StationeryStoreInventorySystemModel.broker
         public Employee GetEmployee(Employee employee)
         {
 
-            empObj = inventory.Employees.Where(eObj => eObj.Name == employee.Name || eObj.Id == employee.Id).First();
+            empObj = inventory.Employees.Where(eObj => eObj.Name == employee.Name || eObj.Id == employee.Id || eObj.User.Id == employee.User.Id).First();
 
             // if (!empObj.Equals(null) && empObj.CreatedBy != employee.Id)
             if (!empObj.Equals(null))
@@ -183,7 +183,7 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public User GetUser(User user)
         {
-            userObj = inventory.Users.Where(uObj => uObj.Id == user.Id).First();
+            userObj = inventory.Users.Where(uObj => uObj.UserName.Equals(user.UserName) && uObj.Password.Equals(user.Password)).First();
             if (!userObj.Equals(null))
                 return userObj;
             return null;
