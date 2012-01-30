@@ -42,23 +42,44 @@ namespace StationeryStoreInventorySystemModel.broker
                 return collectionMissedObj;
             return null;
         }
-
+        /// <summary>
+        /// Get the list of collecionMissed according the Department Id in CollectionMissed table
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns>
+        /// List of collecionMissed
+        /// </returns>
         public List<CollectionMissed> GetAllCollectionMissed(Department department)
         {
+            //get the list of collectionMissed by checking Department Id
             collectionMissedList = inventory.CollectionMisseds.Where(c => c.Department.Id == department.Id).ToList();
             if (collectionMissedList != null)
                 return collectionMissedList;
             return null;
         }
-
+        /// <summary>
+        /// Get the list of CollectionMissed by department Id and status
+        /// </summary>
+        /// <param name="department"></param>
+        /// <param name="status"></param>
+        /// <returns>
+        /// List of CollectionMissed
+        /// </returns>
         public List<CollectionMissed> GetAllCollectionMissed(Department department, Constants.VISIBILITY_STATUS status)
         {
+            //get the collectionMissed List by checking department Id of collecion Missed Table and check the Visibility Status
             collectionMissedList = inventory.CollectionMisseds.Where(c => c.Department.Id == department.Id || status.Equals("SHOW")).ToList();
             if (collectionMissedList != null)
                 return collectionMissedList;
             return null;
         }
-
+        /// <summary>
+        /// Insert the collectionMissed data to the CollectionMissed Table
+        /// </summary>
+        /// <param name="newCollectionMissed"></param>
+        /// <returns>
+        /// Return DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Insert(CollectionMissed newCollectionMissed)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -77,7 +98,13 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        /// Update the collectionMissed data to the CollectionMissed Table
+        /// </summary>
+        /// <param name="collectionMissed"></param>
+        /// <returns>
+        /// Return DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Update(CollectionMissed collectionMissed)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -88,6 +115,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 collectionMissedObj = inventory.CollectionMisseds.Where(c => c.Id == collectionMissed.Id).First();
                 if (collectionMissedObj != null)
                 {
+                    //get the department and employee object by checking Id from collectionMissed table
                     departmentObj = inventory.Departments.Where(d => d.Id == collectionMissed.Department.Id).First();
                     Employee createdBy=inventory.Employees.Where(e=>e.Id==collectionMissed.CreatedBy.Id).First();
                     collectionMissedObj.Id = collectionMissed.Id;
@@ -106,7 +134,13 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        /// Logically delete the status of collectionMissed table
+        /// </summary>
+        /// <param name="collectionMissed"></param>
+        /// <returns>
+        /// Return the DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Delete(CollectionMissed collectionMissed)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
