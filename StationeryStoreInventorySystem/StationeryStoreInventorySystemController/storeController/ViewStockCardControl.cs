@@ -22,32 +22,37 @@ namespace StationeryStoreInventorySystemController.storeController
         IItemBroker itemBroker;
         Employee currentEmployee;
         List<Item> itemList;
+       
+
         public ViewStockCardControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
             InventoryEntities inventory = new InventoryEntities();
-
+            
             itemBroker = new ItemBroker(inventory);
         }
-        //public StockCard GetStockCard(string itemDescription)
-        //{
-        //    Item item = new Item();
-        //    item.Description = itemDescription;
+        public DataTable GetStockCard(string itemDescription)
+        {
+            Item item = new Item();
+            item.Description = itemDescription;
             
-        //    item = itemBroker.GetItem(item);
+            item = itemBroker.GetItem(item);
             
-        //    StockCard stockCard = null;
-        //    if (item != null)
-        //    {
-        //        stockCard = new StockCard();
-        //        stockCard.Item = item;
+            List<StockCardDetail> list = item.StockCardDetails.ToList();
+            DataTable dt = new DataTable();
+            DataRow dr;
+            foreach(StockCardDetail temp in list){
+                dt.NewRow();
+                dr = new DataRow();
+                 dr["date"] = temp.CreatedDate;
+                dr["dept/supplier"] = temp.Description;
+                dr["qty"] = temp.Qty;
+                dr["balance"] = temp.Balance;
+                dt.Rows.Add(dr);
+            }
 
-        //        stockCard = stockCardBroker.GetStockCard(stockCard);
-
-        //    }
-            
-        //    return stockCard;
-        //}
+            return dt;
+        }
 
 
         /// <summary>

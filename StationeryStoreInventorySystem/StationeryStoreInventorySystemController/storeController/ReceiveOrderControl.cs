@@ -24,11 +24,14 @@ namespace StationeryStoreInventorySystemController.storeController
         private IItemBroker itemBroker;
         
         private Employee currentEmployee;
+        private DataTable purchaseOrderNumber;
         private PurchaseOrder purchaseOrder;
         private Supplier supplier;
 
         private DataTable dt;
         private DataRow dr;
+
+
 
         public ReceiveOrderControl()
         {
@@ -40,32 +43,64 @@ namespace StationeryStoreInventorySystemController.storeController
             itemBroker = new ItemBroker(inventory);
         }
 
-        public void SelectAllPurchaseOrderDetails(int purchaseOrderNumber)
+        public DataTable PurchaseOrderNumber
+        {
+            get {
+                DataTable dt = new DataTable();
+                DataRow dr;
+                List<PurchaseOrder> list = purchaseOrderBroker.GetAllPurchaseOrder();
+                foreach (PurchaseOrder po in list)
+                {
+                    dt.NewRow();
+                    dr = new DataRow();
+                    dr["poNumber"] = po.Id;
+                    dt.Rows.Add(dr);
+                }
+                return purchaseOrderNumber; }
+           
+        }
+       
+
+        public DataTable SelectAllPurchaseOrderDetails(int purchaseOrderNumber)
         {
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderNumber;
             purchaseOrder = purchaseOrderBroker.GetPurchaseOrder(purchaseOrder);
-        }
-
-        public DataTable PurchaseOrder(int purchaseOrderNumber)
-        {
-            PurchaseOrder purchaseOrder = new PurchaseOrder();
-            purchaseOrder.Id = purchaseOrderNumber;
-            purchaseOrder = purchaseOrderBroker.GetPurchaseOrder(purchaseOrder);
             List<PurchaseOrderDetail> list = purchaseOrder.PurchaseOrderDetails.ToList();
-            dt = new DataTable();
-            
-            foreach (PurchaseOrderDetail temp in list)
+            DataTable dt = new DataTable();
+            DataRow dr;
+            foreach (PurchaseOrderDetail pod in list)
             {
-                dr = dt.NewRow();
-                dr["itemNo"] = temp.Item.Id;
-                dr["itemDescription"] = temp.Item.Description;
-                dr["quantity"] = temp.Qty;
+                dt.NewRow();
+                dr = new DataRow();
+                dr["itemNo"] = pod.Item.Id;
+                dr["itemDescription"] = pod.Item.Description;
+                dr["quantity"] = pod.Qty;
                 dt.Rows.Add(dr);
-               
             }
+
             return dt;
         }
+
+        //public DataTable PurchaseOrder(int purchaseOrderNumber)
+        //{
+        //    PurchaseOrder purchaseOrder = new PurchaseOrder();
+        //    purchaseOrder.Id = purchaseOrderNumber;
+        //    purchaseOrder = purchaseOrderBroker.GetPurchaseOrder(purchaseOrder);
+        //    List<PurchaseOrderDetail> list = purchaseOrder.PurchaseOrderDetails.ToList();
+        //    dt = new DataTable();
+            
+        //    foreach (PurchaseOrderDetail temp in list)
+        //    {
+        //        dr = dt.NewRow();
+        //        dr["itemNo"] = temp.Item.Id;
+        //        dr["itemDescription"] = temp.Item.Description;
+        //        dr["quantity"] = temp.Qty;
+        //        dt.Rows.Add(dr);
+               
+        //    }
+        //    return dt;
+        //}
 
         /// <summary>
         ///     Insert stock card details and update purchase order
@@ -80,22 +115,27 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="purchaseOrderNumber"></param>
         /// <returns>The return type of this method is status.</returns>
-        public Constants.ACTION_STATUS SelectReceive(int purchaseOrderNumber)
+        public Constants.ACTION_STATUS SelectReceive(int purchaseOrderId ,DataTable dt)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            //update which one in purchase order table????
-            DataTable dt=PurchaseOrder(purchaseOrderNumber);
-            for (int i = 0; i < dt.Rows.Count;i++ )
-               {
-                    DataRow dr = dt.Rows[i];
-                    Item item = new Item();
-                    item.Id = dr[0].ToString();
-                    item.Description = dr[1].ToString();
-                    StockCardDetail temp = new StockCardDetail();
-                    temp.Qty = Convert.ToInt32(dr[2].ToString());
-                    temp.Item = item;
-                    itemBroker.Insert(temp);
-               }
+            PurchaseOrder po = new PurchaseOrder();
+            po.Id = purchaseOrderId;
+            po = purchaseOrderBroker.GetPurchaseOrder(po);
+            List<PurchaseOrderDetail> poDetailList = po.PurchaseOrderDetails.ToList();
+           
+            foreach(DataRow dr in dt.Rows)
+            {
+                foreach (PurchaseOrderDetail poDetail in poDetailList)
+                {
+                    if (poDetail.Item.Id == dr["itemNo"])
+                    {
+                        poDetail.AcceptedQty = (int)dr["quantity"];
+                        purchaseOrderBroker.Update(poDetail);
+                    }
+                }
+              
+             }
+            
             return status;
         }
     }
