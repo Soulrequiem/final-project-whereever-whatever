@@ -15,7 +15,6 @@ using StationeryStoreInventorySystemModel.entity;
 using SystemStoreInventorySystemUtil;
 using System.Data;
 
-
 namespace StationeryStoreInventorySystemController.storeController
 {
     public class ReceiveOrderControl
@@ -28,10 +27,14 @@ namespace StationeryStoreInventorySystemController.storeController
         private PurchaseOrder purchaseOrder;
         private Supplier supplier;
 
+        private List<PurchaseOrder> purchaseOrderList;
+
         private DataTable dt;
         private DataRow dr;
 
+        private string[] columnName = { "itemNo", "itemDescription", "quantity" };
 
+        private DataColumn[] dataColumn;
 
         public ReceiveOrderControl()
         {
@@ -41,44 +44,43 @@ namespace StationeryStoreInventorySystemController.storeController
 
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
             itemBroker = new ItemBroker(inventory);
+
+            purchaseOrderList = purchaseOrderBroker.GetAllPurchaseOrder();
         }
 
-        public DataTable PurchaseOrderNumber
+        public DataTable PurchaseOrderList
         {
-            get {
+            get 
+            {
                 DataTable dt = new DataTable();
                 DataRow dr;
-                List<PurchaseOrder> list = purchaseOrderBroker.GetAllPurchaseOrder();
-                foreach (PurchaseOrder po in list)
+                foreach (PurchaseOrder po in purchaseOrderList)
                 {
                     dr = dt.NewRow();
                     dr["poNumber"] = po.Id;
+                    dr["poNumberText"] = po.Id;
                     dt.Rows.Add(dr);
                 }
-                return purchaseOrderNumber; }
-           
+                return purchaseOrderNumber; 
+            }
         }
        
-
-        public DataTable SelectAllPurchaseOrderDetails(int purchaseOrderNumber)
+        public Constants.ACTION_STATUS SelectAllPurchaseOrderDetails(int index)
         {
-            purchaseOrder = new PurchaseOrder();
-            purchaseOrder.Id = purchaseOrderNumber;
-            purchaseOrder = purchaseOrderBroker.GetPurchaseOrder(purchaseOrder);
-            List<PurchaseOrderDetail> list = purchaseOrder.PurchaseOrderDetails.ToList();
-            DataTable dt = new DataTable();
-            DataRow dr;
-            foreach (PurchaseOrderDetail pod in list)
+            Constants.ACTION_STATUS selectStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            if (purchaseOrderList.Count >= index)
             {
-                dt.NewRow();
-                dr = new DataRow();
-                dr["itemNo"] = pod.Item.Id;
-                dr["itemDescription"] = pod.Item.Description;
-                dr["quantity"] = pod.Qty;
-                dt.Rows.Add(dr);
+                purchaseOrder = purchaseOrderList.ElementAt(index - 1);
+
+                selectStatus = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                selectStatus = Constants.ACTION_STATUS.FAIL;
             }
 
-            return dt;
+            return selectStatus;            
         }
 
         //public DataTable PurchaseOrder(int purchaseOrderNumber)
@@ -114,32 +116,38 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="purchaseOrderNumber"></param>
         /// <returns>The return type of this method is status.</returns>
-        public Constants.ACTION_STATUS SelectReceive(int purchaseOrderId ,DataTable dt)
+        public Constants.ACTION_STATUS SelectReceived(DataTable purchaseOrderDetailTable)
         {
-            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            PurchaseOrder po = new PurchaseOrder();
-            po.Id = purchaseOrderId;
-            po = purchaseOrderBroker.GetPurchaseOrder(po);
-            List<PurchaseOrderDetail> poDetailList = po.PurchaseOrderDetails.ToList();
-           
-            foreach(DataRow dr in dt.Rows)
+            Constants.ACTION_STATUS receivedStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            if (purchaseOrderList.Count > 0)
             {
-                foreach (PurchaseOrderDetail poDetail in poDetailList)
+                int index = 0;
+                foreach (PurchaseOrderDetail purchaseOrderDetail in purchaseOrder.PurchaseOrderDetails)
                 {
-                    if (poDetail.Item.Id == dr["itemNo"])
-                    {
-                        poDetail.AcceptedQty = (int)dr["quantity"];
-                        purchaseOrderBroker.Update(poDetail);
-                    }
+                    purchaseOrderDetail.AcceptedQty = Converter.objToInt(purchaseOrderDetailTable.Rows[index++][columnName[2]]);
+                    //purchaseOrderDetail. = Converter.objToInt(purchaseOrderDetailTable.Rows[index++][columnName[2]]); Need to add Remarks!!!! Arghhhhh
                 }
-              
-             }
-            
-            return status;
+
+                if (purchaseOrderBroker.Update(purchaseOrder) == Constants.DB_STATUS.SUCCESSFULL)
+                {
+                    receivedStatus = Constants.ACTION_STATUS.SUCCESS;
+                }
+                else
+                {
+                    receivedStatus = Constants.ACTION_STATUS.FAIL;
+                }
+            }
+            else
+            {
+                receivedStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return receivedStatus;
         }
     }
 }
 /****************************************/
-/********* End of the Class *****************/
+/********* End of the Class *************/
 /****************************************/
 

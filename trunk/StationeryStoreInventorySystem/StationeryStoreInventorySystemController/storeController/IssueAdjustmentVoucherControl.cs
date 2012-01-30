@@ -26,6 +26,12 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable dt;
         private DataRow dr;
 
+        private string[] discrepancyListColumnName = { "VoucherNo", "CreatedBy", "CreatedDate", "TotalQty", "Status" };
+        private string[] discrepancyItemListColumnName = { "ItemNo", "ItemDescription", "Quantity", "PricePerItem", "Reason" };
+
+        private DataColumn[] discrepancyListColumn;
+        private DataColumn[] discrepancyItemListColumn;
+
         public IssueAdjustmentVoucherControl()
         {
             InventoryEntities inventoryEntities = new InventoryEntities();
@@ -61,7 +67,6 @@ namespace StationeryStoreInventorySystemController.storeController
                 }
                 return dt; 
             }
-           
         }
        
         /// <summary>

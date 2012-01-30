@@ -30,7 +30,8 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable dt;
         private DataRow dr;
 
-        private List<string> columnName = new List<string>() { "VoucherNo", "CreatedBy", "CreatedDate", "TotalQty" };
+        private string[] columnName = { "VoucherNo", "CreatedBy", "CreatedDate", "TotalQty" };
+        private string[] detailColumnName = { "ItemNo", "QuantityAdjusted", "Reason" };
 
         private DataColumn[] dataColumn;
 
@@ -98,8 +99,28 @@ namespace StationeryStoreInventorySystemController.storeController
             get { return stockAdjustment.CreatedBy.Name; }
         }
 
-        public string StockAdjustmentDetail
+        public DataTable StockAdjustmentDetail
         {
+            get
+            {
+                dt = new DataTable();
+
+                dt.Columns.AddRange(dataColumn);
+
+                if (stockAdjustment != null)
+                {
+                    foreach (DiscrepancyDetail discrepancyDetail in stockAdjustment.Discrepancy.DiscrepancyDetails)
+                    {
+                        dr = dt.NewRow();
+                        dr[detailColumnName[0]] = discrepancyDetail.Item.Id;
+                        dr[detailColumnName[1]] = discrepancyDetail.Qty;
+                        dr[detailColumnName[2]] = discrepancyDetail.Remarks;
+                        dt.Rows.Add(dr);
+                    }
+                }
+
+                return dt;
+            }
         }
 
         public Constants.ACTION_STATUS SelectStockAdjustmentVoucher(string stockAdjustmentId)
