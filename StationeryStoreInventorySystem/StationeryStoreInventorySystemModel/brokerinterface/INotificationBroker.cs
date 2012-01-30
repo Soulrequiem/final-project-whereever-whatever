@@ -10,8 +10,8 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
     public interface INotificationBroker
     {
         Notification GetNotification(Notification notification);
-        List<Notification> GetAllNotification();
-        List<Notification> GetAllNotification(Constants.NOTIFICATION_STATUS notificationStatus);
+        List<Notification> GetAllNotification(Employee employee);
+        List<Notification> GetAllNotification(Employee employee, Constants.NOTIFICATION_STATUS notificationStatus);
         Constants.DB_STATUS Insert(Notification newNotification);
         Constants.DB_STATUS Insert(List<Notification> newNotificationList);
         Constants.DB_STATUS Update(Notification notification);
