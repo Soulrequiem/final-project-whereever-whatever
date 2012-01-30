@@ -44,14 +44,14 @@ namespace StationeryStoreInventorySystemModel.broker
             retrieval = inventory.Retrievals.Where(robj => robj.Id == retrieval.Id).First();
             if (!retrieval.Equals(null))
             {
-                var retrievalDetailResult = from rd in inventory.RetrievalDetails
-                                            where rd.Retrieval.Id == retrieval.Id
-                                            select rd;
-                foreach (RetrievalDetail rd in retrievalDetailResult)
-                {
-                    retrieval.RetrievalDetails.Add(rd);
+                //var retrievalDetailResult = from rd in inventory.RetrievalDetails
+                //                            where rd.Retrieval.Id == retrieval.Id
+                //                            select rd;
+                //foreach (RetrievalDetail rd in retrievalDetailResult)
+                //{
+                //    retrieval.RetrievalDetails.Add(rd);
                
-                 }
+                // }
                 return retrieval;
             }
             return null; 
@@ -79,10 +79,10 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 inventory.AddToRetrievals(newRetrieval);
-                foreach (RetrievalDetail retrievalDetail in newRetrieval.RetrievalDetails)
-                {
-                    this.Insert(retrievalDetail);
-                }
+                //foreach (RetrievalDetail retrievalDetail in newRetrieval.RetrievalDetails)
+                //{
+                //    this.Insert(retrievalDetail);
+                //}
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
