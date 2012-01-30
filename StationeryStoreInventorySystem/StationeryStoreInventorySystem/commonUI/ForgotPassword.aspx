@@ -4,21 +4,6 @@
 <%@ Register assembly="Infragistics35.WebUI.WebResizingExtender.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI" tagprefix="igui" %>
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<script type = "text/javascript" id = "igClientScript">
-    function btnSend_Click(name) 
-    {
-        if (name.txtemailaddress.value == "")
-            document.getElementById["lblStatusMessage"].Text = "Enter your Email Address.";
-        else 
-        {
-            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (emailPattern.test(elementValue) == false)
-                document.getElementById["lblStatusMessage"].Text = "Enter your correct Email Address.";
-            else
-                name.submit();
-        }
-    }
-</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
@@ -46,16 +31,10 @@
                        </td>
                    </tr>
                    <tr>
-                       <td>       
-                            <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblStatusMessage" runat="server" />
-                        </td>
-                    </tr>
-                       </td>
+                       <td></td>
                        <td>
                            <div style="float:right" class="button">
-                               <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="Defaultbutton" 
-                                   onclick="btnSend_Click(this.form)"/>
+                               <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="Defaultbutton" />
                            </div>
                        </td>
                        

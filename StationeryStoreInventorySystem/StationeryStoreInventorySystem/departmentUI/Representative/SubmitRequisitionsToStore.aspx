@@ -15,26 +15,6 @@
         Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_Title %>" /></h1>
     <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px">
         <Template>
-            <div style="float:left; width:80px">
-                <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblCollection" runat="server" 
-                            Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_CollectionID %>"/> 
-            </div>
-            <div style="float:left">
-                <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblCollectionID" runat="server" 
-                            Text="C0019"/>
-            </div>
-            <div style="float:right">
-                <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblCollectionPoint" runat="server" 
-                            Text="Management School"/>
-            </div>
-            <div style="float:right; width:100px">
-                <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="Label1" runat="server" 
-                            Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_CollectionPoint %>"/> 
-            </div><br />
             <ig:WebDataGrid ID="dgvRequisitions" runat="server" Height="400px" Width="700px" 
                 StyleSetName="Office2010Blue" AutoGenerateColumns="False" 
                 CssClass="DefaultGridViewStyle" Font-Size="Small" 
@@ -78,9 +58,7 @@
             <div style="float:right">
                         &nbsp;&nbsp;&nbsp;
                             <asp:Button id="btnSave" CssClass="DefaultLargebutton"  runat="server" 
-                            
-                            Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_SubmitToStore %>" 
-                            onclick="btnSave_Click"/>
+                            Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_SubmitToStore %>"/>
                         </div>
         </Template>
     </igmisc:WebGroupBox>

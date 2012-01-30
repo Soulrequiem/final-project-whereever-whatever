@@ -22,7 +22,7 @@
                    <%-- <ig:BoundDataField DataFieldName="RetrievalNo" Key="RetrievalNo" Width="100px">
                         <Header Text="Retrieval No." />
                     </ig:BoundDataField>--%>
-                    <ig:TemplateDataField Key="retrievalNo" Width="100px">
+                    <ig:TemplateDataField Key="RetrievalNo" Width="100px">
                         <ItemTemplate>
                             <asp:HyperLink ID="TripIDLink" runat="server" 
                                 Text='<%# Eval("RetrievalNo" ) %>'
@@ -31,17 +31,17 @@
                         </ItemTemplate>
                         <Header Text="Retrieval No." />
                     </ig:TemplateDataField>
-                    <ig:BoundDataField DataFieldName="RetrievalDate/Time" Key="retrievalDate/Time" 
+                    <ig:BoundDataField DataFieldName="RetrievalDate/Time" Key="RetrievalDate/Time" 
                         Width="150px">
                         <Header Text="Retrieval Date/Time" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="retrievedBy" Width="150px">
+                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="RetrievedBy" Width="150px">
                         <Header Text="Retrieved By" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="NeededQty" Key="neededQty" Width="150px">
+                    <ig:BoundDataField DataFieldName="NeededQty" Key="NeededQty" Width="150px">
                         <Header Text="Needed Qty" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="ActualQty" Key="actualQty" Width="150px">
+                    <ig:BoundDataField DataFieldName="ActualQty" Key="ActualQty" Width="150px">
                         <Header Text="Actual Qty" />
                     </ig:BoundDataField>
                 </Columns>

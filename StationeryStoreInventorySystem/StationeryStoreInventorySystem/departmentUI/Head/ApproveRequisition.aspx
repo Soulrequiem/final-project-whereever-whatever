@@ -88,7 +88,7 @@
         </div>
         <div style="float:right;margin-right:10px">
                 <asp:Button ID="btnApprove" CssClass="DefaultLargebutton"
-                        runat="server" Text="Approve" onclick="btnApprove_Click" />
+                        runat="server" Text="Approve" />
                <%--<a class="button" href="#" style="float:right">Approve</a>--%>
         </div>
     </div>

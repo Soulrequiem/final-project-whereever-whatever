@@ -6,73 +6,51 @@ using StationeryStoreInventorySystemModel.brokerinterface;
 using StationeryStoreInventorySystemModel.broker;
 using StationeryStoreInventorySystemModel.entity;
 using SystemStoreInventorySystemUtil;
-using System.Data;
+
 
 namespace StationeryStoreInventorySystemController.departmentController
 {
     public class SubmitRequestToStoreControl
     {
-        
-        private IRequisitionBroker requisitionBroker;
-
-        private Employee currentEmployee;
-
-        private List<Requisition> approvedRequisitionList;
-
-        private DataTable dt;
-        private DataRow dr;
-
+        IRequisitionBroker requisitionBroker = new RequisitionBroker();
         public SubmitRequestToStoreControl()
         {
-            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
-            InventoryEntities inventory = new InventoryEntities();
-
-            requisitionBroker = new RequisitionBroker(inventory);
-
-            approvedRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.APPROVED);
         }
 
-        public DataTable ApprovedRequisitionList
+        public List<Requisition> GetApprovedRequisition()
         {
-            get
+            List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
+            List<Requisition> resultList = new List<Requisition>();
+            foreach (Requisition requisition in requisitionList)
             {
-                dt = new DataTable();
-                
-                foreach (Requisition requisition in approvedRequisitionList)
+                if (requisition.Status == (int)Constants.REQUISITION_STATUS.APPROVED)
                 {
-                    dr = dt.NewRow();
-                    dr["requisitionId"] = requisition.Id;
-                    dr["requisitionDateTime"] = requisition.ApprovedDate;
-                    dr["requisitionBy"] = requisition.CreatedBy.Name;
-                    dr["requisitionStatus"] = requisition.Status;
-                    dt.Rows.Add(dr);
+                    resultList.Add(requisition);
                 }
-                return dt;
             }
+            return resultList;
         }
 
-        public Requisition SelectRequisition(string requisitionId)
+        public Requisition SelectRequisition(String requisitionID)
         {
-            return approvedRequisitionList.Find(delegate(Requisition requisition) { return requisition.Id.Equals(requisitionId); });
+            Requisition requisition = new Requisition();
+            requisition.Id = requisitionID;
+            Requisition resultRequisition = requisitionBroker.GetRequisition(requisition);
+            return resultRequisition;
         }
 
-        public Constants.ACTION_STATUS SelectSubmit(List<string> requisitionIdList)
+        public Constants.ACTION_STATUS SelectSubmit(String requisitionID)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-
-            Requisition requisition;
-
-            foreach (string requisitionId in requisitionIdList)
-            {
-                requisition = approvedRequisitionList.Find(delegate(Requisition req) { return req.Id.Equals(requisitionId); });
-                requisition.Status = Converter.objToInt(Constants.REQUISITION_STATUS.SUBMITTED);
-
-                if (requisitionBroker.Update(requisition) == Constants.DB_STATUS.SUCCESSFULL)
-                    status = Constants.ACTION_STATUS.SUCCESS;
-                else
-                    status = Constants.ACTION_STATUS.FAIL;
-            }
-
+            Requisition requisition = new Requisition();
+            requisition.Id = requisitionID;
+            Requisition resultRequisition = requisitionBroker.GetRequisition(requisition);
+            resultRequisition.Status = (int) Constants.REQUISITION_STATUS.SUBMITTED;
+            Constants.DB_STATUS dbStatus = requisitionBroker.Update(resultRequisition);
+            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+                status = Constants.ACTION_STATUS.SUCCESS;
+            else
+                status = Constants.ACTION_STATUS.FAIL;
             return status;
         }
     }

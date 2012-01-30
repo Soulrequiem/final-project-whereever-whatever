@@ -10,7 +10,9 @@ namespace StationeryStoreInventorySystemModel.broker
 {
     class RequisitionCollectionItemsBroker:IRequisitionCollectionItemsBroker
     {
+        #region IRequisitionCollectionItemsBroker Members
 
+        #region IRequisitionCollectionItemsBroker Members
         private InventoryEntities inventory;
         private RequisitionCollectionItem reqCollectionItem = null;
         private List<RequisitionCollectionItem> reqCollectionList = null;
@@ -114,6 +116,6 @@ namespace StationeryStoreInventorySystemModel.broker
             return status;
         }
 
-       
+        #endregion
     }
 }

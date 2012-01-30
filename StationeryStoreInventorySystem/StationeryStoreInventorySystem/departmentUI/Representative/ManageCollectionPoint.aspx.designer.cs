@@ -58,22 +58,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative 
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// drdCollectionList control.
+        /// drpCollectionList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.ListControls.WebDropDown drdCollectionList;
-        
-        /// <summary>
-        /// lblStatusMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatusMessage;
+        protected global::Infragistics.Web.UI.ListControls.WebDropDown drpCollectionList;
         
         /// <summary>
         /// btnSave control.

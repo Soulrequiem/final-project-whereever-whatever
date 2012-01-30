@@ -13,10 +13,5 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
 
         }
-
-        protected void drdReportList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
-        {
-            this.reportpanel.Visible = true;
-        }
     }
 }

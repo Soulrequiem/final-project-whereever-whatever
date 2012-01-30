@@ -15,10 +15,10 @@
             <siteMapNode url="~/storeUI/Clerk/GenerateDisbursement.aspx" title="Generate Disbursement"  description="Generate Disbursement" />
         </siteMapNode>
         <siteMapNode url="" title="Store Supervisor/Manager"  description="Store Supervisor/Manager">
-            <siteMapNode url="~/storeUI/SuperVisor_Manager/AdjustmentVoucher.aspx"          title="Adjustment Voucher"            description="Adjustment Voucher" />
-            <siteMapNode url="~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx"  title="View Adjustment Voucher List"  description="View Adjustment Voucher List" />
-            <siteMapNode url="~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx"     title="Issue Adjustment Voucher"      description="Issue Adjustment Voucher" />
-            <siteMapNode url="~/storeUI/SuperVisor_Manager/BlackListDepartment.aspx"        title="Black List Department"         description="Black List Department" />
+            <siteMapNode url="~/storeUI/SuperVisor_Manager/AdjustmentVoucher.aspx" title="Adjustment Voucher"  description="Adjustment Voucher" />
+            <siteMapNode url="~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx" title="View Adjustment Voucher List"  description="View Adjustment Voucher List" />
+            <siteMapNode url="~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx" title="Issue Adjustment Voucher"  description="Issue Adjustment Voucher" />
+            <siteMapNode url="~/storeUI/SuperVisor_Manager/BlackListDepartment.aspx" title="Black List Department"  description="Black List Department" />
         </siteMapNode>
   </siteMapNode>
 </siteMap>

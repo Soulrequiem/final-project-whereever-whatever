@@ -7,15 +7,6 @@
 <%@ Register assembly="Infragistics35.WebUI.WebResizingExtender.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI" tagprefix="igui" %>
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<script type = "text/javascript" id = "igClientScript">
-    function btnSave_Click(name) 
-    {
-        if (name.drdCollectionList.value == "")
-            document.getElementById["lblStatusMessage"].Text = "Enter Collection Point.";
-        else
-            name.submit();
-    }
-</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="ContentDivStyle">
@@ -33,15 +24,15 @@
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundDataField DataFieldName="CollectionID" Key="collectionID" 
+                            <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" 
                                 Width="150px">
                                 <Header Text="CollectionID" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="collectionPoint" 
+                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
                                 Width="350px">
                                 <Header Text="Collection Point" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionTime" Key="collectionTime" 
+                            <ig:BoundDataField DataFieldName="CollectionTime" Key="CollectionTime" 
                                 Width="200px">
                                 <Header Text="Collection Time" />
                             </ig:BoundDataField>
@@ -62,23 +53,16 @@
                         <div style="float:left">
                             <%--<ig:WebDropDown ID="drpCollectionList" runat="server" Width="300px">
                             </ig:WebDropDown>--%>
-                            <ig:WebDropDown ID="drdCollectionList" runat="server" Width="250px" 
+                            <ig:WebDropDown ID="drpCollectionList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="Enter or Select Collection Point" 
-                            StyleSetName="Office2010Blue" 
-                                onselectionchanged="drdCollectionList_SelectionChanged">
+                            StyleSetName="Office2010Blue">
                      </ig:WebDropDown>
-                     <br />
-                        <div style = "float:left">
-                            <asp:Label CssClass="DefaultLabelstyle"  
-                            ID="lblStatusMessage" runat="server"/>
-                        </div>
                         </div>
                         <div style="float:left">
                         &nbsp;&nbsp;&nbsp;
                             <asp:Button id="btnSave" CssClass="Defaultbutton"
-<<<<<<< .mine                                  runat="server" Text="Save" onclick="btnSave_Click(this.form)"/>
-=======                                  runat="server" Text="Save" onclick="drdCollectionList_SelectionChanged"/>
->>>>>>> .theirs                        </div>
+                                  runat="server" Text="Save"/>
+                        </div>
                 </Template>
             </igmisc:WebGroupBox>
 </div>

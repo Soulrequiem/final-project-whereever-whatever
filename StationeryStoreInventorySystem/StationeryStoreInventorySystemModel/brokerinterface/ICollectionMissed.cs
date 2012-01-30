@@ -7,7 +7,7 @@ using SystemStoreInventorySystemUtil;
 
 namespace StationeryStoreInventorySystemModel.brokerinterface
 {
-    public interface ICollectionMissedBroker
+    public interface ICollectionMissed
     {
         CollectionMissed GetCollectionMissed(CollectionMissed collectionMissed);
         List<CollectionMissed> GetAllCollectionMissed(Department department);

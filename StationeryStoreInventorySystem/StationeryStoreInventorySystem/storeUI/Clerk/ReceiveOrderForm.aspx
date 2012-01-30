@@ -78,14 +78,14 @@
                         CssClass="DefaultGridViewStyle" ItemCssClass="ItemGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundDataField DataFieldName="ItemNo" Key="itemNo" Width="150px">
+                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="150px">
                                 <Header Text="Item No." />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="ItemDescription" Key="itemDescription" 
+                            <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
                                 Width="200px">
                                 <Header Text="Item Description" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Quantity" Key="quantity" Width="150px">
+                            <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="150px">
                                 <Header Text="Quantity" />
                             </ig:BoundDataField>
                             <%--<ig:BoundDataField DataFieldName="Remarks(Supplier)" Key="Remarks(Supplier)" 
@@ -127,7 +127,7 @@
                     <div style="float:right">
                         <%--<a class="buttoningrid" href="" style="text-align:center">Received</a>--%>
                         <asp:Button ID="btnReceived" runat="server" CssClass="DefaultLargebutton"
-                                Text="Received" onclick="btnReceived_Click" />
+                                Text="Received" />
                     </div>
                 </Template>
             </igmisc:WebGroupBox>

@@ -1,137 +1,77 @@
-﻿/***************************************************************************/
-/*  File Name       : AssignTempDeptHead.cs
-/*  Module Name     : View
-/*  Owner           : Wai Yan Ko Ko
-/*  class Name      : AssignTempDeptHead
-/*  Details         : Form for Assign Temporary Deptment Representative
-/***************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class AssignTempDeptHead : System.Web.UI.Page
     {
-        AssignTemporaryDepartmentRepresentativeControl atdrCtrl;
-        String remove_employeeID;
-        String assign_employeeID;
-        /// <summary>
-        /// Loads the AssignTempDeptHead form
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                //FillCurrentRepresentativeList();
-                //FillEmployee()
-            }
-        }
+            DataTable dt = new DataTable();
+            //dt.Columns.Add("EmployeeID");
+            dt.Columns.Add("EmployeeID");
+            dt.Columns.Add("EmployeeName");
+            dt.Columns.Add("Designation");
+            dt.Columns.Add("JoiningDate");
+            //dt.Columns.Add("RemainingQty");
+            //dt.Columns.Add("Remarks");
 
-        /// <summary>
-        /// Fills current Representative list
-        /// </summary>
-        /// <param name="dtApprove"></param>
-        private void FillCurrentRepresentativeList()
-        {
-            try
-            {
-                atdrCtrl = GetControl();
-                DataTable dtRepresentative = atdrCtrl.TemporaryDepartmentRepresentative;
-                DgvCurrentAuthorizedPersonRep.DataSource = dtRepresentative;
-                DgvCurrentAuthorizedPersonRep.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+            DataRow dr = dt.NewRow();
+            dr[0] = "1";
+            dr[1] = "1";
+            dr[2] = "1";
+            dr[3] = "1213sadsad";
+            //dr[4] = "1ssdsfdf";
+            //dr[5] = "1ssdsfdf";
+            dt.Rows.Add(dr);
 
-        /// <summary>
-        /// Fills Employee name
-        /// </summary>
-        private void FillEmployee(DataTable dtEmployee)
-        {
-            try
-            {
-                //if (dtEmployee != null)
-               
-                   //To be done
-                   //adrCtrl = new AssignDepartmentRepresentativeControl();
-                   //adrCtrl.
-                    drdEmployeeList.TextField = "Employee";
-                    drdEmployeeList.ValueField = "Name";
-                    drdEmployeeList.DataSource = null; // dtEmployee;
-                    drdEmployeeList.DataBind();
-                
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+            dr = dt.NewRow();
+            dr[0] = "1";
+            dr[1] = "1";
+            dr[2] = "1";
+            dr[3] = "1213sadsad";
+            //dr[4] = "1ssdsfdf";
+            //dr[5] = "1ssdsfdf";
+            dt.Rows.Add(dr);
 
-        /// <summary>
-        /// Fills selected changed employee to datagrid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void drdEmployeeList_SelectionChanged(object sender,
-            Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
-        {
-            try
-            {
-                String selectedEmployee = drdEmployeeList.SelectedItem.Text;
-                atdrCtrl = GetControl();
-                DataTable dt = atdrCtrl.SelectEmployeeName(selectedEmployee);
-                DgvTempDepteHeadSearchDetails.DataSource = dt;
-                DgvTempDepteHeadSearchDetails.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteErrorLog(ex);
-            }
-        }
+            DgvCurrentAuthorizedPersonRep.DataSource = dt;
+            DgvCurrentAuthorizedPersonRep.DataBind();
 
-        private AssignTemporaryDepartmentRepresentativeControl GetControl()
-        {
-            if (atdrCtrl == null)
-                atdrCtrl = new AssignTemporaryDepartmentRepresentativeControl();
-            return atdrCtrl;
-        }
 
-        protected void DgvCurrentAuthorizedPersonRep_RowSelectionChanged(object sender,
-            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
-        {
-            remove_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"];
-        }
+            DataTable dtt = new DataTable();
+            dtt.Columns.Add("TemplateField_0");
+            dtt.Columns.Add("EmployeeID");
+            dtt.Columns.Add("EmployeeName");
+            dtt.Columns.Add("Designation");
+            dtt.Columns.Add("JoiningDate");
+            //dt.Columns.Add("RemainingQty");
+            //dt.Columns.Add("Remarks");
 
-        protected void DgvTempDepteHeadSearchDetails_RowSelectionChanged(object sender,
-            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
-        {
-            assign_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"];
-        }
+            DataRow drr = dtt.NewRow();
+            drr[0] = "1";
+            drr[1] = "1";
+            drr[2] = "1we2we12321";
+            drr[3] = "1213sadsad";
+            drr[4] = "1ssdsfdf";
+            //dr[5] = "1ssdsfdf";
+            dtt.Rows.Add(drr);
 
-        protected void btnRemove_Click(object sender, EventArgs e)
-        {
-            atdrCtrl = GetControl();
-            //atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
-        }
+            drr = dtt.NewRow();
+            drr[0] = "1";
+            drr[1] = "1";
+            drr[2] = "1we2we12321";
+            drr[3] = "1213sadsad";
+            drr[4] = "1ssdsfdf";
+            //dr[5] = "1ssdsfdf";
+            dtt.Rows.Add(drr);
 
-        protected void btnAssign_Click(object sender, EventArgs e)
-        {
-            atdrCtrl = GetControl();
-            atdrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
+            DgvTempDepteHeadSearchDetails.DataSource = dtt;
+            DgvTempDepteHeadSearchDetails.DataBind();
         }
     }
 }
-/********************************************/
-/********* End of the Class *****************/
-/********************************************/

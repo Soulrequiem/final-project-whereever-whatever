@@ -69,10 +69,9 @@
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label3" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_Quantity%>"/>
                             </td>
-                            <td>
-                                <ig:WebNumericEditor ID="txtQuantity" runat="server" HorizontalAlign="Left"
+                            <td><ig:WebTextEditor ID="txtQuantity" runat="server" 
                                  CssClass="DefaultTextStyle" Width="250px" NullText="Enter Item Quantity">
-                                </ig:WebNumericEditor><br />
+                                </ig:WebTextEditor><br />
                             </td>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label4" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_ItemPrice%>"/>
@@ -95,9 +94,7 @@
                                 <%--<input id="btnAdd" type="button" 
                                     value="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" runat="server"/>--%>
                                 <asp:Button ID="btnAdd" CssClass="DefaultLargebutton"
-                                    runat="server" 
-                                    Text="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" 
-                                    onclick="btnAdd_Click" />
+                                    runat="server" Text="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" />
                             </td>
                         </tr>
                     </table>
@@ -107,17 +104,14 @@
                 CssClass="MediumGroupBoxstyle" StyleSetName="" width="700px"
                 TitleAlignment="Left" Text="<%$ Resources:WebResources, CreateDiscrepencyReport_GropuBoxHeader%>">
                 <Template>
-                    <br />
                     <ig:WebDataGrid ID="dgvItemList" runat="server" Height="400px" Width="700px" 
                         AutoGenerateColumns="False" DefaultColumnWidth="50px" 
-                        DataKeyFields="Reason"
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        onrowupdated="dgvItemList_RowUpdated">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundCheckBoxField Key="CreateDiscrepancyReportCheckBox" Width="80px" DataFieldName="CreateDiscrepancyReportCheckBox">
+                            <ig:UnboundCheckBoxField Key="CreateDiscrepancyReportCheckBox" Width="80px">
                                 <Header Text="Select" />
-                            </ig:BoundCheckBoxField>
+                            </ig:UnboundCheckBoxField>
                             <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                 <Header Text="Item No." />
                             </ig:BoundDataField>
@@ -131,7 +125,7 @@
                                           Text='<%# Eval("Quantity") %>'>
                                        </ig:WebTextEditor>
                                   </ItemTemplate>
-                                <Header Text="Quantity" />
+                                <Header Text="Remarks" />
                               </ig:TemplateDataField>
                             <%--<ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="50px">
                                 <Header Text="Quantity" />
@@ -152,29 +146,13 @@
                             </ig:Selection>
                             <ig:Sorting>
                             </ig:Sorting>
-                            <ig:EditingCore>
-                                <Behaviors>
-                                    <ig:CellEditing>
-                                        <ColumnSettings>
-                                            <ig:EditingColumnSetting ColumnKey="CreateDiscrepancyReportCheckBox" />
-                                            <ig:EditingColumnSetting ColumnKey="ItemNo" ReadOnly="True" />
-                                            <ig:EditingColumnSetting ColumnKey="ItemDescription" ReadOnly="True" />
-                                            <ig:EditingColumnSetting ColumnKey="Quantity" />
-                                            <ig:EditingColumnSetting ColumnKey="Price" ReadOnly="True" />
-                                            <ig:EditingColumnSetting ColumnKey="Reason" ReadOnly="True" />
-                                        </ColumnSettings>
-                                    </ig:CellEditing>
-                                </Behaviors>
-                            </ig:EditingCore>
                         </Behaviors>
-                 </ig:WebDataGrid>
+                 </ig:WebDataGrid><br />
                  <div style="float:right">
                      <asp:Button ID="btnApprove" runat="server" CssClass="DefaultLargebutton"
-                        Text="<%$ Resources:WebResources, ApproveButton_text%>" 
-                         onclick="btnApprove_Click" />
+                        Text="<%$ Resources:WebResources, ApproveButton_text%>" />
                      <asp:Button ID="btnDelete" runat="server" CssClass="DefaultLargebutton"
-                        Text="<%$ Resources:WebResources, DeleteButton_text%>" 
-                         onclick="btnDelete_Click" />
+                        Text="<%$ Resources:WebResources, DeleteButton_text%>" />
                  </div>
                 </Template>
     </igmisc:WebGroupBox>

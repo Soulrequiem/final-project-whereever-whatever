@@ -112,19 +112,7 @@ namespace SystemStoreInventorySystemUtil
 
         public enum DESIGNATION
         {
-            UNKNOWN = 0,
-            PROFESSOR,
-            SENIOR_PROFESSOR,
-            ACCOUNTANT,
-            SENIOR_ACCOUNTANT
-        }
-
-        public enum NOTIFICATION_STATUS
-        {
-            UNKNOWN = 0,
-            UNREAD,
-            READ,
-            HIDDEN
+            UNKNOWN = 0
         }
     }
 }

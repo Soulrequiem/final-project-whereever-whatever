@@ -10,94 +10,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class CreateDiscrepencyReport : System.Web.UI.Page
     {
-        private DataTable dtGridItems;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                FillItemsGridView();
-            }
-        }
+           //// Master.FindControl("NavigationPanel").Visible = true;
+           // DataTable dt = new DataTable();
+           // dt.Columns.Add("ID");
+           // dt.Columns.Add("Items");
 
-        private void FillDataTable()
-        {
-            if (dtGridItems == null)
-            {
-                dtGridItems = (DataTable)dgvItemList.DataSource;
-            }
-        }
-
-        /// <summary>
-        /// Fills item drop down
-        /// </summary>
-        /// <param name="dtItems"></param>
-        private void FillItems()
-        {
-            DataTable dtItems = (DataTable)Session["Items"];
-            if (dtItems != null)
-            {
-                drdItemList.TextField = "ItemDescription";
-                drdItemList.ValueField = "ID";
-                drdItemList.DataSource = dtItems;
-                drdItemList.DataBind();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void drdItemList_SelectionChanged(object sender,
-        Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
-        {
-            String selectedItem = drdItemList.SelectedItem.Text;
-            //Pass to the controller
-
-        }
-        /// <summary>
-        /// Adds item in the gridview
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-            DataTable dtGridItems = (DataTable)Session["DiscrepencyItems"];
-            DataRow dr = dtGridItems.NewRow();
-            dr[0] = false;
-            dr[1] = lblItemNumber.Text;
-            dr[2] = drdItemList.SelectedItem.Text;
-            dr[3] = "Zakasss";
-            dr[4] = lblItemPrice.Text;
-            dr[5] = txtReason.Text;
-            
-            dtGridItems.Rows.Add(dr);
-            Session["DiscrepencyItems"] = dtGridItems;
-            FillItemsGridView();
-        }
-
-        private void FillItemsGridView()
-        {
-            dgvItemList.ClearDataSource();
-            dgvItemList.DataSource = (DataTable)Session["DiscrepencyItems"];
-            dgvItemList.DataBind();
-        }
-
-        protected void btnApprove_Click(object sender, EventArgs e)
-        {
-            DataTable dt = (DataTable)Session["DiscrepencyItems"];
-            for (int i = 0; i < dt.Rows.Count; i++)
-                lblItemNumber.Text += dt.Rows[i].ItemArray[0].ToString();
-        }
-
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void dgvItemList_RowUpdated(object sender, Infragistics.Web.UI.GridControls.RowUpdatedEventArgs e)
-        {
-            lblItemPrice.Text = e.RowID.ToString();
+           // for (int i = 0; i < 30; i++)
+           // {
+           //     DataRow dr = dt.NewRow();
+           //     dr[0] = i;
+           //     dr[0] = "Hi" + i + " sheks";
+           //     dt.Rows.Add(dr);
+           // }
+           // drdItemList.DataSource = dt;
+           // drdItemList.
+           // //drdItemList.DataMember = "ID";
+           // //drdItemList.TextField = "Items";
+           // //drdItemList.DataBind();
         }
     }
 }

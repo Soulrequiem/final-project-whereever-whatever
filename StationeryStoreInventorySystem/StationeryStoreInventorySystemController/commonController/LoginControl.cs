@@ -9,15 +9,12 @@ using StationeryStoreInventorySystemModel.brokerinterface;
 
 namespace StationeryStoreInventorySystemController.commonController
 {
-    public class LoginControl
+    class LoginControl
     {
-        private IEmployeeBroker employeeBroker;
-
+        IEmployeeBroker employeeBroker;
         public LoginControl()
         {
-            InventoryEntities inventory = new InventoryEntities();
-            
-            employeeBroker = new EmployeeBroker(inventory);
+            employeeBroker = new EmployeeBroker();
         }
 
         public Constants.ACTION_STATUS SelectLogin(string username, string password)
@@ -27,7 +24,7 @@ namespace StationeryStoreInventorySystemController.commonController
             User user = new User();
             user.UserName = username;
             user.Password = password;
-            user = employeeBroker.GetUser(user); // get user object
+            user = employeeBroker.GetUser(user); // validate user
             
             // if user is null means username and password is incorrect
             if (user != null)
@@ -35,8 +32,6 @@ namespace StationeryStoreInventorySystemController.commonController
                 Employee employee = new Employee();
                 employee.User = user;
                 employee = employeeBroker.GetEmployee(employee);
-
-                Util.PutSession(Util.employeeSessionKey, employee); // put employee object to session for validating user later
 
                 isLogin = Constants.ACTION_STATUS.SUCCESS;
             }

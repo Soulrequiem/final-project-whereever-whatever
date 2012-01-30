@@ -12,10 +12,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //CreateStationeryRetrievalListControl CSRobj = new CreateStationeryRetrievalListControl();
-            //DataTable dt = CSRobj.GetStationerRetrivalList();
-            //FillStationeryRetrievalList();
-
             DataTable dt = new DataTable();
             dt.Columns.Add("CreateStationeryRetrievalListCheckBox");
             dt.Columns.Add("CollectionID");
@@ -34,20 +30,5 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             DgvCreateStationeryRetrievalList.DataSource = dt;
             DgvCreateStationeryRetrievalList.DataBind();
         }
-        private void FillStationeryRetrievalList(DataTable dtStationeryRetrivealList)
-        {
-            try
-            {
-                if (dtStationeryRetrivealList != null)
-                    DgvCreateStationeryRetrievalList.DataSource = dtStationeryRetrivealList;
-                    DgvCreateStationeryRetrievalList.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteErrorLog(ex);
-            }
-
-        }
-
     }
 }

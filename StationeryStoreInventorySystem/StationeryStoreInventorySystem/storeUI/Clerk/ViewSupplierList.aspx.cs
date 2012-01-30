@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using StationeryStoreInventorySystemController.storeController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
@@ -13,32 +11,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                ViewSupplierListControl VSLobj = new ViewSupplierListControl();
-                DataTable dt = VSLobj.GetSupplierList();
-                FillSupplierList(dt);
-            }
-        }
 
-        /// <summary>
-        /// Fills item drop down
-        /// </summary>
-        /// <param name="dtItems"></param>
-        private void FillSupplierList(DataTable dtSupplier)
-        {
-            try
-            {
-                if (dtSupplier != null)
-                {
-                    DgvSupplierList.DataSource = dtSupplier;
-                    DgvSupplierList.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteErrorLog(ex);
-            }
         }
     }
 }

@@ -4,15 +4,6 @@
 <%@ Register Assembly="Infragistics35.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
     Namespace="Infragistics.Web.UI.GridControls" TagPrefix="ig" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<script type = "text/javascript" id = "igClientScript">
-    function btnSignIn_Click(name) 
-    {
-        if (name.txtUsername.value == "" || name.txtPassword.value == "")
-            document.getElementById["lblStatusMessage"].Text = "Enter required fields.";
-        else
-            name.submit();
-    }
-</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FirstContent" runat="server">
     <div class="ContentDivStyle">
@@ -50,17 +41,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <asp:Label CssClass="DefaultLabelstyle" 
-                                ID="lblStatusMessage" runat="server" />
-                            </td>
+                            <td></td>
                             <td>
                                 <a href="#" style="float:left; font-size: small;">Forgot your password?</a>
                                 <div style="float:right">
                                     <asp:Button ID="btnSignIn" CssClass="Defaultbutton"
                                         runat="server" 
-                                        Text="<%$ Resources:WebResources,LogIn_SignIn_Button_Text %>"
-                                         onclick="btnSignIn_Click"/>
+                                        Text="<%$ Resources:WebResources,LogIn_SignIn_Button_Text %>" onclick="btnSignIn_Click" 
+                                        />
                                 </div>
                             </td>
                         </tr>

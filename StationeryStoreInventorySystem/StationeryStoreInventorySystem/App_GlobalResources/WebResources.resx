@@ -531,10 +531,4 @@
   <data name="ForgotPassword_grouptext" xml:space="preserve">
     <value>Enter Email Address</value>
   </data>
-  <data name="SubmitRequisitionsToStore_CollectionID" xml:space="preserve">
-    <value>Collection ID:</value>
-  </data>
-  <data name="SubmitRequisitionsToStore_CollectionPoint" xml:space="preserve">
-    <value>Collection Point:</value>
-  </data>
 </root>

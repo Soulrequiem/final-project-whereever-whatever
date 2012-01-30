@@ -12,15 +12,9 @@ namespace StationeryStoreInventorySystemController.commonController
 {
     public class RequisitionDetailsControl
     {
-        private IRequisitionBroker requisitionBroker;
-        private Employee currentEmployee;
-        
+        IRequisitionBroker requisitionBroker = new RequisitionBroker();
         public RequisitionDetailsControl()
         {
-            currentEmployee = Util.ValidateUser();
-            InventoryEntities inventory = new InventoryEntities();
-
-            requisitionBroker = new RequisitionBroker(inventory);
         }
 
         public List<RequisitionDetail> GetAllRequisitionDetails()
@@ -30,7 +24,7 @@ namespace StationeryStoreInventorySystemController.commonController
             return requisitionDetailList;
         }
 
-        public void SelectRequisition(Requisition requisition){
+        public void SelectRequisitionID(Requisition requisition){
         
             
             RequisitionDetail requisitionDetail = new RequisitionDetail();

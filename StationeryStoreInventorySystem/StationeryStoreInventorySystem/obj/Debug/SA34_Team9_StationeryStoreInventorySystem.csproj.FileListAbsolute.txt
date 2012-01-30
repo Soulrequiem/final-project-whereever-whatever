@@ -28,5 +28,11 @@ C:\Users\wykk\Desktop\ADbywaiyan\ad-project-team-9\trunk\StationeryStoreInventor
 C:\Users\wykk\Desktop\ADbywaiyan\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll.licenses
 C:\Users\wykk\Desktop\ADbywaiyan\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll
 C:\Users\wykk\Desktop\ADbywaiyan\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.pdb
+D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystem.dll
+D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystem.pdb
+D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\SystemStoreInventorySystemUtil.dll
+D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\SystemStoreInventorySystemUtil.pdb
 D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\ResolveAssemblyReference.cache
 D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll.licenses
+D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll
+D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.pdb

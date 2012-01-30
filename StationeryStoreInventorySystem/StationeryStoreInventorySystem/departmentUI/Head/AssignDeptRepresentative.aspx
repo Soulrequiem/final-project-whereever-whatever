@@ -24,8 +24,7 @@
                             <ig:WebDataGrid ID="DgvCurrentDeptRepresentative" runat="server" Height="150px" 
                                 Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                                onrowselectionchanged="DgvCurrentDeptRepresentative_RowSelectionChanged">
+                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                                 <Columns>
                                     <ig:UnboundCheckBoxField Key="BoundCheckBoxField_0" Width="70px">
                                         <Header Text="" />
@@ -67,7 +66,7 @@
                             <div style="float:right">
                                     <%--<a class="button" href="" style="float:right">Remove</a>--%>
                                     <asp:Button ID="btnRemove" CssClass="Defaultbutton"
-                                            runat="server" Text="Remove" onclick="btnRemove_Click" />
+                                            runat="server" Text="Remove" />
                             </div>
                     </Template>                
             </igmisc:WebGroupBox>
@@ -83,10 +82,9 @@
                      <%--<ig:WebTextEditor ID="txtEmployeeName" runat="server" 
                      CssClass="DefaultTextStyle" Width="150px">
                      </ig:WebTextEditor>--%>
-                     <ig:WebDropDown ID="drdRepEmployeeList" runat="server" Width="250px" 
+                     <ig:WebDropDown ID="drdEmployeeList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_EmployeeName %>" 
-                            StyleSetName="Office2010Blue" 
-                        onselectionchanged="drdRepEmployeeList_SelectionChanged">
+                            StyleSetName="Office2010Blue">
                         <Button Visible="False" />
                      </ig:WebDropDown>
                      <br /><br />           
@@ -99,8 +97,7 @@
                         <ig:WebDataGrid ID="DgvRepSearchDetails" runat="server" Height="120px" 
                             Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                            onrowselectionchanged="DgvRepSearchDetails_RowSelectionChanged">
+                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                             <Columns>
                                 <%--<ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
                                     Key="BoundCheckBoxField_0" Width="50px">
@@ -141,7 +138,7 @@
                         <div style="float:right">
                                 <%--<a class="button" href="" style="float:right">Assign</a>--%>
                                 <asp:Button ID="btnAssign" CssClass="Defaultbutton"
-                                    runat="server" Text="Assign" onclick="btnAssign_Click" />
+                                    runat="server" Text="Assign" />
                         </div>
                     </Template>
                 </igmisc:WebGroupBox>

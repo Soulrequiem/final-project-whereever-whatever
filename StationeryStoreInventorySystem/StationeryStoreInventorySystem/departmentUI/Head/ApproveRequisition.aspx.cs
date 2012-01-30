@@ -1,70 +1,45 @@
-﻿/***************************************************************************/
-/*  File Name       : ApproveRequisition.cs
-/*  Module Name     : View
-/*  Owner           : Wai Yan Ko Ko
-/*  class Name      : ApproveRequisition
-/*  Details         : Form for Approve Requisition
-/***************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 {
     public partial class ApproveRequisition : System.Web.UI.Page
     {
-        ApproveRejectRequisitionControl aprCtrl;
-        /// <summary>
-        /// Loads the ApproveRequisition form
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                FillRequisitionList();
-            }
-        }
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ApproveRequisitionCheckBox");
+            dt.Columns.Add("RequisitionID");
+            dt.Columns.Add("RequisitionDate/Time");
+            dt.Columns.Add("RequisitionBy");
+            dt.Columns.Add("RequisitionQty");
+            dt.Columns.Add("Remarks");
 
-        /// <summary>
-        /// Fill data to DataGrid
-        /// </summary>
-        /// <param name="dtApprove"></param>
-        private void FillRequisitionList()
-        {
-            try
-            {
-                aprCtrl = GetControl();
-                DataTable dtApprove = aprCtrl.PendingRequisitionList;
-                DgvRequisitionList.DataSource = dtApprove;
-                DgvRequisitionList.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+            DataRow dr = dt.NewRow();
+            dr[0] = "1";
+            dr[1] = "1we2we12321";
+            dr[2] = "1213sadsad";
+            dr[3] = "1ssdsfdf";
+            dr[4] = "1dsfdsfsdf";
+            //dr[5] = "iwojfowi";
+            dt.Rows.Add(dr);
 
-        private ApproveRejectRequisitionControl GetControl()
-        {
-            if (aprCtrl == null)
-                aprCtrl = new ApproveRejectRequisitionControl();
-            return aprCtrl;
-        }
+            dr = dt.NewRow();
+            dr[0] = "1";
+            dr[1] = "1we2we12321";
+            dr[2] = "1213sadsad";
+            dr[3] = "1ssdsfdf";
+            dr[4] = "1dsfdsfsdf";
+            //dr[5] = "jfiwofj";
+            dt.Rows.Add(dr);
 
-        protected void btnApprove_Click(object sender, EventArgs e)
-        {
-            //aprCtrl = GetControl();
-            //aprCtrl.SelectApproveRequisition(
+            DgvRequisitionList.DataSource = dt;
+            DgvRequisitionList.DataBind();
         }
     }
 }
-/********************************************/
-/********* End of the Class *****************/
-/********************************************/

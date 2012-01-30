@@ -889,24 +889,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collection ID:.
-        /// </summary>
-        internal static string SubmitRequisitionsToStore_CollectionID {
-            get {
-                return ResourceManager.GetString("SubmitRequisitionsToStore_CollectionID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Collection Point:.
-        /// </summary>
-        internal static string SubmitRequisitionsToStore_CollectionPoint {
-            get {
-                return ResourceManager.GetString("SubmitRequisitionsToStore_CollectionPoint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submit To Store.
         /// </summary>
         internal static string SubmitRequisitionsToStore_SubmitToStore {

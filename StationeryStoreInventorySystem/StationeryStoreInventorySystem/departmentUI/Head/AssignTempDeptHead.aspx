@@ -21,8 +21,7 @@
                     <ig:WebDataGrid ID="DgvCurrentAuthorizedPerson" runat="server" Height="130px" 
                         Width="530px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        onrowselectionchanged="DgvCurrentAuthorizedPerson_RowSelectionChanged">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         <ig:UnboundCheckBoxField Key="BoundCheckBoxField_0" Width="50px">
                         </ig:UnboundCheckBoxField>
@@ -63,9 +62,7 @@
                         </Behaviors>
                  </ig:WebDataGrid>
                          <div style="float:right">
-                                <%--<a class="button" href="" style="float:right">Remove</a>--%>
-                                <asp:Button ID="btnRemove" CssClass="Defaultbutton"
-                                            runat="server" Text="Remove" onclick="btnRemove_Click" />
+                                <a class="button" href="" style="float:right">Remove</a>
                         </div>
                 </Template>
             </igmisc:WebGroupBox>
@@ -79,10 +76,9 @@
                      <%--<ig:WebTextEditor ID="txtEmployeeName" runat="server" 
                      CssClass="DefaultTextStyle" Width="150px">
                      </ig:WebTextEditor>--%>
-                     <ig:WebDropDown ID="drdHeadEmployeeList" runat="server" Width="250px" 
+                     <ig:WebDropDown ID="drdEmployeeList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_EmployeeName %>" 
-                            StyleSetName="Office2010Blue" 
-                         onselectionchanged="drdHeadEmployeeList_SelectionChanged">
+                            StyleSetName="Office2010Blue">
                         <Button Visible="False" />
                      </ig:WebDropDown>
                      <br /><br />           
@@ -94,8 +90,7 @@
                             <ig:WebDataGrid ID="DgvTempDepteHeadSearchDetails" runat="server" Height="120px" 
                                 Width="530px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
-                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged">
+                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                                 <Columns>
                                     <%--ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
                                      Key="BoundCheckBoxField_0" Width="50px">
@@ -134,18 +129,22 @@
                                             </ig:CellEditing>
                                         </Behaviors>
                                     </ig:EditingCore>
-                                    <ig:Selection CellClickAction="Row" RowSelectType="Single">
-                                    </ig:Selection>
                                 </Behaviors>
                             </ig:WebDataGrid>
                             <br />
                             <div style="float:right">
-                                    <%--<a class="button" href="" style="float:right">Assign</a>--%>
-                                    <asp:Button ID="btnAssign" CssClass="Defaultbutton"
-                                            runat="server" Text="Assign" onclick="btnAssign_Click" />
+                                    <a class="button" href="" style="float:right">Assign</a>
                             </div>
                             <div style="float:right">
+                            <ig:WebTextEditor ID="txtaRemarks" runat="server" Width="200px" Height="50px" 
+                                NullText="<%$ Resources:WebResources, Text_Remarks %>">
+                            </ig:WebTextEditor>
                             </div>
+                            <div style="float:right;margin-right:10px">
+                                   <asp:Label CssClass="DefaultLabelstyle" 
+                                        ID="lblRemarks" runat="server" 
+                                        Text="Remarks:"/>
+                            </div>                 
                     </Template>
                 </igmisc:WebGroupBox>
 
