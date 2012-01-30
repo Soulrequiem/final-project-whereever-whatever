@@ -126,5 +126,12 @@ namespace SystemStoreInventorySystemUtil
             READ,
             HIDDEN
         }
+
+        public enum DISCREPANCY_TYPE
+        {
+            UNKNOWN,
+            ADD,
+            REDUCE
+        }
     }
 }
