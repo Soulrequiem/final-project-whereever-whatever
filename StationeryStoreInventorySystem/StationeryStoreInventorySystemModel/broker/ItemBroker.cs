@@ -139,7 +139,9 @@ namespace StationeryStoreInventorySystemModel.broker
         /// Get the Item List by Item Description
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// Returns the List of Item
+        /// </returns>
         public List<Item> GetItemReference(Item item)
         {
             List<Item> itemObj = inventory.Items.Where(r => r.Description.Contains(item.Description)).ToList();
