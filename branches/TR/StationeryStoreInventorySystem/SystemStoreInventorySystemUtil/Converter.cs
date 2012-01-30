@@ -8,6 +8,84 @@ namespace SystemStoreInventorySystemUtil
 {
     public class Converter
     {
+        public static Constants.DESIGNATION objToDesignation(object obj)
+        {
+            Constants.DESIGNATION designation = Constants.DESIGNATION.UNKNOWN;
+
+            return designation;
+        }
+
+        public static string GetDesignationText(Constants.DESIGNATION designation)
+        {
+            string designationText = null;
+            switch (designation)
+            {
+            }
+            return designationText;
+        }
+
+        
+
+        public static string GetDepartmentStatusText(Constants.DEPARTMENT_STATUS departmentStatus)
+        {
+            string departmentStatusText = null;
+
+            switch (departmentStatus)
+            {
+                case Constants.DEPARTMENT_STATUS.BLACKLIST:
+                    departmentStatusText = "Blacklist";
+                    break;
+                case Constants.DEPARTMENT_STATUS.HIDDEN:
+                    departmentStatusText = "Hidden";
+                    break;
+                case Constants.DEPARTMENT_STATUS.SHOW:
+                    departmentStatusText = "Show";
+                    break;
+                case Constants.DEPARTMENT_STATUS.UNBLACKLIST:
+                    departmentStatusText = "Unblacklist";
+                    break;
+            }
+
+            return departmentStatusText;
+        }
+
+        public static Constants.EMPLOYEE_ROLE objToEmployeeRole(object obj)
+        {
+            Constants.EMPLOYEE_ROLE status = Constants.EMPLOYEE_ROLE.UNKNOWN;
+
+            switch (objToShort(obj))
+            {
+                case 1:
+                    status = Constants.EMPLOYEE_ROLE.ADMIN;
+                    break;
+                case 2:
+                    status = Constants.EMPLOYEE_ROLE.EMPLOYEE;
+                    break;
+                case 3:
+                    status = Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE;
+                    break;
+                case 4:
+                    status = Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE;
+                    break;
+                case 5:
+                    status = Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD;
+                    break;
+                case 6:
+                    status = Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD;
+                    break;
+                case 7:
+                    status = Constants.EMPLOYEE_ROLE.STORE_CLERK;
+                    break;
+                case 8:
+                    status = Constants.EMPLOYEE_ROLE.STORE_MANAGER;
+                    break;
+                case 9:
+                    status = Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR;
+                    break;
+            }
+            return status;
+        }
+
         /// <summary>
         ///     Converts object to Requisition Status
         /// </summary>
@@ -221,6 +299,28 @@ namespace SystemStoreInventorySystemUtil
             return category;
         }
 
+        public static Constants.DEPARTMENT_STATUS objToDepartmentStatus(object obj)
+        {
+            Constants.DEPARTMENT_STATUS status = Constants.DEPARTMENT_STATUS.UNKNOWN;
+
+            switch (objToShort(obj))
+            {
+                case 1:
+                    status = Constants.DEPARTMENT_STATUS.SHOW;
+                    break;
+                case 2:
+                    status = Constants.DEPARTMENT_STATUS.HIDDEN;
+                    break;
+                case 3:
+                    status = Constants.DEPARTMENT_STATUS.BLACKLIST;
+                    break;
+                case 4:
+                    status = Constants.DEPARTMENT_STATUS.UNBLACKLIST;
+                    break;
+            }
+            return status;
+        }
+
         public static Constants.UNIT_OF_MEASURE objToUnitOfMeasure(object obj)
         {
             Constants.UNIT_OF_MEASURE unit = Constants.UNIT_OF_MEASURE.UNKNOWN;
@@ -407,13 +507,23 @@ namespace SystemStoreInventorySystemUtil
         {
             string result = "";
 
+            //switch (type)
+            //{
+            //    case DATE_CONVERTER.DATE:
+            //        result = dateTime.Month + "/" + dateTime.Day + "/" + dateTime.Year;
+            //        break;
+            //    case DATE_CONVERTER.DATETIME:
+            //        result = dateTime.Month + "/" + dateTime.Day + "/" + dateTime.Year + " " + dateTime.Hour + ":" + dateTime.Minute + ":" + dateTime.Second;
+            //        break;
+            //}
+
             switch (type)
             {
                 case DATE_CONVERTER.DATE:
-                    result = dateTime.Month + "/" + dateTime.Day + "/" + dateTime.Year;
+                    result = dateTime.ToString("yyyy-MM-dd");
                     break;
                 case DATE_CONVERTER.DATETIME:
-                    result = dateTime.Month + "/" + dateTime.Day + "/" + dateTime.Year + " " + dateTime.Hour + ":" + dateTime.Minute + ":" + dateTime.Second;
+                    result = dateTime.ToString("yyyy-MM-dd HH:mm tt");
                     break;
             }
 

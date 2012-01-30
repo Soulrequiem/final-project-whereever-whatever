@@ -2,11 +2,11 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
     <EntitySetMapping Name="CollectionMisseds">
-      <EntityTypeMapping TypeName="InventoryModel.CollectionMissed">
+      <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.CollectionMissed)">
         <MappingFragment StoreEntitySet="CollectionMissed">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -55,6 +55,7 @@
         <MappingFragment StoreEntitySet="Employee">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
@@ -87,6 +88,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="InventoryModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="PurchaseOrders">
       <EntityTypeMapping TypeName="InventoryModel.PurchaseOrder">
         <MappingFragment StoreEntitySet="PurchaseOrder">
@@ -108,18 +119,18 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
-          <ScalarProperty Name="AcceptedByQty" ColumnName="AcceptedByQty" />
+          <ScalarProperty Name="AcceptedQty" ColumnName="AcceptedQty" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Requisitions">
-      <EntityTypeMapping TypeName="InventoryModel.Requisition">
+      <EntityTypeMapping TypeName="IsTypeOf(InventoryModel.Requisition)">
         <MappingFragment StoreEntitySet="Requisition">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -195,21 +206,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="StockCards">
-      <EntityTypeMapping TypeName="InventoryModel.StockCard">
-        <MappingFragment StoreEntitySet="StockCard">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="StockCardDetails">
       <EntityTypeMapping TypeName="InventoryModel.StockCardDetail">
         <MappingFragment StoreEntitySet="StockCardDetails">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="InputFrom" ColumnName="InputFrom" />
-          <ScalarProperty Name="InputFromId" ColumnName="InputFromId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
           <ScalarProperty Name="Balance" ColumnName="Balance" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -292,6 +293,7 @@
       <EndProperty Name="Department">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="ContactId" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_department_employee2" TypeName="InventoryModel.FK_department_employee2" StoreEntitySet="Department">
       <EndProperty Name="Employee">
@@ -300,6 +302,7 @@
       <EndProperty Name="Department">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="HeadId" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="FK_department_employee3" TypeName="InventoryModel.FK_department_employee3" StoreEntitySet="Department">
       <EndProperty Name="Employee">
@@ -423,6 +426,14 @@
         <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Notification_Employee1" TypeName="InventoryModel.FK_Notification_Employee1" StoreEntitySet="Notification">
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="Id" ColumnName="EmployeeId" />
+      </EndProperty>
+      <EndProperty Name="Notification">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
     <AssociationSetMapping Name="FK_purchaseorder_employee1" TypeName="InventoryModel.FK_purchaseorder_employee1" StoreEntitySet="PurchaseOrder">
       <EndProperty Name="Employee">
         <ScalarProperty Name="Id" ColumnName="CreatedBy" />
@@ -507,14 +518,6 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_stockcard_employee1" TypeName="InventoryModel.FK_stockcard_employee1" StoreEntitySet="StockCard">
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="Id" ColumnName="CreatedBy" />
-      </EndProperty>
-      <EndProperty Name="StockCard">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="FK_stockcarddetails_employee1" TypeName="InventoryModel.FK_stockcarddetails_employee1" StoreEntitySet="StockCardDetails">
       <EndProperty Name="Employee">
         <ScalarProperty Name="Id" ColumnName="CreatedBy" />
@@ -573,11 +576,11 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_stockcard_item1" TypeName="InventoryModel.FK_stockcard_item1" StoreEntitySet="StockCard">
+    <AssociationSetMapping Name="FK_StockCardDetails_Item1" TypeName="InventoryModel.FK_StockCardDetails_Item1" StoreEntitySet="StockCardDetails">
       <EndProperty Name="Item">
         <ScalarProperty Name="Id" ColumnName="ItemId" />
       </EndProperty>
-      <EndProperty Name="StockCard">
+      <EndProperty Name="StockCardDetails">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -634,14 +637,6 @@
         <ScalarProperty Name="Id" ColumnName="RetrievalId" />
       </EndProperty>
       <EndProperty Name="RetrievalDetails">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="FK_stockcarddetails_stockcard1" TypeName="InventoryModel.FK_stockcarddetails_stockcard1" StoreEntitySet="StockCardDetails">
-      <EndProperty Name="StockCard">
-        <ScalarProperty Name="Id" ColumnName="StockCardId" />
-      </EndProperty>
-      <EndProperty Name="StockCardDetails">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

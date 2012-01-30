@@ -9,6 +9,7 @@
     <EntitySet Name="Employee" EntityType="InventoryModel.Store.Employee" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Item" EntityType="InventoryModel.Store.Item" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ItemPrice" EntityType="InventoryModel.Store.ItemPrice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Notification" EntityType="InventoryModel.Store.Notification" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PurchaseOrder" EntityType="InventoryModel.Store.PurchaseOrder" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PurchaseOrderDetails" EntityType="InventoryModel.Store.PurchaseOrderDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Requisition" EntityType="InventoryModel.Store.Requisition" store:Type="Tables" Schema="dbo" />
@@ -20,7 +21,6 @@
     <EntitySet Name="RetrievalDetails" EntityType="InventoryModel.Store.RetrievalDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role" EntityType="InventoryModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StockAdjustment" EntityType="InventoryModel.Store.StockAdjustment" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="StockCard" EntityType="InventoryModel.Store.StockCard" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StockCardDetails" EntityType="InventoryModel.Store.StockCardDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Supplier" EntityType="InventoryModel.Store.Supplier" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="InventoryModel.Store.User" store:Type="Tables" Schema="dbo" />
@@ -91,6 +91,10 @@
     <AssociationSet Name="FK_itemprice_employee1" Association="InventoryModel.Store.FK_itemprice_employee1">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="ItemPrice" EntitySet="ItemPrice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notification_Employee1" Association="InventoryModel.Store.FK_Notification_Employee1">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Notification" EntitySet="Notification" />
     </AssociationSet>
     <AssociationSet Name="FK_purchaseorder_employee1" Association="InventoryModel.Store.FK_purchaseorder_employee1">
       <End Role="Employee" EntitySet="Employee" />
@@ -196,20 +200,12 @@
       <End Role="Employee" EntitySet="Employee" />
       <End Role="StockAdjustment" EntitySet="StockAdjustment" />
     </AssociationSet>
-    <AssociationSet Name="FK_stockcard_employee1" Association="InventoryModel.Store.FK_stockcard_employee1">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="StockCard" EntitySet="StockCard" />
-    </AssociationSet>
-    <AssociationSet Name="FK_stockcard_item1" Association="InventoryModel.Store.FK_stockcard_item1">
-      <End Role="Item" EntitySet="Item" />
-      <End Role="StockCard" EntitySet="StockCard" />
-    </AssociationSet>
     <AssociationSet Name="FK_stockcarddetails_employee1" Association="InventoryModel.Store.FK_stockcarddetails_employee1">
       <End Role="Employee" EntitySet="Employee" />
       <End Role="StockCardDetails" EntitySet="StockCardDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK_stockcarddetails_stockcard1" Association="InventoryModel.Store.FK_stockcarddetails_stockcard1">
-      <End Role="StockCard" EntitySet="StockCard" />
+    <AssociationSet Name="FK_StockCardDetails_Item1" Association="InventoryModel.Store.FK_StockCardDetails_Item1">
+      <End Role="Item" EntitySet="Item" />
       <End Role="StockCardDetails" EntitySet="StockCardDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_supplier_employee1" Association="InventoryModel.Store.FK_supplier_employee1">
@@ -246,10 +242,10 @@
     </Key>
     <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
-    <Property Name="ContactId" Type="int" Nullable="false" />
+    <Property Name="ContactId" Type="int" />
     <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
     <Property Name="FaxNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
-    <Property Name="HeadId" Type="int" Nullable="false" />
+    <Property Name="HeadId" Type="int" />
     <Property Name="CollectionPointId" Type="int" />
     <Property Name="RepresentativeId" Type="int" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -274,7 +270,7 @@
     <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="DiscrepancyType" Type="int" Nullable="false" />
     <Property Name="Qty" Type="int" Nullable="false" />
-    <Property Name="Remarks" Type="text" Nullable="false" />
+    <Property Name="Remarks" Type="text" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -285,7 +281,7 @@
     <Property Name="RoleId" Type="int" Nullable="false" />
     <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
-    <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Designation" Type="int" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -318,6 +314,16 @@
     <Property Name="CreatedBy" Type="int" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Message" Type="text" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="PurchaseOrder">
     <Key>
       <PropertyRef Name="Id" />
@@ -345,7 +351,7 @@
     <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="Price" Type="money" Nullable="false" />
     <Property Name="Qty" Type="int" Nullable="false" />
-    <Property Name="AcceptedByQty" Type="int" Nullable="false" />
+    <Property Name="AcceptedQty" Type="int" />
   </EntityType>
   <EntityType Name="Requisition">
     <Key>
@@ -354,7 +360,7 @@
     <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="15" />
     <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="EmployeeId" Type="int" Nullable="false" />
-    <Property Name="Remarks" Type="text" Nullable="false" />
+    <Property Name="Remarks" Type="text" />
     <Property Name="ApprovedBy" Type="int" />
     <Property Name="ApprovedDate" Type="datetime" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -386,7 +392,7 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="RequisitionCollectionId" Type="int" Nullable="false" />
     <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
-    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="Qty" Type="int" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="int" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
@@ -399,7 +405,7 @@
     <Property Name="RequisitionId" Type="nvarchar" Nullable="false" MaxLength="15" />
     <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="Qty" Type="int" Nullable="false" />
-    <Property Name="DeliveredQty" Type="int" Nullable="false" />
+    <Property Name="DeliveredQty" Type="int" />
   </EntityType>
   <EntityType Name="Retrieval">
     <Key>
@@ -419,7 +425,7 @@
     <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
     <Property Name="NeededQty" Type="int" Nullable="false" />
-    <Property Name="ActualQty" Type="int" Nullable="false" />
+    <Property Name="ActualQty" Type="int" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -441,24 +447,13 @@
     <Property Name="CreatedBy" Type="int" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="StockCard">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="CreatedBy" Type="int" Nullable="false" />
-    <Property Name="Status" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="StockCardDetails">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="StockCardId" Type="int" Nullable="false" />
-    <Property Name="InputFrom" Type="int" Nullable="false" />
-    <Property Name="InputFromId" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="ItemId" Type="nvarchar" Nullable="false" MaxLength="4" />
+    <Property Name="Description" Type="text" Nullable="false" />
     <Property Name="Qty" Type="int" Nullable="false" />
     <Property Name="Balance" Type="int" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -541,7 +536,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_department_employee1">
-    <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+    <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
     <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
@@ -553,7 +548,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_department_employee2">
-    <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+    <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
     <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
@@ -693,6 +688,18 @@
       </Principal>
       <Dependent Role="ItemPrice">
         <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notification_Employee1">
+    <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+    <End Role="Notification" Type="InventoryModel.Store.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1008,30 +1015,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_stockcard_employee1">
-    <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
-    <End Role="StockCard" Type="InventoryModel.Store.StockCard" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StockCard">
-        <PropertyRef Name="CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_stockcard_item1">
-    <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
-    <End Role="StockCard" Type="InventoryModel.Store.StockCard" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Item">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StockCard">
-        <PropertyRef Name="ItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_stockcarddetails_employee1">
     <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
     <End Role="StockCardDetails" Type="InventoryModel.Store.StockCardDetails" Multiplicity="*" />
@@ -1044,15 +1027,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_stockcarddetails_stockcard1">
-    <End Role="StockCard" Type="InventoryModel.Store.StockCard" Multiplicity="1" />
+  <Association Name="FK_StockCardDetails_Item1">
+    <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
     <End Role="StockCardDetails" Type="InventoryModel.Store.StockCardDetails" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="StockCard">
+      <Principal Role="Item">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StockCardDetails">
-        <PropertyRef Name="StockCardId" />
+        <PropertyRef Name="ItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -53,8 +53,8 @@
     <Compile Include="brokerinterface\IRequisitionBroker.cs" />
     <Compile Include="brokerinterface\IRequisitionCollectionBroker.cs" />
     <Compile Include="brokerinterface\IRetrievalBroker.cs" />
-    <Compile Include="brokerinterface\IStockCardBroker.cs" />
     <Compile Include="brokerinterface\ISupplierBroker.cs" />
+    <Compile Include="broker\CollectionMissed.cs" />
     <Compile Include="broker\CollectionPointBroker.cs" />
     <Compile Include="broker\DepartmentBroker.cs" />
     <Compile Include="broker\DiscrepancyBroker.cs" />
@@ -65,13 +65,33 @@
     <Compile Include="broker\RequisitionBroker.cs" />
     <Compile Include="broker\RequisitionCollectionBroker.cs" />
     <Compile Include="broker\RetrievalBroker.cs" />
-    <Compile Include="broker\StockCardBroker.cs" />
     <Compile Include="broker\SupplierBroker.cs" />
+    <Compile Include="entity\CollectionPoint.cs" />
+    <Compile Include="entity\Department.cs" />
+    <Compile Include="entity\Discrepancy.cs" />
+    <Compile Include="entity\DiscrepancyDetail.cs" />
+    <Compile Include="entity\Employee.cs" />
     <Compile Include="entity\Inventory.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventory.edmx</DependentUpon>
     </Compile>
+    <Compile Include="entity\Item.cs" />
+    <Compile Include="entity\ItemPrice.cs" />
+    <Compile Include="entity\PurchaseOrder.cs" />
+    <Compile Include="entity\PurchaseOrderDetail.cs" />
+    <Compile Include="entity\Requisition.cs" />
+    <Compile Include="entity\RequisitionCollection.cs" />
+    <Compile Include="entity\RequisitionCollectionDetail.cs" />
+    <Compile Include="entity\RequisitionCollectionItem.cs" />
+    <Compile Include="entity\RequisitionDetail.cs" />
+    <Compile Include="entity\Retrieval.cs" />
+    <Compile Include="entity\RetrievalDetail.cs" />
+    <Compile Include="entity\Role.cs" />
+    <Compile Include="entity\StockAdjustment.cs" />
+    <Compile Include="entity\StockCardDetail.cs" />
+    <Compile Include="entity\Supplier.cs" />
+    <Compile Include="entity\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
