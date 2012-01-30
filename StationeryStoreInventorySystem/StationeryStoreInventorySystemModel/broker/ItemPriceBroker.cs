@@ -18,6 +18,7 @@ namespace StationeryStoreInventorySystemModel.broker
     public class ItemPriceBroker : IItemPriceBroker
     {
         #region IItemPriceBroker Members
+        
         private InventoryEntities inventory;
         private ItemPrice itemPriceObj = null;
         private List<ItemPrice> itemPriceList = null;
@@ -49,6 +50,30 @@ namespace StationeryStoreInventorySystemModel.broker
                 return itemPriceList;
             return null;
         }
+
+        public List<Supplier> GetPrioritySupplier(Item item)
+        {
+            List<Supplier> supplierList = new List<Supplier>();
+            SupplierBroker supplierBroker = new SupplierBroker(this.inventory);
+
+            itemPriceList = inventory.ItemPrices.Where(itemPrice => itemPrice.ItemId == item.Id).ToList<ItemPrice>();
+
+            Supplier supplier;
+
+            foreach (ItemPrice itemPrice in itemPriceList)
+            {
+                supplier = new Supplier();
+                supplier.Id = itemPrice.SupplierId;
+                supplier = supplierBroker.GetSupplier(supplier);
+
+                supplierList.Add(supplier);
+            }
+
+            supplierList.Sort();
+
+            return supplierList;
+        }
+
         /// <summary>
         ///  Insert ItemPrice data to the ItemPrice Table according to the ItemPrice Parameter
         ///   Return Constants.DB_STATUS 

@@ -11,6 +11,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
     {
         ItemPrice GetItemPrice(ItemPrice itemPrice);
         List<ItemPrice> GetAllItemPrice();
+        List<Supplier> GetPrioritySupplier(Item item);
         Constants.DB_STATUS Insert(ItemPrice newItemPrice);
         Constants.DB_STATUS Update(ItemPrice itemPrice);
         Constants.DB_STATUS Delete(ItemPrice itemPrice);
