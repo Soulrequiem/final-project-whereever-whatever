@@ -147,6 +147,8 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
+                collectionMissedObj = inventory.CollectionMisseds.Where(c => c.Id == collectionMissed.Id).First();
+                collectionMissedObj.Status = 2;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
