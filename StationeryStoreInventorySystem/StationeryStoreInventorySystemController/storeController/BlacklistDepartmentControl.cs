@@ -13,7 +13,7 @@ namespace StationeryStoreInventorySystemController.storeController
     public class BlacklistDepartmentControl
     {
         private IDepartmentBroker departmentBroker;
-        private ICollectionMissed collectionMissedBroker;
+        private ICollectionMissedBroker collectionMissedBroker;
         
         private Employee currentEmployee;
 
