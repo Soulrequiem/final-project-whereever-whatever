@@ -114,6 +114,8 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
+              //  cop = inventory.CollectionPoints.Where(c => c.Id == collectionPoint.Id).First();
+                
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
