@@ -13,7 +13,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         LoginControl lgCtrl;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lgCtrl = new LoginControl();
         }
 
         protected void btnSignIn_Click(object sender, EventArgs e)
@@ -23,11 +23,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
            
            
            //Master.FindControl("NavigationPanel").Visible = true;
+            lgCtrl.SelectLogin(txtUsername.Text, txtPassword.Text); 
+
             Session["userName"] = txtUsername.Text.Trim();
             Session["LoadFirstTime"] = true;
             Response.Redirect("~/commonUI/RequisitionDetails.aspx");
 
-            lgCtrl.SelectLogin(txtUsername.Text, txtPassword.Text); 
+            
         }
         private LoginControl GetControl()
         { 
