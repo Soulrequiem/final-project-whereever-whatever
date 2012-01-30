@@ -31,6 +31,8 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable dt;
         private DataRow dr;
 
+        private DataColumn[] dataColumn;
+
         public CreateDiscrepencyReportControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
@@ -41,6 +43,32 @@ namespace StationeryStoreInventorySystemController.storeController
 
             discrepancy = new Discrepancy();
             discrepancyDetailList = new System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail>();
+
+
+        }
+
+        public DataTable DiscrepancyDetailList
+        {
+            get 
+            {
+                dt = new DataTable();
+
+                dt.Columns.AddRange(dataColumn);
+
+                foreach (DiscrepancyDetail temp in discrepancyDetailList)
+                {
+                    dr = dt.NewRow();
+                    dr["DiscrepancyDetailId"] = temp.Id;
+                    dr["ItemNo"] = temp.Item.Id;
+                    dr["ItemDescription"] = temp.Item.Description;
+                    dr["Quantity"] = temp.Qty;
+                    dr["Price"] = temp.Item.Cost;
+                    dr["Reason"] = temp.Remarks;
+                    dt.Rows.Add(dr);
+                }
+
+                return dt;
+            }
         }
 
         /// <summary>
@@ -58,10 +86,7 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return value of this method is resultItem.</returns>
         public Item SelectItemDescription(string itemDescription)
         {
-            Item item = new Item();
-            item.Description = itemDescription;
-            Item resultItem = itemBroker.GetItem(item);
-            return resultItem;
+            return Util.GetItem(itemBroker, itemDescription);
         }
 
        
@@ -87,24 +112,45 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="discrepancyDetail"></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable SelectAdd(DiscrepancyDetail discrepancyDetail)
+        public Constants.ACTION_STATUS SelectAdd(string itemId, int qty, string reason)
         {
-            dt = new DataTable();
-            //discrepancy = new Discrepancy();
-           
-            discrepancyDetailList.Add(discrepancyDetail);
-            foreach (DiscrepancyDetail temp in discrepancyDetailList)
-            {
-                dr = dt.NewRow();
-                dr["itemNo"] = temp.Item.Id;
-                dr["itemDescription"] = temp.Item.Description;
-                dr["quantity"] = temp.Qty;
-                dr["price"] = temp.Item.Cost;
-                dr["reason"] = temp.Remarks;
-                dt.Rows.Add(dr);
-            }
-            return dt;
+            Constants.ACTION_STATUS addStatus = Constants.ACTION_STATUS.UNKNOWN;
 
+            Item item = new Item();
+            item.Id = itemId;
+            item = itemBroker.GetItem(item);
+
+            if (item != null && reason != String.Empty)
+            {
+
+                int discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.UNKNOWN);
+                if (qty > 0)
+                {
+                    discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.ADD);
+                }
+                else
+                {
+                    discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.REDUCE);
+                }
+
+                DiscrepancyDetail discrepancyDetail = new DiscrepancyDetail(discrepancyBroker.GetDiscrepancyDetailId(), discrepancy, item, discrepancyType, qty, reason);
+
+                if (!discrepancyDetailList.Contains(discrepancyDetail))
+                {
+                    discrepancyDetailList.Add(discrepancyDetail);
+                    addStatus = Constants.ACTION_STATUS.SUCCESS;
+                }
+                else
+                {
+                    addStatus = Constants.ACTION_STATUS.FAIL;
+                }
+            }
+            else
+            {
+                addStatus = Constants.ACTION_STATUS.FAIL;
+            }
+            
+            return addStatus;
         }
 
         //public Constants.ACTION_STATUS SelectRemove(DiscrepancyDetail discrepancyDetail)
@@ -128,23 +174,23 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="discrepancyDetail"></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable SelectRemove(DiscrepancyDetail discrepancyDetail)
+        public Constants.ACTION_STATUS SelectRemove(int index)
         {
-            dt = new DataTable();
-            
-            //discrepancyDetailList = new List<DiscrepancyDetail>();
-            discrepancyDetailList.Remove(discrepancyDetail);
-            foreach (DiscrepancyDetail temp in discrepancyDetailList)
+            Constants.ACTION_STATUS removeStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            if (discrepancyDetailList.Count >= index)
             {
-                dr = dt.NewRow();
-                dr["itemNo"] = temp.Item.Id;
-                dr["itemDescription"] = temp.Item.Description;
-                dr["quantity"] = temp.Qty;
-                dr["price"] = temp.Item.Cost;
-                dr["reason"] = temp.Remarks;
-                dt.Rows.Add(dr);
+                DiscrepancyDetail discrepancyDetail = discrepancyDetailList.ElementAt(index - 1);
+
+                discrepancyDetailList.Remove(discrepancyDetail);
+                removeStatus = Constants.ACTION_STATUS.SUCCESS;
             }
-            return dt;
+            else
+            {
+                removeStatus = Constants.ACTION_STATUS.FAIL;
+            }
+            
+            return removeStatus;
         }
 
         /// <summary>
@@ -165,11 +211,12 @@ namespace StationeryStoreInventorySystemController.storeController
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             
             discrepancy.DiscrepancyDetails = discrepancyDetailList;
-            Constants.DB_STATUS dbStatus = discrepancyBroker.Insert(discrepancy);
-            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+
+            if (discrepancyBroker.Insert(discrepancy) == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
                 status = Constants.ACTION_STATUS.FAIL;
+
             return status;
         }
     }
