@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/commonUI/MasterPage.Master" AutoEventWireup="true" CodeBehind="RequisitionDetails.aspx.cs" Inherits="SA34_Team9_StationeryStoreInventorySystem.commonUI.RequisitionDetails" %>
 
+<%@ Register Assembly="Infragistics35.WebUI.WebDataInput.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
+    Namespace="Infragistics.WebUI.WebDataInput" TagPrefix="igtxt" %>
+
 <%@ Register Assembly="Infragistics35.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
     Namespace="Infragistics.Web.UI.EditorControls" TagPrefix="ig" %>
 <%@ Register Assembly="Infragistics35.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
@@ -15,10 +18,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
     <div class="print">
-        <asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
+        <%--<asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
           onmouseout="javascript:this.style.cursor='pointer'"  ImageUrl="~/Images/Common/print.png" 
-          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>
+          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>--%>
         <%--<img alt="Print" src="../Images/Common/print.png" />--%>
+        <asp:ImageButton ID="Print" runat="server" 
+            ImageUrl="~/Images/Common/print.png" Width="30px" Height="45px" 
+            ToolTip="Print" />
     </div>
     
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
