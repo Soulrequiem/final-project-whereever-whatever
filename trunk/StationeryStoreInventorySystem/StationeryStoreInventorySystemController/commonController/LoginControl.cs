@@ -37,6 +37,7 @@ namespace StationeryStoreInventorySystemController.commonController
                 employee = employeeBroker.GetEmployee(employee);
 
                 Util.PutSession(Util.employeeSessionKey, employee); // put employee object to session for validating user later
+                Util.PutSession("Uname", employee.Name);
 
                 isLogin = Constants.ACTION_STATUS.SUCCESS;
             }
