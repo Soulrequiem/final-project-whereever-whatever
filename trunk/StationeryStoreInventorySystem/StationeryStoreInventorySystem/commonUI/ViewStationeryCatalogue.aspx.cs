@@ -12,11 +12,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.commonController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class ViewStationeryCatalogue : System.Web.UI.Page
     {
+        private ViewStationeryCatalogueControl viewStationeryCatalogueControl;
+
         /// <summary>
         /// Loads the ViewStationeryCatalogue form
         /// </summary>  
@@ -49,6 +52,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
             if (!IsPostBack)
             {
+                viewStationeryCatalogueControl = new ViewStationeryCatalogueControl();
+                this.FillStationeryList(viewStationeryCatalogueControl.ItemList);
                 //FillStationeryList();
                 //FillItems();
             }

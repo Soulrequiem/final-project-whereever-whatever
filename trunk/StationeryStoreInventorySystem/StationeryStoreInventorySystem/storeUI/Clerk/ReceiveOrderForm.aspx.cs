@@ -93,7 +93,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             //*********update purchase order
             //*********insert stock card details in stock card
-            receiveOrderControl.SelectReceive(selectedItem); 
+            receiveOrderControl.SelectReceived((DataTable)DgvStationeryOrder.DataSource); 
         } 
     }
 }

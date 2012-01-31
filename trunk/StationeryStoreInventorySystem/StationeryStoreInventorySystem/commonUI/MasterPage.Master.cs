@@ -14,11 +14,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
-                lblLoggedinTime.Text = "Log-in Time: " + System.DateTime.Now.ToString();
-                lblUserName.Text = "welcome, "+ Session["Uname"].ToString();
+                lblLoggedinTime.Text = "Log-in Time: " + SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
+                if (StationeryStoreInventorySystemController.Util.EmployeeName() != null)
+                {
+                    lblUserName.Text = "Welcome, " + StationeryStoreInventorySystemController.Util.EmployeeName();
+                }
                 LoadNavigationMenu();
+                removeAllSession(); // remove all session stored (open a new page)
             }
         }
+
+        private void removeAllSession()
+        {
+            LogIn.removeSession();
+        }
+
         /// <summary>
         /// Loads the navigation as per user level
         /// </summary>

@@ -107,6 +107,10 @@
                                      StyleSetName="Office2010Blue" 
                                      onselectionchanged="drdItemList_SelectionChanged">
                                     <Button Visible="False" />
+                                    <Items>
+                                        <ig:DropDownItem Selected="False" Text="DropDown Item" Value="">
+                                        </ig:DropDownItem>
+                                    </Items>
                                 </ig:WebDropDown>
                             </td>
                         </tr>

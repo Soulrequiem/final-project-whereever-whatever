@@ -11,11 +11,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class LogIn : System.Web.UI.Page
     {
-        LoginControl lgCtrl;
+        private static readonly string sessionKey = "LogIn";
+
+        private LoginControl lgCtrl;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //btnSignIn.Attributes.Add("onclick", "return validate()");
-            
+            if (!IsPostBack)
+            {
+                lgCtrl = GetControl();
+                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, lgCtrl);
+            }
+            else
+            {
+                lgCtrl = (LoginControl) StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
         }
 
         protected void btnSignIn_Click(object sender, EventArgs e)
@@ -25,13 +35,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
            
            
            //Master.FindControl("NavigationPanel").Visible = true;
-            lgCtrl = GetControl();
             if (txtUsername.Text != "" && txtPassword.Text != "")
             {
                 if (Constants.ACTION_STATUS.SUCCESS == lgCtrl.SelectLogin(txtUsername.Text, txtPassword.Text))
                 {
                     Session["userName"] = txtUsername.Text.Trim();
                     Session["LoadFirstTime"] = true;
+                    removeSession();
                     Response.Redirect("~/commonUI/RequisitionDetails.aspx");
                     
                 }
@@ -46,6 +56,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             if (lgCtrl == null)
                 lgCtrl = new LoginControl();
             return lgCtrl;
+        }
+
+        public static void removeSession()
+        {
+            StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
         }
     }
 

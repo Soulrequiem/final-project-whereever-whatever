@@ -16,7 +16,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             if (!IsPostBack)
             {
                 ViewSupplierListControl VSLobj = new ViewSupplierListControl();
-                DataTable dt = VSLobj.GetSupplierList();
+                DataTable dt = VSLobj.SupplierList;
                 FillSupplierList(dt);
             }
         }

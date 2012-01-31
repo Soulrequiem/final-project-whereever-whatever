@@ -35,7 +35,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             if (!IsPostBack)
             {
-                DataTable dt = GetsrtsControl().ApprovedRequisitionList;// GetApprovedRequisition();
+                DataTable dt = GetsrtsControl().ApprovedRequisitionList;
                 FillRequisitionList(dt);
             }
         }

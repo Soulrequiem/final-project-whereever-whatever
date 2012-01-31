@@ -12,11 +12,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class ChangePassword : System.Web.UI.Page
     {
-        ChangePasswordControl CPobj = new ChangePasswordControl();
+        private ChangePasswordControl CPobj;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ChangePasswordControl CPobj = new ChangePasswordControl();
-
+            CPobj = CPobjGetControl();
         }
 
         //protected void btnChange_Click(object sender, EventArgs e)
@@ -39,22 +38,29 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             string oldPassword = txtOldPassword.Text;
             string newPassword = txtNewPassword.Text;
             string confirmPassword = txtConfirmPassword.Text;
-            if (newPassword == confirmPassword)
+            string message = String.Empty;
+            if (newPassword.Equals(confirmPassword))
             {
                 if (CPobj.SelectChange(oldPassword, newPassword) == Constants.ACTION_STATUS.SUCCESS)
-                    lblStatusMessage.Text = "Password change successfully";
+                    message = "Password change successfully";
                 else
-                    lblStatusMessage.Text = "Password is not correct.Try again.";
+                    message = "Password is not correct.Try again.";
             }
+            else
+            {
+                message = "You need to fill the same password.";
+            }
+
+            lblStatusMessage.Text = message;
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            //txtOldPassword.Text = "";
-            //txtNewPassword.Text = "";
-            //txtConfirmPassword.Text = "";
+            lblStatusMessage.Text = String.Empty;
+            txtOldPassword.Text = String.Empty;
+            txtNewPassword.Text = String.Empty;
+            txtConfirmPassword.Text = String.Empty;
         }
-
         private ChangePasswordControl CPobjGetControl()
         {
             if (CPobj == null)
