@@ -15,7 +15,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         ChangePasswordControl CPobj = new ChangePasswordControl();
         protected void Page_Load(object sender, EventArgs e)
         {
-            ChangePasswordControl CPobj = new ChangePasswordControl();
+            //ChangePasswordControl CPobj = new ChangePasswordControl();
 
         }
 
@@ -46,6 +46,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 else
                     lblStatusMessage.Text = "Password is not correct.Try again.";
             }
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            //txtOldPassword.Text = "";
+            //txtNewPassword.Text = "";
+            //txtConfirmPassword.Text = "";
+        }
+
+        private ChangePasswordControl CPobjGetControl()
+        {
+            if (CPobj == null)
+                CPobj = new ChangePasswordControl();
+            return CPobj;
         }
     }
 }
