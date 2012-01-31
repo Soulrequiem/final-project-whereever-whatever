@@ -44,7 +44,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             try
             {
                 vavlCtrl = GetControl();
-                DataTable dtAdjustmentList = vavlCtrl.GetStockAdjustmentList();
+                DataTable dtAdjustmentList = vavlCtrl.StockAdjustmentList;
                 DgvAdjustmentVoucherList.DataSource = dtAdjustmentList;
                 DgvAdjustmentVoucherList.DataBind();
             }
@@ -80,7 +80,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             try
             {
                 vavlCtrl = GetControl();
-                DataTable dtAdjustmentReport = vavlCtrl.SelectAdjustmentVoucher(voucherNo);
+                DataTable dtAdjustmentReport = vavlCtrl.StockAdjustmentDetail;
                 DgvAdjustmentVoucher.DataSource = dtAdjustmentReport;
                 DgvAdjustmentVoucher.DataBind();
             }

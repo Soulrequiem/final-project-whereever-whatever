@@ -14,7 +14,7 @@
         <ig:WebDataGrid ID="DgvRequisitionList" runat="server" 
             DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
             Height="400px" Width="700px">
             <Columns>
                 <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" Width="50px">

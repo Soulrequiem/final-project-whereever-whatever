@@ -18,7 +18,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 {
     public partial class ApproveRequisition : System.Web.UI.Page
     {
-        ApproveRejectRequisitionControl aprCtrl;
+        private static readonly string sessionKey = "ApproveRequisition";
+
+        private ApproveRejectRequisitionControl aprCtrl;
         /// <summary>
         /// Loads the ApproveRequisition form
         /// </summary>
@@ -28,8 +30,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             if (!IsPostBack)
             {
-                FillRequisitionList();
+                aprCtrl = GetControl();
+                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, aprCtrl);
+                
             }
+            else
+            {
+                aprCtrl = (ApproveRejectRequisitionControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+            FillRequisitionList();
         }
 
         /// <summary>
@@ -40,9 +49,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             try
             {
-                aprCtrl = GetControl();
-                DataTable dtApprove = aprCtrl.PendingRequisitionList;
-                DgvRequisitionList.DataSource = dtApprove;
+                DgvRequisitionList.DataSource = aprCtrl.PendingRequisitionList;
                 DgvRequisitionList.DataBind();
             }
             catch (Exception e)
@@ -60,8 +67,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            //aprCtrl = GetControl();
-            //aprCtrl.SelectApproveRequisition(
+            for (int i = 0; i < DgvRequisitionList.Rows.Count; i++)
+            {
+                Infragistics.Web.UI.Framework.Data.UnboundCheckboxDataField checkbox = (Infragistics.Web.UI.Framework.Data.UnboundCheckboxDataField)DgvRequisitionList.GetDataView().UnboundFields["ApproveRequisitionCheckBox"];
+                Response.Write(checkbox.Name + " " + checkbox.he + "<br />");
+            }
         }
     }
 }
