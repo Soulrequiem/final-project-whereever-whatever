@@ -36,10 +36,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             try
             {
-                //bldCtrl = GetControl();
-                //DataTable dtDepartment = bldCtrl.
-                //DgvDepartmentList.DataSource = dtDepartment;
-                //DgvDepartmentList.DataBind();
+                bldCtrl = GetControl();
+                DataTable dtDepartment = bldCtrl.DepartmentList;
+                DgvDepartmentList.DataSource = dtDepartment;
+                DgvDepartmentList.DataBind();
             }
             catch (Exception e)
             {

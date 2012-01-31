@@ -29,9 +29,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             if (!IsPostBack)
             {
-                //FillAdjustmentList();
+                FillAdjustmentList();
                 //FillAdjustmentDetails();
-                //FillAdjustmentReport();
+                FillAdjustmentReport();
             }
         }
 
