@@ -10,10 +10,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
     <div class="print">
-        <asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
+        <%--<asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
           onmouseout="javascript:this.style.cursor='pointer'"  ImageUrl="~/Images/Common/print.png" 
-          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>
+          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>--%>
         <%--<img alt="Print" src="../../Images/Common/print.png" />--%>
+        <asp:ImageButton ID="Print" runat="server" 
+            ImageUrl="~/Images/Common/print.png" Width="30px" Height="45px" 
+            ToolTip="Print" />
     </div>
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <br />
