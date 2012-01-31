@@ -30,7 +30,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             if (!IsPostBack)
             {
-                //FillCurrentRepresentativeList();
+                FillCurrentRepresentativeList();
                 //FillEmployee()
             }
         }
