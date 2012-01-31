@@ -13,7 +13,7 @@ namespace StationeryStoreInventorySystem
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            StationeryStoreInventorySystemController.Util.GetItemTable(); // prepare items
         }
 
         protected void Session_Start(object sender, EventArgs e)
