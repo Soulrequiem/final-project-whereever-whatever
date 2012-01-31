@@ -35,7 +35,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             if (!IsPostBack)
             {
-                DataTable dt = GetsrtsControl().GetApprovedRequisition();
+                DataTable dt = GetsrtsControl().ApprovedRequisitionList;// GetApprovedRequisition();
                 FillRequisitionList(dt);
             }
         }
@@ -82,7 +82,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             try
             {
-                GetsrtsControl().SelectSubmit();
+                //GetsrtsControl().SelectSubmit();
             }
             catch (Exception ex)
             {
