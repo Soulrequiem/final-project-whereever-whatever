@@ -109,6 +109,9 @@ namespace SystemStoreInventorySystemUtil
                 case 4:
                     status = Constants.REQUISITION_STATUS.SUBMITTED;
                     break;
+                case 5:
+                    status = Constants.REQUISITION_STATUS.WITHDRAW;
+                    break;
             }
             return status;
         }
@@ -129,6 +132,9 @@ namespace SystemStoreInventorySystemUtil
                     break;
                 case Constants.REQUISITION_STATUS.SUBMITTED:
                     status = "Submitted";
+                    break;
+                case Constants.REQUISITION_STATUS.WITHDRAW:
+                    status = "Withdraw";
                     break;
             }
             return status;

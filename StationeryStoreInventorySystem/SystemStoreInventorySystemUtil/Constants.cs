@@ -29,7 +29,8 @@ namespace SystemStoreInventorySystemUtil
             PENDING,
             APPROVED,
             REJECTED,
-            SUBMITTED
+            SUBMITTED,
+            WITHDRAW
         }
 
         public enum COLLECTION_STATUS
