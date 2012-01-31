@@ -13,5 +13,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
 
         }
+
+        protected void btnSend_Click(object sender, EventArgs e)
+        {
+            //if (txtemailaddress.Text == "")
+            //    lblStatusMessage.Text = "Enter your Email address.";
+        }
     }
 }

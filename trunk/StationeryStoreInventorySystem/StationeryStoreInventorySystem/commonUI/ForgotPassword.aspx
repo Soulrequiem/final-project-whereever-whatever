@@ -4,19 +4,22 @@
 <%@ Register assembly="Infragistics35.WebUI.WebResizingExtender.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI" tagprefix="igui" %>
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<script type = "text/javascript" id = "igClientScript">
-    function btnSend_Click(name) 
-    {
-        if (name.txtemailaddress.value == "")
-            document.getElementById["lblStatusMessage"].Text = "Enter your Email Address.";
+<script type = "text/javascript">
+    function EmailCheck() {
+        if (document.getElementById('MainContent_WebGroupBox1_txtemailaddress').value == "")
+        {
+            document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Enter your Email Address.";
+            return true;
+        }
         else 
         {
             var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (emailPattern.test(elementValue) == false)
-                document.getElementById["lblStatusMessage"].Text = "Enter your correct Email Address.";
-            else
-                name.submit();
+            if (emailPattern.test(elementValue) == false) {
+                document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Enter your correct Email Address.";
+                return false;
+            }
         }
+        return true;
     }
 </script>
 </asp:Content>
@@ -33,33 +36,31 @@
                <Template>
                    <br />
                    <table>
-                   <tr>
-                       <td>
-                           <asp:Label CssClass="DefaultLabelstyle" 
-                           ID="Label2" runat="server" 
-                           Text="<%$ Resources:WebResources, ForgotPassword_Email %>"/>
-                       </td>
-                       <td>
-                           <ig:WebTextEditor ID="txtemailaddress" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_email %>">
-                           </ig:WebTextEditor><br />
-                       </td>
-                   </tr>
-                   <tr>
-                       <td>       
-                            <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblStatusMessage" runat="server" />
-                        </td>
-                    </tr>
-                       </td>
-                       <td>
-                           <div style="float:right" class="button">
-                               <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="Defaultbutton" 
-                                   onclick="btnSend_Click(this.form)"/>
-                           </div>
-                       </td>
+                       <tr>
+                           <td>
+                               <asp:Label CssClass="DefaultLabelstyle" 
+                               ID="Label2" runat="server" 
+                               Text="<%$ Resources:WebResources, ForgotPassword_Email %>"/>
+                           </td>
+                           <td>
+                               <ig:WebTextEditor ID="txtemailaddress" runat="server" 
+                                CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_email %>">
+                               </ig:WebTextEditor><br />
+                           </td>
+                       </tr>
+                       <tr>
+                           <td  style="width:150px">       
+                                <asp:Label CssClass="ErrorLabelstyle" 
+                                ID="lblStatusMessage" runat="server" />
+                            </td>
+                           <td>
+                               <div style="float:right" class="button">
+                                   <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="Defaultbutton" 
+                                    OnClientClick = "return EmailCheck();" onclick="btnSend_Click"/>
+                               </div>
+                           </td>
                        
-                   </tr>
+                       </tr>
                  </table>
                </Template>
           </igmisc:WebGroupBox>
