@@ -11,3 +11,10 @@
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     font-size:small;
 }
+
+.ErrorLabelstyle
+{
+    font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+    font-size: small;
+    color: #FF0000;
+}
