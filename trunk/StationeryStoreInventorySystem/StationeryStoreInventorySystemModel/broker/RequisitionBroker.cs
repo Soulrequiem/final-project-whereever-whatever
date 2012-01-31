@@ -37,7 +37,8 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             if (requisition.Status != null)
             {
-                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id && reqObj.Status == Converter.objToInt(requisition.Status)).First();
+                int status = Converter.objToInt(requisition.Status);
+                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id && reqObj.Status == status).First();
             }
             else
             {
@@ -71,10 +72,11 @@ namespace StationeryStoreInventorySystemModel.broker
         }
 
         public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus)
-         {
-             reqList = inventory.Requisitions.Where(reqObj => reqObj.Status == Converter.objToInt(requisitionStatus)).ToList<Requisition>();
-             return reqList;
-         }
+        {
+            int status = Converter.objToInt(requisitionStatus);
+            reqList = inventory.Requisitions.Where(reqObj => reqObj.Status == status).ToList<Requisition>();
+            return reqList;
+        }
 
         /// <summary>
         /// Insert Requisition data to the Requisition Table according to the Requisition Parameter
@@ -258,28 +260,36 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public string GetRequisitionId(Requisition requisition)
         {
-            Requisition lastRequisition = inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).OrderBy(r => r.Id).Last();
-            
             int idInt;
             string newYr;
-            if (lastRequisition != null)
+            if (inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).Count() > 0)
             {
-                string requisitionId = lastRequisition.Id;
-                string[] stringList = requisitionId.Split('/');
-                string idString = stringList[1];
-                idInt = Converter.objToInt(idString);
+                Requisition lastRequisition = inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).OrderBy(r => r.Id).First();
 
-                int yearInt = DateTime.Now.Year;
-                string yrString = yearInt.ToString();
-                char[] charYr = yrString.ToCharArray();
-                newYr = charYr[2].ToString() + charYr[3].ToString();
-                if (newYr.Equals(stringList[2]))
+                if (lastRequisition != null)
                 {
-                    idInt++;
+                    string requisitionId = lastRequisition.Id;
+                    string[] stringList = requisitionId.Split('/');
+                    string idString = stringList[1];
+                    idInt = Converter.objToInt(idString);
+
+                    int yearInt = DateTime.Now.Year;
+                    string yrString = yearInt.ToString();
+                    char[] charYr = yrString.ToCharArray();
+                    newYr = charYr[2].ToString() + charYr[3].ToString();
+                    if (newYr.Equals(stringList[2]))
+                    {
+                        idInt++;
+                    }
+                    else
+                    {
+                        idInt = 1;
+                    }
                 }
                 else
                 {
                     idInt = 1;
+                    newYr = DateTime.Now.Year.ToString().Substring(2);
                 }
             }
             else
@@ -287,6 +297,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 idInt = 1;
                 newYr = DateTime.Now.Year.ToString().Substring(2);
             }
+
             return requisition.Department.Id + "/" + idInt + "/" + newYr;
         }
 
