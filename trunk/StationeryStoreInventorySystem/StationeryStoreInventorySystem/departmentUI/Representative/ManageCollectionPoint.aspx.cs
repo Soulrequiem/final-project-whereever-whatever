@@ -22,7 +22,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
          private ManageCollectionPointControl GetMcpControl()
                  {
                      if (mngColPntCtrl == null)
-                    mngColPntCtrl = new ManageCollectionPointControl();
+                        mngColPntCtrl = new ManageCollectionPointControl();
                     return mngColPntCtrl;
                
                  }

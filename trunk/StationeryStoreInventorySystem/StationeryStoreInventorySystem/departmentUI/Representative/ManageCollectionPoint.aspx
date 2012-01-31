@@ -8,12 +8,12 @@
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <script type = "text/javascript" id = "igClientScript">
-    function btnSave_Click(name) 
-    {
-        if (name.drdCollectionList.value == "")
-            document.getElementById["lblStatusMessage"].Text = "Enter Collection Point.";
-        else
-            name.submit();
+    function Save() {
+        if (document.getElementById('MainContent_GroupBox_drdCollectionList').value == "") {
+            document.getElementById("MainContent_GroupBox_lblStatusMessage").innerHTML = "Enter Collection Point.";
+            return false;
+        }
+        return true;
     }
 </script>
 </asp:Content>
@@ -57,7 +57,7 @@
                         <div style="float:left">
                             <asp:Label CssClass="DefaultLabelstyle" 
                                 ID="Label3" runat="server" 
-                                Text="<%$ Resources:WebResources, ManageCollectionPoint_SelectNewCollectionPoint %>"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                Text="<%$ Resources:WebResources, ManageCollectionPoint_SelectNewCollectionPoint %>"/>
                         </div>
                         <div style="float:left">
                             <%--<ig:WebDropDown ID="drpCollectionList" runat="server" Width="300px">
@@ -67,18 +67,16 @@
                             StyleSetName="Office2010Blue" 
                                 onselectionchanged="drdCollectionList_SelectionChanged">
                      </ig:WebDropDown>
+                     <div style="float:right">                        
+                            <asp:Button id="btnSave" CssClass="Defaultbutton"
+                              runat="server" Text="Save" onclick="btnSave_Click" OnClientClick="return Save();"/>
+                    </div>
                      <br />
                         <div style = "float:left">
                             <asp:Label CssClass="DefaultLabelstyle"  
                             ID="lblStatusMessage" runat="server"/>
                         </div>
                         </div>
-                        <div style="float:left">
-                        &nbsp;&nbsp;&nbsp;
-                            <asp:Button id="btnSave" CssClass="Defaultbutton"
-<<<<<<< .mine                                  runat="server" Text="Save" onclick="btnSave_Click(this.form)"/>
-=======                                  runat="server" Text="Save" onclick="drdCollectionList_SelectionChanged"/>
->>>>>>> .theirs                        </div>
                 </Template>
             </igmisc:WebGroupBox>
 </div>
