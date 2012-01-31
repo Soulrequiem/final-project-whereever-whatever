@@ -17,8 +17,7 @@ using StationeryStoreInventorySystemController.departmentController;
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class UpdateCollectionByItems : System.Web.UI.Page
-    {
-        
+    {      
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
