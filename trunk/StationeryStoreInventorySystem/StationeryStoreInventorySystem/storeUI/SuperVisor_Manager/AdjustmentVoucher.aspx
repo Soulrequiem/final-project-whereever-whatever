@@ -7,7 +7,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="print">
-        <img alt="Print" src="../Images/Common/print.png" />
+        <%--<img alt="Print" src="../Images/Common/print.png" />--%>
+        <asp:ImageButton ID="Print" runat="server" 
+            ImageUrl="~/Images/Common/print.png" Width="30px" Height="45px" 
+            ToolTip="Print" />
     </div> 
     <div class="ContentDivStyle">
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
@@ -97,6 +100,9 @@
                    <asp:Button ID="btnSave" runat="server" CssClass="DefaultVeryLargebutton"
                      Text="<< Back to Issue Adjustment Voucher" />
             </div>
+            <div style = "float:right; padding-right: 20px">
+                <asp:Button ID="btnBack" runat="server" CssClass="DefaultVeryLargebutton"
+                     Text="Go to View Adjustment Voucher List>>" />
+            </div>
     </div>
-    </a>
 </asp:Content>
