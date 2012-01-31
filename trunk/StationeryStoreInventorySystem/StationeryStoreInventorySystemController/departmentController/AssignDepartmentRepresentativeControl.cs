@@ -29,6 +29,12 @@ namespace StationeryStoreInventorySystemController.departmentController
         private DataTable dt;
         private DataRow dr;
 
+        private string[] columnName = { "RepresentativeID", "RepresentativeName", "Actual/Temporary" };
+        private string[] employeeColumnName = { "EmployeeID", "EmployeeName" };
+
+        private DataColumn[] dataColumn;
+        private DataColumn[] employeeDataColumn;
+
         /// <summary>
         ///     The usage of this method to call GetEmployee() for show the Current Department Representative
         ///     Created By: SanLaPyaye
@@ -56,6 +62,13 @@ namespace StationeryStoreInventorySystemController.departmentController
             temporaryDepartmentRepresentative.Department = currentEmployee.Department;
 
             temporaryDepartmentRepresentative = employeeBroker.GetEmployee(temporaryDepartmentRepresentative);
+
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]),
+                                            new DataColumn(columnName[2]) };
+
+            employeeDataColumn = new DataColumn[] { new DataColumn(employeeColumnName[0]),
+                                                    new DataColumn(employeeColumnName[1]) };
         }
 
         public DataTable DepartmentRepresentative
@@ -63,22 +76,23 @@ namespace StationeryStoreInventorySystemController.departmentController
             get
             {
                 dt = new DataTable();
+                dt.Columns.AddRange(dataColumn);
                 
                 if (departmentRepresentative != null)
                 {
                     dr = dt.NewRow();
-                    dr["representativeId"] = departmentRepresentative.Id;
-                    dr["reprensentativeName"] = departmentRepresentative.Name;
-                    dr["actual/temporary"] = "Actual";
+                    dr[columnName[0]] = departmentRepresentative.Id;
+                    dr[columnName[1]] = departmentRepresentative.Name;
+                    dr[columnName[2]] = "Actual";
                     dt.Rows.Add(dr);
                 }
 
                 if (temporaryDepartmentRepresentative != null)
                 {
                     dr = dt.NewRow();
-                    dr["representativeId"] = temporaryDepartmentRepresentative.Id;
-                    dr["reprensentativeName"] = temporaryDepartmentRepresentative.Name;
-                    dr["actual/temporary"] = "Temporary";
+                    dr[columnName[0]] = temporaryDepartmentRepresentative.Id;
+                    dr[columnName[1]] = temporaryDepartmentRepresentative.Name;
+                    dr[columnName[2]] = "Temporary";
                     dt.Rows.Add(dr);
                 }
 
@@ -131,12 +145,13 @@ namespace StationeryStoreInventorySystemController.departmentController
             emp = employeeBroker.GetEmployee(emp);
 
             dt = new DataTable();
+            dt.Columns.AddRange(employeeDataColumn);
 
             if (emp != null)
             {
                 dr = dt.NewRow();
-                dr["employeeID"] = emp.Id;
-                dr["employeeName"] = emp.Name;
+                dr[employeeColumnName[0]] = emp.Id;
+                dr[employeeColumnName[1]] = emp.Name;
                 dt.Rows.Add(dr);
             }
 

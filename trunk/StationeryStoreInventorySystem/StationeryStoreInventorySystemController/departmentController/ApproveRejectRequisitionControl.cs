@@ -30,6 +30,9 @@ namespace StationeryStoreInventorySystemController.departmentController
         private DataTable dt;
         private DataRow dr;
 
+        private string[] columnName = new string[] { "RequisitionID", "RequisitionDate/Time", "RequisitionBy", "RequisitionQty", "Remarks" };
+
+        private DataColumn[] dataColumn;
 
         /// <summary>
         ///     The usage of this method is to show the Requisitions List.
@@ -53,7 +56,12 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             pendingRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.PENDING);
 
-                     
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]),
+                                            new DataColumn(columnName[2]),
+                                            new DataColumn(columnName[3]),
+                                            new DataColumn(columnName[4]),
+            };
         }
 
         /// <summary>
@@ -80,17 +88,24 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                dt = new DataTable();
-                List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
-
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
+                
                 int qty;
-                foreach (Requisition r in requisitionList)
+                foreach (Requisition r in pendingRequisitionList)
                 {
                     qty = 0;
-                    dr = dt.NewRow();
-                    dr["requisitionId"] = r.Id;
-                    dr["requisitionDate/Time"] = Convert.ToDateTime(r.CreatedDate);
-                    dr["requisitionBy"] = r.CreatedBy.Name;
+                    dr = dt.NewRow(); 
+                    dr[columnName[0]] = r.Id;
+                    dr[columnName[1]] = Convert.ToDateTime(r.CreatedDate);
+                    dr[columnName[2]] = r.CreatedBy.Name;
 
 
                     //List<RequisitionDetail> requisitionDetailList=requisitionBroker.GetRequisitionDetail(r.RequisitionDetails);
@@ -98,8 +113,8 @@ namespace StationeryStoreInventorySystemController.departmentController
                     {
                         qty += reqDetail.Qty;
                     }
-                    dr["requiredQty"] = qty;
-                    dr["remarks"] = r.Remarks;
+                    dr[columnName[3]] = qty;
+                    dr[columnName[4]] = r.Remarks;
 
                     dt.Rows.Add(dr);
 
@@ -139,18 +154,54 @@ namespace StationeryStoreInventorySystemController.departmentController
         ///     Modification Reason:
         /// </summary>
         /// <param name="requisitionID">Get the "Requisition ID" when user click "Requisition ID" link. </param>
-        public Constants.DB_STATUS SelectApproveRequisition(string requisitionID)
-        {
-            Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
-            Requisition requisition = new Requisition();
-            requisition.Id = requisitionID;
-            requisitionBroker.Update(requisition);
-            return status;
+        //public Constants.DB_STATUS SelectApproveRequisition(string requisitionID)
+        //{
+        //    Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
+        //    Requisition requisition = new Requisition();
+        //    requisition.Id = requisitionID;
+        //    requisitionBroker.Update(requisition);
+        //    return status;
             
+        //}
+
+        public Constants.ACTION_STATUS SelectApproveRequisition(List<int> index)
+        {
+            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.APPROVED);
         }
-       
-       
-      
+
+        public Constants.ACTION_STATUS SelectRejectRequisition(List<int> index)
+        {
+            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.REJECTED);
+        }
+
+        private Constants.ACTION_STATUS SelectActionRequisition(List<int> index, Constants.REQUISITION_STATUS requisitionStatus)
+        {
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+
+            if (index.Count > 0)
+            {
+                status = Constants.ACTION_STATUS.SUCCESS;
+                Requisition requisition;
+
+                foreach (int i in index)
+                {
+                    requisition = pendingRequisitionList.ElementAt(i - 1);
+                    requisition.Status = Converter.objToInt(requisitionStatus);
+
+                    if (requisitionBroker.Update(requisition) == Constants.DB_STATUS.FAILED)
+                    {
+                        status = Constants.ACTION_STATUS.FAIL;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                status = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return status;
+        }
     }
 }
 /****************************************/

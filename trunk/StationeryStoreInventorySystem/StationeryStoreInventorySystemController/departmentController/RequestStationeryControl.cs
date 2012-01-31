@@ -23,6 +23,10 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         private DataTable dt;
         private DataRow dr;
+
+        private string[] columnName = { "ItemNo", "ItemDescription", "RequiredQty" };
+
+        private DataColumn[] dataColumn;
         
         public RequestStationeryControl()
         {
@@ -38,27 +42,36 @@ namespace StationeryStoreInventorySystemController.departmentController
             requisition.CreatedBy = currentEmployee;
             requisition.Department = currentEmployee.Department;
             requisition.Id = requisitionBroker.GetRequisitionId(requisition);
+
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]),
+                                            new DataColumn(columnName[2]) };
         }
 
-        public Requisition Requisition
-        {
-            get { return requisition; }
-        }
+        public Requisition Requisition { get { return requisition; } }
+
+        public string RequisitionId { get { return requisition.Id; } }
+        public string DepartmentCode { get { return requisition.Department.Id; } }
+        public string DepartmentName { get{ return requisition.Department.Name; } }
+        public string EmployeeName { get { return requisition.CreatedBy.Name; } }
+        public string EmployeeId { get { return requisition.CreatedBy.Id.ToString(); } }
+        public string EmployeeEmail { get { return requisition.CreatedBy.Email; } }
 
         public DataTable RequisitionDetailList
         {
             get
             {
                 dt = new DataTable();
+                dt.Columns.AddRange(dataColumn);
 
                 if (requisitionDetailList.Count > 0)
                 {
                     foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
                     {
                         dr = dt.NewRow();
-                        dr["itemNo"] = requisitionDetail.Item.Id;
-                        dr["itemDescription"] = requisitionDetail.Item.Description;
-                        dr["requiredQty"] = requisitionDetail.Qty;
+                        dr[columnName[0]] = requisitionDetail.Item.Id;
+                        dr[columnName[1]] = requisitionDetail.Item.Description;
+                        dr[columnName[2]] = requisitionDetail.Qty;
                         dt.Rows.Add(dr);
                     }
                 }
@@ -67,42 +80,15 @@ namespace StationeryStoreInventorySystemController.departmentController
             }
         }
 
-        //public DataTable TypeItemDescription(String itemDescription)
-        //{
-        //    DataTable dt = new DataTable();
-        //    DataRow dr;
-        //    List<Item> itemList = Util.GetItems(itemDescription);
-        //    foreach (Item item in itemList)
-        //    {
-        //        dt.NewRow();
-        //        dr = new DataRow();
-        //        dr["id"] = item.Id;
-        //        dr["description"] = item.Description;
-        //    }
-        //    return dt;
-        //}
-
-
         public DataTable SelectItemDescription(string itemDescription)
         {
-            Item item = Util.GetItem(itemBroker, itemDescription);
-            
-            dt = new DataTable();
-
-            if (item != null)
-            {
-                dr = dt.NewRow();
-                dr["itemNo"] = item.Id;
-                dr["itemDescription"] = item.Description;
-                dt.Rows.Add(dr);
-            }
-            return dt;
+            return Util.GetItemTable(itemBroker, itemDescription);
         }
 
         public Constants.ACTION_STATUS AddToTable(string itemId){
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
-            RequisitionDetail requisitionDetail = new RequisitionDetail();
+            RequisitionDetail requisitionDetail;
             
             Item item = new Item();
             item.Id = itemId;
@@ -110,8 +96,11 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             if (item != null)
             {
+                requisitionDetail = new RequisitionDetail();
                 requisitionDetail.Id = requisitionBroker.GetRequisitionDetailId();
+                requisitionDetail.Requisition = requisition;
                 requisitionDetail.Item = item;
+
                 requisitionDetailList.Add(requisitionDetail);
 
                 status = Constants.ACTION_STATUS.SUCCESS;
@@ -124,10 +113,17 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
-        public Constants.ACTION_STATUS SelectRequest(){
+        public Constants.ACTION_STATUS SelectRequest(DataTable requisitionDetailTable){
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
+            int index = 0;
+            foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
+            {
+                requisitionDetail.Qty = Converter.objToInt(requisitionDetailTable.Rows[index++][columnName[2]]);
+            }
+
             requisition.RequisitionDetails = requisitionDetailList;
+
             if (requisitionBroker.Insert(requisition) == Constants.DB_STATUS.SUCCESSFULL)
             {
                 status = Constants.ACTION_STATUS.SUCCESS;
@@ -140,17 +136,29 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
-        public Constants.ACTION_STATUS SelectRemove(List<int> requisitionDetailId)
+        public Constants.ACTION_STATUS SelectRemove(List<int> index)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
-            RequisitionDetail requisitionDetail;
-
-            foreach (int id in requisitionDetailId)
+            if (requisitionDetailList.Count > 0)
             {
-                requisitionDetail = requisitionDetailList.Where(reqDetail => reqDetail.Id == id).First();
-                requisitionDetailList.Remove(requisitionDetail);
-                status = Constants.ACTION_STATUS.SUCCESS;
+
+                RequisitionDetail requisitionDetail;
+
+                foreach (int i in index)
+                {
+                    requisitionDetail = requisitionDetailList.ElementAt(i - 1);
+
+                    if (requisitionDetailList.Contains(requisitionDetail))
+                    {
+                        requisitionDetailList.Remove(requisitionDetail);
+                        status = Constants.ACTION_STATUS.SUCCESS;
+                    }
+                }
+            }
+            else
+            {
+                status = Constants.ACTION_STATUS.FAIL;
             }
 
             return status;            
