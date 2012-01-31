@@ -14,6 +14,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
+                lblLoggedinTime.Text = "Log-in Time: " + System.DateTime.Now.ToString();
+                lblUserName.Text = "welcome, "+ Session["Uname"].ToString();
                 LoadNavigationMenu();
             }
         }
@@ -22,6 +24,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         /// </summary>
         private void LoadNavigationMenu()
         {
+            
             if (Session["userName"].ToString() == "emp")
             {
                 //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptEmpSiteMapProvider"];
