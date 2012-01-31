@@ -36,7 +36,14 @@ namespace StationeryStoreInventorySystemController
         /// </returns>
         public static object GetSession(string obj)
         {
-            return HttpContext.Current.Session[obj];
+            if (HttpContext.Current.Session == null)
+            {
+                return new Employee();
+            }
+            else
+            {
+                return HttpContext.Current.Session[obj];
+            }
         }
 
         public static void RemoveSession(string key)
@@ -81,6 +88,11 @@ namespace StationeryStoreInventorySystemController
         public static Employee GetEmployee()
         {
             return (Employee)GetSession(employeeSessionKey);
+        }
+
+        public static int GetEmployeeRole()
+        {
+            return GetEmployee().Role.Id;
         }
 
         public static Employee ValidateUser()
