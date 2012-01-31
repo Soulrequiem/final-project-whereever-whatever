@@ -4,25 +4,29 @@
 <%@ Register assembly="Infragistics35.WebUI.WebResizingExtender.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI" tagprefix="igui" %>
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<script type="text/javascript" id="igClientScript">
-    function btnReset_Click(name)
-    {
-        name.txtOldPassword.value = "";
-        name.txtNewPassword.value = "";
-        name.txtConfirmPassword.value = "";
+    <script type="text/javascript" id="igClientScript">
+        function Reset() {
+            document.getElementById("MainContent_WebGroupBox1_txtOldPassword").value = "";
+            document.getElementById("MainContent_WebGroupBox1_txtNewPassword").value = "";
+            document.getElementById("MainContent_WebGroupBox1_txtConfirmPassword").value = "";
+            return false;
 
     }
 
-    function btnChange_Click1(name) 
-    {
-        if (name.txtOldPassword.value == "" || name.txtNewPassword.value == "" || name.txtConfirmPassword.value == "")
-            document.getElementById["lblStatusMessage"].Text = "Enter required fields.";
-        else if (name.txtNewPassword <= 7)
-            document.getElementById["lblStatusMessage"].Text = "Password should be at least 7 charaters";
-        else if (name.txtNewPassword.value != name.txtConfirmPassword.value)
-            document.getElementById["lblStatusMessage"].Text = "New & Confirm not matched.";
-        else
-            name.submit();
+    function Change() {
+        if (document.getElementById('MainContent_WebGroupBox1_txtOldPassword').value == "" || document.getElementById('MainContent_WebGroupBox1_txtNewPassword').value == "" || document.getElementById('MainContent_WebGroupBox1_txtConfirmPassword').value == "") {
+            document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Enter required fields.";
+            return false;
+        }
+        else if (document.getElementById('MainContent_WebGroupBox1_txtNewPassword').value.length <= 7) {
+            document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Password should be at least 7 charaters";
+            return false;
+        }
+        else if (document.getElementById('MainContent_WebGroupBox1_txtNewPassword').value != document.getElementById('MainContent_WebGroupBox1_txtConfirmPassword').value) {
+            document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "New & Confirm not matched.";
+            return false;
+        }
+        return true;
     }
 </script>
 </asp:Content>
@@ -33,7 +37,7 @@
         <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
         Text="<%$ Resources:WebResources, ChangePassword_Title %>" /></h1>
 
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="400px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="<%$ Resources:WebResources, ChangePassword_text %>" 
                 TitleAlignment="Left">
                 <Template>
@@ -77,22 +81,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <asp:Label CssClass="DefaultLabelstyle" 
+                       <td style="width:100px">
+                            <asp:Label CssClass="ErrorLabelstyle" 
                             ID="lblStatusMessage" runat="server" />
                         </td>
-                    </tr>
-                    <tr>
-                        <td></td>
                         <td>
                             <div style="float:right">
                                 <!--<a class="button" href="" style="float:right">Change</a>-->
                                 <asp:Button id="btnReset" CssClass="Defaultbutton"  runat="server" 
-                                    Text="Reset" onclick="btnReset_Click(this.form)"/>
+                                    Text="Reset" OnClientClick = "return Reset();" onclick="btnReset_Click"/>
                             </div>
                             <div style="float:right;margin-right:10px" class="buttons">
-                                <asp:Button id="btnChange" CssClass="Defaultbutton"  runat="server" 
-                                    Text="Change Password" onclick="btnChange_Click1(this.form)"/>
+                                <asp:Button id="btnChange" CssClass="MediumLargeButton"  runat="server" 
+                                    Text="Change Password" OnClientClick = "return Chang();" onclick="btnChange_Click1"/>
                                 <!--<a class="button" href="" style="float:right">Reset</a>-->
                             </div>
                             
