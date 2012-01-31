@@ -40,6 +40,9 @@ namespace StationeryStoreInventorySystemController.storeController
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
 
             purchaseOrderDetailList = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
+            
+            // need to load reorder quantity
+            // need to load unfulfilled quantity
 
             dataColumn = new DataColumn[] { new DataColumn(columnName[0]), 
                                             new DataColumn(columnName[1]), 
