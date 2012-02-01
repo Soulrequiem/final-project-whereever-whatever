@@ -34,10 +34,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public Notification GetNotification(Notification notification)
         {
-            notificationObj = inventory.Notifications.Where(n => n.Id == notification.Id).First();
-            if (notificationObj != null)
+            try
+            {
+                notificationObj = inventory.Notifications.Where(n => n.Id == notification.Id).First();
+            }
+            catch (Exception e)
+            {
+                notificationObj = null;
+            }
+          
                 return notificationObj;
-            return null;
         }
         /// <summary>
         /// Get all of the notification data from the Notification Table by checking the employee Id
@@ -47,10 +53,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public List<Notification> GetAllNotification(Employee employee)
         {
-            notificationList = inventory.Notifications.Where(e => e.Employee.Id == employee.Id).ToList();
-            if (notificationList != null)
-                return notificationList;
-            return null;
+            try
+            {
+                notificationList = inventory.Notifications.Where(e => e.Employee.Id == employee.Id).ToList();
+            }
+            catch (Exception e)
+            {
+                notificationList = null; 
+            }
+         return notificationList;
         }
         /// <summary>
         /// Get all of the Notification data by employeeId and NOTIFICATION_STATUS
@@ -62,11 +73,17 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public List<Notification> GetAllNotification(Employee employee, Constants.NOTIFICATION_STATUS notificationStatus)
         {
-            //get the collectionMissed List by checking department Id of collecion Missed Table and check the Visibility Status
-            notificationList = inventory.Notifications.Where(n => n.Employee.Id == employee.Id || notificationStatus.Equals("SHOW")).ToList();
-            if (notificationList != null)
+            try
+            {
+                //get the collectionMissed List by checking department Id of collecion Missed Table and check the Visibility Status
+                notificationList = inventory.Notifications.Where(n => n.Employee.Id == employee.Id || notificationStatus.Equals("SHOW")).ToList();
+
+            }
+            catch (Exception e)
+            {
+                notificationList = null;
+            }
                 return notificationList;
-            return null;
         }
         /// <summary>
         /// Insert Notification data to notification table
