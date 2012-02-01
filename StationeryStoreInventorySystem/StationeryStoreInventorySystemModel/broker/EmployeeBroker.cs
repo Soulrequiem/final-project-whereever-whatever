@@ -55,7 +55,14 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                employeeObj = inventory.Employees.Where(eObj => eObj.Name == employee.Name || eObj.Id == employee.Id || eObj.User.Id == employee.User.Id).First();
+                if (employee.User != null)
+                {
+                    employeeObj = inventory.Employees.Where(eObj => eObj.User.Id == employee.User.Id).First();
+                }
+                else
+                {
+                    employeeObj = inventory.Employees.Where(eObj => eObj.Name == employee.Name || eObj.Id == employee.Id).First();
+                }
 
                 // if (!empObj.Equals(null) && empObj.CreatedBy != employee.Id)
                 User userDetail = inventory.Users.Where(uObj => uObj.Id == employeeObj.User.Id).First();
