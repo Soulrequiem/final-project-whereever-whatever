@@ -18,12 +18,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class SubmitRequisitionsToStore : System.Web.UI.Page
     {
-        SubmitRequestToStoreControl srtsCtrl;
+        private static readonly string sessionKey = "SubmitRequestToStore";
+
+        private SubmitRequestToStoreControl srtsCtrl;
 
         private SubmitRequestToStoreControl GetsrtsControl()
         {
             if(srtsCtrl==null)
-            srtsCtrl = new SubmitRequestToStoreControl();
+                srtsCtrl = new SubmitRequestToStoreControl();
             return srtsCtrl;
         }
         /// <summary>
@@ -35,9 +37,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             if (!IsPostBack)
             {
-                DataTable dt = GetsrtsControl().ApprovedRequisitionList;
-                FillRequisitionList(dt);
+                commonUI.MasterPage.setCurrentPage(this);
+                srtsCtrl = GetsrtsControl();
+                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, srtsCtrl);
+                
+                if (srtsCtrl.CollectionPoint.Equals(SubmitRequestToStoreControl.UNKNOWN_COLLECTION_POINT))
+                {
+                    btnSave.Enabled = false;
+                }
+                lblCollectionPoint.Text = srtsCtrl.CollectionPoint;
+                lblCollectionID.Text = srtsCtrl.CollectionId;
             }
+            else
+            {
+                srtsCtrl = (SubmitRequestToStoreControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+            FillRequisitionList(srtsCtrl.ApprovedRequisitionList);
         }
 
         /// <summary>
@@ -82,7 +97,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             try
             {
-                //GetsrtsControl().SelectSubmit();
+                if (srtsCtrl.SelectSubmit() == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+                {
+                    // print success message
+                    FillRequisitionList(srtsCtrl.ApprovedRequisitionList);
+                }
+                else
+                {
+                    // print error message
+                }
             }
             catch (Exception ex)
             {

@@ -11,7 +11,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                MasterPage.setCurrentPage(this);
+            }
         }
 
         protected void btnSend_Click(object sender, EventArgs e)

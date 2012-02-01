@@ -10,6 +10,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+        private static string currentPageSessionKey = "CurrentPage";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -24,9 +26,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             }
         }
 
+        public static void setCurrentPage(System.Web.UI.Page currentPage)
+        {
+            StationeryStoreInventorySystemController.Util.PutSession(currentPageSessionKey, currentPage);
+        }
+
         private void removeAllSession()
         {
-            LogIn.removeSession();
+            System.Web.UI.Page currentPage = (System.Web.UI.Page)StationeryStoreInventorySystemController.Util.GetSession(currentPageSessionKey);
+            
+            //if (currentPage.GetType() != typeof(LogIn)) LogIn.removeSession();
+            if (!(currentPage is departmentUI.Head.ApproveRequisition)) departmentUI.Head.ApproveRequisition.removeSession();
         }
 
         /// <summary>

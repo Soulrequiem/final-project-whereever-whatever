@@ -24,7 +24,7 @@
         <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
         Text="<%$ Resources:WebResources, ManageCollectionPoint_Title %>" /></h1>
 
-            <igmisc:WebGroupBox ID="GroupBox" runat="server" Width="700px"
+            <igmisc:WebGroupBox ID="GroupBox" runat="server" Width="700px" EnableViewState="true"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" Text="<%$ Resources:WebResources,ManageCollectionPoint_GroupBox%>" 
                 TitleAlignment="Left">
                 <Template>
@@ -33,15 +33,15 @@
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
-                            <ig:BoundDataField DataFieldName="CollectionID" Key="collectionID" 
+                            <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" 
                                 Width="150px">
                                 <Header Text="CollectionID" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="collectionPoint" 
+                            <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
                                 Width="350px">
                                 <Header Text="Collection Point" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="CollectionTime" Key="collectionTime" 
+                            <ig:BoundDataField DataFieldName="CollectionTime" Key="CollectionTime" 
                                 Width="200px">
                                 <Header Text="Collection Time" />
                             </ig:BoundDataField>

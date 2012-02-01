@@ -18,14 +18,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class ManageCollectionPoint : System.Web.UI.Page
     {
-        ManageCollectionPointControl mngColPntCtrl;
-         private ManageCollectionPointControl GetMcpControl()
-                 {
-                     if (mngColPntCtrl == null)
-                        mngColPntCtrl = new ManageCollectionPointControl();
-                    return mngColPntCtrl;
-               
-                 }
+        private static readonly string sessionKey = "ManageCollectionPoint";
+
+        private ManageCollectionPointControl mngColPntCtrl;
+        
+        private ManageCollectionPointControl GetMcpControl()
+        {
+            if (mngColPntCtrl == null)
+                mngColPntCtrl = new ManageCollectionPointControl();
+            return mngColPntCtrl;
+        }
         /// <summary>
         /// Loads the ManageCollectionPoint form
         /// </summary>
@@ -33,48 +35,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-                
-            //DataTable dt = new DataTable();
-            ////dt.Columns.Add("EmployeeID");
-            //dt.Columns.Add("CollectionID");
-            //dt.Columns.Add("CollectionPoint");
-            //dt.Columns.Add("CollectionTime");
-            ////dt.Columns.Add("JoiningDate");
-            ////dt.Columns.Add("RemainingQty");
-            ////dt.Columns.Add("Remarks");
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "1vdvd";
-            //dr[1] = "1dvd";
-            //dr[2] = "1dvdv";
-            ////dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "1dafd";
-            //dr[1] = "1vdv";
-            //dr[2] = "1vdvd";
-            ////dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dgvCollections.DataSource = dt;
-            //dgvCollections.DataBind();
-
             if (!IsPostBack)
             {
-                FillCollectionList(GetCurrentCollectionPoint());
-                FillCollectionPoints(GetMcpControl().AllCollectionPoint);
+                commonUI.MasterPage.setCurrentPage(this);
+
+                mngColPntCtrl = new ManageCollectionPointControl();
+
+                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, mngColPntCtrl);
             }
+            else
+            {
+                mngColPntCtrl = (ManageCollectionPointControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+            FillCollectionList(mngColPntCtrl.CurrentCollectionPoint);
+            FillCollectionPoints(mngColPntCtrl.AllCollectionPoint);
         }
 
-        private DataTable GetCurrentCollectionPoint()
+        public static void removeSession()
         {
-            DataTable dtColLst = GetMcpControl().CurentCollectionPoint;
-            return dtColLst;
+            StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
         }
 
         /// <summary>
@@ -85,8 +64,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             try
             {
-                dgvCollections.DataSource = dtCollection;
-                dgvCollections.DataBind();
+                if (dtCollection != null)
+                {
+                    dgvCollections.ClearDataSource();
+
+                    dgvCollections.DataSource = dtCollection;
+                    dgvCollections.DataBind();
+                }
             }
             catch (Exception e)
             {
@@ -104,8 +88,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 if (dtPoint != null)
                 {
-                    drdCollectionList.TextField = "text";
-                    drdCollectionList.ValueField = "value";
+                    dgvCollections.ClearDataSource();
+
+                    drdCollectionList.TextField = "CollectionTime";
+                    drdCollectionList.ValueField = "CollectionPoint";
                     drdCollectionList.DataSource = dtPoint;
                     drdCollectionList.DataBind();
                 }
@@ -127,23 +113,33 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
            try
             {
-               //Get Selected ID
-               int collectionPointId = Convert.ToInt16(e.NewSelection.ToString());
-
                //Save it into DB
-               GetMcpControl().SelectSave(collectionPointId);
+               mngColPntCtrl.SelectSave(SystemStoreInventorySystemUtil.Converter.objToInt(e.NewSelection));
 
                //Cleare datasource
                dgvCollections.ClearDataSource();
 
                //Fill current collection point
-               FillCollectionPoints(GetCurrentCollectionPoint());
+               FillCollectionPoints(mngColPntCtrl.CurrentCollectionPoint);
             }
             catch (Exception ex)
             {
                 Logger.WriteErrorLog(ex);
             }           
             
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (mngColPntCtrl.SelectSave(SystemStoreInventorySystemUtil.Converter.objToInt(drdCollectionList.SelectedValue)) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            {
+                FillCollectionList(mngColPntCtrl.CurrentCollectionPoint);
+                // print success message
+            }
+            else
+            {
+                // print error message
+            }
         }
               
     }

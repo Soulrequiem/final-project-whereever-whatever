@@ -15,9 +15,10 @@
             DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
-            Height="400px" Width="700px">
+            Height="400px" Width="700px" EnableViewState="true"
+            oncellselectionchanged="DgvRequisitionList_CellSelectionChanged">
             <Columns>
-                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" Width="50px">
+                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" Width="30px">
                 </ig:UnboundCheckBoxField>
                 <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                     Width="100px">
@@ -58,7 +59,8 @@
 
             </Columns>
             <Behaviors>
-                <ig:Selection CellClickAction="Row" RowSelectType="Single">
+                <ig:Selection CellClickAction="Cell" RowSelectType="Single" Enabled="true">
+                    <AutoPostBackFlags CellSelectionChanged="true" />
                 </ig:Selection>
                 <ig:Paging PageSize="10">
                 </ig:Paging>
@@ -84,12 +86,13 @@
         </ig:WebDataGrid>
         <div style="float:right">
                <asp:Button ID="btnReject" CssClass="DefaultLargebutton"
-                        runat="server" Text="Reject" />
+                        runat="server" Text="Reject" onclick="btnReject_Click" />
         </div>
         <div style="float:right;margin-right:10px">
                 <asp:Button ID="btnApprove" CssClass="DefaultLargebutton"
                         runat="server" Text="Approve" onclick="btnApprove_Click" />
                <%--<a class="button" href="#" style="float:right">Approve</a>--%>
         </div>
+        <asp:HiddenField ID="hdnApprove" runat="server" />
     </div>
 </asp:Content>
