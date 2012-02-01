@@ -2,7 +2,7 @@
 /*  File Name       : ItemPriceBroker.cs
 /*  Module Name     : Models
 /*  Owner           : Thazin Win
-/*  class Name      : ItemPriceBroker
+/*  class Name      : ItemPrice
 /*  Details         : Model representation of Item table
 /***************************************************************************/
 using System;
@@ -22,7 +22,7 @@ namespace StationeryStoreInventorySystemModel.broker
         private InventoryEntities inventory;
         private ItemPrice itemPriceObj = null;
         private List<ItemPrice> itemPriceList = null;
-
+        private List<Supplier> supplierList = null;
         public ItemPriceBroker(InventoryEntities inventory)
         {
             this.inventory = inventory;
@@ -34,43 +34,68 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public ItemPrice GetItemPrice(ItemPrice itemPrice)
         {
-            itemPriceObj = inventory.ItemPrices.Where(iObj => iObj.ItemId == itemPrice.ItemId).First();
-            if (!itemPriceObj.Equals(null))
-                return itemPriceObj;
-            return null;
+            try
+            {
+                itemPriceObj = inventory.ItemPrices.Where(iObj => iObj.ItemId == itemPrice.ItemId).First();
+            }
+            catch (Exception e)
+            {
+                itemPriceObj = null;
+            }
+            return itemPriceObj;
         }
         /// <summary>
         ///  Retrieve All of the ItemPrice information from ItemPrice Table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// List of Item Price
+        /// </returns>
         public List<ItemPrice> GetAllItemPrice()
         {
-            itemPriceList = inventory.ItemPrices.ToList<ItemPrice>();
-            if (!itemPriceList.Equals(null))
+            try
+            {
+                itemPriceList = inventory.ItemPrices.ToList<ItemPrice>();
+            }
+            catch (Exception e)
+            {
+                itemPriceList = null;
+            }
                 return itemPriceList;
-            return null;
         }
-
+        /// <summary>
+        /// Get the Suppliert List according to the Item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>
+        /// List of supplier list
+        /// </returns>
         public List<Supplier> GetPrioritySupplier(Item item)
         {
-            List<Supplier> supplierList = new List<Supplier>();
-            SupplierBroker supplierBroker = new SupplierBroker(this.inventory);
-
-            itemPriceList = inventory.ItemPrices.Where(itemPrice => itemPrice.ItemId == item.Id).ToList<ItemPrice>();
-
-            Supplier supplier;
-
-            foreach (ItemPrice itemPrice in itemPriceList)
+            try
             {
-                supplier = new Supplier();
-                supplier.Id = itemPrice.SupplierId;
-                supplier = supplierBroker.GetSupplier(supplier);
+                supplierList = new List<Supplier>();
+                SupplierBroker supplierBroker = new SupplierBroker(this.inventory);
 
-                supplierList.Add(supplier);
+                itemPriceList = inventory.ItemPrices.Where(itemPrice => itemPrice.ItemId == item.Id).ToList<ItemPrice>();
+
+                Supplier supplier;
+
+                foreach (ItemPrice itemPrice in itemPriceList)
+                {
+                    supplier = new Supplier();
+                    supplier.Id = itemPrice.SupplierId;
+                    supplier = supplierBroker.GetSupplier(supplier);
+
+                    supplierList.Add(supplier);
+                }
+
+                supplierList.Sort();
+
             }
-
-            supplierList.Sort();
-
+            catch (Exception e)
+            {
+                supplierList = null;
+            }
             return supplierList;
         }
 
