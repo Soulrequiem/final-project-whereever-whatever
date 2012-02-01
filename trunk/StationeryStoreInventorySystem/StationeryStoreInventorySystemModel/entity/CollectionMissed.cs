@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : CollectionMissed.cs
+/*  Module Name     : Models
+/*  Owner           : Thazin Win
+/*  class Name      : CollectionMissed
+/*  Details         : Model CollectionMissed of CollectionMissed table
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,3 +27,6 @@ namespace StationeryStoreInventorySystemModel.entity
         }
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
