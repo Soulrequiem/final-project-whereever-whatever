@@ -14,6 +14,8 @@ using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
 
+
+
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 {
     public partial class AssignDeptRespresentative : System.Web.UI.Page
@@ -55,17 +57,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         }
 
        /// <summary>
-       /// Fills Employee name
+       /// Fills Employee name to drop down
        /// </summary>
         private void FillEmployee()
        {
            try
            {
                    //adrCtrl = new AssignDepartmentRepresentativeControl();
-                   //adrCtrl.
+                   //DataTable dtEmployee = adrCtrl.DepartmentRepresentative;
                    drdRepEmployeeList.TextField = "Employee";
                    drdRepEmployeeList.ValueField = "Name";
-                   drdRepEmployeeList.DataSource = null;// dtEmployee;
+                   drdRepEmployeeList.DataSource = null; //dtEmployee;
                    drdRepEmployeeList.DataBind();
                //}
            }
