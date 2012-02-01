@@ -43,6 +43,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 lblEmployeeEmailID.Text = resCtrl.EmployeeEmail;
 
                 FillItems(StationeryStoreInventorySystemController.Util.GetItemTable());
+                FillDetails();
+                FillItemList();
             }
             else
             {
@@ -118,15 +120,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Modified Date: 27/01/2012
         /// </summary>
         /// <param name="dtDetails"></param>
-        private void FillDetails(DataTable dtDetails)
+        private void FillDetails()
         {
             try
             {
-                if (dtDetails != null)
-                {
-                    dgvStationeryList.DataSource = dtDetails;
-                    dgvStationeryList.DataBind();
-                }
+                resCtrl = GetControl();
+                DataTable dtDetails = resCtrl.RequisitionDetailList;
+                dgvStationeryList.DataSource = dtDetails;
+                dgvStationeryList.DataBind();
             }
             catch (Exception e)
             {
@@ -145,7 +146,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 if (items != null)
                 {
                     drdItemList.TextField = "ItemDescription";
-                    drdItemList.ValueField = "ID";
+                    drdItemList.ValueField = "ItemNo";
                     drdItemList.DataSource = items;
                     drdItemList.DataBind();
                 }
@@ -160,10 +161,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Fills Stationery Items to Datagrid
         /// </summary>
         /// <param name="dtStationeryItem"></param>
-        private void FillItemList(DataTable dtStationeryItem)
+        private void FillItemList()
         {
             try
             {
+                resCtrl = GetControl();
+                DataTable dtStationeryItem = resCtrl.RequisitionDetailList;
                 dgvStationeryDetailsList.DataSource = dtStationeryItem;
                 dgvStationeryDetailsList.DataBind();
             }
@@ -173,11 +176,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             }
         }
 
-        protected void drdItemList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        protected void drdItemList_SelectionChanged(object sender,
+            Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
             try
             {
-                FillDetails(resCtrl.SelectItemDescription(drdItemList.SelectedItem.Text));
+                resCtrl = GetControl();
+                resCtrl.AddToTable(drdItemList.SelectedValue);
+                FillDetails();
+                FillItemList();
             }
             catch (Exception ex)
             {
@@ -211,6 +218,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
         }
+
+        //protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
+        //{
+        //    //try
+        //    //{
+        //    //    if (drdItemList.SelectedItem.Text != string.Empty)
+        //    //    {
+        //    //        resCtrl = GetControl();
+        //    //        resCtrl.AddToTable(drdItemList.SelectedItem.Key);
+        //    //        FillDetails();
+        //    //        FillItemList();
+        //    //    }
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Logger.WriteErrorLog(ex);
+        //    //}
+        //}
 
         ///// <summary>
         ///// Fills the change Items to Datagrid

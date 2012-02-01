@@ -105,8 +105,10 @@
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
                                      StyleSetName="Office2010Blue" 
-                                     onselectionchanged="drdItemList_SelectionChanged">
-                                    <Button Visible="False" />
+                                     onselectionchanged="drdItemList_SelectionChanged" 
+                                     AutoFilterQueryType="Contains" >
+                                     <%--onvaluechanged="drdItemList_ValueChanged">--%>
+                                     <AutoPostBackFlags SelectionChanged="On" />
                                     <Items>
                                         <ig:DropDownItem Selected="False" Text="DropDown Item" Value="">
                                         </ig:DropDownItem>
