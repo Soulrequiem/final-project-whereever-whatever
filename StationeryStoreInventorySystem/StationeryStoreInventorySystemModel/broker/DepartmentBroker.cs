@@ -22,7 +22,7 @@ namespace StationeryStoreInventorySystemModel.broker
 
         private InventoryEntities inventory;
         private Department departmentObj = null;
-        private List<Department> departmentList = null;
+       // private List<Department> departmentList = null;
         public DepartmentBroker(InventoryEntities inventory)
         {
             this.inventory = inventory;
@@ -35,7 +35,7 @@ namespace StationeryStoreInventorySystemModel.broker
         public Department GetDepartment(Department department)
         {
             ////Get the Department data by Department ID
-            if (department.Status != null)
+            if (department.Status != 0)
             {
                 departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id && department.Status == Converter.objToInt(department.Status)).First();
             }
