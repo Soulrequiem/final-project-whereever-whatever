@@ -16,6 +16,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Update(RequisitionCollectionDetail requisitionCollectionDetail);
         Constants.DB_STATUS Delete(RequisitionCollectionDetail requisitionCollectionDetail);
 
+        int GetRequisitionCollectionDetailId();
         RequisitionCollection GetRequisitionCollection(RequisitionCollection requisitionCollection);
         List<RequisitionCollection> GetAllRequisitionCollection();
         Constants.DB_STATUS Insert(RequisitionCollection newRequisitionCollection);

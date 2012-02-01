@@ -35,10 +35,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public int GetRequisitionCollectionId()
         {
-            var maxRequistionCollectionId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
-            if(maxRequistionCollectionId!=null)
-              return maxRequistionCollectionId;
-            return 0;
+            int maxRequistionCollectionId = -1;
+            try
+            {
+                maxRequistionCollectionId = inventory.RequisitionCollectionDetails.Max(xObj => xObj.Id) + 1;
+            }
+            catch (Exception e)
+            {
+                maxRequistionCollectionId = 1;
+            }
+            return maxRequistionCollectionId;
         }
         /// <summary>
         /// Get RequisitionCollection Object according to the RequisitionCollection parameter
@@ -167,6 +173,21 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
+
+        public int GetRequisitionCollectionDetailId()
+        {
+            int lastId = -1;
+            try
+            {
+                lastId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
+            }
+            catch (Exception e)
+            {
+                lastId = 1;
+            }
+            return lastId;
+        }
+
         /// <summary>
         /// Get the RequisitionCollectionDetail of the RequisitionCollection Table
         /// </summary>
