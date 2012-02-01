@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : RequisitionCollectionBroker.cs
+/*  Module Name     : Models
+/*  Owner           : Thazin Win
+/*  class Name      : RequisitionCollection and RequistionCollectionDetail
+/*  Details         : Model Requisition of RequisitionCollection and RequisitionCollectionDetail table
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +19,10 @@ namespace StationeryStoreInventorySystemModel.broker
     {
         #region IRequisitionCollectionBroker Members
         private InventoryEntities inventory;
-        private RequisitionCollection reqCollection = null;
-        private RequisitionCollectionDetail reqCollectionDetail = null;
-        private List<RequisitionCollection> reqList = null;
-        private List<RequisitionCollectionDetail> reqDetailList = null;
+        private RequisitionCollection requisitionCollectionObj = null;
+        private RequisitionCollectionDetail requisitionCollectionDetailObj = null;
+        private List<RequisitionCollection> requisitionCollectionList = null;
+        private List<RequisitionCollectionDetail> requisitionCollectionDetailList = null;
 
         public RequisitionCollectionBroker(InventoryEntities inventory)
         { 
@@ -29,77 +36,101 @@ namespace StationeryStoreInventorySystemModel.broker
         public int GetRequisitionCollectionId()
         {
             var maxRequistionCollectionId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
-            return maxRequistionCollectionId;
-
+            if(maxRequistionCollectionId!=null)
+              return maxRequistionCollectionId;
+            return 0;
         }
-
+        /// <summary>
+        /// Get RequisitionCollection Object according to the RequisitionCollection parameter
+        /// </summary>
+        /// <param name="requisitionCollection"></param>
+        /// <returns>
+        /// Return RequisitionCollection Object
+        /// </returns>
         public RequisitionCollection GetRequisitionCollection(RequisitionCollection requisitionCollection)
         {
-          reqCollection = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
-          if (!reqCollection.Equals(null))
-           {
-                //var reqCollectionDetailsResult = from rd in inventory.RequisitionCollectionDetails
-                //                                 where rd.RequisitionCollection.Id==reqCollection.Id
-                //                                 select rd;
-                //foreach (RequisitionCollectionDetail rd in reqCollectionDetailsResult)
-                //{
-                //    reqCollection.RequisitionCollectionDetails.Add(rd);
-                //}
-                return reqCollection;
+            try
+            {
+                requisitionCollectionObj = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
             }
-
-
-          return null;
+            catch (Exception e)
+            {
+                requisitionCollectionObj = null;
+            }
+            return requisitionCollectionObj;
         }
-
+        /// <summary>
+        /// Get the list of RequistionCollection Data
+        /// </summary>
+        /// <returns>
+        /// Return RequisitionCollection List
+        /// </returns>
         public List<RequisitionCollection> GetAllRequisitionCollection()
         {
-            reqList = inventory.RequisitionCollections.ToList();
-            if (reqList != null)
-                return reqList;
-            return null;
+            try
+            {
+                requisitionCollectionList = inventory.RequisitionCollections.ToList();
+            }
+            catch (Exception e)
+            {
+                requisitionCollectionList = null;
+            }
+          
+                return requisitionCollectionList;
                
         }
-
+        /// <summary>
+        /// Insert the RequistionCollection data to the Requistion Table
+        /// </summary>
+        /// <param name="newRequisitionCollection"></param>
+        /// <returns>
+        /// Returns DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Insert(RequisitionCollection newRequisitionCollection)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
-            //  try
-            // {
-
-            foreach (RequisitionCollectionDetail rd in newRequisitionCollection.RequisitionCollectionDetails)
+            try
             {
-                this.Insert(rd);
+
+                foreach (RequisitionCollectionDetail rd in newRequisitionCollection.RequisitionCollectionDetails)
+                {
+                    this.Insert(rd);
+                }
+                inventory.AddToRequisitionCollections(newRequisitionCollection);
+                inventory.SaveChanges();
+                status = Constants.DB_STATUS.SUCCESSFULL;
             }
-            inventory.AddToRequisitionCollections(newRequisitionCollection);
-            inventory.SaveChanges();
-            status = Constants.DB_STATUS.SUCCESSFULL;
-            //}
-            //catch (Exception e)
-            //{
-            //  status = Constants.DB_STATUS.FAILED;
-            //}
+            catch (Exception e)
+            {
+                status = Constants.DB_STATUS.FAILED;
+            }
 
             return status;
         }
-
+        /// <summary>
+        /// Update the Requisition Collection data to the Requisition Collection table
+        /// </summary>
+        /// <param name="requisitionCollection"></param>
+        /// <returns>
+        /// Return DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Update(RequisitionCollection requisitionCollection)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
             try
             {
-                reqCollection = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
-                Department dept = inventory.Departments.Where(d => d.Id == requisitionCollection.Department.Id).First();
+                requisitionCollectionObj = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
+                Department department = inventory.Departments.Where(d => d.Id == requisitionCollection.Department.Id).First();
                 CollectionPoint collectionPoint = inventory.CollectionPoints.Where(c => c.Id == requisitionCollection.CollectionPoint.Id).First();
                 Employee createdBy = inventory.Employees.Where(e => e.Id == requisitionCollection.CreatedBy.Id).First();
-                reqCollection.Id = requisitionCollection.Id;
-                reqCollection.Department = dept;
-                reqCollection.CollectionPoint = collectionPoint;
-                reqCollection.CreatedDate = requisitionCollection.CreatedDate;
-                reqCollection.CreatedBy = createdBy;
-                foreach (RequisitionCollectionDetail rd in reqCollection.RequisitionCollectionDetails)
+                requisitionCollectionObj.Id = requisitionCollection.Id;
+                requisitionCollectionObj.Department = department;
+                requisitionCollectionObj.CollectionPoint = collectionPoint;
+                requisitionCollectionObj.CreatedDate = requisitionCollection.CreatedDate;
+                requisitionCollectionObj.CreatedBy = createdBy;
+                foreach (RequisitionCollectionDetail rd in requisitionCollectionObj.RequisitionCollectionDetails)
                 {
                     this.Update(rd);
                 }
@@ -112,15 +143,21 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
-
+        /// <summary>
+        /// Logically Delete teh Requisition Collection Table
+        /// </summary>
+        /// <param name="requisitionCollection"></param>
+        /// <returns>
+        /// Return DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Delete(RequisitionCollection requisitionCollection)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
             try
             {
-                reqCollection = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
-                reqCollection.Status = 2;
+                requisitionCollectionObj = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
+                requisitionCollectionObj.Status = 2;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -130,25 +167,52 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
+        /// <summary>
+        /// Get the RequisitionCollectionDetail of the RequisitionCollection Table
+        /// </summary>
+        /// <param name="requisitionCollectionDetail"></param>
+        /// <returns>
+        /// Return the RequisitionCollectionDetail object
+        /// </returns>
         public RequisitionCollectionDetail GetRequisitionCollectionDetail(RequisitionCollectionDetail requisitionCollectionDetail)
         {
-
-            reqCollectionDetail = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Id == requisitionCollectionDetail.Id).First();
-            if (!reqCollectionDetail.Equals(null))
+            try
             {
-                return reqCollectionDetail;
-            }
-            return null;
-        }
+                requisitionCollectionDetailObj = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Id == requisitionCollectionDetail.Id).First();
 
+            }
+            catch (Exception e)
+            {
+                requisitionCollectionDetailObj = null;
+            }
+                return requisitionCollectionDetailObj;
+       }
+        /// <summary>
+        /// Get the RequisitionCollectionDetail list from the RequistionCollectionDetail Table
+        /// </summary>
+        /// <returns>
+        /// Return RequisitionCollectionDetail list
+        /// </returns>
         public List<RequisitionCollectionDetail> GetAllRequisitionCollectionDetail()
         {
-            reqDetailList = inventory.RequisitionCollectionDetails.ToList<RequisitionCollectionDetail>();
-            if (!reqDetailList.Equals(null))
-                return reqDetailList;
-            return null;
-        }
+            try
+            {
+                requisitionCollectionDetailList = inventory.RequisitionCollectionDetails.ToList<RequisitionCollectionDetail>();
 
+            }
+            catch (Exception e)
+            {
+                requisitionCollectionDetailList = null;
+            } 
+                return requisitionCollectionDetailList;
+        }
+        /// <summary>
+        /// Insert the RequisitionCollectionDetail data from the parameter
+        /// </summary>
+        /// <param name="newRequisitionCollectionDetail"></param>
+        /// <returns>
+        /// Returns DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Insert(RequisitionCollectionDetail newRequisitionCollectionDetail)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
@@ -167,22 +231,28 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
-
+        /// <summary>
+        /// Update the REquisitionCollectionDetail from the parameter
+        /// </summary>
+        /// <param name="requisitionCollectionDetail"></param>
+        /// <returns>
+        /// Returns DB_STATUS
+        /// </returns>
         public Constants.DB_STATUS Update(RequisitionCollectionDetail requisitionCollectionDetail)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
             try
             {
-                reqCollectionDetail = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Id == requisitionCollectionDetail.Id).First();
-                if(!reqCollectionDetail.Equals(null))
+                requisitionCollectionDetailObj = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Id == requisitionCollectionDetail.Id).First();
+                if(!requisitionCollectionDetailObj.Equals(null))
                 {
                     Requisition requistionId=inventory.Requisitions.Where(r=>r.Id==requisitionCollectionDetail.Requisition.Id).First();
-                    reqCollection = inventory.RequisitionCollections.Where(r => r.Id == requisitionCollectionDetail.RequisitionCollection.Id).First();
+                    requisitionCollectionObj = inventory.RequisitionCollections.Where(r => r.Id == requisitionCollectionDetail.RequisitionCollection.Id).First();
                     
-                    reqCollectionDetail.Id = requisitionCollectionDetail.Id;
-                    reqCollectionDetail.Requisition=requistionId;
-                    reqCollectionDetail.RequisitionCollection = reqCollection;
+                    requisitionCollectionDetailObj.Id = requisitionCollectionDetail.Id;
+                    requisitionCollectionDetailObj.Requisition=requistionId;
+                    requisitionCollectionDetailObj.RequisitionCollection = requisitionCollectionObj;
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
                 }
@@ -228,3 +298,6 @@ namespace StationeryStoreInventorySystemModel.broker
         #endregion
     }
 }
+/****************************************/
+/********* End of the Class *************/
+/****************************************/
