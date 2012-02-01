@@ -18,8 +18,8 @@ namespace StationeryStoreInventorySystemModel.broker
     public class CollectionPointBroker : ICollectionPointBroker
     {
         private InventoryEntities inventory;
-        private CollectionPoint cop = null;
-        private List<CollectionPoint> copList = null;
+        private CollectionPoint collectionPointObj = null;
+        private List<CollectionPoint> collectionPointListObj = null;
        
         public CollectionPointBroker(InventoryEntities inventory)
         {
@@ -34,9 +34,9 @@ namespace StationeryStoreInventorySystemModel.broker
         public CollectionPoint GetCollectionPoint(CollectionPoint collectionPoint)
         {
             ///Get the collectionPoint data by collectionPoint ID
-            cop = inventory.CollectionPoints.Where(copObj => copObj.Id == collectionPoint.Id).First();
-            if (!cop.Equals(null))
-                return cop;
+            collectionPointObj = inventory.CollectionPoints.Where(copObj => copObj.Id == collectionPoint.Id).First();
+            if (!collectionPointObj.Equals(null))
+                return collectionPointObj;
             return null;
         }
         /// <summary>
@@ -45,9 +45,9 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<CollectionPoint> GetAllCollectionPoint()
         {
-            copList = inventory.CollectionPoints.ToList<CollectionPoint>();
-            if (!copList.Equals(null))
-                return copList;
+            collectionPointListObj = inventory.CollectionPoints.ToList<CollectionPoint>();
+            if (!collectionPointListObj.Equals(null))
+                return collectionPointListObj;
             return null;
         }
         /// <summary>
@@ -86,12 +86,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                cop = inventory.CollectionPoints.Where(iObj => iObj.Id == collectionPoint.Id).First();
+                collectionPointObj = inventory.CollectionPoints.Where(iObj => iObj.Id == collectionPoint.Id).First();
                 Employee empId = inventory.Employees.Where(e => e.Id == collectionPoint.Clerk.Id).First();
-                cop.Id = collectionPoint.Id;
-                cop.Name = collectionPoint.Name;
-                cop.Time = collectionPoint.Time;
-                cop.Clerk = empId;
+                collectionPointObj.Id = collectionPoint.Id;
+                collectionPointObj.Name = collectionPoint.Name;
+                collectionPointObj.Time = collectionPoint.Time;
+                collectionPointObj.Clerk = empId;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
