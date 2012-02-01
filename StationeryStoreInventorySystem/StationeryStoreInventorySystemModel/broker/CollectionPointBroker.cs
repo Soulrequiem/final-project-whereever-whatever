@@ -33,11 +33,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public CollectionPoint GetCollectionPoint(CollectionPoint collectionPoint)
         {
-            ///Get the collectionPoint data by collectionPoint ID
-            collectionPointObj = inventory.CollectionPoints.Where(copObj => copObj.Id == collectionPoint.Id).First();
-            if (!collectionPointObj.Equals(null))
-                return collectionPointObj;
-            return null;
+            try
+            {
+                ///Get the collectionPoint data by collectionPoint ID
+                collectionPointObj = inventory.CollectionPoints.Where(copObj => copObj.Id == collectionPoint.Id).First();
+            }
+            catch (Exception e)
+            {
+                collectionPointObj = null;
+            }
+            return collectionPointObj;
         }
         /// <summary>
         /// Retrieve All of the collection point information from CollectionPoint Table
@@ -45,10 +50,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<CollectionPoint> GetAllCollectionPoint()
         {
-            collectionPointListObj = inventory.CollectionPoints.ToList<CollectionPoint>();
-            if (!collectionPointListObj.Equals(null))
-                return collectionPointListObj;
-            return null;
+            try
+            {
+                collectionPointListObj = inventory.CollectionPoints.ToList<CollectionPoint>();
+            }
+            catch (Exception e)
+            {
+                collectionPointListObj = null;
+            }
+
+            return collectionPointListObj;
         }
         /// <summary>
         /// Insert collectionPoint data to the CollectionPoint Table according to the collectionPoint Parameter
