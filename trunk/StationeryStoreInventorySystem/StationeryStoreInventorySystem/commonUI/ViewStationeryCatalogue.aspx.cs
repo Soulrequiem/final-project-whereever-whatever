@@ -18,6 +18,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class ViewStationeryCatalogue : System.Web.UI.Page
     {
+
+        ViewStationeryCatalogueControl vsCtrl;
+
         private ViewStationeryCatalogueControl viewStationeryCatalogueControl;
 
         /// <summary>
@@ -27,47 +30,40 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         /// <param name="e"></param>
         protected void Page_Load(object sender, System.EventArgs e)
         {
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ItemNo");
-            //dt.Columns.Add("Category");
-            //dt.Columns.Add("ItemDescription");
-            //dt.Columns.Add("UnitOfMeasure");            
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1we2we12321";
-            //dr[2] = "1213sadsad";
-            //dr[3] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1we2we12321";
-            //dr[2] = "1213sadsad";
-            //dr[3] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dgvStationeryList.DataSource = dt;
-            //dgvStationeryList.DataBind();
-
             if (!IsPostBack)
             {
+
+                FillStationeryList();
+                FillItems();
+
                 viewStationeryCatalogueControl = new ViewStationeryCatalogueControl();
-                this.FillStationeryList(viewStationeryCatalogueControl.ItemList);
+                //this.FillStationeryList(viewStationeryCatalogueControl.ItemList);
                 //FillStationeryList();
-                //FillItems();
+                FillItems();
+
             }
             
         }
+
+        private ViewStationeryCatalogueControl getControl()
+        {
+            if(vsCtrl == null)
+                vsCtrl = new ViewStationeryCatalogueControl();
+            return vsCtrl;
+        }
+
+
 
         /// <summary>
         /// Fills data to datagrid
         /// </summary>
         /// <param name="dt"></param>
-        private void FillStationeryList(DataTable dtStationery)
+        private void FillStationeryList()
         {
             try
             {
+                vsCtrl = getControl();
+                DataTable dtStationery = vsCtrl.ItemList;
                 dgvStationeryList.DataSource = dtStationery;
                 dgvStationeryList.DataBind();
             }
@@ -85,11 +81,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             try
             {
-                DataTable dtItems = (DataTable)Session["Items"];
+                DataTable dtItems = StationeryStoreInventorySystemController.Util.GetItemTable();
                 if (dtItems != null)
                 {
                     drdItemList.TextField = "ItemDescription";
-                    drdItemList.ValueField = "ID";
+                    drdItemList.ValueField = "ItemNo";
                     drdItemList.DataSource = dtItems;
                     drdItemList.DataBind();
                 }
@@ -111,6 +107,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             try
             {
                 String selectedItem = drdItemList.SelectedItem.Text;
+                vsCtrl = getControl();
+                DataTable dtStationery = vsCtrl.ItemList;
+                dgvStationeryList.DataSource = dtStationery;
+                dgvStationeryList.DataBind();
                 //Pass to the controller get Datatable
                 //Call FillStationeryList function
             }
