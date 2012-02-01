@@ -21,8 +21,8 @@ namespace StationeryStoreInventorySystemModel.broker
         private InventoryEntities inventory;
         private Item itemObj = null;
         private List<Item> itemList = null;
-        private StockCardDetail stcDetail = null;
-        private List<StockCardDetail> stcDetailList = null;
+        private StockCardDetail stockCardDetailObj = null;
+        private List<StockCardDetail> stockCardDetailList = null;
 
         public ItemBroker(InventoryEntities inventory)
         {
@@ -36,10 +36,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Item GetItem(Item item)
         {
-            itemObj = inventory.Items.Where(iObj =>iObj.Id == item.Id).First();
-            if (!itemObj.Equals(null))
-                return itemObj;
-            return null;
+            try
+            {
+                itemObj = inventory.Items.Where(iObj => iObj.Id == item.Id).First();
+            }
+            catch (Exception e)
+            {
+                itemObj=null;
+            }
+            return itemObj;
         }
 
         /// <summary>
@@ -48,10 +53,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<Item> GetAllItem()
         {
-            itemList = inventory.Items.ToList<Item>();
-            if (!itemList.Equals(null))
-                return itemList;
-            return null;
+            try
+            {
+                itemList = inventory.Items.ToList<Item>();
+            }
+            catch (Exception e)
+            {
+                itemList = null;
+            }
+            return itemList;
         }
 
         /// <summary>
@@ -144,8 +154,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public List<Item> GetItemReference(Item item)
         {
-            List<Item> itemObj = inventory.Items.Where(r => r.Description.Contains(item.Description)).ToList();
-            return itemObj;
+            try
+            {
+                itemList = inventory.Items.Where(r => r.Description.Contains(item.Description)).ToList();
+            }
+            catch (Exception e)
+            {
+                itemList = null;
+            }
+            return itemList;
 
         }
         /// <summary>
@@ -155,10 +172,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public StockCardDetail GetStockCardDetail(StockCardDetail stockCardDetail)
         {
-            stcDetail = inventory.StockCardDetails.Where(stcDetailObj => stcDetailObj.Id == stockCardDetail.Id).First();
-            if (!stcDetail.Equals(null))
-                return stcDetail;
-            return null;
+            try
+            {
+                stockCardDetailObj = inventory.StockCardDetails.Where(stcDetailObj => stcDetailObj.Id == stockCardDetail.Id).First();
+            }
+            catch (Exception e)
+            {
+                stockCardDetailObj = null;
+            }
+            return stockCardDetailObj;
         }
         /// <summary>
         ///  Retrieve StockDetail data to the StockDetail Table according to the StockCardDetail Parameter
@@ -166,10 +188,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<StockCardDetail> GetAllStockCardDetail()
         {
-            stcDetailList = inventory.StockCardDetails.ToList<StockCardDetail>();
-            if (!stcDetailList.Equals(null))
-                return stcDetailList;
-            return null;
+            try
+            {
+                stockCardDetailList = inventory.StockCardDetails.ToList<StockCardDetail>();
+            }
+            catch (Exception e)
+            {
+                stockCardDetailList = null;
+            }
+            return stockCardDetailList;
         }
         /// <summary>
         /// Insert StockDetail data to StockDetail Table according to the StockDetail Parameter Return Constants.DB_STATUS
