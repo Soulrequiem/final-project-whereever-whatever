@@ -1,7 +1,7 @@
 ﻿/***************************************************************************/
 /*  File Name       : RequisitionBroker.cs
 /*  Module Name     : Models
-/*  Owner           : Thazin
+/*  Owner           : Thazin Win
 /*  class Name      : Requisition
 /*  Details         : Model Requisition of Requisition and Requisition detail table
 /***************************************************************************/
