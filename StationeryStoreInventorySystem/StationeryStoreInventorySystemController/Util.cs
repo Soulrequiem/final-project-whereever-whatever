@@ -99,6 +99,11 @@ namespace StationeryStoreInventorySystemController
             return (Employee)GetSession(employeeSessionKey);
         }
 
+        public static void SetEmployee(Employee employee)
+        {
+            PutSession(employeeSessionKey, employee);
+        }
+
         public static int GetEmployeeRole()
         {
             return GetEmployee().Role.Id;
