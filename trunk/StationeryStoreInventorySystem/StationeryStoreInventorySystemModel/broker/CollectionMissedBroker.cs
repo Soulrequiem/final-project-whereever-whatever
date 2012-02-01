@@ -36,11 +36,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public CollectionMissed GetCollectionMissed(CollectionMissed collectionMissed)
         {
-            //Get the collectionMissed Object by collectionMissed Parameter's Id
-            collectionMissedObj = inventory.CollectionMisseds.Where(c => c.Id == collectionMissed.Id).First();
-            if (collectionMissedObj != null)
-                return collectionMissedObj;
-            return null;
+            try
+            {
+                //Get the collectionMissed Object by collectionMissed Parameter's Id
+                collectionMissedObj = inventory.CollectionMisseds.Where(c => c.Id == collectionMissed.Id).First();
+            }
+            catch (Exception e)
+            {
+                collectionMissedObj = null;
+            }
+            return collectionMissedObj;
         }
         /// <summary>
         /// Get the list of collecionMissed according the Department Id in CollectionMissed table
@@ -51,11 +56,17 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public List<CollectionMissed> GetAllCollectionMissed(Department department)
         {
-            //get the list of collectionMissed by checking Department Id
-            collectionMissedList = inventory.CollectionMisseds.Where(c => c.Department.Id == department.Id).ToList();
-            if (collectionMissedList != null)
+            try
+            {
+                //get the list of collectionMissed by checking Department Id
+                collectionMissedList = inventory.CollectionMisseds.Where(c => c.Department.Id == department.Id).ToList();
+            }
+            catch (Exception e)
+            {
+                collectionMissedList = null;
+            }
                 return collectionMissedList;
-            return null;
+            
         }
         /// <summary>
         /// Get the list of CollectionMissed by department Id and status
@@ -67,11 +78,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public List<CollectionMissed> GetAllCollectionMissed(Department department, Constants.VISIBILITY_STATUS status)
         {
-            //get the collectionMissed List by checking department Id of collecion Missed Table and check the Visibility Status
-            collectionMissedList = inventory.CollectionMisseds.Where(c => c.Department.Id == department.Id || status.Equals("SHOW")).ToList();
-            if (collectionMissedList != null)
+            try
+            {
+                //get the collectionMissed List by checking department Id of collecion Missed Table and check the Visibility Status
+                collectionMissedList = inventory.CollectionMisseds.Where(c => c.Department.Id == department.Id || status.Equals("SHOW")).ToList();
+            }
+            catch (Exception e)
+            {
+                collectionMissedList = null;
+            }
                 return collectionMissedList;
-            return null;
         }
         /// <summary>
         /// Insert the collectionMissed data to the CollectionMissed Table
