@@ -164,17 +164,17 @@ namespace StationeryStoreInventorySystemController.departmentController
             
         //}
 
-        public Constants.ACTION_STATUS SelectApproveRequisition(List<int> index)
+        public Constants.ACTION_STATUS SelectApproveRequisition(List<int> index, DataTable data)
         {
-            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.APPROVED);
+            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.APPROVED, data);
         }
 
-        public Constants.ACTION_STATUS SelectRejectRequisition(List<int> index)
+        public Constants.ACTION_STATUS SelectRejectRequisition(List<int> index, DataTable data)
         {
-            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.REJECTED);
+            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.REJECTED, data);
         }
 
-        private Constants.ACTION_STATUS SelectActionRequisition(List<int> index, Constants.REQUISITION_STATUS requisitionStatus)
+        private Constants.ACTION_STATUS SelectActionRequisition(List<int> index, Constants.REQUISITION_STATUS requisitionStatus, DataTable data)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
@@ -185,8 +185,11 @@ namespace StationeryStoreInventorySystemController.departmentController
 
                 foreach (int i in index)
                 {
-                    requisition = pendingRequisitionList.ElementAt(i - 1);
+                    requisition = pendingRequisitionList.ElementAt(i);
                     requisition.Status = Converter.objToInt(requisitionStatus);
+                    //requisition.Remarks = data.Rows[i]["Remarks"].ToString();
+
+                    pendingRequisitionList.Remove(requisition);
 
                     if (requisitionBroker.Update(requisition) == Constants.DB_STATUS.FAILED)
                     {

@@ -12,38 +12,62 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class ManageCollectionPointControl
     {
+        private InventoryEntities inventory;
+
         private ICollectionPointBroker collectionPointBroker;
+        private IEmployeeBroker employeeBroker;
         
         private Employee currentEmployee;
-        private CollectionPoint currentCollectionPoint;
         
         private List<CollectionPoint> allCollectionPoint;
 
         private DataTable dt;
+        private DataTable dtList;
         private DataRow dr;
+
+        private string[] columnName = { "CollectionPoint", "CollectionTime", "CollectionID" };
+
+        private DataColumn[] dataColumn; // for drop down list
+        private DataColumn[] dataColumnList;
         
         public ManageCollectionPointControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
-            InventoryEntities inventory = new InventoryEntities();
+            inventory = new InventoryEntities();
 
             collectionPointBroker = new CollectionPointBroker(inventory);
+            employeeBroker = new EmployeeBroker(inventory);
 
             allCollectionPoint = collectionPointBroker.GetAllCollectionPoint();
-            currentCollectionPoint = currentEmployee.Department.CollectionPoint;
+            
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]) };
+
+            dataColumnList = new DataColumn[] { new DataColumn(columnName[2]),
+                                                new DataColumn(columnName[0]),
+                                                new DataColumn(columnName[1]) };
         }
 
-        public DataTable CurentCollectionPoint
+        public DataTable CurrentCollectionPoint
         {
             get
             {
-                dt = new DataTable();
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumnList);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
                 
-                if (currentCollectionPoint != null)
+                if (currentEmployee.Department.CollectionPoint != null)
                 {
                     dr = dt.NewRow();
-                    dr["collectionPoint"] = currentCollectionPoint.Name;
-                    dr["collectionTime"] = currentCollectionPoint.Time;
+                    dr[columnName[2]] = currentEmployee.Department.CollectionPoint.Id;
+                    dr[columnName[0]] = currentEmployee.Department.CollectionPoint.Name;
+                    dr[columnName[1]] = currentEmployee.Department.CollectionPoint.Time;
 
                     dt.Rows.Add(dr);
                 }
@@ -55,20 +79,28 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                dt = new DataTable();
+                if (dtList == null)
+                {
+                    dtList = new DataTable();
+                    dtList.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dtList.Rows.Clear();
+                }
 
                 if (allCollectionPoint.Count > 0)
                 {
                     foreach (CollectionPoint collectionPoint in allCollectionPoint)
                     {
-                        dr = dt.NewRow();
-                        dr["value"] = collectionPoint.Id;
-                        dr["text"] = collectionPoint.Name + " (" + collectionPoint.Time.ToString("hh:ss tt") + ")";
-                        dt.Rows.Add(dr);
+                        dr = dtList.NewRow();
+                        dr[columnName[0]] = collectionPoint.Id;
+                        dr[columnName[1]] = collectionPoint.Name + " (" + collectionPoint.Time.ToString(@"hh\:mm") + ")";
+                        dtList.Rows.Add(dr);
                     }
                 }
 
-                return dt;
+                return dtList;
             }
         }
 
@@ -77,16 +109,45 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
-            CollectionPoint collectionPoint = currentEmployee.Department.CollectionPoint;
-            collectionPoint.Id = collectionPointId;
+            try
+            {
+                Employee employee = new Employee();
+                employee.Id = currentEmployee.Id;
+                employee = employeeBroker.GetEmployee(employee);
 
-            if (collectionPointBroker.Update(collectionPoint) == SystemStoreInventorySystemUtil.Constants.DB_STATUS.SUCCESSFULL)
-            {
-                status = SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS;
+                CollectionPoint collectionPoint = new CollectionPoint();
+                collectionPoint.Id = collectionPointId;
+                collectionPoint = collectionPointBroker.GetCollectionPoint(collectionPoint);
+
+                if (collectionPoint != null)
+                {
+
+                    employee.Department.CollectionPoint = collectionPoint;
+
+                    if (employeeBroker.Update(employee) == SystemStoreInventorySystemUtil.Constants.DB_STATUS.SUCCESSFULL)
+                    {
+                        currentEmployee.Department.CollectionPoint = collectionPoint;
+                        Util.SetEmployee(currentEmployee);
+                        status = SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS;
+                    }
+                    else
+                    {
+                        status = SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL;
+                    }
+                }
+                else
+                {
+                    status = Constants.ACTION_STATUS.FAIL;
+                }
+
+                if (status == Constants.ACTION_STATUS.SUCCESS)
+                {
+                    inventory.SaveChanges();
+                }
             }
-            else
+            catch (Exception e)
             {
-                status = SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL;
+                status = Constants.ACTION_STATUS.FAIL;
             }
 
             return status;
