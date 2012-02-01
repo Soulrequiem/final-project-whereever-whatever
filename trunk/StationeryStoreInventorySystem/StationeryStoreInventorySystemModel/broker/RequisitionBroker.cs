@@ -18,10 +18,10 @@ namespace StationeryStoreInventorySystemModel.broker
     public class RequisitionBroker : brokerinterface.IRequisitionBroker
     {
         private InventoryEntities inventory;
-        private Requisition req = null;
-        private RequisitionDetail reqDetail = null;
-        private List<Requisition> reqList = null;
-        private List<RequisitionDetail> reqDetailList = null;
+        private Requisition requisitionObj= null;
+        private RequisitionDetail requisitionDetailObj = null;
+        private List<Requisition> requisitionList = null;
+        private List<RequisitionDetail> requisitionDetailList = null;
 
         public RequisitionBroker(InventoryEntities inventory)
         {
@@ -35,14 +35,21 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Requisition GetRequisition(Requisition requisition)
         {
-            if (requisition.Status != null)
+            try
             {
-                int status = Converter.objToInt(requisition.Status);
-                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id && reqObj.Status == status).First();
+                if (requisition.Status != 0)
+                {
+                    int status = Converter.objToInt(requisition.Status);
+                    requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id && reqObj.Status == status).First();
+                }
+                else
+                {
+                    requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
+                }
             }
-            else
+            catch (Exception e)
             {
-                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
+                requisitionObj = null;
             }
             //if (!req.Equals(null))
             //{
@@ -55,27 +62,41 @@ namespace StationeryStoreInventorySystemModel.broker
             //    }
             //    return req;
             //}
-            return null;
+            return requisitionObj;
         }
 
         /// <summary>
         ///  Retrieve All of the Requisition information from Requisition Table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// List of Requisition
+        /// </returns>
 
         public List<Requisition> GetAllRequisition()
         {
-            reqList=inventory.Requisitions.ToList<Requisition>();
-            if (!reqList.Equals(null))
-                return reqList;
-            return null;
+            try
+            {
+                requisitionList = inventory.Requisitions.ToList<Requisition>();
+            }
+            catch (Exception e)
+            {
+                requisitionList = null;
+            }
+            return requisitionList;
         }
 
         public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus)
         {
-            int status = Converter.objToInt(requisitionStatus);
-            reqList = inventory.Requisitions.Where(reqObj => reqObj.Status == status).ToList<Requisition>();
-            return reqList;
+            try
+            {
+                int status = Converter.objToInt(requisitionStatus);
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status).ToList<Requisition>();
+            }
+            catch (Exception e)
+            {
+                requisitionList = null;
+            }
+            return requisitionList;
         }
 
         /// <summary>
@@ -119,16 +140,17 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
+                requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
                 Employee empId=inventory.Employees.Where(e=>e.Id==requisition.CreatedBy.Id).First();
                 Employee approvedBy=inventory.Employees.Where(e=>e.Id==requisition.ApprovedBy.Id).First();
-                req.Id = requisition.Id;
-                req.Department = requisition.Department;
-                req.CreatedBy = empId;
-                req.ApprovedBy = approvedBy;
-                req.ApprovedDate = req.ApprovedDate;
-                req.CreatedDate = req.CreatedDate;
-                foreach (RequisitionDetail requisitionDetail in req.RequisitionDetails)
+                Department department = inventory.Departments.Where(d => d.Id == requisition.Department.Id).First();
+                requisitionObj.Id = requisition.Id;
+                requisitionObj.Department = department;
+                requisitionObj.CreatedBy = empId;
+                requisitionObj.ApprovedBy = approvedBy;
+                requisitionObj.ApprovedDate = requisition.ApprovedDate;
+                requisitionObj.CreatedDate = requisition.CreatedDate;
+                foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
                 {
                     this.Update(requisitionDetail);
                 }
@@ -154,8 +176,8 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                req = inventory.Requisitions.Where(reqObj => reqObj.Id == requisiton.Id).First();
-                req.Status = 2;
+                requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisiton.Id).First();
+                requisitionObj.Status = 2;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -174,10 +196,15 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public RequisitionDetail GetRequisitionDetail(RequisitionDetail requisitionDetail)
         {
-            reqDetail = inventory.RequisitionDetails.Where(reqObj => reqObj.Id == requisitionDetail.Id).First();
-            if (!reqDetail.Equals(null))
-                return reqDetail;
-            return null;
+            try
+            {
+                requisitionDetailObj = inventory.RequisitionDetails.Where(reqObj => reqObj.Id == requisitionDetail.Id).First();
+            }
+            catch (Exception e)
+            {
+                requisitionDetailObj = null;
+            }
+            return requisitionDetailObj;
         }
         /// <summary>
         /// Retrieve All of the Requisition detail information from Requisition detail Table
@@ -186,10 +213,16 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public List<RequisitionDetail> GetAllRequisitionDetail()
         {
-            reqDetailList = inventory.RequisitionDetails.ToList<RequisitionDetail>();
-            if (!reqDetailList.Equals(null))
-                return reqDetailList;
-            return null;
+            try
+            {
+                requisitionDetailList = inventory.RequisitionDetails.ToList<RequisitionDetail>();
+            }
+            catch (Exception e)
+            {
+                requisitionDetailList = null;
+            }
+
+            return requisitionDetailList;
         }
         /// <summary>
         /// Insert Requisition dtail data to the Requisition detail Table according to the Requisition Parameter
@@ -228,14 +261,14 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                reqDetail = inventory.RequisitionDetails.Where(reqObj => reqObj.Id == requisitionDetail.Id).First();
+                requisitionDetailObj = inventory.RequisitionDetails.Where(reqObj => reqObj.Id == requisitionDetail.Id).First();
                 Item itemId = inventory.Items.Where(i => i.Id == requisitionDetail.Item.Id).First();
-                Requisition reqId = inventory.Requisitions.Where(r => r.Id == requisitionDetail.Requisition.Id).First();
-                reqDetail.Id = requisitionDetail.Id;
-                reqDetail.Requisition = reqId;
-                reqDetail.Qty = requisitionDetail.Qty;
-                reqDetail.DeliveredQty = requisitionDetail.DeliveredQty;
-                reqDetail.Item = itemId;
+                Requisition requisitionId = inventory.Requisitions.Where(r => r.Id == requisitionDetail.Requisition.Id).First();
+                requisitionDetailObj.Id = requisitionDetail.Id;
+                requisitionDetailObj.Requisition = requisitionId;
+                requisitionDetailObj.Qty = requisitionDetail.Qty;
+                requisitionDetailObj.DeliveredQty = requisitionDetail.DeliveredQty;
+                requisitionDetailObj.Item = itemId;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -257,7 +290,13 @@ namespace StationeryStoreInventorySystemModel.broker
         }
 
 
-
+        /// <summary>
+        /// Get the last requisition Id from requistion table
+        /// </summary>
+        /// <param name="requisition"></param>
+        /// <returns>
+        /// Return RequisitionId
+        /// </returns>
         public string GetRequisitionId(Requisition requisition)
         {
             int idInt;
@@ -300,7 +339,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return requisition.Department.Id + "/" + idInt + "/" + newYr;
         }
-
+        /// <summary>
+        /// Get the last record of RequistionDetailId
+        /// </summary>
+        /// <returns>
+        /// Return RequistionDetailId
+        /// </returns>
         public int GetRequisitionDetailId()
         {
             //List<RequisitionDetail> list = GetAllRequisitionDetail();
