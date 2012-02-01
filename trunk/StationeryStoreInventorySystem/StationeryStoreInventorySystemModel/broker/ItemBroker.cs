@@ -2,8 +2,8 @@
 /*  File Name       : Item.cs
 /*  Module Name     : Models
 /*  Owner           : Thazin Win
-/*  class Name      : ItemBroker
-/*  Details         : Model representation of Item table
+/*  class Name      : Item,StockCardDetail
+/*  Details         : Model item data and stockdetail representation of Item and StockDetail table
 /***************************************************************************/
 using System;
 using System.Collections.Generic;
