@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***************************************************************************/
+/*  File Name       : Employee.cs
+/*  Module Name     : Models
+/*  Owner           : Thazin Win
+/*  class Name      : Employee
+/*  Details         : Model Employee of Employee table
+/***************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,10 +21,10 @@ namespace StationeryStoreInventorySystemModel.broker
 
         #region IEmployeeBroker Members
         private InventoryEntities inventory;
-        private Employee empObj = null;
+        private Employee employeeObj = null;
         private User userObj = null;
         private Role roleObj = null;
-        private List<Employee> empList = null;
+        private List<Employee> employeeList = null;
         private List<User> userList = null;
         private List<Role> roleList = null;
 
@@ -31,9 +38,11 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public int GetEmployeeId()
         {
-
-            var maxEmployeeId = inventory.Employees.Max(xObj => xObj.Id) + 1;
-            return maxEmployeeId;
+                      
+             var maxEmployeeId = inventory.Employees.Max(xObj => xObj.Id) + 1;
+             if (maxEmployeeId.Equals(null))
+                 return 0;
+             return maxEmployeeId;
 
         }
 
@@ -44,20 +53,21 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Employee GetEmployee(Employee employee)
         {
-
-            empObj = inventory.Employees.Where(eObj => eObj.Name == employee.Name || eObj.Id == employee.Id || eObj.User.Id == employee.User.Id).First();
-
-            // if (!empObj.Equals(null) && empObj.CreatedBy != employee.Id)
-            if (!empObj.Equals(null))
+            try
             {
-                User userDetail = inventory.Users.Where(uObj => uObj.Id == empObj.User.Id).First();
-                Role roleDetail = inventory.Roles.Where(rObj => rObj.Id == empObj.Role.Id).First();
-                empObj.User = userDetail;
-                empObj.Role = roleDetail;
+                employeeObj = inventory.Employees.Where(eObj => eObj.Name == employee.Name || eObj.Id == employee.Id || eObj.User.Id == employee.User.Id).First();
 
-                return empObj;
+                // if (!empObj.Equals(null) && empObj.CreatedBy != employee.Id)
+                User userDetail = inventory.Users.Where(uObj => uObj.Id == employeeObj.User.Id).First();
+                Role roleDetail = inventory.Roles.Where(rObj => rObj.Id == employeeObj.Role.Id).First();
+                employeeObj.User = userDetail;
+                employeeObj.Role = roleDetail;
             }
-            return null;
+            catch (Exception e)
+            {
+                employeeObj = null;
+            }
+            return employeeObj;
         }
         /// <summary>
         /// Get all of the Employee record from Employee table
@@ -65,10 +75,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<Employee> GetAllEmployee()
         {
-            empList = inventory.Employees.ToList<Employee>();
-            if (!roleList.Equals(null))
-                return empList;
-            return null;
+            try
+            {
+                employeeList = inventory.Employees.ToList<Employee>();
+            }
+            catch (Exception e)
+            {
+                employeeList = null;
+            }
+
+                return employeeList;
         }
         /// <summary>
         /// Insert the employee infomation to the Employee table
@@ -108,22 +124,22 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                empObj = inventory.Employees.Where(eObj => eObj.Id == employee.Id).First();
+                employeeObj = inventory.Employees.Where(eObj => eObj.Id == employee.Id).First();
                 User userId = inventory.Users.Where(u => u.Id == employee.User.Id).First();
                 Role roleId = inventory.Roles.Where(r => r.Id == employee.Role.Id).First();
                 Department deptId = inventory.Departments.Where(d => d.Id == employee.Department.Id).First();
                 Employee createdBy = inventory.Employees.Where(e => e.Id == employee.CreatedBy.Id).First();
-                if (empObj != null)
+                if (employeeObj != null)
                 {
-                    empObj.Id = employee.Id;
-                    empObj.User = userId;
-                    empObj.Role = roleId;
-                    empObj.Department = deptId;
-                    empObj.Name = employee.Name;
-                    empObj.Designation = employee.Designation;
-                    empObj.Email = employee.Email;
-                    empObj.CreatedDate = employee.CreatedDate;
-                    empObj.CreatedBy = createdBy;
+                    employeeObj.Id = employee.Id;
+                    employeeObj.User = userId;
+                    employeeObj.Role = roleId;
+                    employeeObj.Department = deptId;
+                    employeeObj.Name = employee.Name;
+                    employeeObj.Designation = employee.Designation;
+                    employeeObj.Email = employee.Email;
+                    employeeObj.CreatedDate = employee.CreatedDate;
+                    employeeObj.CreatedBy = createdBy;
                     //this.Update(empObj.User);
                     //this.Update(empObj.Role);
                     inventory.SaveChanges();
@@ -147,12 +163,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                empObj = inventory.Employees.Where(eObj => eObj.Id == employee.Id).First();
-                if (empObj != null)
+                employeeObj = inventory.Employees.Where(eObj => eObj.Id == employee.Id).First();
+                if (employeeObj != null)
                 {
-                    empObj.Status = 2;
-                    empObj.Role.Status = 2;
-                    empObj.User.Status = 2;
+                    employeeObj.Status = 2;
+                    employeeObj.Role.Status = 2;
+                    employeeObj.User.Status = 2;
                     inventory.SaveChanges();
                     status = Constants.DB_STATUS.SUCCESSFULL;
                 }
@@ -345,3 +361,6 @@ namespace StationeryStoreInventorySystemModel.broker
         #endregion
     }
 }
+/****************************************/
+/********* End of the Class *****************/
+/****************************************/
