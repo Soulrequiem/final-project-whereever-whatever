@@ -38,12 +38,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Discrepancy GetDiscrepancy(Discrepancy discrepancy)
         {
-            discrepancyObj = inventory.Discrepancies.Where(disObj => disObj.Id == discrepancy.Id).First();
-            if (!discrepancyObj.Equals(null))
+            try
             {
-                return discrepancyObj;
+                discrepancyObj = inventory.Discrepancies.Where(disObj => disObj.Id == discrepancy.Id).First();
             }
-            return null;
+            catch (Exception e)
+            {
+                discrepancyObj = null;
+            }
+            return discrepancyObj;
 
         }
         /// <summary>
@@ -53,10 +56,17 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<Discrepancy> GetAllDiscrepancy()
         {
-            discrepancyListObj = inventory.Discrepancies.ToList<Discrepancy>();
-            if (!discrepancyListObj.Equals(null))
-                return discrepancyListObj;
-            return null;
+            try
+            {
+
+                discrepancyListObj = inventory.Discrepancies.ToList<Discrepancy>();
+            }
+            catch (Exception e)
+            {
+                discrepancyListObj = null;
+            }
+
+            return discrepancyListObj;
         }
         /// <summary>
         ///  Insert Discrepancy data to the Discrepancy and Discrepancy Detail Table according to the newdiscrepancy Parameter
