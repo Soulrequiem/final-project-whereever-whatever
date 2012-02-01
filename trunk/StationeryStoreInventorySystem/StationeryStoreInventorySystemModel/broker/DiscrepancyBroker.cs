@@ -19,12 +19,12 @@ namespace StationeryStoreInventorySystemModel.broker
     {
         #region IRequisitionCollectionBroker Members
         private InventoryEntities inventory;
-        private Discrepancy dis = null;
-        private DiscrepancyDetail disDetail = null;
-        private List<DiscrepancyDetail> disDetailList = null;
-        private List<Discrepancy> disList = null;
-        private StockAdjustment sta = null;
-        private List<StockAdjustment> staList = null;
+        private Discrepancy discrepancyObj = null;
+        private DiscrepancyDetail discrepancyDetailObj = null;
+        private List<DiscrepancyDetail> discrepancyDetailListObj = null;
+        private List<Discrepancy> discrepancyListObj = null;
+        private StockAdjustment stockAdjustmentObj = null;
+        private List<StockAdjustment> stockAdjustmentListObj = null;
 
         public DiscrepancyBroker(InventoryEntities inventory)
         {
@@ -38,10 +38,10 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Discrepancy GetDiscrepancy(Discrepancy discrepancy)
         {
-            dis = inventory.Discrepancies.Where(disObj => disObj.Id == discrepancy.Id).First();
-            if (!dis.Equals(null))
+            discrepancyObj = inventory.Discrepancies.Where(disObj => disObj.Id == discrepancy.Id).First();
+            if (!discrepancyObj.Equals(null))
             {
-                return dis;
+                return discrepancyObj;
             }
             return null;
 
@@ -53,9 +53,9 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<Discrepancy> GetAllDiscrepancy()
         {
-            disList = inventory.Discrepancies.ToList<Discrepancy>();
-            if (!disList.Equals(null))
-                return disList;
+            discrepancyListObj = inventory.Discrepancies.ToList<Discrepancy>();
+            if (!discrepancyListObj.Equals(null))
+                return discrepancyListObj;
             return null;
         }
         /// <summary>
@@ -99,11 +99,11 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
 
-                dis = inventory.Discrepancies.Where(d => d.Id == discrepancy.Id).First();
+                discrepancyObj = inventory.Discrepancies.Where(d => d.Id == discrepancy.Id).First();
                 Employee createdBy = inventory.Employees.Where(e => e.Id == discrepancy.CreatedBy.Id).First();
-                dis.Id = discrepancy.Id;
-                dis.CreatedDate = discrepancy.CreatedDate;
-                dis.CreatedBy = createdBy;
+                discrepancyObj.Id = discrepancy.Id;
+                discrepancyObj.CreatedDate = discrepancy.CreatedDate;
+                discrepancyObj.CreatedBy = createdBy;
                 foreach (DiscrepancyDetail discrepancyDetail in discrepancy.DiscrepancyDetails)
                 {
                     this.Update(discrepancyDetail);
@@ -130,8 +130,8 @@ namespace StationeryStoreInventorySystemModel.broker
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
             try
             {
-                dis = inventory.Discrepancies.Where(disObj => disObj.Id == discrepancy.Id).First();
-                dis.Status = 2;
+                discrepancyObj = inventory.Discrepancies.Where(disObj => disObj.Id == discrepancy.Id).First();
+                discrepancyObj.Status = 2;
                 foreach (DiscrepancyDetail discrepancyDetail in discrepancy.DiscrepancyDetails)
                 {
                     this.Delete(discrepancyDetail);
@@ -149,16 +149,16 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         public DiscrepancyDetail GetDiscrepancyDetail(DiscrepancyDetail discrepancyDetail)
         {
-            disDetail = inventory.DiscrepancyDetails.Where(disDetailObj => disDetailObj.Id == discrepancyDetail.Id).First();
-            if (!disDetail.Equals(null))
-                return disDetail;
+            discrepancyDetailObj = inventory.DiscrepancyDetails.Where(disDetailObj => disDetailObj.Id == discrepancyDetail.Id).First();
+            if (!discrepancyDetailObj.Equals(null))
+                return discrepancyDetailObj;
             return null;
         }
         public List<DiscrepancyDetail> GetAllDiscrepancyDetail()
         {
-            disDetailList = inventory.DiscrepancyDetails.ToList<DiscrepancyDetail>();
-            if (!disDetailList.Equals(null))
-                return disDetailList;
+            discrepancyDetailListObj = inventory.DiscrepancyDetails.ToList<DiscrepancyDetail>();
+            if (!discrepancyDetailListObj.Equals(null))
+                return discrepancyDetailListObj;
             return null;
         }
         public Constants.DB_STATUS Insert(DiscrepancyDetail discrepancyDetail)
@@ -187,15 +187,15 @@ namespace StationeryStoreInventorySystemModel.broker
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
             try
             {
-                disDetail = inventory.DiscrepancyDetails.Where(disDetailObj => disDetailObj.Id == discrepancyDetail.Id).First();
+                discrepancyDetailObj = inventory.DiscrepancyDetails.Where(disDetailObj => disDetailObj.Id == discrepancyDetail.Id).First();
                 Discrepancy disId = inventory.Discrepancies.Where(d => d.Id == discrepancyDetail.Discrepancy.Id).First();
                 Item item = inventory.Items.Where(i => i.Id == discrepancyDetail.Item.Id).First();
-                disDetail.Qty = discrepancyDetail.Qty;
-                disDetail.Discrepancy = disId;
-                disDetail.Item = item;
-                disDetail.DiscrepancyType = discrepancyDetail.DiscrepancyType;
-                disDetail.Qty = discrepancyDetail.Qty;
-                disDetail.Remarks = discrepancyDetail.Remarks;
+                discrepancyDetailObj.Qty = discrepancyDetail.Qty;
+                discrepancyDetailObj.Discrepancy = disId;
+                discrepancyDetailObj.Item = item;
+                discrepancyDetailObj.DiscrepancyType = discrepancyDetail.DiscrepancyType;
+                discrepancyDetailObj.Qty = discrepancyDetail.Qty;
+                discrepancyDetailObj.Remarks = discrepancyDetail.Remarks;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -224,21 +224,21 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         public StockAdjustment GetStockAdjustment(StockAdjustment stockAdjustment)
         {
-            sta = inventory.StockAdjustments.Where(staObj => staObj.Id == stockAdjustment.Id).First();
-            if (!sta.Equals(null))
+            stockAdjustmentObj = inventory.StockAdjustments.Where(staObj => staObj.Id == stockAdjustment.Id).First();
+            if (!stockAdjustmentObj.Equals(null))
             {
-                Discrepancy dis = inventory.Discrepancies.Where(disObj => disObj.Id == sta.Discrepancy.Id).First();
+                Discrepancy dis = inventory.Discrepancies.Where(disObj => disObj.Id == stockAdjustmentObj.Discrepancy.Id).First();
 
-                sta.Discrepancy = dis;
+                stockAdjustmentObj.Discrepancy = dis;
             }
-            return sta;
+            return stockAdjustmentObj;
 
         }
         public List<StockAdjustment> GetAllStockAdjustment()
         {
-            staList = inventory.StockAdjustments.ToList<StockAdjustment>();
-            if (!staList.Equals(null))
-                return staList;
+            stockAdjustmentListObj = inventory.StockAdjustments.ToList<StockAdjustment>();
+            if (!stockAdjustmentListObj.Equals(null))
+                return stockAdjustmentListObj;
             return null;
         }
         public Constants.DB_STATUS Insert(StockAdjustment newStockAdjustment)
