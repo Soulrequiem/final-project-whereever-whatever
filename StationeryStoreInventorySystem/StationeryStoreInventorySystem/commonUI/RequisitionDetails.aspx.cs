@@ -49,6 +49,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
             if (!IsPostBack)
             {
+                MasterPage.setCurrentPage(this);
                 //FillRequisitionDetailsList();
                 //FillDetails();
             }

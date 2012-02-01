@@ -22,13 +22,11 @@
             </div>
             <div style="float:left">
                 <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblCollectionID" runat="server" 
-                            Text="C0019"/>
+                            ID="lblCollectionID" runat="server" />
             </div>
             <div style="float:right">
                 <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblCollectionPoint" runat="server" 
-                            Text="Management School"/>
+                            ID="lblCollectionPoint" runat="server" />
             </div>
             <div style="float:right; width:100px">
                 <asp:Label CssClass="DefaultLabelstyle" 
