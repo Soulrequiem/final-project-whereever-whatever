@@ -20,6 +20,15 @@ namespace StationeryStoreInventorySystemController
 
         public static readonly string loginPage = "~/commonUI/LogIn.aspx";
 
+        public static string EmployeeName()
+        {
+            if (GetEmployee() == null)
+            {
+                return null;
+            }
+            return GetEmployee().Name;
+        }
+
         public static void PutSession(string key, object obj)
         {
             HttpContext.Current.Session[key] = obj;
@@ -180,26 +189,56 @@ namespace StationeryStoreInventorySystemController
             return item;
         }
 
-        public static DataTable GetItemTable()
+        public static DataTable GetItemTable(IItemBroker itemBroker, string itemDescription)
         {
+            Item item = GetItem(itemBroker, itemDescription);
+
             DataTable dt = new DataTable();
+            dt.Columns.Add("ItemNo");
+            dt.Columns.Add("ItemDescription");
+
             DataRow dr;
 
-            List<Item> itemList = (new ItemBroker(new InventoryEntities())).GetAllItem();
-
-            foreach (Item item in itemList)
+            if (item != null)
             {
                 dr = dt.NewRow();
-                dr["itemNo"] = item.Id;
-                dr["category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
-                dr["itemDescription"] = item.Description;
-                dr["reorderLevel"] = item.ReorderLevel;
-                dr["reorderQty"] = item.ReorderQty;
-                dr["unitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                dr["ItemNo"] = item.Id;
+                dr["ItemDescription"] = item.Description;
                 dt.Rows.Add(dr);
             }
-
             return dt;
+        }
+
+        private static DataTable allItem;
+        public static DataTable GetItemTable()
+        {
+            if (allItem == null)
+            {
+                allItem = new DataTable();
+                allItem.Columns.AddRange(new DataColumn[] { new DataColumn("ItemNo"), 
+                                         new DataColumn("Category"), 
+                                         new DataColumn("ItemDescription"),
+                                         new DataColumn("ReorderLevel"),
+                                         new DataColumn("ReorderQty"),
+                                         new DataColumn("UnitOfMeasure") });
+                DataRow dr;
+
+                List<Item> itemList = (new ItemBroker(new InventoryEntities())).GetAllItem();
+
+                foreach (Item item in itemList)
+                {
+                    dr = allItem.NewRow();
+                    dr["ItemNo"] = item.Id;
+                    dr["Category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
+                    dr["ItemDescription"] = item.Description;
+                    dr["ReorderLevel"] = item.ReorderLevel;
+                    dr["ReorderQty"] = item.ReorderQty;
+                    dr["UnitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                    allItem.Rows.Add(dr);
+                }
+            }
+            
+            return allItem;
         }
 
         public static void GoToPage(string page)
@@ -219,6 +258,11 @@ namespace StationeryStoreInventorySystemController
             status = employeeBroker.Update(employee);
 
             return status;
+        }
+
+        public static string SetAsLink(string linkText, string page, string attribute)
+        {
+            return "<a href='~/" + page + (attribute != String.Empty ? "?" + attribute : "") + "'>" + linkText + "</a>";
         }
     }
 }
