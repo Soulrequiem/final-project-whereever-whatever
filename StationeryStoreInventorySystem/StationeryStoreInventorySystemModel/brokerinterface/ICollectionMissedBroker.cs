@@ -12,10 +12,11 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         CollectionMissed GetCollectionMissed(CollectionMissed collectionMissed);
         List<CollectionMissed> GetAllCollectionMissed(Department department);
         List<CollectionMissed> GetAllCollectionMissed(Department department, Constants.VISIBILITY_STATUS status);
-        Constants.DB_STATUS Insert(CollectionMissed newCollectionMissed,Boolean isSaved);
-        //Constants.DB_STATUS Update(CollectionMissed collectionMissed);
-        //Constants.DB_STATUS Delete(CollectionMissed collectionMissed);
-        Constants.DB_STATUS Update(Boolean isSaved);
-        Constants.DB_STATUS Delete(CollectionMissed collectionMissed,Boolean isSaved);
+        Constants.DB_STATUS Insert(CollectionMissed newCollectionMissed);
+        Constants.DB_STATUS Update(CollectionMissed collectionMissed);
+        Constants.DB_STATUS Delete(CollectionMissed collectionMissed);
+        //Constants.DB_STATUS Insert(CollectionMissed newCollectionMissed, Boolean isSaved);
+        //Constants.DB_STATUS Update(Boolean isSaved);
+        //Constants.DB_STATUS Delete(CollectionMissed collectionMissed,Boolean isSaved);
     }
 }
