@@ -200,7 +200,8 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                requisitionDetailObj = inventory.RequisitionDetails.Where(reqObj => reqObj.Id == requisitionDetail.Id).First();
+                requisitionDetailObj = inventory.RequisitionDetails.Where(reqObj => reqObj.Id == requisitionDetail.Id || reqObj.Requisition.Id == requisitionDetail.Requisition.Id
+                    ).First();
             }
             catch (Exception e)
             {
