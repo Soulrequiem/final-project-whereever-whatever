@@ -58,6 +58,9 @@
                                     </Items>
                                 </ig:WebDropDown>
                             </td>
+                            <%--<td>
+                                <asp:Button ID="btnGetItem" runat="server" Text="Select" CssClass="Searchbutton"/>
+                            </td>--%>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label1" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_ItemNo%>"/>
                             </td>
@@ -74,6 +77,7 @@
                                  CssClass="DefaultTextStyle" Width="250px" NullText="Enter Item Quantity">
                                 </ig:WebNumericEditor><br />
                             </td>
+                            <%--<td></td>--%>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label4" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_ItemPrice%>"/>
                             </td>
@@ -91,6 +95,7 @@
                                     Height="55px" TextMode="MultiLine">
                                 </ig:WebTextEditor>
                             </td>
+                            <%--<td></td>--%>
                             <td>
                                 <%--<input id="btnAdd" type="button" 
                                     value="<%$ Resources:WebResources,CreateDiscrepencyReport_AddButton%>" runat="server"/>--%>
@@ -113,7 +118,9 @@
                         DataKeyFields="Reason"
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        onrowupdated="dgvItemList_RowUpdated">
+                        onrowupdated="dgvItemList_RowUpdated" 
+                        ondatafiltering="dgvItemList_DataFiltering" 
+                        onpageindexchanged="dgvItemList_PageIndexChanged">
                         <Columns>
                             <ig:BoundCheckBoxField Key="CreateDiscrepancyReportCheckBox" Width="80px" DataFieldName="CreateDiscrepancyReportCheckBox">
                                 <Header Text="Select" />

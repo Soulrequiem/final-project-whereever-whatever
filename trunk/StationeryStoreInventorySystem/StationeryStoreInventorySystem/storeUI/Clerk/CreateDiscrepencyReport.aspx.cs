@@ -16,6 +16,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             if (!IsPostBack)
             {
                 FillItemsGridView();
+                FillItems();
             }
         }
 
@@ -33,11 +34,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         /// <param name="dtItems"></param>
         private void FillItems()
         {
-            DataTable dtItems = (DataTable)Session["Items"];
+            DataTable dtItems = StationeryStoreInventorySystemController.Util.GetItemTable();
             if (dtItems != null)
             {
                 drdItemList.TextField = "ItemDescription";
-                drdItemList.ValueField = "ID";
+                drdItemList.ValueField = "ItemNo";
                 drdItemList.DataSource = dtItems;
                 drdItemList.DataBind();
             }
@@ -92,12 +93,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-
+            
         }
 
-        protected void dgvItemList_RowUpdated(object sender, Infragistics.Web.UI.GridControls.RowUpdatedEventArgs e)
+        protected void dgvItemList_RowUpdated(object sender,
+            Infragistics.Web.UI.GridControls.RowUpdatedEventArgs e)
         {
             lblItemPrice.Text = e.RowID.ToString();
+        }
+
+        protected void dgvItemList_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillItemsGridView();
+        }
+
+        protected void dgvItemList_PageIndexChanged(object sender,
+            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillItemsGridView();
         }
     }
 }
