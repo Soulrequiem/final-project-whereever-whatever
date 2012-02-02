@@ -38,9 +38,12 @@
                                 </ig:WebTextEditor><br />--%>
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
-                                     StyleSetName="Office2010Blue" 
-                                     onselectionchanged="drdItemList_SelectionChanged" AutoPostBack="True">
+                                     StyleSetName="Office2010Blue" >
                                 </ig:WebDropDown>
+                            </td>
+                            <td>
+                                <asp:Button ID="btnSearch" runat="server" CssClass="Defaultbutton" 
+                                    onclick="btnSearch_Click" OnClientClick="return Search();" Text="Search" />
                             </td>
                         </tr>
                     </table>
