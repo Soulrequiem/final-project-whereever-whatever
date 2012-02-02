@@ -13,5 +13,8 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Insert(RequisitionCollectionItem newRequisitionCollectionItem);
         Constants.DB_STATUS Update(RequisitionCollectionItem requisitionCollectionItem);
         Constants.DB_STATUS Delete(RequisitionCollectionItem requisitionCollectionItem);
+        //Constants.DB_STATUS Insert(RequisitionCollectionItem newRequisitionCollectionItem,Boolean isSaved);
+        //Constants.DB_STATUS Update(Boolean isSaved);
+        //Constants.DB_STATUS Delete(RequisitionCollectionItem requisitionCollectionItem,Boolean isSaved);
     }
 }
