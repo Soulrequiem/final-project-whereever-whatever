@@ -214,6 +214,39 @@ namespace StationeryStoreInventorySystemController
             return dt;
         }
 
+        public static DataTable GetItemListTable(IItemBroker itemBroker, string itemDescription)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[] { new DataColumn("ItemNo"), 
+                                                   new DataColumn("Category"), 
+                                                   new DataColumn("ItemDescription"),
+                                                   new DataColumn("ReorderLevel"),
+                                                   new DataColumn("ReorderQty"),
+                                                   new DataColumn("UnitOfMeasure") });
+            DataRow dr;
+
+            Item it = new Item();
+            it.Description = itemDescription;
+            it = itemBroker.GetItem(it);
+
+            List<Item> itemList = (new ItemBroker(new InventoryEntities())).GetItemReference(it);
+
+            foreach (Item item in itemList)
+            {
+                dr = dt.NewRow();
+                dr["ItemNo"] = item.Id;
+                dr["Category"] = Converter.GetItemCategoryText(Converter.objToItemCategory(item.ItemCategoryId));
+                dr["ItemDescription"] = item.Description;
+                dr["ReorderLevel"] = item.ReorderLevel;
+                dr["ReorderQty"] = item.ReorderQty;
+                dr["UnitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                dt.Rows.Add(dr);
+            }
+
+
+            return dt;
+        }
+
         private static DataTable allItem;
         public static DataTable GetItemTable()
         {
