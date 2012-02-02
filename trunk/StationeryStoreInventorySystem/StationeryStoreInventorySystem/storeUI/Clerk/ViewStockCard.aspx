@@ -35,6 +35,9 @@
                                     <Button Visible="False" />
                           </ig:WebDropDown>
                      </td>
+                     <td>
+                         <asp:Button ID="btnGetItem" runat="server" Text="Select" CssClass="Searchbutton"/>
+                     </td>
                  </tr>
                  <tr>
                     <td>
