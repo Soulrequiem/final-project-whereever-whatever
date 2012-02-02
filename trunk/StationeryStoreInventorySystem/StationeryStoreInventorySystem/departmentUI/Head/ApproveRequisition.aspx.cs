@@ -98,6 +98,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
             }
         }
 
+
+        protected void DgvRequisitionList_DataFiltering(object sender, Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillRequisitionList();
+        }
+
+        protected void DgvRequisitionList_PageIndexChanged(object sender, Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillRequisitionList();
+        }
+
+
         protected void btnReject_Click(object sender, EventArgs e)
         {
             if (aprCtrl.SelectRejectRequisition(selectedIndexList, (DataTable)DgvRequisitionList.DataSource) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
