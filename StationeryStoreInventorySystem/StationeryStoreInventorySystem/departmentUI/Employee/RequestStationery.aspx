@@ -97,7 +97,8 @@
                      <table>
                         <tr>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label8" runat="server" 
-                                Text="<%$ Resources:WebResources, ViewStationeryCatalogue_EnterItemDescriptionLabel%>"/></td>                            
+                                Text="<%$ Resources:WebResources, ViewStationeryCatalogue_EnterItemDescriptionLabel%>"/>
+                                </td>                            
                                 <td>
                                  <%--<ig:WebTextEditor ID="txtItemDescription" runat="server" 
                                     CssClass="DefaultTextStyle" Width="250px">
@@ -106,7 +107,7 @@
                                      DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
                                      StyleSetName="Office2010Blue" 
                                      onselectionchanged="drdItemList_SelectionChanged" 
-                                     AutoFilterQueryType="Contains" >
+                                     AutoFilterQueryType="Contains" AutoSelectOnMatch="False" >
                                      <%--onvaluechanged="drdItemList_ValueChanged">--%>
                                      <Button Visible="False" />
                                     <Items>
@@ -114,7 +115,9 @@
                                         </ig:DropDownItem>
                                     </Items>
                                 </ig:WebDropDown>
-                                <asp:Button ID="btnGetItem" runat="server" Text="Select" CssClass="Defaultbutton" 
+                                </td>
+                                <td>
+                                <asp:Button ID="btnGetItem" runat="server" Text="Select" CssClass="Searchbutton" 
                                         onclick="btnGetItem_Click"/>
                             </td>
                         </tr>
