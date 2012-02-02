@@ -15,10 +15,9 @@
             DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
-            Height="400px" Width="700px" EnableViewState="true"
-            oncellselectionchanged="DgvRequisitionList_CellSelectionChanged">
+            Height="400px" Width="700px" EnableViewState="true">
             <Columns>
-                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" Width="30px">
+                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" HeaderChecked="false">
                 </ig:UnboundCheckBoxField>
                 <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                     Width="100px">
@@ -48,7 +47,7 @@
                 <ig:TemplateDataField  Key="Remarks" Width="160px">
                         <ItemTemplate>
                              <ig:WebTextEditor ID="Remarks" runat="server" Width="110px"
-                              Text='<%# Eval("Remarks") %>'>
+                              Text='<%# Eval("Remarks") %>' >
                             </ig:WebTextEditor>
                         </ItemTemplate>
                      <Header Text="Remarks" />
@@ -60,7 +59,6 @@
             </Columns>
             <Behaviors>
                 <ig:Selection CellClickAction="Cell" RowSelectType="Single" Enabled="true">
-                    <AutoPostBackFlags CellSelectionChanged="true" />
                 </ig:Selection>
                 <ig:Paging PageSize="10">
                 </ig:Paging>

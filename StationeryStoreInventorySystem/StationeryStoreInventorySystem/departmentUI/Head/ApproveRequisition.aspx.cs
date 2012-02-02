@@ -19,11 +19,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
     public partial class ApproveRequisition : System.Web.UI.Page
     {
         private static readonly string sessionKey = "ApproveRequisition";
-        private static readonly string selectedSessionKey = "ApproveRequisitionSelectedIndex";
-        private static readonly string remarksSessionKey = "ApproveRequisitionRemarks";
+        //private static readonly string selectedSessionKey = "ApproveRequisitionSelectedIndex";
+        //private static readonly string remarksSessionKey = "ApproveRequisitionRemarks";
 
         private ApproveRejectRequisitionControl aprCtrl;
-        private List<int> selectedIndexList;
+        //private List<int> selectedIndexList;
         private Dictionary<string, string> remarksList;
         /// <summary>
         /// Loads the ApproveRequisition form
@@ -36,18 +36,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
             {
                 commonUI.MasterPage.setCurrentPage(this);
                 aprCtrl = GetControl();
-                selectedIndexList = new List<int>();
-                remarksList = new Dictionary<string, string>();
+                //selectedIndexList = new List<int>();
 
                 StationeryStoreInventorySystemController.Util.PutSession(sessionKey, aprCtrl);
-                StationeryStoreInventorySystemController.Util.PutSession(selectedSessionKey, selectedIndexList);
-                StationeryStoreInventorySystemController.Util.PutSession(remarksSessionKey, remarksList);
+                //StationeryStoreInventorySystemController.Util.PutSession(selectedSessionKey, selectedIndexList);
+                //StationeryStoreInventorySystemController.Util.PutSession(remarksSessionKey, remarksList);
             }
             else
             {
                 aprCtrl = (ApproveRejectRequisitionControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
-                selectedIndexList = (List<int>)StationeryStoreInventorySystemController.Util.GetSession(selectedSessionKey);
-                remarksList = (Dictionary<string, string>)StationeryStoreInventorySystemController.Util.GetSession(remarksSessionKey);
+                //selectedIndexList = (List<int>)StationeryStoreInventorySystemController.Util.GetSession(selectedSessionKey);
+                //remarksList = (Dictionary<string, string>)StationeryStoreInventorySystemController.Util.GetSession(remarksSessionKey);
             }
             FillRequisitionList();
         }
@@ -55,8 +54,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         public static void removeSession()
         {
             StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
-            StationeryStoreInventorySystemController.Util.RemoveSession(selectedSessionKey);
-            StationeryStoreInventorySystemController.Util.RemoveSession(remarksSessionKey);
+            //StationeryStoreInventorySystemController.Util.RemoveSession(selectedSessionKey);
+            //StationeryStoreInventorySystemController.Util.RemoveSession(remarksSessionKey);
         }
 
         /// <summary>
@@ -85,88 +84,43 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
         private void refresh()
         {
-            selectedIndexList = new List<int>();
+            //selectedIndexList = new List<int>();
             DgvRequisitionList.Rows.Clear();
             FillRequisitionList();
         }
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            if (aprCtrl.SelectApproveRequisition(selectedIndexList, (DataTable)DgvRequisitionList.DataSource) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            prepareData();
+
+            if (aprCtrl.SelectApproveRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
             {
                 refresh();
             }
         }
-
-
-        protected void DgvRequisitionList_DataFiltering(object sender, Infragistics.Web.UI.GridControls.FilteringEventArgs e)
-        {
-            FillRequisitionList();
-        }
-
-        protected void DgvRequisitionList_PageIndexChanged(object sender, Infragistics.Web.UI.GridControls.PagingEventArgs e)
-        {
-            FillRequisitionList();
-        }
-
 
         protected void btnReject_Click(object sender, EventArgs e)
         {
-            if (aprCtrl.SelectRejectRequisition(selectedIndexList, (DataTable)DgvRequisitionList.DataSource) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            prepareData();
+
+            if (aprCtrl.SelectRejectRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
             {
                 refresh();
             }
         }
-        //protected void DgvRequisitionList_RowSelectionChanged(object sender, Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (e != null)
-        //        {
-        //            int currentPageIndex = DgvRequisitionList.Behaviors.Paging.PageIndex * DgvRequisitionList.Behaviors.Paging.PageSize;
-        //            if (selectedIndexList.Contains(e.CurrentSelectedRows[0].Index + currentPageIndex))
-        //            {
-        //                selectedIndexList.Remove(e.CurrentSelectedRows[0].Index + currentPageIndex);
-        //            }
-        //            else
-        //            {
-        //                selectedIndexList.Add(e.CurrentSelectedRows[0].Index + currentPageIndex);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // do something here later
-        //    }
-        //}
 
-        protected void DgvRequisitionList_CellSelectionChanged(object sender, Infragistics.Web.UI.GridControls.SelectedCellEventArgs e)
+        private void prepareData()
         {
-            try
+            remarksList = new Dictionary<string, string>();
+
+            for (int i = 0; i < DgvRequisitionList.Rows.Count; i++)
             {
-                if (e != null)
+                if (SystemStoreInventorySystemUtil.Converter.objToBool(DgvRequisitionList.Rows[i].Items.FindItemByKey("ApproveRequisitionCheckBox").Value) == true)
                 {
-                    if (e.CurrentSelectedCells[0].Index == 0)
-                    {
-                        //((Infragistics.Web.UI.EditorControls.WebTextEditor)e.CurrentSelectedCells[0].FindControl("Remarks")).ID;
-                        int currentPageIndex = DgvRequisitionList.Behaviors.Paging.PageIndex * DgvRequisitionList.Behaviors.Paging.PageSize;
-                        int currentRow = e.CurrentSelectedCells[0].Row.Index;
-                        if (selectedIndexList.Contains(currentRow + currentPageIndex))
-                        {
-                            selectedIndexList.Remove(currentRow + currentPageIndex);
-                        }
-                        else
-                        {
-                            selectedIndexList.Add(currentRow + currentPageIndex);
-                        }                        
-                    }
+                    remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvRequisitionList.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text);
                 }
             }
-            catch (Exception ex)
-            {
-                // do something here later
-            }
-        }   
+        }
     }
 }
 /********************************************/
