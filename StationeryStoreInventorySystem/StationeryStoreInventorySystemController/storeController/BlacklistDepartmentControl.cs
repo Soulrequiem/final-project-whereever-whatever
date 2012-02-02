@@ -24,27 +24,50 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable dt;
         private DataRow dr;
 
+        private string[] columnName = { "DepartmentName", "MissedTime", "Status", "Remarks", "BlackUnblackList", "DepartmentID" };
+
+        private DataColumn[] dataColumn;
+
         public BlacklistDepartmentControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_MANAGER);
             InventoryEntities inventory = new InventoryEntities();
 
             departmentBroker = new DepartmentBroker(inventory);
+            collectionMissedBroker = new CollectionMissedBroker(inventory);
 
             cleanDepartmentList = departmentBroker.GetAllDepartment(Constants.DEPARTMENT_STATUS.SHOW);
             unblacklistDepartmentList = departmentBroker.GetAllDepartment(Constants.DEPARTMENT_STATUS.UNBLACKLIST);
             blacklistDepartmentList = departmentBroker.GetAllDepartment(Constants.DEPARTMENT_STATUS.BLACKLIST);
+
+            dataColumn = new DataColumn[]{ new DataColumn(columnName[0]),
+                                           new DataColumn(columnName[1]),
+                                           new DataColumn(columnName[2]),
+                                           new DataColumn(columnName[3]),
+                                           new DataColumn(columnName[4]),
+                                           new DataColumn(columnName[5]) };
+                                
         }
+
+      
 
         public DataTable DepartmentList
         {
             get
             {
-                dt = new DataTable();
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
 
-                this.ListToDataTable(cleanDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
-                this.ListToDataTable(unblacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
-                this.ListToDataTable(blacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
+                if (cleanDepartmentList.Count > 0) this.ListToDataTable(cleanDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
+                if (unblacklistDepartmentList.Count > 0) this.ListToDataTable(unblacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
+                if (blacklistDepartmentList.Count > 0) this.ListToDataTable(blacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
 
                 return dt;
             }
@@ -64,25 +87,42 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return value of this method is resultItem.</returns>
-        private DataTable ListToDataTable(List<Department> deptList, Constants.VISIBILITY_STATUS collectionMissedStatus){
+        private void ListToDataTable(List<Department> deptList, Constants.VISIBILITY_STATUS collectionMissedStatus){
             foreach (Department dep in deptList)
             {
                 dr = dt.NewRow();
-                dr["departmentName"] = dep.Name;
-                List<CollectionMissed> missedTime = collectionMissedBroker.GetAllCollectionMissed(dep, collectionMissedStatus);
-                int count = 0;
-                foreach (CollectionMissed times in missedTime)
+                dr[columnName[0]] = dep.Name;
+                List<CollectionMissed> missedTime = collectionMissedBroker.GetAllCollectionMissed(dep);
+                int count = missedTime.Count;
+                //if (missedTime != null)
+                //{
+                //    foreach (CollectionMissed times in missedTime)
+                //    {
+                //        count++;
+                //    }
+                //}
+                string black = null;
+                Constants.DEPARTMENT_STATUS departmentStatus = Converter.objToDepartmentStatus(dep.Status);
+
+                if (departmentStatus == Constants.DEPARTMENT_STATUS.SHOW || departmentStatus == Constants.DEPARTMENT_STATUS.UNBLACKLIST)
                 {
-                    count++;
+                    black = Converter.GetDepartmentStatusText(Constants.DEPARTMENT_STATUS.BLACKLIST);
                 }
-                dr["missedTime"] = count;
-                dr["status"] = Converter.GetDepartmentStatusText(Converter.objToDepartmentStatus(dep.Status));
+                else if (Converter.objToDepartmentStatus(dep.Status) == Constants.DEPARTMENT_STATUS.BLACKLIST)
+                {
+                    black = Converter.GetDepartmentStatusText(Constants.DEPARTMENT_STATUS.UNBLACKLIST);
+                }
+                dr[columnName[1]] = count;
+                dr[columnName[2]] = Converter.GetDepartmentStatusText(Converter.objToDepartmentStatus(dep.Status));
+                dr[columnName[3]] = "remark";
+                dr[columnName[4]] = black;
+                dr[columnName[5]] = dep.Id;
                 dt.Rows.Add(dr);
             }
-            return dt;
+         //   return dt;
         }
 
-
+        
 
          /// <summary>
          ///     Show all departments list except hidden departments
@@ -143,15 +183,22 @@ namespace StationeryStoreInventorySystemController.storeController
                 {
                     case Constants.DEPARTMENT_STATUS.BLACKLIST:
                         department = blacklistDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
+                       // if(department!=null)
                         department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.UNBLACKLIST);
+                        unblacklistDepartmentList.Add(department);
+                        blacklistDepartmentList.Remove(department);
                         break;
                     case Constants.DEPARTMENT_STATUS.UNBLACKLIST:
                         department = unblacklistDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
                         department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.BLACKLIST);
+                        blacklistDepartmentList.Add(department);
+                        unblacklistDepartmentList.Remove(department);
                         break;
                     case Constants.DEPARTMENT_STATUS.SHOW:
                         department = cleanDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
                         department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.BLACKLIST);
+                        blacklistDepartmentList.Add(department);
+                        unblacklistDepartmentList.Remove(department);
                         break;
                 }
 
