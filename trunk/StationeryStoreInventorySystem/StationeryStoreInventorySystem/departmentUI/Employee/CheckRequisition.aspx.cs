@@ -13,6 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
+using StationeryStoreInventorySystemController;
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 {
     public partial class CheckRequisition : System.Web.UI.Page
@@ -31,8 +32,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             if (!IsPostBack)
             {
                 crctrl = new CheckRequisitionControl();
-                FillRequisitionList(crctrl.GetRequisitionList());
-                FillRequisitions(crctrl.GetRequisitionList());
+                Util.PutSession("CheckReq", crctrl.GetRequisitionList());
+                FillRequisitionList();
+                FillRequisitions();
             }
         }
 
@@ -40,11 +42,28 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Fills Requisition to Datagrid
         /// </summary>
         /// <param name="dt"></param>
-        private void FillRequisitionList(DataTable dtRequisition)
+        private void FillSpecificRequisitionList(DataTable dtReq)
         {
             try
             {
-                dgvRequisitionList.DataSource = dtRequisition;
+                dgvRequisitionList.DataSource = dtReq;
+                dgvRequisitionList.DataBind();
+            }
+            catch (Exception e)
+            {
+                Logger.WriteErrorLog(e);
+            }
+        }
+
+        /// <summary>
+        /// Fills Requisition to Datagrid
+        /// </summary>
+        /// <param name="dt"></param>
+        private void FillRequisitionList()
+        {
+            try
+            {
+                dgvRequisitionList.DataSource = (DataTable)Util.GetSession("CheckReq");
                 dgvRequisitionList.DataBind();
             }
             catch (Exception e)
@@ -57,18 +76,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Fills item drop down
         /// </summary>
         /// <param name="dtItems"></param>
-        private void FillRequisitions(DataTable dtRequisition)
+        private void FillRequisitions()
         {
             try
             {
                 //Fill all requisitionsIDs made by current user
                 //crctrl = new CheckRequisitionControl();
                 //crctrl.
-                if (dtRequisition != null)
+                if ((DataTable)Util.GetSession("CheckReq") != null)
                 {
-                    drdRequisitionList.TextField = "requsitionId";
-                    drdRequisitionList.ValueField = "requsitionId";
-                    drdRequisitionList.DataSource = dtRequisition;
+                    drdRequisitionList.TextField = "RequisitionID";
+                    drdRequisitionList.ValueField = "RequisitionID";
+                    drdRequisitionList.DataSource = (DataTable)Util.GetSession("CheckReq");
                     drdRequisitionList.DataBind();
                 }
             }
@@ -100,7 +119,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
-                FillRequisitionList(getControl().GetRequisitionList().Select(" requsitionId LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
+                FillSpecificRequisitionList(((DataTable)Session["CheckReq"]).Select(" RequisitionID LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
             }
             catch (Exception ex)
             {
@@ -113,6 +132,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             if (crctrl == null)
                 crctrl = new CheckRequisitionControl();
             return crctrl;
+        }
+
+        protected void dgvRequisitionDetails_PageIndexChanged(object sender, Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillRequisitionList();
+        }
+
+
+        protected void dgvRequisitionDetails_DataFiltering(object sender, Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillRequisitionList();
         }
 
         ///// <summary>

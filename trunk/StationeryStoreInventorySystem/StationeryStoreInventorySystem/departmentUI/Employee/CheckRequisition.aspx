@@ -61,21 +61,21 @@
                              </ItemTemplate>
                            <Header Text="Requisition ID" />
                 </ig:TemplateDataField>
-                        <ig:BoundDataField DataFieldName="RequisitionDate/Time" 
-                            Key="RequisitionDate/Time" Width="130px">
+                        <ig:BoundDataField DataFieldName="requisitionDate" 
+                            Key="requisitionDate" Width="130px">
                             <Header Text="Requisition Date/Time" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="status" Key="status" Width="110px">
                             <Header Text="status" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RemainingQty" Key="RemainingQty" 
+                        <ig:BoundDataField DataFieldName="remainingQty" Key="remainingQty" 
                             Width="100px">
                             <Header Text="Remaining Qty" />
                         </ig:BoundDataField>
                         <%--<ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
                             <Header Text="Remarks" />
                         </ig:BoundDataField>--%>
-                        <ig:TemplateDataField  Key="Remarks" Width="150px">
+                        <ig:TemplateDataField  Key="remarks" Width="150px">
                             <ItemTemplate>
                                 <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
                                 Text='<%# Eval("Remarks") %>'>
@@ -100,10 +100,10 @@
                                         <ColumnSettings>
                                             <ig:EditingColumnSetting ColumnKey="CheckRequisitionCheckBox" />
                                             <ig:EditingColumnSetting ColumnKey="RequisitionID" />
-                                            <ig:EditingColumnSetting ColumnKey="RequisitionDate/Time" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="requisitionDate" ReadOnly="True" />
                                             <ig:EditingColumnSetting ColumnKey="status" ReadOnly="True" />
-                                            <ig:EditingColumnSetting ColumnKey="RemainingQty" ReadOnly="True" />
-                                            <ig:EditingColumnSetting ColumnKey="Remarks" />
+                                            <ig:EditingColumnSetting ColumnKey="remainingQty" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="remarks" />
                                         </ColumnSettings>
                                     </ig:CellEditing>
                                 </Behaviors>
@@ -146,7 +146,9 @@
                           DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue" 
-                         Height="200px" Width="700px">
+                         Height="200px" Width="700px" 
+                         ondatafiltering="dgvRequisitionDetails_DataFiltering" 
+                         onpageindexchanged="dgvRequisitionDetails_PageIndexChanged">
                     <Columns>
                         
                         <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="90px">
