@@ -14,11 +14,14 @@ using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.storeController;
 
+
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
 {
     public partial class BlackListDepartment : System.Web.UI.Page
     {
-        BlacklistDepartmentControl bldCtrl;
+        private static readonly string sessionKey = "BlacklistDepartment";
+
+        private BlacklistDepartmentControl bldCtrl;
         /// <summary>
         /// Loads the BlackListDepartment form
         /// </summary>
@@ -26,33 +29,69 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             if (!IsPostBack)
             {
-                //FillDepartmentList();
+                if (Request.QueryString["department"] == null){
+                    bldCtrl = new BlacklistDepartmentControl();
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, bldCtrl);
+                }
+                else
+                {
+                    bldCtrl = (BlacklistDepartmentControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+
+                    if (bldCtrl.SelectLink(Request.QueryString["department"].ToString()) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+                    {
+
+                        // print success message
+                    }
+                    else
+                    {
+                        // print error message
+                    }
+                }
             }
+            else
+            {
+                bldCtrl = (BlacklistDepartmentControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+            
+            FillDepartmentList();
         }
 
         private void FillDepartmentList()
         {
             try
             {
-                bldCtrl = GetControl();
-                DataTable dtDepartment = bldCtrl.DepartmentList;
-                DgvDepartmentList.DataSource = dtDepartment;
+                DgvDepartmentList.DataSource = bldCtrl.DepartmentList;
                 DgvDepartmentList.DataBind();
-            }
+             }
             catch (Exception e)
             {
                 Logger.WriteErrorLog(e);
             }
         }
 
-        private BlacklistDepartmentControl GetControl()
+        protected void DgvDepartmentList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
-            if (bldCtrl == null)
-                bldCtrl = new BlacklistDepartmentControl();
-            return bldCtrl;
+            try
+            {
+                HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("BlackUnblackList").FindControl("BlackUnblackList");
+                link.NavigateUrl = "~/storeUI/SuperVisor_Manager/BlackListDepartment.aspx?department=" + e.Row.DataKey[0];
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+            
         }
+
+    //    private BlacklistDepartmentControl GetControl()
+    //    {
+    //        if (bldCtrl == null)
+    //            bldCtrl = new BlacklistDepartmentControl();
+    //        return bldCtrl;
+    //    }
     }
 }
 /********************************************/
