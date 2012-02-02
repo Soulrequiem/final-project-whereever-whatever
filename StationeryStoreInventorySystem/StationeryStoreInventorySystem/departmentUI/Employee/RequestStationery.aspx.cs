@@ -13,6 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
+using StationeryStoreInventorySystemController.commonController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 {
@@ -21,6 +22,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         private static readonly string sessionKey = "RequestStationery";
 
         private RequestStationeryControl resCtrl;
+        private ViewStationeryCatalogueControl vsCtrl;
         /// <summary>
         /// Loads the RequestStationery form
         /// </summary>
@@ -42,75 +44,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 lblEmployeeID.Text = resCtrl.EmployeeId;
                 lblEmployeeEmailID.Text = resCtrl.EmployeeEmail;
 
-                FillItems(StationeryStoreInventorySystemController.Util.GetItemTable());
-                FillDetails();
+                FillItems();
+                //FillDetails("ssfs");
                 FillItemList();
             }
             else
             {
                 resCtrl = (RequestStationeryControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ItemNo");
-            //dt.Columns.Add("ItemDescription");
-            ////dt.Columns.Add("AddToTable");
-            ////dt.Columns.Add("status");
-            ////dt.Columns.Add("RemainingQty");
-            ////dt.Columns.Add("Remarks");
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1";
-            ////dr[2] = "1";
-            ////dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1";
-            ////dr[2] = "1";
-            ////dr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dt.Rows.Add(dr);
-
-            //dgvStationeryList.DataSource = dt;
-            //dgvStationeryList.DataBind();
-
-
-            //DataTable dtt = new DataTable();
-            //dtt.Columns.Add("RequestStationeryCheckBox");
-            //dtt.Columns.Add("ItemNo");
-            //dtt.Columns.Add("ItemDescription");
-            //dtt.Columns.Add("RequiredQty");
-            ////dt.Columns.Add("status");
-            ////dt.Columns.Add("RemainingQty");
-            ////dt.Columns.Add("Remarks");
-
-            //DataRow drr = dtt.NewRow();
-            //drr[0] = "1";
-            //drr[1] = "1";
-            //drr[2] = "1we2we12321";
-            ////drr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dtt.Rows.Add(drr);
-
-            //drr = dtt.NewRow();
-            //drr[0] = "1";
-            //drr[1] = "1";
-            //drr[2] = "1we2we12321";
-            ////drr[3] = "1213sadsad";
-            ////dr[4] = "1ssdsfdf";
-            ////dr[5] = "1ssdsfdf";
-            //dtt.Rows.Add(drr);
-
-            //dgvStationeryDetailsList.DataSource = dtt;
-            //dgvStationeryDetailsList.DataBind();
-
-           
         }
 
         /// <summary>
@@ -120,14 +61,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Modified Date: 27/01/2012
         /// </summary>
         /// <param name="dtDetails"></param>
-        private void FillDetails()
+        private void FillDetails(string sItem)
         {
             try
             {
-                resCtrl = GetControl();
-                DataTable dtDetails = resCtrl.RequisitionDetailList;
-                dgvStationeryList.DataSource = dtDetails;
-                dgvStationeryList.DataBind();
+                DataRow[] dr = StationeryStoreInventorySystemController.Util.GetItemTable().Select(" ItemNo = '" + sItem + "'"); //vsCtrl.ItemList;
+                if (dr != null && dr.Length > 0)
+                {
+                    dgvStationeryList.DataSource = dr.CopyToDataTable();
+                    dgvStationeryList.DataBind();
+                }
             }
             catch (Exception e)
             {
@@ -136,13 +79,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         }
 
         /// <summary>
-        /// Fills item drop down
+        /// Fills item drop down list
         /// </summary>
         /// <param name="dtItems"></param>
-        private void FillItems(DataTable items)
+        private void FillItems()
         {
             try
             {
+                DataTable items = StationeryStoreInventorySystemController.Util.GetItemTable();
                 if (items != null)
                 {
                     drdItemList.TextField = "ItemDescription";
@@ -181,10 +125,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
-                resCtrl = GetControl();
-                resCtrl.AddToTable(drdItemList.SelectedValue);
-                FillDetails();
-                FillItemList();
+                
+                //resCtrl = GetControl();
+                //resCtrl.AddToTable(drdItemList.SelectedValue);
+                //FillDetails();
+                //FillItemList();
             }
             catch (Exception ex)
             {
@@ -217,6 +162,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         public static void removeSession()
         {
             StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
+        }
+
+        protected void btnGetItem_Click(object sender, EventArgs e)
+        {
+            string sItem = drdItemList.SelectedValue.ToString();
+            FillDetails(sItem);
+
         }
 
         //protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
