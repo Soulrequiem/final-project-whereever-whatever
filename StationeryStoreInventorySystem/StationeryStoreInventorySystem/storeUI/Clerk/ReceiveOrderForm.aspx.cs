@@ -27,6 +27,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             if (!IsPostBack)
             {
+                FillStationeryOrder();
                 FillPOList();
             }
         }
@@ -57,10 +58,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         }
 
-        private void FillStationeryOrder(DataTable dtOrders)
+        private void FillStationeryOrder()
         {
             try
             {
+                ROobj = new ReceiveOrderControl();
+                DataTable dtOrders = ROobj.PurchaseOrderList;
                 if(dtOrders!=null)
                     DgvStationeryOrder.DataSource = dtOrders;
                     DgvStationeryOrder.DataBind();
@@ -75,13 +78,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             try
             {
-                //ROobj = new ReceiveOrderControl();
+                purchaseOrderControl = new PurchaseOrderControl();
                 //***********Get all purchase order list
-                //DataTable dt = ROobj.GetPO();
-                //DrdPONo.TextField = "PONumber";
-                //DrdPONo.ValueField  = "PONumber";
-                //DrdPONo.DataSource = dt;
-                //DrdPONo.DataBind();
+                DataTable dt = ROobj.PurchaseOrderList; //GetPO();
+                DrdPONo.TextField = "PONumber";
+                DrdPONo.ValueField  = "PONumber";
+                DrdPONo.DataSource = dt;
+                DrdPONo.DataBind();
             }
             catch (Exception ex)
             {
