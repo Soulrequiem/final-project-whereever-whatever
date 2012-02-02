@@ -159,8 +159,9 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                PurchaseOrder purchase = inventory.PurchaseOrders.Where(p => p.Id == purchaseorder.Id).First();
-                purchase.Status = 2;
+                purchaseorder = inventory.PurchaseOrders.Where(p => p.Id == purchaseorder.Id).First();
+
+                purchaseorder.Status = 2;
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
