@@ -21,16 +21,16 @@ namespace StationeryStoreInventorySystemController.departmentController
     public class CheckRequisitionControl
     {
         private IRequisitionBroker requisitionBroker;
-        
+
         private Employee currentEmployee;
         private Requisition requisition;
         private RequisitionDetail requisitionDetail;
-        
+
         private System.Data.Objects.DataClasses.EntityCollection<Requisition> requisitionList;
 
         private DataTable dt;
         private DataRow dr;
-        
+
         public CheckRequisitionControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.EMPLOYEE);
@@ -62,18 +62,30 @@ namespace StationeryStoreInventorySystemController.departmentController
         public DataTable GetRequisitionList()
         {
             dt = new DataTable();
+            dt.Columns.Add("RequisitionID");
+            dt.Columns.Add("requisitionDate");
+            dt.Columns.Add("status");
+            dt.Columns.Add("remainingQty");
+            dt.Columns.Add("remarks");
             List<Requisition> requisitionList = requisitionBroker.GetAllRequisition();
             foreach (Requisition temp in requisitionList)
             {
                 requisitionDetail = new RequisitionDetail();
-                requisitionDetail.Requisition.Id = temp.Id;
-                RequisitionDetail resultRequisitionDetail= requisitionBroker.GetRequisitionDetail(requisitionDetail);
+                // requisitionDetail.Requisition.Id = temp.Id;
+                requisitionDetail.Requisition = temp;
+                Requisition resultRequisition = requisitionBroker.GetRequisition(temp);
+                RequisitionDetail resultRequisitionDetail = requisitionBroker.GetRequisitionDetail(requisitionDetail);
                 dr = dt.NewRow();
-                dr["requsitionId"] = temp.Id;
-                dr["requisitionDate"] = temp.CreatedDate;
-                dr["status"] = temp.Status; 
-                dr["remainingQty"] = resultRequisitionDetail.Qty-requisitionDetail.DeliveredQty;
-                dr["remarks"] = temp.Remarks;
+                //dr["requsitionId"] = temp.Id;
+                //dr["requisitionDate"] = temp.CreatedDate;
+                //dr["status"] = temp.Status; 
+                //dr["remainingQty"] = resultRequisitionDetail.Qty-requisitionDetail.DeliveredQty;
+                //dr["remarks"] = temp.Remarks;
+                dr["RequisitionID"] = resultRequisition.Id;
+                dr["requisitionDate"] = resultRequisition.CreatedDate;
+                dr["status"] = resultRequisition.Status;
+                dr["remainingQty"] = resultRequisitionDetail.Qty - requisitionDetail.DeliveredQty;
+                dr["remarks"] = resultRequisition.Remarks;
                 dt.Rows.Add(dr);
             }
             return dt;
@@ -102,14 +114,14 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable EnterRequisitionID(string requisitionId)
         {
-            requisition=new Requisition();
-            requisition.Id=requisitionId;
-            requisition=requisitionBroker.GetRequisition(requisition);
-            requisitionDetail=new RequisitionDetail();
-            requisitionDetail.Requisition.Id=requisitionId;
+            requisition = new Requisition();
+            requisition.Id = requisitionId;
+            requisition = requisitionBroker.GetRequisition(requisition);
+            requisitionDetail = new RequisitionDetail();
+            requisitionDetail.Requisition.Id = requisitionId;
             requisitionDetail = requisitionBroker.GetRequisitionDetail(requisitionDetail);
             dt = new DataTable();
-            
+
             dr = dt.NewRow();
             dr["requisitionId"] = requisition.Id;
             dr["requisitionDate/Time"] = requisition.CreatedDate;
@@ -126,7 +138,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         //    RequisitionDetail requisitionDetail = new RequisitionDetail();
         //    requisitionDetail.Id = requisitionId;
         //    RequisitionDetail resultRequisitionDetail=requisitionBroker.GetRequisitionDetail(requisitionDetail);
-            
+
         //}
 
         /// <summary>
@@ -145,12 +157,12 @@ namespace StationeryStoreInventorySystemController.departmentController
         public DataTable SelectRequisitionID(string requisitionId)
         {
             dt = new DataTable();
-            
-            requisition =new Requisition();
-            requisition.Id=requisitionId;
-            requisition=requisitionBroker.GetRequisition(requisition);
+
+            requisition = new Requisition();
+            requisition.Id = requisitionId;
+            requisition = requisitionBroker.GetRequisition(requisition);
             //List<RequisitionDetail> requisitionDetailList=(List<RequisitionDetail>)requisition.RequisitionDetails;
-            foreach(RequisitionDetail temp in requisition.RequisitionDetails)
+            foreach (RequisitionDetail temp in requisition.RequisitionDetails)
             {
                 dr = dt.NewRow();
                 dr["itemNo"] = temp.Item.Id;
@@ -180,7 +192,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             //Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             Constants.DB_STATUS dbStatus = requisitionBroker.Delete(requisition);
-            dbStatus=Constants.DB_STATUS.SUCCESSFULL;
+            dbStatus = Constants.DB_STATUS.SUCCESSFULL;
             if (requisitionList.Count == 1)
                 return null;
             else
