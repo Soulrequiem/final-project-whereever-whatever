@@ -22,7 +22,8 @@
             <ig:WebDataGrid ID="DgvDepartmentList" runat="server" Height="300px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue"  DataKeyFields="DepartmentID"
+            oninitializerow="DgvDepartmentList_InitializeRow">
                 <Columns>
                     <ig:BoundDataField DataFieldName="DepartmentName" Key="DepartmentName" 
                         Width="200px">
@@ -34,9 +35,9 @@
                     <ig:BoundDataField DataFieldName="Status" Key="Status" Width="100px">
                         <Header Text="Status" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="150px">
+                 <%--    <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="150px">
                         <Header Text="Remarks" />
-                    </ig:BoundDataField>
+                    </ig:BoundDataField> --%>
                     <%--<ig:BoundDataField DataFieldName="Black/UnblackList" Key="Black/UnblackList" 
                         Width="150px">
                         <Header Text="BoundColumn_4" />
@@ -44,8 +45,7 @@
                     <ig:TemplateDataField Key="BlackUnblackList" Width="150px">
                         <ItemTemplate>
                             <asp:HyperLink ID="BlackUnblackList" runat="server" 
-                                Text='<%# Eval("Black/UnblackList" ) %>'
-                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                Text='<%# Eval("BlackUnblackList" ) %>'  >
                                 </asp:HyperLink>
                         </ItemTemplate>
                         <Header Text="Black/UnblackList" />
