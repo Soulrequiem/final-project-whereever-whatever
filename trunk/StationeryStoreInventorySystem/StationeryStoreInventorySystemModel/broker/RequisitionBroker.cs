@@ -106,19 +106,19 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <param name="requisition"></param>
         /// <returns></returns>
 
-        public Constants.DB_STATUS Insert(Requisition requisition)//, Boolean isSaved)
+        public Constants.DB_STATUS Insert(Requisition requisition, Boolean isSaved)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
             try
             {
                 inventory.AddToRequisitions(requisition);
-                foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
-                {
-                    this.Insert(requisitionDetail);
-                }
-                //if (isSaved) inventory.SaveChanges();
-                inventory.SaveChanges();
+                //foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
+                //{
+                //    this.Insert(requisitionDetail);
+                //}
+                if (isSaved) inventory.SaveChanges();//to add in all insert method
+              //  inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
             catch (Exception e)
@@ -155,7 +155,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 //{
                 //    this.Update(requisitionDetail);
                 //}
-                if (isSaved) inventory.SaveChanges();
+                if (isSaved) inventory.SaveChanges();//to add all Update method
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
             catch (Exception e)
@@ -171,15 +171,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <param name="requisiton"></param>
         /// <returns></returns>
 
-        public Constants.DB_STATUS Delete(Requisition requisiton)
+        public Constants.DB_STATUS Delete(Requisition requisiton)//,Boolean isSaved)
         {
             Constants.DB_STATUS status = Constants.DB_STATUS.UNKNOWN;
 
             try
             {
-                requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisiton.Id).First();
+               // requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisiton.Id).First();
                 requisitionObj.Status = Converter.objToInt(Constants.REQUISITION_STATUS.HIDDEN);
-                inventory.SaveChanges();
+                //if(isSaved) inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
             catch (Exception e)
