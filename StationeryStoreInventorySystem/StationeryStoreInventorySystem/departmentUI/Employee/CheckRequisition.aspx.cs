@@ -31,35 +31,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             if (!IsPostBack)
             {
                 crctrl = new CheckRequisitionControl();
-                //DataTable dtRequsitions =  crctrl.GetRequisitionList();
-
-                DataTable dt = new DataTable();
-                dt.Columns.Add("CheckRequisitionCheckBox");
-                dt.Columns.Add("RequisitionID");
-                dt.Columns.Add("RequisitionDate/Time");
-                dt.Columns.Add("status");
-                dt.Columns.Add("RemainingQty");
-                dt.Columns.Add("Remarks");
-
-                DataRow dr = dt.NewRow();
-                dr[0] = "100";
-                dr[1] = "1fgg";
-                dr[2] = "uoiuo";
-                dr[3] = "xzcnbkjh";
-                dr[4] = "d09f8sdkf";
-
-                dt.Rows.Add(dr);
-
-                dr = dt.NewRow();
-                dr[0] = "101";
-                dr[1] = "134";
-                dr[2] = "2342r";
-                dr[3] = "xcv";
-                dr[4] = "121";
-
-                dt.Rows.Add(dr);
-
-                FillRequisitionList(dt);
+                FillRequisitionList(crctrl.GetRequisitionList());
+                FillRequisitions(crctrl.GetRequisitionList());
             }
         }
 
@@ -84,20 +57,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Fills item drop down
         /// </summary>
         /// <param name="dtItems"></param>
-        private void FillRequisitions()
+        private void FillRequisitions(DataTable dtRequisition)
         {
             try
             {
                 //Fill all requisitionsIDs made by current user
                 //crctrl = new CheckRequisitionControl();
                 //crctrl.
-                DataTable dtItems = new DataTable();
-
-                if (dtItems != null)
+                if (dtRequisition != null)
                 {
-                    drdRequisitionList.TextField = "Requisitions";
-                    drdRequisitionList.ValueField = "ID";
-                    drdRequisitionList.DataSource = dtItems;
+                    drdRequisitionList.TextField = "requsitionId";
+                    drdRequisitionList.ValueField = "requsitionId";
+                    drdRequisitionList.DataSource = dtRequisition;
                     drdRequisitionList.DataBind();
                 }
             }
@@ -125,20 +96,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 Logger.WriteErrorLog(e);
             }
         }
-
-        protected void drdRequisitionList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        protected void btnGetItem_Click(object sender, EventArgs e)
         {
             try
             {
-                String selectedRequisition = drdRequisitionList.SelectedItem.Text;
-                crctrl = new CheckRequisitionControl();
-                DataTable dtReqDetails = crctrl.SelectRequisitionID(selectedRequisition);
-                FillRequisitionList(dtReqDetails);
+                FillRequisitionList(getControl().GetRequisitionList().Select(" requsitionId LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
             }
             catch (Exception ex)
             {
                 Logger.WriteErrorLog(ex);
             }
+        }
+
+        private CheckRequisitionControl getControl()
+        {
+            if (crctrl == null)
+                crctrl = new CheckRequisitionControl();
+            return crctrl;
         }
 
         ///// <summary>
