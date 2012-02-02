@@ -12,6 +12,7 @@
             <siteMapNode url="~/commonUI/Report.aspx" title="Generate Reports"  description="Generate Reports" />
             <siteMapNode url="~/storeUI/Clerk/ViewStationeryRetrievalList.aspx" title="View Stationery Retrieval List"  description="View Stationery Retrieval List" />
             <siteMapNode url="~/storeUI/Clerk/CreateStationeryRetrievalList.aspx" title="Create Stationery Retrieval List"  description="Create Stationery Retrieval List" />
+            <siteMapNode url="~/storeUI/Clerk/UpdateStationeryRetrieval.aspx" title="Create Stationery Retrieval List"  description="Update Stationery Retrieval List" />
             <siteMapNode url="~/storeUI/Clerk/GenerateDisbursement.aspx" title="Generate Disbursement"  description="Generate Disbursement" />
         </siteMapNode>
   </siteMapNode>
