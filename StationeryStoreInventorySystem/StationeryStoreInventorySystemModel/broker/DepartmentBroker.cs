@@ -37,7 +37,8 @@ namespace StationeryStoreInventorySystemModel.broker
             ////Get the Department data by Department ID
             if (department.Status != 0)
             {
-                departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id && department.Status == Converter.objToInt(department.Status)).First();
+                int status = Converter.objToInt(department.Status);
+                departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id && department.Status == status).First();
             }
             else
             {
@@ -73,7 +74,8 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public List<Department> GetAllDepartment(Constants.DEPARTMENT_STATUS departmentStatus)
         {
-            return inventory.Departments.Where(iObj => iObj.Status == Converter.objToInt(departmentStatus)).ToList<Department>();
+            int status = Converter.objToInt(departmentStatus);
+            return inventory.Departments.Where(iObj => iObj.Status == status).ToList<Department>();
         }
 
         /// <summary>
