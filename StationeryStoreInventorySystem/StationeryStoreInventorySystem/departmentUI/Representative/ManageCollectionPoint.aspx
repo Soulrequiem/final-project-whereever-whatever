@@ -30,7 +30,7 @@
                 <Template>
                     <ig:WebDataGrid ID="dgvCollections" runat="server" Height="150px" Width="700px" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
-                        HeaderCaptionCssClass="HeaderGridViewStyle" 
+                        HeaderCaptionCssClass="HeaderGridViewStyle"
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
                             <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" 
