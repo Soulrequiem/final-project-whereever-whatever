@@ -38,7 +38,7 @@ namespace StationeryStoreInventorySystemModel.broker
             int maxRequistionCollectionId = -1;
             try
             {
-                maxRequistionCollectionId = inventory.RequisitionCollectionDetails.Max(xObj => xObj.Id) + 1;
+                maxRequistionCollectionId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
             }
             catch (Exception e)
             {
@@ -179,7 +179,7 @@ namespace StationeryStoreInventorySystemModel.broker
             int lastId = -1;
             try
             {
-                lastId = inventory.RequisitionCollections.Max(xObj => xObj.Id) + 1;
+                lastId = inventory.RequisitionCollectionDetails.Max(xObj => xObj.Id) + 1;
             }
             catch (Exception e)
             {
