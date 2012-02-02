@@ -12,10 +12,11 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Department GetDepartment(Department department);
         List<Department> GetAllDepartment();
         List<Department> GetAllDepartment(Constants.DEPARTMENT_STATUS departmentStatus);
-        Constants.DB_STATUS Insert(Department newDepartment,Boolean isSaved);
-        //Constants.DB_STATUS Update(Department department);
-        //Constants.DB_STATUS Delete(Department department);
-        Constants.DB_STATUS Update(Boolean isSaved);
-        Constants.DB_STATUS Delete(Department department,Boolean isSaved);
+        Constants.DB_STATUS Insert(Department newDepartment);
+        Constants.DB_STATUS Update(Department department);
+        Constants.DB_STATUS Delete(Department department);
+        //Constants.DB_STATUS Insert(Department newDepartment, Boolean isSaved);
+        //Constants.DB_STATUS Update(Boolean isSaved);
+        //Constants.DB_STATUS Delete(Department department,Boolean isSaved);
     }
 }
