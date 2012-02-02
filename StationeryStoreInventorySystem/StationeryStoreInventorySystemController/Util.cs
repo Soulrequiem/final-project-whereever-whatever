@@ -276,7 +276,7 @@ namespace StationeryStoreInventorySystemController
                 }
             }
             
-            return allItem;
+            return allItem.Copy();
         }
 
         public static void GoToPage(string page)
