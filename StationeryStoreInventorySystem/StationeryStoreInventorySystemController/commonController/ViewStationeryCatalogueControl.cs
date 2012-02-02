@@ -75,7 +75,7 @@ namespace StationeryStoreInventorySystemController.commonController
         ///     Modification Reason:
         /// </summary>
         /// <returns>Return the list of stationery catalogue. </returns>
-        public DataTable ItemList
+        public DataTable AllItemList
         {
             get
             {
@@ -114,11 +114,13 @@ namespace StationeryStoreInventorySystemController.commonController
                 //        dt.Rows.Add(dr);
                 //    }
                 //}
-
                 //return dt;
             }
         }
-
+        public DataTable ItemList(string itemDescription)
+        {
+            return Util.GetItemListTable(itemDescription);
+        }
 
         ///     The usage of this method is to assign the selected Department Head from Search Result
         ///     Created By: SanLaPyaye
@@ -144,6 +146,7 @@ namespace StationeryStoreInventorySystemController.commonController
         {
             return Util.GetItem(itemBroker, itemDescription);
         }
+
 
         public void SelectPrint()
         {
