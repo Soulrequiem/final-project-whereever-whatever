@@ -41,20 +41,27 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public Retrieval GetRetrieval(Retrieval retrieval)
         {
-            retrieval = inventory.Retrievals.Where(robj => robj.Id == retrieval.Id).First();
-            if (!retrieval.Equals(null))
+            try
             {
-                //var retrievalDetailResult = from rd in inventory.RetrievalDetails
-                //                            where rd.Retrieval.Id == retrieval.Id
-                //                            select rd;
-                //foreach (RetrievalDetail rd in retrievalDetailResult)
+                retrieval = inventory.Retrievals.Where(robj => robj.Id == retrieval.Id).First();
+                //if (!retrieval.Equals(null))
                 //{
-                //    retrieval.RetrievalDetails.Add(rd);
-               
-                // }
-                return retrieval;
+                //    //var retrievalDetailResult = from rd in inventory.RetrievalDetails
+                //    //                            where rd.Retrieval.Id == retrieval.Id
+                //    //                            select rd;
+                //    //foreach (RetrievalDetail rd in retrievalDetailResult)
+                //    //{
+                //    //    retrieval.RetrievalDetails.Add(rd);
+
+                //    // }
+                //    return retrieval;
+                //}
             }
-            return null; 
+            catch (Exception e)
+            {
+                retrieval = null;
+            }
+            return retrieval;
         }
         /// <summary>
         ///   Retrieve All of the Retrieval information from Retrieval Table
@@ -62,10 +69,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<Retrieval> GetAllRetrieval()
         {
-            retrievalList = inventory.Retrievals.ToList<Retrieval>();
-            if (!retrievalList.Equals(null))
+            try
+            {
+                retrievalList = inventory.Retrievals.ToList<Retrieval>();
+            }
+            catch (Exception e)
+            {
+                retrievalList = null;
+            }
+        
                 return retrievalList;
-            return null;
         }
         /// <summary>
         /// Insert Retrieval data to the Retrieval Table according to the Retrieval Parameter
@@ -154,10 +167,16 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public RetrievalDetail GetRetrievalDetail(RetrievalDetail retrievalDetail)
         {
-            retrievalDetail = inventory.RetrievalDetails.Where(rObj => rObj.Id == retrievalDetail.Id).First();
-            if (!retrievalDetail.Equals(null))
+            try
+            {
+                retrievalDetail = inventory.RetrievalDetails.Where(rObj => rObj.Id == retrievalDetail.Id).First();
+            }
+            catch (Exception e)
+            {
+                retrievalDetail = null;
+            }
+          
                 return retrievalDetail;
-            return null;
         }
         /// <summary>
         /// Retrieve All of the RetrievalDetail information from RetrievalDetail Table
@@ -165,7 +184,15 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
        public List<RetrievalDetail> GetAllRetrievalDetail()
         {
-            throw new NotImplementedException();
+            try
+            {
+                retrievalDetailList = inventory.RetrievalDetails.ToList();
+            }
+            catch (Exception e)
+            {
+                retrievalDetailList = null;
+            }
+            return retrievalDetailList;
         }
         
         /// <summary>
