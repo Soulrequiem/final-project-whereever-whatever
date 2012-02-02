@@ -288,10 +288,18 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public int GetPurchaseOrderId()
         {
-            int lastPurchaseOrderNumber = inventory.PurchaseOrders.Last().Id + 1;
-            if (lastPurchaseOrderNumber.ToString().Substring(0, 4).CompareTo(DateTime.Now.Year.ToString()) != 0)
+            int lastPurchaseOrderNumber;
+            try
             {
-                lastPurchaseOrderNumber = Converter.objToInt(DateTime.Now.Year.ToString() + "1".PadLeft(5, '0'));
+                lastPurchaseOrderNumber = inventory.PurchaseOrders.Last().Id + 1;
+                if (lastPurchaseOrderNumber.ToString().Substring(0, 4).CompareTo(DateTime.Now.Year.ToString()) != 0)
+                {
+                    lastPurchaseOrderNumber = Converter.objToInt(DateTime.Now.Year.ToString() + "1".PadLeft(5, '0'));
+                }
+            }
+            catch (Exception e)
+            {
+                lastPurchaseOrderNumber = 0;
             }
             return lastPurchaseOrderNumber;
         }
