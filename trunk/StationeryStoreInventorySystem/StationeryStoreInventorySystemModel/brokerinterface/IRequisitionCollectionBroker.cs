@@ -12,16 +12,22 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         int GetRequisitionCollectionId();
         RequisitionCollectionDetail GetRequisitionCollectionDetail(RequisitionCollectionDetail requisitionCollectionDetail);
         List<RequisitionCollectionDetail> GetAllRequisitionCollectionDetail();
-        Constants.DB_STATUS Insert(RequisitionCollectionDetail newRequisitionCollectionDetail,Boolean isSaved);
-        Constants.DB_STATUS Update(Boolean isSaved);
-        Constants.DB_STATUS Delete(RequisitionCollectionDetail requisitionCollectionDetail,Boolean isSaved);
+        Constants.DB_STATUS Insert(RequisitionCollectionDetail newRequisitionCollectionDetail);
+        Constants.DB_STATUS Update(RequisitionCollectionDetail requisitionCollectionDetail);
+        Constants.DB_STATUS Delete(RequisitionCollectionDetail requisitionCollectionDetail);
+        //Constants.DB_STATUS Insert(RequisitionCollectionDetail newRequisitionCollectionDetail,Boolean isSaved);
+        //Constants.DB_STATUS Update(Boolean isSaved);
+        //Constants.DB_STATUS Delete(RequisitionCollectionDetail requisitionCollectionDetail,Boolean isSaved);
 
         int GetRequisitionCollectionDetailId();
         RequisitionCollection GetRequisitionCollection(RequisitionCollection requisitionCollection);
         List<RequisitionCollection> GetAllRequisitionCollection();
-        Constants.DB_STATUS Insert(RequisitionCollection newRequisitionCollection,Boolean isSaved);
-        Constants.DB_STATUS Update(Boolean isSaved);
-        Constants.DB_STATUS Delete(RequisitionCollection requisitionCollection,Boolean isSaved);
+        Constants.DB_STATUS Insert(RequisitionCollection newRequisitionCollection);
+        Constants.DB_STATUS Update(RequisitionCollection requisitionCollection);
+        Constants.DB_STATUS Delete(RequisitionCollection requisitionCollection);
+        //Constants.DB_STATUS Insert(RequisitionCollection newRequisitionCollection,Boolean isSaved);
+        //Constants.DB_STATUS Update(Boolean isSaved);
+        //Constants.DB_STATUS Delete(RequisitionCollection requisitionCollection,Boolean isSaved);
 
         //RequisitionCollectionItem GetRequisitionCollectionItem(RequisitionCollectionItem requisitionCollectionItem);
         //List<RequisitionCollectionItem> GetAllRequisitionCollectionItem();
