@@ -329,3 +329,48 @@ a.button:active {
   color: #FFFFFF;
   border-color: #444;
 }
+
+/**********************************Button*****************************************/
+.Searchbutton
+{
+   /*background: #003399;*/
+   background: #8DB1E2;
+   font: bold 12px "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+   border: solid 1px #dcdcdc;
+   text-decoration: none;
+   padding: 7px 12px;
+   color: #FFFFFF;    
+   display: inline-block;
+   text-align: center;
+   /*text-shadow: 0 1px 0 #fff;*/ 
+   -webkit-transition: border-color .218s;
+   -moz-transition: border .218s;
+   -o-transition: border-color .218s;
+   transition: border-color .218s;
+   border-radius: 2px;
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+    width:70px;
+    height:30px;
+}
+
+.Searchbutton:hover
+{
+   /*background: white;
+   border: solid 1px grey;
+   font-family: Arial, sans-serif;
+   font-size: 12px;
+   font-weight: bold;
+   color: Red;   
+   height: 25px;*/
+   color: #000000;
+   background: #FF6501;
+   border-color: #999;
+   -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2) -webkit-box-shadow:0 2px 5px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+.Searchbutton:active 
+{
+  color: #FFFFFF;
+  border-color: #444;
+}
