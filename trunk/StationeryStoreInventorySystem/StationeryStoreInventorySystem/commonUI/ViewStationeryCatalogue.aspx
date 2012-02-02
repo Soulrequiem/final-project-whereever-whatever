@@ -42,7 +42,7 @@
                                 </ig:WebDropDown>
                             </td>
                             <td>
-                                <asp:Button ID="btnSearch" runat="server" CssClass="Defaultbutton" 
+                                <asp:Button ID="btnSearch" runat="server" CssClass="Searchbutton"
                                     onclick="btnSearch_Click" OnClientClick="return Search();" Text="Search" />
                             </td>
                         </tr>
