@@ -65,10 +65,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
-                DataRow[] dr = StationeryStoreInventorySystemController.Util.GetItemTable().Select(" ItemNo = '" + sItem + "'"); //vsCtrl.ItemList;
-                if (dr != null && dr.Length > 0)
+                DataTable dt = StationeryStoreInventorySystemController.Util.GetItemListTable(drdItemList.CurrentValue);
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    dgvStationeryList.DataSource = dr.CopyToDataTable();
+                    dgvStationeryList.DataSource = dt;
                     dgvStationeryList.DataBind();
                 }
             }
@@ -166,7 +166,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         protected void btnGetItem_Click(object sender, EventArgs e)
         {
-            string sItem = drdItemList.SelectedValue.ToString();
+            string sItem = drdItemList.CurrentValue.ToString();
             FillDetails(sItem);
 
         }
