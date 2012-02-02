@@ -7,7 +7,7 @@ namespace SystemStoreInventorySystemUtil
 {
     public class Constants
     {
-        public enum VISIBILITY_STATUS
+        public enum VISIBILITY_STATUS // general one
         {
             UNKNOWN = 0,
             SHOW,
@@ -30,7 +30,8 @@ namespace SystemStoreInventorySystemUtil
             APPROVED,
             REJECTED,
             SUBMITTED,
-            WITHDRAW
+            WITHDRAW,
+            HIDDEN
         }
 
         public enum COLLECTION_STATUS
