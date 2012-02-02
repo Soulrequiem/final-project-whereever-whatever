@@ -21,7 +21,8 @@
                     <ig:WebDataGrid ID="dgvCollectionList" runat="server" Height="200px" 
                         Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                        oninitializerow="dgvCollectionList_InitializeRow">
                     <Columns>
                         <%--<ig:TemplateDataField Key="CollectionID" VisibleIndex="0">
                             <Header Text="Collection ID" />
@@ -29,8 +30,7 @@
                         <ig:TemplateDataField Key="CollectionID">
                             <ItemTemplate>
                                 <asp:HyperLink ID="TripIDLink" runat="server" 
-                                    Text='<%# Eval("CollectionID" ) %>'
-                                    NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                    Text='<%# Eval("CollectionID") %>' >
                                     </asp:HyperLink>
                             </ItemTemplate>
                             <Header Text="Collection ID" />
@@ -81,12 +81,12 @@
                 <Template>
                     <table>
                         <tr>
-                            <td>
+                            <td width="150px">
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="Label2" runat="server" 
                                     Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_CollectionIDLabel %>"/>
                             </td>
-                            <td>
+                            <td width="100px">
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="lblCollectionID" runat="server" 
                                     Text="C0019"/>
@@ -108,7 +108,7 @@
                                     ID="Label1" runat="server" 
                                     Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_CollectionDateTimeLabel %>"/>
                             </td>
-                            <td>
+                            <td colspan="3">
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="lblDateTime" runat="server" 
                                     Text="Monday 20-01-2012 11.35 AM"/>
