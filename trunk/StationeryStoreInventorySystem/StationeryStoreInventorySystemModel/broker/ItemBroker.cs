@@ -38,7 +38,7 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                itemObj = inventory.Items.Where(iObj => iObj.Id == item.Id).First();
+                itemObj = inventory.Items.Where(iObj => iObj.Id == item.Id || iObj.Description.Contains(item.Description)).First();
             }
             catch (Exception e)
             {
@@ -191,6 +191,19 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 stockCardDetailList = inventory.StockCardDetails.ToList<StockCardDetail>();
+            }
+            catch (Exception e)
+            {
+                stockCardDetailList = null;
+            }
+            return stockCardDetailList;
+        }
+
+        public List<StockCardDetail> GetAllStockCardDetail(Item item)
+        {
+            try
+            {
+                stockCardDetailList = inventory.StockCardDetails.Where(x=> x.Item.Id == item.Id).ToList<StockCardDetail>();
             }
             catch (Exception e)
             {
