@@ -537,4 +537,10 @@
   <data name="SubmitRequisitionsToStore_CollectionPoint" xml:space="preserve">
     <value>Collection Point:</value>
   </data>
+  <data name="GenerateDisbursement_collection" xml:space="preserve">
+    <value>Collection Point:</value>
+  </data>
+  <data name="GenerateDisbursement_RepName" xml:space="preserve">
+    <value>Representative Name:</value>
+  </data>
 </root>
