@@ -121,16 +121,32 @@
                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="200px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="150px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                            Width="300px">
+                            Width="250px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="200px">
+                        <%--<ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="200px">
                             <Header Text="Required Qty" />
-                        </ig:BoundDataField>
+                        </ig:BoundDataField>--%>
+                        <ig:TemplateDataField Key="RequiredQty" Width="150px">
+                                <ItemTemplate>
+                                    <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
+                                    Text='<%# Eval("RequiredQty") %>' NullText="Enter Required Qty">
+                                    </ig:WebTextEditor>
+                                </ItemTemplate>
+                            <Header Text="Required Qty" />
+                        </ig:TemplateDataField>
+                        <ig:TemplateDataField Key="DeliveredQty" Width="150px">
+                                <ItemTemplate>
+                                    <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
+                                    Text='<%# Eval("DeliveredQty") %>' NullText="Enter Delivered Qty">
+                                    </ig:WebTextEditor>
+                                </ItemTemplate>
+                            <Header Text="Delivered Qty" />
+                        </ig:TemplateDataField>
                     </Columns>
                     <Behaviors>
                         <ig:Selection CellClickAction="Row" RowSelectType="Single">
@@ -161,6 +177,9 @@
                        <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblRemarks" runat="server" 
                             Text="Remarks:"/>
-                </div>                 
-   </div>
+                </div>    
+                <div style="float:left">
+                    <asp:CheckBox ID="CheckBox1" runat="server" Text="Complete Requisition"/>
+                </div>    
+   </div>    
 </asp:Content>
