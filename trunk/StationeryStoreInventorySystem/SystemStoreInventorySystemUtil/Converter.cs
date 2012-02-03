@@ -497,6 +497,18 @@ namespace SystemStoreInventorySystemUtil
             }
         }
 
+        public static bool objToBool(object obj)
+        {
+            try
+            {
+                return Convert.ToBoolean(obj);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public enum DATE_CONVERTER
         {
             DATE,
