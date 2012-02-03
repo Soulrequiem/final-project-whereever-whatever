@@ -22,6 +22,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         private commonController.RequisitionDetailsControl requisitionDetailsControl;
         
         private IRequisitionBroker requisitionBroker;
+        private IEmployeeBroker employeeBroker;
         
         private Employee currentEmployee;
 
@@ -53,6 +54,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             InventoryEntities inventory = new InventoryEntities();
 
             requisitionBroker = new RequisitionBroker(inventory);
+            employeeBroker = new EmployeeBroker(inventory);
 
             pendingRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.PENDING);
 
@@ -60,8 +62,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                                             new DataColumn(columnName[1]),
                                             new DataColumn(columnName[2]),
                                             new DataColumn(columnName[3]),
-                                            new DataColumn(columnName[4]),
-            };
+                                            new DataColumn(columnName[4]) };
         }
 
         /// <summary>
@@ -164,30 +165,36 @@ namespace StationeryStoreInventorySystemController.departmentController
             
         //}
 
-        public Constants.ACTION_STATUS SelectApproveRequisition(List<int> index, DataTable data)
+        public Constants.ACTION_STATUS SelectApproveRequisition(Dictionary<string, string> remarks)
         {
-            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.APPROVED, data);
+            return SelectActionRequisition(remarks, Constants.REQUISITION_STATUS.APPROVED);
         }
 
-        public Constants.ACTION_STATUS SelectRejectRequisition(List<int> index, DataTable data)
+        public Constants.ACTION_STATUS SelectRejectRequisition(Dictionary<string, string> remarks)
         {
-            return SelectActionRequisition(index, Constants.REQUISITION_STATUS.REJECTED, data);
+            return SelectActionRequisition(remarks, Constants.REQUISITION_STATUS.REJECTED);
         }
 
-        private Constants.ACTION_STATUS SelectActionRequisition(List<int> index, Constants.REQUISITION_STATUS requisitionStatus, DataTable data)
+        private Constants.ACTION_STATUS SelectActionRequisition(Dictionary<string, string> remarks, Constants.REQUISITION_STATUS requisitionStatus)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
-            if (index.Count > 0)
+            if (remarks.Count > 0)
             {
                 status = Constants.ACTION_STATUS.SUCCESS;
                 Requisition requisition;
 
-                foreach (int i in index)
+                Employee employee = new Employee();
+                employee.Id = currentEmployee.Id;
+                employee = employeeBroker.GetEmployee(employee);
+
+                foreach (string key in remarks.Keys)
                 {
-                    requisition = pendingRequisitionList.ElementAt(i);
+                    requisition = pendingRequisitionList.ElementAt(Converter.objToInt(key));
                     requisition.Status = Converter.objToInt(requisitionStatus);
-                    //requisition.Remarks = data.Rows[i]["Remarks"].ToString();
+                    requisition.Remarks = remarks[key];
+                    requisition.ApprovedBy = employee;
+                    requisition.ApprovedDate = DateTime.Now;
 
                     pendingRequisitionList.Remove(requisition);
 
