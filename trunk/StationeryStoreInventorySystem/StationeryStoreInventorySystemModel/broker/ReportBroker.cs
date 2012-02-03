@@ -14,7 +14,10 @@ namespace StationeryStoreInventorySystemModel.broker
 
         private string GetConnectionString()
         {
-            return System.Configuration.ConfigurationManager.ConnectionStrings["InventoryEntities"].ConnectionString;
+            string conn =  "Data Source=10.10.2.55;Initial Catalog=Inventory;User ID=CCMyBoss;Password=nokia2012;";
+                //System.Configuration.ConfigurationManager.ConnectionStrings["InventoryEntities"].ToString();
+            //conn = conn.Substring(conn.IndexOf("string="), (conn.IndexOf("string=") - (conn.Length - 1)));
+            return conn;
         }
 
         public System.Data.DataTable ExecuteQuery(System.String StrQuery)
