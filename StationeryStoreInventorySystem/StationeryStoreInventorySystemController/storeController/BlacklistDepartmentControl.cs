@@ -24,7 +24,7 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable dt;
         private DataRow dr;
 
-        private string[] columnName = { "DepartmentName", "MissedTime", "Status", "Remarks", "BlackUnblackList", "DepartmentID" };
+        private string[] columnName = { "DepartmentName", "MissedTime", "Status", "BlackUnblackList", "DepartmentID" };
 
         private DataColumn[] dataColumn;
 
@@ -45,7 +45,7 @@ namespace StationeryStoreInventorySystemController.storeController
                                            new DataColumn(columnName[2]),
                                            new DataColumn(columnName[3]),
                                            new DataColumn(columnName[4]),
-                                           new DataColumn(columnName[5]) };
+                                          };
                                 
         }
 
@@ -69,7 +69,7 @@ namespace StationeryStoreInventorySystemController.storeController
                 if (unblacklistDepartmentList.Count > 0) this.ListToDataTable(unblacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
                 if (blacklistDepartmentList.Count > 0) this.ListToDataTable(blacklistDepartmentList, Constants.VISIBILITY_STATUS.SHOW);
 
-                return dt;
+                return dt.Select("DepartmentName = DepartmentName", "DepartmentName").CopyToDataTable();
             }
         }
 
@@ -93,7 +93,15 @@ namespace StationeryStoreInventorySystemController.storeController
                 dr = dt.NewRow();
                 dr[columnName[0]] = dep.Name;
                 List<CollectionMissed> missedTime = collectionMissedBroker.GetAllCollectionMissed(dep);
-                int count = missedTime.Count;
+                List<CollectionMissed> newList = new List<CollectionMissed>();
+                foreach (CollectionMissed temp in missedTime)
+                {
+                    if (temp.Status != Converter.objToInt(Constants.VISIBILITY_STATUS.HIDDEN))
+                    {
+                        newList.Add(temp);
+                    }
+                }
+                int count = newList.Count;
                 //if (missedTime != null)
                 //{
                 //    foreach (CollectionMissed times in missedTime)
@@ -114,9 +122,9 @@ namespace StationeryStoreInventorySystemController.storeController
                 }
                 dr[columnName[1]] = count;
                 dr[columnName[2]] = Converter.GetDepartmentStatusText(Converter.objToDepartmentStatus(dep.Status));
-                dr[columnName[3]] = "remark";
-                dr[columnName[4]] = black;
-                dr[columnName[5]] = dep.Id;
+               
+                dr[columnName[3]] = black;
+                dr[columnName[4]] = dep.Id;
                 dt.Rows.Add(dr);
             }
          //   return dt;
@@ -185,12 +193,18 @@ namespace StationeryStoreInventorySystemController.storeController
                         department = blacklistDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
                        // if(department!=null)
                         department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.UNBLACKLIST);
+                        foreach (CollectionMissed cm in department.CollectionMisseds.ToList())
+                        {
+                            cm.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.HIDDEN);
+                            collectionMissedBroker.Update(cm);
+                        }
                         unblacklistDepartmentList.Add(department);
                         blacklistDepartmentList.Remove(department);
                         break;
                     case Constants.DEPARTMENT_STATUS.UNBLACKLIST:
                         department = unblacklistDepartmentList.Find(delegate(Department dep) { return dep.Id == departmentId; });
                         department.Status = Converter.objToInt(Constants.DEPARTMENT_STATUS.BLACKLIST);
+                      
                         blacklistDepartmentList.Add(department);
                         unblacklistDepartmentList.Remove(department);
                         break;
