@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StationeryStoreInventorySystem.Reports {
+namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace StationeryStoreInventorySystem.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class DepartmentList : ReportClass {
+    public class RequisitionReport : ReportClass {
         
-        public DepartmentList() {
+        public RequisitionReport() {
         }
         
         public override string ResourceName {
             get {
-                return "DepartmentList.rpt";
+                return "RequisitionReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,8 @@ namespace StationeryStoreInventorySystem.Reports {
         
         public override string FullResourceName {
             get {
-                return "StationeryStoreInventorySystem.Reports.DepartmentList.rpt";
+                return "SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports.RequisitionReport.r" +
+                    "pt";
             }
             set {
                 // Do nothing
@@ -87,12 +88,60 @@ namespace StationeryStoreInventorySystem.Reports {
                 return this.ReportDefinition.Sections[4];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_RequisitionID {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DeptName {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DeptCode {
+            get {
+                return this.DataDefinition.ParameterFields[2];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeName {
+            get {
+                return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeNumber {
+            get {
+                return this.DataDefinition.ParameterFields[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Email {
+            get {
+                return this.DataDefinition.ParameterFields[5];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedDepartmentList : Component, ICachedReport {
+    public class CachedRequisitionReport : Component, ICachedReport {
         
-        public CachedDepartmentList() {
+        public CachedRequisitionReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +178,7 @@ namespace StationeryStoreInventorySystem.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            DepartmentList rpt = new DepartmentList();
+            RequisitionReport rpt = new RequisitionReport();
             rpt.Site = this.Site;
             return rpt;
         }

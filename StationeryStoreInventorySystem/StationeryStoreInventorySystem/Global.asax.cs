@@ -18,6 +18,12 @@ namespace StationeryStoreInventorySystem
 
         protected void Session_Start(object sender, EventArgs e)
         {
+            Session["ItemConsumptionData"] = new DataTable();
+            Session["IsPostBack"] = true;
+            Session["PrintData"] = new DataTable();
+            Session["chartData"] = new DataTable();
+            Session["ReportType"] = string.Empty;
+            Session["ReportData"] = new DataTable();
             Session["WebExplorerState"] = new bool[5]{true,true,true,true,true};
             Session["SelectedIndex"] = 0;
             Session["SelectedGroup"] = 0;

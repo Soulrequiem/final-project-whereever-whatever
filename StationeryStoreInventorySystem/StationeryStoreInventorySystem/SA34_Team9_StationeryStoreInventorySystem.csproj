@@ -39,6 +39,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Infragistics35.Web.v11.2.dll</HintPath>
     </Reference>
+    <Reference Include="Infragistics35.WebUI.Documents.Excel.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="Infragistics35.WebUI.Documents.Reports.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Infragistics35.WebUI.Misc.v11.2.dll</HintPath>
@@ -47,6 +49,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Infragistics35.WebUI.Shared.v11.2.dll</HintPath>
     </Reference>
+    <Reference Include="Infragistics35.WebUI.UltraWebChart.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="Infragistics35.WebUI.WebResizingExtender.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Infragistics35.WebUI.WebResizingExtender.v11.2.dll</HintPath>
@@ -86,9 +89,11 @@
     <Content Include="departmentUI\Representative\UpdateCollectionByItems.aspx" />
     <Content Include="departmentUI\Representative\UpdateCollectionByRequisitions.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Common\Delete.png" />
     <Content Include="Images\Common\Excel_Logo.jpg" />
     <Content Include="Images\Common\GroupBox_bg.png" />
     <Content Include="Images\Common\GroupBox_bg1.png" />
+    <Content Include="Images\Common\iconPrint.gif" />
     <Content Include="Images\Common\PDF Icon.gif" />
     <Content Include="Images\Common\print.png" />
     <Content Include="Images\MasterPage\logo.png" />
@@ -263,16 +268,119 @@
     </Compile>
     <Compile Include="Logger\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\DepartmentList.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DepartmentList.rpt</DependentUpon>
+    <Compile Include="Reports\DataSets\DSAdjustmentVoucher.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSCollections.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSDeliveryOrder.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSDepartments.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSDisbursement.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSEmployees.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSItems.cs" />
+    <Compile Include="Reports\DataSets\DSItems.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSPurchaseOrder.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSReorderItems.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSRequisitionDetails.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSRequisitions.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSRoles.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSStockCard.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSSuppliers.Designer.cs" />
+    <Compile Include="Reports\DataSets\DSTender.Designer.cs" />
+    <Compile Include="Reports\SSISReports\AdjustmentVoucherReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\RequisitionDetails.cs">
+    <Compile Include="Reports\SSISReports\AdjustmentVoucherReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RequisitionDetails.rpt</DependentUpon>
+      <DependentUpon>AdjustmentVoucherReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\DeliveryOrderReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\DeliveryOrderReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryOrderReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\EmployeesReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\EmployeesReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\ItemsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\ItemsReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\PurchaseOrderReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\PurchaseOrderReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseOrderReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\ReorderReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\ReorderReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReorderReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\RequisitionDetailsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\RequisitionDetailsReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequisitionDetailsReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\RequisitionReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\RequisitionReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequisitionReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\RolesReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\RolesReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RolesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\StockCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\StockCardReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockCardReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\SupplierReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SSISReports\SupplierReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SupplierReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="storeUI\Clerk\CreateDiscrepencyReport.aspx.cs">
@@ -408,13 +516,49 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Reports\DepartmentList.rpt">
+    <EmbeddedResource Include="Reports\SSISReports\AdjustmentVoucherReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>DepartmentList.cs</LastGenOutput>
+      <LastGenOutput>AdjustmentVoucherReport1.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\RequisitionDetails.rpt">
+    <EmbeddedResource Include="Reports\SSISReports\DeliveryOrderReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>RequisitionDetails.cs</LastGenOutput>
+      <LastGenOutput>DeliveryOrderReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\EmployeesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EmployeesReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\ItemsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ItemsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\PurchaseOrderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PurchaseOrderReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\ReorderReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReorderReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\RequisitionDetailsReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RequisitionDetailsReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\RequisitionReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RequisitionReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\RolesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RolesReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\StockCardReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StockCardReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SSISReports\SupplierReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SupplierReport1.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -422,6 +566,73 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Reports\DataSets\DSAdjustmentVoucher.xsc">
+      <DependentUpon>DSAdjustmentVoucher.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSAdjustmentVoucher.xsd" />
+    <None Include="Reports\DataSets\DSAdjustmentVoucher.xss">
+      <DependentUpon>DSAdjustmentVoucher.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSCollections.xsc">
+      <DependentUpon>DSCollections.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSCollections.xsd" />
+    <None Include="Reports\DataSets\DSCollections.xss">
+      <DependentUpon>DSCollections.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSDeliveryOrder.xsc">
+      <DependentUpon>DSDeliveryOrder.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSDeliveryOrder.xsd" />
+    <None Include="Reports\DataSets\DSDeliveryOrder.xss">
+      <DependentUpon>DSDeliveryOrder.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSDepartments.xsc">
+      <DependentUpon>DSDepartments.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSDepartments.xsd" />
+    <None Include="Reports\DataSets\DSDepartments.xss">
+      <DependentUpon>DSDepartments.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSDisbursement.xsc">
+      <DependentUpon>DSDisbursement.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSDisbursement.xsd" />
+    <None Include="Reports\DataSets\DSDisbursement.xss">
+      <DependentUpon>DSDisbursement.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DataSets\DSEmployees.xsc" />
+    <None Include="Reports\DataSets\DSEmployees.xsd" />
+    <None Include="Reports\DataSets\DSEmployees.xss" />
+    <None Include="Reports\DataSets\DSItems.xsc" />
+    <None Include="Reports\DataSets\DSItems.xsd" />
+    <None Include="Reports\DataSets\DSItems.xss" />
+    <None Include="Reports\DataSets\DSPurchaseOrder.xsc" />
+    <None Include="Reports\DataSets\DSPurchaseOrder.xsd" />
+    <None Include="Reports\DataSets\DSPurchaseOrder.xss" />
+    <None Include="Reports\DataSets\DSReorderItems.xsc" />
+    <None Include="Reports\DataSets\DSReorderItems.xsd" />
+    <None Include="Reports\DataSets\DSReorderItems.xss" />
+    <None Include="Reports\DataSets\DSRequisitionDetails.xsc" />
+    <None Include="Reports\DataSets\DSRequisitionDetails.xsd" />
+    <None Include="Reports\DataSets\DSRequisitionDetails.xss" />
+    <None Include="Reports\DataSets\DSRequisitions.xsc" />
+    <None Include="Reports\DataSets\DSRequisitions.xsd" />
+    <None Include="Reports\DataSets\DSRequisitions.xss" />
+    <None Include="Reports\DataSets\DSRoles.xsc" />
+    <None Include="Reports\DataSets\DSRoles.xsd" />
+    <None Include="Reports\DataSets\DSRoles.xss" />
+    <None Include="Reports\DataSets\DSStockCard.xsc" />
+    <None Include="Reports\DataSets\DSStockCard.xsd" />
+    <None Include="Reports\DataSets\DSStockCard.xss" />
+    <None Include="Reports\DataSets\DSSuppliers.xsc" />
+    <None Include="Reports\DataSets\DSSuppliers.xsd" />
+    <None Include="Reports\DataSets\DSSuppliers.xss" />
+    <None Include="Reports\DataSets\DSTender.xsc" />
+    <None Include="Reports\DataSets\DSTender.xsd" />
+    <None Include="Reports\DataSets\DSTender.xss" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
