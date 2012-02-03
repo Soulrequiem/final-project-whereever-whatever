@@ -29,8 +29,7 @@
                        <ig:TemplateDataField Key="CollectionID">
                         <ItemTemplate>
                             <asp:HyperLink ID="TripIDLink" runat="server" 
-                                Text='<%# Eval("CollectionID" ) %>'
-                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                Text='<%# Eval("CollectionID" ) %>' >
                                 </asp:HyperLink>
                         </ItemTemplate>
                         <Header Text="Collection ID" />
