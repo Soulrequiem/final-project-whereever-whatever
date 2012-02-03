@@ -67,6 +67,33 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
         protected global::Infragistics.Web.UI.ListControls.WebDropDown drdReportList;
         
         /// <summary>
+        /// panelSupplier control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSupplier;
+        
+        /// <summary>
+        /// lblselect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblselect;
+        
+        /// <summary>
+        /// drdSupplier control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.Web.UI.ListControls.WebDropDown drdSupplier;
+        
+        /// <summary>
         /// lblNoDataAvailable control.
         /// </summary>
         /// <remarks>

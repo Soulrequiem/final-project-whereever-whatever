@@ -26,14 +26,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 grCtrl = new GenerateReportsControl();
             return grCtrl;
         }
-        private void putInSession(DataTable dt)
-        {
-            Session["ItemConsumptionData"] = dt;
-        }
+        //private void putInSession(DataTable dt)
+        //{
+        //    Session["ItemConsumptionData"] = dt;
+        //}
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                panelSupplier.Visible = false;
                 FilterPanel.Visible = false;
                 lblNoDataAvailable.Visible = true;
                 drdReportList.SelectedItemIndex = 0;
@@ -52,6 +53,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             else if (Constants.StationeryCatalogueReport == drdReportList.CurrentValue)
             {
                 reportDT = getControl().getCatalogue();
+            }
+            else if (Constants.ReorderReport == drdReportList.CurrentValue)
+            {
+                reportDT = getControl().getReorderDetails();
             }
             else if (Constants.ColletionReport == drdReportList.CurrentValue)
             {
@@ -93,11 +98,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 drdReportType.SelectedItemIndex = 0;
                 chkShowTotal.Enabled = true;
                 firstLoad();
-
+            }
+            else if (Constants.StationeryTenderReport == drdReportList.CurrentValue)
+            {
+                fillSupplier();
+                panelSupplier.Visible = true;
+                drdSupplier.SelectedItemIndex = 0;
+                reportDT = getControl().getTenderPrice(drdSupplier.SelectedValue);
             }
             PrepareData();
         }
-
+        private void fillSupplier()
+        {
+            drdSupplier.DataSource = getControl().getSuppliers();
+            drdSupplier.DataBind();
+        }
         private void firstLoad()
         {
             reportDT = getControl().defaultResultSet("2011-1-1", "2012-1-2");
@@ -244,14 +259,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             lblNoDataAvailable.Visible = flag;
             reportpanel.Visible = !flag;
-            if (Constants.ItemConsumptionReport == drdReportList.CurrentValue)
-            {
-                FilterPanel.Visible = true;
-            }
-            else
-            {
-                FilterPanel.Visible = false;
-            }
+            FilterPanel.Visible = Constants.ItemConsumptionReport == drdReportList.CurrentValue ? true : false;
+            panelSupplier.Visible = Constants.StationeryTenderReport == drdReportList.CurrentValue ? true : false;
         }
 
         protected void PrintButton_Click(object sender, ImageClickEventArgs e)
@@ -694,6 +703,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             drdItems.ClearSelection();
             firstLoad();
             PrepareData();
+        }
+
+        protected void drdSupplier_SelectionChanged(object sender, DropDownSelectionChangedEventArgs e)
+        {
+            reportDT = getControl().getTenderPrice(drdSupplier.SelectedValue);
+            BindData();
         }
     }
 }
