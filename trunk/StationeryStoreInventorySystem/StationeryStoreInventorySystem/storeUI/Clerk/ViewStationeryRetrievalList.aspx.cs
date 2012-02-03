@@ -18,14 +18,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class ViewStationeryRetrievalList : System.Web.UI.Page
     {
-        ViewStationeryRetrievalListControl vsrCtrl;
+        private ViewStationeryRetrievalListControl vsrCtrl;
+        private static readonly string sessionKey = "ViewStationeryRetrievalList";
+        private string retrievalNo;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                vsrCtrl = new ViewStationeryRetrievalListControl();
-                DataTable dt = vsrCtrl.GetStationeryRetrievalList();
-                FillStationeryRetrivalList(dt);
+                if (Request.QueryString["RetrievalNo"] == null)
+                {
+                    vsrCtrl = new ViewStationeryRetrievalListControl();
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, vsrCtrl);
+                    FillStationeryRetrivalList(vsrCtrl.GetStationeryRetrievalList());
+                }
+                else
+                {
+                    vsrCtrl = (ViewStationeryRetrievalListControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+                    retrievalNo = Request.QueryString["retrievalNo"].ToString();
+                    //
+                }
             }
         }
 
@@ -43,6 +54,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             {
                 Logger.WriteErrorLog(ex);
             }
+        }
+
+        protected void DgvViewStationeryRetrievalList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        {
+            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("retrievalNo").FindControl("retrievalNo");
+            link.NavigateUrl = "~/storeUI/Clerk/ViewStationeryRetrievalList.aspx?RetrievalNo=" + link.Text;
         }
     }
 }
