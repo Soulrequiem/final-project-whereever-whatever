@@ -16,6 +16,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         protected void Page_Load(object sender, EventArgs e)
         {
             CPobj = CPobjGetControl();
+            //txtOldPassword.Text = String.Empty;
+            //txtNewPassword.Text = String.Empty;
+            //txtConfirmPassword.Text = String.Empty;
         }
 
         //protected void btnChange_Click(object sender, EventArgs e)
@@ -54,18 +57,27 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             lblStatusMessage.Text = message;
         }
 
-        protected void btnReset_Click(object sender, EventArgs e)
-        {
-            lblStatusMessage.Text = String.Empty;
-            txtOldPassword.Text = String.Empty;
-            txtNewPassword.Text = String.Empty;
-            txtConfirmPassword.Text = String.Empty;
-        }
+        //protected void btnReset_Click(object sender, EventArgs e)
+        //{
+        //    lblStatusMessage.Text = String.Empty;
+        //    txtOldPassword.Text = String.Empty;
+        //    txtNewPassword.Text = String.Empty;
+        //    txtConfirmPassword.Text = String.Empty;
+        //}
+
         private ChangePasswordControl CPobjGetControl()
         {
             if (CPobj == null)
                 CPobj = new ChangePasswordControl();
             return CPobj;
+        }
+
+        protected void btnReset_Click1(object sender, EventArgs e)
+        {
+            lblStatusMessage.Text = String.Empty;
+            txtOldPassword.Text = String.Empty;
+            txtNewPassword.Text = String.Empty;
+            txtConfirmPassword.Text = String.Empty;
         }
     }
 }
