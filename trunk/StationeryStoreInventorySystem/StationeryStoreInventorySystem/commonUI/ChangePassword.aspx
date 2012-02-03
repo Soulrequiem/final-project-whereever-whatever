@@ -50,7 +50,8 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="txtOldPassword" runat="server" 
-                             CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_old%>">
+                             CssClass="DefaultTextStyle" Width="250px" 
+                                NullText="<%$ Resources:WebResources, Text_old%>" TextMode="Password">
                             </ig:WebTextEditor><br />
                         </td>
                     </tr>
@@ -63,7 +64,7 @@
                         <td>
                             <ig:WebTextEditor ID="txtNewPassword" runat="server" 
                             CssClass="DefaultTextStyle" Width="250px" 
-                                NullText="<%$ Resources:WebResources, Text_new%>">
+                                NullText="<%$ Resources:WebResources, Text_new%>" TextMode="Password">
                             </ig:WebTextEditor><br />
                         </td>
                     </tr>
@@ -75,7 +76,8 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="txtConfirmPassword" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" NullText="<%$ Resources:WebResources, Text_new%>">
+                            CssClass="DefaultTextStyle" Width="250px" 
+                                NullText="<%$ Resources:WebResources, Text_new%>" TextMode="Password">
                         </ig:WebTextEditor>
                         </td>
                     </tr>
@@ -88,7 +90,7 @@
                             <div style="float:right">
                                 <!--<a class="button" href="" style="float:right">Change</a>-->
                                 <asp:Button id="btnReset" CssClass="Defaultbutton"  runat="server" 
-                                    Text="Reset" OnClientClick = "return Reset();" onclick="btnReset_Click"/>
+                                    Text="Reset" OnClientClick = "return Reset();" onclick="btnReset_Click1"/>
                             </div>
                             <div style="float:right;margin-right:10px" class="buttons">
                                 <asp:Button id="btnChange" CssClass="MediumLargeButton"  runat="server" 
