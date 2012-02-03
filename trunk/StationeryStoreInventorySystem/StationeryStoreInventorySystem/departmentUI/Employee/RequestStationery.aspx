@@ -127,7 +127,8 @@
                     <ig:WebDataGrid ID="dgvStationeryList" runat="server" Height="150px" 
                          Width="570px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                         oninitializerow="dgvStationeryList_InitializeRow">
                     <Columns>
                         
                         <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="140px">

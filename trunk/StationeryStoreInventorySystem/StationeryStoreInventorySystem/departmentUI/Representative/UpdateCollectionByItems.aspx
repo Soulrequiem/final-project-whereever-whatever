@@ -13,7 +13,7 @@
             <br />
             <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
             Text="<%$ Resources:WebResources, UpdateCollectionByItems_Header %>" /></h1>
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" width="700px"
                 Text="<%$ Resources:WebResources,UpdateCollectionByRequisions_GroupBoxTitle%>" 
                 TitleAlignment="Left">
@@ -21,19 +21,22 @@
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label5" runat="server" 
                         Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_SelectCollectionLabel%>"/>
                     <ig:WebDataGrid ID="dgvCollectionList" runat="server" Height="200px" 
-                        Width="700px" CssClass="DefaultGridViewStyle" 
-                        HeaderCaptionCssClass="HeaderGridViewStyle" 
+                        Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
+                        HeaderCaptionCssClass="HeaderGridViewStyle" EnableViewState="true"
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        AutoGenerateColumns="False">
+                        oninitializerow="dgvCollectionList_InitializeRow1">
                     <Columns>
-                       <ig:TemplateDataField Key="CollectionID">
-                        <ItemTemplate>
-                            <asp:HyperLink ID="TripIDLink" runat="server" 
-                                Text='<%# Eval("CollectionID" ) %>' >
-                                </asp:HyperLink>
-                        </ItemTemplate>
-                        <Header Text="Collection ID" />
-                    </ig:TemplateDataField>
+                        <%--<ig:TemplateDataField Key="CollectionID" VisibleIndex="0">
+                            <Header Text="Collection ID" />
+                        </ig:TemplateDataField>--%>
+                        <ig:TemplateDataField Key="CollectionID">
+                            <ItemTemplate>
+                                <asp:HyperLink ID="TripIDLink" runat="server" 
+                                    Text='<%# Eval("CollectionID") %>' >
+                                    </asp:HyperLink>
+                            </ItemTemplate>
+                            <Header Text="Collection ID" />
+                        </ig:TemplateDataField>
                         <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
                             VisibleIndex="1">
                             <Header Text="Collection Point" />
@@ -46,9 +49,6 @@
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus">
                             <Header Text="Collection Status" />
-                        </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Status" Key="Status">
-                            <Header Text="Status" />
                         </ig:BoundDataField>
                     </Columns>
                         <Behaviors>
@@ -72,12 +72,12 @@
                 <Template>
                     <table>
                         <tr>
-                            <td>
+                            <td width="150px">
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="Label2" runat="server" 
                                     Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_CollectionIDLabel %>"/>
                             </td>
-                            <td>
+                            <td width="100px">
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="lblCollectionID" runat="server" 
                                     Text="C0019"/>
@@ -99,7 +99,7 @@
                                     ID="Label1" runat="server" 
                                     Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_CollectionDateTimeLabel %>"/>
                             </td>
-                            <td>
+                            <td colspan="3">
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="lblDateTime" runat="server" 
                                     Text="Monday 20-01-2012 11.35 AM"/>
@@ -112,8 +112,8 @@
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label4" runat="server" 
                         Text="<%$ Resources:WebResources, UpdateCollectionByItems_GridViewTitle%>"/>
                     <ig:WebDataGrid ID="dgvItems" runat="server" Height="250px" Width="700px" 
-                        AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
-                        HeaderCaptionCssClass="HeaderGridViewStyle" 
+                        AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" EnableViewState="true"
+                        HeaderCaptionCssClass="HeaderGridViewStyle" DataKeyFields="ItemNo"
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo">
@@ -130,7 +130,7 @@
                         </ig:UnboundField>--%>
                         <ig:TemplateDataField Key="ActualQty">
                         <ItemTemplate>
-                           <ig:WebTextEditor Width="150px" runat="server" Text='<%# Eval("ActualQty" ) %>' NullText="0">
+                           <ig:WebTextEditor ID="ActualQty" Width="150px" runat="server" Text='<%# Eval("ActualQty" ) %>' NullText="0">
                            </ig:WebTextEditor>
                         </ItemTemplate>
                         <Header Text="Actual Qty." />
@@ -148,7 +148,8 @@
                         </Behaviors>
                  </ig:WebDataGrid>
                  <div style="float:right;margin-top:5px">
-                    <asp:Button ID="btnSave" runat="server" CssClass="Defaultbutton" Text="Save" />
+                    <asp:Button ID="btnSave" runat="server" CssClass="Defaultbutton" Text="Save" 
+                         onclick="btnSave_Click" />
                  </div>
                 </Template>
             </igmisc:WebGroupBox>

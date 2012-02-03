@@ -36,7 +36,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 FillItems();
 
                 viewStationeryCatalogueControl = new ViewStationeryCatalogueControl();
-                //this.FillStationeryList(viewStationeryCatalogueControl.ItemList);
+                this.FillStationeryList(StationeryStoreInventorySystemController.Util.GetItemTable());
                 //FillStationeryList();
                 FillItems();
 

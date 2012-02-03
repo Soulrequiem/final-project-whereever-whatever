@@ -110,8 +110,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             try
             {
                 resCtrl = GetControl();
-                DataTable dtStationeryItem = resCtrl.RequisitionDetailList;
-                dgvStationeryDetailsList.DataSource = dtStationeryItem;
+                dgvStationeryDetailsList.DataSource = resCtrl.RequisitionDetailList;
                 dgvStationeryDetailsList.DataBind();
             }
             catch (Exception e)
@@ -168,7 +167,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             string sItem = drdItemList.CurrentValue.ToString();
             FillDetails(sItem);
+        }
 
+        protected void dgvStationeryList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        {
+            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("AddToTable").FindControl("AddToTable");
+            link.NavigateUrl = "~/departmentUI/Employee/RequestStationery.aspx?CollectionIdIndex=" + link.Text;
         }
 
         //protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
