@@ -222,5 +222,5 @@ namespace StationeryStoreInventorySystemController.storeController
     }
 }
 /****************************************/
-/********* End of the Class *****************/
+/********* End of the Class *************/
 /****************************************/

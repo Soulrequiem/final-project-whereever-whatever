@@ -40,8 +40,8 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             allCollectionPoint = collectionPointBroker.GetAllCollectionPoint();
             
-            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
-                                            new DataColumn(columnName[1]) };
+            dataColumn = new DataColumn[] { new DataColumn(columnName[2]),
+                                            new DataColumn(columnName[0]) };
 
             dataColumnList = new DataColumn[] { new DataColumn(columnName[2]),
                                                 new DataColumn(columnName[0]),
@@ -94,8 +94,8 @@ namespace StationeryStoreInventorySystemController.departmentController
                     foreach (CollectionPoint collectionPoint in allCollectionPoint)
                     {
                         dr = dtList.NewRow();
-                        dr[columnName[0]] = collectionPoint.Id;
-                        dr[columnName[1]] = collectionPoint.Name + " (" + collectionPoint.Time.ToString(@"hh\:mm") + ")";
+                        dr[columnName[2]] = collectionPoint.Id;
+                        dr[columnName[0]] = collectionPoint.Name + " (" + collectionPoint.Time.ToString(@"hh\:mm") + ")";
                         dtList.Rows.Add(dr);
                     }
                 }
@@ -126,7 +126,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
                     if (employeeBroker.Update(employee) == SystemStoreInventorySystemUtil.Constants.DB_STATUS.SUCCESSFULL)
                     {
-                        currentEmployee.Department.CollectionPoint = collectionPoint;
+                        currentEmployee = employee;
                         Util.SetEmployee(currentEmployee);
                         status = SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS;
                     }

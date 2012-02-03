@@ -45,7 +45,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             employee.Id = currentEmployee.Id;
             employee = employeeBroker.GetEmployee(employee);
 
-            requisitionCollection = new RequisitionCollection(requisitionCollectionBroker.GetRequisitionCollectionId(), employee.Department, employee.Department.CollectionPoint, DateTime.Now, employee, Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW));
+            requisitionCollection = new RequisitionCollection(requisitionCollectionBroker.GetRequisitionCollectionId(), employee.Department, employee.Department.CollectionPoint, DateTime.Now, employee, Converter.objToInt(Constants.COLLECTION_STATUS.NEED_TO_COLLECT));
             
             approvedRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.APPROVED);
 
