@@ -42,13 +42,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
                 mngColPntCtrl = new ManageCollectionPointControl();
 
                 StationeryStoreInventorySystemController.Util.PutSession(sessionKey, mngColPntCtrl);
+
+                FillCollectionList(mngColPntCtrl.CurrentCollectionPoint);
+                FillCollectionPoints(mngColPntCtrl.AllCollectionPoint);
             }
             else
             {
                 mngColPntCtrl = (ManageCollectionPointControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
-            FillCollectionList(mngColPntCtrl.CurrentCollectionPoint);
-            FillCollectionPoints(mngColPntCtrl.AllCollectionPoint);
+            
         }
 
         public static void removeSession()
@@ -88,10 +90,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 if (dtPoint != null)
                 {
-                    dgvCollections.ClearDataSource();
+                    drdCollectionList.Items.Clear();
 
-                    drdCollectionList.TextField = "CollectionTime";
-                    drdCollectionList.ValueField = "CollectionPoint";
+                    drdCollectionList.TextField = "CollectionPoint";
+                    drdCollectionList.ValueField = "CollectionID";
                     drdCollectionList.DataSource = dtPoint;
                     drdCollectionList.DataBind();
                 }
@@ -108,30 +110,30 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <param name="sender"></param>   
         /// <param name="e"></param>
        
-        protected void drdCollectionList_SelectionChanged(object sender, 
-            Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
-        {
-           try
-            {
-               //Save it into DB
-               mngColPntCtrl.SelectSave(SystemStoreInventorySystemUtil.Converter.objToInt(e.NewSelection));
+        //protected void drdCollectionList_SelectionChanged(object sender, 
+        //    Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        //{
+        //   try
+        //    {
+        //       //Save it into DB
+        //       mngColPntCtrl.SelectSave(SystemStoreInventorySystemUtil.Converter.objToInt(e.NewSelection));
 
-               //Cleare datasource
-               dgvCollections.ClearDataSource();
+        //       //Cleare datasource
+        //       dgvCollections.ClearDataSource();
 
-               //Fill current collection point
-               FillCollectionPoints(mngColPntCtrl.CurrentCollectionPoint);
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteErrorLog(ex);
-            }           
+        //       //Fill current collection point
+        //       FillCollectionPoints(mngColPntCtrl.CurrentCollectionPoint);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.WriteErrorLog(ex);
+        //    }           
             
-        }
+        //}
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (mngColPntCtrl.SelectSave(SystemStoreInventorySystemUtil.Converter.objToInt(drdCollectionList.SelectedValue)) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            if (mngColPntCtrl.SelectSave(SystemStoreInventorySystemUtil.Converter.objToInt(drdCollectionList.SelectedItem.Value)) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
             {
                 FillCollectionList(mngColPntCtrl.CurrentCollectionPoint);
                 // print success message

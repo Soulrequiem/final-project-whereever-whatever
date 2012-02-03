@@ -49,6 +49,8 @@
                         <Behaviors>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
+                            <ig:Paging PageSize="10">
+                            </ig:Paging>
                             <ig:Sorting>
                             </ig:Sorting>
                         </Behaviors>
@@ -64,8 +66,7 @@
                             </ig:WebDropDown>--%>
                             <ig:WebDropDown ID="drdCollectionList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="Enter or Select Collection Point" 
-                            StyleSetName="Office2010Blue" 
-                                onselectionchanged="drdCollectionList_SelectionChanged">
+                            StyleSetName="Office2010Blue">
                      </ig:WebDropDown>
                      <div style="float:right">                        
                             <asp:Button id="btnSave" CssClass="Defaultbutton"

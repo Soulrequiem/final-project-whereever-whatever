@@ -17,15 +17,52 @@ using StationeryStoreInventorySystemController.departmentController;
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class UpdateCollectionByItems : System.Web.UI.Page
-    {      
+    {
+        private static readonly string sessionKey = "UpdateCollectionByItems";
+
+        private UpdateCollectionDetailsByRequisitionItemControl ucdbriControl;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            commonUI.MasterPage.setCurrentPage(this);
+
             if (!IsPostBack)
             {
-                //FillCollectionDetails();
-                //FillItems();
-                //FillItemsDetails();
+                if (Request.QueryString["CollectionIdIndex"] == null)
+                {
+                    ucdbriControl = new StationeryStoreInventorySystemController.departmentController.UpdateCollectionDetailsByRequisitionItemControl();
+
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, ucdbriControl);
+                }
+                else
+                {
+                    ucdbriControl = (UpdateCollectionDetailsByRequisitionItemControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+
+                    if (ucdbriControl.SelectCollection(SystemStoreInventorySystemUtil.Converter.objToInt(Request.QueryString["CollectionIdIndex"])) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+                    {
+                        FillItemDetails(ucdbriControl.ItemDetail);
+
+                        lblCollectionID.Text = ucdbriControl.RequestDetailCollectionId;
+                        lblDateTime.Text = ucdbriControl.RequestDetailCollectionDateTime;
+                        lblCollectionPoint.Text = ucdbriControl.RequestDetailCollectionPoint;
+                    }
+                    else
+                    {
+                        // print message not found
+                    }
+                }
+
             }
+            else
+            {
+                ucdbriControl = (UpdateCollectionDetailsByRequisitionItemControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+            FillCollectionDetails(ucdbriControl.CollectionList);
+        }
+
+        public static void removeSession()
+        {
+            StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
         }
 
         /// <summary>
@@ -46,19 +83,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         }
 
         /// <summary>
-        /// Fills the Item Details to Label
+        /// Fills Items Details to Datagrid
         /// </summary>
-        /// <param name="dtItemDetails"></param>
-        private void FillItems(DataTable dtItem)
+        /// <param name="dtItemsDetails"></param>
+        private void FillItemDetails(DataTable dtItemDetails)
         {
             try
             {
-                lblCollectionID.Text = "ID";
-                lblDateTime.Text = "Date/Time";
-                lblCollectionPoint.Text = "Point";
-                //drdItemList.ValueField = "ID";
-                //drdItemList.DataSource = dtDetails;
-                //drdItemList.DataBind();
+                dgvItems.DataSource = dtItemDetails;
+                dgvItems.DataBind();
             }
             catch (Exception e)
             {
@@ -66,21 +99,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             }
         }
 
-        /// <summary>
-        /// Fills Items Details to Datagrid
-        /// </summary>
-        /// <param name="dtItemsDetails"></param>
-        private void FillItemsDetails(DataTable dtItemsDetails)
+        protected void dgvCollectionList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
-            try
-            {
-                dgvItems.DataSource = dtItemsDetails;
-                dgvItems.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
+            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("CollectionID").FindControl("TripIDLink");
+            link.NavigateUrl = "~/departmentUI/Representative/UpdateCollectionByItems.aspx?CollectionIdIndex=" + link.Text;
         }
     }
 }
