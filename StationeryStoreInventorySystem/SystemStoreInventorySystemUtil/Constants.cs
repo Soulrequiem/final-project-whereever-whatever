@@ -7,7 +7,34 @@ namespace SystemStoreInventorySystemUtil
 {
     public class Constants
     {
-        public enum VISIBILITY_STATUS // general one
+        public const string ItemReportPath = "\\Reports\\SSISReports\\ItemsReport.rpt";
+        public const string ItemReport = "Inventory Status Report";
+        public const string StationeryCatalogueReport = "Stationery Catalogue";
+        public const string CollectionReportPath = "\\Reports\\SSISReports\\CollectionsReport.rpt";
+        public const string ColletionReport = "Collection List";
+        public const string EmployeeReportPath = "\\Reports\\SSISReports\\EmployeesReport.rpt";
+        public const string EmployeeReport = "Employees List";
+        public const string DepartmentReportPath = "\\Reports\\SSISReports\\DepartmentsReport.rpt";
+        public const string DepartmentReport = "Department List";
+        public const string RequisitionReportPath = "\\Reports\\SSISReports\\RequisitionReport.rpt";
+        public const string RequisitionReport = "Requisitions List";
+        public const string SupplierReportPath = "\\Reports\\SSISReports\\SupplierReport.rpt";
+        public const string SupplierReport = "Supplier List";
+        public const string UserReportPath = "\\Reports\\SSISReports\\UserReport.rpt";
+        public const string UserReport = "User List";
+        public const string ItemPriceReportPath = "\\Reports\\SSISReports\\ItemPriceReport.rpt";
+        public const string ItemPriceReport = "ItemPrice List";
+        public const string RolesReportPath = "\\Reports\\SSISReports\\RolesReport.rpt";
+        public const string RolesReport = "Roles List";
+        public const string ReportViewPath = "../commonUI/ReportView.aspx";
+        public const string PrintViewPath = "../commonUI/PrintView.aspx";
+        public const string RequisitionDetailsReportPath = "\\Reports\\SSISReports\\RequisitionReport.rpt";
+        public const string ItemConsumptionReport = "Item Consumption Report";
+        public const string ByRequsitions = "By Requisitions";
+        public const string ByItems = "By Items";
+        public const string stockCardReportPath = "\\Reports\\SSISReports\\StockCardReport.rpt";
+        public const string purchaseOrderReportPath = "\\Reports\\SSISReports\\PurchaseOrderReport.rpt";
+        public enum VISIBILITY_STATUS
         {
             UNKNOWN = 0,
             SHOW,
