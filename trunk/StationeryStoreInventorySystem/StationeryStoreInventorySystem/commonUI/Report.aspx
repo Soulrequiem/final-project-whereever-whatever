@@ -47,7 +47,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
     <ig:WebExcelExporter ID="ExcelExporter" runat="server"/>
     <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
             Text="Reports" /></h1>
-    <div style="float:left; height: 21px;">
+    <div style="float:left; height: 21px;width:100%">
         <div style="float:left">
             <asp:Label ID="Label1" runat="server" Text="Select Report : " CssClass="DefaultLabelstyle"/>
         </div>
@@ -59,18 +59,37 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                 <AutoPostBackFlags SelectionChanged="On" />
                 <Items>
                     <ig:DropDownItem Selected="False" Text="Inventory Status Report" Value=""/>
+                    <ig:DropDownItem Selected="False" Text="Reorder Report" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Item Consumption Report" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Disbursement List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Stationery Catalogue" Value=""/>
+                    <ig:DropDownItem Selected="false" Text="Stationery Supply Tender Form" Value="" /> 
                     <ig:DropDownItem Selected="False" Text="Collection List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Employees List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Department List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Requisition List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Supplier List" Value=""/>
-                    <ig:DropDownItem Selected="False" Text="ItemPrice List" Value=""/>
                 </Items>
             </ig:WebDropDown>
         </div>
+        <asp:Panel runat="server" ID="panelSupplier" Visible="true">
+            <div style="float:left;margin-left:10px">
+                <asp:Label ID="lblselect" runat="server" Text="Select Supplier : " 
+                    CssClass="DefaultLabelstyle" />
+            </div>
+            <div style="float:left">
+                <ig:WebDropDown ID="drdSupplier" runat="server" Width="220px" 
+                    AutoPostBack="True" onselectionchanged="drdSupplier_SelectionChanged" 
+                    DisplayMode="DropDownList" LoadingItemsMessageText="Loading..." 
+                    NullText="Select Supplier" StyleSetName="Office2010Blue" 
+                    TextField="SupplierName" ValueField="SupplierID">
+                    <AutoPostBackFlags SelectionChanged="On" />
+                    <Items>
+                    </Items>
+                    <DropDownItemBinding TextField="SupplierName" ValueField="SupplierID" />
+                </ig:WebDropDown>
+            </div>
+        </asp:Panel>
     </div>
     <br />
     <div id="ReportArea">
@@ -280,7 +299,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                             Version="11.2" ChartType="StackSplineAreaChart">
                             <ColorModel AlphaLevel="150">
                             </ColorModel>
-                                <Axis>
+                                <%--<Axis>
                                     
                                     <PE ElementType="None" Fill="Cornsilk" />
                                     <X TickmarkInterval="0" Visible="True">
@@ -356,7 +375,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                                         </Labels>
                                     </Z2>
                                     
-                                </Axis>
+                                </Axis>--%>
                             </igchart:UltraChart>
                         </div>
                         <div style="float:left;margin-left:10px;margin-top:10px">
