@@ -22,7 +22,7 @@
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
              Text="<%$ Resources:WebResources, ReceiveOrderForm_Title %>" /></h1>
              <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px" CssClass="GroupBoxstyle" 
-                    TitleAlignment="Left">
+                    TitleAlignment="Left" Text="poNumberText">
                 <Template>
              <table>
                 <tr>
@@ -33,8 +33,13 @@
                     </td>
                     <td style="width:250px">
                         <ig:WebDropDown ID="DrdPONo" runat="server" Width="200px" 
-                            NullText="Enter or select PO number" CssClass="DefaultTextStyle">
-                        </ig:WebDropDown>
+                                     DropDownAnimationType="EaseIn"
+                                     StyleSetName="Office2010Blue" 
+                                     onselectionchanged="DrdPONo_SelectionChanged" 
+                                     AutoFilterQueryType="Contains"
+                                     NullText="Enter or select PO number" EnableViewState="true" >
+                                     <AutoPostBackFlags SelectionChanged="On" />
+                                </ig:WebDropDown>
                     </td>
                     <td style="width:150px">
                         <asp:Label CssClass="DefaultLabelstyle" 
@@ -55,8 +60,7 @@
                     </td>
                     <td>
                         <asp:Label CssClass="DefaultLabelstyle" 
-                           ID="lblSupplierName" runat="server" 
-                           Text="ALPHA"/><br />
+                           ID="lblSupplierName" runat="server"/><br />
                     </td>
                     <td>
                         <asp:Label CssClass="DefaultLabelstyle" 
@@ -65,8 +69,7 @@
                     </td>
                     <td>
                         <asp:Label CssClass="DefaultLabelstyle" 
-                           ID="lblDeliveryDate" runat="server" 
-                           Text="11/01/2012"/><br />
+                           ID="lblDeliveryDate" runat="server"/><br />
                     </td>
                 </tr>
              </table>
@@ -78,7 +81,7 @@
                 <Template>
                     <ig:WebDataGrid ID="DgvStationeryOrder" runat="server" Height="400px" 
                         Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
-                        CssClass="DefaultGridViewStyle" ItemCssClass="ItemGridViewStyle" 
+                        CssClass="DefaultGridViewStyle" ItemCssClass="ItemGridViewStyle" EnableViewState="true"
                         HeaderCaptionCssClass="HeaderGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
                             <ig:BoundDataField DataFieldName="ItemNo" Key="itemNo" Width="150px">
@@ -88,9 +91,17 @@
                                 Width="200px">
                                 <Header Text="Item Description" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Quantity" Key="quantity" Width="150px">
+                             <ig:TemplateDataField Key="quantity" Width="200px">
+                                <ItemTemplate>
+                                    <ig:WebTextEditor ID="quantity" runat="server" Width="170px" 
+                                        CssClass="DefaultTextStyle" Text='<%# Eval("quantity" ) %>'>
+                                    </ig:WebTextEditor>
+                                </ItemTemplate>
                                 <Header Text="Quantity" />
-                            </ig:BoundDataField>
+                            </ig:TemplateDataField>
+                           <%--  <ig:BoundDataField DataFieldName="Quantity" Key="quantity" Width="150px">
+                                <Header Text="Quantity" />
+                            </ig:BoundDataField>--%>
                             <%--<ig:BoundDataField DataFieldName="Remarks(Supplier)" Key="Remarks(Supplier)" 
                                 Width="200px">
                                 <Header Text="Remarks(Supplier)" />
