@@ -93,20 +93,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             prepareData();
 
-            //if (aprCtrl.SelectApproveRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
-            //{
-            //    refresh();
-            //}
+            if (aprCtrl.SelectApproveRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            {
+                refresh();
+            }
         }
 
         protected void btnReject_Click(object sender, EventArgs e)
         {
             prepareData();
 
-            //if (aprCtrl.SelectRejectRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
-           // {
-           //     refresh();
-           // }
+            if (aprCtrl.SelectRejectRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            {
+                refresh();
+            }
         }
 
         private void prepareData()
@@ -115,10 +115,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
             for (int i = 0; i < DgvRequisitionList.Rows.Count; i++)
             {
-                //if (SystemStoreInventorySystemUtil.Converter.objToBool(DgvRequisitionList.Rows[i].Items.FindItemByKey("ApproveRequisitionCheckBox").Value) == true)
-                //{
-                //    remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvRequisitionList.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text);
-                //}
+                if (SystemStoreInventorySystemUtil.Converter.objToBool(DgvRequisitionList.Rows[i].Items.FindItemByKey("ApproveRequisitionCheckBox").Value) == true)
+                {
+                    remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvRequisitionList.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text);
+                }
             }
         }
     }

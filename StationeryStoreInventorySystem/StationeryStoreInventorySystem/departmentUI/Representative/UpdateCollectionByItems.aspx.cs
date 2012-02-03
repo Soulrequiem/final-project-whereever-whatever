@@ -26,36 +26,34 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             commonUI.MasterPage.setCurrentPage(this);
 
-            if (!IsPostBack)
+            if (Request.QueryString["CollectionIdIndex"] != null)
             {
-                if (Request.QueryString["CollectionIdIndex"] == null)
+                ucdbriControl = (UpdateCollectionDetailsByRequisitionItemControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+
+                if (ucdbriControl.SelectCollection(SystemStoreInventorySystemUtil.Converter.objToInt(Request.QueryString["CollectionIdIndex"])) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+                {
+                    FillItemDetails(ucdbriControl.ItemDetail);
+
+                    lblCollectionID.Text = ucdbriControl.RequestDetailCollectionId;
+                    lblDateTime.Text = ucdbriControl.RequestDetailCollectionDateTime;
+                    lblCollectionPoint.Text = ucdbriControl.RequestDetailCollectionPoint;
+                }
+                else
+                {
+                    // print message not found
+                }
+            }
+            else
+            {
+                if (!IsPostBack)
                 {
                     ucdbriControl = new StationeryStoreInventorySystemController.departmentController.UpdateCollectionDetailsByRequisitionItemControl();
-
                     StationeryStoreInventorySystemController.Util.PutSession(sessionKey, ucdbriControl);
                 }
                 else
                 {
                     ucdbriControl = (UpdateCollectionDetailsByRequisitionItemControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
-
-                    if (ucdbriControl.SelectCollection(SystemStoreInventorySystemUtil.Converter.objToInt(Request.QueryString["CollectionIdIndex"])) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
-                    {
-                        FillItemDetails(ucdbriControl.ItemDetail);
-
-                        lblCollectionID.Text = ucdbriControl.RequestDetailCollectionId;
-                        lblDateTime.Text = ucdbriControl.RequestDetailCollectionDateTime;
-                        lblCollectionPoint.Text = ucdbriControl.RequestDetailCollectionPoint;
-                    }
-                    else
-                    {
-                        // print message not found
-                    }
                 }
-
-            }
-            else
-            {
-                ucdbriControl = (UpdateCollectionDetailsByRequisitionItemControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
             FillCollectionDetails(ucdbriControl.CollectionList);
         }
@@ -99,10 +97,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             }
         }
 
-        protected void dgvCollectionList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        protected void dgvCollectionList_InitializeRow1(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
             HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("CollectionID").FindControl("TripIDLink");
             link.NavigateUrl = "~/departmentUI/Representative/UpdateCollectionByItems.aspx?CollectionIdIndex=" + link.Text;
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, int> itemsCollected = new Dictionary<string, int>();
+
+            for (int i = 0; i < dgvItems.Rows.Count; i++){
+                itemsCollected.Add(dgvItems.Rows[i].DataKey[0].ToString() , SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvItems.Rows[i].Items.FindItemByKey("ActualQty").FindControl("ActualQty")).Text));
+            }
+
+            ucdbriControl.UpdateRequisitionCollection(itemsCollected);
+            //remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvRequisitionList.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text);
         }
     }
 }
