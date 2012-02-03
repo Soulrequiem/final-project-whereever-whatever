@@ -27,10 +27,18 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable dt;
         private DataRow dr;
 
+        private string[] columnName = { "retrievalNo", "retrievalDate/Time", "retrievedBy", "neededQty", "actualQty" };
+
+        private DataColumn[] dataColumn;
         public ViewStationeryRetrievalListControl()
         {
             InventoryEntities inventory=new InventoryEntities();
             retrievalBroker=new RetrievalBroker(inventory);
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]),
+                                            new DataColumn(columnName[2]),
+                                            new DataColumn(columnName[3]),
+                                            new DataColumn(columnName[4])};
         }
 
         /// <summary>
@@ -49,15 +57,16 @@ namespace StationeryStoreInventorySystemController.storeController
         public DataTable GetStationeryRetrievalList()
         {
             dt = new DataTable();
+            dt.Columns.AddRange(dataColumn);
             retrievalDetailList = retrievalBroker.GetAllRetrievalDetail();
             foreach (RetrievalDetail temp in retrievalDetailList)
             {
                 dr = dt.NewRow();
-                dr["retrievalNo"] = temp.Retrieval.Id;
-                dr["retrievalDate/Time"] = temp.Retrieval.CreatedDate;
-                dr["retrievedBy"] = temp.Retrieval.CreatedBy;
-                dr["neededQty"] = temp.NeededQty;
-                dr["actualQty"] = temp.ActualQty;
+                dr[columnName[0]] = temp.Id;
+                dr[columnName[1]] = temp.Retrieval.CreatedDate;
+                dr[columnName[2]] = temp.Retrieval.CreatedBy;
+                dr[columnName[3]] = temp.NeededQty;
+                dr[columnName[4]] = temp.ActualQty;
                 dt.Rows.Add(dr);
             }
             return dt;
