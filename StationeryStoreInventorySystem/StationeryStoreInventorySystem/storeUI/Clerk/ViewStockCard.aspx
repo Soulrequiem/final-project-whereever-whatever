@@ -5,6 +5,12 @@
     Namespace="Infragistics.Web.UI.ListControls" TagPrefix="ig" %>
 <%@ Register assembly="Infragistics35.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.Web.UI.EditorControls" tagprefix="ig" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .style1
+        {
+            width: 241px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="print">
@@ -25,18 +31,20 @@
                          Text="<%$ Resources:WebResources, ViewStockCard_ItemDescription %>"/>
                         
                      </td>
-                     <td>
+                     <td class="style1">
                          <%--<ig:WebTextEditor ID="txtItemDescription" runat="server" 
                           CssClass="DefaultTextStyle" Width="250px">
                          </ig:WebTextEditor>--%>
                          <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
-                                     StyleSetName="Office2010Blue" OnSelectionChanged="drdItemList_SelectionChanged">
+                                     StyleSetName="Office2010Blue">
                                     <Button Visible="False" />
                           </ig:WebDropDown>
+                         
                      </td>
                      <td>
-                         <asp:Button ID="btnGetItem" runat="server" Text="Select" CssClass="Searchbutton"/>
+                         <asp:Button ID="btnGetItem" runat="server" Text="Select" 
+                             CssClass="Searchbutton" onclick="btnGetItem_Click"/>
                      </td>
                  </tr>
                  <tr>
@@ -45,10 +53,9 @@
                            ID="Label1" runat="server" 
                            Text="<%$ Resources:WebResources, ViewStockCard_ItemNo %>"/>
                     </td>
-                    <td>
+                    <td class="style1">
                           <asp:Label CssClass="DefaultLabelstyle" 
-                           ID="lblItemNo" runat="server" 
-                           Text="P085"/><br />
+                           ID="lblItemNo" runat="server"/><br />
                      </td>
                  </tr>
                  <tr>
@@ -57,10 +64,9 @@
                            ID="Label3" runat="server" 
                            Text="<%$ Resources:WebResources, ViewStockCard_Bin %>"/>
                     </td>
-                    <td>
+                    <td class="style1">
                           <asp:Label CssClass="DefaultLabelstyle" 
-                           ID="Label4" runat="server" 
-                           Text="A7"/><br />
+                           ID="lblBin" runat="server"/><br />
                      </td>
                  </tr>
                  <tr>
@@ -69,10 +75,9 @@
                             ID="Label5" runat="server" 
                             Text="<%$ Resources:WebResources, ViewStockCard_UOM %>"/>
                     </td>
-                    <td>
+                    <td class="style1">
                            <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="Label6" runat="server" 
-                            Text="Box"/><br />
+                            ID="lblUOM" runat="server"/><br />
                      </td>
                  </tr>
                   <tr>
@@ -81,10 +86,8 @@
                              ID="Label7" runat="server" 
                              Text="<%$ Resources:WebResources, ViewStockCard_SupplierList %>"/>
                     </td>
-                    <td>
-                            <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="Label8" runat="server" 
-                            Text="ALpha"/><br />
+                    <td class="style1">
+                            <br />
                      </td>
                  </tr>
                  <tr>
@@ -93,10 +96,9 @@
                              ID="Label9" runat="server" 
                              Text="<%$ Resources:WebResources, ViewStockCard_1stSupplier %>"/>
                     </td>
-                    <td>
+                    <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="Label10" runat="server" 
-                            Text="BANES"/><br />
+                            ID="lblSuplier1" runat="server"/><br />
                      </td>
                  </tr>
                  <tr>
@@ -105,10 +107,9 @@
                               ID="Label11" runat="server" 
                               Text="<%$ Resources:WebResources, ViewStockCard_2ndSupplier %>"/>
                     </td>
-                    <td>
+                    <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="Label12" runat="server" 
-                            Text="CHEP"/><br />
+                            ID="lblSuplier2" runat="server"/><br />
                      </td>
                  </tr>
                  <tr>
@@ -117,10 +118,9 @@
                              ID="Label13" runat="server" 
                              Text="<%$ Resources:WebResources, ViewStockCard_3rdSupplier %>"/>
                     </td>
-                    <td>
+                    <td class="style1">
                             <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="Label14" runat="server" 
-                            Text="ALPHA"/><br />
+                            ID="lblSuplier3" runat="server"/><br />
                      </td>
                  </tr>
              </table>
@@ -129,17 +129,17 @@
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
-                    <ig:BoundDataField DataFieldName="Date" Key="date" Width="100px">
+                    <ig:BoundDataField DataFieldName="date" Key="date" Width="100px">
                         <Header Text="Date" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Dept/Supplier" Key="dept/supplier" 
+                    <ig:BoundDataField DataFieldName="dept/supplier" Key="dept/supplier" 
                         Width="200px">
                         <Header Text="Dept/Supplier" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Qty" Key="qty" Width="100px">
+                    <ig:BoundDataField DataFieldName="qty" Key="qty" Width="100px">
                         <Header Text="Qty" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="Balance" Key="balance" Width="100px">
+                    <ig:BoundDataField DataFieldName="balance" Key="balance" Width="100px">
                         <Header Text="Balance" />
                     </ig:BoundDataField>
                 </Columns>
