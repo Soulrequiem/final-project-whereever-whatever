@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
-    
-    
-    public partial class ViewStockCard {
-        
+namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
+{
+
+
+    public partial class ViewStockCard
+    {
+
         /// <summary>
         /// Print control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton Print;
-        
+
         /// <summary>
         /// ScriptManager1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// Literal1 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal Literal1;
-        
+
         /// <summary>
         /// Label2 control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
+
         /// <summary>
         /// drdItemList control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.ListControls.WebDropDown drdItemList;
-        
+
         /// <summary>
         /// btnGetItem control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGetItem;
-        
+
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// lblItemNo control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblItemNo;
-        
+
         /// <summary>
         /// Label3 control.
         /// </summary>
@@ -92,16 +94,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-        
+
         /// <summary>
-        /// Label4 control.
+        /// lblBin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
-        
+        protected global::System.Web.UI.WebControls.Label lblBin;
+
         /// <summary>
         /// Label5 control.
         /// </summary>
@@ -110,16 +112,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label5;
-        
+
         /// <summary>
-        /// Label6 control.
+        /// lblUOM control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
-        
+        protected global::System.Web.UI.WebControls.Label lblUOM;
+
         /// <summary>
         /// Label7 control.
         /// </summary>
@@ -128,16 +130,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
-        
-        /// <summary>
-        /// Label8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
-        
+
         /// <summary>
         /// Label9 control.
         /// </summary>
@@ -146,16 +139,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label9;
-        
+
         /// <summary>
-        /// Label10 control.
+        /// lblSuplier1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
-        
+        protected global::System.Web.UI.WebControls.Label lblSuplier1;
+
         /// <summary>
         /// Label11 control.
         /// </summary>
@@ -164,16 +157,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label11;
-        
+
         /// <summary>
-        /// Label12 control.
+        /// lblSuplier2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
-        
+        protected global::System.Web.UI.WebControls.Label lblSuplier2;
+
         /// <summary>
         /// Label13 control.
         /// </summary>
@@ -182,16 +175,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label13;
-        
+
         /// <summary>
-        /// Label14 control.
+        /// lblSuplier3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label14;
-        
+        protected global::System.Web.UI.WebControls.Label lblSuplier3;
+
         /// <summary>
         /// DgvStockCardList control.
         /// </summary>
