@@ -12,8 +12,6 @@
             }
             return true;
         }
-</script>
-<script type="text/javascript"">
     function forgot() {
         if (document.getElementById('FirstContent_WebGroupBox1_txtUsername').value == "") {
             document.getElementById('FirstContent_WebGroupBox1_lblStatusMessage').innerHTML = "Enter user name.";
@@ -57,7 +55,7 @@
                             </td>
                             <td>
                                 <ig:WebTextEditor ID="txtUsername" runat="server" 
-                                    CssClass="DefaultTextStyle" Width="250px">
+                                    CssClass="DefaultTextStyle" Width="250px" FocusOnInitialization="True">
                                 </ig:WebTextEditor><br />
                             </td>
                         </tr>
@@ -82,9 +80,9 @@
                                 <a href="ForgotPassword.aspx?"+  style="float:left; font-size: small;" onclick="forgot();">Forgot your password?</a>
                                 <div style="float:right">
                                     <asp:Button ID="btnSignIn" CssClass="Defaultbutton"
-                                        runat="server" 
+                                        runat="server" OnClientClick="return check();" 
                                         Text="<%$ Resources:WebResources,LogIn_SignIn_Button_Text %>"
-                                         OnClientClick = "return check();" OnClick="btnSignIn_Click" />
+                                         OnClick="btnSignIn_Click" />
                                 </div>
                             </td>
                         </tr>
