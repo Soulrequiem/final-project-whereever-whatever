@@ -141,21 +141,22 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
-                Employee empId = inventory.Employees.Where(e => e.Id == requisition.CreatedBy.Id).First();
-                Employee approvedBy = inventory.Employees.Where(e => e.Id == requisition.ApprovedBy.Id).First();
-                Department department = inventory.Departments.Where(d => d.Id == requisition.Department.Id).First();
-                requisitionObj.Id = requisition.Id;
-                requisitionObj.Department = department;
-                requisitionObj.CreatedBy = empId;
-                requisitionObj.ApprovedBy = approvedBy;
-                requisitionObj.ApprovedDate = requisition.ApprovedDate;
-                requisitionObj.CreatedDate = requisition.CreatedDate;
-                foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
-                {
-                    this.Update(requisitionDetail);
-                }
-               // if (isSaved) inventory.SaveChanges();//to add all Update method
+                //requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
+                //Employee empId=inventory.Employees.Where(e=>e.Id==requisition.CreatedBy.Id).First();
+                //Employee approvedBy=inventory.Employees.Where(e=>e.Id==requisition.ApprovedBy.Id).First();
+                //Department department = inventory.Departments.Where(d => d.Id == requisition.Department.Id).First();
+                ////requisitionObj.Id = requisition.Id;
+                //requisitionObj.Department = department;
+                //requisitionObj.CreatedBy = empId;
+                //requisitionObj.ApprovedBy = approvedBy;
+                //requisitionObj.ApprovedDate = requisition.ApprovedDate;
+                //requisitionObj.CreatedDate = requisition.CreatedDate;
+                //foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
+                //{
+                //    this.Update(requisitionDetail);
+                //}
+                //if (isSaved) inventory.SaveChanges();
+                inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
             catch (Exception e)
