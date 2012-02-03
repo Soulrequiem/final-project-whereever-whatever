@@ -6,16 +6,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <script type = "text/javascript">
     function EmailCheck() {
-        if (document.getElementById('MainContent_WebGroupBox1_txtemailaddress').value == "")
+        if (document.getElementById("txtemailaddress").value == "")
         {
-            document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Enter your Email Address.";
-            return true;
+            document.getElementById("lblStatusMessage").innerHTML = "Enter your Email Address.";
+            return false;
         }
         else 
         {
             var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
             if (emailPattern.test(elementValue) == false) {
-                document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Enter your correct Email Address.";
+                document.getElementById("lblStatusMessage").innerHTML = "Enter your correct Email Address.";
                 return false;
             }
         }
@@ -49,14 +49,14 @@
                            </td>
                        </tr>
                        <tr>
-                           <td  style="width:150px">       
+                           <td  style="width:250px">       
                                 <asp:Label CssClass="ErrorLabelstyle" 
                                 ID="lblStatusMessage" runat="server" />
                             </td>
                            <td>
                                <div style="float:right" class="button">
                                    <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="Defaultbutton" 
-                                    OnClientClick = "return EmailCheck();" onclick="btnSend_Click"/>
+                                    OnClick = "btnSend_Click" OnClientClick="return EmailCheck();" />
                                </div>
                            </td>
                        
