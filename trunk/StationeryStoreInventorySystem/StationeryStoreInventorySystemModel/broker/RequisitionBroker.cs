@@ -356,7 +356,7 @@ namespace StationeryStoreInventorySystemModel.broker
             //int id = requisitionDetail.Id;
             //id++;
             //return id;
-            return inventory.RetrievalDetails.Last().Id + 1;
+            return inventory.RetrievalDetails.Max(xObj => xObj.Id) + 1;
         }
     }
 }

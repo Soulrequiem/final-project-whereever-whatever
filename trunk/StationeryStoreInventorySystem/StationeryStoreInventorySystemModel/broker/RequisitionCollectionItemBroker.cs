@@ -19,11 +19,16 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             this.inventory=inventory;
         }
+
+        public int GetRequisitionCollectionItemId()
+        {
+            return inventory.RequisitionCollectionItems.Count() > 0 ? inventory.RequisitionCollectionItems.Max(xObj => xObj.Id) + 1 : 1;
+        }
+
         public RequisitionCollectionItem GetRequisitionCollectionItem(RequisitionCollectionItem requisitionCollectionItem)
         {
 
             reqCollectionItem = inventory.RequisitionCollectionItems.Where(r => r.Id == requisitionCollectionItem.Id).First();
-
 
             if (!reqCollectionItem.Equals(null))
             {
