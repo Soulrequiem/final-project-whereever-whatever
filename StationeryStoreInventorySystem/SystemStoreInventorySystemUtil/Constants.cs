@@ -7,6 +7,8 @@ namespace SystemStoreInventorySystemUtil
 {
     public class Constants
     {
+        public const string ReorderReport = "Reorder Report";
+        public const string StationeryTenderReport = "Stationery Supply Tender Form";
         public const string ItemReportPath = "\\Reports\\SSISReports\\ItemsReport.rpt";
         public const string ItemReport = "Inventory Status Report";
         public const string StationeryCatalogueReport = "Stationery Catalogue";
