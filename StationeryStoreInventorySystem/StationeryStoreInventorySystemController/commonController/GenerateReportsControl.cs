@@ -41,15 +41,60 @@ namespace StationeryStoreInventorySystemController.commonController
         }
         public DataTable getItems()
         {
-            string sQuery = "select id as 'Item Code',Description,UnitOfMeasureId as 'Unit of Measurement',ReorderQty as 'Quantity on Hand',ReorderLevel as 'Reorder level' from Item";
-            return ReturnResultSet(sQuery);
+            StringBuilder sbQuery = new StringBuilder();
+            sbQuery.Append(" select	I.id as 'Item Code', ");
+		    sbQuery.Append(" I.Description, ");
+		    sbQuery.Append(" UM.Name as 'Unit of Measurement', ");
+		    sbQuery.Append(" SCD.Balance as 'Quantity on Hand', ");
+		    sbQuery.Append(" I.ReorderLevel as 'Reorder Level' ");
+            sbQuery.Append(" from	Item I,  ");
+		    sbQuery.Append(" UnitOfMeasure UM, ");
+		    sbQuery.Append(" StockCardDetails SCD ");
+            sbQuery.Append(" where	I.UnitOfMeasureId = UM.Id AND ");
+		    sbQuery.Append(" SCD.ItemId = I.Id AND ");
+		    sbQuery.Append(" SCD.CreatedDate IN (SELECT MAX(CreatedDate)  ");
+		    sbQuery.Append(" 					from StockCardDetails  ");
+            sbQuery.Append(" 					group by ItemId) ");
+            return ReturnResultSet(sbQuery.ToString());
+        }
+
+        public DataTable getReorderDetails()
+        { 
+            StringBuilder sbQuery = new StringBuilder();
+            sbQuery.Append(" select	I.Id as 'Item Code', ");
+		    sbQuery.Append(" I.Description as 'Description', ");
+		    sbQuery.Append(" SCD.Balance as 'Qunatity on Hand', ");
+		    sbQuery.Append(" I.ReorderLevel as 'Reorder Level', ");
+		    sbQuery.Append(" I.ReorderQty as 'Reorder quantity', ");
+		    sbQuery.Append(" POD.PurchaseOrderId as 'PO#', ");
+		    sbQuery.Append(" PO.ExpectedDate as 'Expected Delivery' ");
+		    sbQuery.Append(" from	Item I,  ");
+		    sbQuery.Append(" 		StockCardDetails SCD, ");
+		    sbQuery.Append(" 		PurchaseOrderDetails POD, ");
+		    sbQuery.Append(" 		PurchaseOrder PO ");
+            sbQuery.Append(" where	I.Id = SCD.ItemId AND  ");
+		    sbQuery.Append(" I.ReorderLevel > SCD.Balance AND ");
+		    sbQuery.Append(" POD.ItemId = I.Id AND ");
+		    sbQuery.Append(" PO.Id = POD.PurchaseOrderId AND ");
+		    sbQuery.Append(" SCD.CreatedDate IN (SELECT MAX(CreatedDate)  ");
+		    sbQuery.Append(" 					from StockCardDetails  ");
+            sbQuery.Append(" 					group by ItemId) order by PO.Id asc	");
+            return ReturnResultSet(sbQuery.ToString());
         }
 
         public DataTable getCatalogue()
         {
+            //StringBuilder sbQuery = new StringBuilder();
+            //sbQuery.Append(" select id as 'Item Code',ItemCategoryId as 'Category' ,Description,ReorderLevel as 'Reorder Level', ");
+            //sbQuery.Append(" ReorderQty as 'Reorder Qty',UnitOfMeasureId as 'Unit of Measure' from Item ");
+
             StringBuilder sbQuery = new StringBuilder();
-            sbQuery.Append(" select id as 'Item Code',ItemCategoryId as 'Category' ,Description,ReorderLevel as 'Reorder Level', ");
-            sbQuery.Append(" ReorderQty as 'Reorder Qty',UnitOfMeasureId as 'Unit of Measure' from Item ");
+            sbQuery.Append(" select I.id as 'Item Number',C.Name as 'Category' , ");
+            sbQuery.Append(" I.Description,I.ReorderLevel as 'Reorder Level',  ");
+            sbQuery.Append(" I.ReorderQty as 'Reorder Qty' ");
+            sbQuery.Append(" , UM.Name as 'Unit of Measure'  ");
+            sbQuery.Append(" from Item I, UnitOfMeasure UM, Catagory C ");
+            sbQuery.Append(" where I. UnitOfMeasureId = UM.Id AND C.Id = I.ItemCategoryId ");
             return ReturnResultSet(sbQuery.ToString());
         }
         public DataTable getPurchaseOrderDetails()
@@ -73,7 +118,7 @@ namespace StationeryStoreInventorySystemController.commonController
         public DataTable getSuppliers()
         {
             StringBuilder sbQuery = new StringBuilder();
-            sbQuery.Append(" select Name as 'SupplierName', ContactName as 'ContactPerson', ");
+            sbQuery.Append(" select Id as 'SupplierID', Name as 'SupplierName', ContactName as 'ContactPerson', ");
 		    sbQuery.Append(" Address as 'SupplierAddress', GstRegistrationNumber as 'RegistrationNumber' ");
             sbQuery.Append(" from Supplier");
             return ReturnResultSet(sbQuery.ToString());
@@ -95,6 +140,14 @@ namespace StationeryStoreInventorySystemController.commonController
             else
                 sQuery = "select Id as 'EmployeeId', Name as 'EmployeeName' from Employee";
             return ReturnResultSet(sQuery);
+        }
+
+        public DataTable getTenderPrice(string supplierID)
+        {
+            StringBuilder sbQuery = new StringBuilder();
+            sbQuery.Append(" select I.Description as 'ItemDescription', (CAST(IP.Price AS varchar(5))+'/'+ UM.Name) as 'TenderPrice' ");
+            sbQuery.Append(" from itemprice IP, Item I, UnitOfMeasure UM where UM.Id = I.UnitOfMeasureId AND I.Id = IP.ItemId AND IP.SupplierId='" + supplierID + "'");
+            return ReturnResultSet(sbQuery.ToString());
         }
 
         public DataTable defaultResultSet(string fromDate, string toDate)
