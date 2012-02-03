@@ -24,17 +24,22 @@ namespace StationeryStoreInventorySystemController.storeController
         
         private Employee currentEmployee;
         private DataTable purchaseOrderNumber;
+
+      
         private PurchaseOrder purchaseOrder;
         private Supplier supplier;
 
         private List<PurchaseOrder> purchaseOrderList;
 
         private DataTable dt;
-        private DataRow dr;
+        private DataTable dtt;
+      
 
-        private string[] columnName = { "itemNo", "itemDescription", "quantity" };
+        private string[] columnName = { "poNumber", "poNumberText" };
+        private string[] detail = { "itemNo", "itemDescription", "quantity", "Remarks" };
 
         private DataColumn[] dataColumn;
+        private DataColumn[] detailColumn;
 
         public ReceiveOrderControl()
         {
@@ -46,22 +51,55 @@ namespace StationeryStoreInventorySystemController.storeController
             itemBroker = new ItemBroker(inventory);
 
             purchaseOrderList = purchaseOrderBroker.GetAllPurchaseOrder();
+
+            dataColumn = new DataColumn[]{ new DataColumn(columnName[0]),
+                                           new DataColumn(columnName[1])
+                                          
+                                          };
+            detailColumn = new DataColumn[]{new DataColumn(detail[0]),
+                new DataColumn(detail[1]),new DataColumn(detail[2]),new DataColumn(detail[3])};
+
+                                
+
         }
 
-        public DataTable PurchaseOrderList
+        public DataColumn[] DataColumn
+        {
+            get { return dataColumn; }
+        }
+        public DataColumn[] DetailColumn
+        {
+            get
+            {
+                return new DataColumn[]{new DataColumn(detail[0]),
+                new DataColumn(detail[1]),new DataColumn(detail[2]),new DataColumn(detail[3])};
+            }
+        }
+
+        public DataTable PurchaseOrderNo
         {
             get 
             {
-                DataTable dt = new DataTable();
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
                 DataRow dr;
+                if(purchaseOrderList == null)
+                    purchaseOrderList = purchaseOrderBroker.GetAllPurchaseOrder();
                 foreach (PurchaseOrder po in purchaseOrderList)
                 {
                     dr = dt.NewRow();
-                    dr["poNumber"] = po.Id;
-                    dr["poNumberText"] = po.Id;
+                    dr[columnName[0]] = po.Id;
+                    dr[columnName[1]] = po.Id;
                     dt.Rows.Add(dr);
                 }
-                return purchaseOrderNumber; 
+                return dt; 
             }
         }
        
@@ -83,25 +121,37 @@ namespace StationeryStoreInventorySystemController.storeController
             return selectStatus;            
         }
 
-        //public DataTable PurchaseOrder(int purchaseOrderNumber)
-        //{
-        //    PurchaseOrder purchaseOrder = new PurchaseOrder();
-        //    purchaseOrder.Id = purchaseOrderNumber;
-        //    purchaseOrder = purchaseOrderBroker.GetPurchaseOrder(purchaseOrder);
-        //    List<PurchaseOrderDetail> list = purchaseOrder.PurchaseOrderDetails.ToList();
-        //    dt = new DataTable();
+
+
+        public DataTable GetPurchaseOrderDetail(int purchaseOrderNumber)
+        {
+            PurchaseOrder purchaseOrder = new PurchaseOrder();
+            purchaseOrder.Id = purchaseOrderNumber;
+            purchaseOrder = purchaseOrderBroker.GetPurchaseOrder(purchaseOrder);
+            List<PurchaseOrderDetail> list = purchaseOrder.PurchaseOrderDetails.ToList();
+            if (dtt == null)
+            {
+                dtt = new DataTable();
+                dtt.Columns.AddRange(detailColumn);
+            }
+            else
+            {
+                dtt.Rows.Clear();
+            }
+            DataRow drr;
             
-        //    foreach (PurchaseOrderDetail temp in list)
-        //    {
-        //        dr = dt.NewRow();
-        //        dr["itemNo"] = temp.Item.Id;
-        //        dr["itemDescription"] = temp.Item.Description;
-        //        dr["quantity"] = temp.Qty;
-        //        dt.Rows.Add(dr);
-               
-        //    }
-        //    return dt;
-        //}
+            foreach (PurchaseOrderDetail temp in list)
+            {
+                drr = dtt.NewRow();
+                drr[detail[0]] = temp.Item.Id;
+                drr[detail[1]] = temp.Item.Description;
+                drr[detail[2]] = temp.Qty;
+                //drr[detail[3]] = "remark";
+                dtt.Rows.Add(drr);
+
+            }
+            return dtt;
+        }
 
         /// <summary>
         ///     Insert stock card details and update purchase order
@@ -144,6 +194,52 @@ namespace StationeryStoreInventorySystemController.storeController
             }
 
             return receivedStatus;
+        }
+
+        public Constants.ACTION_STATUS ClickReceived(DataTable dt, string deliveryNo, string poNumber)
+        {
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+            string itemNo, itemDesc, quantity, remark;
+            PurchaseOrder po = new PurchaseOrder();
+            po.Id = Converter.objToInt(poNumber);
+            po = purchaseOrderBroker.GetPurchaseOrder(po);
+            po.DeliveryOrderNumber = deliveryNo;
+            List<PurchaseOrderDetail> poDetailList = po.PurchaseOrderDetails.ToList();
+            foreach (DataRow dr in dt.Rows)
+            {
+                itemNo = dr[detail[0]].ToString();
+                itemDesc = dr[detail[1]].ToString();
+                quantity = dr[detail[2]].ToString();
+                remark = dr[detail[3]].ToString();
+                foreach (PurchaseOrderDetail poDetail in poDetailList)
+                {
+                    if(poDetail.Item.Id.Equals(itemNo)){
+                        poDetail.Qty = Converter.objToInt(quantity);
+                        //need or not to update from purchaseOrderDetailBroker???
+                        // add remark later
+                    }
+                }
+
+            }
+
+            Constants.DB_STATUS dbStatus = purchaseOrderBroker.Update(po);
+            if(dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+                status = Constants.ACTION_STATUS.SUCCESS;
+            else
+                status = Constants.ACTION_STATUS.FAIL;
+            return status;
+        }
+
+
+        public string[] GetLabelData(int purchaseOrderId)
+        {
+            string[] labels = new string[2];
+            PurchaseOrder po = new PurchaseOrder();
+            po.Id = purchaseOrderId;
+            po = purchaseOrderBroker.GetPurchaseOrder(po);
+            labels[0] = po.Supplier.Name;
+            labels[1] = SystemStoreInventorySystemUtil.Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, po.ExpectedDate);
+            return labels;
         }
     }
 }
