@@ -113,14 +113,19 @@ namespace StationeryStoreInventorySystemController.storeController
             item = itemBroker.GetItem(item);
             supplierList = itemPriceBroker.GetPrioritySupplier(item);
             dt.Columns.AddRange(dataColumn);
-            foreach (StockCardDetail stockCardDetail in item.StockCardDetails)
+            stockCardDetailList = itemBroker.GetAllStockCardDetail(item);
+            if (stockCardDetailList != null)
             {
-                dr = dt.NewRow();
-                dr[columnName[0]] = stockCardDetail.CreatedDate;
-                dr[columnName[1]] = stockCardDetail.Description;
-                dr[columnName[2]] = stockCardDetail.Qty;
-                dr[columnName[3]] = stockCardDetail.Balance;
-                dt.Rows.Add(dr);
+                foreach (StockCardDetail stockCardDetail in stockCardDetailList)
+                {
+                    dr = dt.NewRow();
+                    dr[columnName[0]] = SystemStoreInventorySystemUtil.Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, stockCardDetail.CreatedDate);
+                    dr[columnName[1]] = stockCardDetail.Description;
+                    dr[columnName[2]] = stockCardDetail.Qty;
+                    dr[columnName[3]] = stockCardDetail.Balance;
+                    dt.Rows.Add(dr);
+                }
+                
             }
 
             return dt;
