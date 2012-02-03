@@ -13,23 +13,34 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.storeController;
+using SystemStoreInventorySystemUtil;
 
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class ReceiveOrderForm : System.Web.UI.Page
     {
-        ReceiveOrderControl ROobj;
-        PurchaseOrderControl purchaseOrderControl;
+        private static readonly string sessionKey = "ReceiveOrderForm";
+        //ReceiveOrderControl ROobj;
+        //PurchaseOrderControl purchaseOrderControl;
         ReceiveOrderControl receiveOrderControl;
         int selectedItem;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                FillStationeryOrder();
-                FillPOList();
+                    receiveOrderControl = new ReceiveOrderControl();
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, receiveOrderControl);
+                    FillPOList();
+             }
+               
+            else
+            {
+                receiveOrderControl = (ReceiveOrderControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
+
+            
         }
 
         /// <summary>
@@ -40,10 +51,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         protected void DrdPONo_SelectionChanged(object sender,
         Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
+            FillStationeryOrder();
+        }
+
+        private void FillStationeryOrder()
+        {
             try
             {
-                selectedItem = Convert.ToInt32(DrdPONo.SelectedItem.Value);
-                ROobj = new ReceiveOrderControl();
+                selectedItem = SystemStoreInventorySystemUtil.Converter.objToInt(DrdPONo.SelectedValue);
+                DgvStationeryOrder.DataSource = receiveOrderControl.GetPurchaseOrderDetail(selectedItem);
+                DgvStationeryOrder.DataBind();
+                string[] labels = receiveOrderControl.GetLabelData(selectedItem);
+                lblSupplierName.Text = labels[0];
+                lblDeliveryDate.Text = labels[1];
+                //ROobj = new ReceiveOrderControl();
                 //********Plz check this
                 //DataTable dt = ROobj.SelectPurchaseOrderDetails(Convert.ToInt32(selectedItem));
                 //FillStationeryOrder(dt);
@@ -55,35 +76,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             {
                 Logger.WriteErrorLog(ex);
             }
-
-        }
-
-        private void FillStationeryOrder()
-        {
-            try
-            {
-                ROobj = new ReceiveOrderControl();
-                DataTable dtOrders = ROobj.PurchaseOrderList;
-                if(dtOrders!=null)
-                    DgvStationeryOrder.DataSource = dtOrders;
-                    DgvStationeryOrder.DataBind();
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteErrorLog(ex);
-            }
         }
 
         private void FillPOList()
         {
             try
             {
-                purchaseOrderControl = new PurchaseOrderControl();
+                //purchaseOrderControl = new PurchaseOrderControl();
                 //***********Get all purchase order list
-                DataTable dt = ROobj.PurchaseOrderList; //GetPO();
-                DrdPONo.TextField = "PONumber";
-                DrdPONo.ValueField  = "PONumber";
-                DrdPONo.DataSource = dt;
+                //DataTable dt = ROobj.PurchaseOrderList; //GetPO();
+                DrdPONo.TextField = "poNumber";
+                DrdPONo.ValueField = "poNumber";
+                DrdPONo.DataSource = receiveOrderControl.PurchaseOrderNo;
                 DrdPONo.DataBind();
             }
             catch (Exception ex)
@@ -94,10 +98,39 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnReceived_Click(object sender, EventArgs e)
         {
+            //FillStationeryOrder();
             //*********update purchase order
             //*********insert stock card details in stock card
-            receiveOrderControl.SelectReceived((DataTable)DgvStationeryOrder.DataSource); 
-        } 
+            //receiveOrderControl.SelectReceived((DataTable)DgvStationeryOrder.DataSource); 
+            //DataTable dt = new DataTable();
+            //dt.Columns.AddRange(receiveOrderControl.DetailColumn);
+
+            //DataRow dr;
+            //for (int i = 0; i < DgvStationeryOrder.Rows.Count; i++)
+            //{
+            //    dr = dt.NewRow();
+            //    dr["itemNo"] = DgvStationeryOrder.Rows[i].Items[0].ToString();
+            //    dr["itemDescription"] = DgvStationeryOrder.Rows[i].Items[1].ToString();
+            //    dr["quantity"] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvStationeryOrder.Rows[i].Items.FindItemByKey("quantity").FindControl("quantity")).Text;
+            //    dr["Remarks"] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvStationeryOrder.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text;
+            //    dt.Rows.Add(dr);
+            //}
+
+
+
+            //string deliveryNo = txtDeliveryOrderNo.Text;
+            //string poNo = DrdPONo.SelectedValue;
+           
+            //if (receiveOrderControl.ClickReceived(dt, deliveryNo, poNo) == Constants.ACTION_STATUS.SUCCESS){
+            //    Response.Write("SUCESS.....");
+    
+            //}
+            //else{
+            //    Response.Write("FAIL.......");
+            //}
+        }
+
+        
     }
 }
 /****************************************/
