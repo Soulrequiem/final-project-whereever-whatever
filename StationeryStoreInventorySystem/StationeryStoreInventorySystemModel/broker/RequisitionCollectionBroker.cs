@@ -142,19 +142,19 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                requisitionCollectionObj = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
-                Department department = inventory.Departments.Where(d => d.Id == requisitionCollection.Department.Id).First();
-                CollectionPoint collectionPoint = inventory.CollectionPoints.Where(c => c.Id == requisitionCollection.CollectionPoint.Id).First();
-                Employee createdBy = inventory.Employees.Where(e => e.Id == requisitionCollection.CreatedBy.Id).First();
-                requisitionCollectionObj.Id = requisitionCollection.Id;
-                requisitionCollectionObj.Department = department;
-                requisitionCollectionObj.CollectionPoint = collectionPoint;
-                requisitionCollectionObj.CreatedDate = requisitionCollection.CreatedDate;
-                requisitionCollectionObj.CreatedBy = createdBy;
-                foreach (RequisitionCollectionDetail rd in requisitionCollectionObj.RequisitionCollectionDetails)
-                {
-                    this.Update(rd);
-                }
+                //requisitionCollectionObj = inventory.RequisitionCollections.Where(reqObj => reqObj.Id == requisitionCollection.Id).First();
+                //Department department = inventory.Departments.Where(d => d.Id == requisitionCollection.Department.Id).First();
+                //CollectionPoint collectionPoint = inventory.CollectionPoints.Where(c => c.Id == requisitionCollection.CollectionPoint.Id).First();
+                //Employee createdBy = inventory.Employees.Where(e => e.Id == requisitionCollection.CreatedBy.Id).First();
+                //requisitionCollectionObj.Id = requisitionCollection.Id;
+                //requisitionCollectionObj.Department = department;
+                //requisitionCollectionObj.CollectionPoint = collectionPoint;
+                //requisitionCollectionObj.CreatedDate = requisitionCollection.CreatedDate;
+                //requisitionCollectionObj.CreatedBy = createdBy;
+                //foreach (RequisitionCollectionDetail rd in requisitionCollectionObj.RequisitionCollectionDetails)
+                //{
+                //    this.Update(rd);
+                //}
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }

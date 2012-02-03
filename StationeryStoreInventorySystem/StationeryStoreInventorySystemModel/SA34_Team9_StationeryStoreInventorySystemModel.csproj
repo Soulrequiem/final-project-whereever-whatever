@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -43,35 +44,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="brokerinterface\ICollectionMissedBroker.cs" />
     <Compile Include="brokerinterface\ICollectionPointBroker.cs" />
     <Compile Include="brokerinterface\IDepartmentBroker.cs" />
     <Compile Include="brokerinterface\IDiscrepancyBroker.cs" />
     <Compile Include="brokerinterface\IEmployeeBroker.cs" />
     <Compile Include="brokerinterface\IItemBroker.cs" />
     <Compile Include="brokerinterface\IItemPriceBroker.cs" />
+    <Compile Include="brokerinterface\INotificationBroker.cs" />
     <Compile Include="brokerinterface\IPurchaseOrderBroker.cs" />
     <Compile Include="brokerinterface\IRequisitionBroker.cs" />
     <Compile Include="brokerinterface\IRequisitionCollectionBroker.cs" />
+    <Compile Include="brokerinterface\IRequisitionCollectionItemBroker.cs" />
+    <Compile Include="brokerinterface\IRequisitionCollectionItemsBroker.cs" />
     <Compile Include="brokerinterface\IRetrievalBroker.cs" />
-    <Compile Include="brokerinterface\IStockCardBroker.cs" />
     <Compile Include="brokerinterface\ISupplierBroker.cs" />
+    <Compile Include="broker\CollectionMissedBroker.cs" />
     <Compile Include="broker\CollectionPointBroker.cs" />
     <Compile Include="broker\DepartmentBroker.cs" />
     <Compile Include="broker\DiscrepancyBroker.cs" />
     <Compile Include="broker\EmployeeBroker.cs" />
     <Compile Include="broker\ItemBroker.cs" />
     <Compile Include="broker\ItemPriceBroker.cs" />
+    <Compile Include="broker\NotificationBroker.cs" />
     <Compile Include="broker\PurchaseOrderBroker.cs" />
+    <Compile Include="broker\ReportBroker.cs" />
     <Compile Include="broker\RequisitionBroker.cs" />
     <Compile Include="broker\RequisitionCollectionBroker.cs" />
+    <Compile Include="broker\RequisitionCollectionItemBroker.cs" />
+    <Compile Include="broker\RequisitionCollectionItemsBroker.cs" />
     <Compile Include="broker\RetrievalBroker.cs" />
-    <Compile Include="broker\StockCardBroker.cs" />
     <Compile Include="broker\SupplierBroker.cs" />
+    <Compile Include="entity\CollectionPoint.cs" />
+    <Compile Include="entity\Department.cs" />
+    <Compile Include="entity\Discrepancy.cs" />
+    <Compile Include="entity\DiscrepancyDetail.cs" />
+    <Compile Include="entity\Employee.cs" />
     <Compile Include="entity\Inventory.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventory.edmx</DependentUpon>
     </Compile>
+    <Compile Include="entity\Item.cs" />
+    <Compile Include="entity\ItemPrice.cs" />
+    <Compile Include="entity\PurchaseOrder.cs" />
+    <Compile Include="entity\PurchaseOrderDetail.cs" />
+    <Compile Include="entity\Requisition.cs" />
+    <Compile Include="entity\RequisitionCollection.cs" />
+    <Compile Include="entity\RequisitionCollectionDetail.cs" />
+    <Compile Include="entity\RequisitionCollectionItem.cs" />
+    <Compile Include="entity\RequisitionDetail.cs" />
+    <Compile Include="entity\Retrieval.cs" />
+    <Compile Include="entity\RetrievalDetail.cs" />
+    <Compile Include="entity\Role.cs" />
+    <Compile Include="entity\StockAdjustment.cs" />
+    <Compile Include="entity\StockCardDetail.cs" />
+    <Compile Include="entity\Supplier.cs" />
+    <Compile Include="entity\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
