@@ -20,8 +20,8 @@
             <ig:WebDataGrid ID="DgvAdjustmentVoucherList" runat="server" Height="200px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                     onrowselectionchanged="DgvAdjustmentVoucherList_RowSelectionChanged">
+            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="VoucherNo"
+            oninitializerow="DgvAdjustmentVoucherList_InitializeRow">
                 <Columns>
                      <%--<ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="150px">
                          <Header Text="Voucher No." />
@@ -30,7 +30,7 @@
                         <ItemTemplate>
                             <asp:HyperLink ID="VoucherNo" runat="server" 
                                 Text='<%# Eval("VoucherNo" ) %>'
-                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                NavigateUrl="~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx" >
                                 </asp:HyperLink>
                         </ItemTemplate>
                         <Header Text="Voucher No." />
@@ -60,7 +60,7 @@
             </igmisc:WebGroupBox>
             <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
              CssClass="GroupBoxstyle" StyleSetName="" Text="Adjustment Voucher List" 
-             TitleAlignment="Left">
+             TitleAlignment="Left" Visible="False">
              <Template>
                  <div class="printingroupbox">
                       <img alt="Print" src="../Images/Common/print.png" />

@@ -18,8 +18,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
 {
     public partial class ViewAdjustmentVoucherList : System.Web.UI.Page
     {
-        ViewAdjustmentVoucherListControl vavlCtrl;
-        String voucherNo;
+        private static readonly string sessionKey = "ViewAdjustmentVoucherList";
+        private ViewAdjustmentVoucherListControl vavlCtrl;
+        private string voucherNo;
         /// <summary>
         /// Loads the ViewAdjustmentVoucherList form
         /// </summary>
@@ -29,24 +30,42 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             if (!IsPostBack)
             {
-                FillAdjustmentList();
-                //FillAdjustmentDetails();
-                FillAdjustmentReport();
+                if (Request.QueryString["voucherNo"] == null)
+                {
+                    vavlCtrl = new ViewAdjustmentVoucherListControl();
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, vavlCtrl);
+                }
+                else
+                {
+                    vavlCtrl = (ViewAdjustmentVoucherListControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+                    voucherNo = Request.QueryString["voucherNo"].ToString();
+                    vavlCtrl.SelectStockAdjustmentVoucher(voucherNo);
+                    FillAdjustmentDetails(vavlCtrl.StockAdjustmentDetail);
+                    WebGroupBox1.Visible = true;
+                }
+                FillAdjustmentList(vavlCtrl.StockAdjustmentList);
             }
+            else
+            {
+                vavlCtrl = (ViewAdjustmentVoucherListControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+                
         }
 
         /// <summary>
         /// Fills Adjustment List to Datagrid
         /// </summary>
         /// <param name="dtAdjustmentList"></param>
-        private void FillAdjustmentList()
+        private void FillAdjustmentList(DataTable dtAdjustmentList)
         {
             try
             {
                 vavlCtrl = GetControl();
-                DataTable dtAdjustmentList = vavlCtrl.StockAdjustmentList;
-                DgvAdjustmentVoucherList.DataSource = dtAdjustmentList;
-                DgvAdjustmentVoucherList.DataBind();
+                if (dtAdjustmentList != null)
+                {
+                    DgvAdjustmentVoucherList.DataSource = dtAdjustmentList;
+                    DgvAdjustmentVoucherList.DataBind();
+                }
             }
             catch(Exception e)
             {
@@ -58,12 +77,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             try
             {
-                lblVoucher.Text = "Text";
-                lblBy.Text = "By";
-                lblDateIssue.Text = "Date";
-                //drdItemList.ValueField = "ID";
-                //drdItemList.DataSource = dtDetails;
-                //drdItemList.DataBind();
+                lblVoucher.Text = voucherNo;
+                lblBy.Text = vavlCtrl.By;
+                lblDateIssue.Text = vavlCtrl.DateIssued;
+                lblAuthorizedName.Text = vavlCtrl.AuthorizedBy;
+                if (dtAdjustmentDetails != null)
+                {
+                    DgvAdjustmentVoucher.DataSource = dtAdjustmentDetails;
+                    DgvAdjustmentVoucher.DataBind();
+                }
             }
             catch (Exception e)
             {
@@ -71,24 +93,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             }
         }
 
-        /// <summary>
-        /// Fills Adjustment Report Data to Datagrid
-        /// </summary>
-        /// <param name="dtAdjustmentReport"></param>
-        private void FillAdjustmentReport()
-        {
-            try
-            {
-                vavlCtrl = GetControl();
-                DataTable dtAdjustmentReport = vavlCtrl.StockAdjustmentDetail;
-                DgvAdjustmentVoucher.DataSource = dtAdjustmentReport;
-                DgvAdjustmentVoucher.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+        ///// <summary>
+        ///// Fills Adjustment Report Data to Datagrid
+        ///// </summary>
+        ///// <param name="dtAdjustmentReport"></param>
+        //private void FillAdjustmentReport()
+        //{
+        //    try
+        //    {
+        //        vavlCtrl = GetControl();
+        //        DataTable dtAdjustmentReport = vavlCtrl.StockAdjustmentDetail;
+        //        DgvAdjustmentVoucher.DataSource = dtAdjustmentReport;
+        //        DgvAdjustmentVoucher.DataBind();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.WriteErrorLog(e);
+        //    }
+        //}
 
         private ViewAdjustmentVoucherListControl GetControl()
         {
@@ -97,11 +119,27 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             return vavlCtrl;
         }
 
-        protected void DgvAdjustmentVoucherList_RowSelectionChanged(object sender,
-            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        //protected void DgvAdjustmentVoucherList_RowSelectionChanged(object sender,
+        //    Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        //{
+        //    voucherNo = e.CurrentSelectedRows[0].Attributes["VoucherNo"].ToString();
+        //}
+
+        protected void DgvAdjustmentVoucherList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
-            voucherNo = e.CurrentSelectedRows[0].Attributes["VoucherNo"].ToString();
+            try
+            {
+                //voucherNo = e.Row.DataKey[0].ToString();
+                HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("VoucherNo").FindControl("VoucherNo");
+                link.NavigateUrl = "~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx?voucherNo=" + e.Row.DataKey[0];
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
         }
+
+        
     }
 }
 /********************************************/
