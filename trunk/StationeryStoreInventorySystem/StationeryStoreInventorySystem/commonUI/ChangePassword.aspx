@@ -10,7 +10,6 @@
             document.getElementById("MainContent_WebGroupBox1_txtNewPassword").value = "";
             document.getElementById("MainContent_WebGroupBox1_txtConfirmPassword").value = "";
             return false;
-
     }
 
     function Change() {
