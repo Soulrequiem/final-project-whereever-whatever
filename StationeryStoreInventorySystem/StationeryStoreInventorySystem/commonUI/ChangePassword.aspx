@@ -50,8 +50,7 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="txtOldPassword" runat="server" 
-                             CssClass="DefaultTextStyle" Width="250px" 
-                                NullText="<%$ Resources:WebResources, Text_old%>" TextMode="Password">
+                             CssClass="DefaultTextStyle" Width="250px" TextMode="Password">
                             </ig:WebTextEditor><br />
                         </td>
                     </tr>
@@ -63,8 +62,7 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="txtNewPassword" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" 
-                                NullText="<%$ Resources:WebResources, Text_new%>" TextMode="Password">
+                            CssClass="DefaultTextStyle" Width="250px" TextMode="Password">
                             </ig:WebTextEditor><br />
                         </td>
                     </tr>
@@ -76,8 +74,7 @@
                         </td>
                         <td>
                             <ig:WebTextEditor ID="txtConfirmPassword" runat="server" 
-                            CssClass="DefaultTextStyle" Width="250px" 
-                                NullText="<%$ Resources:WebResources, Text_new%>" TextMode="Password">
+                            CssClass="DefaultTextStyle" Width="250px" TextMode="Password">
                         </ig:WebTextEditor>
                         </td>
                     </tr>
