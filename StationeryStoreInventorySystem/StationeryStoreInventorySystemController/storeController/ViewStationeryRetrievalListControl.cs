@@ -18,7 +18,7 @@ using System.Data;
 
 namespace StationeryStoreInventorySystemController.storeController
 {
-    class ViewStationeryRetrievalListControl
+    public class ViewStationeryRetrievalListControl
     {
         private IRetrievalBroker retrievalBroker;
         
