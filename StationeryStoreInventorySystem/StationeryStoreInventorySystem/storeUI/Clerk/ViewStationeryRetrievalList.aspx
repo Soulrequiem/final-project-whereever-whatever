@@ -20,14 +20,15 @@
             Height="400px" Width="700px" DefaultColumnWidth="50px" 
             AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
             HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+            oninitializerow="DgvViewStationeryRetrievalList_InitializeRow">
                 <Columns>
                    <%-- <ig:BoundDataField DataFieldName="RetrievalNo" Key="RetrievalNo" Width="100px">
                         <Header Text="Retrieval No." />
                     </ig:BoundDataField>--%>
                     <ig:TemplateDataField Key="retrievalNo" Width="100px">
                         <ItemTemplate>
-                            <asp:HyperLink ID="TripIDLink" runat="server" 
+                            <asp:HyperLink ID="retrievalNo" runat="server" 
                                 Text='<%# Eval("RetrievalNo" ) %>'
                                 NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
                                 </asp:HyperLink>
