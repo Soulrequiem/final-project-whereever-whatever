@@ -22,7 +22,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     lblUserName.Text = "Welcome, " + StationeryStoreInventorySystemController.Util.EmployeeName();
                 }
                 LoadNavigationMenu();
-                removeAllSession(); // remove all session stored (open a new page)
+                //removeAllSession(); // remove all session stored (open a new page)
             }
         }
 
@@ -31,13 +31,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             StationeryStoreInventorySystemController.Util.PutSession(currentPageSessionKey, currentPage);
         }
 
-        private void removeAllSession()
-        {
-            System.Web.UI.Page currentPage = (System.Web.UI.Page)StationeryStoreInventorySystemController.Util.GetSession(currentPageSessionKey);
+        //private void removeAllSession()
+        //{
+        //    System.Web.UI.Page currentPage = (System.Web.UI.Page)StationeryStoreInventorySystemController.Util.GetSession(currentPageSessionKey);
             
-            //if (currentPage.GetType() != typeof(LogIn)) LogIn.removeSession();
-            if (!(currentPage is departmentUI.Head.ApproveRequisition)) departmentUI.Head.ApproveRequisition.removeSession();
-        }
+        //    //if (currentPage.GetType() != typeof(LogIn)) LogIn.removeSession();
+        //    if (!(currentPage is departmentUI.Head.ApproveRequisition)) departmentUI.Head.ApproveRequisition.removeSession();
+        //}
 
         /// <summary>
         /// Loads the navigation as per user level
