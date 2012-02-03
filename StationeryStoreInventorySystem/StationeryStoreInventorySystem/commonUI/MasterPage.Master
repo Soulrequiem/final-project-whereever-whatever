@@ -155,6 +155,7 @@
                                     <ig:ExplorerBarItem NavigateUrl="~/commonUI/Report.aspx"                                Text="Generate Reports"                        ToolTip="Generate Reports"                        />
                                     <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/ViewStationeryRetrievalList.aspx"      Text="View Stationery Retrieval List"          ToolTip="View Stationery Retrieval List"          />
                                     <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/CreateStationeryRetrievalList.aspx"    Text="Create Stationery Retrieval List"        ToolTip="Create Stationery Retrieval List"        />
+                                    <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/UpdateStationeryRetrieval.aspx"    Text="Update Stationery Retrieval List"        ToolTip="Update Stationery Retrieval List"            />
                                     <ig:ExplorerBarItem NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx"             Text="Generate Disbursement"                   ToolTip="Generate Disbursement"                   />
                                 </Items>
                             </ig:ExplorerBarGroup>
