@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController;
 
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
@@ -101,6 +102,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             {
                 Logger.WriteErrorLog(e);
             }
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Util.PutSession("ReportType", "Stationery");
+            Util.PutSession("RequisitionID", lblRequisitionID.Text);
+            Util.PutSession("DeptName", LblDeptName.Text);
+            Util.PutSession("DeptCode" , lblDeptCode.Text);
+            Util.PutSession("EmployeeName" , lblEmployeeName.Text);
+            Util.PutSession("EmployeeNumber", lblEmployeeNumber.Text);
+            Util.PutSession("Email", lblEmpEmailAddress.Text);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "Myscript", "<script language='javascript'> " +
+                   "window.open('../commonUI/PrintView.aspx');</script>");
         }
     }
 }

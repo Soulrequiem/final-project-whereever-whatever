@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StationeryStoreInventorySystem.Reports {
+namespace StationeryStoreInventorySystem.Reports.SSISReports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace StationeryStoreInventorySystem.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RequisitionDetails : ReportClass {
+    public class RequisitionDetailsReport : ReportClass {
         
-        public RequisitionDetails() {
+        public RequisitionDetailsReport() {
         }
         
         public override string ResourceName {
             get {
-                return "RequisitionDetails.rpt";
+                return "RequisitionDetailsReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace StationeryStoreInventorySystem.Reports {
         
         public override string FullResourceName {
             get {
-                return "StationeryStoreInventorySystem.Reports.RequisitionDetails.rpt";
+                return "StationeryStoreInventorySystem.Reports.SSISReports.RequisitionDetailsReport.rpt";
             }
             set {
                 // Do nothing
@@ -87,12 +87,60 @@ namespace StationeryStoreInventorySystem.Reports {
                 return this.ReportDefinition.Sections[4];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_RequisitionID {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DeptName {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DeptCode {
+            get {
+                return this.DataDefinition.ParameterFields[2];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeName {
+            get {
+                return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeNumber {
+            get {
+                return this.DataDefinition.ParameterFields[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Email {
+            get {
+                return this.DataDefinition.ParameterFields[5];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRequisitionDetails : Component, ICachedReport {
+    public class CachedRequisitionDetailsReport : Component, ICachedReport {
         
-        public CachedRequisitionDetails() {
+        public CachedRequisitionDetailsReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +177,7 @@ namespace StationeryStoreInventorySystem.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RequisitionDetails rpt = new RequisitionDetails();
+            RequisitionDetailsReport rpt = new RequisitionDetailsReport();
             rpt.Site = this.Site;
             return rpt;
         }
