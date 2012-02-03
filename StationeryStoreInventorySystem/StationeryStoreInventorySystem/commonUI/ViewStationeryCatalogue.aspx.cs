@@ -32,7 +32,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
-
                 FillStationeryList(StationeryStoreInventorySystemController.Util.GetItemTable());
                 FillItems();
 
