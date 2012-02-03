@@ -511,6 +511,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Collection Point:.
+        /// </summary>
+        internal static string GenerateDisbursement_collection {
+            get {
+                return ResourceManager.GetString("GenerateDisbursement_collection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Representative Name:.
+        /// </summary>
+        internal static string GenerateDisbursement_RepName {
+            get {
+                return ResourceManager.GetString("GenerateDisbursement_RepName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate Disbursement.
         /// </summary>
         internal static string GenerateDisbursement_Title {
