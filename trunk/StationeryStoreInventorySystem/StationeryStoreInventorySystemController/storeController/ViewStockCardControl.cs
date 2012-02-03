@@ -21,15 +21,17 @@ namespace StationeryStoreInventorySystemController.storeController
     {
         private IItemBroker itemBroker;
         private IItemPriceBroker itemPriceBroker;
-        
+
         private Employee currentEmployee;
         private Item item;
-        
+
         private List<StockCardDetail> stockCardDetailList;
         private List<Supplier> supplierList;
 
         private DataTable dt;
         private DataRow dr;
+
+        private string[] columnName = { "date", "dept/supplier", "qty", "balance" };
 
         private DataColumn[] dataColumn;
 
@@ -38,17 +40,40 @@ namespace StationeryStoreInventorySystemController.storeController
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
 
             InventoryEntities inventory = new InventoryEntities();
-            
+
             itemBroker = new ItemBroker(inventory);
+            itemPriceBroker = new ItemPriceBroker(inventory);
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]),
+                                            new DataColumn(columnName[2]),
+                                            new DataColumn(columnName[3])};
         }
+
+
+        public DataTable getSupplier()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("supplierName");
+            if (supplierList != null && supplierList.Count > 0)
+            {
+                foreach (Supplier s in supplierList)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr[0] = s.Name;
+                    dt.Rows.Add(dr);
+                }
+            }
+            return dt;
+        }
+
 
         //public DataTable GetStockCard(string itemDescription)
         //{
         //    Item item = new Item();
         //    item.Description = itemDescription;
-            
+
         //    item = itemBroker.GetItem(item);
-            
+
         //    List<StockCardDetail> list = item.StockCardDetails.ToList();
         //    DataTable dt = new DataTable();
         //    DataRow dr;
@@ -82,16 +107,19 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             dt = new DataTable();
 
-            item = Util.GetItem(itemBroker, itemDescription);
+            //item = Util.GetItem(itemBroker, itemDescription);
+            item = new Item();
+            item.Description = itemDescription;
+            item = itemBroker.GetItem(item);
             supplierList = itemPriceBroker.GetPrioritySupplier(item);
-
+            dt.Columns.AddRange(dataColumn);
             foreach (StockCardDetail stockCardDetail in item.StockCardDetails)
             {
                 dr = dt.NewRow();
-                dr["date"] = stockCardDetail.CreatedDate;
-                dr["dept/supplier"] = stockCardDetail.Description;
-                dr["qty"] = stockCardDetail.Qty;
-                dr["balance"] = stockCardDetail.Balance;
+                dr[columnName[0]] = stockCardDetail.CreatedDate;
+                dr[columnName[1]] = stockCardDetail.Description;
+                dr[columnName[2]] = stockCardDetail.Qty;
+                dr[columnName[3]] = stockCardDetail.Balance;
                 dt.Rows.Add(dr);
             }
 
