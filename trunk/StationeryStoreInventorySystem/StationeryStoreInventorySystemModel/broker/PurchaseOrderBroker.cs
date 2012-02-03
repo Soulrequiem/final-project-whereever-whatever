@@ -291,7 +291,7 @@ namespace StationeryStoreInventorySystemModel.broker
             int lastPurchaseOrderNumber;
             try
             {
-                lastPurchaseOrderNumber = inventory.PurchaseOrders.Last().Id + 1;
+                lastPurchaseOrderNumber = inventory.PurchaseOrders.Max(xObj => xObj.Id);
                 if (lastPurchaseOrderNumber.ToString().Substring(0, 4).CompareTo(DateTime.Now.Year.ToString()) != 0)
                 {
                     lastPurchaseOrderNumber = Converter.objToInt(DateTime.Now.Year.ToString() + "1".PadLeft(5, '0'));
@@ -306,7 +306,7 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public int GetPurchaseOrderDetailId()
         {
-            return GetAllPurchaseOrderDetail().Last().Id + 1;
+            return inventory.PurchaseOrderDetails.Max(xObj => xObj.Id) + 1;
         }
     }
 }
