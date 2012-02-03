@@ -28,12 +28,14 @@ namespace StationeryStoreInventorySystemController.storeController
         private List<StockAdjustment> stockAdjustmentList;
 
         private DataTable dt;
+        private DataTable dtDetail;
         private DataRow dr;
 
         private string[] columnName = { "VoucherNo", "CreatedBy", "CreatedDate", "TotalQty" };
         private string[] detailColumnName = { "ItemNo", "QuantityAdjusted", "Reason" };
 
         private DataColumn[] dataColumn;
+        private DataColumn[] detailDataColumn;
 
         public ViewAdjustmentVoucherListControl()
         {
@@ -49,13 +51,26 @@ namespace StationeryStoreInventorySystemController.storeController
                                             new DataColumn(columnName[1]),
                                             new DataColumn(columnName[2]),
                                             new DataColumn(columnName[3]) };
+
+            detailDataColumn = new DataColumn[] { new DataColumn(detailColumnName[0]),
+                                            new DataColumn(detailColumnName[1]),
+                                            new DataColumn(detailColumnName[2]) };
         }
 
         public DataTable StockAdjustmentList
         {
             get 
             {
-                dt = new DataTable();
+                if (dt == null)
+                {
+                    dt = new DataTable();
+
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
 
                 foreach (StockAdjustment temp in stockAdjustmentList)
                 {
@@ -103,23 +118,30 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             get
             {
-                dt = new DataTable();
+                if (dtDetail == null)
+                {
+                    dtDetail = new DataTable();
 
-                dt.Columns.AddRange(dataColumn);
+                    dtDetail.Columns.AddRange(detailDataColumn);
+                }
+                else
+                {
+                    dtDetail.Rows.Clear();
+                }
 
                 if (stockAdjustment != null)
                 {
                     foreach (DiscrepancyDetail discrepancyDetail in stockAdjustment.Discrepancy.DiscrepancyDetails)
                     {
-                        dr = dt.NewRow();
+                        dr = dtDetail.NewRow();
                         dr[detailColumnName[0]] = discrepancyDetail.Item.Id;
                         dr[detailColumnName[1]] = discrepancyDetail.Qty;
                         dr[detailColumnName[2]] = discrepancyDetail.Remarks;
-                        dt.Rows.Add(dr);
+                        dtDetail.Rows.Add(dr);
                     }
                 }
 
-                return dt;
+                return dtDetail;
             }
         }
 
@@ -139,6 +161,7 @@ namespace StationeryStoreInventorySystemController.storeController
             }
 
             return selectStatus;
+
         }
         
         //List<Discrepancy> discrepancyList;
