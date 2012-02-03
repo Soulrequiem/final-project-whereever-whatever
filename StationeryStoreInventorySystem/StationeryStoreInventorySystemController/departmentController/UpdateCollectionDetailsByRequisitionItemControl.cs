@@ -15,6 +15,9 @@ namespace StationeryStoreInventorySystemController.departmentController
         private InventoryEntities inventory;
 
         private IRequisitionCollectionBroker requisitionCollectionBroker;
+        private IRequisitionCollectionItemBroker requisitionCollectionItemBroker;
+        private IItemBroker itemBroker;
+        private IEmployeeBroker employeeBroker;
 
         private commonController.RequisitionDetailsControl requisitionDetailsControl;
 
@@ -40,6 +43,9 @@ namespace StationeryStoreInventorySystemController.departmentController
             inventory = new InventoryEntities();
 
             requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
+            requisitionCollectionItemBroker = new RequisitionCollectionItemBroker(inventory);
+            itemBroker = new ItemBroker(inventory);
+            employeeBroker = new EmployeeBroker(inventory);
 
             requisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.NEED_TO_COLLECT);
             collectedRequisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.COLLECTED);
@@ -118,7 +124,8 @@ namespace StationeryStoreInventorySystemController.departmentController
                         dtItemDetailList.Rows.Clear();
                     }
 
-                    Dictionary<Item, List<int>> items = new Dictionary<Item, List<int>>();
+                    Dictionary<Item, int> items = new Dictionary<Item, int>();
+                    Dictionary<Item, int> collectedItems = new Dictionary<Item, int>();
 
                     foreach (RequisitionCollectionDetail requisitionCollectionDetail in requisitionCollection.RequisitionCollectionDetails)
                     {
@@ -126,32 +133,35 @@ namespace StationeryStoreInventorySystemController.departmentController
                         {
                             if (items.ContainsKey(requisitionDetail.Item))
                             {
-                                List<int> quantity = items[requisitionDetail.Item];
-                                quantity[0] += requisitionDetail.Qty;
-                                if (requisitionDetail.DeliveredQty.HasValue)
-                                {
-                                    quantity[1] += requisitionDetail.DeliveredQty.Value;
-                                }
-                                else
-                                {
-                                    quantity[1] += Converter.objToInt(requisitionDetail.DeliveredQty.Value * 0.9);
-                                }
+                                items[requisitionDetail.Item] += requisitionDetail.Qty;
                             }
                             else
                             {
-                                List<int> quantity = new List<int>();
-                                quantity.Add(requisitionDetail.Qty);
-                                if (requisitionDetail.DeliveredQty.HasValue)
-                                {
-                                    quantity.Add(requisitionDetail.DeliveredQty.Value);
-                                }
-                                else
-                                {
-                                    quantity.Add(Converter.objToInt(requisitionDetail.Qty * 0.9));
-                                }
-                                items.Add(requisitionDetail.Item, quantity);
+                                items.Add(requisitionDetail.Item, requisitionDetail.Qty);
 
                             }
+                        }
+                    }
+
+                    RequisitionCollectionItem requisitionCollectionItem;
+
+                    foreach (Item item in items.Keys)
+                    {
+                        if (requisitionCollection.RequisitionCollectionItems != null && requisitionCollection.RequisitionCollectionItems.Count() > 0)
+                        {
+                            requisitionCollectionItem = requisitionCollection.RequisitionCollectionItems.Where(x => x.Item.Equals(item)).First();
+                            if (requisitionCollectionItem != null)
+                            {
+                                collectedItems.Add(item, requisitionCollectionItem.Qty.HasValue ? requisitionCollectionItem.Qty.Value : Converter.objToInt(items[item] * 0.9));
+                            }
+                            else
+                            {
+                                collectedItems.Add(item, Converter.objToInt(items[item] * 0.9));
+                            }
+                        }
+                        else
+                        {
+                            collectedItems.Add(item, Converter.objToInt(items[item] * 0.9));
                         }
                     }
 
@@ -160,9 +170,8 @@ namespace StationeryStoreInventorySystemController.departmentController
                         dr = dtItemDetailList.NewRow();
                         dr[itemDetailColumnName[0]] = key.Id;
                         dr[itemDetailColumnName[1]] = key.Description;
-                        List<int> quantity = items[key];
-                        dr[itemDetailColumnName[2]] = quantity[0].ToString();
-                        dr[itemDetailColumnName[3]] = quantity[1].ToString();
+                        dr[itemDetailColumnName[2]] = items[key].ToString();
+                        dr[itemDetailColumnName[3]] = collectedItems[key];
                         dtItemDetailList.Rows.Add(dr);
                     }
                 }
@@ -206,6 +215,43 @@ namespace StationeryStoreInventorySystemController.departmentController
                     break;
                 }
             }
+        }
+
+        public Constants.ACTION_STATUS UpdateRequisitionCollection(Dictionary<string, int> itemsCollected)
+        {
+            Constants.ACTION_STATUS updateStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            foreach (string key in itemsCollected.Keys)
+            {
+                if (requisitionCollection.RequisitionCollectionItems.Where(x => x.Item.Id == key).Count() > 0)
+                {
+                    RequisitionCollectionItem requisitionCollectionItem = requisitionCollection.RequisitionCollectionItems.Where(x => x.Item.Id == key).First();
+                    requisitionCollectionItem.Qty = itemsCollected[key];
+                }
+                else
+                {
+                    Item item = new Item();
+                    item.Id = key;
+                    item = itemBroker.GetItem(item);
+
+                    Employee employee = new Employee();
+                    employee.Id = currentEmployee.Id;
+                    employee = employeeBroker.GetEmployee(employee);
+
+                    requisitionCollection.RequisitionCollectionItems.Add(new RequisitionCollectionItem(requisitionCollectionItemBroker.GetRequisitionCollectionItemId(), requisitionCollection, item, itemsCollected[key], DateTime.Now, employee, Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW)));
+                } 
+            }
+
+            if (requisitionCollectionBroker.Update(requisitionCollection) == Constants.DB_STATUS.SUCCESSFULL)
+            {
+                updateStatus = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                updateStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return updateStatus;
         }
 
         public void SelectModifyDeliveredQuantity(int index)

@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +44,7 @@
   <ItemGroup>
     <Compile Include="commonController\ChangePasswordControl.cs" />
     <Compile Include="commonController\GenerateReportsControl.cs" />
+    <Compile Include="commonController\IGenerateReportsControl.cs" />
     <Compile Include="commonController\LoginControl.cs" />
     <Compile Include="commonController\LogOutControl.cs" />
     <Compile Include="commonController\PrintFormReportControl.cs" />
@@ -63,9 +66,12 @@
     <Compile Include="storeController\IssueAdjustmentVoucherControl.cs" />
     <Compile Include="storeController\PurchaseOrderControl.cs" />
     <Compile Include="storeController\ReceiveOrderControl.cs" />
+    <Compile Include="storeController\UpdateStationeryRetrievalControl.cs" />
     <Compile Include="storeController\ViewAdjustmentVoucherListControl.cs" />
+    <Compile Include="storeController\ViewStationeryRetrievalListControl.cs" />
     <Compile Include="storeController\ViewStockCardControl.cs" />
     <Compile Include="storeController\ViewSupplierListControl.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StationeryStoreInventorySystemModel\SA34_Team9_StationeryStoreInventorySystemModel.csproj">
