@@ -211,6 +211,26 @@ namespace StationeryStoreInventorySystemModel.broker
             return requisitionDetailObj;
         }
         /// <summary>
+        ///  Retrieve the list of RequisitionDetail information according to the Requisition detail Parameter 
+        /// </summary>
+        /// <param name="requisitionDetail"></param>
+        /// <returns>
+        /// List of Requisition Detail
+        /// </returns>
+
+        public List<RequisitionDetail> GetAllRequisitionDetailByObj(RequisitionDetail requisitionDetail)
+        {
+            try
+            {
+                requisitionDetailList = inventory.RequisitionDetails.Where(reqObj => reqObj.Requisition.Id == requisitionDetail.Requisition.Id).ToList<RequisitionDetail>();
+            }
+            catch (Exception e)
+            {
+                requisitionDetailList = null;
+            }
+            return requisitionDetailList;
+        }
+        /// <summary>
         /// Retrieve All of the Requisition detail information from Requisition detail Table
         /// </summary>
         /// <returns></returns>
