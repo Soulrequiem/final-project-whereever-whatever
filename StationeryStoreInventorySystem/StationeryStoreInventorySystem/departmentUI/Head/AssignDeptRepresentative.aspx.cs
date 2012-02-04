@@ -13,6 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
+using StationeryStoreInventorySystemController;
 
 
 
@@ -32,9 +33,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             if (!IsPostBack)
             {
-                FillRepresentativeList();
                 FillEmployee();
             }
+            FillRepresentativeList();
         }
 
         /// <summary>
@@ -45,9 +46,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             try
             {
-                adrCtrl = GetControl();
-                DataTable dt = adrCtrl.DepartmentRepresentative;
-                DgvCurrentDeptRepresentative.DataSource = dt;
+                //adrCtrl = GetControl();
+                //DataTable dt = adrCtrl.DepartmentRepresentative;
+                DgvCurrentDeptRepresentative.DataSource = Util.GetCurrentRepresentative();
                 DgvCurrentDeptRepresentative.DataBind();
             }
             catch (Exception e)
@@ -59,17 +60,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
        /// <summary>
        /// Fills Employee name to drop down
        /// </summary>
-        private void FillEmployee()
+       private void FillEmployee()
        {
            try
            {
-                   //adrCtrl = new AssignDepartmentRepresentativeControl();
-                   //DataTable dtEmployee = adrCtrl.DepartmentRepresentative;               
-                   drdRepEmployeeList.TextField = "EmployeeName";
-                   drdRepEmployeeList.ValueField = "EmployeeID";
-                   drdRepEmployeeList.DataSource = null; //dtEmployee;
-                   drdRepEmployeeList.DataBind();
-               //}
+               drdRepEmployeeList.DataSource = Util.GetEmployeesByDepartments();
+               drdRepEmployeeList.DataBind();          
            }
            catch (Exception e)
            {
@@ -132,7 +128,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
        protected void btnEmployee_Click(object sender, EventArgs e)
        {
-
+           DgvRepSearchDetails.DataSource = Util.GetEmployeeDetails(drdRepEmployeeList.CurrentValue);
+           DgvRepSearchDetails.DataBind();
        }
 
        protected void DgvRepSearchDetails_DataFiltering(object sender,
