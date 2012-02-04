@@ -35,7 +35,7 @@
                         <Columns>
                             <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" 
                                 Width="150px">
-                                <Header Text="CollectionID" />
+                                <Header Text="Collection Point ID" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" 
                                 Width="350px">
