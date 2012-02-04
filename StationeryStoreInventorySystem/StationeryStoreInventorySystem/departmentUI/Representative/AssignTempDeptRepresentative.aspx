@@ -62,8 +62,10 @@
                      <ig:WebDropDown ID="drdEmployeeList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="Enter Employee Name" 
                             StyleSetName="Office2010Blue" 
-                         onselectionchanged="drdEmployeeList_SelectionChanged">
+                         onselectionchanged="drdEmployeeList_SelectionChanged" 
+                         TextField="employeeName" ValueField="employeeID">
                         <Button Visible="False" />
+                         <DropDownItemBinding TextField="employeeName" ValueField="employeeID" />
                      </ig:WebDropDown>
                 </div>
                 <div style="float:left; padding-left:10px">
