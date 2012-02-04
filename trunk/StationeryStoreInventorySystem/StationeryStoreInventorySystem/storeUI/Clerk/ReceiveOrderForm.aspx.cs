@@ -102,32 +102,34 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             //*********update purchase order
             //*********insert stock card details in stock card
             //receiveOrderControl.SelectReceived((DataTable)DgvStationeryOrder.DataSource); 
-            //DataTable dt = new DataTable();
-            //dt.Columns.AddRange(receiveOrderControl.DetailColumn);
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(receiveOrderControl.DetailColumn);
 
-            //DataRow dr;
-            //for (int i = 0; i < DgvStationeryOrder.Rows.Count; i++)
-            //{
-            //    dr = dt.NewRow();
-            //    dr["itemNo"] = DgvStationeryOrder.Rows[i].Items[0].ToString();
-            //    dr["itemDescription"] = DgvStationeryOrder.Rows[i].Items[1].ToString();
-            //    dr["quantity"] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvStationeryOrder.Rows[i].Items.FindItemByKey("quantity").FindControl("quantity")).Text;
-            //    dr["Remarks"] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvStationeryOrder.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text;
-            //    dt.Rows.Add(dr);
-            //}
+            DataRow dr;
+            for (int i = 0; i < DgvStationeryOrder.Rows.Count; i++)
+            {
+                dr = dt.NewRow();
+                dr["itemNo"] = DgvStationeryOrder.Rows[i].Items[0].Value.ToString();
+                dr["itemDescription"] = DgvStationeryOrder.Rows[i].Items[1].Value.ToString();
+                dr["quantity"] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvStationeryOrder.Rows[i].Items.FindItemByKey("quantity").FindControl("quantity")).Text;
+                dr["Remarks"] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvStationeryOrder.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text;
+                dt.Rows.Add(dr);
+            }
 
 
 
-            //string deliveryNo = txtDeliveryOrderNo.Text;
-            //string poNo = DrdPONo.SelectedValue;
-           
-            //if (receiveOrderControl.ClickReceived(dt, deliveryNo, poNo) == Constants.ACTION_STATUS.SUCCESS){
-            //    Response.Write("SUCESS.....");
-    
-            //}
-            //else{
-            //    Response.Write("FAIL.......");
-            //}
+            string deliveryNo = txtDeliveryOrderNo.Text;
+            string poNo = DrdPONo.SelectedValue;
+
+            if (receiveOrderControl.ClickReceived(dt, deliveryNo, poNo) == Constants.ACTION_STATUS.SUCCESS)
+            {
+                Response.Write("SUCESS.....");
+
+            }
+            else
+            {
+                Response.Write("FAIL.......");
+            }
         }
 
         
