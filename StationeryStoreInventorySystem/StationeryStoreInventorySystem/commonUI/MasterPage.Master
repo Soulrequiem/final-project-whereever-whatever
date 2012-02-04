@@ -86,7 +86,7 @@
                             CssClass="UserNameStyle"></asp:Label>
                     </div>
                     <div class="farsiDiv" style="float:right;width:100px;height:100%">
-                        <asp:HyperLink ID="lnklogout" CssClass="HyperLinkPosition" NavigateUrl="~/commonUI/LogIn.aspx"
+                        <asp:HyperLink ID="lnklogout" CssClass="HyperLinkPosition" NavigateUrl="~/commonUI/LogIn.aspx?do=logout"
                             Text="<%$ Resources:WebResources,MasterPageHeader_Logout%>" runat="server"></asp:HyperLink>
                     </div>
                 </div>

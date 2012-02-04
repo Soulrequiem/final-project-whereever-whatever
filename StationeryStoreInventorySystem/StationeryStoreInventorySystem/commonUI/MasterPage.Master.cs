@@ -18,13 +18,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
-                lblLoggedinTime.Text = "Log-in Time: " + SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
-                if (StationeryStoreInventorySystemController.Util.EmployeeName() != null)
+                if (Request.QueryString["do"] != null)
                 {
-                    lblUserName.Text = "Welcome, " + StationeryStoreInventorySystemController.Util.EmployeeName();
+                    StationeryStoreInventorySystemController.commonController.LogOutControl logoutControl = new StationeryStoreInventorySystemController.commonController.LogOutControl();
+
+                    removeAllSession();
                 }
-                LoadNavigationMenu();
-                //removeAllSession(); // remove all session stored (open a new page)
+                else
+                {
+                    lblLoggedinTime.Text = "Log-in Time: " + SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
+                    if (StationeryStoreInventorySystemController.Util.EmployeeName() != null)
+                    {
+                        lblUserName.Text = "Welcome, " + StationeryStoreInventorySystemController.Util.EmployeeName();
+                    }
+                    LoadNavigationMenu();
+                    //removeAllSession(); // remove all session stored (open a new page)
+                }
             }
         }
 
@@ -33,13 +42,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             StationeryStoreInventorySystemController.Util.PutSession(currentPageSessionKey, currentPage);
         }
 
-        //private void removeAllSession()
-        //{
-        //    System.Web.UI.Page currentPage = (System.Web.UI.Page)StationeryStoreInventorySystemController.Util.GetSession(currentPageSessionKey);
-            
-        //    //if (currentPage.GetType() != typeof(LogIn)) LogIn.removeSession();
-        //    if (!(currentPage is departmentUI.Head.ApproveRequisition)) departmentUI.Head.ApproveRequisition.removeSession();
-        //}
+        private void removeAllSession()
+        {
+            System.Web.UI.Page currentPage = (System.Web.UI.Page)StationeryStoreInventorySystemController.Util.GetSession(currentPageSessionKey);
+
+            //if (currentPage.GetType() != typeof(LogIn)) LogIn.removeSession();
+            if (!(currentPage is departmentUI.Head.ApproveRequisition)) departmentUI.Head.ApproveRequisition.removeSession();
+        }
 
         /// <summary>
         /// Loads the navigation as per user level

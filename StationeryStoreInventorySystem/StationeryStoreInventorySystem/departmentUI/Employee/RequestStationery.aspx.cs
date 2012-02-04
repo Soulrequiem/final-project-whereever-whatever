@@ -41,7 +41,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                     {
                         // print error message
                     }
-
                     FillItems();
                 }
 
@@ -136,38 +135,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             }
         }
 
-        protected void drdItemList_SelectionChanged(object sender,
-            Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
-        {
-            try
-            {
-                
-                //resCtrl = GetControl();
-                //resCtrl.AddToTable(drdItemList.SelectedValue);
-                //FillDetails();
-                //FillItemList();
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteErrorLog(ex);
-            }
-        }
-
         private RequestStationeryControl GetControl()
         {
             if (resCtrl == null)
                 resCtrl = new RequestStationeryControl();
             return resCtrl;
-        }
-
-        protected void btnRequest_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnRemove_Click(object sender, EventArgs e)
-        {
-
         }
 
         public static void removeSession()
@@ -191,6 +163,52 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             resCtrl.SelectRemoveAll();
             FillItemList();
+        }
+
+        protected void btnRemove_Click1(object sender, EventArgs e)
+        {
+            List<int> indexList = new List<int>();
+
+            for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
+            {
+                if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value) == true)
+                {
+                    indexList.Add(i);
+                    dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value = false;
+                }
+            }
+
+            if (resCtrl.SelectRemove(indexList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
+            {
+                // print error message
+            }
+            else
+            {
+                FillItemList();
+            }
+        }
+
+        protected void btnRequest_Click1(object sender, EventArgs e)
+        {
+            Dictionary<string, int> quantity = new Dictionary<string, int>();
+
+            for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
+            {
+                if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value) == true)
+                {
+                    dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value = false;
+                    quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(), SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequiredQty").FindControl("RequiredQty")).Text));
+                }
+            }
+
+            if (resCtrl.SelectRequest(quantity) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
+            {
+                // print error message
+            }
+            else
+            {
+                FillItemList();
+            }
         }
 
         //protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
