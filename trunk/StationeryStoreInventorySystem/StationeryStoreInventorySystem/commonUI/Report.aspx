@@ -67,7 +67,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                     <ig:DropDownItem Selected="False" Text="Collection List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Employees List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Department List" Value=""/>
-                    <ig:DropDownItem Selected="False" Text="Requisition List" Value=""/>
+                    <ig:DropDownItem Selected="False" Text="Requisitions List" Value=""/>
                     <ig:DropDownItem Selected="False" Text="Supplier List" Value=""/>
                 </Items>
             </ig:WebDropDown>
@@ -212,20 +212,20 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                     <asp:Label ID="Label7" runat="server" Text="Show Month : " CssClass="DefaultLabelstyle"/>
                     <ig:WebDropDown ID="drdMonth" runat="server" Width="200px" 
                         NullText="Select Month" AutoPostBack="True" EnableMultipleSelection="True" 
-                        Enabled="False">
+                        Enabled="False" onselectionchanged="drdMonth_SelectionChanged">
                         <Items>
-                            <ig:DropDownItem Selected="False" Text="January" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="February" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="March" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="April" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="May" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="June" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="July" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="August" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="September" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="October" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="November" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="December" Value=""/>
+                            <ig:DropDownItem Selected="False" Text="January" Value="01"/>
+                            <ig:DropDownItem Selected="False" Text="February" Value="02"/>
+                            <ig:DropDownItem Selected="False" Text="March" Value="03"/>
+                            <ig:DropDownItem Selected="False" Text="April" Value="04"/>
+                            <ig:DropDownItem Selected="False" Text="May" Value="05"/>
+                            <ig:DropDownItem Selected="False" Text="June" Value="06"/>
+                            <ig:DropDownItem Selected="False" Text="July" Value="07"/>
+                            <ig:DropDownItem Selected="False" Text="August" Value="08"/>
+                            <ig:DropDownItem Selected="False" Text="September" Value="09"/>
+                            <ig:DropDownItem Selected="False" Text="October" Value="10"/>
+                            <ig:DropDownItem Selected="False" Text="November" Value="11"/>
+                            <ig:DropDownItem Selected="False" Text="December" Value="12"/>
                         </Items>
                     </ig:WebDropDown>
                 </div>
@@ -233,21 +233,21 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                     <div style="float:left">
                     <asp:Label ID="Label8" runat="server" Text="Show Year : " CssClass="DefaultLabelstyle"/>
                     <ig:WebDropDown ID="drdYear" runat="server" Width="100px" 
-                        NullText="Select Year" AutoPostBack="True" EnableMultipleSelection="True" 
-                        Enabled="False">
+                        NullText="Select Year" AutoPostBack="True" 
+                        Enabled="False" onselectionchanged="drdYear_SelectionChanged">
                         <Items>
-                            <ig:DropDownItem Selected="False" Text="2010" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2011" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2012" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2013" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2014" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2015" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2016" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2017" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2018" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2019" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2020" Value=""/>
-                            <ig:DropDownItem Selected="False" Text="2021" Value=""/>
+                            <ig:DropDownItem Selected="False" Text="2010" Value="2010"/>
+                            <ig:DropDownItem Selected="False" Text="2011" Value="2011" />
+                            <ig:DropDownItem Selected="False" Text="2012" Value="2012"/>
+                            <ig:DropDownItem Selected="False" Text="2013" Value="2013"/>
+                            <ig:DropDownItem Selected="False" Text="2014" Value="2014"/>
+                            <ig:DropDownItem Selected="False" Text="2015" Value="2015"/>
+                            <ig:DropDownItem Selected="False" Text="2016" Value="2016"/>
+                            <ig:DropDownItem Selected="False" Text="2017" Value="2017"/>
+                            <ig:DropDownItem Selected="False" Text="2018" Value="2018"/>
+                            <ig:DropDownItem Selected="False" Text="2019" Value="2019"/>
+                            <ig:DropDownItem Selected="False" Text="2020" Value="2020"/>
+                            <ig:DropDownItem Selected="False" Text="2021" Value="2021"/>
                         </Items>
                     </ig:WebDropDown>
                     </div>
