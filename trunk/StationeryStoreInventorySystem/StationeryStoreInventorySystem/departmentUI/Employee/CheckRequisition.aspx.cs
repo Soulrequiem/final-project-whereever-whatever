@@ -129,6 +129,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             }
         }
 
+
+        /// <summary>
+        /// Fills Items Details to Datagrid
+        /// </summary>
+        /// <param name="dtItemsDetails"></param>
+        private void FillRequisitionDetails(DataTable dtCollectionDetails)
+        {
+            try
+            {
+                dgvRequisitionDetails.DataSource = dtCollectionDetails;
+                dgvRequisitionDetails.DataBind();
+            }
+            catch (Exception e)
+            {
+                Logger.WriteErrorLog(e);
+            }
+        }
+
+
         /// <summary>
         /// Fills Requisition Details to Datagrid
         /// </summary>
@@ -189,22 +208,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
          }
 
 
-        /// <summary>
-        /// Fills Items Details to Datagrid
-        /// </summary>
-        /// <param name="dtItemsDetails"></param>
-        private void FillRequisitionDetails(DataTable dtCollectionDetails)
-        {
-            try
-            {
-                dgvRequisitionDetails.DataSource = dtCollectionDetails;
-                dgvRequisitionDetails.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+        
         /// <summary>
         ///To do the withdraw requisition
         ///     Modified By: Thazin Win
@@ -213,14 +217,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         private void prepareData()
         {
             remarksList = new Dictionary<string, string>();
-
+            string requisitionID;
             for (int i = 0; i < dgvRequisitionList.Rows.Count; i++)
             {
                 if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvRequisitionList.Rows[i].Items.FindItemByKey("CheckRequisitionCheckBox").Value) == true)
                 {
                   // if (dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks").Value != null)
-                   remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks").FindControl("remarks")).Text);
-
+                //   remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks").FindControl("remarks")).Text);
+                //   else
+                 //      remarksList.Add(i.ToString(),dgvRequisitionList.Rows[i].Items.FindItemByKey("RequisitionID").Text);
+                    requisitionID =dgvRequisitionList.Rows[i].Items.FindItemByKey("RequisitionID").FindControl("RequisitionID").ToString();
+                   if( checkRequisitionControlObj.SelectWithdraw(SystemStoreInventorySystemUtil.Converter.objToString(Request.QueryString["RequisitionIDIndex"] ))== SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
+                   {
+                       break;
+                   }
+            //{);
                 }
             }
         }
@@ -228,10 +239,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         protected void btnWithdraw_Click(object sender, EventArgs e)
         {
             prepareData();
-            if (checkRequisitionControlObj.SelectWithdrawRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
-            {
-                refresh();
-            }
+            refresh();
+            //if (checkRequisitionControlObj.SelectWithdrawRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            //{
+            //    refresh();
+            //}
         }
 
         private void refresh()
@@ -239,6 +251,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
             dgvRequisitionList.Rows.Clear();
             FillRequisitionList();
+        }
+
+        private void chk_changed(object sender, System.EventArgs e)
+        {
+            string s = string.Empty;
+        }
+
+        protected void dgvRequisitionList_RowSelectionChanged(object sender, Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        {
+            string s = e.CurrentSelectedRows[0].ToString();
+        }
+
+        protected void dgvRequisitionList_CellSelectionChanged(object sender, Infragistics.Web.UI.GridControls.SelectedCellEventArgs e)
+        {
+            string str = e.CurrentSelectedCells.ToString();
         }       
         ///// <summary>
         ///// Fills the changed data into Datagrid
