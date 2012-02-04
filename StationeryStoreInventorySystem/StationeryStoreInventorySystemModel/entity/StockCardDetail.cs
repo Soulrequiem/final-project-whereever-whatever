@@ -7,7 +7,6 @@ namespace StationeryStoreInventorySystemModel.entity
 {
     public partial class StockCardDetail
     {
-        StockCardDetail stockDetial = new StockCardDetail();
         public StockCardDetail()
             : this(0, null, String.Empty, 0, 0, DateTime.Now, null, 0)
         {

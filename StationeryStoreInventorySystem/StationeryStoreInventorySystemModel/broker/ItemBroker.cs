@@ -38,7 +38,14 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                itemObj = inventory.Items.Where(iObj => iObj.Id == item.Id || iObj.Description.Contains(item.Description)).First();
+                if (item.Description != String.Empty)
+                {
+                    itemObj = inventory.Items.Where(iObj => iObj.Description.Contains(item.Description)).First();
+                }
+                else
+                {
+                    itemObj = inventory.Items.Where(iObj => iObj.Id == item.Id).First();
+                }
             }
             catch (Exception e)
             {

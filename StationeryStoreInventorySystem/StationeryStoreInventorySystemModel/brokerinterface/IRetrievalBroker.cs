@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using StationeryStoreInventorySystemModel.entity;
+using StationeryStoreInventorySystemModel.broker;
 using SystemStoreInventorySystemUtil;
 
 namespace StationeryStoreInventorySystemModel.brokerinterface
 {
     public interface IRetrievalBroker
     {
+        
+
         int GetRetrievalId();
         Retrieval GetRetrieval(Retrieval retrieval);
         List<Retrieval> GetAllRetrieval();
@@ -17,6 +20,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Delete(Retrieval retrieval);
 
         int GetRetrievalDetailId();
+        int GetSumRetrievalDetailQty(RetrievalBroker.QTY_TYPE quantityType, Retrieval retrieval);
         RetrievalDetail GetRetrievalDetail(RetrievalDetail retrievalDetail);
         List<RetrievalDetail> GetAllRetrievalDetail();
         Constants.DB_STATUS Insert(RetrievalDetail newRetrievalDetail);

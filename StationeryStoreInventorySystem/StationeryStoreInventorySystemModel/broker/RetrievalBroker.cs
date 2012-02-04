@@ -17,11 +17,18 @@ namespace StationeryStoreInventorySystemModel.broker
 {
     public class RetrievalBroker : IRetrievalBroker
     {
-         private InventoryEntities inventory;
+        private InventoryEntities inventory;
         private Retrieval retrieval = null;
         private RetrievalDetail retrievalDetail = null;
         private List<Retrieval> retrievalList = null;
         private List<RetrievalDetail> retrievalDetailList = null;
+
+        public enum QTY_TYPE
+        {
+            NEEDED_QTY,
+            ACTUAL_QTY
+        }
+
         public RetrievalBroker(InventoryEntities inventory)
         {
             this.inventory = inventory;
@@ -160,6 +167,23 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             return status;
         }
+
+        public int GetSumRetrievalDetailQty(QTY_TYPE quantityType, Retrieval retrieval)
+        {
+            int? totalQty = 0;
+            switch (quantityType)
+            {
+                case QTY_TYPE.ACTUAL_QTY:
+                    totalQty = retrieval.RetrievalDetails.Sum(x => x.ActualQty).Value;
+                    break;
+                case QTY_TYPE.NEEDED_QTY:
+                    totalQty = retrieval.RetrievalDetails.Sum(x => x.NeededQty);
+                    break;
+            }
+
+            return totalQty.HasValue ? totalQty.Value : 0;
+        }
+
         /// <summary>
         /// Retrieve the RetrievalDetail information  from RetrievalDetail Table according to the RetrievalDetail Parameter
         /// </summary>
