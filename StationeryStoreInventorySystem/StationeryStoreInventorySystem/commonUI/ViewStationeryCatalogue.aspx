@@ -54,11 +54,18 @@
                         Height="500px" DefaultColumnWidth="50px" StyleSetName="Office2010Blue" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle">
+                        ItemCssClass="ItemGridViewStyle"
+                        oninitializerow="dgvStationeryList_InitializeRow">
                         <Columns>
-                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="150px">
-                                <Header Text="Item No." />
-                            </ig:BoundDataField>
+                            <ig:TemplateDataField Key="ItemNo" Width="100px">
+                            <ItemTemplate>
+                                <asp:HyperLink ID="ItemNo" runat="server" 
+                                    Text='<%# Eval("ItemNo" ) %>'
+                                    NavigateUrl="~/storeUI/Clerk/ViewStockCard.aspx" >
+                                    </asp:HyperLink>
+                            </ItemTemplate>
+                            <Header Text="Item No." />
+                            </ig:TemplateDataField>
                             <ig:BoundDataField DataFieldName="Category" Key="Category" Width="150px">
                                 <Header Text="Category" />
                             </ig:BoundDataField>
