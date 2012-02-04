@@ -24,27 +24,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ItemNo");
-            //dt.Columns.Add("QuantityAdjusted");
-            //dt.Columns.Add("Reason");
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "Hello";
-            //dr[1] = "1";
-            //dr[2] = "1";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "Hello";
-            //dr[1] = "1";
-            //dr[2] = "1";
-            //dt.Rows.Add(dr);
-
-            //DgvAdjustmentVoucherDetails.ClearDataSource();
-            //DgvAdjustmentVoucherDetails.DataSource = dt;
-            //DgvAdjustmentVoucherDetails.DataBind();
-
             if (!IsPostBack)
             {
                 //FillVoucherDetails();
@@ -88,6 +67,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             {
                 Logger.WriteErrorLog(e);
             }
+        }
+
+        protected void DgvAdjustmentVoucherDetails_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+
         }
     }
 }

@@ -106,6 +106,30 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             voucherNo = e.CurrentSelectedRows[0].Attributes["VoucherNo"].ToString();
         }
+
+        protected void DgvDiscrepancyReportList_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillDiscrepancy();
+        }
+
+        protected void DgvDiscrepancyReportList_PageIndexChanged(object sender,
+            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillDiscrepancy();
+        }
+
+        protected void DgvDiscrepancyReport_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillReport();
+        }
+
+        protected void DgvDiscrepancyReport_PageIndexChanged(object sender,
+            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillReport();
+        }
     }
 }
 /********************************************/

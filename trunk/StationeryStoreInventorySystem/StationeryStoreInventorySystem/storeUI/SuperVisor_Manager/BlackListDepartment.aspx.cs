@@ -86,6 +86,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             
         }
 
+        protected void DgvDepartmentList_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillDepartmentList();
+        }
+
+        protected void DgvDepartmentList_PageIndexChanged(object sender,
+            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillDepartmentList();
+        }
+
     //    private BlacklistDepartmentControl GetControl()
     //    {
     //        if (bldCtrl == null)

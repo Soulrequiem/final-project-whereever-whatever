@@ -19,7 +19,9 @@
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                            onrowselectionchanged="DgvDiscrepancyReportList_RowSelectionChanged">
+                            onrowselectionchanged="DgvDiscrepancyReportList_RowSelectionChanged" 
+                            ondatafiltering="DgvDiscrepancyReportList_DataFiltering" 
+                            onpageindexchanged="DgvDiscrepancyReportList_PageIndexChanged">
                  <Columns>
                      <%--<ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="150px">
                          <Header Text="Voucher No." />
@@ -98,7 +100,9 @@
                             <ig:WebDataGrid ID="DgvDiscrepancyReport" runat="server" Height="300px" 
                             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                            ondatafiltering="DgvDiscrepancyReport_DataFiltering" 
+                            onpageindexchanged="DgvDiscrepancyReport_PageIndexChanged">
                                 <Columns>
                                     <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                         <Header Text="Item No." />

@@ -57,7 +57,8 @@
                             <ig:WebDataGrid ID="DgvAdjustmentVoucherDetails" runat="server" Height="300px" 
                                 Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">                                
+                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                            ondatafiltering="DgvAdjustmentVoucherDetails_DataFiltering">                                
                                 <Columns>
                                     <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="230px">
                                         <Header Text="Item No." />
