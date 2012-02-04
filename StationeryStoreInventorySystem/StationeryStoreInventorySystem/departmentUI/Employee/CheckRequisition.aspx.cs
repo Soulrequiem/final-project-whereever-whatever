@@ -18,7 +18,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 {
     public partial class CheckRequisition : System.Web.UI.Page
     {
-        CheckRequisitionControl crctrl;
+        CheckRequisitionControl checkRequisitionControlObj;
+        private DataTable dt;
+        private DataRow dr;
+        private static readonly string sessionKey = "CheckReq";
+        private Dictionary<string, string> remarksList;
         /// <summary>
         /// Loads the CheckRequisition form
         ///     Modified By: SanLaPyaye
@@ -27,15 +31,42 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// 
+        /// <summary>
+        /// Loads the CheckRequisition form
+        ///     Modified By: Thazin Win
+        ///     Modified Date: 02/02/2012
+        ///     Modification Reason: Show the requisition data in GridView/withdraw the requisition process/Show the requsition detail
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                crctrl = new CheckRequisitionControl();
-                Util.PutSession("CheckReq", crctrl.GetRequisitionList());
-                FillRequisitionList();
-                FillRequisitions();
+                if (Request.QueryString["RequisitionIDIndex"] == null)
+                {
+                    checkRequisitionControlObj = new CheckRequisitionControl();
+                    Util.PutSession(sessionKey, checkRequisitionControlObj);
+                    FillRequisitions();
+                }
+                else
+                {
+                    checkRequisitionControlObj = (CheckRequisitionControl)Util.GetSession(sessionKey);
+
+                    FillRequisitionDetails(checkRequisitionControlObj.SelectRequisitionID(SystemStoreInventorySystemUtil.Converter.objToString(Request.QueryString["RequisitionIDIndex"])));
+                    Util.PutSession(sessionKey, checkRequisitionControlObj);
+                    
+                    FillRequisitions();
+                }
             }
+            else
+            {
+                checkRequisitionControlObj = (CheckRequisitionControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+            FillRequisitionList();
         }
 
         /// <summary>
@@ -63,7 +94,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
-                dgvRequisitionList.DataSource = (DataTable)Util.GetSession("CheckReq");
+                dgvRequisitionList.DataSource = checkRequisitionControlObj.GetRequisitionList();
                 dgvRequisitionList.DataBind();
             }
             catch (Exception e)
@@ -87,7 +118,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 {
                     drdRequisitionList.TextField = "RequisitionID";
                     drdRequisitionList.ValueField = "RequisitionID";
-                    drdRequisitionList.DataSource = (DataTable)Util.GetSession("CheckReq");
+                   // drdRequisitionList.DataSource = (DataTable)Util.GetSession(sessionKey);
+                    drdRequisitionList.DataSource = checkRequisitionControlObj.GetRequisitionList();
                     drdRequisitionList.DataBind();
                 }
             }
@@ -101,25 +133,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Fills Requisition Details to Datagrid
         /// </summary>
         /// <param name="dtDeatilsRequisition"></param>
-        private void FillRequisitionDetails(DataTable dtDeatilsRequisition)
-        {
-            try
-            {
-                lblRequisitionID.Text = "";//Choose selected record ID;
-                lblRequistionStatus.Text = "";//Choose selected requisition status;
-                dgvRequisitionDetails.DataSource = dtDeatilsRequisition;
-                dgvRequisitionDetails.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+        //private void FillRequisitionDetails(DataTable dtDeatilsRequisition)
+        //{
+        //    try
+        //    {
+        //        lblRequisitionID.Text = "";//Choose selected record ID;
+        //        lblRequistionStatus.Text = "";//Choose selected requisition status;
+        //        dgvRequisitionDetails.DataSource = dtDeatilsRequisition;
+        //        dgvRequisitionDetails.DataBind();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.WriteErrorLog(e);
+        //    }
+        //}
         protected void btnGetItem_Click(object sender, EventArgs e)
         {
             try
             {
-                FillSpecificRequisitionList(((DataTable)Session["CheckReq"]).Select(" RequisitionID LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
+                FillSpecificRequisitionList(((DataTable)Session[sessionKey]).Select(" RequisitionID LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
             }
             catch (Exception ex)
             {
@@ -129,9 +161,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         private CheckRequisitionControl getControl()
         {
-            if (crctrl == null)
-                crctrl = new CheckRequisitionControl();
-            return crctrl;
+            if (checkRequisitionControlObj == null)
+                checkRequisitionControlObj = new CheckRequisitionControl();
+            return checkRequisitionControlObj;
         }
 
         protected void dgvRequisitionDetails_PageIndexChanged(object sender, Infragistics.Web.UI.GridControls.PagingEventArgs e)
@@ -145,6 +177,69 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             FillRequisitionList();
         }
 
+        protected void dgvRequisitionList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        {
+            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("RequisitionID").FindControl("RequisitionID");
+            link.NavigateUrl = "~/departmentUI/Employee/CheckRequisition.aspx?RequisitionIDIndex=" + link.Text;
+        }
+
+        public static void removeSession()
+        {
+            StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
+         }
+
+
+        /// <summary>
+        /// Fills Items Details to Datagrid
+        /// </summary>
+        /// <param name="dtItemsDetails"></param>
+        private void FillRequisitionDetails(DataTable dtCollectionDetails)
+        {
+            try
+            {
+                dgvRequisitionDetails.DataSource = dtCollectionDetails;
+                dgvRequisitionDetails.DataBind();
+            }
+            catch (Exception e)
+            {
+                Logger.WriteErrorLog(e);
+            }
+        }
+        /// <summary>
+        ///To do the withdraw requisition
+        ///     Modified By: Thazin Win
+        ///     Modified Date: 02/02/2012
+        /// </summary>
+        private void prepareData()
+        {
+            remarksList = new Dictionary<string, string>();
+
+            for (int i = 0; i < dgvRequisitionList.Rows.Count; i++)
+            {
+                if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvRequisitionList.Rows[i].Items.FindItemByKey("CheckRequisitionCheckBox").Value) == true)
+                {
+                  // if (dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks").Value != null)
+                   remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks").FindControl("remarks")).Text);
+
+                }
+            }
+        }
+
+        protected void btnWithdraw_Click(object sender, EventArgs e)
+        {
+            prepareData();
+            if (checkRequisitionControlObj.SelectWithdrawRequisition(remarksList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            {
+                refresh();
+            }
+        }
+
+        private void refresh()
+        {
+
+            dgvRequisitionList.Rows.Clear();
+            FillRequisitionList();
+        }       
         ///// <summary>
         ///// Fills the changed data into Datagrid
         ///// </summary>

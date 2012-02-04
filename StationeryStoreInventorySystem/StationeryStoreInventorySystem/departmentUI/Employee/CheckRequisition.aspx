@@ -8,7 +8,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="ContentDivStyle">
+    <br />
+    <div class="ContentDivStyle">
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <br />
     <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
@@ -40,10 +41,11 @@
                     <br />
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label9" runat="server" 
                         Text="<%$ Resources:WebResources, SearchResult_Label%>"/>
-                    <ig:WebDataGrid ID="dgvRequisitionList" runat="server" Width="700px"  
+                    <ig:WebDataGrid ID="dgvRequisitionList" runat="server" Width="700px" EnableViewState="true"
                          Height="250px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
+                         oninitializerow="dgvRequisitionList_InitializeRow">
                     <Columns>
                         
                         <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
@@ -57,6 +59,7 @@
                                 <asp:HyperLink ID="RequisitionID" runat="server"
                                  Text='<%# Eval("RequisitionID" ) %>'
                                  NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx" >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </asp:HyperLink>
                              </ItemTemplate>
                            <Header Text="Requisition ID" />
@@ -77,8 +80,8 @@
                         </ig:BoundDataField>--%>
                         <ig:TemplateDataField  Key="remarks" Width="150px">
                             <ItemTemplate>
-                                <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
-                                Text='<%# Eval("Remarks") %>'>
+                                <ig:WebTextEditor ID="remarks" runat="server" Width="120px"
+                                Text='<%# Eval("remarks") %>'>
                                 </ig:WebTextEditor>
                             </ItemTemplate>
                             <Header Text="Remarks" />
@@ -112,7 +115,8 @@
                  </ig:WebDataGrid><br />
                  <div style="float:right">
                      <asp:Button ID="btnWithdraw" CssClass="DefaultLargebutton"
-                        runat="server" Text="<%$ Resources:WebResources,Withdraw_Button_text %>" />
+                        runat="server" Text="<%$ Resources:WebResources,Withdraw_Button_text %>" 
+                         onclick="btnWithdraw_Click" />
                  </div>
                 </Template>
         </igmisc:WebGroupBox><br />
@@ -127,7 +131,7 @@
                                 Text="<%$ Resources:WebResources, RequisitionDetails_RequisitionID%>"/></td>
                             <td>
                                  <asp:Label CssClass="DefaultLabelstyle" ID="lblRequisitionID" runat="server" 
-                                    Text="DDS/111/20"/>
+                                   />
                             </td>
                         </tr>
                         <tr>
@@ -135,7 +139,7 @@
                                 Text="<%$ Resources:WebResources, CheckRequisition_Status_Label%>"/></td>
                             <td>
                                  <asp:Label CssClass="DefaultLabelstyle" ID="lblRequistionStatus" runat="server" 
-                                    Text="Incomplete"/>
+                                    />
                             </td>
                         </tr>
                     </table>
@@ -151,20 +155,20 @@
                          onpageindexchanged="dgvRequisitionDetails_PageIndexChanged">
                     <Columns>
                         
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="90px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="itemNo" Width="90px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
+                        <ig:BoundDataField DataFieldName="ItemDescription" Key="itemDescription" 
                             Width="250px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="120px">
+                        <ig:BoundDataField DataFieldName="RequiredQty" Key="requiredQty" Width="120px">
                             <Header Text="Required Qty" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="ReceivedQty" Key="ReceivedQty" Width="120px">
+                        <ig:BoundDataField DataFieldName="ReceivedQty" Key="receivedQty" Width="120px">
                             <Header Text="Received Qty" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RemainingQty" Key="RemainingQty" 
+                        <ig:BoundDataField DataFieldName="RemainingQty" Key="remainingQty" 
                             Width="120px">
                             <Header Text="Remaining Qty" />
                         </ig:BoundDataField>
