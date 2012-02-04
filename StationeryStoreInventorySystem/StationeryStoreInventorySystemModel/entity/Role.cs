@@ -8,7 +8,7 @@ namespace StationeryStoreInventorySystemModel.entity
     public partial class Role
     {
         public Role()
-            : this(0, "", DateTime.Now, null, 0)
+            : this(0, String.Empty, DateTime.Now, null, 0)
         {
         }
         public Role(int id, string name, DateTime createdDate, Employee createdBy, int status)

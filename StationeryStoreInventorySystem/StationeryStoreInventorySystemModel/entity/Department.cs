@@ -8,7 +8,7 @@ namespace StationeryStoreInventorySystemModel.entity
     public partial class Department
     {
         public Department()
-            : this(" ", " ", null, " ", " ", null, null, null, DateTime.Now, null, 0)
+            : this(String.Empty, String.Empty, null, String.Empty, String.Empty, null, null, null, DateTime.Now, null, 0)
         {
         }
         public Department(string id, string name, Employee contactId, string phoneNumer, string faxNumer, Employee headId, CollectionPoint collectionPointId,

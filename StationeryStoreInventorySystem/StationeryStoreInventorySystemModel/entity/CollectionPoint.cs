@@ -8,7 +8,7 @@ namespace StationeryStoreInventorySystemModel.entity
     public partial class CollectionPoint
     {
         public CollectionPoint()
-            : this(0, " ", new TimeSpan(00, 00, 00),null)
+            : this(0,String.Empty, new TimeSpan(00, 00, 00),null)
         {
         }
         public CollectionPoint(int id, String name, TimeSpan time, Employee clerk)
