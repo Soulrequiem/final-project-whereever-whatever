@@ -646,7 +646,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @Copyright 2012-2013 Logic University. All Rights Reserved..
+        ///   Looks up a localized string similar to &amp;copy;Copyright 2012-2013 Logic University. All Rights Reserved..
         /// </summary>
         internal static string MasterPageFooter_Text {
             get {
