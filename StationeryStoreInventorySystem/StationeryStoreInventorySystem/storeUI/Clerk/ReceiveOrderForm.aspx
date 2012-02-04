@@ -81,7 +81,7 @@
                 <Template>
                     <ig:WebDataGrid ID="DgvStationeryOrder" runat="server" Height="400px" 
                         Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
-                        CssClass="DefaultGridViewStyle" ItemCssClass="ItemGridViewStyle" EnableViewState="true"
+                        CssClass="DefaultGridViewStyle" ItemCssClass="ItemGridViewStyle" EnableDataViewState="true"
                         HeaderCaptionCssClass="HeaderGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
                             <ig:BoundDataField DataFieldName="ItemNo" Key="itemNo" Width="150px">
