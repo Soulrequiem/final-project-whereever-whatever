@@ -15,8 +15,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         private static readonly string sessionKey = "CreatePurchaseOrder";
         private static readonly string selectedSessionKey = "CreatePurchaseOrderSelectedIndex";        
 
-        PurchaseOrderControl poCtrl;
+        private PurchaseOrderControl poCtrl;
         private List<int> selectedIndexList;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -24,7 +25,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 FillItems();
                 FillSupplier();
                 poCtrl = GetControl();
-                lblPONumber.Text = poCtrl.purchaseOrderId.ToString();
+                //lblPONumber.Text = poCtrl.purchaseOrderId.ToString();
 
                 selectedIndexList = new List<int>();
 
@@ -200,10 +201,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            if (poCtrl.SelectRemove(selectedIndexList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
-            {
-                refresh();
-            }
+            //if (poCtrl.SelectRemove(selectedIndexList) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            //{
+            //    refresh();
+            //}
             
             //poCtrl.SelectRemove(selectedIndexList);
         }
