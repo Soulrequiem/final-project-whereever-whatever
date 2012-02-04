@@ -24,9 +24,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             {
                 //FillStockCardDetails(StationeryStoreInventorySystemController.Util.GetItemTable());
                 FillItems();
-
+                ViewStockCardControl viewStockCardControl = new ViewStockCardControl();
+                                
             }
-        }
+    }
 
 
         /// <summary>
@@ -47,6 +48,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                     drdItemList.DataBind();
 
                 }
+                               
             }
             catch (Exception e)
             {

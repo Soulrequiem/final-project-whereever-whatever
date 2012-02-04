@@ -105,7 +105,7 @@
                                 </ig:WebTextEditor>--%>
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
-                                     StyleSetName="Office2010Blue" 
+                                     StyleSetName="Office2010Blue" EnableViewState="true"
                                      onselectionchanged="drdItemList_SelectionChanged" 
                                      AutoFilterQueryType="Contains" AutoSelectOnMatch="False" >
                                      <%--onvaluechanged="drdItemList_ValueChanged">--%>
@@ -127,7 +127,7 @@
                     <ig:WebDataGrid ID="dgvStationeryList" runat="server" Height="150px" 
                          Width="570px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="ItemNo"
                          oninitializerow="dgvStationeryList_InitializeRow">
                     <Columns>
                         
@@ -172,7 +172,7 @@
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label11" runat="server" 
                         Text="<%$ Resources:WebResources, RequisitionDetails_Label_Text%>"/>
                     <ig:WebDataGrid ID="dgvStationeryDetailsList" runat="server" Height="200px" Width="570px" 
-                        DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+                        DefaultColumnWidth="50px" AutoGenerateColumns="False" EnableDataViewState="true"
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
@@ -229,7 +229,8 @@
                     <asp:Button ID="btnRemove" CssClass="DefaultLargebutton"
                         runat="server" Text="<%$ Resources:WebResources,Remove_Button_text %>" />
                     <asp:Button ID="btnReset" CssClass="DefaultLargebutton"
-                        runat="server" Text="<%$ Resources:WebResources,Reset_Button_text %>" />
+                        runat="server" Text="<%$ Resources:WebResources,Reset_Button_text %>" 
+                         onclick="btnReset_Click1" />
                  </div>
                 </Template>
      </igmisc:WebGroupBox>

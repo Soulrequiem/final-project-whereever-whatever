@@ -29,7 +29,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 {
                     vsrCtrl = new ViewStationeryRetrievalListControl();
                     StationeryStoreInventorySystemController.Util.PutSession(sessionKey, vsrCtrl);
-                    FillStationeryRetrivalList(vsrCtrl.GetStationeryRetrievalList());
+                    FillStationeryRetrivalList(vsrCtrl.RetrievalList);
                 }
                 else
                 {

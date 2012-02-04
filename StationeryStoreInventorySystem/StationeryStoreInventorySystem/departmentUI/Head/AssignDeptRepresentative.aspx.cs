@@ -65,8 +65,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
            {
                    //adrCtrl = new AssignDepartmentRepresentativeControl();
                    //DataTable dtEmployee = adrCtrl.DepartmentRepresentative;
-                   drdRepEmployeeList.TextField = "Employee";
-                   drdRepEmployeeList.ValueField = "Name";
+                   drdRepEmployeeList.TextField = "EmployeeName";
+                   drdRepEmployeeList.ValueField = "EmployeeID";
                    drdRepEmployeeList.DataSource = null; //dtEmployee;
                    drdRepEmployeeList.DataBind();
                //}
