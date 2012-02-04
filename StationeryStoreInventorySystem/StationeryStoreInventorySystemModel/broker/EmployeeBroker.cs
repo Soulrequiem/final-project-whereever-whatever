@@ -205,6 +205,26 @@ namespace StationeryStoreInventorySystemModel.broker
             return employeeList;
 
         }
+
+        /// <summary>
+        /// Get Employee Name According to the Employee Name
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
+        public List<Employee> GetEmployeeByDepartments(Employee employee)
+        {
+            try
+            {
+                employeeList = inventory.Employees.Where(eObj => eObj.Department.Id == employee.Department.Id).ToList();
+            }
+            catch (Exception e)
+            {
+                employeeList = null;
+            }
+
+            return employeeList;
+
+        }
         /// <summary>
         /// Get user data of ther User table according to the User parameter
         /// </summary>
