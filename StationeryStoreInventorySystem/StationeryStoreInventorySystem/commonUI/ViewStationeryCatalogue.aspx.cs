@@ -32,21 +32,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
-                FillStationeryList(StationeryStoreInventorySystemController.Util.GetItemTable());
+                FillStationeryList();
                 FillItems();
 
                 viewStationeryCatalogueControl = new ViewStationeryCatalogueControl();
-                //this.FillStationeryList(StationeryStoreInventorySystemController.Util.GetItemTable());
+                //this.FillStationeryList(viewStationeryCatalogueControl.ItemList);
                 //FillStationeryList();
-                //FillItems();
+                FillItems();
 
             }
-            
+
         }
 
         private ViewStationeryCatalogueControl getControl()
         {
-            if(vsCtrl == null)
+            if (vsCtrl == null)
                 vsCtrl = new ViewStationeryCatalogueControl();
             return vsCtrl;
         }
@@ -57,7 +57,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         /// Fills data to datagrid
         /// </summary>
         /// <param name="dt"></param>
-        private void FillStationeryList(DataTable dt)
+        private void FillStationeryList()
         {
             try
             {
@@ -69,8 +69,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 //    dtStationery = vsCtrl.AllItemList;
                 //}else
                 //    dtStationery=vsCtrl.ItemList(itemDescription);
-                dgvStationeryList.DataSource = dt;
-                dgvStationeryList.DataBind();
+                DataTable dt = StationeryStoreInventorySystemController.Util.GetItemListTable(drdItemList.CurrentValue);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dgvStationeryList.DataSource = dt;
+                    dgvStationeryList.DataBind();
+                }
             }
             catch (Exception e)
             {
@@ -119,13 +123,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         //        //Pass to the controller get Datatable
 
         //        //Call FillStationeryList function according the item list
-                
+
         //    }
         //    catch (Exception ex)
         //    {
         //        Logger.WriteErrorLog(ex);
         //    }    
-       
+
         //}
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -135,20 +139,26 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 //string selectedItem = drdItemList.SelectedItem.Text;
                 //vsCtrl = getControl();
                 //DataTable dtStationery = vsCtrl.ItemList(selectedItem);
-                FillStationeryList(StationeryStoreInventorySystemController.Util.GetItemListTable(drdItemList.CurrentValue)); 
+                FillStationeryList();
                 //dgvStationeryList.DataSource = dtStationery;
                 //dgvStationeryList.DataBind();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.WriteErrorLog(ex);
             }
         }
 
-        protected void dgvStationeryList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        protected void dgvStationeryList_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
         {
-            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("ItemNo").FindControl("ItemNo");
-            link.NavigateUrl = "~/storeUI/Clerk/ViewStockCard.aspx?ItemDescription=" + e.Row.Items[2].Text;
+            FillStationeryList();
+        }
+
+        protected void dgvStationeryList_PageIndexChanged(object sender,
+            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillStationeryList();
         }
     }
 }
