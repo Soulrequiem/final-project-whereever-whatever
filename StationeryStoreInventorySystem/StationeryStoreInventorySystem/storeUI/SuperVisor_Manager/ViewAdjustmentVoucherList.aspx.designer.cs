@@ -58,6 +58,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager {
         protected global::Infragistics.WebUI.Misc.WebGroupBox WebGroupBox1;
         
         /// <summary>
+        /// Print control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton Print;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>

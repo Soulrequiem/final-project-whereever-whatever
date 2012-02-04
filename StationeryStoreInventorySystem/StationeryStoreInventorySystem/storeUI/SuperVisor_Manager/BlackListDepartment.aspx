@@ -20,10 +20,12 @@
               ID="Label2" runat="server"
               Text="<%$ Resources:WebResources, BlackListDepartment_DepartmentList %>"/>
             <ig:WebDataGrid ID="DgvDepartmentList" runat="server" Height="300px" 
-            Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+            Width="550px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue"  DataKeyFields="DepartmentID"
-            oninitializerow="DgvDepartmentList_InitializeRow">
+            oninitializerow="DgvDepartmentList_InitializeRow" 
+            ondatafiltering="DgvDepartmentList_DataFiltering" 
+            onpageindexchanged="DgvDepartmentList_PageIndexChanged">
                 <Columns>
                     <ig:BoundDataField DataFieldName="DepartmentName" Key="DepartmentName" 
                         Width="200px">
