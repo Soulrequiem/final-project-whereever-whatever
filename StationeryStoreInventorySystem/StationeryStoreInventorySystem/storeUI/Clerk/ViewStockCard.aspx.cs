@@ -18,16 +18,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class ViewStockCard : System.Web.UI.Page
     {
+        string itemDescription;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                //FillStockCardDetails(StationeryStoreInventorySystemController.Util.GetItemTable());
                 FillItems();
-                ViewStockCardControl viewStockCardControl = new ViewStockCardControl();
-                                
+                if (Request.QueryString["ItemDescription"] != null)
+                {
+                   
+                    drdItemList.TextField = Request.QueryString["ItemDescription"].ToString();
+                    itemDescription = Request.QueryString["ItemDescription"].ToString();
+                    SearchResult();
+                }
             }
-    }
+        }
 
 
         /// <summary>
@@ -46,9 +51,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                     drdItemList.ValueField = "ID";
                     drdItemList.DataSource = dtItems;
                     drdItemList.DataBind();
-
                 }
-                               
             }
             catch (Exception e)
             {
@@ -94,16 +97,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnGetItem_Click(object sender, EventArgs e)
         {
-            ViewStockCardControl vsCtrl = new ViewStockCardControl();
+            itemDescription = drdItemList.SelectedItem.Text;
+            SearchResult();
+        }
 
-            DataTable dtItem = StationeryStoreInventorySystemController.Util.GetItemListTable(drdItemList.SelectedItem.Text);
+        protected void SearchResult()
+        {
+            ViewStockCardControl vsCtrl = new ViewStockCardControl();
+            //itemDescription=drdItemList.SelectedItem.Text;
+
+            DataTable dtItem = StationeryStoreInventorySystemController.Util.GetItemListTable(itemDescription);
             if (dtItem != null)
             {
                 lblItemNo.Text = dtItem.Rows[0][0].ToString();
                 lblUOM.Text = dtItem.Rows[0][5].ToString();
             }
 
-            FillStockCardDetails(vsCtrl.GetStockCardDetails(drdItemList.SelectedItem.Text));
+            FillStockCardDetails(vsCtrl.GetStockCardDetails(itemDescription));
             DataTable dt = vsCtrl.getSupplier();
             if (dt != null && dt.Rows.Count == 3)
             {
@@ -111,13 +121,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 lblSuplier2.Text = dt.Rows[1].ItemArray[0].ToString();
                 lblSuplier3.Text = dt.Rows[2].ItemArray[0].ToString();
             }
-
         }
-
-        //protected void btnSearch_Click(object sender, EventArgs e)
-        //{
-        //    FillStockCardDetails(StationeryStoreInventorySystemController.Util.GetItemListTable(drdItemList.CurrentValue)); 
-        //}
     }
 }
 /****************************************/
