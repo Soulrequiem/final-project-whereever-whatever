@@ -319,5 +319,24 @@ namespace StationeryStoreInventorySystemController
         {
             return "<a href='~/" + page + (attribute != String.Empty ? "?" + attribute : "") + "'>" + linkText + "</a>";
         }
+
+        public static DataTable GetEmployeesByDepartments()
+        {
+            InventoryEntities inventory = new InventoryEntities();
+
+            IEmployeeBroker employeeBroker = new EmployeeBroker(inventory);
+            List<Employee> lEmployee = employeeBroker.GetEmployeeByDepartments(Util.GetEmployee());
+            DataTable dtEmployee = new DataTable();
+            dtEmployee.Columns.Add("employeeID");
+            dtEmployee.Columns.Add("employeeName");
+            foreach (Employee emp in lEmployee)
+            {
+                DataRow dr = dtEmployee.NewRow();
+                dr[0] = emp.Id;
+                dr[1] = emp.Name;
+                dtEmployee.Rows.Add(dr);
+            }
+            return dtEmployee;
+        }
     }
 }
