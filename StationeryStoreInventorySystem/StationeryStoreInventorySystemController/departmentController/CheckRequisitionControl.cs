@@ -20,27 +20,78 @@ namespace StationeryStoreInventorySystemController.departmentController
 {
     public class CheckRequisitionControl
     {
+
+        private InventoryEntities inventory;
         private IRequisitionBroker requisitionBroker;
+        private IItemBroker itemBroker;//addded by thazin win
+        private IEmployeeBroker employeeBroker;
+       
 
         private Employee currentEmployee;
         private Requisition requisition;
         private RequisitionDetail requisitionDetail;
+        private List<Requisition> pendingRequisitionList;
 
         private System.Data.Objects.DataClasses.EntityCollection<Requisition> requisitionList;
-
+   
         private DataTable dt;
         private DataRow dr;
+        private DataColumn[] dataColumn;
+        //private string[] columnName = new string[] { "RequisitionID", "requisitionDate", "RequisitionBy", "RequisitionQty", "remarks" };
+        private string[] columnName = new string[] { "RequisitionID", "requisitionDate", "RequisitionBy", "remarks" };
 
         public CheckRequisitionControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.EMPLOYEE);
-            InventoryEntities inventory = new InventoryEntities();
+            this.inventory = new InventoryEntities();
+
+
 
             requisitionBroker = new RequisitionBroker(inventory);
+            
             requisitionList = new System.Data.Objects.DataClasses.EntityCollection<Requisition>();
             //requisitionList = requisitionBroker.GetAllRequisition();
         }
 
+        public DataTable PendingRequisitionList
+        {
+            get
+            {
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
+
+                int qty;
+                foreach (Requisition r in pendingRequisitionList)
+                {
+                    qty = 0;
+                    dr = dt.NewRow();
+                    dr[columnName[0]] = r.Id;
+                    dr[columnName[1]] = Convert.ToDateTime(r.CreatedDate);
+                    dr[columnName[2]] = r.CreatedBy.Name;
+
+
+                    //List<RequisitionDetail> requisitionDetailList=requisitionBroker.GetRequisitionDetail(r.RequisitionDetails);
+                    //foreach (RequisitionDetail reqDetail in r.RequisitionDetails)
+                    //{
+                    //    qty += reqDetail.Qty;
+                    //}
+                    //dr[columnName[3]] = qty;
+                    dr[columnName[3]] = r.Remarks;
+
+                    dt.Rows.Add(dr);
+
+                }
+
+                return dt;
+            }
+        }
         //public List<Requisition> GetRequisitionList()
         //{
         //    return requisitionList;
@@ -50,9 +101,9 @@ namespace StationeryStoreInventorySystemController.departmentController
         ///     Show all requisition.
         ///     Created By:JinChengCheng
         ///     Created Date:26-01-2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
+        ///     Modified By:Thazin Win
+        ///     Modified Date:02-02-2012
+        ///     Modification Reason:Get requisition list by requistion
         ///     Modified By:
         ///     Modified Date:
         ///     Modification Reason:
@@ -91,6 +142,116 @@ namespace StationeryStoreInventorySystemController.departmentController
             return dt;
         }
 
+
+        /// <summary>
+        ///     Show requisition detail according to the selected requisition
+        ///     Created By:JinChengCheng
+        ///     Created Date:26-01-2012
+        ///     Modified By:Thazin Win
+        ///     Modified Date:02-02-2012
+        ///     Modification Reason:To retrieve detail data
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        /// </summary>
+        /// <param name="requisitionId"></param>
+        /// <returns>The return type of this method is datatable.</returns>
+        public DataTable SelectRequisitionID(string requisitionId)
+        {
+            dt = new DataTable();
+            dt.Columns.Add("itemNo");
+            dt.Columns.Add("itemDescription");
+            dt.Columns.Add("requiredQty");
+            dt.Columns.Add("receivedQty");
+            dt.Columns.Add("remainingQty");
+
+            List<RequisitionDetail> requistionDetailList;
+            requisition = new Requisition();
+            requisition.Id = requisitionId;
+            requisitionDetail=new RequisitionDetail();
+            requisitionDetail.Requisition=requisition;
+           // requisition = requisitionBroker.GetRequisition(requisition);
+            requistionDetailList = requisitionBroker.GetAllRequisitionDetailByObj(requisitionDetail);
+            //List<RequisitionDetail> requisitionDetailList=(List<RequisitionDetail>)requisition.RequisitionDetails;
+           // foreach (RequisitionDetail temp in requisition.RequisitionDetails)
+          foreach (RequisitionDetail temp in requistionDetailList)
+            {
+                dr = dt.NewRow();
+
+                itemBroker = new ItemBroker(inventory);
+                Item item = new Item();
+                item =temp.Item ;
+                item = itemBroker.GetItem(item);
+                dr["itemNo"] = item.Id;
+                dr["itemDescription"] = item.Description;
+                dr["requiredQty"] = temp.Qty;
+                dr["receivedQty"] = temp.DeliveredQty.HasValue ? temp.DeliveredQty.Value : 0;
+                if (temp.DeliveredQty.Equals(null))
+                    dr["remainingQty"] = 0;
+                else
+                    dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
+                //dr["itemNo"] = temp.Item.Id;
+                //dr["itemDescription"] = temp.Item.Description;
+                //dr["requiredQty"] = temp.Qty;
+                //dr["receivedQty"] = temp.DeliveredQty;
+                //dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
+                dt.Rows.Add(dr);
+            }
+            return dt;
+        }
+        /// <summary>
+         ///To withdraw the requisition
+        ///     Created By:Thazin Win
+        ///     Created Date:03-02-2012
+        ///     Modified By:
+        ///     Modified Date:
+        ///     Modification Reason:
+        ///     Modified Date:
+        ///     Modification Reason: 
+        /// </summary>
+        /// <param name="remarks"></param>
+        /// <returns></returns>
+        public Constants.ACTION_STATUS SelectWithdrawRequisition(Dictionary<string, string> remarks)
+        {
+            return SelectActionRequisition(remarks, Constants.REQUISITION_STATUS.WITHDRAW);
+        }
+        private Constants.ACTION_STATUS SelectActionRequisition(Dictionary<string, string> remarks, Constants.REQUISITION_STATUS requisitionStatus)
+        {
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+            employeeBroker = new EmployeeBroker(inventory);
+            if (remarks.Count > 0)
+            {
+                status = Constants.ACTION_STATUS.SUCCESS;
+                Requisition requisition=new Requisition();
+
+                Employee employee = new Employee();
+                employee.Id = currentEmployee.Id;
+                employee = employeeBroker.GetEmployee(employee);
+
+                foreach (string key in remarks.Keys)
+                {
+                   requisition = pendingRequisitionList.ElementAt(Converter.objToInt(key));
+                    requisition.Status = Converter.objToInt(requisitionStatus);
+                    requisition.Remarks = remarks[key];
+                    requisition.ApprovedBy = employee;
+                    requisition.ApprovedDate = DateTime.Now;
+
+                    pendingRequisitionList.Remove(requisition);
+
+                    if (requisitionBroker.Update(requisition) == Constants.DB_STATUS.FAILED)
+                    {
+                        status = Constants.ACTION_STATUS.FAIL;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                status = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return status;
+        }
         //public Requisition EnterRequisitionID(string requisitionId)
         //{
         //    requisition = new Requisition();
@@ -141,40 +302,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         //}
 
-        /// <summary>
-        ///     Show requisition detail according to the selected requisition
-        ///     Created By:JinChengCheng
-        ///     Created Date:26-01-2012
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        ///     Modified By:
-        ///     Modified Date:
-        ///     Modification Reason:
-        /// </summary>
-        /// <param name="requisitionId"></param>
-        /// <returns>The return type of this method is datatable.</returns>
-        public DataTable SelectRequisitionID(string requisitionId)
-        {
-            dt = new DataTable();
-
-            requisition = new Requisition();
-            requisition.Id = requisitionId;
-            requisition = requisitionBroker.GetRequisition(requisition);
-            //List<RequisitionDetail> requisitionDetailList=(List<RequisitionDetail>)requisition.RequisitionDetails;
-            foreach (RequisitionDetail temp in requisition.RequisitionDetails)
-            {
-                dr = dt.NewRow();
-                dr["itemNo"] = temp.Item.Id;
-                dr["itemDescription"] = temp.Item.Description;
-                dr["requiredQty"] = temp.Qty;
-                dr["receivedQty"] = temp.DeliveredQty;
-                dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
-                dt.Rows.Add(dr);
-            }
-            return dt;
-        }
-
+     
         /// <summary>
         ///     Refresh requisition list after withdraw one requisition
         ///     Created By:JinChengCheng
