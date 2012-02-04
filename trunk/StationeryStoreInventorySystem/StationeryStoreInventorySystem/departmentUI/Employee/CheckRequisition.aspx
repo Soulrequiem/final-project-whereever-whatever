@@ -41,21 +41,22 @@
                     <br />
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label9" runat="server" 
                         Text="<%$ Resources:WebResources, SearchResult_Label%>"/>
-                    <ig:WebDataGrid ID="dgvRequisitionList" runat="server" Width="700px" EnableViewState="true"
+                    <ig:WebDataGrid ID="dgvRequisitionList" runat="server" Width="700px"
                          Height="250px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
                          oninitializerow="dgvRequisitionList_InitializeRow" 
                          oncellselectionchanged="dgvRequisitionList_CellSelectionChanged" 
-                         onrowselectionchanged="dgvRequisitionList_RowSelectionChanged">
+                         onrowselectionchanged="dgvRequisitionList_RowSelectionChanged" 
+                         onrowupdating="dgvRequisitionList_RowUpdating">
                     <Columns>
-                        <ig:TemplateDataField Key="CheckRequisitionCheckBox" Width="85px">
+                        <%--<ig:TemplateDataField Key="CheckRequisitionCheckBox" Width="85px">
                             <ItemTemplate>
                                 <asp:CheckBox runat="server" OnCheckedChanged="chk_changed" />
                             </ItemTemplate>
-                            </ig:TemplateDataField>
-                        <%--<ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
-                        </ig:UnboundCheckBoxField>--%>
+                            </ig:TemplateDataField>--%>
+                        <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
+                        </ig:UnboundCheckBoxField>
                         <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                             Width="110px">
                             <Header Text="Requisition ID" />
@@ -96,6 +97,7 @@
                     </Columns>
                         <Behaviors>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
+                                <AutoPostBackFlags RowSelectionChanged="True" />
                             </ig:Selection>
                             <ig:Sorting>
                             </ig:Sorting>
