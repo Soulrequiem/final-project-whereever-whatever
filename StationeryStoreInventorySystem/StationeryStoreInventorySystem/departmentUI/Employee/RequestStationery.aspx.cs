@@ -35,12 +35,36 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             {
                 resCtrl = (RequestStationeryControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
 
+                if (resCtrl == null)
+                {
+                    resCtrl = GetControl();
+
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, resCtrl);
+
+                    lblRequisitionDate.Text = SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
+                    lblRequisitionID.Text = resCtrl.RequisitionId;
+                    lblDepartmentCode.Text = resCtrl.DepartmentCode;
+                    lblDepartmentName.Text = resCtrl.DepartmentName;
+                    lblEmployeeName.Text = resCtrl.EmployeeName;
+                    lblEmployeeID.Text = resCtrl.EmployeeId;
+                    lblEmployeeEmailID.Text = resCtrl.EmployeeEmail;
+                }
+
                 if (!IsPostBack)
                 {
                     if (resCtrl.AddToTable(Request.QueryString["itemCode"]) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
                     {
                         // print error message
                     }
+
+                    lblRequisitionDate.Text = SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
+                    lblRequisitionID.Text = resCtrl.RequisitionId;
+                    lblDepartmentCode.Text = resCtrl.DepartmentCode;
+                    lblDepartmentName.Text = resCtrl.DepartmentName;
+                    lblEmployeeName.Text = resCtrl.EmployeeName;
+                    lblEmployeeID.Text = resCtrl.EmployeeId;
+                    lblEmployeeEmailID.Text = resCtrl.EmployeeEmail;
+
                     FillItems();
                 }
 
