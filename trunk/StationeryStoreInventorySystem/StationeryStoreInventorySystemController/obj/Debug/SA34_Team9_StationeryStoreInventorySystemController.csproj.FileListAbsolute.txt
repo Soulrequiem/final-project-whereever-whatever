@@ -16,3 +16,12 @@ C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\Sta
 C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\StationeryStoreInventorySystemController.dll
 C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\StationeryStoreInventorySystemController.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\bin\Debug\StationeryStoreInventorySystemController.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\bin\Debug\StationeryStoreInventorySystemController.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\bin\Debug\StationeryStoreInventorySystemModel.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\bin\Debug\SystemStoreInventorySystemUtil.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\bin\Debug\StationeryStoreInventorySystemModel.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\bin\Debug\SystemStoreInventorySystemUtil.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\StationeryStoreInventorySystemController.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\StationeryStoreInventorySystemController.pdb

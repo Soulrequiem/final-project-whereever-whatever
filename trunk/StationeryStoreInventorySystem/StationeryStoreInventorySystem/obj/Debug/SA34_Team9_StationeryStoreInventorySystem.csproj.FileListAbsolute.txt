@@ -32,3 +32,5 @@ D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\Station
 D:\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll.licenses
 D:\final-project-whereever-whatever_latest\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\ResolveAssemblyReference.cache
 D:\final-project-whereever-whatever_latest\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll.licenses
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll.licenses
