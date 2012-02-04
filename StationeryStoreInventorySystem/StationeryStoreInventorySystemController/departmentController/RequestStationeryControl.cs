@@ -26,6 +26,8 @@ namespace StationeryStoreInventorySystemController.departmentController
         private string[] columnName = { "ItemNo", "ItemDescription", "RequiredQty" };
 
         private DataColumn[] dataColumn;
+
+        private int itemAdded;
         
         public RequestStationeryControl()
         {
@@ -39,7 +41,10 @@ namespace StationeryStoreInventorySystemController.departmentController
             requisition = new Requisition();
             requisition.CreatedBy = Util.GetEmployee(employeeBroker);
             requisition.Department = requisition.CreatedBy.Department;
+            requisition.Status = Converter.objToInt(Constants.REQUISITION_STATUS.PENDING);
             requisition.Id = requisitionBroker.GetRequisitionId(requisition);
+
+            itemAdded = 0;
 
             dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
                                             new DataColumn(columnName[1]),
@@ -101,14 +106,14 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             if (item != null)
             {
-                requisitionDetail = new RequisitionDetail();
-                requisitionDetail.Id = requisitionBroker.GetRequisitionDetailId();
-                requisitionDetail.Requisition = requisition;
-                requisitionDetail.Item = item;
-                requisitionDetail.Qty = 1;
-
-                if (!requisition.RequisitionDetails.Contains(requisitionDetail))
+                if (requisition.RequisitionDetails.Where(x=> x.Item.Id == itemId).Count() == 0)
                 {
+                    requisitionDetail = new RequisitionDetail();
+                    requisitionDetail.Id = requisitionBroker.GetRequisitionDetailId() + (itemAdded++);
+                    requisitionDetail.Requisition = requisition;
+                    requisitionDetail.Item = item;
+                    requisitionDetail.Qty = 1;
+
                     requisition.RequisitionDetails.Add(requisitionDetail);
                     status = Constants.ACTION_STATUS.SUCCESS;
                 }
@@ -125,14 +130,23 @@ namespace StationeryStoreInventorySystemController.departmentController
             return status;
         }
 
-        public Constants.ACTION_STATUS SelectRequest(DataTable requisitionDetailTable){
+        public Constants.ACTION_STATUS SelectRequest(Dictionary<string, int> quantity)
+        {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
-            int index = 0;
-            foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
+            foreach (string itemId in quantity.Keys)
             {
-                requisitionDetail.Qty = Converter.objToInt(requisitionDetailTable.Rows[index++][columnName[2]]);
+                if (requisition.RequisitionDetails.Where(x => x.Item.Id == itemId).Count() > 0)
+                {
+                    requisition.RequisitionDetails.Where(x => x.Item.Id == itemId).First().Qty = quantity[itemId];
+                }
             }
+
+            //int index = 0;
+            //foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
+            //{
+            //    requisitionDetail.Qty = Converter.objToInt(requisitionDetailTable.Rows[index++][columnName[2]]);
+            //}
 
             if (requisitionBroker.Insert(requisition) == Constants.DB_STATUS.SUCCESSFULL)
             {
@@ -154,17 +168,36 @@ namespace StationeryStoreInventorySystemController.departmentController
             {
 
                 RequisitionDetail requisitionDetail;
+                List<RequisitionDetail> requisitionDetailToBeRemoved = new List<RequisitionDetail>();
+                int totalDeleted = 0;
 
                 foreach (int i in index)
                 {
-                    requisitionDetail = requisition.RequisitionDetails.ElementAt(i - 1);
+                    requisitionDetail = requisition.RequisitionDetails.ElementAt(i - (totalDeleted++));
 
-                    if (requisition.RequisitionDetails.Contains(requisitionDetail))
+                    if (requisitionDetail != null)
                     {
-                        requisition.RequisitionDetails.Remove(requisitionDetail);
+                        requisitionDetailToBeRemoved.Add(requisitionDetail);
                         status = Constants.ACTION_STATUS.SUCCESS;
                     }
+                    else
+                    {
+                        status = Constants.ACTION_STATUS.FAIL;
+                        break;
+                    }
                 }
+
+                if (status == Constants.ACTION_STATUS.SUCCESS)
+                {
+                    foreach (RequisitionDetail rd in requisitionDetailToBeRemoved)
+                    {
+                        requisition.RequisitionDetails.Remove(rd);
+                    }
+
+                    itemAdded -= totalDeleted;
+
+                    requisition.RequisitionDetails.OrderBy(x=> x.Id);
+                }                
             }
             else
             {
@@ -179,6 +212,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             if (requisition.RequisitionDetails.Count() > 0)
             {
                 requisition.RequisitionDetails.Clear();
+                itemAdded = 0;
                 return Constants.ACTION_STATUS.SUCCESS;
             }
             else
