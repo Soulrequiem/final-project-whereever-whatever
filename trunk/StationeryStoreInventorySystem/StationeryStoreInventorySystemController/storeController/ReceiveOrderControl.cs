@@ -225,22 +225,25 @@ namespace StationeryStoreInventorySystemController.storeController
                     if(poDetail.Item.Id.Equals(itemNo)){
                         poDetail.AcceptedQty = Converter.objToInt(quantity);
                         Item item = poDetail.Item;
+                        item.Cost = poDetail.Price;
+                        itemBroker.Update(item);
                         StockCardDetail stockCardDetail = new StockCardDetail();
                         stockCardDetail.Item = item;
                         stockCardDetail.Description = "Supplier-" + po.Supplier.Id;
                         stockCardDetail.Qty = Converter.objToInt(quantity);
                         stockCardDetail.CreatedDate = DateTime.Now;
+                        stockCardDetail.CreatedBy = Util.GetEmployee(employeeBroker);
                         stockCardDetail.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
-                        List<StockCardDetail> stockCardDetailList = itemBroker.GetAllStockCardDetail().ToList();
-                        List<StockCardDetail> newList = new List<StockCardDetail>();
-                        foreach(StockCardDetail scd in stockCardDetailList){
-                            if(scd.Item.Id.Equals(item.Id)){
-                                newList.Add(scd);
-                            }
-                        }
+                        //List<StockCardDetail> stockCardDetailList = itemBroker.GetAllStockCardDetail().ToList();
+                        //List<StockCardDetail> newList = new List<StockCardDetail>();
+                        //foreach(StockCardDetail scd in stockCardDetailList){
+                        //    if(scd.Item.Id.Equals(item.Id)){
+                        //        newList.Add(scd);
+                        //    }
+                        //}
                         
-                        StockCardDetail scDetail = newList.Last<StockCardDetail>();
-                        stockCardDetail.Balance = scDetail.Balance + Converter.objToInt(quantity);
+                        //StockCardDetail scDetail = newList.Last<StockCardDetail>();
+                        stockCardDetail.Balance = itemBroker.GetCurrentBalance(item) + Converter.objToInt(quantity);
                         stockCardDetail.Id = itemBroker.GetStockCardDetailId();
                         itemBroker.Insert(stockCardDetail);
                         // add remark later
