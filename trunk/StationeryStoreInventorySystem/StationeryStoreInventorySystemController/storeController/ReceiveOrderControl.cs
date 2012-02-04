@@ -20,6 +20,7 @@ namespace StationeryStoreInventorySystemController.storeController
     public class ReceiveOrderControl
     {
         private IPurchaseOrderBroker purchaseOrderBroker;
+        private IEmployeeBroker employeeBroker;
         private IItemBroker itemBroker;
         
         private Employee currentEmployee;
@@ -49,6 +50,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
             itemBroker = new ItemBroker(inventory);
+            employeeBroker = new EmployeeBroker(inventory);
 
             purchaseOrderList = purchaseOrderBroker.GetAllPurchaseOrder();
 
@@ -204,24 +206,49 @@ namespace StationeryStoreInventorySystemController.storeController
             po.Id = Converter.objToInt(poNumber);
             po = purchaseOrderBroker.GetPurchaseOrder(po);
             po.DeliveryOrderNumber = deliveryNo;
+            po.DeliveryDate = DateTime.Now;
+            po.AcceptedBy = Util.GetEmployee(employeeBroker);
+          
             List<PurchaseOrderDetail> poDetailList = po.PurchaseOrderDetails.ToList();
             foreach (DataRow dr in dt.Rows)
             {
                 itemNo = dr[detail[0]].ToString();
+                
                 itemDesc = dr[detail[1]].ToString();
+           
                 quantity = dr[detail[2]].ToString();
+               
                 remark = dr[detail[3]].ToString();
+                
                 foreach (PurchaseOrderDetail poDetail in poDetailList)
                 {
                     if(poDetail.Item.Id.Equals(itemNo)){
-                        poDetail.Qty = Converter.objToInt(quantity);
-                        //need or not to update from purchaseOrderDetailBroker???
+                        poDetail.AcceptedQty = Converter.objToInt(quantity);
+                        Item item = poDetail.Item;
+                        StockCardDetail stockCardDetail = new StockCardDetail();
+                        stockCardDetail.Item = item;
+                        stockCardDetail.Description = "Supplier-" + po.Supplier.Id;
+                        stockCardDetail.Qty = Converter.objToInt(quantity);
+                        stockCardDetail.CreatedDate = DateTime.Now;
+                        stockCardDetail.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+                        List<StockCardDetail> stockCardDetailList = itemBroker.GetAllStockCardDetail().ToList();
+                        List<StockCardDetail> newList = new List<StockCardDetail>();
+                        foreach(StockCardDetail scd in stockCardDetailList){
+                            if(scd.Item.Id.Equals(item.Id)){
+                                newList.Add(scd);
+                            }
+                        }
+                        
+                        StockCardDetail scDetail = newList.Last<StockCardDetail>();
+                        stockCardDetail.Balance = scDetail.Balance + Converter.objToInt(quantity);
+                        stockCardDetail.Id = itemBroker.GetStockCardDetailId();
+                        itemBroker.Insert(stockCardDetail);
                         // add remark later
                     }
                 }
 
             }
-
+            
             Constants.DB_STATUS dbStatus = purchaseOrderBroker.Update(po);
             if(dbStatus == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
