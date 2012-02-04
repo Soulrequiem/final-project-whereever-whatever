@@ -431,7 +431,7 @@ namespace SystemStoreInventorySystemUtil
 
         /// <summary>
         ///     Converts an object into double
-        ///     createdBy Priyanka
+        ///     
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -448,6 +448,7 @@ namespace SystemStoreInventorySystemUtil
         }
         /// <summary>
         /// Convert an object into bool
+        /// createdBy Priyanka
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
