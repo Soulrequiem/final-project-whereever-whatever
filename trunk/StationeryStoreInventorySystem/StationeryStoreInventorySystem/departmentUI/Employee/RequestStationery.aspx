@@ -105,10 +105,8 @@
                                 </ig:WebTextEditor>--%>
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_Item %>" 
-                                     StyleSetName="Office2010Blue" EnableViewState="true"
-                                     onselectionchanged="drdItemList_SelectionChanged" 
+                                     StyleSetName="Office2010Blue" EnableViewState="true" 
                                      AutoFilterQueryType="Contains" AutoSelectOnMatch="False" >
-                                     <%--onvaluechanged="drdItemList_ValueChanged">--%>
                                      <Button Visible="False" />
                                     <Items>
                                         <ig:DropDownItem Selected="false" Text="DropDown Item" Value="">
@@ -144,8 +142,7 @@
                         <ig:TemplateDataField Key="AddToTable" Width="160px">
                                 <ItemTemplate>
                                    <asp:HyperLink ID="AddToTable" runat="server"
-                                       Text="Add to Table"
-                                       NavigateUrl="~/departmentUI/Employee/RequestStationery.aspx" >
+                                       Text="Add to Table" >
                                        </asp:HyperLink>
                                </ItemTemplate>
                             <Header Text="" />
@@ -173,7 +170,7 @@
                         Text="<%$ Resources:WebResources, RequisitionDetails_Label_Text%>"/>
                     <ig:WebDataGrid ID="dgvStationeryDetailsList" runat="server" Height="200px" Width="570px" 
                         DefaultColumnWidth="50px" AutoGenerateColumns="False" EnableDataViewState="true"
-                        CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
+                        CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" DataKeyFields="ItemNo"
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         
@@ -192,7 +189,7 @@
                         </ig:BoundDataField>--%>
                         <ig:TemplateDataField  Key="RequiredQty" Width="160px">
                             <ItemTemplate>
-                                <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="140px"
+                                <ig:WebTextEditor ID="RequiredQty" runat="server" Width="140px"
                                 Text='<%# Eval("RequiredQty") %>' NullText="Enter Required Quantity">
                                 </ig:WebTextEditor>
                             </ItemTemplate>
@@ -203,8 +200,6 @@
                         <Behaviors>
                             <ig:Filtering>
                             </ig:Filtering>
-                            <ig:Paging PageSize="10">
-                            </ig:Paging>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
                             <ig:Sorting>
@@ -225,9 +220,11 @@
                  </ig:WebDataGrid>
                  <div style="float:right;margin-right:15px">
                     <asp:Button ID="btnRequest" CssClass="DefaultLargebutton"
-                        runat="server" Text="<%$ Resources:WebResources,Request_Button_text %>" />
+                        runat="server" Text="<%$ Resources:WebResources,Request_Button_text %>" 
+                         onclick="btnRequest_Click1" />
                     <asp:Button ID="btnRemove" CssClass="DefaultLargebutton"
-                        runat="server" Text="<%$ Resources:WebResources,Remove_Button_text %>" />
+                        runat="server" Text="<%$ Resources:WebResources,Remove_Button_text %>" 
+                         onclick="btnRemove_Click1" />
                     <asp:Button ID="btnReset" CssClass="DefaultLargebutton"
                         runat="server" Text="<%$ Resources:WebResources,Reset_Button_text %>" 
                          onclick="btnReset_Click1" />
