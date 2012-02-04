@@ -85,6 +85,33 @@ namespace StationeryStoreInventorySystemModel.broker
             return requisitionList;
         }
 
+        /// <summary>
+        ///  Retrieve All of the Requisition information according to the status
+        /// </summary>
+        /// <returns>
+        /// List of Requisition
+        /// </returns>
+
+        public List<Requisition> GetAllRequisitionByStatus()
+        {
+            try
+            {
+
+                requisitionList = inventory.Requisitions.Where(reqObj=>reqObj.Status==1 || reqObj.Status==2).ToList<Requisition>();
+            }
+            catch (Exception e)
+            {
+                requisitionList = null;
+            }
+            return requisitionList;
+        }
+
+
+        /// <summary>
+        /// Retreive All of the requisition information according to status
+        /// </summary>
+        /// <param name="requisitionStatus"></param>
+        /// <returns></returns>
         public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus)
         {
             try
