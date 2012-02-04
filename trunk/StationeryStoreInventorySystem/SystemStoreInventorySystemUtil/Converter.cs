@@ -431,6 +431,7 @@ namespace SystemStoreInventorySystemUtil
 
         /// <summary>
         ///     Converts an object into double
+        ///     createdBy Priyanka
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -443,6 +444,22 @@ namespace SystemStoreInventorySystemUtil
             catch (Exception e)
             {
                 return -1;
+            }
+        }
+        /// <summary>
+        /// Convert an object into bool
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static Boolean  objToBool(object obj)
+        {
+            try
+            {
+                return Convert.ToBoolean(obj);
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
