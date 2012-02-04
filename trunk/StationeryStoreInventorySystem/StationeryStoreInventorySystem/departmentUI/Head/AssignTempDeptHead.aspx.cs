@@ -130,6 +130,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             remove_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"];
         }
+
+        protected void btnEmployee_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DgvTempDepteHeadSearchDetails_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillHeadList();
+        }
+
+        protected void DgvTempDepteHeadSearchDetails_PageIndexChanged(object sender,
+            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillHeadList();
+        }
     }
 }
 /********************************************/

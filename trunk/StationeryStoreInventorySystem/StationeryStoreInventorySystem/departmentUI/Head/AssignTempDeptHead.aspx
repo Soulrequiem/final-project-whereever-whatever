@@ -85,8 +85,13 @@
                          onselectionchanged="drdHeadEmployeeList_SelectionChanged">
                         <Button Visible="False" />
                      </ig:WebDropDown>
-                     <br /><br />           
                 </div>
+                <div style="float:left; padding-left:10px">
+                    <asp:Button ID="btnEmployee" runat="server" Text="Select" 
+                         CssClass="Searchbutton" onclick="btnEmployee_Click"/>
+                </div>
+                     <br /><br />  
+                     
                 <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="530px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Search Result" 
                 TitleAlignment="Left">
@@ -95,7 +100,9 @@
                                 Width="530px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged">
+                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged" 
+                                ondatafiltering="DgvTempDepteHeadSearchDetails_DataFiltering" 
+                                onpageindexchanged="DgvTempDepteHeadSearchDetails_PageIndexChanged">
                                 <Columns>
                                     <%--ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
                                      Key="BoundCheckBoxField_0" Width="50px">
@@ -136,6 +143,10 @@
                                     </ig:EditingCore>
                                     <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                     </ig:Selection>
+                                    <ig:Paging>
+                                    </ig:Paging>
+                                    <ig:Filtering>
+                                    </ig:Filtering>
                                 </Behaviors>
                             </ig:WebDataGrid>
                             <br />

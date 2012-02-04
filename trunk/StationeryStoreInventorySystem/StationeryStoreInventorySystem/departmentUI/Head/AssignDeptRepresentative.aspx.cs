@@ -64,7 +64,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
            try
            {
                    //adrCtrl = new AssignDepartmentRepresentativeControl();
-                   //DataTable dtEmployee = adrCtrl.DepartmentRepresentative;
+                   //DataTable dtEmployee = adrCtrl.DepartmentRepresentative;               
                    drdRepEmployeeList.TextField = "EmployeeName";
                    drdRepEmployeeList.ValueField = "EmployeeID";
                    drdRepEmployeeList.DataSource = null; //dtEmployee;
@@ -128,6 +128,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
            if (adrCtrl == null)
                adrCtrl = new AssignDepartmentRepresentativeControl();
            return adrCtrl;
+       }
+
+       protected void btnEmployee_Click(object sender, EventArgs e)
+       {
+
+       }
+
+       protected void DgvRepSearchDetails_DataFiltering(object sender,
+           Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+       {
+           FillRepresentativeList();
+       }
+
+       protected void DgvRepSearchDetails_PageIndexChanged(object sender,
+           Infragistics.Web.UI.GridControls.PagingEventArgs e)
+       {
+           FillRepresentativeList();
        }
     }
 }
