@@ -149,10 +149,17 @@ namespace StationeryStoreInventorySystemController.departmentController
                     {
                         if (requisitionCollection.RequisitionCollectionItems != null && requisitionCollection.RequisitionCollectionItems.Count() > 0)
                         {
-                            requisitionCollectionItem = requisitionCollection.RequisitionCollectionItems.Where(x => x.Item.Equals(item)).First();
-                            if (requisitionCollectionItem != null)
+                            if (requisitionCollection.RequisitionCollectionItems.Where(x => x.Item.Id == item.Id).Count() > 0)
                             {
-                                collectedItems.Add(item, requisitionCollectionItem.Qty.HasValue ? requisitionCollectionItem.Qty.Value : Converter.objToInt(items[item] * 0.9));
+                                requisitionCollectionItem = requisitionCollection.RequisitionCollectionItems.Where(x => x.Item.Id == item.Id).First();
+                                if (requisitionCollectionItem != null)
+                                {
+                                    collectedItems.Add(item, requisitionCollectionItem.Qty.HasValue ? requisitionCollectionItem.Qty.Value : Converter.objToInt(items[item] * 0.9));
+                                }
+                                else
+                                {
+                                    collectedItems.Add(item, Converter.objToInt(items[item] * 0.9));
+                                }
                             }
                             else
                             {
@@ -221,6 +228,8 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             Constants.ACTION_STATUS updateStatus = Constants.ACTION_STATUS.UNKNOWN;
 
+            int addedItem = 0;
+
             foreach (string key in itemsCollected.Keys)
             {
                 if (requisitionCollection.RequisitionCollectionItems.Where(x => x.Item.Id == key).Count() > 0)
@@ -238,7 +247,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                     employee.Id = currentEmployee.Id;
                     employee = employeeBroker.GetEmployee(employee);
 
-                    requisitionCollection.RequisitionCollectionItems.Add(new RequisitionCollectionItem(requisitionCollectionItemBroker.GetRequisitionCollectionItemId(), requisitionCollection, item, itemsCollected[key], DateTime.Now, employee, Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW)));
+                    requisitionCollection.RequisitionCollectionItems.Add(new RequisitionCollectionItem(requisitionCollectionItemBroker.GetRequisitionCollectionItemId() + (addedItem++), requisitionCollection, item, itemsCollected[key], DateTime.Now, employee, Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW)));
                 } 
             }
 

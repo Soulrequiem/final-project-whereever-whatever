@@ -15,12 +15,11 @@ namespace StationeryStoreInventorySystemController.departmentController
     {
         private IRequisitionBroker requisitionBroker;
         private IItemBroker itemBroker;
+        private IEmployeeBroker employeeBroker;
         
         private Employee currentEmployee;
         private Requisition requisition;
         
-        private System.Data.Objects.DataClasses.EntityCollection<RequisitionDetail> requisitionDetailList;
-
         private DataTable dt;
         private DataRow dr;
 
@@ -35,12 +34,11 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             requisitionBroker = new RequisitionBroker(inventory);
             itemBroker = new ItemBroker(inventory);
-
-            requisitionDetailList = new System.Data.Objects.DataClasses.EntityCollection<RequisitionDetail>();
+            employeeBroker = new EmployeeBroker(inventory);
 
             requisition = new Requisition();
-            requisition.CreatedBy = currentEmployee;
-            requisition.Department = currentEmployee.Department;
+            requisition.CreatedBy = Util.GetEmployee(employeeBroker);
+            requisition.Department = requisition.CreatedBy.Department;
             requisition.Id = requisitionBroker.GetRequisitionId(requisition);
 
             dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
@@ -61,12 +59,19 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                dt = new DataTable();
-                dt.Columns.AddRange(dataColumn);
-
-                if (requisitionDetailList.Count > 0)
+                if (dt == null)
                 {
-                    foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
+
+                if (requisition.RequisitionDetails.Count > 0)
+                {
+                    foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
                     {
                         dr = dt.NewRow();
                         dr[columnName[0]] = requisitionDetail.Item.Id;
@@ -100,10 +105,17 @@ namespace StationeryStoreInventorySystemController.departmentController
                 requisitionDetail.Id = requisitionBroker.GetRequisitionDetailId();
                 requisitionDetail.Requisition = requisition;
                 requisitionDetail.Item = item;
+                requisitionDetail.Qty = 1;
 
-                requisitionDetailList.Add(requisitionDetail);
-
-                status = Constants.ACTION_STATUS.SUCCESS;
+                if (!requisition.RequisitionDetails.Contains(requisitionDetail))
+                {
+                    requisition.RequisitionDetails.Add(requisitionDetail);
+                    status = Constants.ACTION_STATUS.SUCCESS;
+                }
+                else
+                {
+                    status = Constants.ACTION_STATUS.FAIL;
+                }
             }
             else
             {
@@ -117,12 +129,10 @@ namespace StationeryStoreInventorySystemController.departmentController
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
             int index = 0;
-            foreach (RequisitionDetail requisitionDetail in requisitionDetailList)
+            foreach (RequisitionDetail requisitionDetail in requisition.RequisitionDetails)
             {
                 requisitionDetail.Qty = Converter.objToInt(requisitionDetailTable.Rows[index++][columnName[2]]);
             }
-
-            requisition.RequisitionDetails = requisitionDetailList;
 
             if (requisitionBroker.Insert(requisition) == Constants.DB_STATUS.SUCCESSFULL)
             {
@@ -140,18 +150,18 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
 
-            if (requisitionDetailList.Count > 0)
+            if (requisition.RequisitionDetails.Count > 0)
             {
 
                 RequisitionDetail requisitionDetail;
 
                 foreach (int i in index)
                 {
-                    requisitionDetail = requisitionDetailList.ElementAt(i - 1);
+                    requisitionDetail = requisition.RequisitionDetails.ElementAt(i - 1);
 
-                    if (requisitionDetailList.Contains(requisitionDetail))
+                    if (requisition.RequisitionDetails.Contains(requisitionDetail))
                     {
-                        requisitionDetailList.Remove(requisitionDetail);
+                        requisition.RequisitionDetails.Remove(requisitionDetail);
                         status = Constants.ACTION_STATUS.SUCCESS;
                     }
                 }
@@ -162,6 +172,19 @@ namespace StationeryStoreInventorySystemController.departmentController
             }
 
             return status;            
+        }
+
+        public Constants.ACTION_STATUS SelectRemoveAll()
+        {
+            if (requisition.RequisitionDetails.Count() > 0)
+            {
+                requisition.RequisitionDetails.Clear();
+                return Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                return Constants.ACTION_STATUS.FAIL;
+            }
         }
     }
 }

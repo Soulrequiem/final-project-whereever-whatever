@@ -99,6 +99,22 @@ namespace StationeryStoreInventorySystemController
             return (Employee)GetSession(employeeSessionKey);
         }
 
+        /// <summary>
+        ///     Get an employee object from the current employee inside the session using the same context
+        /// </summary>
+        /// <param name="employeeBroker"></param>
+        /// <returns></returns>
+        public static Employee GetEmployee(IEmployeeBroker employeeBroker)
+        {
+            if (GetEmployee() != null)
+            {
+                Employee employee = new Employee();
+                employee.Id = GetEmployee().Id;
+                return employeeBroker.GetEmployee(employee);
+            }
+            return null;
+        }
+
         public static void SetEmployee(Employee employee)
         {
             PutSession(employeeSessionKey, employee);
@@ -252,6 +268,31 @@ namespace StationeryStoreInventorySystemController
             }
             
             return allItem.Copy();
+        }
+
+        private static DataTable employeeTable;
+        public static DataTable GetEmployeeTable()
+        {
+            if (employeeTable == null)
+            {
+                employeeTable = new DataTable();
+                employeeTable.Columns.AddRange(new DataColumn[]{ new DataColumn("EmployeeID"),
+                                                                 new DataColumn("EmployeeName") });
+
+                DataRow dr;
+
+                List<Employee> employeeList = (new EmployeeBroker(new InventoryEntities())).GetAllEmployee();
+
+                foreach (Employee employee in employeeList)
+                {
+                    dr = employeeTable.NewRow();
+                    dr["EmployeeID"] = employee.Id;
+                    dr["EmployeeName"] = employee.Name;
+                    employeeTable.Rows.Add(dr);
+                }
+            }
+
+            return employeeTable.Copy();
         }
 
         public static void GoToPage(string page)
