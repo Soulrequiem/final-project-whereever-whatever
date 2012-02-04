@@ -286,6 +286,16 @@ namespace StationeryStoreInventorySystemModel.broker
             throw new NotImplementedException();
         }
 
+
+        #region IItemBroker Members
+
+
+        public int GetStockCardDetailId()
+        {
+            return inventory.StockCardDetails.Max(xObj => xObj.Id) + 1;
+        }
+
+        #endregion
     }
         #endregion
     }
