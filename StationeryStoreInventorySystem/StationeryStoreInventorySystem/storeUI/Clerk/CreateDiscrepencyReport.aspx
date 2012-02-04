@@ -58,9 +58,10 @@
                                     </Items>
                                 </ig:WebDropDown>
                             </td>
-                            <%--<td>
-                                <asp:Button ID="btnGetItem" runat="server" Text="Select" CssClass="Searchbutton"/>
-                            </td>--%>
+                            <td>
+                                <asp:Button ID="btnGetItem" runat="server" Text="Select" 
+                                    CssClass="Searchbutton" onclick="btnGetItem_Click"/>
+                            </td>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label1" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_ItemNo%>"/>
                             </td>
@@ -117,10 +118,7 @@
                         AutoGenerateColumns="False" DefaultColumnWidth="50px" 
                         DataKeyFields="Reason"
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        onrowupdated="dgvItemList_RowUpdated" 
-                        ondatafiltering="dgvItemList_DataFiltering" 
-                        onpageindexchanged="dgvItemList_PageIndexChanged">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                         <Columns>
                             <ig:BoundCheckBoxField Key="CreateDiscrepancyReportCheckBox" Width="80px" DataFieldName="CreateDiscrepancyReportCheckBox">
                                 <Header Text="Select" />
