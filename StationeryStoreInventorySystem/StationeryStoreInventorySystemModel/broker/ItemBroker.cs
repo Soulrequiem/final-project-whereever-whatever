@@ -172,6 +172,19 @@ namespace StationeryStoreInventorySystemModel.broker
             return itemList;
 
         }
+
+        public int GetCurrentBalance(Item item)
+        {
+            if (inventory.StockCardDetails.Where(x => x.Item.Id == item.Id).Count() == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return inventory.StockCardDetails.Where(x => x.Item.Id == item.Id).OrderByDescending(x => x.Id).First().Balance;
+            }
+        }
+
         /// <summary>
         ///  Retrieve the StockCardDetail information according to the stockCardDetail Parameter 
         /// </summary>
