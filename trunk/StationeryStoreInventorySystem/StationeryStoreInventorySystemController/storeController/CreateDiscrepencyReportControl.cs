@@ -22,9 +22,12 @@ namespace StationeryStoreInventorySystemController.storeController
     {
         private IItemBroker itemBroker;
         private IDiscrepancyBroker discrepancyBroker;
+        private IItemPriceBroker itemPriceBroker;
         
         private Employee currentEmployee;
         private Discrepancy discrepancy;
+        private Item item;
+        private ItemPrice itemprice;
         
         private System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail> discrepancyDetailList;
 
@@ -40,12 +43,28 @@ namespace StationeryStoreInventorySystemController.storeController
 
             discrepancyBroker = new DiscrepancyBroker(inventory);
             itemBroker = new ItemBroker(inventory);
+            item = new Item();
+            itemPriceBroker = new ItemPriceBroker(inventory);
+            itemprice = new ItemPrice();
+            
 
             discrepancy = new Discrepancy();
             discrepancyDetailList = new System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail>();
 
 
         }
+        /// <summary>
+        /// createdBy priyanka
+        /// </summary>
+
+
+        public Item Item { get { return item; } }
+        public string ItemId { get { return item.Id; } }
+        public decimal Cost { get { return item.Cost; } }
+
+        //public ItemPrice ItemPrice { get { return itemprice; } }
+       
+
 
         public DataTable DiscrepancyDetailList
         {
@@ -84,9 +103,22 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return value of this method is resultItem.</returns>
-        public Item SelectItemDescription(string itemDescription)
+        public Constants.ACTION_STATUS SelectItemDescription(string itemDescription)
         {
-            return Util.GetItem(itemBroker, itemDescription);
+            Constants.ACTION_STATUS selectStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            item = Util.GetItem(itemBroker, itemDescription);
+
+            if (item != null)
+            {
+                selectStatus = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                selectStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return selectStatus;
         }
 
        
