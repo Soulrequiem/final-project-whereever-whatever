@@ -22,7 +22,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         private static readonly string sessionKey = "RequestStationery";
 
         private RequestStationeryControl resCtrl;
-        private ViewStationeryCatalogueControl vsCtrl;
+
         /// <summary>
         /// Loads the RequestStationery form
         /// </summary>
@@ -30,28 +30,46 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            // click add to table
+            if (Request.QueryString["itemCode"] != null)
             {
-                resCtrl = GetControl();
+                resCtrl = (RequestStationeryControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
 
-                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, resCtrl);
+                if (!IsPostBack)
+                {
+                    if (resCtrl.AddToTable(Request.QueryString["itemCode"]) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
+                    {
+                        // print error message
+                    }
 
-                lblRequisitionDate.Text = SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
-                lblRequisitionID.Text = resCtrl.RequisitionId;
-                lblDepartmentCode.Text = resCtrl.DepartmentCode;
-                lblDepartmentName.Text = resCtrl.DepartmentName;
-                lblEmployeeName.Text = resCtrl.EmployeeName;
-                lblEmployeeID.Text = resCtrl.EmployeeId;
-                lblEmployeeEmailID.Text = resCtrl.EmployeeEmail;
+                    FillItems();
+                }
 
-                FillItems();
-                //FillDetails("ssfs");
                 FillItemList();
             }
             else
             {
-                resCtrl = (RequestStationeryControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
-            }
+                if (!IsPostBack)
+                {
+                    resCtrl = GetControl();
+
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, resCtrl);
+
+                    lblRequisitionDate.Text = SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
+                    lblRequisitionID.Text = resCtrl.RequisitionId;
+                    lblDepartmentCode.Text = resCtrl.DepartmentCode;
+                    lblDepartmentName.Text = resCtrl.DepartmentName;
+                    lblEmployeeName.Text = resCtrl.EmployeeName;
+                    lblEmployeeID.Text = resCtrl.EmployeeId;
+                    lblEmployeeEmailID.Text = resCtrl.EmployeeEmail;
+
+                    FillItems();
+                }
+                else
+                {
+                    resCtrl = (RequestStationeryControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+                }
+            }            
         }
 
         /// <summary>
@@ -109,7 +127,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
-                resCtrl = GetControl();
                 dgvStationeryDetailsList.DataSource = resCtrl.RequisitionDetailList;
                 dgvStationeryDetailsList.DataBind();
             }
@@ -153,11 +170,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         }
 
-        protected void btnReset_Click(object sender, EventArgs e)
-        {
-            dgvStationeryDetailsList.ClearDataSource();
-        }
-
         public static void removeSession()
         {
             StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
@@ -172,7 +184,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         protected void dgvStationeryList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
             HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("AddToTable").FindControl("AddToTable");
-            link.NavigateUrl = "~/departmentUI/Employee/RequestStationery.aspx?CollectionIdIndex=" + link.Text;
+            link.NavigateUrl = "~/departmentUI/Employee/RequestStationery.aspx?action=add&itemCode=" + e.Row.DataKey[0];
+        }
+
+        protected void btnReset_Click1(object sender, EventArgs e)
+        {
+            resCtrl.SelectRemoveAll();
+            FillItemList();
         }
 
         //protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
