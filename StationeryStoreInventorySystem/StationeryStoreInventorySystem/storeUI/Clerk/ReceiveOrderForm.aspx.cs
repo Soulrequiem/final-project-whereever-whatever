@@ -123,12 +123,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
             if (receiveOrderControl.ClickReceived(dt, deliveryNo, poNo) == Constants.ACTION_STATUS.SUCCESS)
             {
-                Response.Write("SUCESS.....");
+                //Response.Write("SUCESS.....");
 
             }
             else
             {
-                Response.Write("FAIL.......");
+                //Response.Write("FAIL.......");
             }
         }
 
