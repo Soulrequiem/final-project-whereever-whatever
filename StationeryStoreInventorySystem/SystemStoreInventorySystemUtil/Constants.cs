@@ -75,7 +75,6 @@ namespace SystemStoreInventorySystemUtil
         {
             UNKNOWN = 0,
             CLIP,
-            DISK,
             ENVELOPE,
             ERASER,
             EXERCISE,
@@ -92,7 +91,8 @@ namespace SystemStoreInventorySystemUtil
             STAPLER,
             TACKS,
             TPARENCY,
-            TRAY
+            TRAY, 
+            DISK
         }
 
         public enum UNIT_OF_MEASURE
