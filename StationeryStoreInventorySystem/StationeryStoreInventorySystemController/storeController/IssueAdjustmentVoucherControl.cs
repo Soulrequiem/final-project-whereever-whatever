@@ -21,53 +21,56 @@ namespace StationeryStoreInventorySystemController.storeController
     {
         private IDiscrepancyBroker discrepancyBroker;
 
-        private List<Discrepancy> discrepancyList;
+        private System.Data.Objects.DataClasses.EntityCollection<Discrepancy> discrepancyList;
 
         private DataTable dt;
         private DataRow dr;
 
-        private string[] discrepancyListColumnName = { "VoucherNo", "CreatedBy", "CreatedDate", "TotalQty", "Status" };
+        private string[] discrepancyListColumnName = { "Id", "CreatedBy", "CreatedDate", "TotalQty", "Status" };
         private string[] discrepancyItemListColumnName = { "ItemNo", "ItemDescription", "Quantity", "PricePerItem", "Reason" };
 
         private DataColumn[] discrepancyListColumn;
-        private DataColumn[] discrepancyItemListColumn;
+      //  private DataColumn[] discrepancyItemListColumn;
 
         public IssueAdjustmentVoucherControl()
         {
             InventoryEntities inventoryEntities = new InventoryEntities();
             discrepancyBroker = new DiscrepancyBroker(inventoryEntities);
-            discrepancyList = GetDiscrepancyList();
+            discrepancyList = new System.Data.Objects.DataClasses.EntityCollection<Discrepancy>();
+            discrepancyListColumn = new DataColumn[]{new DataColumn(discrepancyListColumnName[0]),new DataColumn(discrepancyListColumnName[1]),new DataColumn(discrepancyListColumnName[2]),new DataColumn(discrepancyListColumnName[3]),new DataColumn(discrepancyListColumnName[4])
+            };
         }
+
         
-        public DataTable DiscrepancyList
-        {
-            get
-            {
-                DataTable dt = new DataTable();
+        //public DataTable DiscrepancyList
+        //{
+        //    get
+        //    {
+        //        DataTable dt = new DataTable();
                 
-                if (discrepancyList.Count > 0)
-                {
-                    DataRow dr;
-                    foreach (Discrepancy temp in discrepancyList)
-                    {
-                        dr = dt.NewRow();
-                        dr["voucherNo"] = null;
-                        dr["createdBy"] = temp.CreatedBy.Name;
-                        dr["createdDate"] = temp.CreatedDate;
-                        int totalQty = 0;
-                        //List<DiscrepancyDetail> list = (List<DiscrepancyDetail>)temp.DiscrepancyDetails;
-                        foreach (DiscrepancyDetail tempDetail in temp.DiscrepancyDetails.ToList())
-                        {
-                            totalQty += tempDetail.Qty;
-                        }
-                        dr["totalQty"] = totalQty;
-                        dr["status"] = temp.Status;
-                        dt.Rows.Add(dr);
-                    }
-                }
-                return dt; 
-            }
-        }
+        //        if (discrepancyList.Count > 0)
+        //        {
+        //            DataRow dr;
+        //            foreach (Discrepancy temp in discrepancyList)
+        //            {
+        //                dr = dt.NewRow();
+        //                dr["voucherNo"] = null;
+        //                dr["createdBy"] = temp.CreatedBy.Name;
+        //                dr["createdDate"] = temp.CreatedDate;
+        //                int totalQty = 0;
+        //                //List<DiscrepancyDetail> list = (List<DiscrepancyDetail>)temp.DiscrepancyDetails;
+        //                foreach (DiscrepancyDetail tempDetail in temp.DiscrepancyDetails.ToList())
+        //                {
+        //                    totalQty += tempDetail.Qty;
+        //                }
+        //                dr["totalQty"] = totalQty;
+        //                dr["status"] = temp.Status;
+        //                dt.Rows.Add(dr);
+        //            }
+        //        }
+        //        return dt; 
+        //    }
+        //}
        
         /// <summary>
         ///     Show all discrepancy list which status is show
@@ -82,17 +85,44 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return value of this method is resultItem.</returns>
-        public List<Discrepancy> GetDiscrepancyList()
+        public DataTable GetDiscrepancyList()
         {
-            List<Discrepancy> list = discrepancyBroker.GetAllDiscrepancy();
 
-            List<Discrepancy> newList = new List<Discrepancy>();
-            foreach (Discrepancy discrepancy in list)
+            dt = new DataTable();
+            dt.Columns.AddRange(discrepancyListColumn);
+            List<Discrepancy> list = discrepancyBroker.GetAllDiscrepancy();
+            foreach (Discrepancy temp in list)
             {
-                if (discrepancy.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW))
-                    newList.Add(discrepancy);
+                DataRow dr;
+          //      requisitionDetail = new RequisitionDetail();
+                if (temp.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW))
+                {
+                    //      RequisitionDetail resultRequisitionDetail = requisitionBroker.GetRequisitionDetail(requisitionDetail);
+                  
+                    dr = dt.NewRow();
+                    dr["id"] = temp.Id;
+                    dr["createdBy"] = temp.CreatedBy.Name;
+                    dr["createdDate"] = temp.CreatedDate;
+                    int totalQty = 0;
+                    foreach (DiscrepancyDetail tempDetail in temp.DiscrepancyDetails.ToList())
+                    {
+                        totalQty += tempDetail.Qty;
+                    }
+                    dr["totalQty"] = totalQty;
+                    dr["status"] = temp.Status;
+                    dt.Rows.Add(dr);
+                }
             }
-            return newList;
+       
+            
+
+            //List<Discrepancy> newList = new List<Discrepancy>();
+            //foreach (Discrepancy discrepancy in list)
+            //{
+            //    if (discrepancy.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW))
+            //        newList.Add(discrepancy);
+            //}
+            return dt;
         }
 
         /// <summary>
