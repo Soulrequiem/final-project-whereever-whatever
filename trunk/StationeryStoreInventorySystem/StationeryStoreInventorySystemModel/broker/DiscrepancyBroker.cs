@@ -68,6 +68,21 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return discrepancyListObj;
         }
+
+        public List<Discrepancy> GetAllDiscrepancy(Constants.VISIBILITY_STATUS visibilityStatus)
+        {
+            try
+            {
+                int status = Converter.objToInt(visibilityStatus);
+                discrepancyListObj = inventory.Discrepancies.Where(x=> x.Status == status).ToList<Discrepancy>();
+            }
+            catch (Exception e)
+            {
+                discrepancyListObj = null;
+            }
+
+            return discrepancyListObj;
+        }
         /// <summary>
         ///  Insert Discrepancy data to the Discrepancy and Discrepancy Detail Table according to the newdiscrepancy Parameter
         ///  Return Constants.DB_STATUS
