@@ -446,24 +446,7 @@ namespace SystemStoreInventorySystemUtil
                 return -1;
             }
         }
-        /// <summary>
-        /// Convert an object into bool
-        /// createdBy Priyanka
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static Boolean  objToBool(object obj)
-        {
-            try
-            {
-                return Convert.ToBoolean(obj);
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
+        
         /// <summary>
         ///     Converts an object into Datetime
         /// </summary>
