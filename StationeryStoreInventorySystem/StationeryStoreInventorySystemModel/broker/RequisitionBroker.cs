@@ -350,30 +350,38 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </returns>
         public string GetRequisitionId(Requisition requisition)
         {
-            int idInt;
-            string newYr;
-            if (inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).Count() > 0)
+            try
             {
-                Requisition lastRequisition = inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).OrderBy(r => r.Id).First();
-
-                if (lastRequisition != null)
+                int idInt;
+                string newYr;
+                if (inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).Count() > 0)
                 {
-                    string requisitionId = lastRequisition.Id;
-                    string[] stringList = requisitionId.Split('/');
-                    string idString = stringList[1];
-                    idInt = Converter.objToInt(idString);
+                    Requisition lastRequisition = inventory.Requisitions.Where(r => r.Id.IndexOf(requisition.Department.Id) > -1).OrderByDescending(x => x.CreatedDate).First();
 
-                    int yearInt = DateTime.Now.Year;
-                    string yrString = yearInt.ToString();
-                    char[] charYr = yrString.ToCharArray();
-                    newYr = charYr[2].ToString() + charYr[3].ToString();
-                    if (newYr.Equals(stringList[2]))
+                    if (lastRequisition != null)
                     {
-                        idInt++;
+                        string requisitionId = lastRequisition.Id;
+                        string[] stringList = requisitionId.Split('/');
+                        string idString = stringList[1];
+                        idInt = Converter.objToInt(idString);
+
+                        int yearInt = DateTime.Now.Year;
+                        string yrString = yearInt.ToString();
+                        char[] charYr = yrString.ToCharArray();
+                        newYr = charYr[2].ToString() + charYr[3].ToString();
+                        if (newYr.Equals(stringList[2]))
+                        {
+                            idInt++;
+                        }
+                        else
+                        {
+                            idInt = 1;
+                        }
                     }
                     else
                     {
                         idInt = 1;
+                        newYr = DateTime.Now.Year.ToString().Substring(2);
                     }
                 }
                 else
@@ -381,14 +389,13 @@ namespace StationeryStoreInventorySystemModel.broker
                     idInt = 1;
                     newYr = DateTime.Now.Year.ToString().Substring(2);
                 }
-            }
-            else
-            {
-                idInt = 1;
-                newYr = DateTime.Now.Year.ToString().Substring(2);
-            }
 
-            return requisition.Department.Id + "/" + idInt + "/" + newYr;
+                return requisition.Department.Id + "/" + idInt + "/" + newYr;
+            }
+            catch (Exception e)
+            {
+                return "Unknown";
+            }
         }
         /// <summary>
         /// Get the last record of RequistionDetailId
@@ -403,7 +410,14 @@ namespace StationeryStoreInventorySystemModel.broker
             //int id = requisitionDetail.Id;
             //id++;
             //return id;
-            return inventory.RetrievalDetails.Max(xObj => xObj.Id) + 1;
+            if (inventory.RequisitionDetails.Count() > 0)
+            {
+                return inventory.RequisitionDetails.Max(xObj => xObj.Id) + 1;
+            }
+            else
+            {
+                return 1;
+            }
         }
     }
 }
