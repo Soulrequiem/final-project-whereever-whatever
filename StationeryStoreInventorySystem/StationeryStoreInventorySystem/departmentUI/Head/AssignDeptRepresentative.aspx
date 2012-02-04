@@ -8,6 +8,15 @@
     Namespace="Infragistics.Web.UI.GridControls" TagPrefix="ig" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%--<script type="text/javascript" language="javascript">
+        function textboxcheck() {
+            if (document.getElementById("MainContent_WebGroupBox1_drdRepEmployeeList").value == "") {
+                document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Choose stationery.";
+                return false;
+            }
+            return true;
+        }
+    </script>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
@@ -89,8 +98,16 @@
                         onselectionchanged="drdRepEmployeeList_SelectionChanged">
                         <Button Visible="False" />
                      </ig:WebDropDown>
+                     <br />
+                     <asp:Label CssClass="ErrorLabelstyle" 
+                        ID="lblStatusMessage" runat="server"/>
+                 </div>
+                 <div style="float:left; padding-left:10px">
+                    <asp:Button ID="btnEmployee" runat="server" Text="Select" 
+                         CssClass="Searchbutton" onclick="btnEmployee_Click" /> <%--OnClientClick="return textboxcheck();"/>--%>
+                 </div>
                      <br /><br />           
-                </div>
+                
                 
                 <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="520px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Search Result" 
@@ -100,7 +117,9 @@
                             Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                            onrowselectionchanged="DgvRepSearchDetails_RowSelectionChanged">
+                            onrowselectionchanged="DgvRepSearchDetails_RowSelectionChanged" 
+                            ondatafiltering="DgvRepSearchDetails_DataFiltering" 
+                            onpageindexchanged="DgvRepSearchDetails_PageIndexChanged">
                             <Columns>
                                 <%--<ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
                                     Key="BoundCheckBoxField_0" Width="50px">
@@ -136,6 +155,10 @@
                                         </ig:CellEditing>
                                     </Behaviors>
                                 </ig:EditingCore>
+                                <ig:Paging>
+                                </ig:Paging>
+                                <ig:Filtering>
+                                </ig:Filtering>
                             </Behaviors>
                         </ig:WebDataGrid>
                         <div style="float:right">

@@ -76,6 +76,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head {
         protected global::Infragistics.Web.UI.ListControls.WebDropDown drdRepEmployeeList;
         
         /// <summary>
+        /// lblStatusMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStatusMessage;
+        
+        /// <summary>
+        /// btnEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEmployee;
+        
+        /// <summary>
         /// WebGroupBox2 control.
         /// </summary>
         /// <remarks>
