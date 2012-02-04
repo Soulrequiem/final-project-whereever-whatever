@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Infragistics.WebUI;
+using StationeryStoreInventorySystemController;
+using SystemStoreInventorySystemUtil;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
@@ -46,7 +48,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (Session["userName"] != null)
             {
-                if (Session["userName"].ToString() == "emp")
+                if (Util.GetEmployeeRole() == (int) Constants.EMPLOYEE_ROLE.EMPLOYEE)
                 {
                     //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptEmpSiteMapProvider"];
                     NavigationBar.Groups[0].Visible = true;
@@ -56,7 +58,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     NavigationBar.Groups[4].Visible = false;
                     SetDefaultMenuSelection(3, 0);
                 }
-                else if (Session["userName"].ToString() == "head")
+                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD ||
+                    Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD )
                 {
                     NavigationBar.Groups[0].Visible = true;
                     NavigationBar.Groups[1].Visible = true;
@@ -66,7 +69,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     SetDefaultMenuSelection(0, 2);
                     //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptHeadMapProvider"];
                 }
-                else if (Session["userName"].ToString() == "rep")
+                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE ||
+                    Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)
                 {
                     NavigationBar.Groups[0].Visible = true;
                     NavigationBar.Groups[1].Visible = true;
@@ -76,7 +80,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     SetDefaultMenuSelection(0, 1);
                     //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptRepSiteMapProvider"];
                 }
-                else if (Session["userName"].ToString() == "clerk")
+                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_CLERK)
                 {
                     NavigationBar.Groups[0].Visible = false;
                     NavigationBar.Groups[1].Visible = false;
@@ -86,7 +90,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     SetDefaultMenuSelection(7, 3);
                     //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreClerkSiteMapProvider"];
                 }
-                else if (Session["userName"].ToString() == "super")
+                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
                 {
                     NavigationBar.Groups[0].Visible = false;
                     NavigationBar.Groups[1].Visible = false;
@@ -97,7 +101,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     SetDefaultMenuSelection(2, 4);
                     //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
                 }
-                else if (Session["userName"].ToString() == "manager")
+                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER)
                 {
                     NavigationBar.Groups[0].Visible = false;
                     NavigationBar.Groups[1].Visible = false;
@@ -108,14 +112,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     SetDefaultMenuSelection(2, 4);
                     //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
                 }
-                else if (Session["userName"].ToString() == "Admin")
+                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.ADMIN)                
                 {
                     NavigationBar.Groups[0].Visible = true;
                     NavigationBar.Groups[1].Visible = true;
                     NavigationBar.Groups[2].Visible = true;
                     NavigationBar.Groups[3].Visible = true;
                     NavigationBar.Groups[4].Visible = true;
-                    NavigationBar.Groups[5].Visible = true;
+                    //NavigationBar.Groups[5].Visible = true;
                     SetDefaultMenuSelection(2, 4);
                 }
             }
