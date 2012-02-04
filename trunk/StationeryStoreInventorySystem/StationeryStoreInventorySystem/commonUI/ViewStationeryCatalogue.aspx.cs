@@ -149,6 +149,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             }
         }
 
+        protected void dgvStationeryList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        {
+            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("ItemNo").FindControl("ItemNo");
+            link.NavigateUrl = "~/storeUI/Clerk/ViewStockCard.aspx?ItemDescription=" + e.Row.Items[2].Text;
+        }
+
         protected void dgvStationeryList_DataFiltering(object sender,
             Infragistics.Web.UI.GridControls.FilteringEventArgs e)
         {

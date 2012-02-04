@@ -56,7 +56,8 @@
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle"
                         oninitializerow="dgvStationeryList_InitializeRow" 
-                        ondatafiltering="dgvStationeryList_DataFiltering">
+                        ondatafiltering="dgvStationeryList_DataFiltering" 
+                        onpageindexchanged="dgvStationeryList_PageIndexChanged">
                         <Columns>
                             <ig:TemplateDataField Key="ItemNo" Width="100px">
                             <ItemTemplate>
