@@ -13,6 +13,7 @@ using Infragistics.Web.UI.ListControls;
 using Infragistics.WebUI.UltraWebChart;
 using SystemStoreInventorySystemUtil;
 using System.Collections;
+using StationeryStoreInventorySystemController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
@@ -34,16 +35,55 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
+                loadReports();
                 panelSupplier.Visible = false;
                 FilterPanel.Visible = false;
                 lblNoDataAvailable.Visible = true;
                 drdReportList.SelectedItemIndex = 0;
-                reportDT = getControl().getItems();
                 PrepareData();
+                drdMonth.SelectedItemIndex = 0;
+                drdYear.SelectedItemIndex = 0;
             }
             Session["IsPostBack"] = true;
         }
 
+        private void loadReports()
+        {
+            drdReportList.Items.Clear();
+            int roleID = Util.GetEmployeeRole();
+            if ((int)Constants.EMPLOYEE_ROLE.STORE_CLERK == roleID ||
+                (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER == roleID ||
+                (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR == roleID ||
+                (int)Constants.EMPLOYEE_ROLE.ADMIN == roleID)
+            { 
+                drdReportList.Items.Add(new DropDownItem("Inventory Status Report"));
+                drdReportList.Items.Add(new DropDownItem("Reorder Report"));
+                drdReportList.Items.Add(new DropDownItem("Item Consumption Report"));
+                drdReportList.Items.Add(new DropDownItem("Disbursement List"));
+                drdReportList.Items.Add(new DropDownItem("Stationery Catalogue"));
+                drdReportList.Items.Add(new DropDownItem("Stationery Supply Tender Form"));
+                drdReportList.Items.Add(new DropDownItem("Collection List"));
+                drdReportList.Items.Add(new DropDownItem("Employees List"));
+                drdReportList.Items.Add(new DropDownItem("Department List"));
+                drdReportList.Items.Add(new DropDownItem("Requisition List"));
+                drdReportList.Items.Add(new DropDownItem("Supplier List"));
+                drdReportList.Items[0].Selected = true;
+                drdReportList.SelectedItemIndex = 0;
+                reportDT = getControl().getItems();
+            }
+            else if ((int)Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD == roleID ||
+                (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE == roleID)
+            {
+                drdReportList.Items.Add(new DropDownItem("Requisition List"));
+                drdReportList.Items.Add(new DropDownItem("Item Consumption Report"));
+                drdReportList.Items.Add(new DropDownItem("Stationery Catalogue"));
+                drdReportList.Items.Add(new DropDownItem("Employees List"));
+                drdReportList.Items.Add(new DropDownItem("Department List"));
+                drdDepartment.Enabled = false;
+                drdReportList.SelectedItemIndex = 0;
+                reportDT = getControl().getRequisitions();
+            }
+        }
         protected void drdReportList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
             if (Constants.ItemReport == drdReportList.CurrentValue)
@@ -98,6 +138,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 drdReportType.SelectedItemIndex = 0;
                 chkShowTotal.Enabled = true;
                 firstLoad();
+                drdDepartment.SelectedItemIndex = 0;
             }
             else if (Constants.StationeryTenderReport == drdReportList.CurrentValue)
             {
@@ -438,8 +479,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         }
         private void fillEmployeesByDepartment()
         {
+            string DeptID = drdDepartment.SelectedValue == null ? string.Empty : drdDepartment.SelectedValue;
             drdEmployee.DataSource = null;
-            drdEmployee.DataSource = getControl().getEmployeesByDepartment(drdDepartment.SelectedValue);
+            drdEmployee.DataSource = getControl().getEmployeesByDepartment(DeptID);
         }
 
         protected void rdDateRage_CheckedChanged(object sender, EventArgs e)
@@ -452,6 +494,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             rdDateRage.Checked = !rdMonth.Checked;
             EnableDisableControls();
+            drdMonth_SelectionChanged(null, null);
         }
 
         protected void EnableDisableControls()
@@ -709,6 +752,71 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             reportDT = getControl().getTenderPrice(drdSupplier.SelectedValue);
             BindData();
+        }
+
+        protected void drdMonth_SelectionChanged(object sender, DropDownSelectionChangedEventArgs e)
+        {
+            if (!drdMonth.CurrentValue.Contains(","))
+            {
+                string fromDate = drdYear.SelectedItems[0].Value + "-" + (Convert.ToInt16(drdMonth.SelectedItems[0].Value)) + "-01";
+                string todate = drdYear.SelectedItems[0].Value + "-" + (Convert.ToInt16(drdMonth.SelectedItems[0].Value)) +"-"+
+                    System.DateTime.DaysInMonth(Convert.ToInt16(drdYear.SelectedValue), (Convert.ToInt16(drdMonth.SelectedItems[0].Value)));
+
+                if (Constants.ByRequsitions == drdReportType.SelectedItem.Text)
+                {
+                    dgvReport.ClearDataSource();
+                    reportDT = getControl().getFilterDepartmentByRequisitions(drdDepartment.SelectedValue,
+                                    drdEmployee.SelectedValue, chkShowTotal.Checked, drdRequisitions.SelectedValue
+                                    , fromDate, todate);
+                    BindChart();
+                }
+                else if (Constants.ByItems == drdReportType.SelectedItem.Text)
+                {
+                    dgvReport.ClearDataSource();
+                    reportDT = getControl().getFilterDepartmentByItems(drdDepartment.SelectedValue, drdEmployee.SelectedValue,
+                        drdItems.CurrentValue, fromDate, todate);
+                }
+            }
+            else
+            {
+                string fromDate = string.Empty;
+                string todate = string.Empty;
+               
+
+                //for (int i = 0; i < s.Length; i++)
+                //{
+                for (int i = 0; i < drdMonth.SelectedItems.Count; i++)
+                {
+                    fromDate = fromDate + ";" + drdYear.SelectedItems[0].Value + "-" + drdMonth.SelectedItems[i].Value + "-01";
+                    todate = todate + ";" + drdYear.SelectedItems[0].Value + "-" + drdMonth.SelectedItems[i].Value + "-" +
+                        System.DateTime.DaysInMonth(Convert.ToInt16(drdYear.SelectedItems[0].Value),
+                        (Convert.ToInt16(drdMonth.SelectedItems[i].Value)));
+                }
+                //}
+
+                if (Constants.ByRequsitions == drdReportType.SelectedItem.Text)
+                {
+                    dgvReport.ClearDataSource();
+                    reportDT = getControl().getFilterDepartmentByRequisitions(drdDepartment.SelectedValue,
+                                    drdEmployee.SelectedValue, chkShowTotal.Checked, drdRequisitions.SelectedValue
+                                    , fromDate, todate);
+                    BindChart();
+                }
+                else if (Constants.ByItems == drdReportType.SelectedItem.Text)
+                {
+                    dgvReport.ClearDataSource();
+                    reportDT = getControl().getFilterDepartmentByItems(drdDepartment.SelectedValue, drdEmployee.SelectedValue,
+                        drdItems.CurrentValue, fromDate, todate);
+                }
+            }
+
+            BindData();
+            Session["ReportData"] = reportDT;
+        }
+
+        protected void drdYear_SelectionChanged(object sender, DropDownSelectionChangedEventArgs e)
+        {
+            drdMonth_SelectionChanged(null, null);
         }
     }
 }
