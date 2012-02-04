@@ -103,6 +103,34 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name="itemDescription"></param>
         /// <returns>The return type of this method is datatable.</returns>
+        //public DataTable GetStockCardDetails(string itemDescription)
+        //{
+        //    dt = new DataTable();
+
+        //    //item = Util.GetItem(itemBroker, itemDescription);
+        //    item = new Item();
+        //    item.Description = itemDescription;
+        //    item = itemBroker.GetItem(item);
+        //    supplierList = itemPriceBroker.GetPrioritySupplier(item);
+        //    dt.Columns.AddRange(dataColumn);
+        //    stockCardDetailList = itemBroker.GetAllStockCardDetail(item);
+        //    if (stockCardDetailList != null)
+        //    {
+        //        foreach (StockCardDetail stockCardDetail in stockCardDetailList)
+        //        {
+        //            dr = dt.NewRow();
+        //            dr[columnName[0]] = SystemStoreInventorySystemUtil.Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, stockCardDetail.CreatedDate);
+        //            dr[columnName[1]] = stockCardDetail.Description;
+        //            dr[columnName[2]] = stockCardDetail.Qty;
+        //            dr[columnName[3]] = stockCardDetail.Balance;
+        //            dt.Rows.Add(dr);
+        //        }
+                
+        //    }
+
+        //    return dt;
+        //}
+
         public DataTable GetStockCardDetails(string itemDescription)
         {
             dt = new DataTable();
@@ -125,12 +153,11 @@ namespace StationeryStoreInventorySystemController.storeController
                     dr[columnName[3]] = stockCardDetail.Balance;
                     dt.Rows.Add(dr);
                 }
-                
+
             }
 
             return dt;
         }
-
         public void SelectPrint(string itemId)
         {
         }
