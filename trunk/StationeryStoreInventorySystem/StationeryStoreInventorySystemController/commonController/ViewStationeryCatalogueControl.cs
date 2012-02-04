@@ -147,6 +147,10 @@ namespace StationeryStoreInventorySystemController.commonController
             return Util.GetItem(itemBroker, itemDescription);
         }
 
+        public bool IsStoreOfficer()
+        {
+            return Util.CheckPermission(Constants.EMPLOYEE_ROLE.STORE_CLERK, Util.GetRolePermission(Converter.objToEmployeeRole(Util.GetEmployeeRole())));
+        }
 
         public void SelectPrint()
         {

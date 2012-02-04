@@ -140,7 +140,8 @@ namespace StationeryStoreInventorySystemController
         {
             Employee employee = ValidateUser();
 
-            if (!CheckPermission(allowedRole, GetRolePermission(Converter.objToEmployeeRole(employee.Role.Id))))
+            //if (!CheckPermission(allowedRole, GetRolePermission(Converter.objToEmployeeRole(employee.Role.Id))))
+            if (!CheckPermission(Converter.objToEmployeeRole(employee.Role.Id), GetRolePermission(allowedRole)))
             {
                 commonController.LogOutControl logOutControl = new commonController.LogOutControl();
             }
