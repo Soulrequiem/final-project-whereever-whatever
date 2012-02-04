@@ -55,7 +55,8 @@
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle"
-                        oninitializerow="dgvStationeryList_InitializeRow">
+                        oninitializerow="dgvStationeryList_InitializeRow" 
+                        ondatafiltering="dgvStationeryList_DataFiltering">
                         <Columns>
                             <ig:TemplateDataField Key="ItemNo" Width="100px">
                             <ItemTemplate>
