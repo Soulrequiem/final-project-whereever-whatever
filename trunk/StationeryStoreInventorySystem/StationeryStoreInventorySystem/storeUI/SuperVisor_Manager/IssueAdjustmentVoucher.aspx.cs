@@ -104,7 +104,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             return iavCtrl;
         }
 
-        protected void DgvDiscrepancyReportList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender,
+            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
         {
             try
             {
