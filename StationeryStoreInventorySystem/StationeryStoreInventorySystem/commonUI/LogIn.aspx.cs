@@ -26,6 +26,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             else
             {
                 lgCtrl = (LoginControl) StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+                if (lgCtrl == null)
+                {
+                    lgCtrl = GetControl();
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, lgCtrl);
+                }
             }
         }
 
