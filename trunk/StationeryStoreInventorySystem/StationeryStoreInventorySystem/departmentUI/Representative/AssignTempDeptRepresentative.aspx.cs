@@ -13,6 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
+using StationeryStoreInventorySystemController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
@@ -30,9 +31,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             if (!IsPostBack)
             {
-                FillCurrentRepresentativeList();
-                //FillEmployee()
+                FillEmployee();
             }
+            FillCurrentRepresentativeList();
         }
 
         /// <summary>
@@ -43,9 +44,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             try
             {
-                atdrCtrl = GetControl();
-                DataTable dtRepresentative = atdrCtrl.TemporaryDepartmentRepresentative;
-                DgvCurrentAuthorizedPersonRep.DataSource = dtRepresentative;
+                //atdrCtrl = GetControl();
+                //DataTable dtRepresentative = atdrCtrl.TemporaryDepartmentRepresentative;
+                DgvCurrentAuthorizedPersonRep.DataSource = Util.GetCurrentTemporaryRepresentative();
                 DgvCurrentAuthorizedPersonRep.DataBind();
             }
             catch (Exception e)
@@ -57,19 +58,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <summary>
         /// Fills Employee name
         /// </summary>
-        private void FillEmployee(DataTable dtEmployee)
+        private void FillEmployee()
         {
             try
             {
-                //if (dtEmployee != null)
-               
-                   //To be done
-                   //adrCtrl = new AssignDepartmentRepresentativeControl();
-                   //adrCtrl.
-                    drdEmployeeList.TextField = "Employee";
-                    drdEmployeeList.ValueField = "Name";
-                    drdEmployeeList.DataSource = null; // dtEmployee;
-                    drdEmployeeList.DataBind();
+
+                drdEmployeeList.DataSource = Util.GetEmployeesByDepartments();
+                drdEmployeeList.DataBind();
                 
             }
             catch (Exception e)
@@ -110,13 +105,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         protected void DgvCurrentAuthorizedPersonRep_RowSelectionChanged(object sender,
             Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
         {
-            remove_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"];
+            //remove_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"].ToString();
         }
 
         protected void DgvTempDepteHeadSearchDetails_RowSelectionChanged(object sender,
             Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
         {
-            assign_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"];
+            assign_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"].ToString();
         }
 
         protected void btnRemove_Click(object sender, EventArgs e)
@@ -133,7 +128,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 
         protected void btnEmployee_Click(object sender, EventArgs e)
         {
-
+            DgvTempDepteHeadSearchDetails.DataSource = Util.GetEmployeeDetails(drdEmployeeList.CurrentValue);
+            DgvTempDepteHeadSearchDetails.DataBind();
         }
 
         protected void DgvTempDepteHeadSearchDetails_DataFiltering(object sender,
