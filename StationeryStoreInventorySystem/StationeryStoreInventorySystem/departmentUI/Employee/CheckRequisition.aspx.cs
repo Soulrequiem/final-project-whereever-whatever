@@ -226,7 +226,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 //   remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks").FindControl("remarks")).Text);
                 //   else
                  //      remarksList.Add(i.ToString(),dgvRequisitionList.Rows[i].Items.FindItemByKey("RequisitionID").Text);
-                    requisitionID =dgvRequisitionList.Rows[i].Items.FindItemByKey("RequisitionID").FindControl("RequisitionID").ToString();
+                    requisitionID =((HyperLink)dgvRequisitionList.Rows[i].Items.FindItemByKey("RequisitionID").FindControl("RequisitionID")).Text;
                    if( checkRequisitionControlObj.SelectWithdraw(SystemStoreInventorySystemUtil.Converter.objToString(Request.QueryString["RequisitionIDIndex"] ))== SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
                    {
                        break;
@@ -266,6 +266,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         protected void dgvRequisitionList_CellSelectionChanged(object sender, Infragistics.Web.UI.GridControls.SelectedCellEventArgs e)
         {
             string str = e.CurrentSelectedCells.ToString();
+        }
+
+        protected void dgvRequisitionList_RowUpdating(object sender, Infragistics.Web.UI.GridControls.RowUpdatingEventArgs e)
+        {
+            string str = e.Row.Items[0].ToString();
         }       
         ///// <summary>
         ///// Fills the changed data into Datagrid
