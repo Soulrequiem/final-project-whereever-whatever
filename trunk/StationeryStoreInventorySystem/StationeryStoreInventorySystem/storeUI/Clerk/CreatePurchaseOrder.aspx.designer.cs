@@ -166,6 +166,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::Infragistics.Web.UI.ListControls.WebDropDown drdItemList;
         
         /// <summary>
+        /// btnSelect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSelect;
+        
+        /// <summary>
         /// Label7 control.
         /// </summary>
         /// <remarks>
@@ -217,7 +226,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.EditorControls.WebTextEditor txtPrice;
+        protected global::Infragistics.Web.UI.EditorControls.WebNumericEditor txtPrice;
+        
+        /// <summary>
+        /// lblStatusMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStatusMessage;
         
         /// <summary>
         /// btnApprove control.
