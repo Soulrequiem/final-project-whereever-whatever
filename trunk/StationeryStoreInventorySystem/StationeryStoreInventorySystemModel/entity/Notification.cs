@@ -7,7 +7,8 @@ namespace StationeryStoreInventorySystemModel.entity
 {
     public partial class Notification
     {
-        public Notification():this(0,null," ",DateTime.Now,0)
+        public Notification()
+            : this(0, null, String.Empty, DateTime.Now, 0)
         {
         }
         public Notification(int id, Employee employeeId, string message, DateTime createdDate, int status)

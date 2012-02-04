@@ -9,7 +9,7 @@ namespace StationeryStoreInventorySystemModel.entity
     {
 
         public PurchaseOrder()
-            : this(0, null, "", "", DateTime.Now, DateTime.Now, null, DateTime.Now, null, 0, "", DateTime.Now, null)
+            : this(0, null, String.Empty, String.Empty, DateTime.Now, DateTime.Now, null, DateTime.Now, null, 0, "", DateTime.Now, null)
         {
         }
 
