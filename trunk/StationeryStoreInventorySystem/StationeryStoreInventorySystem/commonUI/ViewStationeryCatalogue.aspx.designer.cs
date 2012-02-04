@@ -92,5 +92,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid dgvStationeryList;
+        
+        /// <summary>
+        /// dgvClerkStationeryList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Infragistics.Web.UI.GridControls.WebDataGrid dgvClerkStationeryList;
     }
 }

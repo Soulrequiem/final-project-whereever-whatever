@@ -18,10 +18,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class ViewStationeryCatalogue : System.Web.UI.Page
     {
+        private static readonly string sessionKey = "ViewStationeryCatalogueControl";
 
-        ViewStationeryCatalogueControl vsCtrl;
-
-        private ViewStationeryCatalogueControl viewStationeryCatalogueControl;
+        private ViewStationeryCatalogueControl vsCtrl;
 
         /// <summary>
         /// Loads the ViewStationeryCatalogue form
@@ -32,16 +31,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (!IsPostBack)
             {
+                MasterPage.setCurrentPage(this);
+
+                vsCtrl = new ViewStationeryCatalogueControl();
+
                 FillStationeryList();
                 FillItems();
 
-                viewStationeryCatalogueControl = new ViewStationeryCatalogueControl();
-                //this.FillStationeryList(viewStationeryCatalogueControl.ItemList);
-                //FillStationeryList();
-                FillItems();
-
+                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, vsCtrl);
             }
-
+            else
+            {
+                vsCtrl = (ViewStationeryCatalogueControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
         }
 
         private ViewStationeryCatalogueControl getControl()
@@ -51,8 +53,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             return vsCtrl;
         }
 
-
-
         /// <summary>
         /// Fills data to datagrid
         /// </summary>
@@ -61,19 +61,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             try
             {
-                //string itemDescription = drdItemList.SelectedItem.Text;
-                //vsCtrl = getControl();
-                //DataTable dtStationery;
-                //if (itemDescription==null)
-                //{
-                //    dtStationery = vsCtrl.AllItemList;
-                //}else
-                //    dtStationery=vsCtrl.ItemList(itemDescription);
                 DataTable dt = StationeryStoreInventorySystemController.Util.GetItemListTable(drdItemList.CurrentValue);
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    dgvStationeryList.DataSource = dt;
-                    dgvStationeryList.DataBind();
+                    if (!vsCtrl.IsStoreOfficer())
+                    {
+                        dgvStationeryList.DataSource = dt;
+                        dgvStationeryList.DataBind();
+                        dgvClerkStationeryList.Visible = false;
+                        WebGroupBox1.Width = 600;
+                    }
+                    else
+                    {
+                        dgvClerkStationeryList.DataSource = dt;
+                        dgvClerkStationeryList.DataBind();
+                        dgvStationeryList.Visible = false;
+                        WebGroupBox1.Width = 760;
+                    }
                 }
             }
             catch (Exception e)
@@ -105,43 +109,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             }
         }
 
-        /// <summary>
-        /// Fills changed item to datagrid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //protected void drdItemList_SelectionChanged(object sender, 
-        //    Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        String selectedItem = drdItemList.SelectedItem.Text;
-        //        vsCtrl = getControl();
-        //        DataTable dtStationery = vsCtrl.ItemList;
-        //        dgvStationeryList.DataSource = dtStationery;
-        //        dgvStationeryList.DataBind();
-        //        //Pass to the controller get Datatable
-
-        //        //Call FillStationeryList function according the item list
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.WriteErrorLog(ex);
-        //    }    
-
-        //}
-
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                //string selectedItem = drdItemList.SelectedItem.Text;
-                //vsCtrl = getControl();
-                //DataTable dtStationery = vsCtrl.ItemList(selectedItem);
                 FillStationeryList();
-                //dgvStationeryList.DataSource = dtStationery;
-                //dgvStationeryList.DataBind();
             }
             catch (Exception ex)
             {

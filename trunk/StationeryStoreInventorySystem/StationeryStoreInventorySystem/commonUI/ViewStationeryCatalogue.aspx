@@ -50,8 +50,42 @@
                     <br />
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label5" runat="server" 
                         Text="<%$ Resources:WebResources, ViewStationeryCatalogue_Label%>"/>
-                    <ig:WebDataGrid ID="dgvStationeryList" runat="server" Width="700px" 
+                    <ig:WebDataGrid ID="dgvStationeryList" runat="server" Width="600px" 
                         Height="500px" DefaultColumnWidth="50px" StyleSetName="Office2010Blue" 
+                        AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
+                        HeaderCaptionCssClass="HeaderGridViewStyle" 
+                        ItemCssClass="ItemGridViewStyle" 
+                        ondatafiltering="dgvStationeryList_DataFiltering" 
+                        onpageindexchanged="dgvStationeryList_PageIndexChanged">
+                        <Columns>
+                            <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
+                                <Header Text="Item No." />
+                            </ig:BoundDataField>
+                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="120px">
+                                <Header Text="Category" />
+                            </ig:BoundDataField>
+                            <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
+                                Width="250px">
+                                <Header Text="Item Description" />
+                            </ig:BoundDataField>
+                            <ig:BoundDataField DataFieldName="UnitOfMeasure" Key="UnitOfMeasure" 
+                                Width="100px">
+                                <Header Text="UnitOfMeasure" />
+                            </ig:BoundDataField>
+                        </Columns>
+                        <Behaviors>
+                            <ig:Selection CellClickAction="Row" RowSelectType="Single">
+                            </ig:Selection>
+                            <ig:Paging PageSize="10">
+                            </ig:Paging>
+                            <ig:Filtering>
+                            </ig:Filtering>
+                            <ig:Sorting>
+                            </ig:Sorting>
+                        </Behaviors>
+                 </ig:WebDataGrid>
+                 <ig:WebDataGrid ID="dgvClerkStationeryList" runat="server" Width="760px" 
+                        Height="640px" DefaultColumnWidth="50px" StyleSetName="Office2010Blue" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle"
@@ -68,12 +102,20 @@
                             </ItemTemplate>
                             <Header Text="Item No." />
                             </ig:TemplateDataField>
-                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="150px">
+                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="120px">
                                 <Header Text="Category" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
                                 Width="250px">
                                 <Header Text="Item Description" />
+                            </ig:BoundDataField>
+                            <ig:BoundDataField DataFieldName="ReorderLevel" Key="ReorderLevel" 
+                                Width="70px">
+                                <Header Text="Reorder Level" />
+                            </ig:BoundDataField>
+                            <ig:BoundDataField DataFieldName="ReorderQty" Key="ReorderQty" 
+                                Width="70px">
+                                <Header Text="Reorder Qty" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="UnitOfMeasure" Key="UnitOfMeasure" 
                                 Width="150px">
