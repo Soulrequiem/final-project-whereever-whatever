@@ -115,7 +115,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
                 Response.Write(ex.Message);
             }
         }
-<<<<<<< .mine
 
         //protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender, 
         //    Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
@@ -140,7 +139,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         //        //do something
         //    }
         //}
-=======
 
         protected void DgvDiscrepancyReportList_DataFiltering(object sender,
             Infragistics.Web.UI.GridControls.FilteringEventArgs e)
@@ -165,7 +163,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             FillReport();
         }
->>>>>>> .r445
     }
 }
 /********************************************/
