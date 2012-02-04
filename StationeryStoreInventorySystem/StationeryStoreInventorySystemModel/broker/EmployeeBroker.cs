@@ -225,6 +225,51 @@ namespace StationeryStoreInventorySystemModel.broker
             return employeeList;
 
         }
+
+        public Employee GetCurrentTempRep(Employee employee)
+        {
+            try
+            {
+                employeeObj = inventory.Employees.Where(eObj => eObj.Department.Id == employee.Department.Id && 
+                    eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE).ToList().First();
+            }
+            catch (Exception e)
+            {
+                employeeObj = null;
+            }
+
+            return employeeObj;
+         }
+        public List<Employee> GetRepresentative(Employee employee)
+        {
+            try
+            {
+                employeeList = inventory.Employees.Where(eObj => eObj.Department.Id == employee.Department.Id && 
+                    (eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE) ||
+                    (eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)).ToList();
+            }
+            catch (Exception e)
+            {
+                employeeList = null;
+            }
+
+            return employeeList;
+        }
+        public Employee GetCurrentTemporaryDeptHead(Employee employee)
+        {
+            try
+            {
+                employeeObj = inventory.Employees.Where(eObj => eObj.Department.Id == employee.Department.Id &&
+                    eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD).ToList().First();
+            }
+            catch (Exception e)
+            {
+                employeeObj = null;
+            }
+
+            return employeeObj;
+        }
+
         /// <summary>
         /// Get user data of ther User table according to the User parameter
         /// </summary>
