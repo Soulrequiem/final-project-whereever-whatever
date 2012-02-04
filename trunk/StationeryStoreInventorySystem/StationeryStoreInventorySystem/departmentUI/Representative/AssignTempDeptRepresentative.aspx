@@ -65,8 +65,12 @@
                          onselectionchanged="drdEmployeeList_SelectionChanged">
                         <Button Visible="False" />
                      </ig:WebDropDown>
-                     <br />
-                </div><br />
+                </div>
+                <div style="float:left; padding-left:10px">
+                    <asp:Button ID="btnEmployee" runat="server" Text="Select" 
+                         CssClass="Searchbutton" onclick="btnEmployee_Click"/>
+                </div>
+                     <br /><br />  
                 <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="700px"
                 CssClass="MediumGroupBoxstyle" StyleSetName="" Text="Search Result" 
                 TitleAlignment="Left">
@@ -75,7 +79,9 @@
                                 Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged">
+                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged" 
+                                ondatafiltering="DgvTempDepteHeadSearchDetails_DataFiltering" 
+                                onpageindexchanged="DgvTempDepteHeadSearchDetails_PageIndexChanged">
                                <Columns>
                                     <ig:TemplateDataField Key="TemplateField_0" Width="50px">
                                         <ItemTemplate>
@@ -99,6 +105,10 @@
                                 <Behaviors>
                                     <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                     </ig:Selection>
+                                    <ig:Paging>
+                                    </ig:Paging>
+                                    <ig:Filtering>
+                                    </ig:Filtering>
                                 </Behaviors>
                             </ig:WebDataGrid>
                             <div style="float:right">
