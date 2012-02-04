@@ -13,6 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
+using StationeryStoreInventorySystemController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 {
@@ -30,9 +31,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             if (!IsPostBack)
             {
-                FillHeadList();
-                //FillEmployee();
+                FillEmployee();
             }
+            FillHeadList();
         }
 
         /// <summary>
@@ -43,9 +44,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             try
             {
-                atdrCtrl = GetControl();
-                DataTable dtHead = atdrCtrl.TemporaryDepartmentHead;
-                DgvCurrentAuthorizedPerson.DataSource = dtHead;
+                //atdrCtrl = GetControl();
+                //DataTable dtHead = atdrCtrl.TemporaryDepartmentHead;
+                DgvCurrentAuthorizedPerson.DataSource = Util.GetCurrentTemporaryHead();
                 DgvCurrentAuthorizedPerson.DataBind();
             }
             catch (Exception e)
@@ -61,16 +62,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
         {
             try
             {
-                //if (dtEmployee != null)
-               
-                   //To be done
-                   //adrCtrl = new AssignDepartmentRepresentativeControl();
-                   //adrCtrl.
-                    drdHeadEmployeeList.TextField = "Employee";
-                    drdHeadEmployeeList.ValueField = "Name";
-                    drdHeadEmployeeList.DataSource = null; //dtEmployee;
-                    drdHeadEmployeeList.DataBind();
-               
+                drdHeadEmployeeList.DataSource = Util.GetEmployeesByDepartments();
+                drdHeadEmployeeList.DataBind();     
             }
             catch (Exception e)
             {
@@ -133,7 +126,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
         protected void btnEmployee_Click(object sender, EventArgs e)
         {
-
+            DgvTempDepteHeadSearchDetails.DataSource = Util.GetEmployeeDetails(drdHeadEmployeeList.CurrentValue);
+            DgvTempDepteHeadSearchDetails.DataBind();
         }
 
         protected void DgvTempDepteHeadSearchDetails_DataFiltering(object sender,
