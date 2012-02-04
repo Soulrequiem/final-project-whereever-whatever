@@ -21,8 +21,10 @@ namespace StationeryStoreInventorySystemController.storeController
     public class ViewStationeryRetrievalListControl
     {
         private IRetrievalBroker retrievalBroker;
+
+        private Employee currentEmployee;
         
-        private List<RetrievalDetail> retrievalDetailList;
+        private List<Retrieval> retrievalList;
 
         private DataTable dt;
         private DataRow dr;
@@ -30,15 +32,21 @@ namespace StationeryStoreInventorySystemController.storeController
         private string[] columnName = { "retrievalNo", "retrievalDate/Time", "retrievedBy", "neededQty", "actualQty" };
 
         private DataColumn[] dataColumn;
+
         public ViewStationeryRetrievalListControl()
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
+
             InventoryEntities inventory=new InventoryEntities();
             retrievalBroker=new RetrievalBroker(inventory);
-            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
-                                            new DataColumn(columnName[1]),
-                                            new DataColumn(columnName[2]),
-                                            new DataColumn(columnName[3]),
-                                            new DataColumn(columnName[4])};
+
+            retrievalList = retrievalBroker.GetAllRetrieval();
+
+            dataColumn = new DataColumn[]{ new DataColumn(columnName[0]), 
+                                           new DataColumn(columnName[1]), 
+                                           new DataColumn(columnName[2]), 
+                                           new DataColumn(columnName[3]), 
+                                           new DataColumn(columnName[4]) };
         }
 
         /// <summary>
@@ -54,22 +62,24 @@ namespace StationeryStoreInventorySystemController.storeController
         /// </summary>
         /// <param name=""></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable GetStationeryRetrievalList()
+        public DataTable RetrievalList
         {
-            dt = new DataTable();
-            dt.Columns.AddRange(dataColumn);
-            retrievalDetailList = retrievalBroker.GetAllRetrievalDetail();
-            foreach (RetrievalDetail temp in retrievalDetailList)
+            get
             {
-                dr = dt.NewRow();
-                dr[columnName[0]] = temp.Id;
-                dr[columnName[1]] = temp.Retrieval.CreatedDate;
-                dr[columnName[2]] = temp.Retrieval.CreatedBy;
-                dr[columnName[3]] = temp.NeededQty;
-                dr[columnName[4]] = temp.ActualQty;
-                dt.Rows.Add(dr);
-            }
-            return dt;
+                dt = new DataTable();
+                
+                foreach (Retrieval retrieval in retrievalList)
+                {
+                    dr = dt.NewRow();
+                    dr[columnName[0]] = retrieval.Id;
+                    dr[columnName[1]] = retrieval.CreatedDate;
+                    dr[columnName[2]] = retrieval.CreatedBy;
+                    dr[columnName[3]] = retrievalBroker.GetSumRetrievalDetailQty(RetrievalBroker.QTY_TYPE.NEEDED_QTY, retrieval);
+                    dr[columnName[4]] = retrievalBroker.GetSumRetrievalDetailQty(RetrievalBroker.QTY_TYPE.ACTUAL_QTY, retrieval);
+                    dt.Rows.Add(dr);
+                }
+                return dt;
+            }            
         }
     }
 }
