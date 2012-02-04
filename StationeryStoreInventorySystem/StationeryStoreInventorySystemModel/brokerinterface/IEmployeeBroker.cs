@@ -19,6 +19,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Update(Employee employee);
         Constants.DB_STATUS Delete(Employee employee);
         List<Employee> GetEmployeeName(Employee employee);
+        List<Employee> GetEmployeeByDepartments(Employee employee);
 
         User GetUser(User user);
         List<User> GetAllUser();
