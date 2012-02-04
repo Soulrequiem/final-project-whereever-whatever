@@ -26,6 +26,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Insert(StockCardDetail newStockCardDetail);
         Constants.DB_STATUS Update(StockCardDetail stockCardDetail);
         Constants.DB_STATUS Delete(StockCardDetail stockCardDetail);
+        int GetStockCardDetailId();
         //Constants.DB_STATUS Insert(StockCardDetail newStockCardDetail,Boolean isSaved);
         //Constants.DB_STATUS Update(Boolean isSaved);
         //Constants.DB_STATUS Delete(StockCardDetail stockCardDetail,Boolean isSaved);
