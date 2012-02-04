@@ -29,7 +29,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             if (!IsPostBack)
             {
+               // iavCtrl.GetDiscrepancyList();
                 FillDiscrepancy();
+
                 //FillReportDetails();
                 //FillReport();
             }
@@ -41,24 +43,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         /// <param name="dtDiscrepancy"></param>
         private void FillDiscrepancy()
         {
-            try
-            {
+            //try
+            //{
                 iavCtrl = GetControl();
-                DataTable dtDiscrepancy = iavCtrl.DiscrepancyList;
+                DataTable dtDiscrepancy = iavCtrl.GetDiscrepancyList();
                 DgvDiscrepancyReportList.DataSource = dtDiscrepancy;
                 DgvDiscrepancyReportList.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Logger.WriteErrorLog(e);
+            //}
         }
+      
 
         /// <summary>
         /// Fills Report Details to Label
         /// </summary>
         /// <param name="dtReportDetails"></param>
-        private void FillReportDetails(DataTable dtReportDetails)
+        private void FillReportDetails()//DataTable dtReportDetails)
         {
             try
             {
@@ -101,11 +104,43 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             return iavCtrl;
         }
 
-        protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender, 
-            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        protected void DgvDiscrepancyReportList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
-            voucherNo = e.CurrentSelectedRows[0].Attributes["VoucherNo"].ToString();
+            try
+            {
+                HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("id").FindControl("id");
+                link.NavigateUrl = "~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx?discrepancyId=" + e.Row.DataKey[0];
+            }catch(Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
         }
+<<<<<<< .mine
+
+        //protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender, 
+        //    Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        //{
+        //    voucherNo = e.CurrentSelectedRows[0].Attributes["VoucherNo"].ToString();
+        //}
+
+
+        //protected void DgvDiscrepancyReportList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        //{
+        //    try
+        //    {
+        //        HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("id").FindControl("id");                
+        //        link.NavigateUrl = "~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx?discrepancyId=" + e.Row.DataKey[0];
+        //        iavCtrl = GetControl();
+        //        DataTable dt = iavCtrl.SelectDiscrepancy(Convert.ToInt16(e.Row.Items.FindItemByKey("id").FindControl("id")));
+        //        DgvDiscrepancyReportList.DataSource = dt;
+        //        DgvDiscrepancyReportList.DataBind();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //do something
+        //    }
+        //}
+=======
 
         protected void DgvDiscrepancyReportList_DataFiltering(object sender,
             Infragistics.Web.UI.GridControls.FilteringEventArgs e)
@@ -130,6 +165,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             FillReport();
         }
+>>>>>>> .r445
     }
 }
 /********************************************/

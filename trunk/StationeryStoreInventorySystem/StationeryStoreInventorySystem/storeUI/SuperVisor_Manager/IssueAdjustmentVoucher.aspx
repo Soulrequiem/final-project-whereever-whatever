@@ -3,6 +3,7 @@
 <%@ Register assembly="Infragistics35.WebUI.Misc.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.WebUI.Misc" tagprefix="igmisc" %>
 <%@ Register Assembly="Infragistics35.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb"
     Namespace="Infragistics.Web.UI.GridControls" TagPrefix="ig" %>
+<%@ Register assembly="Infragistics35.Web.v11.2, Version=11.2.20112.1019, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" namespace="Infragistics.Web.UI.NavigationControls" tagprefix="ig1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -18,34 +19,28 @@
              <ig:WebDataGrid ID="DgvDiscrepancyReportList" runat="server" Height="200px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                            onrowselectionchanged="DgvDiscrepancyReportList_RowSelectionChanged" 
-                            ondatafiltering="DgvDiscrepancyReportList_DataFiltering" 
-                            onpageindexchanged="DgvDiscrepancyReportList_PageIndexChanged">
+            ItemCssClass="ItemGridViewStyle">
                  <Columns>
                      <%--<ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="150px">
                          <Header Text="Voucher No." />
                      </ig:BoundDataField>--%>
-                     <ig:TemplateDataField Key="VoucherNo" Width="120px">
+                     <ig:TemplateDataField Key="id" Width="150px">
                         <ItemTemplate>
-                            <asp:HyperLink ID="VoucherNo" runat="server" 
-                                Text='<%# Eval("VoucherNo" ) %>'
-                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                            <asp:HyperLink ID="id" runat="server" 
+                                Text='<%# Eval("id" ) %>'
+                                NavigateUrl="~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx" >
                                 </asp:HyperLink>
                         </ItemTemplate>
-                        <Header Text="Voucher No." />
+                        <Header Text="Discrepancy ID" />
                     </ig:TemplateDataField>
-                     <ig:BoundDataField DataFieldName="CreatedBy" Key="CreatedBy" Width="150px">
+                     <ig:BoundDataField DataFieldName="createdBy" Key="createdBy" Width="200px">
                          <Header Text="Created By" />
                      </ig:BoundDataField>
-                     <ig:BoundDataField DataFieldName="CreatedDate" Key="CreatedDate" Width="150px">
+                     <ig:BoundDataField DataFieldName="createdDate" Key="createdDate" Width="200px">
                          <Header Text="Created Date" />
                      </ig:BoundDataField>
-                     <ig:BoundDataField DataFieldName="TotalQty" Key="TotalQty" Width="100px">
+                     <ig:BoundDataField DataFieldName="totalQty" Key="totalQty" Width="150px">
                          <Header Text="Total Qty" />
-                     </ig:BoundDataField>
-                     <ig:BoundDataField DataFieldName="Status" Key="Status" Width="150px">
-                         <Header Text="Status" />
                      </ig:BoundDataField>
                  </Columns>
                  <Behaviors>
@@ -100,15 +95,13 @@
                             <ig:WebDataGrid ID="DgvDiscrepancyReport" runat="server" Height="300px" 
                             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                            ondatafiltering="DgvDiscrepancyReport_DataFiltering" 
-                            onpageindexchanged="DgvDiscrepancyReport_PageIndexChanged">
+                            ItemCssClass="ItemGridViewStyle">
                                 <Columns>
                                     <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                         <Header Text="Item No." />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                                        Width="200px">
+                                        Width="210px">
                                         <Header Text="Item Description" />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="120px">
@@ -135,7 +128,7 @@
                             </ig:WebDataGrid>
                             <div style="float:right">
                                     <%--<a class="button" href="" style="float:right">Issue</a>--%>
-                                    <asp:Button ID="btnIssue" runat="server" CssClass="Defaultbutton" Text="Issue" />
+                                    <asp:Button ID="btnIssue" runat="server" CssClass="Defaultbutton" Text="Issue"/>
                             </div>
                             <div style="float:left;margin-right:10px">
                                    <asp:Label CssClass="DefaultLabelstyle" 
