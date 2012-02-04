@@ -141,7 +141,7 @@ namespace StationeryStoreInventorySystemController
             Employee employee = ValidateUser();
 
             //if (!CheckPermission(allowedRole, GetRolePermission(Converter.objToEmployeeRole(employee.Role.Id))))
-            if (!CheckPermission(Converter.objToEmployeeRole(employee.Role.Id), GetRolePermission(allowedRole)))
+            if (!CheckPermission(Converter.objToEmployeeRole(employee.Role.Id), GetRolePermission(allowedRole)) && !(Converter.objToEmployeeRole(employee.Role.Id) == Constants.EMPLOYEE_ROLE.ADMIN))
             {
                 commonController.LogOutControl logOutControl = new commonController.LogOutControl();
             }
@@ -153,20 +153,20 @@ namespace StationeryStoreInventorySystemController
             List<Constants.EMPLOYEE_ROLE> permission = new List<Constants.EMPLOYEE_ROLE>();
 
             // Department
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.EMPLOYEE || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.EMPLOYEE)
             {
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.EMPLOYEE);
-                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE : employeeType;
+                employeeType = Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE;
             }
 
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)
             {
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE);
-                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD : employeeType;
+                employeeType = SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD;
             }
 
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD || employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
             {
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD);
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD);                
@@ -176,16 +176,16 @@ namespace StationeryStoreInventorySystemController
             // end of Department
 
             // Store
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_CLERK || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_CLERK)
             {
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_CLERK);
-                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR : employeeType;
+                employeeType = Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR;
             }
 
-            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
+            if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
             {
                 permission.Add(SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
-                employeeType = employeeType != Constants.EMPLOYEE_ROLE.ADMIN ? SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER : employeeType;
+                employeeType = SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER;
             }
 
             if (employeeType == SystemStoreInventorySystemUtil.Constants.EMPLOYEE_ROLE.STORE_MANAGER || employeeType == Constants.EMPLOYEE_ROLE.ADMIN)
