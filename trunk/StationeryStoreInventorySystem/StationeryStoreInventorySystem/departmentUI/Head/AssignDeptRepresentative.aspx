@@ -95,8 +95,10 @@
                      <ig:WebDropDown ID="drdRepEmployeeList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_EmployeeName %>" 
                             StyleSetName="Office2010Blue" 
-                        onselectionchanged="drdRepEmployeeList_SelectionChanged">
+                        onselectionchanged="drdRepEmployeeList_SelectionChanged" 
+                        TextField="employeeName" ValueField="employeeID">
                         <Button Visible="False" />
+                         <DropDownItemBinding TextField="employeeName" ValueField="employeeID" />
                      </ig:WebDropDown>
                      <br />
                      <asp:Label CssClass="ErrorLabelstyle" 
