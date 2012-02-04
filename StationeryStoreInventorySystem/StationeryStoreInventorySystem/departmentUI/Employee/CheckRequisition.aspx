@@ -45,11 +45,17 @@
                          Height="250px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
-                         oninitializerow="dgvRequisitionList_InitializeRow">
+                         oninitializerow="dgvRequisitionList_InitializeRow" 
+                         oncellselectionchanged="dgvRequisitionList_CellSelectionChanged" 
+                         onrowselectionchanged="dgvRequisitionList_RowSelectionChanged">
                     <Columns>
-                        
-                        <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
-                        </ig:UnboundCheckBoxField>
+                        <ig:TemplateDataField Key="CheckRequisitionCheckBox" Width="85px">
+                            <ItemTemplate>
+                                <asp:CheckBox runat="server" OnCheckedChanged="chk_changed" />
+                            </ItemTemplate>
+                            </ig:TemplateDataField>
+                        <%--<ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
+                        </ig:UnboundCheckBoxField>--%>
                         <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                             Width="110px">
                             <Header Text="Requisition ID" />
