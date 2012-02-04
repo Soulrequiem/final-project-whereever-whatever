@@ -21,7 +21,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         protected void btnSend_Click(object sender, EventArgs e)
         {
             String Email = txtemailaddress.Text.Trim();
-            //SendEmail.Sending(Email);
+            SendEmail.Sending(Email);
             //if (txtemailaddress.Text != "")
             //    lblStatusMessage.Text = "Successful.";
         }
