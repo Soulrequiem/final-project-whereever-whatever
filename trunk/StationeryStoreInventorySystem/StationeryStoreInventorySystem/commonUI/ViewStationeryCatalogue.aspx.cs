@@ -36,9 +36,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 FillItems();
 
                 viewStationeryCatalogueControl = new ViewStationeryCatalogueControl();
-                this.FillStationeryList(StationeryStoreInventorySystemController.Util.GetItemTable());
+                //this.FillStationeryList(StationeryStoreInventorySystemController.Util.GetItemTable());
                 //FillStationeryList();
-                FillItems();
+                //FillItems();
 
             }
             
@@ -143,6 +143,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             {
                 Logger.WriteErrorLog(ex);
             }
+        }
+
+        protected void dgvStationeryList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
+        {
+            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("ItemNo").FindControl("ItemNo");
+            link.NavigateUrl = "~/storeUI/Clerk/ViewStockCard.aspx?ItemDescription=" + e.Row.Items[2].Text;
         }
     }
 }
