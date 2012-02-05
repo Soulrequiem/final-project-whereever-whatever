@@ -38,6 +38,7 @@ namespace StationeryStoreInventorySystemController.storeController
         private Employee currentEmployee;
         private EmployeeBroker employeeBroker;
         private StockAdjustment stockAdjustment;
+        private List<Discrepancy> showList;
         //  private DataColumn[] discrepancyItemListColumn;
 
         public IssueAdjustmentVoucherControl()
@@ -69,9 +70,24 @@ namespace StationeryStoreInventorySystemController.storeController
                 }
                 DataRow dr;
                 if (discrepancyDataList == null)
-                    discrepancyDataList = discrepancyBroker.GetAllDiscrepancy(Constants.VISIBILITY_STATUS.SHOW);
-                foreach (Discrepancy dc in discrepancyDataList)
                 {
+                    discrepancyDataList = discrepancyBroker.GetAllDiscrepancy(Constants.VISIBILITY_STATUS.SHOW);
+                    showList = new List<Discrepancy>();
+                    foreach (Discrepancy temp in discrepancyDataList)
+                    {
+                        if (GetList(temp.DiscrepancyDetails.ToList()).Count > 0)
+                        {
+                            showList.Add(temp);
+
+                        }
+                       
+
+                    }
+                }
+
+                foreach (Discrepancy dc in showList)
+                {
+                    
                     dr = dt.NewRow();
                     dr[listColumnName[0]] = dc.Id;
                     dr[listColumnName[1]] = dc.CreatedBy;
@@ -219,8 +235,32 @@ namespace StationeryStoreInventorySystemController.storeController
             discrepancy.Id = discrepancyId;
             discrepancy = discrepancyBroker.GetDiscrepancy(discrepancy);
             //List<DiscrepancyDetail> discrepancyDetailList = (List<DiscrepancyDetail>)discrepancy.DiscrepancyDetails;
+            //List<DiscrepancyDetail> supervisorDetails = new List<DiscrepancyDetail>();
+            //List<DiscrepancyDetail> managerDetails = new List<DiscrepancyDetail>();
 
-            foreach (DiscrepancyDetail temp in discrepancy.DiscrepancyDetails)
+            //foreach (DiscrepancyDetail dd in discrepancy.DiscrepancyDetails)
+            //{
+            //    if (dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR))
+            //    {
+            //        supervisorDetails.Add(dd);
+            //    }
+            //    else
+            //    {
+            //        managerDetails.Add(dd);
+            //    }
+            //}
+
+            //List<DiscrepancyDetail> currentList;
+            //if (currentEmployee.Role.Id == Converter.objToInt(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR))
+            //{
+            //    currentList = supervisorDetails;
+            //}
+            //else
+            //{
+            //    currentList = managerDetails;
+            //}
+
+            foreach (DiscrepancyDetail temp in GetList(discrepancy.DiscrepancyDetails.ToList()))
             {
                 drr = dtt.NewRow();
                 drr[detailColumnName[0]] = temp.Item.Id;
@@ -233,7 +273,37 @@ namespace StationeryStoreInventorySystemController.storeController
             return dtt;
         }
 
-        public string IssueAdjustment()
+        private List<DiscrepancyDetail> GetList(List<DiscrepancyDetail> list)
+        {
+            List<DiscrepancyDetail> supervisorDetails = new List<DiscrepancyDetail>();
+            List<DiscrepancyDetail> managerDetails = new List<DiscrepancyDetail>();
+
+            foreach (DiscrepancyDetail dd in list)
+            {
+                if (dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR))
+                {
+                    supervisorDetails.Add(dd);
+                }
+                else
+                {
+                    managerDetails.Add(dd);
+                }
+            }
+
+            List<DiscrepancyDetail> currentList;
+            if (currentEmployee.Role.Id == Converter.objToInt(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR))
+            {
+                currentList = supervisorDetails;
+            }
+            else
+            {
+                currentList = managerDetails;
+            }
+
+            return currentList;
+        }
+
+        public string[] IssueAdjustment()
         {
             stockAdjustment = new StockAdjustment();
             stockAdjustment.Id = discrepancyBroker.GetStockAdjustmentId();
@@ -241,8 +311,11 @@ namespace StationeryStoreInventorySystemController.storeController
             stockAdjustment.CreatedDate = DateTime.Now;
             stockAdjustment.CreatedBy = Util.GetEmployee(employeeBroker);
             stockAdjustment.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
-            
-            return stockAdjustment.Id;
+            string[] array = new string[3];
+            array[0] = stockAdjustment.Id;
+            array[1] = stockAdjustment.CreatedBy.Name;
+            array[2] = discrepancy.CreatedBy.Name;
+            return array;
         }
 
         public Constants.ACTION_STATUS CreateAdjustment()
