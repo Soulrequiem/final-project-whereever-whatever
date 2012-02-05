@@ -126,21 +126,22 @@ namespace StationeryStoreInventorySystemController.departmentController
             dt.Columns.Add("status");
             dt.Columns.Add("remainingQty");
             dt.Columns.Add("remarks");
-            List<Requisition> requisitionList = requisitionBroker.GetAllRequisitionByStatus();
+            List<Requisition> requisitionList = requisitionBroker.GetAllRequisitionByEmployee(Util.GetEmployee().Id);// GetAllRequisitionByStatus();
             foreach (Requisition temp in requisitionList)
             {
                 requisitionDetail = new RequisitionDetail();
                 // requisitionDetail.Requisition.Id = temp.Id;
                 requisitionDetail.Requisition = temp;
-                Requisition resultRequisition = requisitionBroker.GetRequisition(temp);
+                //Requisition resultRequisition = requisitionBroker.GetRequisition(temp);
                 RequisitionDetail resultRequisitionDetail = requisitionBroker.GetRequisitionDetail(requisitionDetail);
-                dr = dt.NewRow();
-                dr["RequisitionID"] = resultRequisition.Id;
-                dr["requisitionDate"] = resultRequisition.CreatedDate;
-                dr["status"] = resultRequisition.Status;
-                dr["remainingQty"] = resultRequisitionDetail.Qty - requisitionDetail.DeliveredQty;
-                dr["remarks"] = resultRequisition.Remarks;
-                dt.Rows.Add(dr);
+                
+                    dr = dt.NewRow();
+                    dr["RequisitionID"] = temp.Id;
+                    dr["requisitionDate"] = temp.CreatedDate;
+                    dr["status"] = temp.Status;
+                    dr["remainingQty"] = resultRequisitionDetail.Qty - requisitionDetail.DeliveredQty;
+                    dr["remarks"] = temp.Remarks;
+                    dt.Rows.Add(dr);
                 //dr["requsitionId"] = temp.Id;
                 //dr["requisitionDate"] = temp.CreatedDate;
                 //dr["status"] = temp.Status; 
