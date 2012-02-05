@@ -78,7 +78,7 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                retrievalList = inventory.Retrievals.ToList<Retrieval>();
+                retrievalList = inventory.Retrievals.OrderByDescending(x=> x.Id).ToList<Retrieval>();
             }
             catch (Exception e)
             {
