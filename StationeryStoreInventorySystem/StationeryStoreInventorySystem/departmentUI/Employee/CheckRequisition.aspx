@@ -143,12 +143,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><asp:Label CssClass="DefaultLabelstyle" ID="Label3" runat="server" 
+                            <%--<td><asp:Label CssClass="DefaultLabelstyle" ID="Label3" runat="server" 
                                 Text="<%$ Resources:WebResources, CheckRequisition_Status_Label%>"/></td>
                             <td>
                                  <asp:Label CssClass="DefaultLabelstyle" ID="lblRequistionStatus" runat="server" 
                                     />
-                            </td>
+                            </td>--%>
                         </tr>
                     </table>
                     <br />

@@ -60,6 +60,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                     Util.PutSession(sessionKey, checkRequisitionControlObj);
                     
                     FillRequisitions();
+                    lblRequisitionID.Text = Request.QueryString["RequisitionIDIndex"].ToString();
                 }
             }
             else
@@ -94,6 +95,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
+
                 dgvRequisitionList.DataSource = checkRequisitionControlObj.GetRequisitionList();
                 dgvRequisitionList.DataBind();
             }
@@ -114,14 +116,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 //Fill all requisitionsIDs made by current user
                 //crctrl = new CheckRequisitionControl();
                 //crctrl.
-                if ((DataTable)Util.GetSession("CheckReq") != null)
-                {
+                //DataTable dt = Util.GetSession("CheckReq") == null ? null : (DataTable)Util.GetSession("CheckReq");
+                //if (dt != null)
+                //{
                     drdRequisitionList.TextField = "RequisitionID";
                     drdRequisitionList.ValueField = "RequisitionID";
                    // drdRequisitionList.DataSource = (DataTable)Util.GetSession(sessionKey);
-                    drdRequisitionList.DataSource = checkRequisitionControlObj.GetRequisitionList();
+                    Util.PutSession("reqData", checkRequisitionControlObj.GetRequisitionList());
+                    drdRequisitionList.DataSource = (DataTable)Session["reqData"];
                     drdRequisitionList.DataBind();
-                }
+                    
+                //}
             }
             catch (Exception e)
             {
@@ -138,6 +143,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
+                
                 dgvRequisitionDetails.DataSource = dtCollectionDetails;
                 dgvRequisitionDetails.DataBind();
             }
@@ -170,7 +176,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
-                FillSpecificRequisitionList(((DataTable)Session[sessionKey]).Select(" RequisitionID LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
+                FillSpecificRequisitionList(((DataTable)Session["reqData"]).Select(" RequisitionID LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
             }
             catch (Exception ex)
             {
