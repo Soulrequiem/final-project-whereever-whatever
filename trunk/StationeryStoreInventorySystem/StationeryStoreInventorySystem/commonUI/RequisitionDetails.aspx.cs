@@ -27,30 +27,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("ItemNo");
-            //dt.Columns.Add("ItemDescription");
-            //dt.Columns.Add("RequiredQty");
-           
-
-            //DataRow dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1we2we12321";
-            //dr[2] = "1213sadsad";
-            //dt.Rows.Add(dr);
-
-            //dr = dt.NewRow();
-            //dr[0] = "1";
-            //dr[1] = "1we2we12321";
-            //dr[2] = "1213sadsad";
-            //dt.Rows.Add(dr);
-
-            //DgvRequisitionDetails.DataSource = dt;
-            //DgvRequisitionDetails.DataBind();
-
             if (!IsPostBack)
             {
-                MasterPage.setCurrentPage(this);
                 //FillRequisitionDetailsList();
                 //FillDetails();
             }
@@ -116,6 +94,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             Util.PutSession("Email", lblEmpEmailAddress.Text);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "Myscript", "<script language='javascript'> " +
                    "window.open('../commonUI/PrintView.aspx');</script>");
+        }
+
+        protected void btnApprove_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnReject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
