@@ -174,30 +174,31 @@ namespace StationeryStoreInventorySystemController.departmentController
                 foreach (int i in index)
                 {
                     requisitionDetail = requisition.RequisitionDetails.ElementAt(i - (totalDeleted++));
-
-                    if (requisitionDetail != null)
-                    {
-                        requisitionDetailToBeRemoved.Add(requisitionDetail);
+                    //requisitionDetail = requisition.RequisitionDetails.ElementAt(i);
+                    requisition.RequisitionDetails.Remove(requisitionDetail);
+                    //if (requisitionDetail != null)
+                    //{
+                    //    requisitionDetailToBeRemoved.Add(requisitionDetail);
                         status = Constants.ACTION_STATUS.SUCCESS;
-                    }
-                    else
-                    {
-                        status = Constants.ACTION_STATUS.FAIL;
-                        break;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    status = Constants.ACTION_STATUS.FAIL;
+                    //    break;
+                    //}
                 }
 
-                if (status == Constants.ACTION_STATUS.SUCCESS)
-                {
-                    foreach (RequisitionDetail rd in requisitionDetailToBeRemoved)
-                    {
-                        requisition.RequisitionDetails.Remove(rd);
-                    }
+                //if (status == Constants.ACTION_STATUS.SUCCESS)
+                //{
+                //    foreach (RequisitionDetail rd in requisitionDetailToBeRemoved)
+                //    {
+                //        requisition.RequisitionDetails.Remove(rd);
+                //    }
 
-                    itemAdded -= totalDeleted;
+                //    itemAdded -= totalDeleted;
 
-                    requisition.RequisitionDetails.OrderBy(x=> x.Id);
-                }                
+                //    requisition.RequisitionDetails.OrderBy(x=> x.Id);
+                //}                
             }
             else
             {
