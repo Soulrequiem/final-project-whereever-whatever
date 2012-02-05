@@ -117,7 +117,8 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.CreatedBy.Id == employeeID).ToList<Requisition>();
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.CreatedBy.Id == employeeID &&
+                    (reqObj.Status == 1 || reqObj.Status == 2)).ToList<Requisition>();
             }
             catch (Exception e)
             {
