@@ -121,24 +121,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee {
         protected global::System.Web.UI.WebControls.Label lblRequisitionID;
         
         /// <summary>
-        /// Label3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// lblRequistionStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRequistionStatus;
-        
-        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
