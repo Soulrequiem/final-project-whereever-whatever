@@ -138,7 +138,8 @@ namespace StationeryStoreInventorySystemController.departmentController
                     dr = dt.NewRow();
                     dr["RequisitionID"] = temp.Id;
                     dr["requisitionDate"] = temp.CreatedDate;
-                    dr["status"] = temp.Status;
+
+                    dr["status"] = Enum.GetName(typeof(Constants.REQUISITION_STATUS), temp.Status); 
                     dr["remainingQty"] = resultRequisitionDetail.Qty - requisitionDetail.DeliveredQty;
                     dr["remarks"] = temp.Remarks;
                     dt.Rows.Add(dr);
