@@ -132,12 +132,12 @@ namespace StationeryStoreInventorySystemModel.broker
         /// </summary>
         /// <param name="requisitionStatus"></param>
         /// <returns></returns>
-        public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus)
+        public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus, Department department)
         {
             try
             {
                 int status = Converter.objToInt(requisitionStatus);
-                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status).ToList<Requisition>();
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status && reqObj.Department.Id.Contains(department.Id)).ToList<Requisition>();
             }
             catch (Exception e)
             {

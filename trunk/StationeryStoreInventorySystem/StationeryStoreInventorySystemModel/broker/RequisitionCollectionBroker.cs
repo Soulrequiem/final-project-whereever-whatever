@@ -86,6 +86,21 @@ namespace StationeryStoreInventorySystemModel.broker
                
         }
 
+        public List<RequisitionCollection> GetAllRequisitionCollection(Constants.COLLECTION_STATUS collectionStatus)
+        {
+            try
+            {
+                int status = Converter.objToInt(collectionStatus);
+                requisitionCollectionList = inventory.RequisitionCollections.Where(requisitionCollection => requisitionCollection.Status == status).ToList<RequisitionCollection>();
+            }
+            catch (Exception e)
+            {
+                requisitionCollectionList = null;
+            }
+
+            return requisitionCollectionList;
+        }
+
         public List<RequisitionCollection> GetAllRequisitionCollection(Department department, Constants.COLLECTION_STATUS collectionStatus)
         {
             try
