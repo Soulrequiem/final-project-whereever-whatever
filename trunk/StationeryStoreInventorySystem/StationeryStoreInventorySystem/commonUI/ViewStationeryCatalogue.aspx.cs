@@ -76,7 +76,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         dgvClerkStationeryList.DataSource = dt;
                         dgvClerkStationeryList.DataBind();
                         dgvStationeryList.Visible = false;
-                        WebGroupBox1.Width = 760;
+                        WebGroupBox1.Width = 720;
                     }
                 }
             }

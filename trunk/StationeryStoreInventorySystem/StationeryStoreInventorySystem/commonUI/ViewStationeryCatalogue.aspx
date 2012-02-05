@@ -84,7 +84,7 @@
                             </ig:Sorting>
                         </Behaviors>
                  </ig:WebDataGrid>
-                 <ig:WebDataGrid ID="dgvClerkStationeryList" runat="server" Width="760px" 
+                 <ig:WebDataGrid ID="dgvClerkStationeryList" runat="server" Width="720px" 
                         Height="640px" DefaultColumnWidth="50px" StyleSetName="Office2010Blue" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
@@ -93,7 +93,7 @@
                         ondatafiltering="dgvStationeryList_DataFiltering" 
                         onpageindexchanged="dgvStationeryList_PageIndexChanged">
                         <Columns>
-                            <ig:TemplateDataField Key="ItemNo" Width="100px">
+                            <ig:TemplateDataField Key="ItemNo" Width="80px">
                             <ItemTemplate>
                                 <asp:HyperLink ID="ItemNo" runat="server" 
                                     Text='<%# Eval("ItemNo" ) %>'
@@ -102,7 +102,7 @@
                             </ItemTemplate>
                             <Header Text="Item No." />
                             </ig:TemplateDataField>
-                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="120px">
+                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="100px">
                                 <Header Text="Category" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
