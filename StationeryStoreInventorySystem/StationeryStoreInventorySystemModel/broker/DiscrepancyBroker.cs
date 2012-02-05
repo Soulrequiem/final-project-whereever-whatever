@@ -304,12 +304,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public int GetDiscrepancyDetailId()
         {
-            throw new NotImplementedException();
+            return inventory.DiscrepancyDetails.Max(xObj => xObj.Id) + 1;
         }
 
         public string GetStockAdjustmentId()
         {
-            throw new NotImplementedException();
+            return "11";
         }
     }
 }
