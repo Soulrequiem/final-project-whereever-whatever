@@ -182,58 +182,58 @@ namespace SystemStoreInventorySystemUtil
                     category = Constants.ITEM_CATEGORY.CLIP;
                     break;
                 case 2:
-                    category = Constants.ITEM_CATEGORY.DISK;
-                    break;
-                case 3:
                     category = Constants.ITEM_CATEGORY.ENVELOPE;
                     break;
-                case 4:
+                case 3:
                     category = Constants.ITEM_CATEGORY.ERASER;
                     break;
-                case 5:
+                case 4:
                     category = Constants.ITEM_CATEGORY.EXERCISE;
                     break;
-                case 6:
+                case 5:
                     category = Constants.ITEM_CATEGORY.FILE;
                     break;
-                case 7:
+                case 6:
                     category = Constants.ITEM_CATEGORY.PAD;
                     break;
-                case 8:
+                case 7:
                     category = Constants.ITEM_CATEGORY.PAPER;
                     break;
-                case 9:
+                case 8:
                     category = Constants.ITEM_CATEGORY.PEN;
                     break;
-                case 10:
+                case 9:
                     category = Constants.ITEM_CATEGORY.PUNCHER;
                     break;
-                case 11:
+                case 10:
                     category = Constants.ITEM_CATEGORY.RULER;
                     break;
-                case 12:
+                case 11:
                     category = Constants.ITEM_CATEGORY.SCISSORS;
                     break;
-                case 13:
+                case 12:
                     category = Constants.ITEM_CATEGORY.SHARPENER;
                     break;
-                case 14:
+                case 13:
                     category = Constants.ITEM_CATEGORY.SHORTHAND;
                     break;
-                case 15:
+                case 14:
                     category = Constants.ITEM_CATEGORY.STAPLER;
                     break;
-                case 16:
+                case 15:
                     category = Constants.ITEM_CATEGORY.TACKS;
                     break;
-                case 17:
+                case 16:
                     category = Constants.ITEM_CATEGORY.TAPE;
                     break;
-                case 18:
+                case 17:
                     category = Constants.ITEM_CATEGORY.TPARENCY;
                     break;
-                case 19:
+                case 18:
                     category = Constants.ITEM_CATEGORY.TRAY;
+                    break;
+                case 19:
+                    category = Constants.ITEM_CATEGORY.DISK;
                     break;
             }
             return category;
