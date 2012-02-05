@@ -375,6 +375,16 @@ namespace StationeryStoreInventorySystemModel.broker
         }
 
         #endregion
+
+        #region IDiscrepancyBroker Members
+
+
+        public string GetStockAdjustmentId()
+        {
+            return "21";
+        }
+
+        #endregion
     }
 }
         #endregion
