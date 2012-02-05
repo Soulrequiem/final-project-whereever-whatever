@@ -30,5 +30,6 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Update(StockAdjustment stockAdjustment);
         Constants.DB_STATUS Delete(StockAdjustment stockAdjustment);
         string GetStockAdjustmentId(Employee employee);
+        string GetStockAdjustmentId();
     }
 }
