@@ -18,7 +18,9 @@
             ImageUrl="~/Images/Common/print.png" Width="30px" Height="45px" 
             ToolTip="Print" />
     </div>
-    <asp:ScriptManager ID="ScriptManager1" runat="server"/>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+    <%--<asp:ScriptManager ID="ScriptManager1" runat="server"/>--%>
             <br />
     <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
             Text="<%$ Resources:WebResources, RequestStationery_Header %>" /></h1>
