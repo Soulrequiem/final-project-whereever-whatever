@@ -162,8 +162,8 @@ namespace SystemStoreInventorySystemUtil
         public enum DISCREPANCY_TYPE
         {
             UNKNOWN,
-            ADD,
-            REDUCE
+            SUPERVISOR,
+            MANAGER
         }
     }
 }
