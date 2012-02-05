@@ -8,6 +8,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <style type="text/css">.hidden{visibility:hidden;}</style>
+
     <br />
     <div class="ContentDivStyle">
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
@@ -85,7 +87,7 @@
                         <%--<ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
                             <Header Text="Remarks" />
                         </ig:BoundDataField>--%>
-                        <ig:TemplateDataField  Key="remarks" Width="150px">
+                        <ig:TemplateDataField  Key="remarks" Width="150px" Hidden="True">
                             <ItemTemplate>
                                 <ig:WebTextEditor ID="remarks" runat="server" Width="120px"
                                 Text='<%# Eval("remarks") %>'>
