@@ -151,6 +151,26 @@ namespace StationeryStoreInventorySystemModel.broker
         }
 
         /// <summary>
+        /// Retreive All of the requisition information according to status
+        /// </summary>
+        /// <param name="requisitionStatus"></param>
+        /// <returns></returns>
+        public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus)
+        {
+
+            try
+            {
+
+                int status = Converter.objToInt(requisitionStatus);
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status).ToList<Requisition>();
+            }
+            catch (Exception e)
+            {
+                requisitionList = null;
+            }
+            return requisitionList;
+        }
+        /// <summary>
         /// Insert Requisition data to the Requisition Table according to the Requisition Parameter
         ///  Return Constants.DB_STATUS
         /// </summary>
