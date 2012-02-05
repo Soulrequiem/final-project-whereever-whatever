@@ -55,7 +55,7 @@
                             </ig:Sorting>
                         </Behaviors>
                     </ig:WebDataGrid>
-                    <br>
+                    <br />
                         <div style="float:left">
                             <asp:Label CssClass="DefaultLabelstyle" 
                                 ID="Label3" runat="server" 
@@ -67,17 +67,20 @@
                             <ig:WebDropDown ID="drdCollectionList" runat="server" Width="250px" 
                             DropDownAnimationType="EaseIn" NullText="Enter or Select Collection Point" 
                             StyleSetName="Office2010Blue">
-                     </ig:WebDropDown>
-                     <div style="float:right">                        
-                            <asp:Button id="btnSave" CssClass="Defaultbutton"
-                              runat="server" Text="Save" onclick="btnSave_Click" OnClientClick="return Save();"/>
-                    </div>
-                     <br />
-                        <div style = "float:left">
-                            <asp:Label CssClass="DefaultLabelstyle"  
-                            ID="lblStatusMessage" runat="server"/>
+                         </ig:WebDropDown>
+                         </div>
+                         <div style="float:left; padding-left:10px">                        
+                                <asp:Button id="btnSave" CssClass="Defaultbutton"
+                                  runat="server" Text="Save" onclick="btnSave_Click" OnClientClick="return Save();"/>
                         </div>
-                        </div>
+                         <div style = "float:left; padding-top:8px">
+                                <asp:Label CssClass="DefaultLabelstyle"  
+                                ID="lblStatusMessage" runat="server"/>
+                         </div> 
+                         <%--<div style="float:left; padding-left:10px">
+                            <asp:Button ID="btnEmployee" runat="server" Text="Select" 
+                                 CssClass="Searchbutton" onclick="btnEmployee_Click"/>
+                        </div>--%>
                 </Template>
             </igmisc:WebGroupBox>
 </div>
