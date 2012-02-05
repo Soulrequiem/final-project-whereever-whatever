@@ -301,9 +301,20 @@ namespace StationeryStoreInventorySystemModel.broker
 
 
 
-        public string GetDiscrepancyDetailId(Employee employee)
+      
+
+     
+
+        #region IDiscrepancyBroker Members
+
+
+        public int GetDiscrepancyDetailId()
         {
-           
+            return inventory.DiscrepancyDetails.Max(xObj => xObj.Id) + 1;
+        }
+
+        public string GetStockAdjustmentId(Employee employee)
+        {
             try
             {
                 int idInt;
@@ -317,7 +328,7 @@ namespace StationeryStoreInventorySystemModel.broker
                 {
                     prefix = "002";
                 }
-                if (inventory.StockAdjustments.Where(s=> s.Id.IndexOf(prefix) > -1).Count() > 0)
+                if (inventory.StockAdjustments.Where(s => s.Id.IndexOf(prefix) > -1).Count() > 0)
                 {
                     //Discrepancy lastDiscrepancy = inventory.Discrepancies.Where(d => d.Id.IndexOf(discrepancy.CreatedBy.CreatedBy) > -1).OrderByDescending(x => x.CreatedDate).First();
                     StockAdjustment lastStockAdjustment = inventory.StockAdjustments.Where(s => s.Id.IndexOf(prefix) > -1).OrderByDescending(s => s.CreatedDate).First();
@@ -363,10 +374,7 @@ namespace StationeryStoreInventorySystemModel.broker
         
         }
 
-        public string GetStockAdjustmentId()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }
         #endregion
