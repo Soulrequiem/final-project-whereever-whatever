@@ -52,7 +52,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 srtsCtrl = (SubmitRequestToStoreControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
-            FillRequisitionList(srtsCtrl.ApprovedRequisitionList);
+            FillRequisitionList();
         }
 
         /// <summary>
@@ -80,10 +80,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// Fills Requisition list to DataGrid
         /// </summary>
         /// <param name="dtCollection"></param>
-        private void FillRequisitionList(DataTable dtRequisition)
+        private void FillRequisitionList()
         {
             try
             {
+                srtsCtrl = GetsrtsControl();
+                DataTable dtRequisition = srtsCtrl.ApprovedRequisitionList;
                 dgvRequisitions.DataSource = dtRequisition;
                 dgvRequisitions.DataBind();
             }
@@ -100,7 +102,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
                 if (srtsCtrl.SelectSubmit() == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
                 {
                     // print success message
-                    FillRequisitionList(srtsCtrl.ApprovedRequisitionList);
+                    FillRequisitionList();
                 }
                 else
                 {
@@ -111,6 +113,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             {
                 Logger.WriteErrorLog(ex);
             }
+        }
+
+        protected void dgvRequisitions_DataFiltering(object sender,
+            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillRequisitionList();
+        }
+
+        protected void dgvRequisitions_PageIndexChanged(object sender,
+            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillRequisitionList();
         }
 
     }

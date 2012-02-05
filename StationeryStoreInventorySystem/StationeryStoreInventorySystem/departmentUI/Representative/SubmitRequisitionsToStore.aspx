@@ -37,7 +37,9 @@
                 StyleSetName="Office2010Blue" AutoGenerateColumns="False" 
                 CssClass="DefaultGridViewStyle" Font-Size="Small" 
                 HeaderCaptionCssClass="HeaderGridViewStyle" 
-                ItemCssClass="ItemGridViewStyle">
+                ItemCssClass="ItemGridViewStyle" 
+                ondatafiltering="dgvRequisitions_DataFiltering" 
+                onpageindexchanged="dgvRequisitions_PageIndexChanged">
                 <Columns>
                     <ig:TemplateDataField Key="RequisitionID" Width="150px">
                         <ItemTemplate>
@@ -75,8 +77,7 @@
                     <br>
             <div style="float:right">
                         &nbsp;&nbsp;&nbsp;
-                            <asp:Button id="btnSave" CssClass="DefaultLargebutton"  runat="server" 
-                            
+                            <asp:Button id="btnSave" CssClass="MediumLargeButton"  runat="server" 
                             Text="<%$ Resources:WebResources, SubmitRequisitionsToStore_SubmitToStore %>" 
                             onclick="btnSave_Click"/>
                         </div>
