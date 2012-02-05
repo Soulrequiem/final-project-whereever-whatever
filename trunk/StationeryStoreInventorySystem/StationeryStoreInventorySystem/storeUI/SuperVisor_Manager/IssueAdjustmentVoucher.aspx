@@ -19,16 +19,17 @@
              <ig:WebDataGrid ID="DgvDiscrepancyReportList" runat="server" Height="200px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle">
+            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="DiscrepancyId"
+                            oninitializerow="DgvDiscrepancyReportList_InitializeRow">
                  <Columns>
                      <%--<ig:BoundDataField DataFieldName="VoucherNo" Key="VoucherNo" Width="150px">
                          <Header Text="Voucher No." />
                      </ig:BoundDataField>--%>
-                     <ig:TemplateDataField Key="id" Width="150px">
+                     <ig:TemplateDataField Key="DiscrepancyId" Width="120px">
                         <ItemTemplate>
-                            <asp:HyperLink ID="id" runat="server" 
-                                Text='<%# Eval("id" ) %>'
-                                NavigateUrl="~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx" >
+                            <asp:HyperLink ID="DiscrepancyId" runat="server" 
+                                Text='<%# Eval("DiscrepancyId" ) %>'
+                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
                                 </asp:HyperLink>
                         </ItemTemplate>
                         <Header Text="Discrepancy ID" />
@@ -42,6 +43,9 @@
                      <ig:BoundDataField DataFieldName="totalQty" Key="totalQty" Width="150px">
                          <Header Text="Total Qty" />
                      </ig:BoundDataField>
+                  <%--    <ig:BoundDataField DataFieldName="Status" Key="Status" Width="150px">
+                         <Header Text="Status" />
+                     </ig:BoundDataField>--%>
                  </Columns>
                  <Behaviors>
                      <ig:Filtering>
@@ -58,7 +62,7 @@
              </igmisc:WebGroupBox>
              <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="700px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Discrepancy Report" 
-                TitleAlignment="Left">
+                TitleAlignment="Left" Visible="False">
                     <Template>
                         <div style="float:left;width:70px">
                             <asp:Label CssClass="DefaultLabelstyle" 
@@ -78,8 +82,7 @@
                         </div>
                         <div style="float:left">
                             <asp:Label CssClass="DefaultLabelstyle" 
-                            ID="lblBy" runat="server" 
-                            Text="Clerk"/><br />
+                            ID="lblBy" runat="server"/><br />
                         </div>
                         <div style="float:right;margin-right:20px">
                             <asp:Label CssClass="DefaultLabelstyle" 
@@ -95,7 +98,7 @@
                             <ig:WebDataGrid ID="DgvDiscrepancyReport" runat="server" Height="300px" 
                             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                            ItemCssClass="ItemGridViewStyle">
+                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                                 <Columns>
                                     <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                         <Header Text="Item No." />
@@ -137,8 +140,7 @@
                             </div>    
                             <div style="float:left">
                                    <asp:Label CssClass="DefaultLabelstyle" 
-                                    ID="lblAuthorizedName" runat="server" 
-                                    Text="Wai Yan Ko Ko"/>
+                                    ID="lblAuthorizedName" runat="server"/>
                             </div>                                         
                     </Template>                
             </igmisc:WebGroupBox>
