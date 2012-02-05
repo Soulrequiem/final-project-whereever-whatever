@@ -46,8 +46,8 @@ namespace StationeryStoreInventorySystemController.departmentController
             employee = employeeBroker.GetEmployee(employee);
 
             requisitionCollection = new RequisitionCollection(requisitionCollectionBroker.GetRequisitionCollectionId(), employee.Department, employee.Department.CollectionPoint, DateTime.Now, employee, Converter.objToInt(Constants.COLLECTION_STATUS.NEED_TO_COLLECT));
-            
-            approvedRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.APPROVED);
+
+            approvedRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.APPROVED, currentEmployee.Department);
 
             dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
                                             new DataColumn(columnName[1]),
@@ -78,7 +78,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                     dr[columnName[0]] = requisition.Id;
                     dr[columnName[1]] = requisition.ApprovedDate;
                     dr[columnName[2]] = requisition.CreatedBy.Name;
-                    dr[columnName[3]] = requisition.Status;
+                    dr[columnName[3]] = Converter.GetRequisitionStatusText(Converter.objToRequisitionStatus(requisition.Status));
                     dt.Rows.Add(dr);
                 }
                 return dt;
