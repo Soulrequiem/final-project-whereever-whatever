@@ -37,7 +37,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
                 }
                 else
                 {
-                    vavlCtrl = (ViewAdjustmentVoucherListControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+                    if (Request.QueryString["action"] != null)
+                    {
+                        vavlCtrl = new ViewAdjustmentVoucherListControl();
+                        StationeryStoreInventorySystemController.Util.PutSession(sessionKey, vavlCtrl);
+                    }
+                    else
+                    {
+                        vavlCtrl = (ViewAdjustmentVoucherListControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+                    }
                     voucherNo = Request.QueryString["voucherNo"].ToString();
                     vavlCtrl.SelectStockAdjustmentVoucher(voucherNo);
                     FillAdjustmentDetails(vavlCtrl.StockAdjustmentDetail);
