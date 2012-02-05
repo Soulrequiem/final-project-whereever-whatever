@@ -295,21 +295,77 @@ namespace StationeryStoreInventorySystemModel.broker
         }
         public int GetDiscrepancyId()
         {
-
             var maxDiscrepacnyId = inventory.Discrepancies.Max(xObj => xObj.Id) + 1;
             return maxDiscrepacnyId;
         }
 
 
 
-        public int GetDiscrepancyDetailId()
+        public string GetDiscrepancyDetailId(Employee employee)
         {
-            return inventory.DiscrepancyDetails.Max(xObj => xObj.Id) + 1;
+           
+            try
+            {
+                int idInt;
+                string newYr;
+                string prefix = String.Empty;
+                if (employee.Role.Id == Converter.objToInt(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR))
+                {
+                    prefix = "001";
+                }
+                else if (employee.Role.Id == Converter.objToInt(Constants.EMPLOYEE_ROLE.STORE_MANAGER))
+                {
+                    prefix = "002";
+                }
+                if (inventory.StockAdjustments.Where(s=> s.Id.IndexOf(prefix) > -1).Count() > 0)
+                {
+                    //Discrepancy lastDiscrepancy = inventory.Discrepancies.Where(d => d.Id.IndexOf(discrepancy.CreatedBy.CreatedBy) > -1).OrderByDescending(x => x.CreatedDate).First();
+                    StockAdjustment lastStockAdjustment = inventory.StockAdjustments.Where(s => s.Id.IndexOf(prefix) > -1).OrderByDescending(s => s.CreatedDate).First();
+
+                    if (lastStockAdjustment != null)
+                    {
+                        string stockAdjustmentId = lastStockAdjustment.Id;
+                        string[] stringList = stockAdjustmentId.Split('/');
+                        string idString = stringList[1];
+                        idInt = Converter.objToInt(idString);
+
+                        int yearInt = DateTime.Now.Year;
+                        string yrString = yearInt.ToString();
+                        char[] charYr = yrString.ToCharArray();
+                        newYr = charYr[2].ToString() + charYr[3].ToString();
+                        if (newYr.Equals(stringList[2]))
+                        {
+                            idInt++;
+                        }
+                        else
+                        {
+                            idInt = 1;
+                        }
+                    }
+                    else
+                    {
+                        idInt = 1;
+                        newYr = DateTime.Now.Year.ToString().Substring(2);
+                    }
+                }
+                else
+                {
+                    idInt = 1;
+                    newYr = DateTime.Now.Year.ToString().Substring(2);
+                }
+
+                return prefix + "/" + idInt + "/" + newYr;
+            }
+            catch (Exception e)
+            {
+                return "Unknown";
+            }
+        
         }
 
         public string GetStockAdjustmentId()
         {
-            return "11";
+            throw new NotImplementedException();
         }
     }
 }
