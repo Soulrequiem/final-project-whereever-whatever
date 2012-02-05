@@ -28,17 +28,23 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataRow dr;
         private DataRow drr;
         private List<Discrepancy> discrepancyDataList;
+        private Discrepancy discrepancy;
 
         private string[] listColumnName = { "DiscrepancyId", "CreatedBy", "CreatedDate", "TotalQty" };
         private string[] detailColumnName = { "ItemNo", "ItemDescription", "Quantity", "PricePerItem", "Reason" };
 
         private DataColumn[] listColumn;
         private DataColumn[] detailColumn;
+        private Employee currentEmployee;
+        private EmployeeBroker employeeBroker;
+        private StockAdjustment stockAdjustment;
         //  private DataColumn[] discrepancyItemListColumn;
 
         public IssueAdjustmentVoucherControl()
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
             InventoryEntities inventoryEntities = new InventoryEntities();
+            employeeBroker = new EmployeeBroker(inventoryEntities);
             discrepancyBroker = new DiscrepancyBroker(inventoryEntities);
             // discrepancyList = new System.Data.Objects.DataClasses.EntityCollection<Discrepancy>();
             listColumn = new DataColumn[]{new DataColumn(listColumnName[0]),new DataColumn(listColumnName[1]),new DataColumn(listColumnName[2]),new DataColumn(listColumnName[3])
@@ -209,7 +215,7 @@ namespace StationeryStoreInventorySystemController.storeController
             {
                 dtt.Rows.Clear();
             }
-            Discrepancy discrepancy = new Discrepancy();
+            discrepancy = new Discrepancy();
             discrepancy.Id = discrepancyId;
             discrepancy = discrepancyBroker.GetDiscrepancy(discrepancy);
             //List<DiscrepancyDetail> discrepancyDetailList = (List<DiscrepancyDetail>)discrepancy.DiscrepancyDetails;
@@ -227,6 +233,31 @@ namespace StationeryStoreInventorySystemController.storeController
             return dtt;
         }
 
+        public string IssueAdjustment()
+        {
+            stockAdjustment = new StockAdjustment();
+            stockAdjustment.Id = discrepancyBroker.GetStockAdjustmentId();
+            stockAdjustment.Discrepancy = discrepancy;
+            stockAdjustment.CreatedDate = DateTime.Now;
+            stockAdjustment.CreatedBy = Util.GetEmployee(employeeBroker);
+            stockAdjustment.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+            
+            return stockAdjustment.Id;
+        }
+
+        public Constants.ACTION_STATUS CreateAdjustment()
+        {
+            Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
+            Constants.DB_STATUS dbStatus = discrepancyBroker.Insert(stockAdjustment);
+            if (dbStatus == Constants.DB_STATUS.SUCCESSFULL)
+                status = Constants.ACTION_STATUS.SUCCESS;
+            else
+                status = Constants.ACTION_STATUS.FAIL;
+            discrepancy.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.HIDDEN);
+            discrepancyBroker.Update(discrepancy);
+            return status;
+
+        }
 
         //public Constants.ACTION_STATUS SelectDiscrepancyIssue(Discrepancy discrepancy)
         //{
