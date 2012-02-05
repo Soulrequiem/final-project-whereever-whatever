@@ -13,13 +13,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.storeController;
+using SystemStoreInventorySystemUtil;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
 {
     public partial class IssueAdjustmentVoucher : System.Web.UI.Page
     {
+        private static readonly string sessionKey = "IssueAdjustmentVoucher";
         IssueAdjustmentVoucherControl iavCtrl;
-        String voucherNo;
+
+       
         /// <summary>
         /// Loads the IssueAdjustmentVoucher form
         /// </summary>
@@ -29,12 +32,28 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             if (!IsPostBack)
             {
-               // iavCtrl.GetDiscrepancyList();
-                FillDiscrepancy();
-
-                //FillReportDetails();
-                //FillReport();
+                if (Request.QueryString["discrepancyId"] == null)
+                {
+                    iavCtrl = new IssueAdjustmentVoucherControl();
+                    StationeryStoreInventorySystemController.Util.PutSession(sessionKey, iavCtrl);
+                }
+                else
+                {
+                    iavCtrl = (IssueAdjustmentVoucherControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+                    int id = Converter.objToInt(Request.QueryString["discrepancyId"]);
+                    DgvDiscrepancyReport.DataSource = iavCtrl.SelectDiscrepancy(id);
+                    DgvDiscrepancyReport.DataBind();
+                   
+                    lblDateIssue.Text = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, DateTime.Now);
+                    lblVoucher.Text = iavCtrl.IssueAdjustment();
+                }
             }
+            else
+            {
+                iavCtrl = (IssueAdjustmentVoucherControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+            }
+
+            FillDiscrepancy();
         }
 
         /// <summary>
@@ -45,57 +64,57 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         {
             //try
             //{
-                iavCtrl = GetControl();
-                DataTable dtDiscrepancy = iavCtrl.GetDiscrepancyList();
-                DgvDiscrepancyReportList.DataSource = dtDiscrepancy;
-                DgvDiscrepancyReportList.DataBind();
+            iavCtrl = GetControl();
+          
+            DgvDiscrepancyReportList.DataSource = iavCtrl.DiscrepancyList;
+            DgvDiscrepancyReportList.DataBind();
             //}
             //catch (Exception e)
             //{
             //    Logger.WriteErrorLog(e);
             //}
         }
-      
+
 
         /// <summary>
         /// Fills Report Details to Label
         /// </summary>
         /// <param name="dtReportDetails"></param>
-        private void FillReportDetails()//DataTable dtReportDetails)
-        {
-            try
-            {
-                lblVoucher.Text = "Text";
-                lblBy.Text = "By";
-                lblDateIssue.Text = "Date";
-                //drdItemList.ValueField = "ID";
-                //drdItemList.DataSource = dtDetails;
-                //drdItemList.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+        //private void FillReportDetails()//DataTable dtReportDetails)
+        //{
+        //    try
+        //    {
+        //        lblVoucher.Text = "Text";
+        //        lblBy.Text = "By";
+        //        lblDateIssue.Text = "Date";
+        //        //drdItemList.ValueField = "ID";
+        //        //drdItemList.DataSource = dtDetails;
+        //        //drdItemList.DataBind();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.WriteErrorLog(e);
+        //    }
+        //}
 
         /// <summary>
         /// Fills Report Data to Datagrid
         /// </summary>
         /// <param name="dtReport"></param>
-        private void FillReport()
-        {
-            try
-            {
-                iavCtrl = GetControl();
-                DataTable dtReport = iavCtrl.SelectDiscrepancy(Convert.ToInt16(voucherNo));
-                DgvDiscrepancyReport.DataSource = dtReport;
-                DgvDiscrepancyReport.DataBind();
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+        //private void FillReport()
+        //{
+        //    try
+        //    {
+        //        iavCtrl = GetControl();
+        //        DataTable dtReport = iavCtrl.SelectDiscrepancy(Convert.ToInt16(voucherNo));
+        //        DgvDiscrepancyReport.DataSource = dtReport;
+        //        DgvDiscrepancyReport.DataBind();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.WriteErrorLog(e);
+        //    }
+        //}
 
         private IssueAdjustmentVoucherControl GetControl()
         {
@@ -104,18 +123,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             return iavCtrl;
         }
 
-        protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender,
-            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
-        {
-            try
-            {
-                HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("id").FindControl("id");
-                link.NavigateUrl = "~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx?discrepancyId=" + e.Row.DataKey[0];
-            }catch(Exception ex)
-            {
-                Response.Write(ex.Message);
-            }
-        }
+        //protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender,
+        //    Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        //{
+        //    try
+        //    {
+        //        HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("id").FindControl("id");
+        //        link.NavigateUrl = "~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx?discrepancyId=" + e.Row.DataKey[0];
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.Write(ex.Message);
+        //    }
+        //}
 
         //protected void DgvDiscrepancyReportList_RowSelectionChanged(object sender, 
         //    Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
@@ -153,16 +173,41 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             FillDiscrepancy();
         }
 
-        protected void DgvDiscrepancyReport_DataFiltering(object sender,
-            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        //protected void DgvDiscrepancyReport_DataFiltering(object sender,
+        //    Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        //{
+        //    FillReport();
+        //}
+
+        //protected void DgvDiscrepancyReport_PageIndexChanged(object sender,
+        //    Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        //{
+        //    FillReport();
+        //}
+
+        protected void DgvDiscrepancyReportList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
-            FillReport();
+            try
+            {
+                HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("DiscrepancyId").FindControl("DiscrepancyId");
+                link.NavigateUrl = "~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx?discrepancyId=" + e.Row.DataKey[0];
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
         }
 
-        protected void DgvDiscrepancyReport_PageIndexChanged(object sender,
-            Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        protected void btnIssue_Click(object sender, EventArgs e)
         {
-            FillReport();
+            if (iavCtrl.CreateAdjustment() == Constants.ACTION_STATUS.SUCCESS)
+            {
+                StationeryStoreInventorySystemController.Util.GoToPage("ViewAdjustmentVoucherList.aspx?action=add&voucherNo=" + lblVoucher.Text);
+            }
+            else
+            {
+                //error message
+            }
         }
     }
 }
