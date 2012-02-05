@@ -175,10 +175,10 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public void GetReorderItem(ref PurchaseOrder purchaseOrder)
         {
-            dataset.ReorderLevelDataSet ds = new dataset.ReorderLevelDataSet();
-            dataset.ReorderLevelDataSetTableAdapters.DataTable1TableAdapter da = new dataset.ReorderLevelDataSetTableAdapters.DataTable1TableAdapter();
+            //dataset.ReorderLevelDataSet ds = new dataset.ReorderLevelDataSet();
+            //dataset.ReorderLevelDataSetTableAdapters.DataTable1TableAdapter da = new dataset.ReorderLevelDataSetTableAdapters.DataTable1TableAdapter();
 
-            dataset.ReorderLevelDataSetTableAdapters.TableAdapterManager tam = new dataset.ReorderLevelDataSetTableAdapters.TableAdapterManager();
+ //           dataset.ReorderLevelDataSetTableAdapters.TableAdapterManager tam = new dataset.ReorderLevelDataSetTableAdapters.TableAdapterManager();
             
             //reorderLevelDataAdapter.Fill(ds);
             //return da.GetData();
