@@ -106,6 +106,26 @@ namespace StationeryStoreInventorySystemModel.broker
             return requisitionList;
         }
 
+        /// <summary>
+        ///  Retrieve All of the Requisition information according to the status
+        /// </summary>
+        /// <returns>
+        /// List of Requisition
+        /// </returns>
+
+        public List<Requisition> GetAllRequisitionByEmployee(int employeeID)
+        {
+            try
+            {
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.CreatedBy.Id == employeeID).ToList<Requisition>();
+            }
+            catch (Exception e)
+            {
+                requisitionList = null;
+            }
+            return requisitionList;
+        }
+
 
         /// <summary>
         /// Retreive All of the requisition information according to status
