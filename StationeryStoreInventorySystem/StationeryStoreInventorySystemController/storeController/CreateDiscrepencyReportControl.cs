@@ -165,7 +165,7 @@ namespace StationeryStoreInventorySystemController.storeController
                     discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.REDUCE);
                 }
 
-                DiscrepancyDetail discrepancyDetail = new DiscrepancyDetail(discrepancyBroker.GetDiscrepancyDetailId(), discrepancy, item, discrepancyType, qty, reason);
+                DiscrepancyDetail discrepancyDetail = null;// new DiscrepancyDetail(discrepancyBroker.GetDiscrepancyDetailId(), discrepancy, item, discrepancyType, qty, reason);
 
                 if (!discrepancyDetailList.Contains(discrepancyDetail))
                 {

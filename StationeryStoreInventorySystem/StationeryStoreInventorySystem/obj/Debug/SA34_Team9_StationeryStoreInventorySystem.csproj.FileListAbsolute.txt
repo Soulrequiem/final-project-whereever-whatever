@@ -34,3 +34,13 @@ D:\final-project-whereever-whatever_latest\trunk\StationeryStoreInventorySystem\
 D:\final-project-whereever-whatever_latest\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll.licenses
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll.licenses
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystem.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystem.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystemController.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\SystemStoreInventorySystemUtil.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystemModel.dll
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystemController.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\SystemStoreInventorySystemUtil.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\bin\StationeryStoreInventorySystemModel.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystem\obj\Debug\StationeryStoreInventorySystem.dll

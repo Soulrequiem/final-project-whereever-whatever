@@ -63,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="storeController\BlacklistDepartmentControl.cs" />
     <Compile Include="storeController\CreateDiscrepencyReportControl.cs" />
+    <Compile Include="storeController\CreateStationeryRetrievalListControl.cs" />
     <Compile Include="storeController\IssueAdjustmentVoucherControl.cs" />
     <Compile Include="storeController\PurchaseOrderControl.cs" />
     <Compile Include="storeController\ReceiveOrderControl.cs" />
