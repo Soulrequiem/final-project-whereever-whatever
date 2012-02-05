@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
 using StationeryStoreInventorySystemController.commonController;
+using SystemStoreInventorySystemUtil;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 {
@@ -109,6 +110,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 DataTable dt = StationeryStoreInventorySystemController.Util.GetItemListTable(drdItemList.CurrentValue);
                 if (dt != null && dt.Rows.Count > 0)
                 {
+                    //dgvStationeryList.ClearDataSource();
                     dgvStationeryList.DataSource = dt;
                     dgvStationeryList.DataBind();
                 }
@@ -150,6 +152,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
+                dgvStationeryDetailsList.ClearDataSource();
                 dgvStationeryDetailsList.DataSource = resCtrl.RequisitionDetailList;
                 dgvStationeryDetailsList.DataBind();
             }
@@ -181,6 +184,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("AddToTable").FindControl("AddToTable");
             link.NavigateUrl = "~/departmentUI/Employee/RequestStationery.aspx?action=add&itemCode=" + e.Row.DataKey[0];
+            //Response.Redirect("~/departmentUI/Employee/RequestStationery.aspx?action=add&itemCode=" + e.Row.DataKey[0]);
         }
 
         protected void btnReset_Click1(object sender, EventArgs e)
@@ -233,6 +237,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             {
                 FillItemList();
             }
+            Infragistics.Web.UI.NavigationControls.WebExplorerBar wbar = (Infragistics.Web.UI.NavigationControls.WebExplorerBar)(this.Master.FindControl("NavigationBar"));
+            //if (Session["SelectedIndex"] != null && this.Master.FindControl("NavigationBar").Groups.Count > 0)
+            //{
+                Session["SelectedIndex"] = 3;
+                Session["SelectedGroup"] = 0;
+                wbar.Groups[0].Items[3].Selected = true;
+                Response.Redirect("~/departmentUI/Employee/CheckRequisition.aspx");
+            //}
+            //
+            //wbar.it
+            //SendEmail SE = new SendEmail();
+            //ScriptManager1.RegisterScriptControl(dgvStationeryDetailsList);
+            //SE.sendEmail("smallpig1313@gmail.com", "I am sorry", "I am sorry", dgvStationeryDetailsList);
         }
 
         //protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
