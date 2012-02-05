@@ -13,6 +13,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Item GetItem(Item item);
         List<Item> GetAllItem();
         List<Item> GetItemReference(Item item);
+        void GetReorderItem(ref PurchaseOrder purchaseOrder);
         Constants.DB_STATUS Insert(Item newItem);
         Constants.DB_STATUS Update(Item item);
         Constants.DB_STATUS Delete(Item item);

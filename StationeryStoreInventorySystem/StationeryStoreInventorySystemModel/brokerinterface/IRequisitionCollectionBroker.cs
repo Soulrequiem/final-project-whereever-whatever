@@ -22,6 +22,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         int GetRequisitionCollectionDetailId();
         RequisitionCollection GetRequisitionCollection(RequisitionCollection requisitionCollection);
         List<RequisitionCollection> GetAllRequisitionCollection();
+        List<RequisitionCollection> GetAllRequisitionCollection(Constants.COLLECTION_STATUS collectionStatus);
         List<RequisitionCollection> GetAllRequisitionCollection(Department department, Constants.COLLECTION_STATUS collectionStatus);
         Constants.DB_STATUS Insert(RequisitionCollection newRequisitionCollection);
         Constants.DB_STATUS Update(RequisitionCollection requisitionCollection);
