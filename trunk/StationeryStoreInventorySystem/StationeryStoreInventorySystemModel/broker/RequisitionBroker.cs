@@ -92,12 +92,12 @@ namespace StationeryStoreInventorySystemModel.broker
         /// List of Requisition
         /// </returns>
 
-        public List<Requisition> GetAllRequisitionByStatus()
+        public List<Requisition> GetAllRequisitionByStatus(int employeeID)
         {
             try
             {
 
-                requisitionList = inventory.Requisitions.Where(reqObj=>reqObj.Status==1 || reqObj.Status==2).ToList<Requisition>();
+                requisitionList = inventory.Requisitions.Where(reqObj=>reqObj.Status==1 || reqObj.Status==2 && reqObj.CreatedBy.Id==employeeID).ToList<Requisition>();
             }
             catch (Exception e)
             {
@@ -115,10 +115,11 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public List<Requisition> GetAllRequisitionByEmployee(int employeeID)
         {
+            Constants.REQUISITION_STATUS requisitionStatus = Constants.REQUISITION_STATUS.HIDDEN;
             try
             {
-                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.CreatedBy.Id == employeeID &&
-                    (reqObj.Status == 1 || reqObj.Status == 2)).ToList<Requisition>();
+                int status = Converter.objToInt(requisitionStatus);
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.CreatedBy.Id == employeeID && reqObj.Status != status).ToList<Requisition>();
             }
             catch (Exception e)
             {
@@ -135,8 +136,10 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus, Department department)
         {
+            
             try
             {
+
                 int status = Converter.objToInt(requisitionStatus);
                 requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status && reqObj.Department.Id.Contains(department.Id)).ToList<Requisition>();
             }
@@ -226,8 +229,12 @@ namespace StationeryStoreInventorySystemModel.broker
 
             try
             {
-                requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisiton.Id).First();
-                requisitionObj.Status = Converter.objToInt(Constants.REQUISITION_STATUS.HIDDEN);
+                //requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisiton.Id).First();
+                //requisitionObj.Id = requisiton.Id;
+                //requisitionObj.ApprovedBy = requisiton.ApprovedBy;
+                //requisitionObj.Id = requisiton.Id;
+               // requisitionObj.Status = requisiton.Status;
+                //requisitionObj.Status = 6;
                 //if(isSaved) inventory.SaveChanges();
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
