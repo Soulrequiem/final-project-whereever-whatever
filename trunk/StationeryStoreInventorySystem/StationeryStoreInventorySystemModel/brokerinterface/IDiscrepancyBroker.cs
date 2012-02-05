@@ -14,7 +14,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Insert(Discrepancy newDiscrepancy);
         Constants.DB_STATUS Update(Discrepancy discrepancy);
         Constants.DB_STATUS Delete(Discrepancy discrepancy);
-        int GetDiscrepancyId();
+        //int GetDiscrepancyId();
         List<Discrepancy> GetAllDiscrepancy(Constants.VISIBILITY_STATUS visibilityStatus);
 
         DiscrepancyDetail GetDiscrepancyDetail(DiscrepancyDetail discrepancyDetail);
@@ -22,7 +22,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Insert(DiscrepancyDetail newDiscrepancyDetail);
         Constants.DB_STATUS Update(DiscrepancyDetail discrepancyDetail);
         Constants.DB_STATUS Delete(DiscrepancyDetail discrepancyDetail);
-        int GetDiscrepancyDetailId();
+        //int GetDiscrepancyDetailId();
 
         StockAdjustment GetStockAdjustment(StockAdjustment stockAdjustment);
         List<StockAdjustment> GetAllStockAdjustment();

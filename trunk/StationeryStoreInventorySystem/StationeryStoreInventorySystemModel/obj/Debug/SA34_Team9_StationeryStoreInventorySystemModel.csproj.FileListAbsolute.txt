@@ -13,11 +13,11 @@ C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\Sta
 C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.dll
 C:\Users\mika\Desktop\ad-project-team-9\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.pdb
+C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\StationeryStoreInventorySystemModel.dll.config
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\StationeryStoreInventorySystemModel.dll
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\StationeryStoreInventorySystemModel.pdb
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\SystemStoreInventorySystemUtil.dll
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\bin\Debug\SystemStoreInventorySystemUtil.pdb
-C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.dll
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemModel\obj\Debug\StationeryStoreInventorySystemModel.pdb

@@ -15,7 +15,7 @@
     <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
             Text="<%$ Resources:WebResources, CheckRequisition_header_Text %>" /></h1>
         <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" 
-                CssClass="MediumGroupBoxstyle" StyleSetName="" width="700px"
+                CssClass="MediumGroupBoxstyle" StyleSetName="Appletini" width="700px"
                 TitleAlignment="Left">
                 <Template>
                      <table>

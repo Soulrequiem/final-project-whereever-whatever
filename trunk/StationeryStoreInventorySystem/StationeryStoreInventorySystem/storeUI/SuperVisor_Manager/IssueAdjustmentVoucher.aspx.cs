@@ -45,7 +45,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
                     DgvDiscrepancyReport.DataBind();
                    
                     lblDateIssue.Text = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, DateTime.Now);
-                    lblVoucher.Text = iavCtrl.IssueAdjustment();
+                    //lblVoucher.Text = iavCtrl.IssueAdjustment();
                 }
             }
             else
@@ -198,17 +198,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             }
         }
 
-        protected void btnIssue_Click(object sender, EventArgs e)
-        {
-            if (iavCtrl.CreateAdjustment() == Constants.ACTION_STATUS.SUCCESS)
-            {
-                StationeryStoreInventorySystemController.Util.GoToPage("ViewAdjustmentVoucherList.aspx?action=add&voucherNo=" + lblVoucher.Text);
-            }
-            else
-            {
-                //error message
-            }
-        }
+        //protected void btnIssue_Click(object sender, EventArgs e)
+        //{
+        //    if (iavCtrl.CreateAdjustment() == Constants.ACTION_STATUS.SUCCESS)
+        //    {
+        //        StationeryStoreInventorySystemController.Util.GoToPage("ViewAdjustmentVoucherList.aspx?action=add&voucherNo=" + lblVoucher.Text);
+        //    }
+        //    else
+        //    {
+        //        //error message
+        //    }
+        //}
     }
 }
 /********************************************/
