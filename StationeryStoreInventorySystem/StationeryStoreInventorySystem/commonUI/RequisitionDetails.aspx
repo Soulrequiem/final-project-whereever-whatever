@@ -139,7 +139,7 @@
                                 </ItemTemplate>
                             <Header Text="Required Qty" />
                         </ig:TemplateDataField>
-                        <ig:TemplateDataField Key="DeliveredQty" Width="150px">
+                        <ig:TemplateDataField Key="DeliveredQty" Width="150px" Hidden="True">
                                 <ItemTemplate>
                                     <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
                                     Text='<%# Eval("DeliveredQty") %>' NullText="Enter Delivered Qty">
@@ -162,24 +162,29 @@
                 <br />
                 <div style="float:right">
                         <asp:Button ID="btnReject" CssClass="Defaultbutton"
-                                        runat="server" Text="Reject"/>
+                                        runat="server" Text="Reject" onclick="btnReject_Click" 
+                            Visible="False"/>
                 </div>
                 <div style="float:right;margin-right:10px">
                        <asp:Button ID="btnApprove" CssClass="Defaultbutton"
-                                        runat="server" Text="Approve"/>
+                                        runat="server" Text="Approve" onclick="btnApprove_Click" 
+                           Visible="False"/>
                 </div>
                 <div style="float:right;margin-right:10px">
                     <ig:WebTextEditor ID="txtaRemarks" runat="server" Width="200px" Height="50px" 
-                        NullText="<%$ Resources:WebResources, Text_Remarks %>" TextMode="MultiLine">
+                        NullText="<%$ Resources:WebResources, Text_Remarks %>" 
+                        TextMode="MultiLine" Visible="False">
                     </ig:WebTextEditor>
                 </div>
                 <div style="float:right;margin-right:10px">
                        <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblRemarks" runat="server" 
-                            Text="Remarks:"/>
+                            Text="Remarks:" Visible="False"/>
                 </div>    
                 <div style="float:left">
-                    <asp:CheckBox ID="CheckBox1" runat="server" Text="Complete Requisition"/>
+                    <asp:CheckBox ID="CheckBox1" runat="server" Text="Complete Requisition" 
+                        CssClass="DefaultLabelstyle" oncheckedchanged="CheckBox1_CheckedChanged" 
+                        Visible="False"/>
                 </div>    
    </div>    
 </asp:Content>
