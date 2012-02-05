@@ -106,6 +106,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
+            Session["PrintData"] = new DataTable();
             Util.PutSession("ReportType", "Stationery");
             Util.PutSession("RequisitionID", lblRequisitionID.Text);
             Util.PutSession("DeptName", LblDeptName.Text);
