@@ -66,6 +66,7 @@ namespace SystemStoreInventorySystemUtil
         public enum COLLECTION_STATUS
         {
             UNKNOWN = 0,
+            NEED_TO_RETRIEVE,
             NEED_TO_COLLECT,
             COLLECTED,
             UNCOLLECTED

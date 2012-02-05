@@ -147,10 +147,16 @@ namespace SystemStoreInventorySystemUtil
             switch (objToShort(obj))
             {
                 case 1:
-                    status = Constants.COLLECTION_STATUS.NEED_TO_COLLECT;
+                    status = Constants.COLLECTION_STATUS.NEED_TO_RETRIEVE;
                     break;
                 case 2:
+                    status = Constants.COLLECTION_STATUS.NEED_TO_COLLECT;
+                    break;
+                case 3:
                     status = Constants.COLLECTION_STATUS.COLLECTED;
+                    break;
+                case 4:
+                    status = Constants.COLLECTION_STATUS.UNCOLLECTED;
                     break;
             }
 
@@ -162,11 +168,17 @@ namespace SystemStoreInventorySystemUtil
             string status = null;
             switch (collectionStatus)
             {
+                case Constants.COLLECTION_STATUS.NEED_TO_RETRIEVE:
+                    status = "Need to Retrieve";
+                    break;
                 case Constants.COLLECTION_STATUS.NEED_TO_COLLECT:
                     status = "Need To Collect";
                     break;
                 case Constants.COLLECTION_STATUS.COLLECTED:
                     status = "Collected";
+                    break;
+                case Constants.COLLECTION_STATUS.UNCOLLECTED:
+                    status = "Uncollected";
                     break;
             }
             return status;
