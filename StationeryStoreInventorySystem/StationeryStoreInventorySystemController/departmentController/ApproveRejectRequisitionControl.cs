@@ -56,7 +56,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             requisitionBroker = new RequisitionBroker(inventory);
             employeeBroker = new EmployeeBroker(inventory);
 
-            pendingRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.PENDING);
+            pendingRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.PENDING, currentEmployee.Department);
 
             dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
                                             new DataColumn(columnName[1]),
