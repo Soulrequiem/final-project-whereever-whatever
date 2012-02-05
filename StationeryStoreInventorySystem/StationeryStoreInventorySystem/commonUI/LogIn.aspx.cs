@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using StationeryStoreInventorySystemController.commonController;
 using SystemStoreInventorySystemUtil;
+using StationeryStoreInventorySystemController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
@@ -48,8 +49,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     Session["userName"] = txtUsername.Text.Trim();
                     Session["LoadFirstTime"] = true;
                     removeSession();
-                    Response.Redirect("~/commonUI/RequisitionDetails.aspx");
-                    
+                    int UserRole = Util.GetEmployeeRole();
+
+                    if(UserRole == (int)Constants.EMPLOYEE_ROLE.EMPLOYEE)
+                        Response.Redirect("~/departmentUI/Employee/CheckRequisition.aspx");
+                    else if(UserRole == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE ||
+                        UserRole == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE)
+                        Response.Redirect("~/departmentUI/Representative/SubmitRequisitionsToStore.aspx");
+                    else if(UserRole == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD ||
+                        UserRole == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
+                        Response.Redirect("~/departmentUI/Head/ApproveRequisition.aspx");
+                    else if(UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_CLERK)
+                        Response.Redirect("~/storeUI/Clerk/ViewStationeryRetrievalList.aspx");
+                    else if(UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER ||
+                        UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
+                        Response.Redirect("~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx");
+                    else if(UserRole == (int)Constants.EMPLOYEE_ROLE.ADMIN)
+                        Response.Redirect("~/commonUI/Report.aspx");
                 }
                 else
                     lblStatusMessage.Text = "Login failed.";
