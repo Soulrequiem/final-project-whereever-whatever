@@ -110,9 +110,9 @@
                                     <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="120px">
                                         <Header Text="Quantity" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="PricePerItem" Key="PricePerItem" 
+                                    <ig:BoundDataField DataFieldName="TotalPrice" Key="TotaPrice" 
                                         Width="120px">
-                                        <Header Text="Price Per Item" />
+                                        <Header Text="Total Price" />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="Reason" Key="Reason" Width="150px">
                                         <Header Text="Reason" />
