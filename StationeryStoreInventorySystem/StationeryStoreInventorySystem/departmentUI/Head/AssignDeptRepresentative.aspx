@@ -26,21 +26,18 @@
         <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
         Text="<%$ Resources:WebResources, AssignDeptRespresentative_Title %>" /></h1>
             <br />
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="520px"
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="500px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Current Department Representative" 
                 TitleAlignment="Left">
                     <Template>
                             <ig:WebDataGrid ID="DgvCurrentDeptRepresentative" runat="server" Height="150px" 
-                                Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+                                Width="500px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                                onrowselectionchanged="DgvCurrentDeptRepresentative_RowSelectionChanged">
+                                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue"
+                                EnableDataViewState="True">
                                 <Columns>
-                                    <ig:UnboundCheckBoxField Key="BoundCheckBoxField_0" Width="70px">
-                                        <Header Text="" />
-                                    </ig:UnboundCheckBoxField>
                                     <ig:BoundDataField DataFieldName="RepresentativeID" Key="RepresentativeID" 
-                                        Width="120px">
+                                        Width="150px">
                                         <Header Text="Representative ID" />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="RepresentativeName" Key="RepresentativeName" 
@@ -48,7 +45,7 @@
                                         <Header Text="Representative Name" />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="Actual/Temporary" Key="Actual/Temporary" 
-                                        Width="130px">
+                                        Width="150px">
                                         <Header Text="Actual/Temporary" />
                                     </ig:BoundDataField>
                                 </Columns>
@@ -111,33 +108,27 @@
                      <br /><br />           
                 
                 
-                <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="520px"
+                <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="500px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Search Result" 
                 TitleAlignment="Left">
                     <Template>
                         <ig:WebDataGrid ID="DgvRepSearchDetails" runat="server" Height="120px" 
-                            Width="520px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+                            Width="500px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                            onrowselectionchanged="DgvRepSearchDetails_RowSelectionChanged" 
+                            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue"
                             ondatafiltering="DgvRepSearchDetails_DataFiltering" 
-                            onpageindexchanged="DgvRepSearchDetails_PageIndexChanged">
+                            onpageindexchanged="DgvRepSearchDetails_PageIndexChanged" 
+                            EnableDataViewState="True">
                             <Columns>
                                 <%--<ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
                                     Key="BoundCheckBoxField_0" Width="50px">
                                     <Header Text="" />
                                 </ig:BoundCheckBoxField>--%>
-                                <ig:TemplateDataField  Key="AssignDeptRepRadio" Width="100px">
-                                        <ItemTemplate>
-                                            <asp:RadioButton ID="AssignDeptRepRadio" runat="server" />
-                                        </ItemTemplate>
-                                     <Header Text="" />
-                                 </ig:TemplateDataField>
-                                <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID" Width="150px">
+                                <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID" Width="250px">
                                     <Header Text="Employee ID" />
                                 </ig:BoundDataField>
                                 <ig:BoundDataField DataFieldName="EmployeeName" Key="EmployeeName" 
-                                    Width="270px">
+                                    Width="250px">
                                     <Header Text="Employee Name" />
                                 </ig:BoundDataField>
                             </Columns>
@@ -146,17 +137,6 @@
                                 </ig:Sorting>
                                 <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                 </ig:Selection>
-                                <ig:EditingCore>
-                                    <Behaviors>
-                                        <ig:CellEditing>
-                                            <ColumnSettings>
-                                                <ig:EditingColumnSetting ColumnKey="AssignDeptRepRadio" />
-                                                <ig:EditingColumnSetting ColumnKey="EmployeeID" ReadOnly="True" />
-                                                <ig:EditingColumnSetting ColumnKey="EmployeeName" ReadOnly="True" />
-                                            </ColumnSettings>
-                                        </ig:CellEditing>
-                                    </Behaviors>
-                                </ig:EditingCore>
                                 <ig:Paging>
                                 </ig:Paging>
                                 <ig:Filtering>

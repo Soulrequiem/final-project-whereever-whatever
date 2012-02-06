@@ -14,23 +14,21 @@
         <h1 class="HeaderStyle"><asp:Literal ID="Literal19" runat="server" 
         Text="<%$ Resources:WebResources, AssignTempDeptHead_Title %>" /></h1>
             <br />
-            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="530px"
+            <igmisc:WebGroupBox ID="WebGroupBox1" runat="server" Width="500px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Current Authorized Person" 
                 TitleAlignment="Left">
                 <Template>
                     <ig:WebDataGrid ID="DgvCurrentAuthorizedPerson" runat="server" Height="130px" 
-                        Width="530px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
+                        Width="500px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        onrowselectionchanged="DgvCurrentAuthorizedPerson_RowSelectionChanged">
+                        EnableDataViewState="True">
                     <Columns>
-                        <ig:UnboundCheckBoxField Key="BoundCheckBoxField_0" Width="50px">
-                        </ig:UnboundCheckBoxField>
                         <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID" Width="100px">
                             <Header Text="Employee ID" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="EmployeeName" Key="EmployeeName" 
-                            Width="160px">
+                            Width="180px">
                             <Header Text="Employee Name" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="Designation" Key="Designation" Width="100px">
@@ -94,38 +92,32 @@
                 </div>
                      <br /><br />  
                      
-                <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="530px"
+                <igmisc:WebGroupBox ID="WebGroupBox2" runat="server" Width="500px"
                 CssClass="GroupBoxstyle" StyleSetName="" Text="Search Result" 
                 TitleAlignment="Left">
                     <Template>
                             <ig:WebDataGrid ID="DgvTempDepteHeadSearchDetails" runat="server" Height="120px" 
-                                Width="530px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
+                                Width="500px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged" 
                                 ondatafiltering="DgvTempDepteHeadSearchDetails_DataFiltering" 
-                                onpageindexchanged="DgvTempDepteHeadSearchDetails_PageIndexChanged">
+                                onpageindexchanged="DgvTempDepteHeadSearchDetails_PageIndexChanged" 
+                                EnableDataViewState="True">
                                 <Columns>
                                     <%--ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
                                      Key="BoundCheckBoxField_0" Width="50px">
                                     </ig:BoundCheckBoxField>--%>
-                                    <ig:TemplateDataField  Key="AssignTempDeptHeadRadio" Width="50px">
-                                        <ItemTemplate>
-                                            <asp:RadioButton ID="AssignTempDeptHeadRadio" runat="server" />
-                                        </ItemTemplate>
-                                     <Header Text="" />
-                                    </ig:TemplateDataField>
                                     <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID" Width="100px">
                                         <Header Text="Employee ID" />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="EmployeeName" Key="EmployeeName" 
-                                        Width="160px">
+                                        Width="180px">
                                         <Header Text="Employee Name" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="Designation" Key="Designation" Width="120px">
+                                    <ig:BoundDataField DataFieldName="Designation" Key="Designation" Width="100px">
                                         <Header Text="Designation" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="JoiningDate" Key="JoiningDate" Width="100px">
+                                    <ig:BoundDataField DataFieldName="JoiningDate" Key="JoiningDate" Width="120px">
                                         <Header Text="Joining Date" />
                                     </ig:BoundDataField>
                                 </Columns>

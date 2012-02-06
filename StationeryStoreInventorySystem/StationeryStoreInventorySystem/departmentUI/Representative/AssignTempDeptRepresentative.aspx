@@ -22,7 +22,7 @@
                         Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        onrowselectionchanged="DgvCurrentAuthorizedPersonRep_RowSelectionChanged">
+                        EnableDataViewState="True">
                     <Columns>
                         <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID">
                             <Header Text="Employee ID" />
@@ -81,23 +81,18 @@
                                 Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                                onrowselectionchanged="DgvTempDepteHeadSearchDetails_RowSelectionChanged" 
                                 ondatafiltering="DgvTempDepteHeadSearchDetails_DataFiltering" 
-                                onpageindexchanged="DgvTempDepteHeadSearchDetails_PageIndexChanged">
+                                onpageindexchanged="DgvTempDepteHeadSearchDetails_PageIndexChanged" 
+                                EnableDataViewState="True">
                                <Columns>
-                                    <ig:TemplateDataField Key="TemplateField_0" Width="50px">
-                                        <ItemTemplate>
-                                            <asp:RadioButton ID="RadioButton1" runat="server" />
-                                        </ItemTemplate>
-                                        <Header Text="Select" />
-                                    </ig:TemplateDataField>
                                     <ig:BoundDataField DataFieldName="EmployeeID" Key="EmployeeID" Width="100px">
                                         <Header Text="Employee ID" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="EmployeeName" Key="EmployeeName">
+                                    <ig:BoundDataField DataFieldName="EmployeeName" Key="EmployeeName" 
+                                        Width="250px">
                                         <Header Text="Employee Name" />
                                     </ig:BoundDataField>
-                                    <ig:BoundDataField DataFieldName="Designation" Key="Designation">
+                                    <ig:BoundDataField DataFieldName="Designation" Key="Designation" Width="200px">
                                         <Header Text="Designation" />
                                     </ig:BoundDataField>
                                     <ig:BoundDataField DataFieldName="JoiningDate" Key="JoiningDate" Width="150px">
