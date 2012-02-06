@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController;
 using StationeryStoreInventorySystemController.departmentController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
@@ -36,20 +37,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
                 if (Request.QueryString["CollectionIdIndex"] == null)
                 {
                     ucdbrControl = new StationeryStoreInventorySystemController.departmentController.UpdateCollectionDetailsByRequisitionControl();
-
                     StationeryStoreInventorySystemController.Util.PutSession(sessionKey, ucdbrControl);
                 }
                 else
                 {
                     ucdbrControl = (UpdateCollectionDetailsByRequisitionControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
-
-                    if (ucdbrControl.SelectCollection(SystemStoreInventorySystemUtil.Converter.objToInt(Request.QueryString["CollectionIdIndex"])) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+                    if (ucdbrControl.SelectCollection(SystemStoreInventorySystemUtil.Converter.objToInt(Request.QueryString["CollectionIdIndex"])) 
+                        == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
                     {
                         FillRequisitionDetails(ucdbrControl.RequestDetail);
-
                         lblCollectionID.Text = ucdbrControl.RequestDetailCollectionId;
                         lblDateTime.Text = ucdbrControl.RequestDetailCollectionDateTime;
                         lblCollectionPoint.Text = ucdbrControl.RequestDetailCollectionPoint;
+
+                        Util.PutSession("CollectionIdIndex", Request.QueryString["CollectionIdIndex"]);
                     }
                     else
                     {
@@ -108,6 +109,26 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         {
             HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("CollectionID").FindControl("TripIDLink");
             link.NavigateUrl = "~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx?CollectionIdIndex=" + link.Text;
+        }
+
+        protected void dgvCollectionList_PageIndexChanged(object sender, Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillCollectionDetails(ucdbrControl.CollectionList);
+        }
+
+        protected void dgvCollectionList_DataFiltering(object sender, Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillCollectionDetails(ucdbrControl.CollectionList);
+        }
+
+        protected void dgvRequisitions_DataFiltering(object sender, Infragistics.Web.UI.GridControls.FilteringEventArgs e)
+        {
+            FillRequisitionDetails(ucdbrControl.RequestDetail);
+        }
+
+        protected void dgvRequisitions_PageIndexChanged(object sender, Infragistics.Web.UI.GridControls.PagingEventArgs e)
+        {
+            FillRequisitionDetails(ucdbrControl.RequestDetail);
         }
     }
 }
