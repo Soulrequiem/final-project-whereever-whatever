@@ -13,6 +13,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.storeController;
+using Infragistics.Web.UI.GridControls;
 
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk

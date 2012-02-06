@@ -19,21 +19,22 @@
             <ig:WebDataGrid ID="DgvGenerateDisbursement" runat="server" Height="300px" 
             Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+            ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+            EnableDataViewState="True">
                 <Columns>
                     <%--<ig:BoundCheckBoxField DataFieldName="GenerateReports" 
                         Key="GenerateReports" Width="80px">
                         <Header Text="Select" />
                     </ig:BoundCheckBoxField>--%>
-                    <ig:TemplateDataField Key="Select" Width="80px">
+                    <%--<ig:TemplateDataField Key="Select" Width="80px">
                         <ItemTemplate>
                             <asp:RadioButton ID="RadioButton1" runat="server" />
                         </ItemTemplate>
-                    </ig:TemplateDataField>
+                    </ig:TemplateDataField>--%>
                     <%--<ig:BoundDataField DataFieldName="RetrievalNo" Key="RetrievalNo" Width="120px">
                         <Header Text="Retrieval No." />
                     </ig:BoundDataField>--%>
-                    <ig:TemplateDataField Key="RetrievalNo" Width="120px">
+                    <ig:TemplateDataField Key="RetrievalNo" Width="140px">
                         <ItemTemplate>
                             <asp:HyperLink ID="TripIDLink" runat="server" 
                                 Text='<%# Eval("RetrievalNo" ) %>'
@@ -43,14 +44,14 @@
                         <Header Text="Retrieval No." />
                     </ig:TemplateDataField>
                     <ig:BoundDataField DataFieldName="RetrievalDate/Time" Key="RetrievalDate/Time" 
-                        Width="200px">
+                        Width="220px">
                         <Header Text="Retrieval Date/Time" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="RetrievedQty" Key="RetrievedQty" 
-                        Width="150px">
+                        Width="170px">
                         <Header Text="Retrieved Qty" />
                     </ig:BoundDataField>
-                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="RetrievedBy" Width="150px">
+                    <ig:BoundDataField DataFieldName="RetrievedBy" Key="RetrievedBy" Width="170px">
                         <Header Text="Retrieved By" />
                     </ig:BoundDataField>
                 </Columns>
