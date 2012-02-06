@@ -160,9 +160,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         protected void dgvRequisitionList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
-            if ((SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text) == SystemStoreInventorySystemUtil.Constants.REQUISITION_STATUS.REJECTED)||
-                (SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text) == SystemStoreInventorySystemUtil.Constants.REQUISITION_STATUS.SUBMITTED)||
-                (SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text) == SystemStoreInventorySystemUtil.Constants.REQUISITION_STATUS.WITHDRAW))
+            if ((SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text) == SystemStoreInventorySystemUtil.Constants.REQUISITION_STATUS.REJECTED) ||
+                (SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text) == SystemStoreInventorySystemUtil.Constants.REQUISITION_STATUS.SUBMITTED) ||
+                (SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text) == SystemStoreInventorySystemUtil.Constants.REQUISITION_STATUS.WITHDRAW) ||
+                (SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text) == SystemStoreInventorySystemUtil.Constants.REQUISITION_STATUS.COMPLETE))
             {
                 e.Row.Items[0].CssClass = "hidden";
             }
