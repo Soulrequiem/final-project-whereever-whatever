@@ -15,31 +15,63 @@ namespace StationeryStoreInventorySystemController.storeController
     {
         private IItemBroker itemBroker;
         private IPurchaseOrderBroker purchaseOrderBroker;
-        
+        private DataTable SupplierList;
+        private ISupplierBroker supplierBroker;
+        private DataTable table;
+
+        public DataTable SupplierList1
+        {
+            get {
+                List<Supplier> suppliers = supplierBroker.GetAllSupplier();
+                if (table == null)
+                {
+                    table = new DataTable();
+                    table.Columns.AddRange(supplierColumn);
+                }
+                else
+                {
+                    table.Rows.Clear();
+                }
+
+                DataRow row;
+                foreach (Supplier supplier in suppliers)
+                {
+                    row = table.NewRow();
+                    row[supplierColumn[0]]= supplier.Id;
+                    row[supplierColumn[1]] = supplier.Name;
+                    table.Rows.Add(row);
+                }
+                return table; }
+            
+        }
         private Employee currentEmployee;
         private PurchaseOrder purchaseOrder;
         
+        private System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail> purchaseOrderDetailList;
+
         private DataTable dt;
         private DataRow dr;
-
+        private string[] supplierColumnName = { "SupplierID", "SupplierName" };
         private string[] columnName = { "ItemNo", "Description", "Quantity", "Price", "Amount" };
-
+        private DataColumn[] supplierColumn;
         private DataColumn[] dataColumn;
         
         public PurchaseOrderControl()
         {
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
             InventoryEntities inventory = new InventoryEntities();
-
+            supplierBroker = new SupplierBroker(inventory);
             itemBroker = new ItemBroker(inventory);
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
 
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
 
+            purchaseOrderDetailList = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
+            
             // need to load reorder quantity
             // need to load unfulfilled quantity
-
+            supplierColumn = new DataColumn[] { new DataColumn(supplierColumnName[0]), new DataColumn(supplierColumnName[1])};
             dataColumn = new DataColumn[] { new DataColumn(columnName[0]), 
                                             new DataColumn(columnName[1]), 
                                             new DataColumn(columnName[2]), 
@@ -51,17 +83,10 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             get
             {
-                if (dt == null)
-                {
-                    dt = new DataTable();
-                    dt.Columns.AddRange(dataColumn);
-                }
-                else
-                {
-                    dt.Rows.Clear();
-                }
+                dt = new DataTable();
+                dt.Columns.AddRange(dataColumn);
                 
-                foreach (PurchaseOrderDetail temp in purchaseOrder.PurchaseOrderDetails)
+                foreach (PurchaseOrderDetail temp in purchaseOrderDetailList)
                 {
                     dr = dt.NewRow();
                     dr[columnName[0]] = temp.Item.Id;
@@ -85,7 +110,17 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS addStatus = Constants.ACTION_STATUS.UNKNOWN;
             
-            if (purchaseOrder.PurchaseOrderDetails.Where(x=> x.Item.Id == itemId).Count() == 0)
+            bool isFound = false;
+
+            foreach (PurchaseOrderDetail purchaseOrderDetailTemp in purchaseOrderDetailList)
+            {
+                if (purchaseOrderDetailTemp.Item.Id == itemId)
+                {
+                    isFound = true;
+                }
+            }
+
+            if (!isFound)
             {
                 PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
                 purchaseOrderDetail.Id = purchaseOrderBroker.GetPurchaseOrderDetailId();
@@ -93,7 +128,7 @@ namespace StationeryStoreInventorySystemController.storeController
                 item.Id = itemId;
                 purchaseOrderDetail.Item = itemBroker.GetItem(item);
 
-                purchaseOrder.PurchaseOrderDetails.Add(purchaseOrderDetail);
+                purchaseOrderDetailList.Add(purchaseOrderDetail);
 
                 addStatus = Constants.ACTION_STATUS.SUCCESS;
             }
@@ -110,11 +145,11 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS removeStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            if (purchaseOrder.PurchaseOrderDetails.Count >= index)
+            if (purchaseOrderDetailList.Count >= index)
             {
-                PurchaseOrderDetail purchaseOrderDetail = purchaseOrder.PurchaseOrderDetails.ElementAt(index);
+                PurchaseOrderDetail purchaseOrderDetail = purchaseOrderDetailList.ElementAt(index - 1);
 
-                purchaseOrder.PurchaseOrderDetails.Remove(purchaseOrderDetail);
+                purchaseOrderDetailList.Remove(purchaseOrderDetail);
                 removeStatus = Constants.ACTION_STATUS.SUCCESS;
             }
             else
@@ -129,7 +164,7 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS createStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            purchaseOrder.PurchaseOrderDetails = purchaseOrder.PurchaseOrderDetails;
+            purchaseOrder.PurchaseOrderDetails = purchaseOrderDetailList;
 
             if (purchaseOrderBroker.Insert(purchaseOrder) == Constants.DB_STATUS.SUCCESSFULL)
                 createStatus = Constants.ACTION_STATUS.SUCCESS;
@@ -142,9 +177,9 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS cancelStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            if (purchaseOrder.PurchaseOrderDetails.Count > 0)
+            if (purchaseOrderDetailList.Count > 0)
             {
-                purchaseOrder.PurchaseOrderDetails = null;
+                purchaseOrderDetailList = null;
                 cancelStatus = Constants.ACTION_STATUS.SUCCESS;
             }
             else
@@ -153,5 +188,6 @@ namespace StationeryStoreInventorySystemController.storeController
             }
             return cancelStatus;
         }
+
     }
 }
