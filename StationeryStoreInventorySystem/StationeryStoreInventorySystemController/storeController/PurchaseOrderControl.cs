@@ -18,6 +18,18 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable SupplierList;
         private ISupplierBroker supplierBroker;
         private DataTable table;
+        private int purchaseOrderId;
+        private List<PurchaseOrderDetail> poDetailList;
+
+        public int PurchaseOrderId
+        {
+            get
+            {
+                purchaseOrderId = purchaseOrder.Id;
+                return purchaseOrderId; 
+}
+            
+        }
 
         public DataTable SupplierList1
         {
@@ -47,7 +59,7 @@ namespace StationeryStoreInventorySystemController.storeController
         private Employee currentEmployee;
         private PurchaseOrder purchaseOrder;
         
-        private System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail> purchaseOrderDetailList;
+        //private System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail> purchaseOrderDetailList;
 
         private DataTable dt;
         private DataRow dr;
@@ -63,11 +75,11 @@ namespace StationeryStoreInventorySystemController.storeController
             supplierBroker = new SupplierBroker(inventory);
             itemBroker = new ItemBroker(inventory);
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
-
+            
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
-
-            purchaseOrderDetailList = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
+            poDetailList = new List<PurchaseOrder>();
+            //purchaseOrderDetailList = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
             
             // need to load reorder quantity
             // need to load unfulfilled quantity
@@ -83,10 +95,17 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             get
             {
-                dt = new DataTable();
-                dt.Columns.AddRange(dataColumn);
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
                 
-                foreach (PurchaseOrderDetail temp in purchaseOrderDetailList)
+                foreach (PurchaseOrderDetail temp in poDetailList)
                 {
                     dr = dt.NewRow();
                     dr[columnName[0]] = temp.Item.Id;
@@ -100,9 +119,10 @@ namespace StationeryStoreInventorySystemController.storeController
             }
         }
 
-        public Item SelectItemDescription(string itemDescription)
+        public string SelectItemDescription(string itemDescription)
         {
-            return Util.GetItem(itemBroker, itemDescription);
+            Item item = Util.GetItem(itemBroker, itemDescription);
+            return item.Id;
 
         }
 
