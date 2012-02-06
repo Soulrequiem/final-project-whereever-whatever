@@ -18,12 +18,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class UpdateStationeryRetrieval : System.Web.UI.Page
     {
-        string select_collectionId; 
+        string select_collectionId;
+        private UpdateStationeryRetrievalControl USRobj;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                UpdateStationeryRetrievalControl USRobj=new UpdateStationeryRetrievalControl();
+                USRobj=new UpdateStationeryRetrievalControl();
                 DataTable dt = USRobj.GetCollectionIDList();
                 FillCollectionList(dt);
             }
