@@ -8,7 +8,7 @@
     Namespace="Infragistics.Web.UI.GridControls" TagPrefix="ig" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <%--<script type="text/javascript" language="javascript">
+    <script type="text/javascript" language="javascript">
         function textboxcheck() {
             if (document.getElementById("MainContent_WebGroupBox1_drdRepEmployeeList").value == "") {
                 document.getElementById("MainContent_WebGroupBox1_lblStatusMessage").innerHTML = "Choose stationery.";
@@ -16,7 +16,7 @@
             }
             return true;
         }
-    </script>--%>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
@@ -103,7 +103,7 @@
                  </div>
                  <div style="float:left; padding-left:10px">
                     <asp:Button ID="btnEmployee" runat="server" Text="Select" 
-                         CssClass="Searchbutton" onclick="btnEmployee_Click" /> <%--OnClientClick="return textboxcheck();"/>--%>
+                         CssClass="Searchbutton" onclick="btnEmployee_Click" OnClientClick="return textboxcheck();"/>
                  </div>
                      <br /><br />           
                 

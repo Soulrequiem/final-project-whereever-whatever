@@ -85,6 +85,9 @@
                         <Button Visible="False" />
                          <DropDownItemBinding TextField="employeeName" ValueField="employeeID" />
                      </ig:WebDropDown>
+                     <br />
+                     <asp:Label CssClass="ErrorLabelstyle" 
+                        ID="lblStatusMessage" runat="server"/>
                 </div>
                 <div style="float:left; padding-left:10px">
                     <asp:Button ID="btnEmployee" runat="server" Text="Select" 

@@ -50,12 +50,13 @@
                 </Template>
             </igmisc:WebGroupBox>
                 <br />
+                <br />
                 <div style="float:left">
                      <asp:Label CssClass="DefaultLabelstyle" 
                      ID="Label15" runat="server" 
-                     Text="Employee Name:"/>      &nbsp;&nbsp;&nbsp;     
+                     Text="Employee Name:"/>     
                 </div>
-                <div style="float:left">
+                <div style="float:left; padding-left:10px">
                      <%--<ig:WebTextEditor ID="txtEmployeeName" runat="server" 
                      CssClass="DefaultTextStyle" Width="250px">
                      </ig:WebTextEditor>--%>
@@ -67,6 +68,9 @@
                         <Button Visible="False" />
                          <DropDownItemBinding TextField="employeeName" ValueField="employeeID" />
                      </ig:WebDropDown>
+                     <br />
+                     <asp:Label CssClass="ErrorLabelstyle" 
+                        ID="lblStatusMessage" runat="server"/>
                 </div>
                 <div style="float:left; padding-left:10px">
                     <asp:Button ID="btnEmployee" runat="server" Text="Select" 
@@ -77,7 +81,7 @@
                 CssClass="MediumGroupBoxstyle" StyleSetName="" Text="Search Result" 
                 TitleAlignment="Left">
                     <Template>
-                            <ig:WebDataGrid ID="DgvTempDepteHeadSearchDetails" runat="server" Height="150px" 
+                            <ig:WebDataGrid ID="DgvTempDeptRepSearchDetails" runat="server" Height="150px" 
                                 Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                                 HeaderCaptionCssClass="HeaderGridViewStyle" 
                                 ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
