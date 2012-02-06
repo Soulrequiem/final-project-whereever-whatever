@@ -69,7 +69,7 @@
             <div style="float:right">
                 <%--<a class="buttoningrid" href="" style="float:right">Generate</a>--%>
                 <asp:Button ID="btnGenerate" runat="server" CssClass="DefaultLargebutton"
-                                Text="Generate" />
+                                Text="Generate" onclick="btnGenerate_Click" />
             </div>
     </div>
 </asp:Content>
