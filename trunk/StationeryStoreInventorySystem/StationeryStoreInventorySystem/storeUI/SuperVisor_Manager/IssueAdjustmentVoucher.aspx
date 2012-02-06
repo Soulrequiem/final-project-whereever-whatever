@@ -131,7 +131,8 @@
                             </ig:WebDataGrid>
                             <div style="float:right">
                                     <%--<a class="button" href="" style="float:right">Issue</a>--%>
-                                    <asp:Button ID="btnIssue" runat="server" CssClass="Defaultbutton" Text="Issue"/>
+                                    <asp:Button ID="btnIssue" runat="server" CssClass="Defaultbutton" Text="Issue" 
+                                        onclick="btnIssue_Click"/>
                             </div>
                             <div style="float:left;margin-right:10px">
                                    <asp:Label CssClass="DefaultLabelstyle" 
