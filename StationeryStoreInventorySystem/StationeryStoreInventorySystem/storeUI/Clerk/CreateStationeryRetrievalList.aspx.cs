@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController.storeController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
@@ -22,12 +23,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             //DataTable dt = CSRobj.GetStationerRetrivalList();
             //FillStationeryRetrievalList();
 
-            DataTable dt = new DataTable();
-            dt.Columns.Add("CreateStationeryRetrievalListCheckBox");
-            dt.Columns.Add("CollectionID");
-            dt.Columns.Add("CollectionDate/Time");
-            dt.Columns.Add("Department");
-            dt.Columns.Add("DepartmentStatus");
+            if (!IsPostBack)
+            {
+                createStationeryRetrievalListControl = new CreateStationeryRetrievalListControl();
 
                 FillRequisitionCollectionList(createStationeryRetrievalListControl.RequisitionCollectionList);
 
