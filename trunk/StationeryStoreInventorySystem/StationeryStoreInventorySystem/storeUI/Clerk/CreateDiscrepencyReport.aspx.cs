@@ -8,8 +8,6 @@ using System.Data;
 using StationeryStoreInventorySystemController.storeController;
 using SystemStoreInventorySystemUtil;
 
-
-
 namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class CreateDiscrepencyReport : System.Web.UI.Page

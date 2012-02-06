@@ -24,9 +24,10 @@
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label8" runat="server" 
                                 Text="<%$ Resources:WebResources, ViewStationeryCatalogue_EnterItemDescriptionLabel%>"/>
                             </td>
-                            <td style="width:300px"><%--<ig:WebTextEditor ID="txtDescription" runat="server" 
+                            <td style="width:400px"><%--<ig:WebTextEditor ID="txtDescription" runat="server" 
                                  CssClass="DefaultTextStyle" Width="250px">
                                 </ig:WebTextEditor>--%>
+                                <div style="float: left">
                                 <ig:WebDropDown ID="drdItemList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
                                      StyleSetName="Office2010Blue" AutoFilterQueryType="Contains" 
@@ -57,16 +58,17 @@
                                         </ig:DropDownItem>
                                     </Items>
                                 </ig:WebDropDown>
-                            </td>
-                            <td>
+                                </div>
+                                <div style="float: left;">
                                 <asp:Button ID="btnGetItem" runat="server" Text="Select" 
                                     CssClass="Searchbutton" onclick="btnGetItem_Click"/>
+                                </div>
+                                <span style="clear: both;"></span>
                             </td>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label1" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_ItemNo%>"/>
                             </td>
-                            <td><asp:Label CssClass="DefaultLabelstyle" ID="lblItemNumber" runat="server" 
-                                Text="26187268"/>
+                            <td><asp:Label CssClass="DefaultLabelstyle" ID="lblItemNumber" runat="server" />
                             </td>
                         </tr>
                         <tr>
@@ -82,8 +84,7 @@
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label4" runat="server" 
                                 Text="<%$ Resources:WebResources, CreateDiscrepencyReport_ItemPrice%>"/>
                             </td>
-                            <td><asp:Label CssClass="DefaultLabelstyle" ID="lblItemPrice" runat="server" 
-                                Text="$2890"/>
+                            <td><asp:Label CssClass="DefaultLabelstyle" ID="lblItemPrice" runat="server" />
                             </td>
                         </tr>
                         <tr>
