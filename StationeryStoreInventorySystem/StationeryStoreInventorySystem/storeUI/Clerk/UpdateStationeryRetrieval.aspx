@@ -35,7 +35,7 @@
                                 Key="collectionDate/Time" Width="150px">
                                 <Header Text="Collection Date/Time" />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="DeptRepresentativeName" Key="departmentRepresentativeName" 
+                            <ig:BoundDataField DataFieldName="departmentRepresentativeName" Key="departmentRepresentativeName" 
                                 Width="150px">
                                 <Header Text="Dept. Rep. Name" />
                             </ig:BoundDataField>
