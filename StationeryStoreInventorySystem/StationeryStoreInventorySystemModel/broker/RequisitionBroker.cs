@@ -40,11 +40,11 @@ namespace StationeryStoreInventorySystemModel.broker
                 if (requisition.Status != 0)
                 {
                     int status = Converter.objToInt(requisition.Status);
-                    requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id && reqObj.Status == status).First();
+                    requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id.Contains(requisition.Id) && reqObj.Status == status).First();
                 }
                 else
                 {
-                    requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id == requisition.Id).First();
+                    requisitionObj = inventory.Requisitions.Where(reqObj => reqObj.Id.Contains(requisition.Id)).First();
                 }
             }
             catch (Exception e)
@@ -142,6 +142,24 @@ namespace StationeryStoreInventorySystemModel.broker
 
                 int status = Converter.objToInt(requisitionStatus);
                 requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status && reqObj.Department.Id.Contains(department.Id)).ToList<Requisition>();
+            }
+            catch (Exception e)
+            {
+                requisitionList = null;
+            }
+            return requisitionList;
+        }
+
+        /// <summary>
+        /// Retreive All of the requisition information according to status
+        /// </summary>
+        /// <param name="requisitionStatus"></param>
+        /// <returns></returns>
+        public List<Requisition> GetAllRequisition(Department department)
+        {
+            try
+            {
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Department.Id.Contains(department.Id)).ToList<Requisition>();
             }
             catch (Exception e)
             {
