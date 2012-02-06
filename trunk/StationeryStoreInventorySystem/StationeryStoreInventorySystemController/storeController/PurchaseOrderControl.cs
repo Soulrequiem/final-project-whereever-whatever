@@ -14,7 +14,9 @@ namespace StationeryStoreInventorySystemController.storeController
     public class PurchaseOrderControl
     {
         private IItemBroker itemBroker;
+        private IItemPriceBroker itemPriceBroker;
         private IPurchaseOrderBroker purchaseOrderBroker;
+
         private DataTable SupplierList;
         private ISupplierBroker supplierBroker;
         private DataTable table;
@@ -57,6 +59,9 @@ namespace StationeryStoreInventorySystemController.storeController
                 return table; }
             
         }
+
+        private Item item;
+        private ItemPrice itemPrice;
         private Employee currentEmployee;
         private PurchaseOrder purchaseOrder;
         
@@ -76,6 +81,8 @@ namespace StationeryStoreInventorySystemController.storeController
             supplierBroker = new SupplierBroker(inventory);
             itemBroker = new ItemBroker(inventory);
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
+            itemPriceBroker = new ItemPriceBroker(inventory);
+
             reorderList = GetReorderItemList();
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
@@ -120,11 +127,30 @@ namespace StationeryStoreInventorySystemController.storeController
             }
         }
 
-        public string SelectItemDescription(string itemDescription)
+        public string ItemCode { get { return item.Id; } }
+        public string Price { get { return Converter.objToMoneyString(itemPrice.Price).Substring(1); } }
+
+        public Constants.ACTION_STATUS SelectItemDescription(string itemDescription, string supplierId)
         {
-            Item item = Util.GetItem(itemBroker, itemDescription);
-            return item.Id;
-            
+            Constants.ACTION_STATUS selectStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            item = Util.GetItem(itemBroker, itemDescription);
+
+            itemPrice = new ItemPrice();
+            itemPrice.SupplierId = supplierId;
+            itemPrice.ItemId = item.Id;
+            itemPrice = itemPriceBroker.GetItemPrice(itemPrice);
+
+            if (item != null && itemPrice != null)
+            {
+                selectStatus = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                selectStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return selectStatus;
         }
 
         private List<Item> GetReorderItemList()
