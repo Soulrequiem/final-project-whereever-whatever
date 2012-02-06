@@ -177,6 +177,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 dt.Rows.Add(dr);
                 chartReport.DataSource = dt;
                 chartReport.DataBind();
+                Session["chartData"] = dt;
             }
         }
         private void fillSupplier()
