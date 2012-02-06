@@ -152,7 +152,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         {
             try
             {
-                dgvStationeryDetailsList.ClearDataSource();
+                
+                //dgvStationeryDetailsList.ClearDataSource();
+                //DataTable dt = resCtrl.RequisitionDetailList;
                 dgvStationeryDetailsList.DataSource = resCtrl.RequisitionDetailList;
                 dgvStationeryDetailsList.DataBind();
             }
@@ -216,40 +218,52 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             }
         }
 
-        protected void btnRequest_Click1(object sender, EventArgs e)
+        private bool ValidateScreen()
         {
-            Dictionary<string, int> quantity = new Dictionary<string, int>();
-
+            int isNumber = 0;
             for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
             {
-                if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value) == true)
+                if(int.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out isNumber) == false ||
+                    Convert.ToInt16(dgvStationeryDetailsList.Rows[i].Items[3].Text) <= 0)
                 {
-                    dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value = false;
-                    quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(), SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequiredQty").FindControl("RequiredQty")).Text));
+                    lblStatusMessage.Text = "Invalid quantity.";
+                    return false;
                 }
             }
+            return true;
+        }
 
-            if (resCtrl.SelectRequest(quantity) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
+        protected void btnRequest_Click1(object sender, EventArgs e)
+        {
+            if(ValidateScreen())
             {
-                // print error message
-            }
-            else
-            {
-                FillItemList();
-            }
-            Infragistics.Web.UI.NavigationControls.WebExplorerBar wbar = (Infragistics.Web.UI.NavigationControls.WebExplorerBar)(this.Master.FindControl("NavigationBar"));
-            //if (Session["SelectedIndex"] != null && this.Master.FindControl("NavigationBar").Groups.Count > 0)
-            //{
+                Dictionary<string, int> quantity = new Dictionary<string, int>();
+
+                for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
+                {
+                    if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value) == true)
+                    {
+                        dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value = false;
+                        //quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(), SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequiredQty").FindControl("RequiredQty")).Text));
+                        quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(),
+                            SystemStoreInventorySystemUtil.Converter.objToInt(dgvStationeryDetailsList.Rows[0].Items[3].Text));
+                    }
+                }
+
+                if (resCtrl.SelectRequest(quantity) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
+                {
+                    lblStatusMessage.Text = "Requisition failed!";
+                }
+                else
+                {
+                    FillItemList();
+                }
+                Infragistics.Web.UI.NavigationControls.WebExplorerBar wbar = (Infragistics.Web.UI.NavigationControls.WebExplorerBar)(this.Master.FindControl("NavigationBar"));
                 Session["SelectedIndex"] = 3;
                 Session["SelectedGroup"] = 0;
                 wbar.Groups[0].Items[3].Selected = true;
                 Response.Redirect("~/departmentUI/Employee/CheckRequisition.aspx");
-            //}
-            //
-            //wbar.it
-            //SendEmail SE = new SendEmail();
-            //ScriptManager1.RegisterScriptControl(dgvStationeryDetailsList);
-            //SE.sendEmail("smallpig1313@gmail.com", "I am sorry", "I am sorry", dgvStationeryDetailsList);
+            }
         }
 
         //protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)

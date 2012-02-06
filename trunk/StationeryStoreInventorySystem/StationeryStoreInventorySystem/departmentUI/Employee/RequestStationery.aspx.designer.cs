@@ -247,6 +247,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee {
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid dgvStationeryDetailsList;
         
         /// <summary>
+        /// lblStatusMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStatusMessage;
+        
+        /// <summary>
         /// btnRequest control.
         /// </summary>
         /// <remarks>
