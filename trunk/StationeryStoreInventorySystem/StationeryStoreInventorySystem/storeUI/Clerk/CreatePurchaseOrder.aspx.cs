@@ -27,6 +27,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 FillSupplier();
                 FillItems();
                 lblPONumber.Text = purchaseOrderControl.PurchaseOrderId.ToString();
+                FillDataGrid();
             }
             else
             {
