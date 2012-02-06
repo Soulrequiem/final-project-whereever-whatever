@@ -59,6 +59,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 drdReportList.Items.Add(new DropDownItem("Inventory Status Report"));
                 drdReportList.Items.Add(new DropDownItem("Reorder Report"));
                 drdReportList.Items.Add(new DropDownItem("Item Consumption Report"));
+                drdReportList.Items.Add(new DropDownItem("Stock Item Movement Report"));
                 drdReportList.Items.Add(new DropDownItem("Disbursement List"));
                 drdReportList.Items.Add(new DropDownItem("Stationery Catalogue"));
                 drdReportList.Items.Add(new DropDownItem("Stationery Supply Tender Form"));
@@ -78,7 +79,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 drdReportList.Items.Add(new DropDownItem("Item Consumption Report"));
                 drdReportList.Items.Add(new DropDownItem("Stationery Catalogue"));
                 drdReportList.Items.Add(new DropDownItem("Employees List"));
-                drdReportList.Items.Add(new DropDownItem("Department List"));
                 drdDepartment.Enabled = false;
                 drdReportList.SelectedItemIndex = 0;
                 reportDT = getControl().getRequisitions();
@@ -130,6 +130,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             {
                 reportDT = getControl().getRoles();
             }
+            else if (Constants.ItemMovementReport == drdReportList.CurrentValue)
+            {
+                fillSupplier();
+                panelSupplier.Visible = true;
+                drdSupplier.SelectedItemIndex = 0;
+                reportDT = getControl().getItemMovement("C001");
+                bindStockMovementChart();
+            }
             else if (Constants.ItemConsumptionReport == drdReportList.CurrentValue)
             {
                 fillData();
@@ -149,10 +157,44 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             }
             PrepareData();
         }
+
+        private void bindStockMovementChart()
+        {
+            if (reportDT != null && reportDT.Rows.Count > 0)
+            {
+                DataTable dt = new DataTable();
+                foreach (DataRow sourcerow in reportDT.Rows)
+                {
+                    dt.Columns.Add(sourcerow["MovementTime"].ToString(), typeof(int));
+                }
+
+                DataRow dr = dt.NewRow();
+                int col = 0;
+                foreach (DataRow sourcerow in reportDT.Rows)
+                {
+                    dr[col++] = Convert.ToInt16(sourcerow["StockLevel"].ToString());
+                }
+                dt.Rows.Add(dr);
+                chartReport.DataSource = dt;
+                chartReport.DataBind();
+            }
+        }
         private void fillSupplier()
         {
-            drdSupplier.DataSource = getControl().getSuppliers();
-            drdSupplier.DataBind();
+            if (Constants.ItemMovementReport == drdReportList.CurrentValue)
+            {
+                lblselect.Text = "Select Item :";
+                drdSupplier.TextField = "Description";
+                drdSupplier.ValueField = "Item Code";
+                drdSupplier.DataSource = getControl().getItems();
+                drdSupplier.DataBind();
+            }
+            else
+            {
+                lblselect.Text = "Select Supplier :";
+                drdSupplier.DataSource = getControl().getSuppliers();
+                drdSupplier.DataBind();
+            }
         }
         private void firstLoad()
         {
@@ -301,7 +343,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             lblNoDataAvailable.Visible = flag;
             reportpanel.Visible = !flag;
             FilterPanel.Visible = Constants.ItemConsumptionReport == drdReportList.CurrentValue ? true : false;
-            panelSupplier.Visible = Constants.StationeryTenderReport == drdReportList.CurrentValue ? true : false;
+            panelSupplier.Visible = Constants.StationeryTenderReport == drdReportList.CurrentValue ||
+                                    Constants.ItemMovementReport == drdReportList.CurrentValue ? true : false;
         }
 
         protected void PrintButton_Click(object sender, ImageClickEventArgs e)
@@ -750,8 +793,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
         protected void drdSupplier_SelectionChanged(object sender, DropDownSelectionChangedEventArgs e)
         {
-            reportDT = getControl().getTenderPrice(drdSupplier.SelectedValue);
-            BindData();
+            if (Constants.ItemMovementReport == drdReportList.CurrentValue)
+            {
+                reportDT = getControl().getItemMovement(drdSupplier.SelectedValue);
+                BindData();
+                bindStockMovementChart();
+            }
+            else
+            {
+                reportDT = getControl().getTenderPrice(drdSupplier.SelectedValue);
+                BindData();
+            }
         }
 
         protected void drdMonth_SelectionChanged(object sender, DropDownSelectionChangedEventArgs e)
