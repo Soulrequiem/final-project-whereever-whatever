@@ -21,7 +21,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
     {
         private static readonly string sessionKey = "IssueAdjustmentVoucher";
         IssueAdjustmentVoucherControl iavCtrl;
-
+        
        
         /// <summary>
         /// Loads the IssueAdjustmentVoucher form
@@ -34,6 +34,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             {
                 if (Request.QueryString["discrepancyId"] == null)
                 {
+                 
                     iavCtrl = new IssueAdjustmentVoucherControl();
                     StationeryStoreInventorySystemController.Util.PutSession(sessionKey, iavCtrl);
                 }
@@ -41,15 +42,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
                 {
                     iavCtrl = (IssueAdjustmentVoucherControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
                     int id = Converter.objToInt(Request.QueryString["discrepancyId"]);
+                    WebGroupBox1.Visible = true;
                     DgvDiscrepancyReport.DataSource = iavCtrl.SelectDiscrepancy(id);
                     DgvDiscrepancyReport.DataBind();
-                   
+                  
                     lblDateIssue.Text = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, DateTime.Now);
-                    //lblVoucher.Text = iavCtrl.IssueAdjustment();
+                    string[] array = iavCtrl.IssueAdjustment();
+                     lblVoucher.Text = array[0];
+                     lblAuthorizedName.Text = array[1];
+                     lblBy.Text = array[2];
                 }
             }
             else
             {
+                
                 iavCtrl = (IssueAdjustmentVoucherControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
 
@@ -198,17 +204,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
             }
         }
 
-        //protected void btnIssue_Click(object sender, EventArgs e)
-        //{
-        //    if (iavCtrl.CreateAdjustment() == Constants.ACTION_STATUS.SUCCESS)
-        //    {
-        //        StationeryStoreInventorySystemController.Util.GoToPage("ViewAdjustmentVoucherList.aspx?action=add&voucherNo=" + lblVoucher.Text);
-        //    }
-        //    else
-        //    {
-        //        //error message
-        //    }
-        //}
+        protected void btnIssue_Click(object sender, EventArgs e)
+        {
+            
+            if (iavCtrl.CreateAdjustment() == Constants.ACTION_STATUS.SUCCESS)
+            {
+                StationeryStoreInventorySystemController.Util.GoToPage("ViewAdjustmentVoucherList.aspx?action=add&voucherNo=" + lblVoucher.Text);
+            }
+            else
+            {
+                Response.Write("Fail....");
+                //error message
+            }
+        }
     }
 }
 /********************************************/
