@@ -175,11 +175,11 @@
                  </ig:WebDataGrid>
                  <div style="float:right">
                      <asp:Button ID="btnApprove" runat="server" CssClass="DefaultLargebutton"
-                        Text="<%$ Resources:WebResources, ApproveButton_text%>" 
-                         onclick="btnApprove_Click" />
+                        Text="Create" 
+                         onclick="btnCreate_Click" />
                      <asp:Button ID="btnDelete" runat="server" CssClass="DefaultLargebutton"
-                        Text="<%$ Resources:WebResources, DeleteButton_text%>" 
-                         onclick="btnDelete_Click" />
+                        Text="Remove" 
+                         onclick="btnRemove_Click" />
                  </div>
                 </Template>
     </igmisc:WebGroupBox>
