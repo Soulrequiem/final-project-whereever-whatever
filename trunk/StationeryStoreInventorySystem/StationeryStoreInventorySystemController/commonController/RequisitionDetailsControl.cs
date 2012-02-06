@@ -185,19 +185,23 @@ namespace StationeryStoreInventorySystemController.commonController
         /// <returns>The return type of this method is datatable.</returns>
         public Constants.ACTION_STATUS Setstatus(string requisitionId, Constants.REQUISITION_STATUS Reqstatus, string remarks, DataTable dt)
         {
-            Constants.REQUISITION_STATUS requisitionStatus = Reqstatus;
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             requisition = RequisitionList.Find(delegate(Requisition req) { return req.Id.Contains(requisitionId); });
-
-            foreach (RequisitionDetail temp in requisition.RequisitionDetails)
+            if (Reqstatus != Constants.REQUISITION_STATUS.REJECTED)
             {
-                DataRow[] dr = dt.Select(" ItemCode = '" + temp.Item.Id + "'");
-                if(dr != null && dr.Length > 0)
+                foreach (RequisitionDetail temp in requisition.RequisitionDetails)
                 {
-                    temp.Qty = Convert.ToInt16(dr[1]);
-                    temp.DeliveredQty = Convert.ToInt16(dr[2]);
+                    DataRow[] dr = dt.Select(" ItemCode = '" + temp.Item.Id + "'");
+                    if (dr != null && dr.Length > 0)
+                    {
+                        temp.Qty = Convert.ToInt16(dr[0][1].ToString());
+                        temp.DeliveredQty = Convert.ToInt16(dr[0][2].ToString());
+                    }
                 }
             }
+            
+            requisition.Remarks = remarks;
+            requisition.Status = (int)(Reqstatus);
             requisitionBroker.Update(requisition);
             return status;
         }
