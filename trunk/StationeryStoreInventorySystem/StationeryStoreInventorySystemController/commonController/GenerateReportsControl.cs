@@ -21,6 +21,12 @@ namespace StationeryStoreInventorySystemController.commonController
             emp = Util.GetEmployee();
         }
 
+        public DataTable getItemMovement(string ItemCode)
+        {
+            string sQuery = "select CreatedDate as  'MovementTime', CONVERT(int, Balance) as 'StockLevel' from StockCardDetails where ItemId = '" + ItemCode + "'";
+            return ReturnResultSet(sQuery);
+        }
+
         public DataTable getCollections()
         {
             string sQuery = "select id,name,time from CollectionPoint";
@@ -59,25 +65,6 @@ namespace StationeryStoreInventorySystemController.commonController
             }
             return ReturnResultSet(sbQuery.ToString());
         }
-        //public DataTable getItems()
-        //{
-        //    StringBuilder sbQuery = new StringBuilder();
-        //    sbQuery.Append(" select I.id as 'Item Code', ");
-        //    sbQuery.Append(" I.Description, ");
-        //    sbQuery.Append(" UM.Name as 'Unit of Measurement', ");
-        //    sbQuery.Append(" SCD.Balance as 'Quantity on Hand', ");
-        //    sbQuery.Append(" I.ReorderLevel as 'Reorder Level' ");
-        //    sbQuery.Append(" from Item I, ");
-        //    sbQuery.Append(" UnitOfMeasure UM, ");
-        //    sbQuery.Append(" StockCardDetails SCD ");
-        //    sbQuery.Append(" where I.UnitOfMeasureId = UM.Id AND ");
-        //    sbQuery.Append(" SCD.ItemId = I.Id AND ");
-        //    sbQuery.Append(" SCD.CreatedDate IN (SELECT MAX(CreatedDate)  ");
-        //    sbQuery.Append(" from StockCardDetails  ");
-        //    sbQuery.Append(" group by ItemId) ");
-        //    return ReturnResultSet(sbQuery.ToString());
-        //}
-
         public DataTable getItems()
         {
             StringBuilder sbQuery = new StringBuilder();
