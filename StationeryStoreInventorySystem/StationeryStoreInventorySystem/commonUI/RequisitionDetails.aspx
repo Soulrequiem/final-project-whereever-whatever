@@ -31,7 +31,7 @@
         Text="<%$ Resources:WebResources, RequisitionDetails_Title %>" /></h1>
                 <table>
                     <tr>
-                        <td>
+                        <%--<td>
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="Label2" runat="server" 
                             Text="<%$ Resources:WebResources, RequisitionDetails_RequisitionDates %>"/>
@@ -40,7 +40,7 @@
                             <asp:Label CssClass="DefaultLabelstyle" 
                             ID="lblRequisitionDate" runat="server" 
                             Text="11/01/2012"/><br />
-                        </td>
+                        </td>--%>
                    </tr>
                    <tr>
                         <td>
@@ -119,34 +119,43 @@
                 <ig:WebDataGrid ID="DgvRequisitionDetails" runat="server" Width="700px"
                  Height="300px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                 CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
+            EnableDataViewState="True" DataKeyFields="itemNo">
                     <Columns>
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="150px">
+                        <ig:BoundDataField DataFieldName="itemNo" Key="itemNo" Width="150px">
                             <Header Text="Item No." />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
+                        <ig:BoundDataField DataFieldName="itemDescription" Key="itemDescription" 
                             Width="250px">
                             <Header Text="Item Description" />
+                        </ig:BoundDataField>
+                         <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="150px">
+                            <Header Text="Required Qty" />
+                        </ig:BoundDataField>
+                        <ig:BoundDataField DataFieldName="receivedQty" Key="receivedQty" 
+                            Width="250px">
+                            <Header Text="Delivered Qty" />
                         </ig:BoundDataField>
                         <%--<ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="200px">
                             <Header Text="Required Qty" />
                         </ig:BoundDataField>--%>
-                        <ig:TemplateDataField Key="RequiredQty" Width="150px">
+                        <%--<ig:TemplateDataField Key="requiredQty" Width="150px">
                                 <ItemTemplate>
                                     <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
-                                    Text='<%# Eval("RequiredQty") %>' NullText="Enter Required Qty">
+                                    Text='<%# Eval("requiredQty") %>' NullText="Enter Required Qty">
                                     </ig:WebTextEditor>
                                 </ItemTemplate>
                             <Header Text="Required Qty" />
                         </ig:TemplateDataField>
-                        <ig:TemplateDataField Key="DeliveredQty" Width="150px" Hidden="True">
+                        <ig:TemplateDataField Key="receivedQty" Width="150px" Hidden="True">
                                 <ItemTemplate>
                                     <ig:WebTextEditor ID="WebTextEditor1" runat="server" Width="120px"
-                                    Text='<%# Eval("DeliveredQty") %>' NullText="Enter Delivered Qty">
+                                    Text='<%# Eval("receivedQty") %>' NullText="Enter Delivered Qty" AutoPostBackFlags-ValueChanged="On"
+                                    AutoPostBackFlags-EnterKeyDown="On">
                                     </ig:WebTextEditor>
                                 </ItemTemplate>
                             <Header Text="Delivered Qty" />
-                        </ig:TemplateDataField>
+                        </ig:TemplateDataField>--%>
                     </Columns>
                     <Behaviors>
                         <ig:Selection CellClickAction="Row" RowSelectType="Single">
@@ -157,6 +166,21 @@
                         </ig:Filtering>
                         <ig:Sorting>
                         </ig:Sorting>
+                        <ig:EditingCore>
+                            <Behaviors>
+                                <ig:CellEditing>
+                                    <ColumnSettings>
+                                        <ig:EditingColumnSetting ColumnKey="itemNo" ReadOnly="True" />
+                                        <ig:EditingColumnSetting ColumnKey="itemDescription" ReadOnly="True" />
+                                        <ig:EditingColumnSetting ColumnKey="RequiredQty" />
+                                        <ig:EditingColumnSetting ColumnKey="receivedQty" />
+                                    </ColumnSettings>
+                                </ig:CellEditing>
+                                <ig:RowEditingTemplate>
+                                    <EditModeActions MouseClick="Single" />
+                                </ig:RowEditingTemplate>
+                            </Behaviors>
+                        </ig:EditingCore>
                     </Behaviors>
                 </ig:WebDataGrid>
                 <br />
@@ -169,6 +193,11 @@
                        <asp:Button ID="btnApprove" CssClass="Defaultbutton"
                                         runat="server" Text="Approve" onclick="btnApprove_Click" 
                            Visible="False"/>
+                </div>
+                <div style="float:right;margin-right:10px">
+                       <asp:Button ID="btnSave" CssClass="Defaultbutton"
+                                        runat="server" Text="Save" Visible="False" 
+                           onclick="btnSave_Click"/>
                 </div>
                 <div style="float:right;margin-right:10px">
                     <ig:WebTextEditor ID="txtaRemarks" runat="server" Width="200px" Height="50px" 
@@ -185,6 +214,11 @@
                     <asp:CheckBox ID="CheckBox1" runat="server" Text="Complete Requisition" 
                         CssClass="DefaultLabelstyle" oncheckedchanged="CheckBox1_CheckedChanged" 
                         Visible="False"/>
-                </div>    
+                        <div style="float:left">
+                            <asp:HyperLink ID="lnkback" runat="server" Text="<%$ Resources:WebResources,Back_Link_Text %>" 
+                                CssClass="DefaultLabelstyle">
+                            </asp:HyperLink>
+                        </div>
+                </div>  
    </div>    
 </asp:Content>
