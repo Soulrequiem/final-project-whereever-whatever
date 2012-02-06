@@ -183,6 +183,10 @@
                         </ig:EditingCore>
                     </Behaviors>
                 </ig:WebDataGrid>
+                <div style="float:left">
+                   <asp:Label CssClass="ErrorLabelstyle" 
+                               ID="lblStatusMessage" runat="server"/>
+               </div>
                 <br />
                 <div style="float:right">
                         <asp:Button ID="btnReject" CssClass="Defaultbutton"
@@ -212,7 +216,7 @@
                 </div>    
                 <div style="float:left">
                     <asp:CheckBox ID="CheckBox1" runat="server" Text="Complete Requisition" 
-                        CssClass="DefaultLabelstyle" oncheckedchanged="CheckBox1_CheckedChanged" 
+                        CssClass="DefaultLabelstyle" 
                         Visible="False"/>
                         <div style="float:left">
                             <asp:HyperLink ID="lnkback" runat="server" Text="<%$ Resources:WebResources,Back_Link_Text %>" 

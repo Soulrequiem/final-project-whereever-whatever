@@ -23,15 +23,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
     public partial class RequisitionDetails : System.Web.UI.Page
     {
-        CheckRequisitionControl rqCtrl = null;
         private RequisitionDetailsControl aprCtrl;
-
-        private CheckRequisitionControl getControl()
-        {
-            if (rqCtrl == null)
-                rqCtrl = new CheckRequisitionControl();
-            return rqCtrl;
-        }
 
         private RequisitionDetailsControl getApprRejectControl()
         {
@@ -70,13 +62,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 {
                     CheckBox1.Visible = true;
                     DgvRequisitionDetails.Columns[3].Hidden = false;
+                    DgvRequisitionDetails.Behaviors.EditingCore.Behaviors.CellEditing.ColumnSettings[2].ReadOnly = true;
                     btnApprove.Visible = false;
                     btnReject.Visible = false;
                     btnSave.Visible = true;
                     lblRemarks.Visible = false;
                     txtaRemarks.Visible = false;
                     lnkback.Visible = true;
-                    lnkback.NavigateUrl = "~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx";
+                    lnkback.NavigateUrl = "~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx?CollectionIdIndex='"+Session["CollectionIdIndex"].ToString();
                     lnkback.Text = "Back to Update collections by Requisitions";
                 }
                 FillRequsitionDetils(reqID);
@@ -152,6 +145,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
+            if (ValidateScreen())
+            {
+                getApprRejectControl().Setstatus(lblRequisitionID.Text, Constants.REQUISITION_STATUS.APPROVED, txtaRemarks.Text, getItemQuantities());
+                gotoApprovePage();
+            }
+        }
+
+        private DataTable getItemQuantities()
+        {
             DataTable dt = new DataTable();
             dt.Columns.Add("ItemCode");
             dt.Columns.Add("RequiredQty");
@@ -161,37 +163,86 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 DataRow dr = dt.NewRow();
                 dr[0] = DgvRequisitionDetails.Rows[i].Items[0].Text;
                 dr[1] = DgvRequisitionDetails.Rows[i].Items[2].Text;
-                dr[2] = "0";
+                dr[2] = DgvRequisitionDetails.Rows[i].Items[3].Text;
                 dt.Rows.Add(dr);
             }
-            getApprRejectControl().Setstatus(lblRequisitionID.Text, Constants.REQUISITION_STATUS.APPROVED, txtaRemarks.Text, dt);
-            gotoApprovePage();
+            return dt;
         }
 
         protected void btnReject_Click(object sender, EventArgs e)
         {
-            getApprRejectControl().Setstatus(lblRequisitionID.Text, Constants.REQUISITION_STATUS.REJECTED, txtaRemarks.Text, null);
-            gotoApprovePage();
-        }
-
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
+            if (txtaRemarks.Text != string.Empty)
+            {
+                getApprRejectControl().Setstatus(lblRequisitionID.Text, Constants.REQUISITION_STATUS.REJECTED, txtaRemarks.Text, null);
+                gotoApprovePage();
+            }
+            else
+                lblStatusMessage.Text = "Please enter remarks.";
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (ValidateScreen())
+            {
+                if (CheckBox1.Checked)
+                    getApprRejectControl().Setstatus(lblRequisitionID.Text, Constants.REQUISITION_STATUS.COMPLETE, string.Empty, getItemQuantities());
+                else
+                    getApprRejectControl().Setstatus(lblRequisitionID.Text, Constants.REQUISITION_STATUS.SUBMITTED, string.Empty, getItemQuantities());
 
+                gotoUpdateCollectionsByRequisitionsPage();
+            }
         }
 
-        private void received_textChanged(object sender, EventArgs e)
+        private bool ValidateScreen()
         {
-            string s = string.Empty;
+            int isNumber = 0;
+            bool isQuantityMatched = false;
+            for (int i = 0; i < DgvRequisitionDetails.Rows.Count; i++)
+            {
+                if(int.TryParse(DgvRequisitionDetails.Rows[i].Items[2].Text, out isNumber) == false ||
+                   int.TryParse(DgvRequisitionDetails.Rows[i].Items[3].Text, out isNumber) == false )
+                {
+                    lblStatusMessage.Text = "Invalid quantity.";
+                    return false;
+                }
+                else if (Convert.ToInt16(DgvRequisitionDetails.Rows[i].Items[2].Text) <
+                    Convert.ToInt16(DgvRequisitionDetails.Rows[i].Items[3].Text))
+                {
+                    lblStatusMessage.Text = "Delivered quantity can not be greater than required quantity.";
+                    return false;
+                }
+                else if (Convert.ToInt16(DgvRequisitionDetails.Rows[i].Items[3].Text) < 0 ||
+                    Convert.ToInt16(DgvRequisitionDetails.Rows[i].Items[2].Text) < 0)
+                {
+                    lblStatusMessage.Text = "Invalid quantity.";
+                    return false;
+                }
+                else if (DgvRequisitionDetails.Rows[i].Items[2].Text == DgvRequisitionDetails.Rows[i].Items[3].Text)
+                    isQuantityMatched = true;
+                else
+                    isQuantityMatched = false;
+            }
+            if (CheckBox1.Checked && !isQuantityMatched)
+            {
+                lblStatusMessage.Text = "Delivered quantity is still not matched with the required quantity. Requisition can not be completed.";
+                return false;
+            }
+            else if (!CheckBox1.Checked && isQuantityMatched)
+            {
+                lblStatusMessage.Text = "Please check 'Complete Requisition'.";
+                return false;
+            }
+            return true;
         }
 
         private void gotoApprovePage()
         {
             Response.Redirect("~/departmentUI/Head/ApproveRequisition.aspx");
+        }
+
+        private void gotoUpdateCollectionsByRequisitionsPage()
+        {
+            Response.Redirect("~/departmentUI/Representative/UpdateCollectionByRequisitions.aspx");
         }
     }
 }
