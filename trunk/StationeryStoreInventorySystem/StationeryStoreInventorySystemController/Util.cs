@@ -314,9 +314,12 @@ namespace StationeryStoreInventorySystemController
             Employee employee = new Employee();
             employee.Id = employeeId;
             employee = employeeBroker.GetEmployee(employee);
-            employee.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
+            Role newRole = new Role();
+            newRole = employeeBroker.GetRole(employee.Role);
+            //employee.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
+            newRole.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
 
-            status = employeeBroker.Update(employee);
+            status = employeeBroker.Update(newRole);
 
             return status;
         }
