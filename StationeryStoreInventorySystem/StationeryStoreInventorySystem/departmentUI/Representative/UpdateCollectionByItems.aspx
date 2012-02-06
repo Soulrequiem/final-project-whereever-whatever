@@ -47,9 +47,9 @@
                         <ig:BoundDataField DataFieldName="CollectionDateTime" Key="CollectionDateTime">
                             <Header Text="Collection Date/Time" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus">
+                        <%--<ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus" Hidden="false">
                             <Header Text="Collection Status" />
-                        </ig:BoundDataField>
+                        </ig:BoundDataField>--%>
                     </Columns>
                         <Behaviors>
                             <ig:Paging>
