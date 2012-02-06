@@ -34,12 +34,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 //GenerateDisbursementControl GDobj = new GenerateDisbursementControl();
                 //DataTable dt = GDobj.GetDisbursementList();
                 FillDisbursementList(generateDisbursementControl.RetrievalList);
+                FillCollectionList(generateDisbursementControl.CollectionPointList);
 
                 StationeryStoreInventorySystemController.Util.PutSession(sessionKey, generateDisbursementControl);
             }
             else
             {
                 generateDisbursementControl = (GenerateDisbursementControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
+
             }
         }
 
@@ -70,12 +72,41 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             }
         }
 
+        /// <summary>
+        /// Fills Collection list to DataGrid
+        /// </summary>
+        /// <param name="dtCollection"></param>
+        private void FillCollectionList(DataTable dtCollection)
+        {
+            try
+            {
+                if (dtCollection != null)
+                {
+                    drdCollectionPoint.TextField = "CollectionPoint";
+                    drdCollectionPoint.ValueField = "CollectionID";
+                    drdCollectionPoint.DataSource = dtCollection;
+                    drdCollectionPoint.DataBind();
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.WriteErrorLog(e);
+            }
+        }
+
         protected void btnGenerate_Click(object sender, EventArgs e)
         {
             if (DgvGenerateDisbursement.Behaviors.Selection.SelectedRows.Count > 0)
                 foreach (GridRecord selectedRow in DgvGenerateDisbursement.Behaviors.Selection.SelectedRows)
-                    disbursement = selectedRow.Items.GetValue(0).ToString();
-            generateDisbursementControl = new GenerateDisbursementControl();
+                    disbursement = selectedRow.DataKey[0].ToString();
+
+            if (disbursement != String.Empty || disbursement == null)
+            {
+                GenerateDisbursementPanel.Visible = true;
+                RetrievalPanel.Visible = false;
+
+                lblRetrievalNo.Text = disbursement;
+            }
         }
     }
 }

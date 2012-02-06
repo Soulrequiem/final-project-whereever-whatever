@@ -72,7 +72,7 @@
                      </td>
                      <td>
                         <ig:WebTextEditor ID="txtaDeliverTo" runat="server" Width="250px" CssClass="DefaultTextStyle"
-                            NullText="Enter the Date (dd/mm/yyyy)" Height="50px" TextMode="MultiLine">
+                            NullText="Delivery Address" Text="Heng Mui Keng Terrace 25" Height="50px" TextMode="MultiLine">
                         </ig:WebTextEditor>
                          
                      </td>
@@ -87,7 +87,7 @@
                     </td>
                     <td>
                         <ig:WebTextEditor ID="txtAttn" runat="server" Width="250px" 
-                            NullText="Enter Attention to" CssClass="DefaultTextStyle">
+                            NullText="Enter Attention to" Text="Mr Azman" CssClass="DefaultTextStyle">
                         </ig:WebTextEditor>
                     </td>
                 </tr>
@@ -114,6 +114,10 @@
                                     <Button Visible="False" />
                              </ig:WebDropDown>
                         </td>
+                        <td>
+                            <asp:Button ID="btnGetItem" runat="server" Text="Select" CssClass="Searchbutton" 
+                                        onclick="btnGetItem_Click"/>
+                        </td>
                         <td style="width:150px">
                             <asp:Label CssClass="DefaultLabelstyle" 
                              ID="Label7" runat="server" 
@@ -135,6 +139,7 @@
                             <asp:Label CssClass="DefaultLabelstyle" ID="lblItemNumber"
                              runat="server"/>
                         </td>
+                        <td></td>
                         <td>
                             <asp:Label CssClass="DefaultLabelstyle" 
                              ID="Label9" runat="server" 

@@ -166,6 +166,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::Infragistics.Web.UI.ListControls.WebDropDown drdItemList;
         
         /// <summary>
+        /// btnGetItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGetItem;
+        
+        /// <summary>
         /// Label7 control.
         /// </summary>
         /// <remarks>
