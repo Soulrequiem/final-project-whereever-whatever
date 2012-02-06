@@ -12,19 +12,45 @@ namespace SystemStoreInventorySystemUtil
         {
             Constants.DESIGNATION designation = Constants.DESIGNATION.UNKNOWN;
 
+            switch(objToShort(obj))
+            {
+                case 1:
+                    designation = Constants.DESIGNATION.PROFESSOR;
+                    break;
+                case 2:
+                    designation = Constants.DESIGNATION.SENIOR_PROFESSOR;
+                    break;
+                case 3:
+                    designation = Constants.DESIGNATION.ACCOUNTANT;
+                    break;
+                case 4:
+                    designation = Constants.DESIGNATION.SENIOR_ACCOUNTANT;
+                    break;
+            }
+
             return designation;
         }
-
+        
         public static string GetDesignationText(Constants.DESIGNATION designation)
         {
             string designationText = null;
             switch (designation)
             {
+                case Constants.DESIGNATION.PROFESSOR:
+                    designationText = "Professor";
+                    break;
+                case Constants.DESIGNATION.SENIOR_PROFESSOR:
+                    designationText = "Senior Professor";
+                    break;
+                case Constants.DESIGNATION.ACCOUNTANT:
+                    designationText = "Accountant";
+                    break;
+                case Constants.DESIGNATION.SENIOR_ACCOUNTANT:
+                    designationText = "Senior Accountant";
+                    break;
             }
             return designationText;
         }
-
-        
 
         public static string GetDepartmentStatusText(Constants.DEPARTMENT_STATUS departmentStatus)
         {
