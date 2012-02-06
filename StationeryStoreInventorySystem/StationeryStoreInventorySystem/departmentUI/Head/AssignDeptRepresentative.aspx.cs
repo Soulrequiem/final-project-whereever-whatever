@@ -109,22 +109,44 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
        protected void btnRemove_Click(object sender, EventArgs e)
        {
            if (DgvCurrentDeptRepresentative.Behaviors.Selection.SelectedRows.Count > 0)
+           {
                foreach (GridRecord selectedRow in DgvCurrentDeptRepresentative.Behaviors.Selection.SelectedRows)
                    remove_employeeID = selectedRow.Items.GetValue(0).ToString();
-           adrCtrl = GetControl();
-           adrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
-           DgvCurrentDeptRepresentative.ClearDataSource();
+               adrCtrl = GetControl();
+               adrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
+               FillRepresentativeList();
+           }
+           else
+               lblStatusMessage.Text = "Please select employee to remove.";
        }
 
        protected void btnAssign_Click(object sender, EventArgs e)
        {
            if (DgvRepSearchDetails.Behaviors.Selection.SelectedRows.Count > 0)
+           {
+               DataTable dt = Util.GetCurrentRepresentative();
+               if (dt != null && dt.Rows.Count > 0)
+               {
+                   lblStatusMessage.Text = "Please remove current representative first.";
+                   return;
+               }
+               //DataRow[] dr = dt.Select(" RepresentativeName = '" + DgvRepSearchDetails.Behaviors.Selection.SelectedRows[0].Items[1].ToString() + "'");
+               //if (dr.Length > 0)
+               //{
+               //    lblStatusMessage.Text = "Selected employee is already a representative";
+               //    return;
+               //}
+
                foreach (GridRecord select in DgvRepSearchDetails.Behaviors.Selection.SelectedRows)
                    assign_employeeID = select.Items.GetValue(0).ToString();
-           adrCtrl = new AssignDepartmentRepresentativeControl();
-           adrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
-           DgvRepSearchDetails.ClearDataSource();
-           FillRepresentativeList();
+               adrCtrl = new AssignDepartmentRepresentativeControl();
+               adrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
+               DgvRepSearchDetails.ClearDataSource();
+               FillRepresentativeList();
+               drdRepEmployeeList.ClearSelection();
+           }
+          else
+               lblStatusMessage.Text = "Please select the employee to assign.";
        }
 
        //protected void DgvCurrentDeptRepresentative_RowSelectionChanged(object sender, 
@@ -148,8 +170,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
        protected void btnEmployee_Click(object sender, EventArgs e)
        {
-           DgvRepSearchDetails.DataSource = Util.GetEmployeeDetails(drdRepEmployeeList.CurrentValue);
-           DgvRepSearchDetails.DataBind();
+           try
+           {
+               if (Convert.ToString(drdRepEmployeeList.SelectedValue) != "")
+               {
+                   DgvRepSearchDetails.DataSource = Util.GetEmployeeDetails(drdRepEmployeeList.CurrentValue);
+                   DgvRepSearchDetails.DataBind();
+               }
+               else
+                   lblStatusMessage.Text = "Choose one employee to assign.";
+           }
+           catch (Exception ex)
+           {
+               //print error
+           }
        }
 
        protected void DgvRepSearchDetails_DataFiltering(object sender,

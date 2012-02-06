@@ -31,6 +31,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblStatusMessage.Text = "";
             if (!IsPostBack)
             {
                 FillEmployee();
@@ -98,8 +99,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
                 String selectedEmployee = drdEmployeeList.SelectedItem.Text;
                 atdrCtrl = GetControl();
                 DataTable dt = atdrCtrl.SelectEmployeeName(selectedEmployee);
-                DgvTempDepteHeadSearchDetails.DataSource = dt;
-                DgvTempDepteHeadSearchDetails.DataBind();
+                DgvTempDeptRepSearchDetails.DataSource = dt;
+                DgvTempDeptRepSearchDetails.DataBind();
             }
             catch (Exception ex)
             {
@@ -129,28 +130,61 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
         protected void btnRemove_Click(object sender, EventArgs e)
         {
             if (DgvCurrentAuthorizedPersonRep.Behaviors.Selection.SelectedRows.Count > 0)
+            {
                 foreach (GridRecord selectedRow in DgvCurrentAuthorizedPersonRep.Behaviors.Selection.SelectedRows)
                     remove_employeeID = selectedRow.Items.GetValue(0).ToString();
-            atdrCtrl = GetControl();
-            atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
-            DgvCurrentAuthorizedPersonRep.Rows.Clear();
+                atdrCtrl = GetControl();
+                atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
+                FillCurrentRepresentativeList();
+            }
+            else
+                lblStatusMessage.Text = "Please select employee to remove.";
         }
 
         protected void btnAssign_Click(object sender, EventArgs e)
         {
-            if (DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows.Count > 0)
-                foreach (GridRecord selected in DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows)
+            if (DgvTempDeptRepSearchDetails.Behaviors.Selection.SelectedRows.Count > 0)
+            {
+                DataTable dt = Util.GetCurrentTemporaryRepresentative();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    lblStatusMessage.Text = "Please remove current representative first.";
+                    return;
+                }
+                //DataRow[] dr = dt.Select(" RepresentativeName = '" + DgvTempDeptRepSearchDetails.Behaviors.Selection.SelectedRows[0].Items[1].ToString() + "'");
+                //if (dr.Length > 0)
+                //{
+                //    lblStatusMessage.Text = "Selected employee is already a representative";
+                //    return;
+                //}
+                foreach (GridRecord selected in DgvTempDeptRepSearchDetails.Behaviors.Selection.SelectedRows)
                     assign_employeeID = selected.Items.GetValue(0).ToString();
-            atdrCtrl = GetControl();
-            atdrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
-            DgvTempDepteHeadSearchDetails.ClearDataSource();
-            FillCurrentRepresentativeList();
+                atdrCtrl = GetControl();
+                atdrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
+                DgvTempDeptRepSearchDetails.ClearDataSource();
+                FillCurrentRepresentativeList();
+                drdEmployeeList.ClearSelection();
+            }
+            else
+                lblStatusMessage.Text = "Please select the employee to assign.";
         }
 
         protected void btnEmployee_Click(object sender, EventArgs e)
         {
-            DgvTempDepteHeadSearchDetails.DataSource = Util.GetEmployeeDetails(drdEmployeeList.CurrentValue);
-            DgvTempDepteHeadSearchDetails.DataBind();
+            try
+            {
+                if (Convert.ToString(drdEmployeeList.SelectedValue) != "")
+                {
+                    DgvTempDeptRepSearchDetails.DataSource = Util.GetEmployeeDetails(drdEmployeeList.CurrentValue);
+                    DgvTempDeptRepSearchDetails.DataBind();
+                }
+                else
+                    lblStatusMessage.Text = "Choose one employee to assign.";
+            }
+            catch (Exception ex)
+            {
+                //print something
+            }            
         }
 
         protected void DgvTempDepteHeadSearchDetails_DataFiltering(object sender,

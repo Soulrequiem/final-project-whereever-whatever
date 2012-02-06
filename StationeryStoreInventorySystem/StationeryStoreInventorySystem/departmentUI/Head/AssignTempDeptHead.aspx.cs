@@ -109,23 +109,44 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
         protected void btnAssign_Click(object sender, EventArgs e)
         {
-            if (DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows.Count > 0)
-                foreach (GridRecord select in DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows)
-                    assign_employeeID = select.Items.GetValue(0).ToString();
-            atdrCtrl = GetControl();
-            atdrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
-            DgvTempDepteHeadSearchDetails.ClearDataSource();
-            FillHeadList();
+                    if (DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows.Count > 0)
+                    {
+                        DataTable dt = Util.GetCurrentTemporaryHead();
+                        if (dt!= null && dt.Rows.Count > 0)
+                    {
+                        lblStatusMessage.Text = "Please remove current head first.";
+                        return;
+                    }
+                    //DataRow[] dr = dt.Select(" RepresentativeName = '" + DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows[0].Items[1].ToString() + "'");
+                    //if (dr.Length > 0)
+                    //{
+                    //    lblStatusMessage.Text = "Selected employee is already a representative";
+                    //    return;
+                    //}
+                        foreach (GridRecord select in DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows)
+                            assign_employeeID = select.Items.GetValue(0).ToString();
+                    atdrCtrl = GetControl();
+                    atdrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
+                    DgvTempDepteHeadSearchDetails.ClearDataSource();                    
+                    FillHeadList();
+                    drdHeadEmployeeList.ClearSelection();
+            }
+            else
+                lblStatusMessage.Text = "Please select the employee to assign.";
         }
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
             if (DgvCurrentAuthorizedPerson.Behaviors.Selection.SelectedRows.Count > 0)
+            {
                 foreach (GridRecord selectedRow in DgvCurrentAuthorizedPerson.Behaviors.Selection.SelectedRows)
                     remove_employeeID = selectedRow.Items.GetValue(0).ToString();
-            atdrCtrl = GetControl();
-            atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
-            DgvCurrentAuthorizedPerson.ClearDataSource();
+                atdrCtrl = GetControl();
+                atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
+                FillHeadList();
+            }
+            else
+                lblStatusMessage.Text = "Please select employee to remove.";
         }
 
         //protected void DgvTempDepteHeadSearchDetails_RowSelectionChanged(object sender, 
@@ -142,8 +163,20 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 
         protected void btnEmployee_Click(object sender, EventArgs e)
         {
-            DgvTempDepteHeadSearchDetails.DataSource = Util.GetEmployeeDetails(drdHeadEmployeeList.CurrentValue);
-            DgvTempDepteHeadSearchDetails.DataBind();
+            try
+            {
+                if (Convert.ToString(drdHeadEmployeeList.SelectedValue) != "")
+                {
+                    DgvTempDepteHeadSearchDetails.DataSource = Util.GetEmployeeDetails(drdHeadEmployeeList.CurrentValue);
+                    DgvTempDepteHeadSearchDetails.DataBind();
+                }
+                else
+                    lblStatusMessage.Text = "Choose one employee to assign.";
+            }
+            catch (Exception ex)
+            {
+                //print something
+            }
         }
 
         protected void DgvTempDepteHeadSearchDetails_DataFiltering(object sender,
