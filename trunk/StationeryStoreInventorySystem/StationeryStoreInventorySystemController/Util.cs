@@ -314,12 +314,13 @@ namespace StationeryStoreInventorySystemController
             Employee employee = new Employee();
             employee.Id = employeeId;
             employee = employeeBroker.GetEmployee(employee);
-            Role newRole = new Role();
-            newRole = employeeBroker.GetRole(employee.Role);
-            //employee.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
-            newRole.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
 
-            status = employeeBroker.Update(newRole);
+            Role assignRole = new Role();
+            assignRole.Id = Converter.objToInt(role);
+            assignRole = employeeBroker.GetRole(assignRole);
+            employee.Role = assignRole;
+
+            status = employeeBroker.Update(employee);
 
             return status;
         }
@@ -362,8 +363,10 @@ namespace StationeryStoreInventorySystemController
             //foreach (Employee emp in lEmployee)
             //{
                 DataRow dr = dtEmployee.NewRow();
-                dr[0] = lEmployee.Id;
-                dr[1] = lEmployee.Name;
+                dr["EmployeeID"] = lEmployee.Id;
+                dr["EmployeeName"] = lEmployee.Name;
+                dr["Designation"] = SystemStoreInventorySystemUtil.Converter.GetDesignationText(SystemStoreInventorySystemUtil.Converter.objToDesignation(lEmployee.Designation));
+                dr["JoiningDate"] = SystemStoreInventorySystemUtil.Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, lEmployee.CreatedDate);
                 dtEmployee.Rows.Add(dr);
             //}
             return dtEmployee;
