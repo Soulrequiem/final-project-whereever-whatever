@@ -131,7 +131,8 @@ namespace StationeryStoreInventorySystemController.storeController
 
                 if (stockAdjustment != null)
                 {
-                    foreach (DiscrepancyDetail discrepancyDetail in stockAdjustment.Discrepancy.DiscrepancyDetails)
+                    List<DiscrepancyDetail> showList = GetList(stockAdjustment.Discrepancy.DiscrepancyDetails.ToList());
+                    foreach (DiscrepancyDetail discrepancyDetail in showList)
                     {
                         dr = dtDetail.NewRow();
                         dr[detailColumnName[0]] = discrepancyDetail.Item.Id;
@@ -143,6 +144,36 @@ namespace StationeryStoreInventorySystemController.storeController
 
                 return dtDetail;
             }
+        }
+
+        private List<DiscrepancyDetail> GetList(List<DiscrepancyDetail> list)
+        {
+            List<DiscrepancyDetail> supervisorDetails = new List<DiscrepancyDetail>();
+            List<DiscrepancyDetail> managerDetails = new List<DiscrepancyDetail>();
+
+            foreach (DiscrepancyDetail dd in list)
+            {
+                if (dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR))
+                {
+                    supervisorDetails.Add(dd);
+                }
+                else
+                {
+                    managerDetails.Add(dd);
+                }
+            }
+
+            List<DiscrepancyDetail> currentList;
+            if (currentEmployee.Role.Id == Converter.objToInt(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR))
+            {
+                currentList = supervisorDetails;
+            }
+            else
+            {
+                currentList = managerDetails;
+            }
+
+            return currentList;
         }
 
         public Constants.ACTION_STATUS SelectStockAdjustmentVoucher(string stockAdjustmentId)
