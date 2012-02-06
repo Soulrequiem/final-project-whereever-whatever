@@ -120,12 +120,15 @@ namespace StationeryStoreInventorySystemController.departmentController
 
                     foreach (RequisitionCollectionDetail requisitionCollectionDetail in requisitionCollection.RequisitionCollectionDetails)
                     {
-                        dr = dtRequisitionDetailList.NewRow();
-                        dr[requisitionDetailColumnName[0]] = requisitionCollectionDetail.Requisition.Id;
-                        dr[requisitionDetailColumnName[1]] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, requisitionCollectionDetail.Requisition.CreatedDate);
-                        dr[requisitionDetailColumnName[2]] = requisitionCollectionDetail.Requisition.CreatedBy.Name;
-                        dr[requisitionDetailColumnName[3]] = Converter.GetRequisitionStatusText(Converter.objToRequisitionStatus(requisitionCollectionDetail.Requisition.Status));
-                        dtRequisitionDetailList.Rows.Add(dr);
+                        if (requisitionCollectionDetail.Requisition.Status == (int)Constants.REQUISITION_STATUS.SUBMITTED)
+                        {
+                            dr = dtRequisitionDetailList.NewRow();
+                            dr[requisitionDetailColumnName[0]] = requisitionCollectionDetail.Requisition.Id;
+                            dr[requisitionDetailColumnName[1]] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, requisitionCollectionDetail.Requisition.CreatedDate);
+                            dr[requisitionDetailColumnName[2]] = requisitionCollectionDetail.Requisition.CreatedBy.Name;
+                            dr[requisitionDetailColumnName[3]] = Converter.GetRequisitionStatusText(Converter.objToRequisitionStatus(requisitionCollectionDetail.Requisition.Status));
+                            dtRequisitionDetailList.Rows.Add(dr);
+                        }
                     }
                 }
 
