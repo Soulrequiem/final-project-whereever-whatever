@@ -80,21 +80,21 @@
                         <ig:BoundDataField DataFieldName="status" Key="status" Width="110px">
                             <Header Text="status" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="remainingQty" Key="remainingQty" 
+                        <ig:BoundDataField DataFieldName="remainingQty" Key="remainingQty" Hidden="True"
                             Width="100px">
                             <Header Text="Remaining Qty" />
                         </ig:BoundDataField>
-                        <%--<ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
+                        <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
                             <Header Text="Remarks" />
-                        </ig:BoundDataField>--%>
-                        <ig:TemplateDataField  Key="remarks" Width="150px" Hidden="True">
+                        </ig:BoundDataField>
+                        <%--<ig:TemplateDataField  Key="remarks" Width="150px" Hidden="True">
                             <ItemTemplate>
                                 <ig:WebTextEditor ID="remarks" runat="server" Width="120px"
                                 Text='<%# Eval("remarks") %>'>
                                 </ig:WebTextEditor>
                             </ItemTemplate>
                             <Header Text="Remarks" />
-                        </ig:TemplateDataField>
+                        </ig:TemplateDataField>--%>
                         
                     </Columns>
                         <Behaviors>
