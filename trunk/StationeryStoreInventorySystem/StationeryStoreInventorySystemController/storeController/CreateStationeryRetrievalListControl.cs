@@ -48,7 +48,7 @@ namespace StationeryStoreInventorySystemController.storeController
             employeeBroker = new EmployeeBroker(inventory);
 
             //retrievalList = retrievalBroker.GetAllRetrieval();
-            requisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(Util.GetEmployee(employeeBroker).Department, Constants.COLLECTION_STATUS.NEED_TO_COLLECT);
+            requisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(Constants.COLLECTION_STATUS.NEED_TO_RETRIEVE);
 
             collectionDataColumn = new DataColumn[] { new DataColumn(collectionColumnName[0]),
                                                       new DataColumn(collectionColumnName[1]),
@@ -84,42 +84,6 @@ namespace StationeryStoreInventorySystemController.storeController
             }
         }
 
-        //public DataTable RetrievalList
-        //{
-        //    get 
-        //    {
-        //        if (retrievalDataTable == null)
-        //        {
-        //            retrievalDataTable = new DataTable();
-        //            retrievalDataTable.Columns.AddRange(retrievalDataColumn);
-        //        }
-        //        else
-        //        {
-        //            retrievalDataTable.Rows.Clear();
-        //        }
-
-        //        return retrievalDataTable;
-        //    }
-        //}
-
-        //public Constants.ACTION_STATUS SelectRetrieval(int retrievalId)
-        //{
-        //    Constants.ACTION_STATUS selectStatus = Constants.ACTION_STATUS.UNKNOWN;
-
-        //    retrieval = retrievalList.Find(delegate(Retrieval r) { return r.Id == retrievalId; });
-
-        //    if (retrieval != null)
-        //    {
-        //        selectStatus = Constants.ACTION_STATUS.SUCCESS;
-        //    }
-        //    else
-        //    {
-        //        selectStatus = Constants.ACTION_STATUS.FAIL;
-        //    }
-
-        //    return selectStatus;
-        //}
-
         public DataTable RetrievalDetailList
         {
             get
@@ -145,6 +109,23 @@ namespace StationeryStoreInventorySystemController.storeController
 
                 return retrievalDetailDataTable;
             }
+        }
+
+        public object GetSelectedRequisitionCollection(List<int> selectedIndex)
+        {
+            List<RequisitionCollection> requisitionCollectionSelectedList = null;
+
+            if (selectedIndex.Count > 0)
+            {
+                requisitionCollectionSelectedList = new List<RequisitionCollection>();
+
+                foreach (int index in selectedIndex)
+                {
+                    requisitionCollectionSelectedList.Add(requisitionCollectionList[index]);
+                }
+            }
+
+            return requisitionCollectionSelectedList;
         }
     }
 }
