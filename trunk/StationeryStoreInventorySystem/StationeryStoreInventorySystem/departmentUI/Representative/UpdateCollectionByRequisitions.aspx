@@ -88,8 +88,7 @@
                             </td>
                             <td width="100px">
                                 <asp:Label CssClass="DefaultLabelstyle" 
-                                    ID="lblCollectionID" runat="server" 
-                                    Text="C0019"/>
+                                    ID="lblCollectionID" runat="server"/>
                             </td>
                             <td>
                                 <asp:Label CssClass="DefaultLabelstyle" 
@@ -98,8 +97,7 @@
                             </td>
                             <td>
                                 <asp:Label CssClass="DefaultLabelstyle" 
-                                    ID="lblCollectionPoint" runat="server" 
-                                    Text="University Hospital"/>&nbsp;&nbsp;
+                                    ID="lblCollectionPoint" runat="server"/>&nbsp;&nbsp;
                             </td>
                         </tr>
                         <tr>
@@ -110,8 +108,7 @@
                             </td>
                             <td colspan="3">
                                 <asp:Label CssClass="DefaultLabelstyle" 
-                                    ID="lblDateTime" runat="server" 
-                                    Text="Monday 20-01-2012 11.35 AM"/>
+                                    ID="lblDateTime" runat="server"/>
                             </td>
                             <td></td>
                             <td></td>
@@ -144,7 +141,7 @@
                             <ItemTemplate>
                             <asp:HyperLink ID="TripIDLink" runat="server" 
                                 Text='Modify Delivered Quantity'
-                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                NavigateUrl='<%# Eval("RequisitionID","~/commonUI/RequisitionDetails.aspx?ReqID={0}") %>'>
                                 </asp:HyperLink>
                         </ItemTemplate>
                         </ig:TemplateDataField>
