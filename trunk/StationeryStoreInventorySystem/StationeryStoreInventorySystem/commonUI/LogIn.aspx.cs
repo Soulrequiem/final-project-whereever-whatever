@@ -63,7 +63,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         Response.Redirect("~/storeUI/Clerk/ViewStationeryRetrievalList.aspx");
                     else if(UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER ||
                         UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
-                        Response.Redirect("~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx");
+                        Response.Redirect("~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx");
                     else if(UserRole == (int)Constants.EMPLOYEE_ROLE.ADMIN)
                         Response.Redirect("~/commonUI/Report.aspx");
                 }
