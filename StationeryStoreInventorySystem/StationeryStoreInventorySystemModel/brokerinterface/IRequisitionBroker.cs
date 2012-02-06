@@ -15,6 +15,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus);
         List<Requisition> GetAllRequisitionByEmployee(int employeeID);
         List<Requisition> GetAllRequisition(Constants.REQUISITION_STATUS requisitionStatus, Department department);
+        List<Requisition> GetAllRequisition(Department department);
        
         //Constants.DB_STATUS Insert(Requisition requisition,Boolean isSaved);
         //Constants.DB_STATUS Update(Boolean isSaved);
