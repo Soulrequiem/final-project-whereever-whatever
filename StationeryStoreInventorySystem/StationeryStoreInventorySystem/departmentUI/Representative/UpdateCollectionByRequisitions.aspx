@@ -22,7 +22,9 @@
                         Width="700px" AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        oninitializerow="dgvCollectionList_InitializeRow">
+                        oninitializerow="dgvCollectionList_InitializeRow" 
+                        ondatafiltering="dgvCollectionList_DataFiltering" 
+                        onpageindexchanged="dgvCollectionList_PageIndexChanged">
                     <Columns>
                         <%--<ig:TemplateDataField Key="CollectionID" VisibleIndex="0">
                             <Header Text="Collection ID" />
@@ -45,10 +47,10 @@
                         <ig:BoundDataField DataFieldName="CollectionDateTime" Key="CollectionDateTime">
                             <Header Text="Collection Date/Time" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus">
+                        <%--<ig:BoundDataField DataFieldName="CollectionStatus" Key="CollectionStatus">
                             <Header Text="Collection Status" />
-                        </ig:BoundDataField>
-                        <ig:TemplateDataField Key="Status">
+                        </ig:BoundDataField>--%>
+                        <%--<ig:TemplateDataField Key="Status">
                             <ItemTemplate>
                             <asp:HyperLink ID="Status" runat="server" 
                                 Text='Update Status'
@@ -56,7 +58,7 @@
                                 </asp:HyperLink>
                                 <Header Text="" />
                         </ItemTemplate>
-                        </ig:TemplateDataField>
+                        </ig:TemplateDataField>--%>
                         <%--<ig:BoundDataField DataFieldName="Status" Key="Status">
                             <Header Text="Status" />
                         </ig:BoundDataField>--%>
@@ -121,7 +123,9 @@
                 <ig:WebDataGrid ID="dgvRequisitions" runat="server" Height="300px" Width="700px" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue">
+                        ItemCssClass="DefaultGridViewStyle" StyleSetName="Office2010Blue" 
+                        ondatafiltering="dgvRequisitions_DataFiltering" 
+                        onpageindexchanged="dgvRequisitions_PageIndexChanged">
                     <Columns>
                         <ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                             Width="80px">
@@ -134,7 +138,7 @@
                         <ig:BoundDataField DataFieldName="RequisitionBy" Key="RequisitionBy">
                             <Header Text="Requisition By" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="RequisitionStatus" Key="RequisitionStatus">
+                        <ig:BoundDataField DataFieldName="RequisitionStatus" Key="RequisitionStatus" Hidden="true">
                             <Header Text="Requisition Status" />
                         </ig:BoundDataField>
                         <ig:TemplateDataField Key="ModifyRequisition">
