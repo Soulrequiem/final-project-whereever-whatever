@@ -31,7 +31,7 @@ namespace StationeryStoreInventorySystemController.storeController
         private Discrepancy discrepancy;
 
         private string[] listColumnName = { "DiscrepancyId", "CreatedBy", "CreatedDate", "TotalQty" };
-        private string[] detailColumnName = { "ItemNo", "ItemDescription", "Quantity", "PricePerItem", "Reason" };
+        private string[] detailColumnName = { "ItemNo", "ItemDescription", "Quantity", "TotalPrice", "Reason" };
 
         private DataColumn[] listColumn;
         private DataColumn[] detailColumn;
@@ -267,7 +267,7 @@ namespace StationeryStoreInventorySystemController.storeController
                 drr[detailColumnName[0]] = temp.Item.Id;
                 drr[detailColumnName[1]] = temp.Item.Description;
                 drr[detailColumnName[2]] = temp.Qty;
-                drr[detailColumnName[3]] = temp.Item.Cost;
+                drr[detailColumnName[3]] = temp.Qty * 10;//temp.Item.Cost;
                 drr[detailColumnName[4]] = temp.Remarks;
                 dtt.Rows.Add(drr);
             }
