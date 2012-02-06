@@ -48,10 +48,10 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             temporaryDepartmentRepresentative = new Employee();
             temporaryDepartmentRepresentative.Role = new Role();
-            temporaryDepartmentRepresentative.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE);
-            temporaryDepartmentRepresentative.Department = currentEmployee.Department;
+          //  temporaryDepartmentRepresentative.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE);
+          //  temporaryDepartmentRepresentative.Department = currentEmployee.Department;
 
-            temporaryDepartmentRepresentative = employeeBroker.GetEmployee(temporaryDepartmentRepresentative);
+          //  temporaryDepartmentRepresentative = employeeBroker.GetEmployee(temporaryDepartmentRepresentative);
         }
 
         public DataTable TemporaryDepartmentRepresentative
@@ -105,7 +105,8 @@ namespace StationeryStoreInventorySystemController.departmentController
         public Constants.ACTION_STATUS SelectRemove(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            
+            //temporaryDepartmentRepresentative.Id = employeeId;
+            //temporaryDepartmentRepresentative = employeeBroker.GetEmployee(temporaryDepartmentRepresentative);
             if (Util.Assign(employeeBroker, employeeId, Constants.EMPLOYEE_ROLE.EMPLOYEE) == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
@@ -163,7 +164,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         public Constants.ACTION_STATUS SelectAssign(int employeeId)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-            
+
             if (Util.Assign(employeeBroker, employeeId, Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE) == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else

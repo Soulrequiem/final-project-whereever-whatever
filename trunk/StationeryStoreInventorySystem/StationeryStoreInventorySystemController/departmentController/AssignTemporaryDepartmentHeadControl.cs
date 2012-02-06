@@ -27,7 +27,8 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         private DataTable dt;
         private DataRow dr;
-
+        private string[] employeeColumnName = { "EmployeeID", "EmployeeName", "Designation", "JoiningDate" };
+        private DataColumn[] employeeDataColumn;
         /// <summary>
         ///     To show the Current Temporary Department Head
         ///     Created By: SanLaPyaye
@@ -133,14 +134,15 @@ namespace StationeryStoreInventorySystemController.departmentController
             emp = employeeBroker.GetEmployee(emp);
 
             dt = new DataTable();
+            dt.Columns.AddRange(employeeDataColumn);
 
             if (emp != null)
             {
                 dr = dt.NewRow();
-                dr["employeeId"] = emp.Id;
-                dr["employeeName"] = emp.Name;
-                //dr["designation"] = Converter.GetDesignationText(Converter.objToDesignation(emp.Designation));
-                dr["joiningDate"] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, emp.CreatedDate);
+                dr[employeeColumnName[0]] = emp.Id;
+                dr[employeeColumnName[1]] = emp.Name;
+                dr[employeeColumnName[2]] = Converter.GetDesignationText(Converter.objToDesignation(emp.Designation));
+                dr[employeeColumnName[3]] = emp.CreatedDate.ToString();
                 dt.Rows.Add(dr);
             }
 
