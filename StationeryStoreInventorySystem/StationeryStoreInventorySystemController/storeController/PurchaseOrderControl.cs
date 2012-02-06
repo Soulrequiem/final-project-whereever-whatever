@@ -78,7 +78,7 @@ namespace StationeryStoreInventorySystemController.storeController
             
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
-            poDetailList = new List<PurchaseOrder>();
+            poDetailList = new List<PurchaseOrderDetail>();
             //purchaseOrderDetailList = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
             
             // need to load reorder quantity
@@ -123,91 +123,99 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Item item = Util.GetItem(itemBroker, itemDescription);
             return item.Id;
-
+            
         }
 
-        public Constants.ACTION_STATUS SelectAdd(string itemId)
+        private List<Item> GetReorderItemList()
         {
-            Constants.ACTION_STATUS addStatus = Constants.ACTION_STATUS.UNKNOWN;
+            List<Item> itemList = new List<Item>();
+
+            return itemList;
+        }
+
+        //public Constants.ACTION_STATUS SelectAdd()
+        //{
+        //    Constants.ACTION_STATUS addStatus = Constants.ACTION_STATUS.UNKNOWN;
             
-            bool isFound = false;
+        //    bool isFound = false;
 
-            foreach (PurchaseOrderDetail purchaseOrderDetailTemp in purchaseOrderDetailList)
-            {
-                if (purchaseOrderDetailTemp.Item.Id == itemId)
-                {
-                    isFound = true;
-                }
-            }
+        //    foreach (PurchaseOrderDetail purchaseOrderDetailTemp in purchaseOrderDetailList)
+        //    {
+        //        if (purchaseOrderDetailTemp.Item.Id == itemId)
+        //        {
+        //            isFound = true;
+        //        }
+        //    }
 
-            if (!isFound)
-            {
-                PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
-                purchaseOrderDetail.Id = purchaseOrderBroker.GetPurchaseOrderDetailId();
-                Item item = new Item();
-                item.Id = itemId;
-                purchaseOrderDetail.Item = itemBroker.GetItem(item);
+        //    if (!isFound)
+        //    {
+        //        PurchaseOrderDetail purchaseOrderDetail = new PurchaseOrderDetail();
+        //        purchaseOrderDetail.Id = purchaseOrderBroker.GetPurchaseOrderDetailId();
+        //        Item item = new Item();
+        //        item.Id = itemId;
+        //        purchaseOrderDetail.Item = itemBroker.GetItem(item);
 
-                purchaseOrderDetailList.Add(purchaseOrderDetail);
+        //        purchaseOrderDetailList.Add(purchaseOrderDetail);
 
-                addStatus = Constants.ACTION_STATUS.SUCCESS;
-            }
-            else
-            {
-                addStatus = Constants.ACTION_STATUS.FAIL;
-            }
+        //        addStatus = Constants.ACTION_STATUS.SUCCESS;
+        //    }
+        //    else
+        //    {
+        //        addStatus = Constants.ACTION_STATUS.FAIL;
+        //    }
 
-            return addStatus;
+        //    return addStatus;
            
-        }
+        //}
 
-        public Constants.ACTION_STATUS SelectRemove(int index)
-        {
-            Constants.ACTION_STATUS removeStatus = Constants.ACTION_STATUS.UNKNOWN;
+        //public Constants.ACTION_STATUS SelectRemove(int index)
+        //{
+        //    Constants.ACTION_STATUS removeStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            if (purchaseOrderDetailList.Count >= index)
-            {
-                PurchaseOrderDetail purchaseOrderDetail = purchaseOrderDetailList.ElementAt(index - 1);
+        //    if (purchaseOrderDetailList.Count >= index)
+        //    {
+        //        PurchaseOrderDetail purchaseOrderDetail = purchaseOrderDetailList.ElementAt(index - 1);
 
-                purchaseOrderDetailList.Remove(purchaseOrderDetail);
-                removeStatus = Constants.ACTION_STATUS.SUCCESS;
-            }
-            else
-            {
-                removeStatus = Constants.ACTION_STATUS.FAIL;
-            }
+        //        purchaseOrderDetailList.Remove(purchaseOrderDetail);
+        //        removeStatus = Constants.ACTION_STATUS.SUCCESS;
+        //    }
+        //    else
+        //    {
+        //        removeStatus = Constants.ACTION_STATUS.FAIL;
+        //    }
             
-            return removeStatus;
+        //    return removeStatus;
         }
 
-        public Constants.ACTION_STATUS SelectCreate()
-        {
-            Constants.ACTION_STATUS createStatus = Constants.ACTION_STATUS.UNKNOWN;
+        //public Constants.ACTION_STATUS SelectCreate()
+        //{
+        //    Constants.ACTION_STATUS createStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            purchaseOrder.PurchaseOrderDetails = purchaseOrderDetailList;
+        //    purchaseOrder.PurchaseOrderDetails = purchaseOrderDetailList;
 
-            if (purchaseOrderBroker.Insert(purchaseOrder) == Constants.DB_STATUS.SUCCESSFULL)
-                createStatus = Constants.ACTION_STATUS.SUCCESS;
-            else
-                createStatus = Constants.ACTION_STATUS.FAIL;
-            return createStatus;
-        }
+        //    if (purchaseOrderBroker.Insert(purchaseOrder) == Constants.DB_STATUS.SUCCESSFULL)
+        //        createStatus = Constants.ACTION_STATUS.SUCCESS;
+        //    else
+        //        createStatus = Constants.ACTION_STATUS.FAIL;
+        //    return createStatus;
+        //}
 
-        public Constants.ACTION_STATUS SelectCancel()
-        {
-            Constants.ACTION_STATUS cancelStatus = Constants.ACTION_STATUS.UNKNOWN;
+        //public Constants.ACTION_STATUS SelectCancel()
+        //{
+        //    Constants.ACTION_STATUS cancelStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            if (purchaseOrderDetailList.Count > 0)
-            {
-                purchaseOrderDetailList = null;
-                cancelStatus = Constants.ACTION_STATUS.SUCCESS;
-            }
-            else
-            {
-                cancelStatus = Constants.ACTION_STATUS.FAIL;
-            }
-            return cancelStatus;
-        }
+        //    if (purchaseOrderDetailList.Count > 0)
+        //    {
+        //        purchaseOrderDetailList = null;
+        //        cancelStatus = Constants.ACTION_STATUS.SUCCESS;
+        //    }
+        //    else
+        //    {
+        //        cancelStatus = Constants.ACTION_STATUS.FAIL;
+        //    }
+        //    return cancelStatus;
+        //}
 
     }
-}
+
+
