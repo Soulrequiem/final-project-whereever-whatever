@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using StationeryStoreInventorySystemController;
 using StationeryStoreInventorySystemController.storeController;
 using SystemStoreInventorySystemUtil;
 
@@ -30,6 +31,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //Response.Write(Util.CheckAdjustment());
             if (!IsPostBack)
             {
                 if (Request.QueryString["discrepancyId"] == null)
