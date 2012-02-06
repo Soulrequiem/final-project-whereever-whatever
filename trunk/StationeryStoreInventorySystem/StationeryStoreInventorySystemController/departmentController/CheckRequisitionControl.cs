@@ -21,7 +21,7 @@ namespace StationeryStoreInventorySystemController.departmentController
     public class CheckRequisitionControl
     {
 
-       
+
         private IRequisitionBroker requisitionBroker;
         private IItemBroker itemBroker;//addded by thazin win
         private IEmployeeBroker employeeBroker;
@@ -46,11 +46,11 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             requisitionBroker = new RequisitionBroker(inventory);
             employeeBroker = new EmployeeBroker(inventory);
-           // itemBroker = new ItemBroker(inventory);
+            // itemBroker = new ItemBroker(inventory);
 
             //pendingRequisitionList = requisitionBroker.GetAllRequisition(Constants.REQUISITION_STATUS.PENDING);
 
-           // pendingRequisitionList = requisitionBroker.GetAllRequisitionByStatus(Util.GetEmployee().Id);
+            // pendingRequisitionList = requisitionBroker.GetAllRequisitionByStatus(Util.GetEmployee().Id);
 
             pendingRequisitionList = requisitionBroker.GetAllRequisitionByEmployee(Util.GetEmployee().Id);
 
@@ -59,7 +59,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                                             new DataColumn(columnName[2]),
                                             new DataColumn(columnName[3]),
                                             new DataColumn(columnName[4]) };
-    
+
             //requisitionList = new System.Data.Objects.DataClasses.EntityCollection<Requisition>();
             //requisitionList = requisitionBroker.GetAllRequisition();
         }
@@ -87,8 +87,8 @@ namespace StationeryStoreInventorySystemController.departmentController
                     dr = dtRequisition.NewRow();
                     dr[columnName[0]] = r.Id;
                     dr[columnName[1]] = Convert.ToDateTime(r.CreatedDate);
-                   // dr[columnName[2]] = r.CreatedBy.Name;
-                    dr[columnName[2]] = r.Status;
+                    // dr[columnName[2]] = r.CreatedBy.Name;
+                    dr[columnName[2]] =  r.Status;
 
 
                     //List<RequisitionDetail> requisitionDetailList=requisitionBroker.GetRequisitionDetail(r.RequisitionDetails);
@@ -96,10 +96,10 @@ namespace StationeryStoreInventorySystemController.departmentController
                     {
                         qty += reqDetail.Qty;
                         if (!reqDetail.DeliveredQty.Equals(null))
-                        deliveredQty += Converter.objToInt(reqDetail.DeliveredQty.Value) == -1 ? 0 : reqDetail.DeliveredQty.Value;
+                            deliveredQty += Converter.objToInt(reqDetail.DeliveredQty.Value) == -1 ? 0 : reqDetail.DeliveredQty.Value;
                     }
                     dr[columnName[3]] = qty - deliveredQty;
-                    dr[columnName[3]] = r.Remarks;
+                    dr[columnName[4]] = r.Remarks;
 
                     dtRequisition.Rows.Add(dr);
 
@@ -142,25 +142,25 @@ namespace StationeryStoreInventorySystemController.departmentController
                 requisitionDetail.Requisition = temp;
                 //Requisition resultRequisition = requisitionBroker.GetRequisition(temp);
                 RequisitionDetail resultRequisitionDetail = requisitionBroker.GetRequisitionDetail(requisitionDetail);
-                
-                    dr = dt.NewRow();
-                    dr["requisitionID"] = temp.Id;
-                    dr["requisitionDate"] = temp.CreatedDate;
-                    //dr["status"] = Converter.GetRequisitionStatusText(Converter.objToRequisitionStatus(temp.Status));
-                    dr["status"] = temp.Status;
+
+                dr = dt.NewRow();
+                dr["requisitionID"] = temp.Id;
+                dr["requisitionDate"] = temp.CreatedDate;
+                //dr["status"] = Converter.GetRequisitionStatusText(Converter.objToRequisitionStatus(temp.Status));
+                dr["status"] = temp.Status;
 
 
-                    dr["status"] = Enum.GetName(typeof(Constants.REQUISITION_STATUS), temp.Status); 
+                dr["status"] = Enum.GetName(typeof(Constants.REQUISITION_STATUS), temp.Status);
 
-                    dr["remainingQty"] = resultRequisitionDetail.Qty - requisitionDetail.DeliveredQty;
-                    dr["remarks"] = temp.Remarks;
-                    dt.Rows.Add(dr);
+                dr["remainingQty"] = resultRequisitionDetail.Qty - requisitionDetail.DeliveredQty;
+                dr["remarks"] = temp.Remarks;
+                dt.Rows.Add(dr);
                 //dr["requsitionId"] = temp.Id;
                 //dr["requisitionDate"] = temp.CreatedDate;
                 //dr["status"] = temp.Status; 
                 //dr["remainingQty"] = resultRequisitionDetail.Qty-requisitionDetail.DeliveredQty;
                 //dr["remarks"] = temp.Remarks;
-              
+
             }
             return dt;
         }
@@ -225,42 +225,42 @@ namespace StationeryStoreInventorySystemController.departmentController
 
             return selectStatus;
 
-          //  dt = new DataTable();
-          //  dt.Columns.Add("itemNo");
-          //  dt.Columns.Add("itemDescription");
-          //  dt.Columns.Add("requiredQty");
-          //  dt.Columns.Add("receivedQty");
-          //  dt.Columns.Add("remainingQty");
+            //  dt = new DataTable();
+            //  dt.Columns.Add("itemNo");
+            //  dt.Columns.Add("itemDescription");
+            //  dt.Columns.Add("requiredQty");
+            //  dt.Columns.Add("receivedQty");
+            //  dt.Columns.Add("remainingQty");
 
-          //  List<RequisitionDetail> requistionDetailList;
-          //  requisition = new Requisition();
-          //  itemBroker = new ItemBroker(inventory);
-          //  requisition.Id = requisitionId;
-          //  requisitionDetail=new RequisitionDetail();
-          //  requisitionDetail.Requisition=requisition;
-          //  requistionDetailList = requisitionBroker.GetAllRequisitionDetailByObj(requisitionDetail);
-           
-          //foreach (RequisitionDetail temp in requistionDetailList)
-          //  {
-          //      dr = dt.NewRow();
+            //  List<RequisitionDetail> requistionDetailList;
+            //  requisition = new Requisition();
+            //  itemBroker = new ItemBroker(inventory);
+            //  requisition.Id = requisitionId;
+            //  requisitionDetail=new RequisitionDetail();
+            //  requisitionDetail.Requisition=requisition;
+            //  requistionDetailList = requisitionBroker.GetAllRequisitionDetailByObj(requisitionDetail);
 
-          //      Item item = new Item();
-          //      item =temp.Item ;
-          //      item = itemBroker.GetItem(item);
-          //      dr["itemNo"] = item.Id;
-          //      dr["itemDescription"] = item.Description;
-          //      dr["requiredQty"] = temp.Qty;
-          //      dr["receivedQty"] = temp.DeliveredQty.HasValue ? temp.DeliveredQty.Value : 0;
-          //      if (temp.DeliveredQty.Equals(null))
-          //          dr["remainingQty"] = 0;
-          //      else
-          //          dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
-          //      dt.Rows.Add(dr);
-          //  }
-          //  return dt;
+            //foreach (RequisitionDetail temp in requistionDetailList)
+            //  {
+            //      dr = dt.NewRow();
+
+            //      Item item = new Item();
+            //      item =temp.Item ;
+            //      item = itemBroker.GetItem(item);
+            //      dr["itemNo"] = item.Id;
+            //      dr["itemDescription"] = item.Description;
+            //      dr["requiredQty"] = temp.Qty;
+            //      dr["receivedQty"] = temp.DeliveredQty.HasValue ? temp.DeliveredQty.Value : 0;
+            //      if (temp.DeliveredQty.Equals(null))
+            //          dr["remainingQty"] = 0;
+            //      else
+            //          dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
+            //      dt.Rows.Add(dr);
+            //  }
+            //  return dt;
         }
         /// <summary>
-         ///To withdraw the requisition
+        ///To withdraw the requisition
         ///     Created By:Thazin Win
         ///     Created Date:03-02-2012
         ///     Modified By:
@@ -278,7 +278,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         private Constants.ACTION_STATUS SelectActionRequisition(Dictionary<string, string> remarks, Constants.REQUISITION_STATUS requisitionStatus)
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
-           // employeeBroker = new EmployeeBroker(inventory);
+            // employeeBroker = new EmployeeBroker(inventory);
             if (remarks.Count > 0)
             {
                 status = Constants.ACTION_STATUS.SUCCESS;
@@ -290,7 +290,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
                 foreach (string key in remarks.Keys)
                 {
-                   
+
                     requisition = pendingRequisitionList.ElementAt(Converter.objToInt(key));
                     requisition.Status = Converter.objToInt(requisitionStatus);
                     requisition.Remarks = remarks[key];
@@ -365,7 +365,7 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         //}
 
-     
+
         /// <summary>
         ///     Refresh requisition list after withdraw one requisition
         ///     Created By:JinChengCheng
@@ -379,7 +379,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// </summary>
         /// <param name="requisitionId"></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public Constants.ACTION_STATUS SelectWithdraw(string requisitionId,string remarks)
+        public Constants.ACTION_STATUS SelectWithdraw(string requisitionId, string remarks)
         {
             Constants.REQUISITION_STATUS requisitionStatus = Constants.REQUISITION_STATUS.WITHDRAW;
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
@@ -391,10 +391,10 @@ namespace StationeryStoreInventorySystemController.departmentController
             requisition = new Requisition();
             requisition.Id = requisitionId;
             requisition = requisitionBroker.GetRequisition(requisition);
-            requisition.Remarks = (remarks==null? String.Empty: remarks);
+            requisition.Remarks = (remarks == null ? String.Empty : remarks);
             //requisition.ApprovedBy = employee;
             //requisition.ApprovedDate = DateTime.Now;
-           requisition.Status = Converter.objToInt(requisitionStatus);
+            requisition.Status = Converter.objToInt(requisitionStatus);
             if (requisitionBroker.Update(requisition) == Constants.DB_STATUS.FAILED)
             {
                 status = Constants.ACTION_STATUS.FAIL;
