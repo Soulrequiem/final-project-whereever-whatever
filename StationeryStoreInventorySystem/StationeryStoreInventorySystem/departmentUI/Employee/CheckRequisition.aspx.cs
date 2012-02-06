@@ -18,7 +18,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 {
     public partial class CheckRequisition : System.Web.UI.Page
     {
-        CheckRequisitionControl checkRequisitionControlObj;
+        private CheckRequisitionControl checkRequisitionControlObj;
         private DataTable dt;
         private DataRow dr;
         private static readonly string sessionKey = "CheckReq";
@@ -50,6 +50,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 {
                     checkRequisitionControlObj = GetControl();
                     StationeryStoreInventorySystemController.Util.PutSession(sessionKey, checkRequisitionControlObj);
+
+
                     //checkRequisitionControlObj = new CheckRequisitionControl();
                     //Util.PutSession(sessionKey, checkRequisitionControlObj);
                     //FillRequisitions();
@@ -59,9 +61,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                     checkRequisitionControlObj = (CheckRequisitionControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
                     //checkRequisitionControlObj = (CheckRequisitionControl)Util.GetSession(sessionKey);
 
-                    FillRequisitionDetails(checkRequisitionControlObj.SelectRequisitionID(SystemStoreInventorySystemUtil.Converter.objToString(Request.QueryString["RequisitionIDIndex"])));
-                    Util.PutSession(sessionKey, checkRequisitionControlObj);
-                    
+                    checkRequisitionControlObj.SelectRequisitionID(SystemStoreInventorySystemUtil.Converter.objToString(Request.QueryString["RequisitionIDIndex"]));
+
+                    FillRequisitionDetails(checkRequisitionControlObj.RequisitionDetail);
+
+                    lblRequisitionID.Text = checkRequisitionControlObj.RequisitionId;
                     //FillRequisitions();
                     //lblRequisitionID.Text = Request.QueryString["RequisitionIDIndex"].ToString();
                 }
@@ -163,7 +167,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 e.Row.Items[0].CssClass = "hidden";
             }
             e.Row.Items[3].Text = SystemStoreInventorySystemUtil.Converter.GetRequisitionStatusText(SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text));
-            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("RequisitionID").FindControl("RequisitionID");
+            HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("requisitionID").FindControl("requisitionID");
             link.NavigateUrl = "~/departmentUI/Employee/CheckRequisition.aspx?RequisitionIDIndex=" + link.Text;
         }
 
@@ -194,8 +198,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             try
             {
                 
-                    drdRequisitionList.TextField = "RequisitionID";
-                    drdRequisitionList.ValueField = "RequisitionID";
+                    drdRequisitionList.TextField = "requisitionID";
+                    drdRequisitionList.ValueField = "requisitionID";
                    // drdRequisitionList.DataSource = (DataTable)Util.GetSession(sessionKey);
                     Util.PutSession("reqData", checkRequisitionControlObj.GetRequisitionList());
                     drdRequisitionList.DataSource = (DataTable)Session["reqData"];
