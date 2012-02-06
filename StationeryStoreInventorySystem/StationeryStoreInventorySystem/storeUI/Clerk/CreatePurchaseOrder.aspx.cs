@@ -81,11 +81,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         }
 
-        protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
+        protected void btnApprove_Click(object sender, EventArgs e)
         {
-            string description = drdItemList.SelectedItem.Text;
-            lblItemNumber.Text = purchaseOrderControl.SelectItemDescription(description);
+            string supplier = DrdSupplier.SelectedItem.Text;
+            string expectedDate = txtSupplyDate.Text;
+            string address = txtaDeliverTo.Text;
+            string attn = txtAttn.Text;
+
+            //purchaseOrderControl.SelectAdd();
         }
+
+        private void FillDataGrid()
+        {
+            DataTable dtable = purchaseOrderControl.PurchaseOrderDetailList;
+            DgvPurchaseOrderInput.DataSource = dtable;
+            DgvPurchaseOrderInput.DataBind();
+        }
+
 
         // <summary>
          
