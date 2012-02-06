@@ -23,21 +23,20 @@
                         onrowselectionchanged="dgvCollections_RowSelectionChanged">
                         <Columns>
                             <ig:UnboundCheckBoxField Key="UpdateStationeryRetrievalCheckBox" Width="50px">
-                                <Header Text="Select" />
                             </ig:UnboundCheckBoxField>
                             <ig:BoundDataField DataFieldName="CollectionID" Key="collectionId" Width="80px">
                                 <Header Text="Collection ID" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionPoint" Key="collectionPoint" 
-                                Width="120px">
+                                Width="160px">
                                 <Header Text="Collection Point" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionDate/Time" 
-                                Key="collectionDate/Time" Width="100px">
+                                Key="collectionDate/Time" Width="150px">
                                 <Header Text="Collection Date/Time" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="DeptRepresentativeName" Key="departmentRepresentativeName" 
-                                Width="120px">
+                                Width="150px">
                                 <Header Text="Dept. Rep. Name" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="DepartmentName" 
