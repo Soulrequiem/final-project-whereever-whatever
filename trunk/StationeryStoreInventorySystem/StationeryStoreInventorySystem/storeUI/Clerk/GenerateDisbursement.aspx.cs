@@ -23,6 +23,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         private static readonly string sessionKey = "GenerateDisbursement";
 
         private GenerateDisbursementControl generateDisbursementControl;
+
+        private string disbursement;
    
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -66,6 +68,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             {
                 Logger.WriteErrorLog(ex);
             }
+        }
+
+        protected void btnGenerate_Click(object sender, EventArgs e)
+        {
+            if (DgvGenerateDisbursement.Behaviors.Selection.SelectedRows.Count > 0)
+                foreach (GridRecord selectedRow in DgvGenerateDisbursement.Behaviors.Selection.SelectedRows)
+                    disbursement = selectedRow.Items.GetValue(0).ToString();
+            generateDisbursementControl = new GenerateDisbursementControl();
         }
     }
 }
