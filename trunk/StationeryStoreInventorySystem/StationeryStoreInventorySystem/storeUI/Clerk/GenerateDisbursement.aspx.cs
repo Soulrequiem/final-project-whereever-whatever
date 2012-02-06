@@ -19,14 +19,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 {
     public partial class GenerateDisbursement : System.Web.UI.Page
     {
-        
+        private static readonly string sessionKey = "GenerateDisbursement";
+
+        private GenerateDisbursementControl generateDisbursementControl;
+   
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                generateDisbursementControl = new GenerateDisbursementControl();
                 //GenerateDisbursementControl GDobj = new GenerateDisbursementControl();
                 //DataTable dt = GDobj.GetDisbursementList();
-                //FillDisbursementList();
+                FillDisbursementList(generateDisbursementControl.RetrievalList);
+
+                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, generateDisbursementControl);
+            }
+            else
+            {
+                generateDisbursementControl = (GenerateDisbursementControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
         }
 
