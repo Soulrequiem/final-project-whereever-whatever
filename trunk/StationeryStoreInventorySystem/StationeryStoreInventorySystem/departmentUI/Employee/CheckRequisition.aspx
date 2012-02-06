@@ -46,8 +46,8 @@
                     <ig:WebDataGrid ID="dgvRequisitionList" runat="server" Width="700px"
                          Height="250px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
-                         oninitializerow="dgvRequisitionList_InitializeRow" 
+                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="requisitionID"
+                         oninitializerow="dgvRequisitionList_InitializeRow" EnableDataViewState="true"
                          oncellselectionchanged="dgvRequisitionList_CellSelectionChanged" 
                          onrowselectionchanged="dgvRequisitionList_RowSelectionChanged" 
                          onrowupdating="dgvRequisitionList_RowUpdating">
@@ -63,10 +63,10 @@
                             Width="110px">
                             <Header Text="Requisition ID" />
                         </ig:BoundDataField>--%>
-                        <ig:TemplateDataField Key="RequisitionID" Width="120px">
+                        <ig:TemplateDataField Key="requisitionID" Width="120px">
                             <ItemTemplate>
-                                <asp:HyperLink ID="RequisitionID" runat="server"
-                                 Text='<%# Eval("RequisitionID" ) %>'
+                                <asp:HyperLink ID="requisitionID" runat="server"
+                                 Text='<%# Eval("requisitionID" ) %>'
                                  NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx" >
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </asp:HyperLink>
