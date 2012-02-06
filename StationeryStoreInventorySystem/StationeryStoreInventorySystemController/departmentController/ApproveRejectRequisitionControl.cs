@@ -140,7 +140,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         public void SelectRequisition(string requisitionId)
         {
             requisitionDetailsControl = new commonController.RequisitionDetailsControl();
-            requisitionDetailsControl.SelectRequisition(pendingRequisitionList.Find(delegate(Requisition req) { return requisitionId == req.Id; }));
+            requisitionDetailsControl.SelectRequisition(requisitionId);
         }
         
         /// <summary>
