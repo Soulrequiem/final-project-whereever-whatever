@@ -27,8 +27,9 @@
             .farsiDiv a:visited {font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;font-size: small; color:#FFFFFF; text-decoration:underline}
             .farsiDiv a:hover {font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;font-size: small; color:#FFFFFF; text-decoration:none}
             .farsiDiv a:active {font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;font-size: small; color:#FFFFFF; text-decoration:underline} 
-            .notification { width: 120px; height: 25px; position: fixed; bottom: 0px; background-color: #EFEFEF; border: 1px solid #000000; border-bottom: 0px solid #FFFFFF; cursor: pointer; text-indent: 5px; }
+            .notification { width: 120px; height: 20px; position: fixed; bottom: 0px; background-color: #EFEFEF; border: 1px solid #000000; border-bottom: 0px solid #FFFFFF; cursor: pointer; text-indent: 5px; }
     </style>
+    <script src="/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript" id="igClientScript">
     <!--
         function NavigationBar_ItemExpanding(sender, eventArgs) {
@@ -68,6 +69,25 @@
                 __doPostBack(id, 0);
             }
         }
+
+        var notificationTimer;
+        var checkNotification = function () {
+            $.post("/commonUI/Notification.aspx", { check: "true" },
+            function (data) {
+                document.getElementById("notification").innerHTML = data;
+            });
+            notificationTimer = null;
+            clearTimeout(notificationTimer);
+            notificationTimer = setTimeout("checkNotification()", 1000 * 60 * 12);
+        };
+
+        function goToNotification() {
+            window.location.href = "/commonUI/Notification.aspx";
+        }
+
+        $(document).ready(function () {
+            checkNotification();
+        });
 
     // -->
     </script>
@@ -173,7 +193,7 @@
 
                     </asp:Panel>
 
-                    <div id="notification" class="notification">Testing</div>
+                    <div id="notification" class="notification" onclick="goToNotification();"></div>
                   
             </div>
             <div class="ContentArea">
