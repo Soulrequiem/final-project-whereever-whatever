@@ -66,14 +66,22 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             get
             {
-                dt = new DataTable();
+                if (dt == null)
+                {
+                    dt = new DataTable();
+                    dt.Columns.AddRange(dataColumn);
+                }
+                else
+                {
+                    dt.Rows.Clear();
+                }
                 
                 foreach (Retrieval retrieval in retrievalList)
                 {
                     dr = dt.NewRow();
                     dr[columnName[0]] = retrieval.Id;
-                    dr[columnName[1]] = retrieval.CreatedDate;
-                    dr[columnName[2]] = retrieval.CreatedBy;
+                    dr[columnName[1]] = Converter.dateTimeToString(Converter.DATE_CONVERTER.DATETIME, retrieval.CreatedDate);
+                    dr[columnName[2]] = retrieval.CreatedBy.Name;
                     dr[columnName[3]] = retrievalBroker.GetSumRetrievalDetailQty(RetrievalBroker.QTY_TYPE.NEEDED_QTY, retrieval);
                     dr[columnName[4]] = retrievalBroker.GetSumRetrievalDetailQty(RetrievalBroker.QTY_TYPE.ACTUAL_QTY, retrieval);
                     dt.Rows.Add(dr);
