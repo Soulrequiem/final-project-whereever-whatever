@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to Approve/Reject Requisitions.
+        /// </summary>
+        internal static string Back_Link_Text {
+            get {
+                return ResourceManager.GetString("Back_Link_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Department List.
         /// </summary>
         internal static string BlackListDepartment_DepartmentList {

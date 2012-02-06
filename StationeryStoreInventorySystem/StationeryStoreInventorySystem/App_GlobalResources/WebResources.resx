@@ -543,4 +543,7 @@
   <data name="GenerateDisbursement_RepName" xml:space="preserve">
     <value>Representative Name:</value>
   </data>
+  <data name="Back_Link_Text" xml:space="preserve">
+    <value>Back to Approve/Reject Requisitions</value>
+  </data>
 </root>
