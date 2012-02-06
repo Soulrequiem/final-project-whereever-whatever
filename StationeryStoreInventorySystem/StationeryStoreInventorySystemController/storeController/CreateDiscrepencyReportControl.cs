@@ -64,7 +64,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
         public Item Item { get { return item; } }
         public string ItemId { get { return item.Id; } }
-        public decimal Cost { get { return item.Cost; } }
+        public string Cost { get { return Converter.objToMoneyString(item.Cost); } }
 
         //public ItemPrice ItemPrice { get { return itemprice; } }
        
@@ -85,7 +85,7 @@ namespace StationeryStoreInventorySystemController.storeController
                     dr["ItemNo"] = temp.Item.Id;
                     dr["ItemDescription"] = temp.Item.Description;
                     dr["Quantity"] = temp.Qty;
-                    dr["Price"] = temp.Item.Cost;
+                    dr["Price"] = Converter.objToMoneyString(temp.Item.Cost);
                     dr["Reason"] = temp.Remarks;
                     dt.Rows.Add(dr);
                 }
