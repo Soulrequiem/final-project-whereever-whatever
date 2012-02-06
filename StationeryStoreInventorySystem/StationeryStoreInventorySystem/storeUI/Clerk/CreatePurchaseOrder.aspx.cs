@@ -78,7 +78,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         protected void drdItemList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
             string description = drdItemList.SelectedItem.Text;
-            lblItemNumber.Text = purchaseOrderControl.SelectItemDescription(description);
+            
+            if (purchaseOrderControl.SelectItemDescription(description, DrdSupplier.SelectedItem.Text) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            {
+                lblItemNumber.Text = purchaseOrderControl.ItemCode;
+                txtPrice.Text = purchaseOrderControl.Price;
+            }
 
         }
 
@@ -97,6 +102,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             DataTable dtable = purchaseOrderControl.PurchaseOrderDetailList;
             DgvPurchaseOrderInput.DataSource = dtable;
             DgvPurchaseOrderInput.DataBind();
+        }
+
+        protected void btnGetItem_Click(object sender, EventArgs e)
+        {
+            string sItem = drdItemList.CurrentValue.ToString();
+
+            if (DrdSupplier.SelectedItem == null)
+            {
+                // print error message
+            }
+            else if (purchaseOrderControl.SelectItemDescription(sItem, DrdSupplier.SelectedItem.Value) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+            {
+                lblItemNumber.Text = purchaseOrderControl.ItemCode;
+                txtPrice.Text = purchaseOrderControl.Price;
+            }
         }
 
 
