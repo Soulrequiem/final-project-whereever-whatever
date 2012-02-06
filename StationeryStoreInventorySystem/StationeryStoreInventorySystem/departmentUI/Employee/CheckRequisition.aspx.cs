@@ -272,17 +272,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         protected void dgvRequisitionList_RowSelectionChanged(object sender, Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
         {
-            string s = e.CurrentSelectedRows[0].ToString();
+            //string s = e.CurrentSelectedRows[0].ToString();
         }
 
         protected void dgvRequisitionList_CellSelectionChanged(object sender, Infragistics.Web.UI.GridControls.SelectedCellEventArgs e)
         {
-            string str = e.CurrentSelectedCells.ToString();
+            //string str = e.CurrentSelectedCells.ToString();
         }
 
         protected void dgvRequisitionList_RowUpdating(object sender, Infragistics.Web.UI.GridControls.RowUpdatingEventArgs e)
         {
-            string str = e.Row.Items[0].ToString();
+            //string str = e.Row.Items[0].ToString();
         }       
         
     }
