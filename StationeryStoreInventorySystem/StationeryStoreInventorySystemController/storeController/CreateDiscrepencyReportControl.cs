@@ -29,15 +29,17 @@ namespace StationeryStoreInventorySystemController.storeController
         private Item item;
         private ItemPrice itemprice;
         
-        private System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail> discrepancyDetailList;
+        //private System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail> discrepancyDetailList;
 
         private DataTable dt;
         private DataRow dr;
 
         private DataColumn[] dataColumn;
+        private List<DiscrepancyDetail> ddList;
 
         public CreateDiscrepencyReportControl()
         {
+            ddList = new List<DiscrepancyDetail>();
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
             InventoryEntities inventory = new InventoryEntities();
 
@@ -49,7 +51,11 @@ namespace StationeryStoreInventorySystemController.storeController
             
 
             discrepancy = new Discrepancy();
-            discrepancyDetailList = new System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail>();
+            discrepancy.Id = discrepancyBroker.GetDiscrepancyId();
+            discrepancy.CreatedDate = DateTime.Now;
+            discrepancy.CreatedBy = Util.GetEmployee(new EmployeeBroker(inventory));
+            discrepancy.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+           // discrepancyDetailList = new System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail>();
 
 
         }
@@ -74,7 +80,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
                 dt.Columns.AddRange(dataColumn);
 
-                foreach (DiscrepancyDetail temp in discrepancyDetailList)
+                foreach (DiscrepancyDetail temp in ddList)
                 {
                     dr = dt.NewRow();
                     dr["DiscrepancyDetailId"] = temp.Id;
@@ -146,7 +152,6 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public Constants.ACTION_STATUS SelectAdd(string itemId, int qty, string reason)
         {
-            Constants.ACTION_STATUS addStatus = Constants.ACTION_STATUS.UNKNOWN;
 
             Item item = new Item();
             item.Id = itemId;
@@ -154,35 +159,55 @@ namespace StationeryStoreInventorySystemController.storeController
 
             if (item != null && reason != String.Empty)
             {
-
-                int discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.UNKNOWN);
-                if (qty > 0)
+                DiscrepancyDetail dd = new DiscrepancyDetail();
+                dd.Id = discrepancyBroker.GetDiscrepancyDetailId();
+                dd.Discrepancy = discrepancy;
+                dd.Item = item;
+                int amount = qty * (int)item.Cost;
+                if (amount >= 250)
                 {
-                    discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.ADD);
+                    dd.DiscrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.MANAGER);
                 }
                 else
                 {
-                    discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.REDUCE);
+                    dd.DiscrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR);
                 }
+                dd.Qty = qty;
+                dd.Remarks = reason;
+                dd.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+                ddList.Add(dd);
+             
+                //int discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.UNKNOWN);
+                //if (qty > 0)
+                //{
+                //    discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.ADD);
+                //}
+                //else
+                //{
+                //    discrepancyType = Converter.objToInt(Constants.DISCREPANCY_TYPE.REDUCE);
+                //}
 
-                DiscrepancyDetail discrepancyDetail = null;// new DiscrepancyDetail(discrepancyBroker.GetDiscrepancyDetailId(), discrepancy, item, discrepancyType, qty, reason);
+                //    DiscrepancyDetail discrepancyDetail = null;// new DiscrepancyDetail(discrepancyBroker.GetDiscrepancyDetailId(), discrepancy, item, discrepancyType, qty, reason);
 
-                if (!discrepancyDetailList.Contains(discrepancyDetail))
-                {
-                    discrepancyDetailList.Add(discrepancyDetail);
-                    addStatus = Constants.ACTION_STATUS.SUCCESS;
-                }
-                else
-                {
-                    addStatus = Constants.ACTION_STATUS.FAIL;
-                }
+                //    if (!discrepancyDetailList.Contains(discrepancyDetail))
+                //    {
+                //        discrepancyDetailList.Add(discrepancyDetail);
+                //        addStatus = Constants.ACTION_STATUS.SUCCESS;
+                //    }
+                //    else
+                //    {
+                //        addStatus = Constants.ACTION_STATUS.FAIL;
+                //    }
+                //}
+                //else
+                //{
+                //    addStatus = Constants.ACTION_STATUS.FAIL;
+                //}
+
+                
+
             }
-            else
-            {
-                addStatus = Constants.ACTION_STATUS.FAIL;
-            }
-            
-            return addStatus;
+            return Constants.ACTION_STATUS.SUCCESS;
         }
 
         //public Constants.ACTION_STATUS SelectRemove(DiscrepancyDetail discrepancyDetail)
@@ -210,11 +235,11 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS removeStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            if (discrepancyDetailList.Count >= index)
+            if (ddList.Count >= index)
             {
-                DiscrepancyDetail discrepancyDetail = discrepancyDetailList.ElementAt(index - 1);
+                DiscrepancyDetail discrepancyDetail = ddList.ElementAt(index - 1);
 
-                discrepancyDetailList.Remove(discrepancyDetail);
+                ddList.Remove(discrepancyDetail);
                 removeStatus = Constants.ACTION_STATUS.SUCCESS;
             }
             else
@@ -242,8 +267,14 @@ namespace StationeryStoreInventorySystemController.storeController
         {
             Constants.ACTION_STATUS status = Constants.ACTION_STATUS.UNKNOWN;
             
-            discrepancy.DiscrepancyDetails = discrepancyDetailList;
+           
 
+            foreach (DiscrepancyDetail discrepancyDetail in ddList)
+            {
+                discrepancy.DiscrepancyDetails.Add(discrepancyDetail);
+            }
+            
+            
             if (discrepancyBroker.Insert(discrepancy) == Constants.DB_STATUS.SUCCESSFULL)
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
