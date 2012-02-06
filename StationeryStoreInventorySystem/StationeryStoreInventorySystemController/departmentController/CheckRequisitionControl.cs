@@ -32,12 +32,11 @@ namespace StationeryStoreInventorySystemController.departmentController
         private RequisitionDetail requisitionDetail;
         private List<Requisition> pendingRequisitionList;
 
-        private System.Data.Objects.DataClasses.EntityCollection<Requisition> requisitionList;
-   
         private DataTable dt;
+        private DataTable dtRequisition;
         private DataRow dr;
         private DataColumn[] dataColumn;
-        private string[] columnName = new string[] { "RequisitionID", "requisitionDate", "status", "remainingQty", "remarks" };
+        private string[] columnName = new string[] { "requisitionID", "requisitionDate", "status", "remainingQty", "remarks" };
         //private string[] columnName = new string[] { "RequisitionID", "requisitionDate", "RequisitionBy", "remarks" };
 
         public CheckRequisitionControl()
@@ -69,14 +68,14 @@ namespace StationeryStoreInventorySystemController.departmentController
         {
             get
             {
-                if (dt == null)
+                if (dtRequisition == null)
                 {
-                    dt = new DataTable();
-                    dt.Columns.AddRange(dataColumn);
+                    dtRequisition = new DataTable();
+                    dtRequisition.Columns.AddRange(dataColumn);
                 }
                 else
                 {
-                    dt.Rows.Clear();
+                    dtRequisition.Rows.Clear();
                 }
 
                 int qty;
@@ -85,7 +84,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                 {
                     qty = 0;
                     deliveredQty = 0;
-                    dr = dt.NewRow();
+                    dr = dtRequisition.NewRow();
                     dr[columnName[0]] = r.Id;
                     dr[columnName[1]] = Convert.ToDateTime(r.CreatedDate);
                    // dr[columnName[2]] = r.CreatedBy.Name;
@@ -102,11 +101,11 @@ namespace StationeryStoreInventorySystemController.departmentController
                     dr[columnName[3]] = qty - deliveredQty;
                     dr[columnName[3]] = r.Remarks;
 
-                    dt.Rows.Add(dr);
+                    dtRequisition.Rows.Add(dr);
 
                 }
 
-                return dt;
+                return dtRequisition;
             }
         }
         //public List<Requisition> GetRequisitionList()
@@ -130,7 +129,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         public DataTable GetRequisitionList()
         {
             dt = new DataTable();
-            dt.Columns.Add("RequisitionID");
+            dt.Columns.Add("requisitionID");
             dt.Columns.Add("requisitionDate");
             dt.Columns.Add("status");
             dt.Columns.Add("remainingQty");
@@ -145,7 +144,7 @@ namespace StationeryStoreInventorySystemController.departmentController
                 RequisitionDetail resultRequisitionDetail = requisitionBroker.GetRequisitionDetail(requisitionDetail);
                 
                     dr = dt.NewRow();
-                    dr["RequisitionID"] = temp.Id;
+                    dr["requisitionID"] = temp.Id;
                     dr["requisitionDate"] = temp.CreatedDate;
                     //dr["status"] = Converter.GetRequisitionStatusText(Converter.objToRequisitionStatus(temp.Status));
                     dr["status"] = temp.Status;
@@ -166,6 +165,35 @@ namespace StationeryStoreInventorySystemController.departmentController
             return dt;
         }
 
+        public string RequisitionId { get { return requisition != null ? requisition.Id : ""; } }
+
+        public DataTable RequisitionDetail
+        {
+            get
+            {
+                dt = new DataTable();
+                dt.Columns.Add("itemNo");
+                dt.Columns.Add("itemDescription");
+                dt.Columns.Add("requiredQty");
+                dt.Columns.Add("receivedQty");
+                dt.Columns.Add("remainingQty");
+
+                foreach (RequisitionDetail temp in requisition.RequisitionDetails)
+                {
+                    dr = dt.NewRow();
+                    dr["itemNo"] = temp.Item.Id;
+                    dr["itemDescription"] = temp.Item.Description;
+                    dr["requiredQty"] = temp.Qty;
+                    dr["receivedQty"] = temp.DeliveredQty.HasValue ? temp.DeliveredQty.Value : 0;
+                    if (temp.DeliveredQty.Equals(null))
+                        dr["remainingQty"] = 0;
+                    else
+                        dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
+                    dt.Rows.Add(dr);
+                }
+                return dt;
+            }
+        }
 
         /// <summary>
         ///     Show requisition detail according to the selected requisition
@@ -180,41 +208,56 @@ namespace StationeryStoreInventorySystemController.departmentController
         /// </summary>
         /// <param name="requisitionId"></param>
         /// <returns>The return type of this method is datatable.</returns>
-        public DataTable SelectRequisitionID(string requisitionId)
+        public Constants.ACTION_STATUS SelectRequisitionID(string requisitionId)
         {
-            dt = new DataTable();
-            dt.Columns.Add("itemNo");
-            dt.Columns.Add("itemDescription");
-            dt.Columns.Add("requiredQty");
-            dt.Columns.Add("receivedQty");
-            dt.Columns.Add("remainingQty");
+            Constants.ACTION_STATUS selectStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-            List<RequisitionDetail> requistionDetailList;
-            requisition = new Requisition();
-            itemBroker = new ItemBroker(inventory);
-            requisition.Id = requisitionId;
-            requisitionDetail=new RequisitionDetail();
-            requisitionDetail.Requisition=requisition;
-            requistionDetailList = requisitionBroker.GetAllRequisitionDetailByObj(requisitionDetail);
-           
-          foreach (RequisitionDetail temp in requistionDetailList)
+            requisition = pendingRequisitionList.Find(delegate(Requisition req) { return req.Id.Contains(requisitionId); });
+
+            if (requisition != null)
             {
-                dr = dt.NewRow();
-
-                Item item = new Item();
-                item =temp.Item ;
-                item = itemBroker.GetItem(item);
-                dr["itemNo"] = item.Id;
-                dr["itemDescription"] = item.Description;
-                dr["requiredQty"] = temp.Qty;
-                dr["receivedQty"] = temp.DeliveredQty.HasValue ? temp.DeliveredQty.Value : 0;
-                if (temp.DeliveredQty.Equals(null))
-                    dr["remainingQty"] = 0;
-                else
-                    dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
-                dt.Rows.Add(dr);
+                selectStatus = Constants.ACTION_STATUS.SUCCESS;
             }
-            return dt;
+            else
+            {
+                selectStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return selectStatus;
+
+          //  dt = new DataTable();
+          //  dt.Columns.Add("itemNo");
+          //  dt.Columns.Add("itemDescription");
+          //  dt.Columns.Add("requiredQty");
+          //  dt.Columns.Add("receivedQty");
+          //  dt.Columns.Add("remainingQty");
+
+          //  List<RequisitionDetail> requistionDetailList;
+          //  requisition = new Requisition();
+          //  itemBroker = new ItemBroker(inventory);
+          //  requisition.Id = requisitionId;
+          //  requisitionDetail=new RequisitionDetail();
+          //  requisitionDetail.Requisition=requisition;
+          //  requistionDetailList = requisitionBroker.GetAllRequisitionDetailByObj(requisitionDetail);
+           
+          //foreach (RequisitionDetail temp in requistionDetailList)
+          //  {
+          //      dr = dt.NewRow();
+
+          //      Item item = new Item();
+          //      item =temp.Item ;
+          //      item = itemBroker.GetItem(item);
+          //      dr["itemNo"] = item.Id;
+          //      dr["itemDescription"] = item.Description;
+          //      dr["requiredQty"] = temp.Qty;
+          //      dr["receivedQty"] = temp.DeliveredQty.HasValue ? temp.DeliveredQty.Value : 0;
+          //      if (temp.DeliveredQty.Equals(null))
+          //          dr["remainingQty"] = 0;
+          //      else
+          //          dr["remainingQty"] = temp.Qty - temp.DeliveredQty;
+          //      dt.Rows.Add(dr);
+          //  }
+          //  return dt;
         }
         /// <summary>
          ///To withdraw the requisition
