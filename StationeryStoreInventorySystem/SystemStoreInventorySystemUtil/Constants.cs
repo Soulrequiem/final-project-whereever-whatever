@@ -60,7 +60,8 @@ namespace SystemStoreInventorySystemUtil
             REJECTED,
             SUBMITTED,
             WITHDRAW,
-            HIDDEN
+            HIDDEN,
+            COMPLETE
         }
 
         public enum COLLECTION_STATUS
