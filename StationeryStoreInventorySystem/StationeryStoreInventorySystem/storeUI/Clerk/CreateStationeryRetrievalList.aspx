@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
- <div class="print">
+    <div class="print">
          <%--<img alt="Print" src="../Images/Common/print.png" />--%>
          <asp:ImageButton ID="Print" runat="server" 
             ImageUrl="~/Images/Common/print.png" Width="30px" Height="45px" 
@@ -17,26 +17,21 @@
              Text="<%$ Resources:WebResources, CreateStationeryRetrievalList_Title %>" /></h1>
              <br />
             <ig:WebDataGrid ID="DgvCreateStationeryRetrievalList" runat="server" 
-            Height="300px" Width="700px" DefaultColumnWidth="50px" 
-            AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
-            HeaderCaptionCssClass="HeaderGridViewStyle" 
+            Height="500px" Width="700px" DefaultColumnWidth="50px" 
+            AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" EnableDataViewState="true"
+            HeaderCaptionCssClass="HeaderGridViewStyle" DataKeyFields="CollectionID"
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                 <Columns>
                     <ig:UnboundCheckBoxField Key="CreateStationeryRetrievalListCheckBox" Width="50px">
                     </ig:UnboundCheckBoxField>
-                    <ig:TemplateDataField Key="CollectionID" Width="120px">
-                        <ItemTemplate>
-                            <asp:HyperLink ID="TripIDLink" runat="server" 
-                                Text='<%# Eval("CollectionID" ) %>'
-                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
-                           </asp:HyperLink>
-                        </ItemTemplate>
+                    <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" 
+                        Width="120px">
                         <Header Text="Collection ID" />
-                    </ig:TemplateDataField>
+                    </ig:BoundDataField>
                     <%--<ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" Width="50px">
                         <Header Text="Collection ID" />
                     </ig:BoundDataField>--%>
-                    <ig:BoundDataField DataFieldName="CollectionDate/Time" Key="CollectionDate/Time" 
+                    <ig:BoundDataField DataFieldName="CollectionDateTime" Key="CollectionDateTime" 
                         Width="150px">
                         <Header Text="Collection Date/Time" />
                     </ig:BoundDataField>
@@ -54,8 +49,6 @@
                             <ig:ColumnFilteringSetting />
                         </ColumnSettings>
                     </ig:Filtering>
-                    <ig:Paging PageSize="10">
-                    </ig:Paging>
                     <ig:Selection CellClickAction="Row" RowSelectType="Single">
                     </ig:Selection>
                     <ig:Sorting>
@@ -74,7 +67,7 @@
             <div style="float:right">
                 <%--<a class="buttoningrid" href="" style="float:right">Create</a>--%>
                 <asp:Button ID="btnApprove" runat="server" CssClass="Defaultbutton"
-                                Text="Create" />
+                                Text="Create" onclick="btnApprove_Click" />
             </div>
     </div>
 </asp:Content>
