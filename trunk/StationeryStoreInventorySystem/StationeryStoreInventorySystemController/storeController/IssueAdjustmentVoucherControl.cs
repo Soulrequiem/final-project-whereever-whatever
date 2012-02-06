@@ -20,7 +20,7 @@ namespace StationeryStoreInventorySystemController.storeController
     public class IssueAdjustmentVoucherControl
     {
         private IDiscrepancyBroker discrepancyBroker;
-
+        private IItemBroker itemBroker;
         private System.Data.Objects.DataClasses.EntityCollection<Discrepancy> discrepancyList;
 
         private DataTable dt;
@@ -47,6 +47,7 @@ namespace StationeryStoreInventorySystemController.storeController
             InventoryEntities inventoryEntities = new InventoryEntities();
             employeeBroker = new EmployeeBroker(inventoryEntities);
             discrepancyBroker = new DiscrepancyBroker(inventoryEntities);
+            itemBroker = new ItemBroker(inventoryEntities);
             // discrepancyList = new System.Data.Objects.DataClasses.EntityCollection<Discrepancy>();
             listColumn = new DataColumn[]{new DataColumn(listColumnName[0]),new DataColumn(listColumnName[1]),new DataColumn(listColumnName[2]),new DataColumn(listColumnName[3])
             };
@@ -280,11 +281,11 @@ namespace StationeryStoreInventorySystemController.storeController
 
             foreach (DiscrepancyDetail dd in list)
             {
-                if (dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR))
+                if (dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR) && dd.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW))
                 {
                     supervisorDetails.Add(dd);
                 }
-                else
+                else if(dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.MANAGER) && dd.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW))
                 {
                     managerDetails.Add(dd);
                 }
@@ -306,7 +307,7 @@ namespace StationeryStoreInventorySystemController.storeController
         public string[] IssueAdjustment()
         {
             stockAdjustment = new StockAdjustment();
-            stockAdjustment.Id = discrepancyBroker.GetStockAdjustmentId();
+            stockAdjustment.Id = discrepancyBroker.GetStockAdjustmentId(currentEmployee);
             stockAdjustment.Discrepancy = discrepancy;
             stockAdjustment.CreatedDate = DateTime.Now;
             stockAdjustment.CreatedBy = Util.GetEmployee(employeeBroker);
@@ -326,8 +327,43 @@ namespace StationeryStoreInventorySystemController.storeController
                 status = Constants.ACTION_STATUS.SUCCESS;
             else
                 status = Constants.ACTION_STATUS.FAIL;
-            discrepancy.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.HIDDEN);
+         //   discrepancy.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.HIDDEN);
+            List<DiscrepancyDetail> dd = GetList(discrepancy.DiscrepancyDetails.ToList());
+            foreach (DiscrepancyDetail temp in dd)
+            {
+                StockCardDetail stockCardDetail = new StockCardDetail();
+                stockCardDetail.Id = itemBroker.GetStockCardDetailId();
+                stockCardDetail.Item = temp.Item;
+                stockCardDetail.Description = "Stock Adjsutment " + stockAdjustment.Id;
+                stockCardDetail.Qty = temp.Qty;
+                stockCardDetail.CreatedDate = DateTime.Now;
+                stockCardDetail.CreatedBy = Util.GetEmployee(employeeBroker);
+                stockCardDetail.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+                stockCardDetail.Balance = itemBroker.GetCurrentBalance(temp.Item) + Converter.objToInt(temp.Qty);
+                itemBroker.Insert(stockCardDetail);
+                temp.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.HIDDEN);
+                //discrepancyBroker.Update(temp);
+            }
+
+            bool flag = false;
+            foreach (DiscrepancyDetail temp in discrepancy.DiscrepancyDetails)
+            {
+                if(temp.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW)){
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag)
+            {
+                discrepancy.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.HIDDEN);
+            }
+            else
+            {
+                discrepancy.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+            }
             discrepancyBroker.Update(discrepancy);
+
+            
             return status;
 
         }
