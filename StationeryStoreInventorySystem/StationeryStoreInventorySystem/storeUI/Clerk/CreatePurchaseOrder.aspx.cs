@@ -24,13 +24,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 //FillItemsGridView();
 
                 //FillItems();
+                FillSupplier();
+                FillItems();
+                lblPONumber.Text = purchaseOrderControl.PurchaseOrderId.ToString();
             }
             else
             {
                 purchaseOrderControl = (PurchaseOrderControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
             //FillItemsGridView();
-            FillSupplier();
+            
         }
 
         private PurchaseOrderControl GetControl()
@@ -43,17 +46,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         // Fills item drop down
         // </summary>
         // <param name="dtItems"></param>
-        //private void FillItems()
-        //{
-        //    DataTable dtItems = (DataTable)Session["Items"];
-        //    if (dtItems != null)
-        //    {
-        //        drdItemList.TextField = "ItemDescription";
-        //        drdItemList.ValueField = "ID";
-        //        drdItemList.DataSource = dtItems;
-        //        drdItemList.DataBind();
-        //    }
-        //}
+        private void FillItems()
+        {
+            DataTable dtItems = StationeryStoreInventorySystemController.Util.GetItemTable();
+            if (dtItems != null)
+            {
+                drdItemList.TextField = "ItemDescription";
+                drdItemList.ValueField = "ID";
+                drdItemList.DataSource = dtItems;
+                drdItemList.DataBind();
+            }
+        }
 
         // <summary>
         // Fills item drop down
@@ -69,6 +72,19 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 DrdSupplier.DataSource = dtt;
                 DrdSupplier.DataBind();
             }
+        }
+
+        protected void drdItemList_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        {
+            string description = drdItemList.SelectedItem.Text;
+            lblItemNumber.Text = purchaseOrderControl.SelectItemDescription(description);
+
+        }
+
+        protected void drdItemList_ValueChanged(object sender, Infragistics.Web.UI.ListControls.DropDownValueChangedEventArgs e)
+        {
+            string description = drdItemList.SelectedItem.Text;
+            lblItemNumber.Text = purchaseOrderControl.SelectItemDescription(description);
         }
 
         // <summary>
