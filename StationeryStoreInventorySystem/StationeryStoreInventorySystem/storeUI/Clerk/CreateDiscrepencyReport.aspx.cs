@@ -26,7 +26,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 createDiscrepancyReportControl = GetControl();
                 StationeryStoreInventorySystemController.Util.PutSession(sessionKey, createDiscrepancyReportControl);
 
-                FillItemsGridView();
+                //FillItemsGridView();
+
                 FillItems();
             }
             else
@@ -75,16 +76,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         protected void drdItemList_SelectionChanged(object sender,
         Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
         {
-            string selectedItem = drdItemList.SelectedItem.Text;
+            //string selectedItem = drdItemList.SelectedItem.Text;
 
-            if (createDiscrepancyReportControl.SelectItemDescription(drdItemList.SelectedItem.Text) == Constants.ACTION_STATUS.SUCCESS)
-            {
-                lblItemNumber.Text = createDiscrepancyReportControl.ItemId;
-            }
-            else
-            {
-                // print error message
-            }
+            //if (createDiscrepancyReportControl.SelectItemDescription(drdItemList.SelectedItem.Text) == Constants.ACTION_STATUS.SUCCESS)
+            //{
+            //    lblItemNumber.Text = createDiscrepancyReportControl.ItemId;
+            //}
+            //else
+            //{
+            //    // print error message
+            //}
             //Pass to the controller
 
         }
@@ -114,8 +115,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             dr[3] = txtQuantity.Text;
             dr[4] = lblItemPrice.Text;
             dr[5] = txtReason.Text;
-
+           
             dtGridItems.Rows.Add(dr);
+            createDiscrepancyReportControl.SelectAdd(lblItemNumber.Text, Converter.objToInt(txtQuantity.Text), txtReason.Text);
             Session["DiscrepencyItems"] = dtGridItems;
             FillItemsGridView();
         }
@@ -128,11 +130,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             dgvItemList.DataBind();
         }
 
-        protected void btnApprove_Click(object sender, EventArgs e)
+        protected void btnCreate_Click(object sender, EventArgs e)
         {
-            DataTable dt = (DataTable)Session["DiscrepencyItems"];
-            for (int i = 0; i < dt.Rows.Count; i++)
-                lblItemNumber.Text += dt.Rows[i].ItemArray[0].ToString();
+            //DataTable dt = (DataTable)Session["DiscrepencyItems"];
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //    lblItemNumber.Text += dt.Rows[i].ItemArray[0].ToString();
+            Constants.ACTION_STATUS status = createDiscrepancyReportControl.SelectCreate();
+            if (status == Constants.ACTION_STATUS.SUCCESS)
+            {
+                Response.Write("Sucess.....");
+            }
+            else
+            {
+                Response.Write("Fail.........");
+            }
+            
+            
         }
         /// <summary>
         /// To remove the selected row
@@ -141,10 +154,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        protected void btnDelete_Click(object sender, EventArgs e)
+        protected void btnRemove_Click(object sender, EventArgs e)
         {
            // ArrayList productToDelete = new ArrayList();
-
+            DataTable dtGridItems = (DataTable)Session["DiscrepencyItems"];
             int deletedItem = 0;
             for (int i = 0; i < dgvItemList.Rows.Count; i++)
             {
@@ -152,9 +165,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 {
                     createDiscrepancyReportControl.SelectRemove(i - (deletedItem++));
                     refresh();
+                    dtGridItems.Rows.RemoveAt(i);
+
                 }
             }
-
+            Session["DiscrepencyItems"] = dtGridItems;
+           
            
             
         }
