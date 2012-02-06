@@ -381,7 +381,7 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public string GetStockAdjustmentId()
         {
-            return "21";
+            return "52";
         }
 
         #endregion
