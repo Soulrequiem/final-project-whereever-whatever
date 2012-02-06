@@ -29,8 +29,6 @@ namespace StationeryStoreInventorySystemController.storeController
         private Item item;
         private ItemPrice itemprice;
         
-        //private System.Data.Objects.DataClasses.EntityCollection<DiscrepancyDetail> discrepancyDetailList;
-
         private DataTable dt;
         private DataRow dr;
 
@@ -39,8 +37,7 @@ namespace StationeryStoreInventorySystemController.storeController
 
         public CreateDiscrepencyReportControl()
         {
-            ddList = new List<DiscrepancyDetail>();
-            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR);
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
             InventoryEntities inventory = new InventoryEntities();
 
             discrepancyBroker = new DiscrepancyBroker(inventory);
@@ -48,7 +45,8 @@ namespace StationeryStoreInventorySystemController.storeController
             item = new Item();
             itemPriceBroker = new ItemPriceBroker(inventory);
             itemprice = new ItemPrice();
-            
+
+            ddList = new List<DiscrepancyDetail>();
 
             discrepancy = new Discrepancy();
             discrepancy.Id = discrepancyBroker.GetDiscrepancyId();
