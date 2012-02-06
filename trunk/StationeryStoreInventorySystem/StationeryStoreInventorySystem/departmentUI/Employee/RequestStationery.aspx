@@ -191,9 +191,9 @@
                         </ig:BoundDataField>--%>
                         <ig:TemplateDataField  Key="RequiredQty" Width="160px">
                             <ItemTemplate>
-                                <ig:WebTextEditor ID="RequiredQty" runat="server" Width="140px"
+                                <ig:WebNumericEditor ID="RequiredQty" runat="server" Width="140px"
                                 Text='<%# Eval("RequiredQty") %>' NullText="Enter Required Quantity">
-                                </ig:WebTextEditor>
+                                </ig:WebNumericEditor>
                             </ItemTemplate>
                             <Header Text="Required Qty" />
                         </ig:TemplateDataField>

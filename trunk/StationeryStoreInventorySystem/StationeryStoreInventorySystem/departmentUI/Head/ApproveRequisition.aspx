@@ -15,15 +15,16 @@
             DefaultColumnWidth="50px" AutoGenerateColumns="False" 
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
-            Height="400px" Width="700px" EnableViewState="true">
+            Height="400px" Width="700px">
             <Columns>
-                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" HeaderChecked="false">
+                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" HeaderChecked="false" 
+                    Width="50px">
                 </ig:UnboundCheckBoxField>
                 <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                     Width="100px">
                     <Header Text="Requisition ID" />
                 </ig:BoundDataField>--%>
-                <ig:TemplateDataField Key="RequisitionID" Width="120px">
+                <ig:TemplateDataField Key="RequisitionID" Width="110px">
                     <ItemTemplate>
                         <asp:HyperLink ID="RequisitionID" runat="server"
                          Text='<%# Eval("RequisitionID" ) %>'
@@ -44,7 +45,7 @@
                     Width="120px">
                     <Header Text="Requisition Qty" />
                 </ig:BoundDataField>
-                <ig:TemplateDataField  Key="Remarks" Width="160px">
+                <ig:TemplateDataField  Key="Remarks" Width="155px">
                         <ItemTemplate>
                              <ig:WebTextEditor ID="Remarks" runat="server" Width="110px"
                               Text='<%# Eval("Remarks") %>' >
