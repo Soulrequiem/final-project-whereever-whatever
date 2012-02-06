@@ -41,15 +41,19 @@
                 ondatafiltering="dgvRequisitions_DataFiltering" 
                 onpageindexchanged="dgvRequisitions_PageIndexChanged">
                 <Columns>
-                    <ig:TemplateDataField Key="RequisitionID" Width="150px">
+                    <%--<ig:TemplateDataField Key="RequisitionID" Width="150px">
                         <ItemTemplate>
                             <asp:HyperLink ID="TripIDLink" runat="server" 
                                 Text='<%# Eval("RequisitionID" ) %>'
-                                NavigateUrl="~/storeUI/Clerk/GenerateDisbursement.aspx" >
+                                NavigateUrl='<%# Eval("RequisitionID","~/commonUI/RequisitionDetails.aspx?ReqID={0}") %>'>
                                 </asp:HyperLink>
                         </ItemTemplate>
                         <Header Text="Requisition ID" />
-                    </ig:TemplateDataField>
+                    </ig:TemplateDataField>--%>
+                    <ig:BoundDataField DataFieldName="RequisitionID" 
+                        Key="RequisitionID" Width="150px">
+                        <Header Text="Requisition ID" />
+                    </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="RequisitionDateTime" 
                         Key="RequisitionDateTime" Width="170px">
                         <Header Text="Requisition Date/Time" />
