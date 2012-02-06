@@ -20,6 +20,7 @@ namespace StationeryStoreInventorySystemController.storeController
         private DataTable table;
         private int purchaseOrderId;
         private List<PurchaseOrderDetail> poDetailList;
+        private List<Item> reorderList;
 
         public int PurchaseOrderId
         {
@@ -75,7 +76,7 @@ namespace StationeryStoreInventorySystemController.storeController
             supplierBroker = new SupplierBroker(inventory);
             itemBroker = new ItemBroker(inventory);
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
-            
+            reorderList = GetReorderItemList();
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
             poDetailList = new List<PurchaseOrderDetail>();
@@ -105,14 +106,14 @@ namespace StationeryStoreInventorySystemController.storeController
                     dt.Rows.Clear();
                 }
                 
-                foreach (PurchaseOrderDetail temp in poDetailList)
+                foreach (Item temp in reorderList)
                 {
                     dr = dt.NewRow();
-                    dr[columnName[0]] = temp.Item.Id;
-                    dr[columnName[1]] = temp.Item.Description;
-                    dr[columnName[2]] = temp.Qty;
-                    dr[columnName[3]] = temp.Price;
-                    dr[columnName[4]] = temp.Qty * temp.Price;
+                    dr[columnName[0]] = temp.Id;
+                    dr[columnName[1]] = temp.Description;
+                    dr[columnName[2]] = temp.ReorderQty;
+                    dr[columnName[3]] = temp.Cost;
+                    dr[columnName[4]] = temp.ReorderQty * temp.Cost;
                     dt.Rows.Add(dr);
                 }
                 return dt;
@@ -128,9 +129,19 @@ namespace StationeryStoreInventorySystemController.storeController
 
         private List<Item> GetReorderItemList()
         {
-            List<Item> itemList = new List<Item>();
+            List<Item> reorderList = new List<Item>();
+            List<Item> itemList = itemBroker.GetAllItem();
+            foreach (Item item in itemList)
+            {
+                int bal = itemBroker.GetCurrentBalance(item);
+                if (bal < item.ReorderLevel)
+                {
+                    reorderList.Add(item);
+                }
 
-            return itemList;
+            }
+
+            return reorderList;
         }
 
         //public Constants.ACTION_STATUS SelectAdd()
