@@ -18,7 +18,7 @@ namespace StationeryStoreInventorySystem
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            Session["ItemConsumptionData"] = new DataTable();
+            //Session["ItemConsumptionData"] = new DataTable();
             Session["IsPostBack"] = true;
             Session["PrintData"] = new DataTable();
             Session["chartData"] = new DataTable();
