@@ -25,13 +25,33 @@ namespace StationeryStoreInventorySystemController.storeController
         private InventoryEntities inventory;
         private IRequisitionCollectionBroker requisitionCollectionBroker;
 
+        private Employee currentEmployee;
+
+        List<RequisitionCollection> collectionList;
+
         private DataTable dt;
         private DataRow dr;
 
+        private string[] columnName = { "collectionId", "collectionPoint", "collectionDate/Time", "departmentRepresentativeName", "departmentName", "collectionStatus" };
+
+        private DataColumn[] dataColumn;
+
         public UpdateStationeryRetrievalControl()
         {
+            currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
+
             inventory = new InventoryEntities();
             retrievalBroker = new RetrievalBroker(inventory);
+            requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
+
+            collectionList = requisitionCollectionBroker.GetAllRequisitionCollection();
+
+            dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
+                                            new DataColumn(columnName[1]),
+                                            new DataColumn(columnName[2]),
+                                            new DataColumn(columnName[3]),
+                                            new DataColumn(columnName[4]),
+                                            new DataColumn(columnName[5]) };
         }
         /// <summary>
         ///     Update stationery retrieval by collection point
@@ -48,18 +68,25 @@ namespace StationeryStoreInventorySystemController.storeController
         /// <returns>The return type of this method is datatable.</returns>
         public DataTable GetCollectionIDList()
         {
-            dt = new DataTable();
-            requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
-            List<RequisitionCollection> collectionList = requisitionCollectionBroker.GetAllRequisitionCollection();
+            if (dt == null)
+            {
+                dt = new DataTable();
+                dt.Columns.AddRange(dataColumn);
+            }
+            else
+            {
+                dt.Rows.Clear();
+            }
+
             foreach (RequisitionCollection temp in collectionList)
             {
                 dr = dt.NewRow();
-                dr["collectionId"]=temp.Id;
-                dr["collectionPoint"] = temp.CollectionPoint.Name;
-                dr["collectionDate/Time"] = temp.CollectionPoint.Time;
-                dr["departmentRepresentativeName"] = temp.Department.Representative.Name;
-                dr["departmentName"] = temp.Department.Name;
-                dr["collectionStatus"] = Constants.COLLECTION_STATUS.NEED_TO_COLLECT;
+                dr[columnName[0]] = temp.Id;
+                dr[columnName[1]] = temp.CollectionPoint == null ? "" : temp.CollectionPoint.Name;
+                dr[columnName[2]] = temp.CollectionPoint == null ? "" : Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATE, temp.CreatedDate) + " " + temp.CollectionPoint.Time;
+                dr[columnName[3]] = temp.Department.Representative == null ? "" : temp.Department.Representative.Name;
+                dr[columnName[4]] = temp.Department == null ? "" : temp.Department.Name;
+                dr[columnName[5]] = Converter.GetCollectionStatusText(Converter.objToCollectionStatus(temp.Status));
                 dt.Rows.Add(dr);
             }
             return dt;
@@ -72,6 +99,6 @@ namespace StationeryStoreInventorySystemController.storeController
     }
 }
 /****************************************/
-/********* End of the Class *****************/
+/********* End of the Class *************/
 /****************************************/
 
