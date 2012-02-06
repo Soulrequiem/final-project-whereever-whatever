@@ -59,22 +59,31 @@ namespace StationeryStoreInventorySystemController.commonController
             }
             return ReturnResultSet(sbQuery.ToString());
         }
+        //public DataTable getItems()
+        //{
+        //    StringBuilder sbQuery = new StringBuilder();
+        //    sbQuery.Append(" select I.id as 'Item Code', ");
+        //    sbQuery.Append(" I.Description, ");
+        //    sbQuery.Append(" UM.Name as 'Unit of Measurement', ");
+        //    sbQuery.Append(" SCD.Balance as 'Quantity on Hand', ");
+        //    sbQuery.Append(" I.ReorderLevel as 'Reorder Level' ");
+        //    sbQuery.Append(" from Item I, ");
+        //    sbQuery.Append(" UnitOfMeasure UM, ");
+        //    sbQuery.Append(" StockCardDetails SCD ");
+        //    sbQuery.Append(" where I.UnitOfMeasureId = UM.Id AND ");
+        //    sbQuery.Append(" SCD.ItemId = I.Id AND ");
+        //    sbQuery.Append(" SCD.CreatedDate IN (SELECT MAX(CreatedDate)  ");
+        //    sbQuery.Append(" from StockCardDetails  ");
+        //    sbQuery.Append(" group by ItemId) ");
+        //    return ReturnResultSet(sbQuery.ToString());
+        //}
+
         public DataTable getItems()
         {
             StringBuilder sbQuery = new StringBuilder();
-            sbQuery.Append(" select I.id as 'Item Code', ");
-		    sbQuery.Append(" I.Description, ");
-		    sbQuery.Append(" UM.Name as 'Unit of Measurement', ");
-		    sbQuery.Append(" SCD.Balance as 'Quantity on Hand', ");
-		    sbQuery.Append(" I.ReorderLevel as 'Reorder Level' ");
-            sbQuery.Append(" from Item I, ");
-		    sbQuery.Append(" UnitOfMeasure UM, ");
-		    sbQuery.Append(" StockCardDetails SCD ");
-            sbQuery.Append(" where I.UnitOfMeasureId = UM.Id AND ");
-		    sbQuery.Append(" SCD.ItemId = I.Id AND ");
-		    sbQuery.Append(" SCD.CreatedDate IN (SELECT MAX(CreatedDate)  ");
-		    sbQuery.Append(" from StockCardDetails  ");
-            sbQuery.Append(" group by ItemId) ");
+            sbQuery.Append(" select SCD.ItemId as 'Item Code', I.Description, SCD.Balance as 'Quantity on Hand', I.ReorderLevel as 'Reorder Level' ");
+            sbQuery.Append(" from StockCardDetails SCD, Item I ");
+            sbQuery.Append(" where I.Id = SCD.ItemId AND SCD.CreatedDate IN (SELECT MAX(CreatedDate)  from StockCardDetails  group by ItemId) ");
             return ReturnResultSet(sbQuery.ToString());
         }
 
