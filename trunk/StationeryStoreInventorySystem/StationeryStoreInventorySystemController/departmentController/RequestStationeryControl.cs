@@ -68,6 +68,10 @@ namespace StationeryStoreInventorySystemController.departmentController
                 {
                     dt = new DataTable();
                     dt.Columns.AddRange(dataColumn);
+                    DataColumn[] keys = new DataColumn[1];
+                    DataColumn dc = dataColumn[0];
+                    keys[0] = dc;
+                    dt.PrimaryKey = keys;
                 }
                 else
                 {
