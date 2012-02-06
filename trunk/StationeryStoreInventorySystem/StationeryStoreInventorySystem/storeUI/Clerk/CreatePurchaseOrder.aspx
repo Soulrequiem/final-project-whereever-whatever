@@ -110,9 +110,7 @@
                         <td style="width:250px">
                             <ig:WebDropDown ID="drdItemList" runat="server" Width="220px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
-                                     StyleSetName="Office2010Blue" 
-                                onselectionchanged="drdItemList_SelectionChanged" 
-                                onvaluechanged="drdItemList_ValueChanged">
+                                     StyleSetName="Office2010Blue">
                                     <Button Visible="False" />
                              </ig:WebDropDown>
                         </td>
@@ -150,7 +148,7 @@
                         <td>
                             <%--<a class="buttoningrid" href="" style="float:right">Add</a>--%>
                             <asp:Button ID="btnApprove" runat="server" CssClass="Defaultbutton"
-                                Text="Add" />
+                                Text="Add" onclick="btnApprove_Click" />
                         </td>
                     </tr>
                 </table>
