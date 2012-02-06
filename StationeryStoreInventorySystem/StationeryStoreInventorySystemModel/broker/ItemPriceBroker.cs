@@ -36,7 +36,7 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                itemPriceObj = inventory.ItemPrices.Where(iObj => iObj.ItemId == itemPrice.ItemId).First();
+                itemPriceObj = inventory.ItemPrices.Where(iObj => iObj.ItemId.Contains(itemPrice.ItemId) && iObj.SupplierId.Contains(itemPrice.SupplierId)).First();
             }
             catch (Exception e)
             {

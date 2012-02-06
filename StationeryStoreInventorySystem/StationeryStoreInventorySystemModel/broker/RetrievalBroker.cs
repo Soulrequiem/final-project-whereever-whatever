@@ -174,10 +174,10 @@ namespace StationeryStoreInventorySystemModel.broker
             switch (quantityType)
             {
                 case QTY_TYPE.ACTUAL_QTY:
-                    totalQty = retrieval.RetrievalDetails.Sum(x => x.ActualQty).Value;
+                    totalQty = retrieval.RetrievalDetails.Where(x=> x.Retrieval.Id == retrieval.Id).Sum(x => x.ActualQty).Value;
                     break;
                 case QTY_TYPE.NEEDED_QTY:
-                    totalQty = retrieval.RetrievalDetails.Sum(x => x.NeededQty);
+                    totalQty = retrieval.RetrievalDetails.Where(x => x.Retrieval.Id == retrieval.Id).Sum(x => x.NeededQty);
                     break;
             }
 
