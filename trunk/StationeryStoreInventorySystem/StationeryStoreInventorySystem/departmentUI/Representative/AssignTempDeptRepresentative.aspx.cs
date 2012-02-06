@@ -14,11 +14,13 @@ using System.Web.UI.WebControls;
 using System.Data;
 using StationeryStoreInventorySystemController.departmentController;
 using StationeryStoreInventorySystemController;
+using Infragistics.Web.UI.GridControls;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
 {
     public partial class AssignTempDeptHead : System.Web.UI.Page
     {
+        private static readonly string sessionKey = "AssignTempDeptRepresentative";
         AssignTemporaryDepartmentRepresentativeControl atdrCtrl;
         String remove_employeeID;
         String assign_employeeID;
@@ -32,8 +34,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             if (!IsPostBack)
             {
                 FillEmployee();
+                StationeryStoreInventorySystemController.Util.PutSession(sessionKey, atdrCtrl);
+            }
+            else
+            {
+                atdrCtrl = (AssignTemporaryDepartmentRepresentativeControl)StationeryStoreInventorySystemController.Util.GetSession(sessionKey);
             }
             FillCurrentRepresentativeList();
+        }
+
+        public static void removeSession()
+        {
+            StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
         }
 
         /// <summary>
@@ -102,28 +114,37 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
             return atdrCtrl;
         }
 
-        protected void DgvCurrentAuthorizedPersonRep_RowSelectionChanged(object sender,
-            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
-        {
-            //remove_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"].ToString();
-        }
+        //protected void DgvCurrentAuthorizedPersonRep_RowSelectionChanged(object sender,
+        //    Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        //{
+        //    remove_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"].ToString();
+        //}
 
-        protected void DgvTempDepteHeadSearchDetails_RowSelectionChanged(object sender,
-            Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
-        {
-            assign_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"].ToString();
-        }
+        //protected void DgvTempDepteHeadSearchDetails_RowSelectionChanged(object sender,
+        //    Infragistics.Web.UI.GridControls.SelectedRowEventArgs e)
+        //{
+        //    assign_employeeID = e.CurrentSelectedRows[0].Attributes["EmployeeID"].ToString();
+        //}
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
+            if (DgvCurrentAuthorizedPersonRep.Behaviors.Selection.SelectedRows.Count > 0)
+                foreach (GridRecord selectedRow in DgvCurrentAuthorizedPersonRep.Behaviors.Selection.SelectedRows)
+                    remove_employeeID = selectedRow.Items.GetValue(0).ToString();
             atdrCtrl = GetControl();
-            //atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
+            atdrCtrl.SelectRemove(Convert.ToInt16(remove_employeeID));
+            DgvCurrentAuthorizedPersonRep.Rows.Clear();
         }
 
         protected void btnAssign_Click(object sender, EventArgs e)
         {
+            if (DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows.Count > 0)
+                foreach (GridRecord selected in DgvTempDepteHeadSearchDetails.Behaviors.Selection.SelectedRows)
+                    assign_employeeID = selected.Items.GetValue(0).ToString();
             atdrCtrl = GetControl();
             atdrCtrl.SelectAssign(Convert.ToInt16(assign_employeeID));
+            DgvTempDepteHeadSearchDetails.ClearDataSource();
+            FillCurrentRepresentativeList();
         }
 
         protected void btnEmployee_Click(object sender, EventArgs e)
