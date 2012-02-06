@@ -138,6 +138,9 @@ namespace SystemStoreInventorySystemUtil
                 case 5:
                     status = Constants.REQUISITION_STATUS.WITHDRAW;
                     break;
+                case 7:
+                    status = Constants.REQUISITION_STATUS.COMPLETE;
+                    break;
             }
             return status;
         }
@@ -161,6 +164,9 @@ namespace SystemStoreInventorySystemUtil
                     break;
                 case Constants.REQUISITION_STATUS.WITHDRAW:
                     status = "Withdraw";
+                    break;
+                case Constants.REQUISITION_STATUS.COMPLETE:
+                    status = "Complete";
                     break;
             }
             return status;
@@ -198,7 +204,7 @@ namespace SystemStoreInventorySystemUtil
                     status = "Need to Retrieve";
                     break;
                 case Constants.COLLECTION_STATUS.NEED_TO_COLLECT:
-                    status = "Need To Collect";
+                    status = "Incomplete";
                     break;
                 case Constants.COLLECTION_STATUS.COLLECTED:
                     status = "Collected";
