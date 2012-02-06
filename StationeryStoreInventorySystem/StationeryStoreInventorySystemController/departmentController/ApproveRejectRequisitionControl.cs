@@ -27,6 +27,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         private Employee currentEmployee;
 
         private List<Requisition> pendingRequisitionList;
+        private List<Requisition> approvedRequisitionList;
         
         private DataTable dt;
         private DataRow dr;
@@ -140,7 +141,7 @@ namespace StationeryStoreInventorySystemController.departmentController
         public void SelectRequisition(string requisitionId)
         {
             requisitionDetailsControl = new commonController.RequisitionDetailsControl();
-            requisitionDetailsControl.SelectRequisition(requisitionId);
+            requisitionDetailsControl.SelectRequisition(pendingRequisitionList.Find(delegate(Requisition req) { return requisitionId == req.Id; }));
         }
         
         /// <summary>
