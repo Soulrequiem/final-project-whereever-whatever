@@ -27,7 +27,7 @@
                     <ItemTemplate>
                         <asp:HyperLink ID="RequisitionID" runat="server"
                          Text='<%# Eval("RequisitionID" ) %>'
-                         NavigateUrl="~/commonUI/RequisitionDetails.aspx" >
+                         NavigateUrl='<%# Eval("RequisitionID","~/commonUI/RequisitionDetails.aspx?ReqID={0}") %>'>
                         </asp:HyperLink>
                      </ItemTemplate>
                    <Header Text="Requisition ID" />
