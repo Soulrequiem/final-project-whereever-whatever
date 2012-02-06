@@ -171,8 +171,9 @@
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label11" runat="server" 
                         Text="<%$ Resources:WebResources, RequisitionDetails_Label_Text%>"/>
                     <ig:WebDataGrid ID="dgvStationeryDetailsList" runat="server" Height="200px" Width="570px" 
-                        DefaultColumnWidth="50px" AutoGenerateColumns="False" EnableDataViewState="true"
-                        CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" DataKeyFields="ItemNo"
+                        DefaultColumnWidth="50px" AutoGenerateColumns="False" EnableDataViewState="True"
+                        CssClass="DefaultGridViewStyle" 
+                        HeaderCaptionCssClass="HeaderGridViewStyle" DataKeyFields="ItemNo"
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         
@@ -186,17 +187,17 @@
                             Width="270px">
                             <Header Text="Item Description" />
                         </ig:BoundDataField>
-                       <%-- <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="80px">
+                        <ig:BoundDataField DataFieldName="RequiredQty" Key="RequiredQty" Width="160px">
                             <Header Text="Required Qty" />
-                        </ig:BoundDataField>--%>
-                        <ig:TemplateDataField  Key="RequiredQty" Width="160px">
+                        </ig:BoundDataField>
+                        <%--<ig:TemplateDataField  Key="RequiredQty" Width="160px">
                             <ItemTemplate>
-                                <ig:WebNumericEditor ID="RequiredQty" runat="server" Width="140px"
+                                <ig:WebTextEditor ID="RequiredQty" runat="server" Width="140px"
                                 Text='<%# Eval("RequiredQty") %>' NullText="Enter Required Quantity">
-                                </ig:WebNumericEditor>
+                                </ig:WebTextEditor>
                             </ItemTemplate>
                             <Header Text="Required Qty" />
-                        </ig:TemplateDataField>
+                        </ig:TemplateDataField>--%>
                         
                     </Columns>
                         <Behaviors>
@@ -213,13 +214,17 @@
                                             <ig:EditingColumnSetting ColumnKey="RequestStationeryCheckBox" />
                                             <ig:EditingColumnSetting ColumnKey="ItemNo" ReadOnly="True" />
                                             <ig:EditingColumnSetting ColumnKey="ItemDescription" ReadOnly="True" />
-                                            <ig:EditingColumnSetting ColumnKey="RequiredQty" />
+                                            <ig:EditingColumnSetting ColumnKey="RequiredQty"/>
                                         </ColumnSettings>
                                     </ig:CellEditing>
                                 </Behaviors>
                             </ig:EditingCore>
                         </Behaviors>
                  </ig:WebDataGrid>
+                 <div style="float:left">
+                    <asp:Label CssClass="ErrorLabelstyle" 
+                               ID="lblStatusMessage" runat="server"/>
+                 </div>
                  <div style="float:right;margin-right:15px">
                     <asp:Button ID="btnRequest" CssClass="DefaultLargebutton"
                         runat="server" Text="<%$ Resources:WebResources,Request_Button_text %>" 
