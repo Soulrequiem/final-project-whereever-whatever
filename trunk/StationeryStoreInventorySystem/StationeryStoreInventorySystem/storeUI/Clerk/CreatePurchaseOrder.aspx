@@ -40,7 +40,7 @@
                                      DropDownAnimationType="EaseIn"
                                      StyleSetName="Office2010Blue" 
                                      AutoFilterQueryType="Contains"
-                                     NullText="Select Supplier" EnableViewState="true" >
+                                     NullText="Select Supplier" ViewStateMode="Enabled" EnableViewState="true" >
                                      <AutoPostBackFlags SelectionChanged="On" />
                                 </ig:WebDropDown>
                     </td>
@@ -51,8 +51,7 @@
                     </td>
                     <td style="width:250px">
                         <asp:Label CssClass="DefaultLabelstyle" 
-                           ID="lblPONumber" runat="server" 
-                           Text="201201068"/><br />
+                           ID="lblPONumber" runat="server"/><br />
                     </td>
                 </tr>
                 <tr>
@@ -111,7 +110,9 @@
                         <td style="width:250px">
                             <ig:WebDropDown ID="drdItemList" runat="server" Width="220px" 
                                      DropDownAnimationType="EaseIn" NullText="Enter Item Description" 
-                                     StyleSetName="Office2010Blue">
+                                     StyleSetName="Office2010Blue" 
+                                onselectionchanged="drdItemList_SelectionChanged" 
+                                onvaluechanged="drdItemList_ValueChanged">
                                     <Button Visible="False" />
                              </ig:WebDropDown>
                         </td>
@@ -134,8 +135,7 @@
                         </td>
                         <td style="width:250px">
                             <asp:Label CssClass="DefaultLabelstyle" ID="lblItemNumber"
-                             runat="server" 
-                             Text="Blah Blah"/>
+                             runat="server"/>
                         </td>
                         <td>
                             <asp:Label CssClass="DefaultLabelstyle" 
