@@ -161,13 +161,11 @@
             <Template>
                 <ig:WebDataGrid ID="DgvPurchaseOrderInput" runat="server" Height="300px" 
                     Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
-                    CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
+                    CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" EnableDataViewState = "true"
                     ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
-                        <ig:BoundCheckBoxField DataFieldName="CreatePurchaseOrderCheckBox" 
-                            Key="CreatePurchaseOrderCheckBox" Width="50px">
-                            <Header Text="BoundCheckBoxField_0" />
-                        </ig:BoundCheckBoxField>
+                        <ig:UnboundCheckBoxField Key="CreatePurchaseOrderCheckBox" Width="50px">
+                        </ig:UnboundCheckBoxField>
                         <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
                             <Header Text="Item No" />
                         </ig:BoundDataField>
