@@ -226,14 +226,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         private bool ValidateScreen()
         {
-            bool isChecked = true;
+            //bool isChecked = true;
             decimal isNumber = 0;
             for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
             {
-                if ((bool)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value == false)
-                    isChecked = false;
-                else
-                    isChecked = true;
+                //if ((bool)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value == false)
+                //    isChecked = false;
+                //else
+                //    isChecked = true;
 
 
                     if (decimal.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out isNumber) == false ||
@@ -243,11 +243,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                         return false;
                     }
             }
-            if (isChecked == false)
-            {
-                lblStatusMessage.Text = "Please select items.";
-                return false;
-            }
+            //if (isChecked == false)
+            //{
+            //    lblStatusMessage.Text = "Please select items.";
+            //    return false;
+            //}
 
             return true;
         }
