@@ -293,7 +293,7 @@ namespace StationeryStoreInventorySystemController
                     dr = employeeTable.NewRow();
                     dr["EmployeeID"] = employee.Id;
                     dr["EmployeeName"] = employee.Name;
-                    dr["Designation"] = employee.Designation;
+                    dr["Designation"] = Converter.GetDesignationText(Converter.objToDesignation(employee.Designation)); 
                     dr["JoiningDate"] = employee.CreatedDate;
                     dr["DepartmentID"] = employee.Department.Id;
                     employeeTable.Rows.Add(dr);
@@ -315,7 +315,11 @@ namespace StationeryStoreInventorySystemController
             Employee employee = new Employee();
             employee.Id = employeeId;
             employee = employeeBroker.GetEmployee(employee);
-            employee.Role.Id = Converter.objToInt(Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE);
+
+            Role assignRole = new Role();
+            assignRole.Id = Converter.objToInt(role);
+            assignRole = employeeBroker.GetRole(assignRole);
+            employee.Role = assignRole;
 
             status = employeeBroker.Update(employee);
 
@@ -352,19 +356,26 @@ namespace StationeryStoreInventorySystemController
 
             IEmployeeBroker employeeBroker = new EmployeeBroker(inventory);
             Employee lEmployee = employeeBroker.GetCurrentTempRep(Util.GetEmployee());
-            DataTable dtEmployee = new DataTable();
-            dtEmployee.Columns.Add("EmployeeID");
-            dtEmployee.Columns.Add("EmployeeName");
-            dtEmployee.Columns.Add("Designation");
-            dtEmployee.Columns.Add("JoiningDate");
-            //foreach (Employee emp in lEmployee)
-            //{
+
+            if (lEmployee != null)
+            {
+                DataTable dtEmployee = new DataTable();
+                dtEmployee.Columns.Add("EmployeeID");
+                dtEmployee.Columns.Add("EmployeeName");
+                dtEmployee.Columns.Add("Designation");
+                dtEmployee.Columns.Add("JoiningDate");
+                //foreach (Employee emp in lEmployee)
+                //{
                 DataRow dr = dtEmployee.NewRow();
-                dr[0] = lEmployee.Id;
-                dr[1] = lEmployee.Name;
+                dr["EmployeeID"] = lEmployee.Id;
+                dr["EmployeeName"] = lEmployee.Name;
+                dr["Designation"] = SystemStoreInventorySystemUtil.Converter.GetDesignationText(SystemStoreInventorySystemUtil.Converter.objToDesignation(lEmployee.Designation));
+                dr["JoiningDate"] = SystemStoreInventorySystemUtil.Converter.dateTimeToString(Converter.DATE_CONVERTER.DATE, lEmployee.CreatedDate);
                 dtEmployee.Rows.Add(dr);
-            //}
-            return dtEmployee;
+                //}
+                return dtEmployee;
+            }
+            return null;
         }
 
         public static DataTable GetCurrentRepresentative()
@@ -373,6 +384,8 @@ namespace StationeryStoreInventorySystemController
 
             IEmployeeBroker employeeBroker = new EmployeeBroker(inventory);
             List<Employee> lEmployee = employeeBroker.GetRepresentative(Util.GetEmployee());
+if (lEmployee != null)
+            {
             DataTable dtEmployee = new DataTable();
             dtEmployee.Columns.Add("RepresentativeID");
             dtEmployee.Columns.Add("RepresentativeName");
@@ -386,6 +399,8 @@ namespace StationeryStoreInventorySystemController
                 dtEmployee.Rows.Add(dr);
             }
             return dtEmployee;
+			}
+			return null;
         }
         // return true if default page for supervisor is IssueAdjustmentVoucher
         public static bool CheckAdjustment()
@@ -398,9 +413,9 @@ namespace StationeryStoreInventorySystemController
                 {
                     foreach (DiscrepancyDetail dd in discrepancy.DiscrepancyDetails.ToList())
                     {
-                        if(dd.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW) && dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR)){
-                            return true;
-                        }
+                        //if(dd.Status == Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW) && dd.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR)){
+                        //    return true;
+                        //}
                     }
                 }
             }
@@ -414,21 +429,31 @@ namespace StationeryStoreInventorySystemController
 
             IEmployeeBroker employeeBroker = new EmployeeBroker(inventory);
             Employee lEmployee = employeeBroker.GetCurrentTemporaryDeptHead(Util.GetEmployee());
-            DataTable dtEmployee = new DataTable();
-            dtEmployee.Columns.Add("EmployeeID");
-            dtEmployee.Columns.Add("EmployeeName");
-            dtEmployee.Columns.Add("Designation");
-            dtEmployee.Columns.Add("JoiningDate");
-            //foreach (Employee emp in lEmployee)
-            //{
+
+            if (lEmployee != null)
+            {
+                DataTable dtEmployee = new DataTable();
+                dtEmployee.Columns.Add("EmployeeID");
+                dtEmployee.Columns.Add("EmployeeName");
+                dtEmployee.Columns.Add("Designation");
+                dtEmployee.Columns.Add("JoiningDate");
+                //foreach (Employee emp in lEmployee)
+                //{
                 DataRow dr = dtEmployee.NewRow();
                 dr[0] = lEmployee.Id;
                 dr[1] = lEmployee.Name;
-                dr[2] = lEmployee.Designation;
-                dr[2] = lEmployee.CreatedDate;
+                dr[2] = SystemStoreInventorySystemUtil.Converter.GetDesignationText(SystemStoreInventorySystemUtil.Converter.objToDesignation(lEmployee.Designation));
+                dr[3] = lEmployee.CreatedDate;
                 dtEmployee.Rows.Add(dr);
-            //}
-            return dtEmployee;
+                //}
+                return dtEmployee;
+            }
+            return null;
+        }
+
+        public static int GetCurrentDepartmentStatus()
+        {
+            return GetEmployee().Department.Status;
         }
 
         public static DataTable GetEmployeeDetails(string employeeName)
