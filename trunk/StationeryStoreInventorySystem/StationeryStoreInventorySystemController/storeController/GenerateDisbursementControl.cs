@@ -20,16 +20,16 @@ namespace StationeryStoreInventorySystemController.storeController
         private Employee currentEmployee;
 
         private List<Retrieval> retrievalList;
-        private List<CollectionPoint> collectionPointList;
+        //private List<CollectionPoint> collectionPointList;
 
-        private DataTable dt, dtCollectionPoint;
+        private DataTable dt;//, dtCollectionPoint;
         private DataRow dr;
 
         private string[] columnName = { "RetrievalNo", "RetrievalDate/Time", "RetrievedQty", "RetrievedBy" };
-        private string[] collectionColumnName = { "CollectionID", "CollectionPoint" };
+        //private string[] collectionColumnName = { "CollectionID", "CollectionPoint" };
 
         private DataColumn[] dataColumn;
-        private DataColumn[] collectionDataColumn; // for drop down list
+        //private DataColumn[] collectionDataColumn; // for drop down list
 
         public GenerateDisbursementControl()
         {
@@ -40,15 +40,15 @@ namespace StationeryStoreInventorySystemController.storeController
             collectionPointBroker = new CollectionPointBroker(inventory);
 
             retrievalList = retrievalBroker.GetAllRetrieval();
-            collectionPointList = collectionPointBroker.GetAllCollectionPoint();
+            //collectionPointList = collectionPointBroker.GetAllCollectionPoint();
 
             dataColumn = new DataColumn[]{ new DataColumn(columnName[0]),
                                            new DataColumn(columnName[1]),
                                            new DataColumn(columnName[2]),
                                            new DataColumn(columnName[3]) };
 
-            collectionDataColumn = new DataColumn[] { new DataColumn(collectionColumnName[0]),
-                                                      new DataColumn(collectionColumnName[1]) };
+            //collectionDataColumn = new DataColumn[] { new DataColumn(collectionColumnName[0]),
+            //                                          new DataColumn(collectionColumnName[1]) };
         }
 
         public DataTable RetrievalList
@@ -79,30 +79,30 @@ namespace StationeryStoreInventorySystemController.storeController
             }
         }
 
-        public DataTable CollectionPointList
-        {
-            get
-            {
-                if (dtCollectionPoint == null)
-                {
-                    dtCollectionPoint = new DataTable();
-                    dtCollectionPoint.Columns.AddRange(collectionDataColumn);
-                }
-                else
-                {
-                    dtCollectionPoint.Rows.Clear();
-                }
+        //public DataTable CollectionPointList
+        //{
+        //    get
+        //    {
+        //        if (dtCollectionPoint == null)
+        //        {
+        //            dtCollectionPoint = new DataTable();
+        //            dtCollectionPoint.Columns.AddRange(collectionDataColumn);
+        //        }
+        //        else
+        //        {
+        //            dtCollectionPoint.Rows.Clear();
+        //        }
 
-                foreach (CollectionPoint collectionPoint in collectionPointList)
-                {
-                    dr = dtCollectionPoint.NewRow();
-                    dr[collectionColumnName[0]] = collectionPoint.Id;
-                    dr[collectionColumnName[1]] = collectionPoint.Name;
-                    dtCollectionPoint.Rows.Add(dr);
-                }
+        //        foreach (CollectionPoint collectionPoint in collectionPointList)
+        //        {
+        //            dr = dtCollectionPoint.NewRow();
+        //            dr[collectionColumnName[0]] = collectionPoint.Id;
+        //            dr[collectionColumnName[1]] = collectionPoint.Name;
+        //            dtCollectionPoint.Rows.Add(dr);
+        //        }
 
-                return dtCollectionPoint;
-            }
-        }
+        //        return dtCollectionPoint;
+        //    }
+        //}
     }
 }
