@@ -15,6 +15,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Insert(CollectionMissed newCollectionMissed);
         Constants.DB_STATUS Update(CollectionMissed collectionMissed);
         Constants.DB_STATUS Delete(CollectionMissed collectionMissed);
+        int GetCollectionMissedId();
         //Constants.DB_STATUS Insert(CollectionMissed newCollectionMissed, Boolean isSaved);
         //Constants.DB_STATUS Update(Boolean isSaved);
         //Constants.DB_STATUS Delete(CollectionMissed collectionMissed,Boolean isSaved);
