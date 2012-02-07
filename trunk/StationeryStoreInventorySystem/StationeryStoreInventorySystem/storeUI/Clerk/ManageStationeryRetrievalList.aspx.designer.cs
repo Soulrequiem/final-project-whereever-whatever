@@ -121,15 +121,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid FulfillWebDataGrid1;
         
         /// <summary>
-        /// btnFulfillSet1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFulfillSet1;
-        
-        /// <summary>
         /// FulfillWebGroupBox2 control.
         /// </summary>
         /// <remarks>
@@ -175,22 +166,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::System.Web.UI.WebControls.Label lblFulfillNeededQty2;
         
         /// <summary>
-        /// lFulfillActualQuantity2 control.
+        /// lFulfillActualQty2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lFulfillActualQuantity2;
+        protected global::System.Web.UI.WebControls.Label lFulfillActualQty2;
         
         /// <summary>
-        /// lblFulfillActualQuantity2 control.
+        /// lblFulfillActualQty2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFulfillActualQuantity2;
+        protected global::System.Web.UI.WebControls.Label lblFulfillActualQty2;
         
         /// <summary>
         /// FulfillWebDataGrid2 control.
@@ -200,15 +191,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid FulfillWebDataGrid2;
-        
-        /// <summary>
-        /// btnFulfillSet2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFulfillSet2;
         
         /// <summary>
         /// FulfillWebGroupBox3 control.
@@ -274,22 +256,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::System.Web.UI.WebControls.Label lblFulfillActualQty3;
         
         /// <summary>
-        /// FullfillWebDataGrid3 control.
+        /// FulfillWebDataGrid3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Infragistics.Web.UI.GridControls.WebDataGrid FullfillWebDataGrid3;
-        
-        /// <summary>
-        /// btnFulfillSet3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFulfillSet3;
+        protected global::Infragistics.Web.UI.GridControls.WebDataGrid FulfillWebDataGrid3;
         
         /// <summary>
         /// FulfillWebGroupBox4 control.
@@ -364,15 +337,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid FulfillWebDataGrid4;
         
         /// <summary>
-        /// btnFulfillSet4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFulfillSet4;
-        
-        /// <summary>
         /// FulfillWebGroupBox5 control.
         /// </summary>
         /// <remarks>
@@ -443,15 +407,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Infragistics.Web.UI.GridControls.WebDataGrid FulfillWebDataGrid5;
-        
-        /// <summary>
-        /// btnFulfillSet5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFulfillSet5;
         
         /// <summary>
         /// FulfilledPaginating control.

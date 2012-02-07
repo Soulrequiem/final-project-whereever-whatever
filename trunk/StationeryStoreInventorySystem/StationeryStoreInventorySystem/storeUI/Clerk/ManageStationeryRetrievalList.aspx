@@ -110,12 +110,12 @@
                                     </ig:WebDataGrid>
                             </td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td colspan="2" align="right">
                                 <asp:Button ID="btnFulfillSet1" style="width:200px" runat="server" CssClass="DefaultLargebutton"
                                     Text="Set Based On Request Sequence" onclick="btnGenerate_Click" />
                             </td>
-                        </tr>                    
+                        </tr>    --%>                
                     </table>
                 </Template>
     </igmisc:WebGroupBox>
@@ -149,10 +149,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Label ID="lFulfillActualQuantity2" CssClass="DefaultLabelstyle" Text="<%$ Resources:WebResources, ManageStationeryRetrievalList_ActualQty%>" runat="server"></asp:Label>
+                                            <asp:Label ID="lFulfillActualQty2" CssClass="DefaultLabelstyle" Text="<%$ Resources:WebResources, ManageStationeryRetrievalList_ActualQty%>" runat="server"></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblFulfillActualQuantity2" CssClass="DefaultLabelstyle" runat="server"></asp:Label>
+                                            <asp:Label ID="lblFulfillActualQty2" CssClass="DefaultLabelstyle" runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
@@ -195,12 +195,12 @@
                                     </ig:WebDataGrid>
                             </td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td colspan="2" align="right">
                                 <asp:Button ID="btnFulfillSet2" style="width:200px" runat="server" CssClass="DefaultLargebutton"
                                     Text="Set Based On Request Sequence" onclick="btnGenerate_Click" />
                             </td>
-                        </tr>   
+                        </tr>   --%>
                     </table>
                 </Template>
     </igmisc:WebGroupBox>
@@ -243,7 +243,7 @@
                                 </table>
                             </td>
                             <td>
-                                <ig:WebDataGrid ID="FullfillWebDataGrid3" runat="server" 
+                                <ig:WebDataGrid ID="FulfillWebDataGrid3" runat="server" 
                                     Height="150px" Width="400px" DefaultColumnWidth="50px" 
                                     AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" EnableDataViewState="true"
                                     HeaderCaptionCssClass="HeaderGridViewStyle" DataKeyFields="Department"
@@ -280,12 +280,12 @@
                                     </ig:WebDataGrid>
                             </td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td colspan="2" align="right">
                                 <asp:Button ID="btnFulfillSet3" style="width:200px" runat="server" CssClass="DefaultLargebutton"
                                     Text="Set Based On Request Sequence" onclick="btnGenerate_Click" />
                             </td>
-                        </tr>   
+                        </tr>   --%>
                     </table>
                 </Template>
     </igmisc:WebGroupBox>
@@ -365,13 +365,13 @@
                                     </ig:WebDataGrid>
                             </td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td colspan="2" align="right">
                                 <asp:Button ID="btnFulfillSet4" style="width:200px" runat="server" CssClass="DefaultLargebutton"
                                     Text="Set Based On Request Sequence" onclick="btnGenerate_Click" />
                             </td>
-                        </tr>   
-                    </table>
+                        </tr>  --%>
+                        </table>
                 </Template>
     </igmisc:WebGroupBox>
 
@@ -450,17 +450,17 @@
                                     </ig:WebDataGrid>
                             </td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td colspan="2" align="right">
                                 <asp:Button ID="btnFulfillSet5" style="width:200px" runat="server" CssClass="DefaultLargebutton"
                                     Text="Set Based On Request Sequence" onclick="btnGenerate_Click" />
                             </td>
-                        </tr>   
+                        </tr>   --%>
                     </table>
                 </Template>
     </igmisc:WebGroupBox>
 
-    <asp:Panel ID="FulfilledPaginating" runat="server">
+    <asp:Panel ID="FulfilledPaginating" HorizontalAlign="Right" runat="server">
     
     </asp:Panel>
     </div>
@@ -904,7 +904,7 @@
 
     <div style="float: right">
     <asp:Button ID="btnSubmit" style="width:150px" runat="server" CssClass="DefaultLargebutton"
-        Text="Submit Actual Quantity" onclick="btnGenerate_Click" />
+        Text="Submit Actual Quantity" onclick="btnSubmit_Click" />
     </div>
     <span style="clear: both"></span>
 
