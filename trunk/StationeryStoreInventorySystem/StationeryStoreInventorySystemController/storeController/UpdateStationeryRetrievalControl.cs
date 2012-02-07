@@ -24,15 +24,16 @@ namespace StationeryStoreInventorySystemController.storeController
         private IRetrievalBroker retrievalBroker;
         private InventoryEntities inventory;
         private IRequisitionCollectionBroker requisitionCollectionBroker;
-
+        private ICollectionMissedBroker collectionMissedBroker;
         private Employee currentEmployee;
+        private IEmployeeBroker employeeBroker;
 
         List<RequisitionCollection> collectionList;
 
         private DataTable dt;
         private DataRow dr;
 
-        private string[] columnName = { "collectionId", "collectionPoint", "collectionDate/Time", "departmentRepresentativeName", "departmentName", "collectionStatus" };
+        private string[] columnName = { "CollectionID", "collectionPoint", "collectionDate/Time", "departmentRepresentativeName", "departmentName", "collectionStatus" };
 
         private DataColumn[] dataColumn;
 
@@ -41,10 +42,12 @@ namespace StationeryStoreInventorySystemController.storeController
             currentEmployee = Util.ValidateUser(Constants.EMPLOYEE_ROLE.STORE_CLERK);
 
             inventory = new InventoryEntities();
+            collectionMissedBroker = new CollectionMissedBroker(inventory);
+            employeeBroker = new EmployeeBroker(inventory);
             retrievalBroker = new RetrievalBroker(inventory);
             requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
 
-            collectionList = requisitionCollectionBroker.GetAllRequisitionCollection();
+            //collectionList = requisitionCollectionBroker.GetAllRequisitionCollection();
 
             dataColumn = new DataColumn[] { new DataColumn(columnName[0]),
                                             new DataColumn(columnName[1]),
@@ -77,7 +80,7 @@ namespace StationeryStoreInventorySystemController.storeController
             {
                 dt.Rows.Clear();
             }
-
+            collectionList = requisitionCollectionBroker.GetAllRequisitionCollection();
             foreach (RequisitionCollection temp in collectionList)
             {
                 dr = dt.NewRow();
@@ -91,9 +94,30 @@ namespace StationeryStoreInventorySystemController.storeController
             }
             return dt;
         }
-
+        
         public Constants.ACTION_STATUS SetCollectionStatus(Constants.COLLECTION_STATUS collectionStatus, List<string> collectionIdList)
         {
+            foreach (string collectionId in collectionIdList)
+            {
+                RequisitionCollection requisitionCollection = new RequisitionCollection();
+                requisitionCollection.Id = Converter.objToInt(collectionId);
+                requisitionCollection = requisitionCollectionBroker.GetRequisitionCollection(requisitionCollection);
+                requisitionCollection.Status = Converter.objToInt(collectionStatus);
+                requisitionCollectionBroker.Update(requisitionCollection);
+                if (collectionStatus == Constants.COLLECTION_STATUS.UNCOLLECTED)
+                {
+                    CollectionMissed collectionMissed = new CollectionMissed();
+                    collectionMissed.Id = collectionMissedBroker.GetCollectionMissedId();
+                    collectionMissed.Department = requisitionCollection.Department;
+                    collectionMissed.CreatedBy = Util.GetEmployee(employeeBroker);
+                    collectionMissed.CreatedDate = DateTime.Now;
+                    collectionMissed.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+                    collectionMissedBroker.Insert(collectionMissed);
+                }
+            }
+
+           
+        
             return SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.UNKNOWN;
         }
     }
