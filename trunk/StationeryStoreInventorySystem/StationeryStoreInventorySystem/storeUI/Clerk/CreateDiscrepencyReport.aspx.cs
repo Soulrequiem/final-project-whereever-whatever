@@ -69,29 +69,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         /// <param name="e"></param>
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            //DataTable dtGridItems = (DataTable)Session["DiscrepencyItems"];
-            //if (dtGridItems == null)
-            //{
-            //    dtGridItems = new DataTable();
-
-            //    foreach (string columnName in dgvItemList.Columns)
-            //    {
-            //        dtGridItems.Columns.Add(columnName);
-            //    }
-            //}
-
-
-            //DataRow dr = dtGridItems.NewRow();
-            //dr[0] = false;
-            //dr[1] = lblItemNumber.Text;
-            //dr[2] = drdItemList.SelectedItem.Text;
-            //dr[3] = txtQuantity.Text;
-            //dr[4] = lblItemPrice.Text;
-            //dr[5] = txtReason.Text;
-           
-            //dtGridItems.Rows.Add(dr);
             createDiscrepancyReportControl.SelectAdd(lblItemNumber.Text, Converter.objToInt(txtQuantity.Text), txtReason.Text);
-            //Session["DiscrepencyItems"] = dtGridItems;
             FillItemsGridView();
 
             drdItemList.CurrentValue = "";
