@@ -12,9 +12,11 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         int GetRequisitionCollectionId();
         RequisitionCollectionDetail GetRequisitionCollectionDetail(RequisitionCollectionDetail requisitionCollectionDetail);
         List<RequisitionCollectionDetail> GetAllRequisitionCollectionDetail();
+        RequisitionCollectionDetail GetAllRequisitionCollectionDetail(string requisitionID);
         Constants.DB_STATUS Insert(RequisitionCollectionDetail newRequisitionCollectionDetail);
         Constants.DB_STATUS Update(RequisitionCollectionDetail requisitionCollectionDetail);
         Constants.DB_STATUS Delete(RequisitionCollectionDetail requisitionCollectionDetail);
+        RequisitionCollection GetAllRequisitionCollectionByRequisitionCollectionID(string RCId);
         //Constants.DB_STATUS Insert(RequisitionCollectionDetail newRequisitionCollectionDetail,Boolean isSaved);
         //Constants.DB_STATUS Update(Boolean isSaved);
         //Constants.DB_STATUS Delete(RequisitionCollectionDetail requisitionCollectionDetail,Boolean isSaved);
