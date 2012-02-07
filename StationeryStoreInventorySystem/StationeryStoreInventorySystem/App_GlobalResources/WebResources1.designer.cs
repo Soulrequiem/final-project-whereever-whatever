@@ -664,6 +664,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual Qty.
+        /// </summary>
+        internal static string ManageStationeryRetrievalList_ActualQty {
+            get {
+                return ResourceManager.GetString("ManageStationeryRetrievalList_ActualQty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bin.
+        /// </summary>
+        internal static string ManageStationeryRetrievalList_Bin {
+            get {
+                return ResourceManager.GetString("ManageStationeryRetrievalList_Bin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Needed Qty.
+        /// </summary>
+        internal static string ManageStationeryRetrievalList_NeededQty {
+            get {
+                return ResourceManager.GetString("ManageStationeryRetrievalList_NeededQty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieval No.
+        /// </summary>
+        internal static string ManageStationeryRetrievalList_RetrievalNo {
+            get {
+                return ResourceManager.GetString("ManageStationeryRetrievalList_RetrievalNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Stationery Retrieval List.
+        /// </summary>
+        internal static string ManageStationeryRetrievalList_Title {
+            get {
+                return ResourceManager.GetString("ManageStationeryRetrievalList_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;copy;Copyright 2012-2013 Logic University. All Rights Reserved..
         /// </summary>
         internal static string MasterPageFooter_Text {
