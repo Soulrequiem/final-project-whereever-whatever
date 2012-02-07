@@ -142,8 +142,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             {
                 if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvRequisitionList.Rows[i].Items.FindItemByKey("CheckRequisitionCheckBox").Value) == true)
                 {
-                    
-                    remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks").FindControl("remarks")).Text);
+                    //if (null != dgvRequisitionList.Rows[i].Items.FindItemByKey("remarks"))
+                    remarksList.Add(i.ToString(), dgvRequisitionList.Rows[i].Items[5].Text);
                     
                 }
             }
