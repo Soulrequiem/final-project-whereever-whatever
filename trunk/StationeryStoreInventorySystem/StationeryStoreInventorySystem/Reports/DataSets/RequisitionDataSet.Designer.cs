@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
+namespace StationeryStoreInventorySystem.Reports.DataSets {
     
     
     /// <summary>
@@ -20,17 +20,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSRequisitionDetails")]
+    [global::System.Xml.Serialization.XmlRootAttribute("RequisitionDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSRequisitionDetails : global::System.Data.DataSet {
+    public partial class RequisitionDataSet : global::System.Data.DataSet {
         
-        private RequisitionsDataTable tableRequisitions;
+        private RequisitionDataTable tableRequisition;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DSRequisitionDetails() {
+        public RequisitionDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSRequisitionDetails(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected RequisitionDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Requisitions"] != null)) {
-                    base.Tables.Add(new RequisitionsDataTable(ds.Tables["Requisitions"]));
+                if ((ds.Tables["Requisition"] != null)) {
+                    base.Tables.Add(new RequisitionDataTable(ds.Tables["Requisition"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public RequisitionsDataTable Requisitions {
+        public RequisitionDataTable Requisition {
             get {
-                return this.tableRequisitions;
+                return this.tableRequisition;
             }
         }
         
@@ -127,7 +127,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DSRequisitionDetails cln = ((DSRequisitionDetails)(base.Clone()));
+            RequisitionDataSet cln = ((RequisitionDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Requisitions"] != null)) {
-                    base.Tables.Add(new RequisitionsDataTable(ds.Tables["Requisitions"]));
+                if ((ds.Tables["Requisition"] != null)) {
+                    base.Tables.Add(new RequisitionDataTable(ds.Tables["Requisition"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableRequisitions = ((RequisitionsDataTable)(base.Tables["Requisitions"]));
+            this.tableRequisition = ((RequisitionDataTable)(base.Tables["Requisition"]));
             if ((initTable == true)) {
-                if ((this.tableRequisitions != null)) {
-                    this.tableRequisitions.InitVars();
+                if ((this.tableRequisition != null)) {
+                    this.tableRequisition.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DSRequisitionDetails";
+            this.DataSetName = "RequisitionDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DSRequisitionDetails.xsd";
+            this.Namespace = "http://tempuri.org/RequisitionDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableRequisitions = new RequisitionsDataTable();
-            base.Tables.Add(this.tableRequisitions);
+            this.tableRequisition = new RequisitionDataTable();
+            base.Tables.Add(this.tableRequisition);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeRequisitions() {
+        private bool ShouldSerializeRequisition() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DSRequisitionDetails ds = new DSRequisitionDetails();
+            RequisitionDataSet ds = new RequisitionDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,14 +270,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void RequisitionsRowChangeEventHandler(object sender, RequisitionsRowChangeEvent e);
+        public delegate void RequisitionRowChangeEventHandler(object sender, RequisitionRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class RequisitionsDataTable : global::System.Data.TypedTableBase<RequisitionsRow> {
+        public partial class RequisitionDataTable : global::System.Data.TypedTableBase<RequisitionRow> {
             
             private global::System.Data.DataColumn columnItemNo;
             
@@ -287,8 +287,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RequisitionsDataTable() {
-                this.TableName = "Requisitions";
+            public RequisitionDataTable() {
+                this.TableName = "Requisition";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -296,7 +296,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal RequisitionsDataTable(global::System.Data.DataTable table) {
+            internal RequisitionDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -313,7 +313,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected RequisitionsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected RequisitionDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -353,47 +353,47 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RequisitionsRow this[int index] {
+            public RequisitionRow this[int index] {
                 get {
-                    return ((RequisitionsRow)(this.Rows[index]));
+                    return ((RequisitionRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RequisitionsRowChangeEventHandler RequisitionsRowChanging;
+            public event RequisitionRowChangeEventHandler RequisitionRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RequisitionsRowChangeEventHandler RequisitionsRowChanged;
+            public event RequisitionRowChangeEventHandler RequisitionRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RequisitionsRowChangeEventHandler RequisitionsRowDeleting;
+            public event RequisitionRowChangeEventHandler RequisitionRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RequisitionsRowChangeEventHandler RequisitionsRowDeleted;
+            public event RequisitionRowChangeEventHandler RequisitionRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddRequisitionsRow(RequisitionsRow row) {
+            public void AddRequisitionRow(RequisitionRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RequisitionsRow AddRequisitionsRow(string ItemNo, string ItemDescription, string RequiredQty) {
-                RequisitionsRow rowRequisitionsRow = ((RequisitionsRow)(this.NewRow()));
+            public RequisitionRow AddRequisitionRow(string ItemNo, string ItemDescription, string RequiredQty) {
+                RequisitionRow rowRequisitionRow = ((RequisitionRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ItemNo,
                         ItemDescription,
                         RequiredQty};
-                rowRequisitionsRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowRequisitionsRow);
-                return rowRequisitionsRow;
+                rowRequisitionRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRequisitionRow);
+                return rowRequisitionRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                RequisitionsDataTable cln = ((RequisitionsDataTable)(base.Clone()));
+                RequisitionDataTable cln = ((RequisitionDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -401,7 +401,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new RequisitionsDataTable();
+                return new RequisitionDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -425,28 +425,28 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RequisitionsRow NewRequisitionsRow() {
-                return ((RequisitionsRow)(this.NewRow()));
+            public RequisitionRow NewRequisitionRow() {
+                return ((RequisitionRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new RequisitionsRow(builder);
+                return new RequisitionRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(RequisitionsRow);
+                return typeof(RequisitionRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.RequisitionsRowChanged != null)) {
-                    this.RequisitionsRowChanged(this, new RequisitionsRowChangeEvent(((RequisitionsRow)(e.Row)), e.Action));
+                if ((this.RequisitionRowChanged != null)) {
+                    this.RequisitionRowChanged(this, new RequisitionRowChangeEvent(((RequisitionRow)(e.Row)), e.Action));
                 }
             }
             
@@ -454,8 +454,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.RequisitionsRowChanging != null)) {
-                    this.RequisitionsRowChanging(this, new RequisitionsRowChangeEvent(((RequisitionsRow)(e.Row)), e.Action));
+                if ((this.RequisitionRowChanging != null)) {
+                    this.RequisitionRowChanging(this, new RequisitionRowChangeEvent(((RequisitionRow)(e.Row)), e.Action));
                 }
             }
             
@@ -463,8 +463,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.RequisitionsRowDeleted != null)) {
-                    this.RequisitionsRowDeleted(this, new RequisitionsRowChangeEvent(((RequisitionsRow)(e.Row)), e.Action));
+                if ((this.RequisitionRowDeleted != null)) {
+                    this.RequisitionRowDeleted(this, new RequisitionRowChangeEvent(((RequisitionRow)(e.Row)), e.Action));
                 }
             }
             
@@ -472,14 +472,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.RequisitionsRowDeleting != null)) {
-                    this.RequisitionsRowDeleting(this, new RequisitionsRowChangeEvent(((RequisitionsRow)(e.Row)), e.Action));
+                if ((this.RequisitionRowDeleting != null)) {
+                    this.RequisitionRowDeleting(this, new RequisitionRowChangeEvent(((RequisitionRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveRequisitionsRow(RequisitionsRow row) {
+            public void RemoveRequisitionRow(RequisitionRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -488,7 +488,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DSRequisitionDetails ds = new DSRequisitionDetails();
+                RequisitionDataSet ds = new RequisitionDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -506,7 +506,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "RequisitionsDataTable";
+                attribute2.FixedValue = "RequisitionDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -550,15 +550,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class RequisitionsRow : global::System.Data.DataRow {
+        public partial class RequisitionRow : global::System.Data.DataRow {
             
-            private RequisitionsDataTable tableRequisitions;
+            private RequisitionDataTable tableRequisition;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal RequisitionsRow(global::System.Data.DataRowBuilder rb) : 
+            internal RequisitionRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableRequisitions = ((RequisitionsDataTable)(this.Table));
+                this.tableRequisition = ((RequisitionDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -566,14 +566,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public string ItemNo {
                 get {
                     try {
-                        return ((string)(this[this.tableRequisitions.ItemNoColumn]));
+                        return ((string)(this[this.tableRequisition.ItemNoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ItemNo\' in table \'Requisitions\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemNo\' in table \'Requisition\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRequisitions.ItemNoColumn] = value;
+                    this[this.tableRequisition.ItemNoColumn] = value;
                 }
             }
             
@@ -582,14 +582,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public string ItemDescription {
                 get {
                     try {
-                        return ((string)(this[this.tableRequisitions.ItemDescriptionColumn]));
+                        return ((string)(this[this.tableRequisition.ItemDescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ItemDescription\' in table \'Requisitions\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemDescription\' in table \'Requisition\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRequisitions.ItemDescriptionColumn] = value;
+                    this[this.tableRequisition.ItemDescriptionColumn] = value;
                 }
             }
             
@@ -598,51 +598,51 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public string RequiredQty {
                 get {
                     try {
-                        return ((string)(this[this.tableRequisitions.RequiredQtyColumn]));
+                        return ((string)(this[this.tableRequisition.RequiredQtyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RequiredQty\' in table \'Requisitions\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'RequiredQty\' in table \'Requisition\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRequisitions.RequiredQtyColumn] = value;
+                    this[this.tableRequisition.RequiredQtyColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsItemNoNull() {
-                return this.IsNull(this.tableRequisitions.ItemNoColumn);
+                return this.IsNull(this.tableRequisition.ItemNoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetItemNoNull() {
-                this[this.tableRequisitions.ItemNoColumn] = global::System.Convert.DBNull;
+                this[this.tableRequisition.ItemNoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsItemDescriptionNull() {
-                return this.IsNull(this.tableRequisitions.ItemDescriptionColumn);
+                return this.IsNull(this.tableRequisition.ItemDescriptionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetItemDescriptionNull() {
-                this[this.tableRequisitions.ItemDescriptionColumn] = global::System.Convert.DBNull;
+                this[this.tableRequisition.ItemDescriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsRequiredQtyNull() {
-                return this.IsNull(this.tableRequisitions.RequiredQtyColumn);
+                return this.IsNull(this.tableRequisition.RequiredQtyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetRequiredQtyNull() {
-                this[this.tableRequisitions.RequiredQtyColumn] = global::System.Convert.DBNull;
+                this[this.tableRequisition.RequiredQtyColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -650,22 +650,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class RequisitionsRowChangeEvent : global::System.EventArgs {
+        public class RequisitionRowChangeEvent : global::System.EventArgs {
             
-            private RequisitionsRow eventRow;
+            private RequisitionRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RequisitionsRowChangeEvent(RequisitionsRow row, global::System.Data.DataRowAction action) {
+            public RequisitionRowChangeEvent(RequisitionRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RequisitionsRow Row {
+            public RequisitionRow Row {
                 get {
                     return this.eventRow;
                 }

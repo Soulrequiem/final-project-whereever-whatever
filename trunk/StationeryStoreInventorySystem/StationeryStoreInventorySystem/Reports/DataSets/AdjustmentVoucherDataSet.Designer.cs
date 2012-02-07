@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
+namespace StationeryStoreInventorySystem.Reports.DataSets {
     
     
     /// <summary>
@@ -20,9 +20,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSAdjustmentVoucher")]
+    [global::System.Xml.Serialization.XmlRootAttribute("AdjustmentVoucherDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSAdjustmentVoucher : global::System.Data.DataSet {
+    public partial class AdjustmentVoucherDataSet : global::System.Data.DataSet {
         
         private AdjustmentVoucherDataTable tableAdjustmentVoucher;
         
@@ -30,7 +30,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DSAdjustmentVoucher() {
+        public AdjustmentVoucherDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSAdjustmentVoucher(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected AdjustmentVoucherDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DSAdjustmentVoucher cln = ((DSAdjustmentVoucher)(base.Clone()));
+            AdjustmentVoucherDataSet cln = ((AdjustmentVoucherDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DSAdjustmentVoucher";
+            this.DataSetName = "AdjustmentVoucherDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DSAdjustmentVoucher.xsd";
+            this.Namespace = "http://tempuri.org/AdjustmentVoucherDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableAdjustmentVoucher = new AdjustmentVoucherDataTable();
@@ -225,7 +225,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DSAdjustmentVoucher ds = new DSAdjustmentVoucher();
+            AdjustmentVoucherDataSet ds = new AdjustmentVoucherDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -279,9 +279,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class AdjustmentVoucherDataTable : global::System.Data.TypedTableBase<AdjustmentVoucherRow> {
             
-            private global::System.Data.DataColumn columnItemCode;
+            private global::System.Data.DataColumn columnItemNo;
             
-            private global::System.Data.DataColumn columnQuantity_adjusted;
+            private global::System.Data.DataColumn columnQuantityAdjusted;
             
             private global::System.Data.DataColumn columnReason;
             
@@ -320,17 +320,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ItemCodeColumn {
+            public global::System.Data.DataColumn ItemNoColumn {
                 get {
-                    return this.columnItemCode;
+                    return this.columnItemNo;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Quantity_adjustedColumn {
+            public global::System.Data.DataColumn QuantityAdjustedColumn {
                 get {
-                    return this.columnQuantity_adjusted;
+                    return this.columnQuantityAdjusted;
                 }
             }
             
@@ -379,11 +379,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AdjustmentVoucherRow AddAdjustmentVoucherRow(string ItemCode, string Quantity_adjusted, string Reason) {
+            public AdjustmentVoucherRow AddAdjustmentVoucherRow(string ItemNo, string QuantityAdjusted, string Reason) {
                 AdjustmentVoucherRow rowAdjustmentVoucherRow = ((AdjustmentVoucherRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ItemCode,
-                        Quantity_adjusted,
+                        ItemNo,
+                        QuantityAdjusted,
                         Reason};
                 rowAdjustmentVoucherRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAdjustmentVoucherRow);
@@ -407,18 +407,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnItemCode = base.Columns["ItemCode"];
-                this.columnQuantity_adjusted = base.Columns["Quantity adjusted"];
+                this.columnItemNo = base.Columns["ItemNo"];
+                this.columnQuantityAdjusted = base.Columns["QuantityAdjusted"];
                 this.columnReason = base.Columns["Reason"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnItemCode = new global::System.Data.DataColumn("ItemCode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnItemCode);
-                this.columnQuantity_adjusted = new global::System.Data.DataColumn("Quantity adjusted", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQuantity_adjusted);
+                this.columnItemNo = new global::System.Data.DataColumn("ItemNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItemNo);
+                this.columnQuantityAdjusted = new global::System.Data.DataColumn("QuantityAdjusted", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantityAdjusted);
                 this.columnReason = new global::System.Data.DataColumn("Reason", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnReason);
             }
@@ -488,7 +488,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DSAdjustmentVoucher ds = new DSAdjustmentVoucher();
+                AdjustmentVoucherDataSet ds = new AdjustmentVoucherDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -563,33 +563,33 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ItemCode {
+            public string ItemNo {
                 get {
                     try {
-                        return ((string)(this[this.tableAdjustmentVoucher.ItemCodeColumn]));
+                        return ((string)(this[this.tableAdjustmentVoucher.ItemNoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ItemCode\' in table \'AdjustmentVoucher\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemNo\' in table \'AdjustmentVoucher\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableAdjustmentVoucher.ItemCodeColumn] = value;
+                    this[this.tableAdjustmentVoucher.ItemNoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Quantity_adjusted {
+            public string QuantityAdjusted {
                 get {
                     try {
-                        return ((string)(this[this.tableAdjustmentVoucher.Quantity_adjustedColumn]));
+                        return ((string)(this[this.tableAdjustmentVoucher.QuantityAdjustedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Quantity adjusted\' in table \'AdjustmentVoucher\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'QuantityAdjusted\' in table \'AdjustmentVoucher\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableAdjustmentVoucher.Quantity_adjustedColumn] = value;
+                    this[this.tableAdjustmentVoucher.QuantityAdjustedColumn] = value;
                 }
             }
             
@@ -611,26 +611,26 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsItemCodeNull() {
-                return this.IsNull(this.tableAdjustmentVoucher.ItemCodeColumn);
+            public bool IsItemNoNull() {
+                return this.IsNull(this.tableAdjustmentVoucher.ItemNoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetItemCodeNull() {
-                this[this.tableAdjustmentVoucher.ItemCodeColumn] = global::System.Convert.DBNull;
+            public void SetItemNoNull() {
+                this[this.tableAdjustmentVoucher.ItemNoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsQuantity_adjustedNull() {
-                return this.IsNull(this.tableAdjustmentVoucher.Quantity_adjustedColumn);
+            public bool IsQuantityAdjustedNull() {
+                return this.IsNull(this.tableAdjustmentVoucher.QuantityAdjustedColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetQuantity_adjustedNull() {
-                this[this.tableAdjustmentVoucher.Quantity_adjustedColumn] = global::System.Convert.DBNull;
+            public void SetQuantityAdjustedNull() {
+                this[this.tableAdjustmentVoucher.QuantityAdjustedColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

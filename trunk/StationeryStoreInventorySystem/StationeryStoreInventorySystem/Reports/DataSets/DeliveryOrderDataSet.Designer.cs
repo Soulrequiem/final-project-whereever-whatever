@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
+namespace StationeryStoreInventorySystem.Reports.DataSets {
     
     
     /// <summary>
@@ -20,17 +20,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSReorderItems")]
+    [global::System.Xml.Serialization.XmlRootAttribute("DeliveryOrderDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSReorderItems : global::System.Data.DataSet {
+    public partial class DeliveryOrderDataSet : global::System.Data.DataSet {
         
-        private ReorderItemsDataTable tableReorderItems;
+        private DeliveryOrderDataTable tableDeliveryOrder;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DSReorderItems() {
+        public DeliveryOrderDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSReorderItems(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected DeliveryOrderDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["ReorderItems"] != null)) {
-                    base.Tables.Add(new ReorderItemsDataTable(ds.Tables["ReorderItems"]));
+                if ((ds.Tables["DeliveryOrder"] != null)) {
+                    base.Tables.Add(new DeliveryOrderDataTable(ds.Tables["DeliveryOrder"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ReorderItemsDataTable ReorderItems {
+        public DeliveryOrderDataTable DeliveryOrder {
             get {
-                return this.tableReorderItems;
+                return this.tableDeliveryOrder;
             }
         }
         
@@ -127,7 +127,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DSReorderItems cln = ((DSReorderItems)(base.Clone()));
+            DeliveryOrderDataSet cln = ((DeliveryOrderDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["ReorderItems"] != null)) {
-                    base.Tables.Add(new ReorderItemsDataTable(ds.Tables["ReorderItems"]));
+                if ((ds.Tables["DeliveryOrder"] != null)) {
+                    base.Tables.Add(new DeliveryOrderDataTable(ds.Tables["DeliveryOrder"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableReorderItems = ((ReorderItemsDataTable)(base.Tables["ReorderItems"]));
+            this.tableDeliveryOrder = ((DeliveryOrderDataTable)(base.Tables["DeliveryOrder"]));
             if ((initTable == true)) {
-                if ((this.tableReorderItems != null)) {
-                    this.tableReorderItems.InitVars();
+                if ((this.tableDeliveryOrder != null)) {
+                    this.tableDeliveryOrder.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DSReorderItems";
+            this.DataSetName = "DeliveryOrderDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DSReorderItems.xsd";
+            this.Namespace = "http://tempuri.org/DeliveryOrderDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableReorderItems = new ReorderItemsDataTable();
-            base.Tables.Add(this.tableReorderItems);
+            this.tableDeliveryOrder = new DeliveryOrderDataTable();
+            base.Tables.Add(this.tableDeliveryOrder);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeReorderItems() {
+        private bool ShouldSerializeDeliveryOrder() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DSReorderItems ds = new DSReorderItems();
+            DeliveryOrderDataSet ds = new DeliveryOrderDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,33 +270,27 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void ReorderItemsRowChangeEventHandler(object sender, ReorderItemsRowChangeEvent e);
+        public delegate void DeliveryOrderRowChangeEventHandler(object sender, DeliveryOrderRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ReorderItemsDataTable : global::System.Data.TypedTableBase<ReorderItemsRow> {
+        public partial class DeliveryOrderDataTable : global::System.Data.TypedTableBase<DeliveryOrderRow> {
             
-            private global::System.Data.DataColumn columnItemNo;
+            private global::System.Data.DataColumn columnitemNo;
             
-            private global::System.Data.DataColumn columnDescription;
+            private global::System.Data.DataColumn columnitemDescription;
             
-            private global::System.Data.DataColumn columnQuantityOnHand;
+            private global::System.Data.DataColumn columnquantity;
             
-            private global::System.Data.DataColumn columnReorderLevel;
-            
-            private global::System.Data.DataColumn columnReorderQuantity;
-            
-            private global::System.Data.DataColumn columnPONumber;
-            
-            private global::System.Data.DataColumn columnExpectedDelivery;
+            private global::System.Data.DataColumn columnRemarks;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ReorderItemsDataTable() {
-                this.TableName = "ReorderItems";
+            public DeliveryOrderDataTable() {
+                this.TableName = "DeliveryOrder";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -304,7 +298,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ReorderItemsDataTable(global::System.Data.DataTable table) {
+            internal DeliveryOrderDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -321,64 +315,40 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected ReorderItemsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected DeliveryOrderDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ItemNoColumn {
+            public global::System.Data.DataColumn itemNoColumn {
                 get {
-                    return this.columnItemNo;
+                    return this.columnitemNo;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescriptionColumn {
+            public global::System.Data.DataColumn itemDescriptionColumn {
                 get {
-                    return this.columnDescription;
+                    return this.columnitemDescription;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn QuantityOnHandColumn {
+            public global::System.Data.DataColumn quantityColumn {
                 get {
-                    return this.columnQuantityOnHand;
+                    return this.columnquantity;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ReorderLevelColumn {
+            public global::System.Data.DataColumn RemarksColumn {
                 get {
-                    return this.columnReorderLevel;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ReorderQuantityColumn {
-                get {
-                    return this.columnReorderQuantity;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PONumberColumn {
-                get {
-                    return this.columnPONumber;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ExpectedDeliveryColumn {
-                get {
-                    return this.columnExpectedDelivery;
+                    return this.columnRemarks;
                 }
             }
             
@@ -393,51 +363,48 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ReorderItemsRow this[int index] {
+            public DeliveryOrderRow this[int index] {
                 get {
-                    return ((ReorderItemsRow)(this.Rows[index]));
+                    return ((DeliveryOrderRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ReorderItemsRowChangeEventHandler ReorderItemsRowChanging;
+            public event DeliveryOrderRowChangeEventHandler DeliveryOrderRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ReorderItemsRowChangeEventHandler ReorderItemsRowChanged;
+            public event DeliveryOrderRowChangeEventHandler DeliveryOrderRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ReorderItemsRowChangeEventHandler ReorderItemsRowDeleting;
+            public event DeliveryOrderRowChangeEventHandler DeliveryOrderRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event ReorderItemsRowChangeEventHandler ReorderItemsRowDeleted;
+            public event DeliveryOrderRowChangeEventHandler DeliveryOrderRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddReorderItemsRow(ReorderItemsRow row) {
+            public void AddDeliveryOrderRow(DeliveryOrderRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ReorderItemsRow AddReorderItemsRow(string ItemNo, string Description, string QuantityOnHand, string ReorderLevel, string ReorderQuantity, string PONumber, string ExpectedDelivery) {
-                ReorderItemsRow rowReorderItemsRow = ((ReorderItemsRow)(this.NewRow()));
+            public DeliveryOrderRow AddDeliveryOrderRow(string itemNo, string itemDescription, string quantity, string Remarks) {
+                DeliveryOrderRow rowDeliveryOrderRow = ((DeliveryOrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        ItemNo,
-                        Description,
-                        QuantityOnHand,
-                        ReorderLevel,
-                        ReorderQuantity,
-                        PONumber,
-                        ExpectedDelivery};
-                rowReorderItemsRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowReorderItemsRow);
-                return rowReorderItemsRow;
+                        itemNo,
+                        itemDescription,
+                        quantity,
+                        Remarks};
+                rowDeliveryOrderRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDeliveryOrderRow);
+                return rowDeliveryOrderRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                ReorderItemsDataTable cln = ((ReorderItemsDataTable)(base.Clone()));
+                DeliveryOrderDataTable cln = ((DeliveryOrderDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -445,64 +412,55 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new ReorderItemsDataTable();
+                return new DeliveryOrderDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnItemNo = base.Columns["ItemNo"];
-                this.columnDescription = base.Columns["Description"];
-                this.columnQuantityOnHand = base.Columns["QuantityOnHand"];
-                this.columnReorderLevel = base.Columns["ReorderLevel"];
-                this.columnReorderQuantity = base.Columns["ReorderQuantity"];
-                this.columnPONumber = base.Columns["PONumber"];
-                this.columnExpectedDelivery = base.Columns["ExpectedDelivery"];
+                this.columnitemNo = base.Columns["itemNo"];
+                this.columnitemDescription = base.Columns["itemDescription"];
+                this.columnquantity = base.Columns["quantity"];
+                this.columnRemarks = base.Columns["Remarks"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnItemNo = new global::System.Data.DataColumn("ItemNo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnItemNo);
-                this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDescription);
-                this.columnQuantityOnHand = new global::System.Data.DataColumn("QuantityOnHand", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQuantityOnHand);
-                this.columnReorderLevel = new global::System.Data.DataColumn("ReorderLevel", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnReorderLevel);
-                this.columnReorderQuantity = new global::System.Data.DataColumn("ReorderQuantity", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnReorderQuantity);
-                this.columnPONumber = new global::System.Data.DataColumn("PONumber", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPONumber);
-                this.columnExpectedDelivery = new global::System.Data.DataColumn("ExpectedDelivery", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpectedDelivery);
+                this.columnitemNo = new global::System.Data.DataColumn("itemNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnitemNo);
+                this.columnitemDescription = new global::System.Data.DataColumn("itemDescription", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnitemDescription);
+                this.columnquantity = new global::System.Data.DataColumn("quantity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnquantity);
+                this.columnRemarks = new global::System.Data.DataColumn("Remarks", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRemarks);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ReorderItemsRow NewReorderItemsRow() {
-                return ((ReorderItemsRow)(this.NewRow()));
+            public DeliveryOrderRow NewDeliveryOrderRow() {
+                return ((DeliveryOrderRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new ReorderItemsRow(builder);
+                return new DeliveryOrderRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(ReorderItemsRow);
+                return typeof(DeliveryOrderRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.ReorderItemsRowChanged != null)) {
-                    this.ReorderItemsRowChanged(this, new ReorderItemsRowChangeEvent(((ReorderItemsRow)(e.Row)), e.Action));
+                if ((this.DeliveryOrderRowChanged != null)) {
+                    this.DeliveryOrderRowChanged(this, new DeliveryOrderRowChangeEvent(((DeliveryOrderRow)(e.Row)), e.Action));
                 }
             }
             
@@ -510,8 +468,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.ReorderItemsRowChanging != null)) {
-                    this.ReorderItemsRowChanging(this, new ReorderItemsRowChangeEvent(((ReorderItemsRow)(e.Row)), e.Action));
+                if ((this.DeliveryOrderRowChanging != null)) {
+                    this.DeliveryOrderRowChanging(this, new DeliveryOrderRowChangeEvent(((DeliveryOrderRow)(e.Row)), e.Action));
                 }
             }
             
@@ -519,8 +477,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.ReorderItemsRowDeleted != null)) {
-                    this.ReorderItemsRowDeleted(this, new ReorderItemsRowChangeEvent(((ReorderItemsRow)(e.Row)), e.Action));
+                if ((this.DeliveryOrderRowDeleted != null)) {
+                    this.DeliveryOrderRowDeleted(this, new DeliveryOrderRowChangeEvent(((DeliveryOrderRow)(e.Row)), e.Action));
                 }
             }
             
@@ -528,14 +486,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.ReorderItemsRowDeleting != null)) {
-                    this.ReorderItemsRowDeleting(this, new ReorderItemsRowChangeEvent(((ReorderItemsRow)(e.Row)), e.Action));
+                if ((this.DeliveryOrderRowDeleting != null)) {
+                    this.DeliveryOrderRowDeleting(this, new DeliveryOrderRowChangeEvent(((DeliveryOrderRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveReorderItemsRow(ReorderItemsRow row) {
+            public void RemoveDeliveryOrderRow(DeliveryOrderRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -544,7 +502,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DSReorderItems ds = new DSReorderItems();
+                DeliveryOrderDataSet ds = new DeliveryOrderDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -562,7 +520,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "ReorderItemsDataTable";
+                attribute2.FixedValue = "DeliveryOrderDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -606,211 +564,127 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class ReorderItemsRow : global::System.Data.DataRow {
+        public partial class DeliveryOrderRow : global::System.Data.DataRow {
             
-            private ReorderItemsDataTable tableReorderItems;
+            private DeliveryOrderDataTable tableDeliveryOrder;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ReorderItemsRow(global::System.Data.DataRowBuilder rb) : 
+            internal DeliveryOrderRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableReorderItems = ((ReorderItemsDataTable)(this.Table));
+                this.tableDeliveryOrder = ((DeliveryOrderDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ItemNo {
+            public string itemNo {
                 get {
                     try {
-                        return ((string)(this[this.tableReorderItems.ItemNoColumn]));
+                        return ((string)(this[this.tableDeliveryOrder.itemNoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ItemNo\' in table \'ReorderItems\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'itemNo\' in table \'DeliveryOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableReorderItems.ItemNoColumn] = value;
+                    this[this.tableDeliveryOrder.itemNoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Description {
+            public string itemDescription {
                 get {
                     try {
-                        return ((string)(this[this.tableReorderItems.DescriptionColumn]));
+                        return ((string)(this[this.tableDeliveryOrder.itemDescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'ReorderItems\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'itemDescription\' in table \'DeliveryOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableReorderItems.DescriptionColumn] = value;
+                    this[this.tableDeliveryOrder.itemDescriptionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string QuantityOnHand {
+            public string quantity {
                 get {
                     try {
-                        return ((string)(this[this.tableReorderItems.QuantityOnHandColumn]));
+                        return ((string)(this[this.tableDeliveryOrder.quantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'QuantityOnHand\' in table \'ReorderItems\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'quantity\' in table \'DeliveryOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableReorderItems.QuantityOnHandColumn] = value;
+                    this[this.tableDeliveryOrder.quantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ReorderLevel {
+            public string Remarks {
                 get {
                     try {
-                        return ((string)(this[this.tableReorderItems.ReorderLevelColumn]));
+                        return ((string)(this[this.tableDeliveryOrder.RemarksColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ReorderLevel\' in table \'ReorderItems\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Remarks\' in table \'DeliveryOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableReorderItems.ReorderLevelColumn] = value;
+                    this[this.tableDeliveryOrder.RemarksColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ReorderQuantity {
-                get {
-                    try {
-                        return ((string)(this[this.tableReorderItems.ReorderQuantityColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ReorderQuantity\' in table \'ReorderItems\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableReorderItems.ReorderQuantityColumn] = value;
-                }
+            public bool IsitemNoNull() {
+                return this.IsNull(this.tableDeliveryOrder.itemNoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string PONumber {
-                get {
-                    try {
-                        return ((string)(this[this.tableReorderItems.PONumberColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PONumber\' in table \'ReorderItems\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableReorderItems.PONumberColumn] = value;
-                }
+            public void SetitemNoNull() {
+                this[this.tableDeliveryOrder.itemNoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ExpectedDelivery {
-                get {
-                    try {
-                        return ((string)(this[this.tableReorderItems.ExpectedDeliveryColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ExpectedDelivery\' in table \'ReorderItems\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableReorderItems.ExpectedDeliveryColumn] = value;
-                }
+            public bool IsitemDescriptionNull() {
+                return this.IsNull(this.tableDeliveryOrder.itemDescriptionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsItemNoNull() {
-                return this.IsNull(this.tableReorderItems.ItemNoColumn);
+            public void SetitemDescriptionNull() {
+                this[this.tableDeliveryOrder.itemDescriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetItemNoNull() {
-                this[this.tableReorderItems.ItemNoColumn] = global::System.Convert.DBNull;
+            public bool IsquantityNull() {
+                return this.IsNull(this.tableDeliveryOrder.quantityColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDescriptionNull() {
-                return this.IsNull(this.tableReorderItems.DescriptionColumn);
+            public void SetquantityNull() {
+                this[this.tableDeliveryOrder.quantityColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDescriptionNull() {
-                this[this.tableReorderItems.DescriptionColumn] = global::System.Convert.DBNull;
+            public bool IsRemarksNull() {
+                return this.IsNull(this.tableDeliveryOrder.RemarksColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsQuantityOnHandNull() {
-                return this.IsNull(this.tableReorderItems.QuantityOnHandColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetQuantityOnHandNull() {
-                this[this.tableReorderItems.QuantityOnHandColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsReorderLevelNull() {
-                return this.IsNull(this.tableReorderItems.ReorderLevelColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetReorderLevelNull() {
-                this[this.tableReorderItems.ReorderLevelColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsReorderQuantityNull() {
-                return this.IsNull(this.tableReorderItems.ReorderQuantityColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetReorderQuantityNull() {
-                this[this.tableReorderItems.ReorderQuantityColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPONumberNull() {
-                return this.IsNull(this.tableReorderItems.PONumberColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPONumberNull() {
-                this[this.tableReorderItems.PONumberColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsExpectedDeliveryNull() {
-                return this.IsNull(this.tableReorderItems.ExpectedDeliveryColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetExpectedDeliveryNull() {
-                this[this.tableReorderItems.ExpectedDeliveryColumn] = global::System.Convert.DBNull;
+            public void SetRemarksNull() {
+                this[this.tableDeliveryOrder.RemarksColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -818,22 +692,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class ReorderItemsRowChangeEvent : global::System.EventArgs {
+        public class DeliveryOrderRowChangeEvent : global::System.EventArgs {
             
-            private ReorderItemsRow eventRow;
+            private DeliveryOrderRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ReorderItemsRowChangeEvent(ReorderItemsRow row, global::System.Data.DataRowAction action) {
+            public DeliveryOrderRowChangeEvent(DeliveryOrderRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ReorderItemsRow Row {
+            public DeliveryOrderRow Row {
                 get {
                     return this.eventRow;
                 }

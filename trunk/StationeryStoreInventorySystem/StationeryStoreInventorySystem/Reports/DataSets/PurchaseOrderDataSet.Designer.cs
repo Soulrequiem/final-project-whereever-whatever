@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
+namespace StationeryStoreInventorySystem.Reports.DataSets {
     
     
     /// <summary>
@@ -20,17 +20,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSStockCard")]
+    [global::System.Xml.Serialization.XmlRootAttribute("PurchaseOrderDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSStockCard : global::System.Data.DataSet {
+    public partial class PurchaseOrderDataSet : global::System.Data.DataSet {
         
-        private StockCardDataTable tableStockCard;
+        private PurchaseOrderDataTable tablePurchaseOrder;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DSStockCard() {
+        public PurchaseOrderDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSStockCard(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected PurchaseOrderDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["StockCard"] != null)) {
-                    base.Tables.Add(new StockCardDataTable(ds.Tables["StockCard"]));
+                if ((ds.Tables["PurchaseOrder"] != null)) {
+                    base.Tables.Add(new PurchaseOrderDataTable(ds.Tables["PurchaseOrder"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public StockCardDataTable StockCard {
+        public PurchaseOrderDataTable PurchaseOrder {
             get {
-                return this.tableStockCard;
+                return this.tablePurchaseOrder;
             }
         }
         
@@ -127,7 +127,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DSStockCard cln = ((DSStockCard)(base.Clone()));
+            PurchaseOrderDataSet cln = ((PurchaseOrderDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["StockCard"] != null)) {
-                    base.Tables.Add(new StockCardDataTable(ds.Tables["StockCard"]));
+                if ((ds.Tables["PurchaseOrder"] != null)) {
+                    base.Tables.Add(new PurchaseOrderDataTable(ds.Tables["PurchaseOrder"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableStockCard = ((StockCardDataTable)(base.Tables["StockCard"]));
+            this.tablePurchaseOrder = ((PurchaseOrderDataTable)(base.Tables["PurchaseOrder"]));
             if ((initTable == true)) {
-                if ((this.tableStockCard != null)) {
-                    this.tableStockCard.InitVars();
+                if ((this.tablePurchaseOrder != null)) {
+                    this.tablePurchaseOrder.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DSStockCard";
+            this.DataSetName = "PurchaseOrderDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DSStockCard.xsd";
+            this.Namespace = "http://tempuri.org/PurchaseOrderDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableStockCard = new StockCardDataTable();
-            base.Tables.Add(this.tableStockCard);
+            this.tablePurchaseOrder = new PurchaseOrderDataTable();
+            base.Tables.Add(this.tablePurchaseOrder);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeStockCard() {
+        private bool ShouldSerializePurchaseOrder() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DSStockCard ds = new DSStockCard();
+            PurchaseOrderDataSet ds = new PurchaseOrderDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,27 +270,29 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void StockCardRowChangeEventHandler(object sender, StockCardRowChangeEvent e);
+        public delegate void PurchaseOrderRowChangeEventHandler(object sender, PurchaseOrderRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class StockCardDataTable : global::System.Data.TypedTableBase<StockCardRow> {
+        public partial class PurchaseOrderDataTable : global::System.Data.TypedTableBase<PurchaseOrderRow> {
             
-            private global::System.Data.DataColumn columndate;
+            private global::System.Data.DataColumn columnItemNo;
             
-            private global::System.Data.DataColumn _columndept_supplier;
+            private global::System.Data.DataColumn columnDescription;
             
-            private global::System.Data.DataColumn columnqty;
+            private global::System.Data.DataColumn columnQuantity;
             
-            private global::System.Data.DataColumn columnbalance;
+            private global::System.Data.DataColumn columnPrice;
+            
+            private global::System.Data.DataColumn columnAmount;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StockCardDataTable() {
-                this.TableName = "StockCard";
+            public PurchaseOrderDataTable() {
+                this.TableName = "PurchaseOrder";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -298,7 +300,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal StockCardDataTable(global::System.Data.DataTable table) {
+            internal PurchaseOrderDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -315,40 +317,48 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected StockCardDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected PurchaseOrderDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
+            public global::System.Data.DataColumn ItemNoColumn {
                 get {
-                    return this.columndate;
+                    return this.columnItemNo;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn _dept_supplierColumn {
+            public global::System.Data.DataColumn DescriptionColumn {
                 get {
-                    return this._columndept_supplier;
+                    return this.columnDescription;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn qtyColumn {
+            public global::System.Data.DataColumn QuantityColumn {
                 get {
-                    return this.columnqty;
+                    return this.columnQuantity;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn balanceColumn {
+            public global::System.Data.DataColumn PriceColumn {
                 get {
-                    return this.columnbalance;
+                    return this.columnPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AmountColumn {
+                get {
+                    return this.columnAmount;
                 }
             }
             
@@ -363,48 +373,49 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StockCardRow this[int index] {
+            public PurchaseOrderRow this[int index] {
                 get {
-                    return ((StockCardRow)(this.Rows[index]));
+                    return ((PurchaseOrderRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event StockCardRowChangeEventHandler StockCardRowChanging;
+            public event PurchaseOrderRowChangeEventHandler PurchaseOrderRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event StockCardRowChangeEventHandler StockCardRowChanged;
+            public event PurchaseOrderRowChangeEventHandler PurchaseOrderRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event StockCardRowChangeEventHandler StockCardRowDeleting;
+            public event PurchaseOrderRowChangeEventHandler PurchaseOrderRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event StockCardRowChangeEventHandler StockCardRowDeleted;
+            public event PurchaseOrderRowChangeEventHandler PurchaseOrderRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddStockCardRow(StockCardRow row) {
+            public void AddPurchaseOrderRow(PurchaseOrderRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StockCardRow AddStockCardRow(string date, string _dept_supplier, string qty, string balance) {
-                StockCardRow rowStockCardRow = ((StockCardRow)(this.NewRow()));
+            public PurchaseOrderRow AddPurchaseOrderRow(string ItemNo, string Description, string Quantity, string Price, string Amount) {
+                PurchaseOrderRow rowPurchaseOrderRow = ((PurchaseOrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        date,
-                        _dept_supplier,
-                        qty,
-                        balance};
-                rowStockCardRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowStockCardRow);
-                return rowStockCardRow;
+                        ItemNo,
+                        Description,
+                        Quantity,
+                        Price,
+                        Amount};
+                rowPurchaseOrderRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPurchaseOrderRow);
+                return rowPurchaseOrderRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                StockCardDataTable cln = ((StockCardDataTable)(base.Clone()));
+                PurchaseOrderDataTable cln = ((PurchaseOrderDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -412,57 +423,58 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new StockCardDataTable();
+                return new PurchaseOrderDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columndate = base.Columns["date"];
-                this._columndept_supplier = base.Columns["dept/supplier"];
-                this.columnqty = base.Columns["qty"];
-                this.columnbalance = base.Columns["balance"];
+                this.columnItemNo = base.Columns["ItemNo"];
+                this.columnDescription = base.Columns["Description"];
+                this.columnQuantity = base.Columns["Quantity"];
+                this.columnPrice = base.Columns["Price"];
+                this.columnAmount = base.Columns["Amount"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columndate = new global::System.Data.DataColumn("date", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate);
-                this._columndept_supplier = new global::System.Data.DataColumn("dept/supplier", typeof(string), null, global::System.Data.MappingType.Element);
-                this._columndept_supplier.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columndept_supplier");
-                this._columndept_supplier.ExtendedProperties.Add("Generator_UserColumnName", "dept/supplier");
-                base.Columns.Add(this._columndept_supplier);
-                this.columnqty = new global::System.Data.DataColumn("qty", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnqty);
-                this.columnbalance = new global::System.Data.DataColumn("balance", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbalance);
+                this.columnItemNo = new global::System.Data.DataColumn("ItemNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItemNo);
+                this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescription);
+                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantity);
+                this.columnPrice = new global::System.Data.DataColumn("Price", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrice);
+                this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAmount);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StockCardRow NewStockCardRow() {
-                return ((StockCardRow)(this.NewRow()));
+            public PurchaseOrderRow NewPurchaseOrderRow() {
+                return ((PurchaseOrderRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new StockCardRow(builder);
+                return new PurchaseOrderRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(StockCardRow);
+                return typeof(PurchaseOrderRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.StockCardRowChanged != null)) {
-                    this.StockCardRowChanged(this, new StockCardRowChangeEvent(((StockCardRow)(e.Row)), e.Action));
+                if ((this.PurchaseOrderRowChanged != null)) {
+                    this.PurchaseOrderRowChanged(this, new PurchaseOrderRowChangeEvent(((PurchaseOrderRow)(e.Row)), e.Action));
                 }
             }
             
@@ -470,8 +482,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.StockCardRowChanging != null)) {
-                    this.StockCardRowChanging(this, new StockCardRowChangeEvent(((StockCardRow)(e.Row)), e.Action));
+                if ((this.PurchaseOrderRowChanging != null)) {
+                    this.PurchaseOrderRowChanging(this, new PurchaseOrderRowChangeEvent(((PurchaseOrderRow)(e.Row)), e.Action));
                 }
             }
             
@@ -479,8 +491,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.StockCardRowDeleted != null)) {
-                    this.StockCardRowDeleted(this, new StockCardRowChangeEvent(((StockCardRow)(e.Row)), e.Action));
+                if ((this.PurchaseOrderRowDeleted != null)) {
+                    this.PurchaseOrderRowDeleted(this, new PurchaseOrderRowChangeEvent(((PurchaseOrderRow)(e.Row)), e.Action));
                 }
             }
             
@@ -488,14 +500,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.StockCardRowDeleting != null)) {
-                    this.StockCardRowDeleting(this, new StockCardRowChangeEvent(((StockCardRow)(e.Row)), e.Action));
+                if ((this.PurchaseOrderRowDeleting != null)) {
+                    this.PurchaseOrderRowDeleting(this, new PurchaseOrderRowChangeEvent(((PurchaseOrderRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveStockCardRow(StockCardRow row) {
+            public void RemovePurchaseOrderRow(PurchaseOrderRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -504,7 +516,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DSStockCard ds = new DSStockCard();
+                PurchaseOrderDataSet ds = new PurchaseOrderDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -522,7 +534,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "StockCardDataTable";
+                attribute2.FixedValue = "PurchaseOrderDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -566,127 +578,155 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class StockCardRow : global::System.Data.DataRow {
+        public partial class PurchaseOrderRow : global::System.Data.DataRow {
             
-            private StockCardDataTable tableStockCard;
+            private PurchaseOrderDataTable tablePurchaseOrder;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal StockCardRow(global::System.Data.DataRowBuilder rb) : 
+            internal PurchaseOrderRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableStockCard = ((StockCardDataTable)(this.Table));
+                this.tablePurchaseOrder = ((PurchaseOrderDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string date {
+            public string ItemNo {
                 get {
                     try {
-                        return ((string)(this[this.tableStockCard.dateColumn]));
+                        return ((string)(this[this.tablePurchaseOrder.ItemNoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'StockCard\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ItemNo\' in table \'PurchaseOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableStockCard.dateColumn] = value;
+                    this[this.tablePurchaseOrder.ItemNoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string _dept_supplier {
+            public string Description {
                 get {
                     try {
-                        return ((string)(this[this.tableStockCard._dept_supplierColumn]));
+                        return ((string)(this[this.tablePurchaseOrder.DescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dept/supplier\' in table \'StockCard\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'PurchaseOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableStockCard._dept_supplierColumn] = value;
+                    this[this.tablePurchaseOrder.DescriptionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string qty {
+            public string Quantity {
                 get {
                     try {
-                        return ((string)(this[this.tableStockCard.qtyColumn]));
+                        return ((string)(this[this.tablePurchaseOrder.QuantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'qty\' in table \'StockCard\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Quantity\' in table \'PurchaseOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableStockCard.qtyColumn] = value;
+                    this[this.tablePurchaseOrder.QuantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string balance {
+            public string Price {
                 get {
                     try {
-                        return ((string)(this[this.tableStockCard.balanceColumn]));
+                        return ((string)(this[this.tablePurchaseOrder.PriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'balance\' in table \'StockCard\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Price\' in table \'PurchaseOrder\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableStockCard.balanceColumn] = value;
+                    this[this.tablePurchaseOrder.PriceColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsdateNull() {
-                return this.IsNull(this.tableStockCard.dateColumn);
+            public string Amount {
+                get {
+                    try {
+                        return ((string)(this[this.tablePurchaseOrder.AmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Amount\' in table \'PurchaseOrder\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePurchaseOrder.AmountColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetdateNull() {
-                this[this.tableStockCard.dateColumn] = global::System.Convert.DBNull;
+            public bool IsItemNoNull() {
+                return this.IsNull(this.tablePurchaseOrder.ItemNoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Is_dept_supplierNull() {
-                return this.IsNull(this.tableStockCard._dept_supplierColumn);
+            public void SetItemNoNull() {
+                this[this.tablePurchaseOrder.ItemNoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Set_dept_supplierNull() {
-                this[this.tableStockCard._dept_supplierColumn] = global::System.Convert.DBNull;
+            public bool IsDescriptionNull() {
+                return this.IsNull(this.tablePurchaseOrder.DescriptionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsqtyNull() {
-                return this.IsNull(this.tableStockCard.qtyColumn);
+            public void SetDescriptionNull() {
+                this[this.tablePurchaseOrder.DescriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetqtyNull() {
-                this[this.tableStockCard.qtyColumn] = global::System.Convert.DBNull;
+            public bool IsQuantityNull() {
+                return this.IsNull(this.tablePurchaseOrder.QuantityColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsbalanceNull() {
-                return this.IsNull(this.tableStockCard.balanceColumn);
+            public void SetQuantityNull() {
+                this[this.tablePurchaseOrder.QuantityColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetbalanceNull() {
-                this[this.tableStockCard.balanceColumn] = global::System.Convert.DBNull;
+            public bool IsPriceNull() {
+                return this.IsNull(this.tablePurchaseOrder.PriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPriceNull() {
+                this[this.tablePurchaseOrder.PriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAmountNull() {
+                return this.IsNull(this.tablePurchaseOrder.AmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAmountNull() {
+                this[this.tablePurchaseOrder.AmountColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -694,22 +734,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class StockCardRowChangeEvent : global::System.EventArgs {
+        public class PurchaseOrderRowChangeEvent : global::System.EventArgs {
             
-            private StockCardRow eventRow;
+            private PurchaseOrderRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StockCardRowChangeEvent(StockCardRow row, global::System.Data.DataRowAction action) {
+            public PurchaseOrderRowChangeEvent(PurchaseOrderRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StockCardRow Row {
+            public PurchaseOrderRow Row {
                 get {
                     return this.eventRow;
                 }
