@@ -40,6 +40,25 @@ namespace StationeryStoreInventorySystemModel.broker
 
         //}
 
+        public int GetPendingQuantity(Item item)
+        {
+            try
+            {
+                int pendingQty = 0;
+                List<PurchaseOrderDetail> list = inventory.PurchaseOrderDetails.Where(pod => pod.Item.Id.Contains(item.Id) && pod.AcceptedQty < pod.Qty).ToList<PurchaseOrderDetail>();
+                foreach (PurchaseOrderDetail purchaseOrderDetail in list)
+                {
+                    pendingQty += purchaseOrderDetail.Qty - (purchaseOrderDetail.AcceptedQty.HasValue ? purchaseOrderDetail.AcceptedQty.Value : 0);
+                }
+                return pendingQty;
+                //return inventory.PurchaseOrderDetails.Where(pod => pod.Item.Id.Contains(item.Id) && pod.AcceptedQty.Value < pod.Qty).Sum(pod => pod.Qty - pod.AcceptedQty.Value);
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
         /// <summary>
         /// Retrieve the PurchaseOrder information  from PurchaseOrder Table according to the purchaseOrder Parameter
         /// Return purchaseorder
@@ -49,18 +68,25 @@ namespace StationeryStoreInventorySystemModel.broker
         public PurchaseOrder GetPurchaseOrder(PurchaseOrder purchaseOrder)
         {
             //int showStatus = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
-            purchaseorder = inventory.PurchaseOrders.Where(purchaseOrderObj => purchaseOrderObj.Id == purchaseOrder.Id).First();
-            if (!purchaseorder.Equals(null))
+            try
             {
-                var purchaseOrderDetailsResult = from rd in inventory.PurchaseOrderDetails
-                                                 where rd.PurchaseOrder.Id == purchaseorder.Id
-                                                 select rd;
-                foreach (PurchaseOrderDetail rd in purchaseOrderDetailsResult)
+                purchaseorder = inventory.PurchaseOrders.Where(purchaseOrderObj => purchaseOrderObj.Id == purchaseOrder.Id).First();
+                if (!purchaseorder.Equals(null))
                 {
-                    purchaseorder.PurchaseOrderDetails.Add(rd);
+                    var purchaseOrderDetailsResult = from rd in inventory.PurchaseOrderDetails
+                                                     where rd.PurchaseOrder.Id == purchaseorder.Id
+                                                     select rd;
+                    foreach (PurchaseOrderDetail rd in purchaseOrderDetailsResult)
+                    {
+                        purchaseorder.PurchaseOrderDetails.Add(rd);
+                    }
                 }
+                return purchaseorder;
             }
-            return purchaseorder;
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -71,10 +97,14 @@ namespace StationeryStoreInventorySystemModel.broker
 
         public List<entity.PurchaseOrder> GetAllPurchaseOrder()
         {
-            purchaseOrderList = inventory.PurchaseOrders.ToList<PurchaseOrder>();
-            if (!purchaseOrderList.Equals(null))
-                return purchaseOrderList;
-            return null;
+            try
+            {
+                return inventory.PurchaseOrders.ToList<PurchaseOrder>();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -90,10 +120,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 inventory.AddToPurchaseOrders(newPurchaseOrder);
-                foreach (PurchaseOrderDetail puchaseOrderDetail in newPurchaseOrder.PurchaseOrderDetails)
-                {
-                    this.Insert(puchaseOrderDetail);
-                }
+                
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
             }
@@ -296,17 +323,28 @@ namespace StationeryStoreInventorySystemModel.broker
                 {
                     lastPurchaseOrderNumber = Converter.objToInt(DateTime.Now.Year.ToString() + "1".PadLeft(5, '0'));
                 }
+                else
+                {
+                    lastPurchaseOrderNumber++;
+                }
             }
             catch (Exception e)
             {
-                lastPurchaseOrderNumber = 0;
+                lastPurchaseOrderNumber = DateTime.Now.Year * 100000 + 1;
             }
             return lastPurchaseOrderNumber;
         }
 
         public int GetPurchaseOrderDetailId()
         {
-            return inventory.PurchaseOrderDetails.Max(xObj => xObj.Id) + 1;
+            try
+            {
+                return inventory.PurchaseOrderDetails.Max(xObj => xObj.Id) + 1;
+            }
+            catch (Exception e)
+            {
+                return 1;
+            }
         }
     }
 }
