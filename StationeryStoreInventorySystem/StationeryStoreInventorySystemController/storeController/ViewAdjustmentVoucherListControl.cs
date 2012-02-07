@@ -72,21 +72,36 @@ namespace StationeryStoreInventorySystemController.storeController
                     dt.Rows.Clear();
                 }
 
+                bool isAdded = false;
+
                 foreach (StockAdjustment temp in stockAdjustmentList)
                 {
+                    isAdded = false;
+
                     int totalQty = 0;
                     foreach (DiscrepancyDetail detail in temp.Discrepancy.DiscrepancyDetails)
                     {
-                        totalQty += detail.Qty;
+                        if (detail.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.SUPERVISOR) && currentEmployee.Role.Id == Converter.objToInt(Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR))
+                        {
+                            totalQty += detail.Qty;
+                            isAdded = true;
+                        }
+                        else if (detail.DiscrepancyType == Converter.objToInt(Constants.DISCREPANCY_TYPE.MANAGER) && currentEmployee.Role.Id == Converter.objToInt(Constants.EMPLOYEE_ROLE.STORE_MANAGER))
+                        {
+                            totalQty += detail.Qty;
+                            isAdded = true;
+                        }
                     }
 
-                    dr = dt.NewRow();
-                    dr[columnName[0]] = temp.Id;
-                    dr[columnName[1]] = temp.CreatedBy.Name;
-                    dr[columnName[2]] = temp.CreatedDate;
-
-                    dr[columnName[3]] = totalQty;
-                    dt.Rows.Add(dr);
+                    if (isAdded)
+                    {
+                        dr = dt.NewRow();
+                        dr[columnName[0]] = temp.Id;
+                        dr[columnName[1]] = temp.CreatedBy.Name;
+                        dr[columnName[2]] = temp.CreatedDate;
+                        dr[columnName[3]] = totalQty;
+                        dt.Rows.Add(dr);
+                    }
                 }
 
                 return dt;
