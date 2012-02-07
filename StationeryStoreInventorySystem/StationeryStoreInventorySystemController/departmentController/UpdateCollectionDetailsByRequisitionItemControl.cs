@@ -48,7 +48,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             employeeBroker = new EmployeeBroker(inventory);
 
             requisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.NEED_TO_COLLECT);
-            collectedRequisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.COLLECTED);
+            //collectedRequisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.COLLECTED);
 
             collectionListDataColumn = new DataColumn[] { new DataColumn(collectionListColumnName[0]),
                                                           new DataColumn(collectionListColumnName[1]),
