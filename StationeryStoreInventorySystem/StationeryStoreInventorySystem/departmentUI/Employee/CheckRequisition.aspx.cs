@@ -167,7 +167,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             {
                 e.Row.Items[0].CssClass = "hidden";
             }
-            e.Row.Items[3].Text = SystemStoreInventorySystemUtil.Converter.GetRequisitionStatusText(SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text));
+            int number = 0;
+
+            if (int.TryParse(e.Row.Items[3].Text,out number))
+                e.Row.Items[3].Text = SystemStoreInventorySystemUtil.Converter.GetRequisitionStatusText(SystemStoreInventorySystemUtil.Converter.objToRequisitionStatus(e.Row.Items[3].Text));
             HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("requisitionID").FindControl("requisitionID");
             link.NavigateUrl = "~/departmentUI/Employee/CheckRequisition.aspx?RequisitionIDIndex=" + link.Text;
         }
