@@ -340,6 +340,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
         private void SetLabel(bool flag)
         {
+            WebTab1.Tabs[1].Enabled = Constants.ItemConsumptionReport == drdReportList.CurrentValue ? true : false;
             lblNoDataAvailable.Visible = flag;
             reportpanel.Visible = !flag;
             FilterPanel.Visible = Constants.ItemConsumptionReport == drdReportList.CurrentValue ? true : false;
