@@ -244,9 +244,10 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                employeeList = inventory.Employees.Where(eObj => eObj.Department.Id == employee.Department.Id && 
-                    (eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE) ||
-                    (eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)).ToList();
+                employeeList = inventory.Employees.Where(eObj => (eObj.Department.Id == employee.Department.Id && 
+                    (eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE)) ||
+                    (eObj.Department.Id == employee.Department.Id && 
+                    (eObj.Role.Id == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE))).ToList();
             }
             catch (Exception e)
             {
