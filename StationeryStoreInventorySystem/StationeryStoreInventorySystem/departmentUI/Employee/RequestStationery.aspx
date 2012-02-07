@@ -177,7 +177,7 @@
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
                         
-                        <ig:UnboundCheckBoxField Key="RequestStationeryCheckBox" Width="60px">
+                        <ig:UnboundCheckBoxField Key="RequestStationeryCheckBox" Width="60px" HeaderCheckBoxMode="Off">
                             <Header Text="" />
                         </ig:UnboundCheckBoxField>
                         <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="80px">
