@@ -57,99 +57,94 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         {
             if (Session["userName"] != null)
             {
-                if (Util.GetEmployeeRole() == (int) Constants.EMPLOYEE_ROLE.EMPLOYEE)
-                {
-                    //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptEmpSiteMapProvider"];
-                    NavigationBar.Groups[0].Visible = true;
-                    NavigationBar.Groups[1].Visible = false;
-                    NavigationBar.Groups[2].Visible = false;
-                    NavigationBar.Groups[3].Visible = false;
-                    NavigationBar.Groups[4].Visible = false;
-                    SetDefaultMenuSelection(3, 0);
-                }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD )
-                {
-                    NavigationBar.Groups[0].Visible = true;
-                    NavigationBar.Groups[1].Visible = true;
-                    NavigationBar.Groups[2].Visible = true;
-                    NavigationBar.Groups[3].Visible = false;
-                    NavigationBar.Groups[4].Visible = false;
-                    SetDefaultMenuSelection(0, 2);
-                    //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptHeadMapProvider"];
-                }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
-                {
-                    NavigationBar.Groups[0].Visible = true;
-                    NavigationBar.Groups[1].Visible = true;
-                    NavigationBar.Groups[2].Visible = true;
-                    NavigationBar.Groups[2].Items[1].Visible = false;
-                    NavigationBar.Groups[2].Items[2].Visible = false;
-                    NavigationBar.Groups[3].Visible = false;
-                    NavigationBar.Groups[4].Visible = false;
-                    SetDefaultMenuSelection(0, 2);
-                }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)
-                {
-                    NavigationBar.Groups[0].Visible = true;
-                    NavigationBar.Groups[1].Visible = true;
-                    NavigationBar.Groups[1].Items[4].Visible = false;
-                    NavigationBar.Groups[2].Visible = false;
-                    NavigationBar.Groups[3].Visible = false;
-                    NavigationBar.Groups[4].Visible = false;
-                    SetDefaultMenuSelection(0, 1);
-                    //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptRepSiteMapProvider"];
-                }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE )
-                {
-                    NavigationBar.Groups[0].Visible = true;
-                    NavigationBar.Groups[1].Visible = true;
-                    NavigationBar.Groups[2].Visible = false;
-                    NavigationBar.Groups[3].Visible = false;
-                    NavigationBar.Groups[4].Visible = false;
-                    SetDefaultMenuSelection(0, 1);
-                    //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptRepSiteMapProvider"];
-                }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_CLERK)
+                if ((int)Constants.DEPARTMENT_STATUS.BLACKLIST == 
+                    Util.GetCurrentDepartmentStatus())
                 {
                     NavigationBar.Groups[0].Visible = false;
                     NavigationBar.Groups[1].Visible = false;
                     NavigationBar.Groups[2].Visible = false;
-                    NavigationBar.Groups[3].Visible = true;
+                    NavigationBar.Groups[3].Visible = false;
                     NavigationBar.Groups[4].Visible = false;
-                    SetDefaultMenuSelection(7, 3);
-                    //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreClerkSiteMapProvider"];
+                    NavigationBar.Groups[5].Visible = true;
+                    SetDefaultMenuSelection(0, 0);
                 }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
+                else
                 {
-                    NavigationBar.Groups[0].Visible = false;
-                    NavigationBar.Groups[1].Visible = false;
-                    NavigationBar.Groups[2].Visible = false;
-                    NavigationBar.Groups[3].Visible = true;
-                    NavigationBar.Groups[4].Text = "Supervisor";
-                    NavigationBar.Groups[4].Visible = true;
-                    SetDefaultMenuSelection(2, 4);
-                    //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
-                }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER)
-                {
-                    NavigationBar.Groups[0].Visible = false;
-                    NavigationBar.Groups[1].Visible = false;
-                    NavigationBar.Groups[2].Visible = false;
-                    NavigationBar.Groups[3].Visible = true;
-                    NavigationBar.Groups[4].Text = "Manager";
-                    NavigationBar.Groups[4].Visible = true;
-                    SetDefaultMenuSelection(2, 4);
-                    //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
-                }
-                else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.ADMIN)
-                {
-                    NavigationBar.Groups[0].Visible = true;
-                    NavigationBar.Groups[1].Visible = true;
-                    NavigationBar.Groups[2].Visible = true;
-                    NavigationBar.Groups[3].Visible = true;
-                    NavigationBar.Groups[4].Visible = true;
-                    //NavigationBar.Groups[5].Visible = true;
-                    SetDefaultMenuSelection(2, 4);
+                    NavigationBar.Groups[5].Visible = false;
+                    if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.EMPLOYEE)
+                    {
+                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptEmpSiteMapProvider"];
+                        NavigationBar.Groups[0].Visible = true;
+                        NavigationBar.Groups[1].Visible = false;
+                        NavigationBar.Groups[2].Visible = false;
+                        NavigationBar.Groups[3].Visible = false;
+                        NavigationBar.Groups[4].Visible = false;
+                        SetDefaultMenuSelection(3, 0);
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD ||
+                        Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
+                    {
+                        NavigationBar.Groups[0].Visible = true;
+                        NavigationBar.Groups[1].Visible = true;
+                        NavigationBar.Groups[2].Visible = true;
+                        NavigationBar.Groups[3].Visible = false;
+                        NavigationBar.Groups[4].Visible = false;
+                        SetDefaultMenuSelection(0, 2);
+                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptHeadMapProvider"];
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE ||
+                        Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)
+                    {
+                        NavigationBar.Groups[0].Visible = true;
+                        NavigationBar.Groups[1].Visible = true;
+                        NavigationBar.Groups[2].Visible = false;
+                        NavigationBar.Groups[3].Visible = false;
+                        NavigationBar.Groups[4].Visible = false;
+                        SetDefaultMenuSelection(0, 1);
+                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptRepSiteMapProvider"];
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_CLERK)
+                    {
+                        NavigationBar.Groups[0].Visible = false;
+                        NavigationBar.Groups[1].Visible = false;
+                        NavigationBar.Groups[2].Visible = false;
+                        NavigationBar.Groups[3].Visible = true;
+                        NavigationBar.Groups[4].Visible = false;
+                        SetDefaultMenuSelection(7, 3);
+                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreClerkSiteMapProvider"];
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
+                    {
+                        NavigationBar.Groups[0].Visible = false;
+                        NavigationBar.Groups[1].Visible = false;
+                        NavigationBar.Groups[2].Visible = false;
+                        NavigationBar.Groups[3].Visible = true;
+                        NavigationBar.Groups[4].Text = "Supervisor";
+                        NavigationBar.Groups[4].Visible = true;
+                        SetDefaultMenuSelection(2, 4);
+                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER)
+                    {
+                        NavigationBar.Groups[0].Visible = false;
+                        NavigationBar.Groups[1].Visible = false;
+                        NavigationBar.Groups[2].Visible = false;
+                        NavigationBar.Groups[3].Visible = true;
+                        NavigationBar.Groups[4].Text = "Manager";
+                        NavigationBar.Groups[4].Visible = true;
+                        SetDefaultMenuSelection(2, 4);
+                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreManagerSiteMapProvider"];
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.ADMIN)
+                    {
+                        NavigationBar.Groups[0].Visible = true;
+                        NavigationBar.Groups[1].Visible = true;
+                        NavigationBar.Groups[2].Visible = true;
+                        NavigationBar.Groups[3].Visible = true;
+                        NavigationBar.Groups[4].Visible = true;
+                        //NavigationBar.Groups[5].Visible = true;
+                        SetDefaultMenuSelection(2, 4);
+                    }
                 }
             }
             //NavigationBar.DataSource = null;

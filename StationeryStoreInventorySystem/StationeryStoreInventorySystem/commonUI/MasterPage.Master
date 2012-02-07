@@ -188,6 +188,12 @@
                                     <ig:ExplorerBarItem NavigateUrl="~/storeUI/SuperVisor_Manager/BlackListDepartment.aspx"       Text="Black List Department"            ToolTip="Black List Department"               />
                                 </Items>
                             </ig:ExplorerBarGroup>
+                            <ig:ExplorerBarGroup Text="Department Blacklisted" Visible ="false">
+                                <%--SuperVisor Menu--%>
+                                <Items>
+                                   <ig:ExplorerBarItem NavigateUrl="~/commonUI/ChangePassword.aspx"                        Text="Change Password"                         ToolTip="Change Password"                         />
+                                </Items>
+                            </ig:ExplorerBarGroup>
                         </Groups>
                     </ig:WebExplorerBar>
 
