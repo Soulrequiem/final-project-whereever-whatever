@@ -16,14 +16,14 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RequisitionDetailsReport : ReportClass {
+    public class StationeryRequisitionReport : ReportClass {
         
-        public RequisitionDetailsReport() {
+        public StationeryRequisitionReport() {
         }
         
         public override string ResourceName {
             get {
-                return "RequisitionDetailsReport.rpt";
+                return "StationeryRequisitionReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,8 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         public override string FullResourceName {
             get {
-                return "StationeryStoreInventorySystem.Reports.SSISReports.RequisitionDetailsReport.rpt";
+                return "StationeryStoreInventorySystem.Reports.SSISReports.StationeryRequisitionReport.rp" +
+                    "t";
             }
             set {
                 // Do nothing
@@ -90,7 +91,7 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_RequisitionID {
+        public CrystalDecisions.Shared.IParameterField Parameter_DeptName {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +99,7 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DeptName {
+        public CrystalDecisions.Shared.IParameterField Parameter_DeptCode {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,7 +107,7 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DeptCode {
+        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeName {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -114,7 +115,7 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeName {
+        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeNumber {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -122,7 +123,7 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeNumber {
+        public CrystalDecisions.Shared.IParameterField Parameter_Email {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }
@@ -130,17 +131,49 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Email {
+        public CrystalDecisions.Shared.IParameterField Parameter_RequisitionID {
             get {
                 return this.DataDefinition.ParameterFields[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_approvedBy {
+            get {
+                return this.DataDefinition.ParameterFields[6];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_orderedBy {
+            get {
+                return this.DataDefinition.ParameterFields[7];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_approvedDate {
+            get {
+                return this.DataDefinition.ParameterFields[8];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_orderedDate {
+            get {
+                return this.DataDefinition.ParameterFields[9];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRequisitionDetailsReport : Component, ICachedReport {
+    public class CachedStationeryRequisitionReport : Component, ICachedReport {
         
-        public CachedRequisitionDetailsReport() {
+        public CachedStationeryRequisitionReport() {
         }
         
         [Browsable(false)]
@@ -177,7 +210,7 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RequisitionDetailsReport rpt = new RequisitionDetailsReport();
+            StationeryRequisitionReport rpt = new StationeryRequisitionReport();
             rpt.Site = this.Site;
             return rpt;
         }

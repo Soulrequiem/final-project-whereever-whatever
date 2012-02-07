@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
+namespace StationeryStoreInventorySystem.Reports.SSISReports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class AdjustmentVoucherReport : ReportClass {
+    public class DeliveryOrderFormReport : ReportClass {
         
-        public AdjustmentVoucherReport() {
+        public DeliveryOrderFormReport() {
         }
         
         public override string ResourceName {
             get {
-                return "AdjustmentVoucherReport.rpt";
+                return "DeliveryOrderFormReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,8 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         public override string FullResourceName {
             get {
-                return "SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports.AdjustmentVoucherRe" +
-                    "port.rpt";
+                return "StationeryStoreInventorySystem.Reports.SSISReports.DeliveryOrderFormReport.rpt";
             }
             set {
                 // Do nothing
@@ -91,7 +90,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_VoucherNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_orderno {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -99,7 +98,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_date {
+        public CrystalDecisions.Shared.IParameterField Parameter_reference {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -107,25 +106,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_authorizedBy {
+        public CrystalDecisions.Shared.IParameterField Parameter_date {
             get {
                 return this.DataDefinition.ParameterFields[2];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Supervisor {
-            get {
-                return this.DataDefinition.ParameterFields[3];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedAdjustmentVoucherReport : Component, ICachedReport {
+    public class CachedDeliveryOrderFormReport : Component, ICachedReport {
         
-        public CachedAdjustmentVoucherReport() {
+        public CachedDeliveryOrderFormReport() {
         }
         
         [Browsable(false)]
@@ -162,7 +153,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            AdjustmentVoucherReport rpt = new AdjustmentVoucherReport();
+            DeliveryOrderFormReport rpt = new DeliveryOrderFormReport();
             rpt.Site = this.Site;
             return rpt;
         }
