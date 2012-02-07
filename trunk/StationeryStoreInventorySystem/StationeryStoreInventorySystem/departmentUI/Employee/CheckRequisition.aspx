@@ -20,14 +20,15 @@
                 CssClass="MediumGroupBoxstyle" StyleSetName="Appletini" width="700px"
                 TitleAlignment="Left">
                 <Template>
-                     <table>
+                <br />
+                     <%--<table>
                         <tr>
                             <td><asp:Label CssClass="DefaultLabelstyle" ID="Label8" runat="server" 
                                 Text="<%$ Resources:WebResources, RequisitionDetails_RequisitionID%>"/></td>
                             <td>
-                                 <%--<ig:WebTextEditor ID="txtRequisitionID" runat="server" 
+                                 <ig:WebTextEditor ID="txtRequisitionID" runat="server" 
                                     CssClass="DefaultTextStyle" Width="250px">
-                                </ig:WebTextEditor>--%>
+                                </ig:WebTextEditor>
                                 <ig:WebDropDown ID="drdRequisitionList" runat="server" Width="250px" 
                                      DropDownAnimationType="EaseIn" NullText="<%$ Resources:WebResources, Text_RequisitionID%>" 
                                      StyleSetName="Office2010Blue">
@@ -42,12 +43,12 @@
                     </table>
                     <br />
                     <asp:Label CssClass="DefaultLabelstyle" ID="Label9" runat="server" 
-                        Text="<%$ Resources:WebResources, SearchResult_Label%>"/>
+                        Text="<%$ Resources:WebResources, SearchResult_Label%>"/>--%>
                     <ig:WebDataGrid ID="dgvRequisitionList" runat="server" Width="700px"
                          Height="250px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                          CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                          ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="requisitionID"
-                         oninitializerow="dgvRequisitionList_InitializeRow" EnableDataViewState="true"
+                         oninitializerow="dgvRequisitionList_InitializeRow" EnableDataViewState="True"
                          oncellselectionchanged="dgvRequisitionList_CellSelectionChanged" 
                          onrowselectionchanged="dgvRequisitionList_RowSelectionChanged" 
                          onrowupdating="dgvRequisitionList_RowUpdating">
@@ -57,8 +58,14 @@
                                 <asp:CheckBox runat="server" OnCheckedChanged="chk_changed" />
                             </ItemTemplate>
                             </ig:TemplateDataField>--%>
-                        <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
-                        </ig:UnboundCheckBoxField>
+                            <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" HeaderChecked="false" 
+                                Width="85px">
+                            </ig:UnboundCheckBoxField>
+                        <%--<ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="chk_changed" />
+                            </ItemTemplate>
+                        </ig:UnboundCheckBoxField>--%>
                         <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
                             Width="110px">
                             <Header Text="Requisition ID" />
@@ -67,12 +74,12 @@
                             <ItemTemplate>
                                 <asp:HyperLink ID="requisitionID" runat="server"
                                  Text='<%# Eval("requisitionID" ) %>'
-                                 NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx" >
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                 NavigateUrl="~/departmentUI/Employee/CheckRequisition.aspx" ><%--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
                                 </asp:HyperLink>
                              </ItemTemplate>
                            <Header Text="Requisition ID" />
-                </ig:TemplateDataField>
+                        </ig:TemplateDataField>
                         <ig:BoundDataField DataFieldName="requisitionDate" 
                             Key="requisitionDate" Width="170px">
                             <Header Text="Requisition Date/Time" />
@@ -197,6 +204,5 @@
                  </ig:WebDataGrid><br />
                 </Template>
         </igmisc:WebGroupBox>
-    </igmisc:WebGroupBox>
 </div>
 </asp:Content>

@@ -77,17 +77,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
             FillRequisitionList();
         }
 
-        protected void btnGetItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FillSpecificRequisitionList(((DataTable)Session["reqData"]).Select(" RequisitionID LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteErrorLog(ex);
-            }
-        }
+        //protected void btnGetItem_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        FillSpecificRequisitionList(((DataTable)Session["reqData"]).Select(" RequisitionID LIKE '" + drdRequisitionList.CurrentValue + "%'").CopyToDataTable());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.WriteErrorLog(ex);
+        //    }
+        //}
 
         public static void removeSession()
         {
@@ -197,25 +197,25 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
         /// Fills item drop down
         /// </summary>
         /// <param name="dtItems"></param>
-        private void FillRequisitions()
-        {
-            try
-            {
+        //private void FillRequisitions()
+        //{
+        //    try
+        //    {
                 
-                    drdRequisitionList.TextField = "requisitionID";
-                    drdRequisitionList.ValueField = "requisitionID";
-                   // drdRequisitionList.DataSource = (DataTable)Util.GetSession(sessionKey);
-                    Util.PutSession("reqData", checkRequisitionControlObj.GetRequisitionList());
-                    drdRequisitionList.DataSource = (DataTable)Session["reqData"];
-                    drdRequisitionList.DataBind();
+        //            drdRequisitionList.TextField = "requisitionID";
+        //            drdRequisitionList.ValueField = "requisitionID";
+        //           // drdRequisitionList.DataSource = (DataTable)Util.GetSession(sessionKey);
+        //            Util.PutSession("reqData", checkRequisitionControlObj.GetRequisitionList());
+        //            drdRequisitionList.DataSource = (DataTable)Session["reqData"];
+        //            drdRequisitionList.DataBind();
                     
-                //}
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+        //        //}
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.WriteErrorLog(e);
+        //    }
+        //}
 
 
         /// <summary>
