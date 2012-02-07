@@ -189,9 +189,11 @@ namespace StationeryStoreInventorySystemController.departmentController
                 employee.Id = currentEmployee.Id;
                 employee = employeeBroker.GetEmployee(employee);
 
+                int actionIndex = 0;
+
                 foreach (string key in remarks.Keys)
                 {
-                    requisition = pendingRequisitionList.ElementAt(Converter.objToInt(key));
+                    requisition = pendingRequisitionList.ElementAt(Converter.objToInt(key) - (actionIndex++));
                     requisition.Status = Converter.objToInt(requisitionStatus);
                     requisition.Remarks = remarks[key];
                     requisition.ApprovedBy = employee;
