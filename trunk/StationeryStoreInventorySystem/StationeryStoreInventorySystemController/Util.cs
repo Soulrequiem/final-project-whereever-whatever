@@ -251,7 +251,8 @@ namespace StationeryStoreInventorySystemController
                                          new DataColumn("ItemDescription"),
                                          new DataColumn("ReorderLevel"),
                                          new DataColumn("ReorderQty"),
-                                         new DataColumn("UnitOfMeasure") });
+                                         new DataColumn("UnitOfMeasure"),
+                                         new DataColumn("Bin") });
                 DataRow dr;
 
                 List<Item> itemList = (new ItemBroker(new InventoryEntities())).GetAllItem();
@@ -265,6 +266,7 @@ namespace StationeryStoreInventorySystemController
                     dr["ReorderLevel"] = item.ReorderLevel;
                     dr["ReorderQty"] = item.ReorderQty;
                     dr["UnitOfMeasure"] = Converter.GetUnitOfMeasureText(Converter.objToUnitOfMeasure(item.UnitOfMeasureId));
+                    dr["Bin"] = item.Bin;
                     allItem.Rows.Add(dr);
                 }
             }
