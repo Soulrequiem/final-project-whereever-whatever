@@ -129,7 +129,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         NavigationBar.Groups[2].Visible = false;
                         NavigationBar.Groups[3].Visible = true;
                         NavigationBar.Groups[4].Visible = false;
-                        SetDefaultMenuSelection(8, 3);
+                        SetDefaultMenuSelection(2, 3);
                         //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreClerkSiteMapProvider"];
                     }
                     else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
