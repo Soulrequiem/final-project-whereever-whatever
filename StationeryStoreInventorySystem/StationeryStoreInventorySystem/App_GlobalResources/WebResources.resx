@@ -549,4 +549,19 @@
   <data name="GenerateReports_Header" xml:space="preserve">
     <value>Generate Reports</value>
   </data>
+  <data name="ManageStationeryRetrievalList_ActualQty" xml:space="preserve">
+    <value>Actual Qty</value>
+  </data>
+  <data name="ManageStationeryRetrievalList_Bin" xml:space="preserve">
+    <value>Bin</value>
+  </data>
+  <data name="ManageStationeryRetrievalList_NeededQty" xml:space="preserve">
+    <value>Needed Qty</value>
+  </data>
+  <data name="ManageStationeryRetrievalList_RetrievalNo" xml:space="preserve">
+    <value>Retrieval No</value>
+  </data>
+  <data name="ManageStationeryRetrievalList_Title" xml:space="preserve">
+    <value>Manage Stationery Retrieval List</value>
+  </data>
 </root>
