@@ -18,7 +18,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
 {
     public partial class ApproveRequisition : System.Web.UI.Page
     {
-        private static readonly string sessionKey = "ApproveRequisition";
+        public static readonly string sessionKey = "ApproveRequisition";
         //private static readonly string selectedSessionKey = "ApproveRequisitionSelectedIndex";
         //private static readonly string remarksSessionKey = "ApproveRequisitionRemarks";
 
@@ -118,6 +118,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
                 if (SystemStoreInventorySystemUtil.Converter.objToBool(DgvRequisitionList.Rows[i].Items.FindItemByKey("ApproveRequisitionCheckBox").Value) == true)
                 {
                     remarksList.Add(i.ToString(), ((Infragistics.Web.UI.EditorControls.WebTextEditor)DgvRequisitionList.Rows[i].Items.FindItemByKey("Remarks").FindControl("Remarks")).Text);
+                    DgvRequisitionList.Rows[i].Items.FindItemByKey("ApproveRequisitionCheckBox").Value = false;
                 }
             }
         }
