@@ -42,7 +42,7 @@ namespace StationeryStoreInventorySystemController.departmentController
             requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
 
             requisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.NEED_TO_COLLECT);
-            collectedRequisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.COLLECTED);
+            //collectedRequisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.COLLECTED);
 
             collectionListDataColumn = new DataColumn[] { new DataColumn(collectionListColumnName[0]),
                                                           new DataColumn(collectionListColumnName[1]),
@@ -175,6 +175,12 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         public void SelectModifyDeliveredQuantity(int index)
         {
+
         }
+
+        //public void UpdateStatus(string collectionID)
+        //{ 
+        //    if()
+        //}
     }
 }
