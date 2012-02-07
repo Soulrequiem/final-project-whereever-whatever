@@ -235,6 +235,21 @@ namespace StationeryStoreInventorySystemModel.broker
             return lastId;
         }
 
+        public RequisitionCollectionDetail GetRequisitionCollectionDetail(Requisition requisition)
+        {
+            RequisitionCollectionDetail requisitionCollectionDetail;
+            try
+            {
+                requisitionCollectionDetail = inventory.RequisitionCollectionDetails.Where(x => x.Requisition.Id.Contains(requisition.Id)).First();
+            }
+            catch (Exception e)
+            {
+                requisitionCollectionDetail = null;
+            }
+
+            return requisitionCollectionDetail;
+        }
+
         /// <summary>
         /// Get the RequisitionCollectionDetail of the RequisitionCollection Table
         /// </summary>
@@ -246,7 +261,7 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                requisitionCollectionDetailObj = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Id == requisitionCollectionDetail.Id).First();
+                requisitionCollectionDetailObj = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Id == requisitionCollectionDetail.Id || reqObj.Requisition.Id.Contains(requisitionCollectionDetail.Requisition.Id)).First();
 
             }
             catch (Exception e)
