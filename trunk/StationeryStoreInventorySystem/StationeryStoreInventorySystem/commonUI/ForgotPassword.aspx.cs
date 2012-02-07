@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SystemStoreInventorySystemUtil;
+using StationeryStoreInventorySystemController;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
@@ -20,10 +21,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
-            String Email = txtemailaddress.Text.Trim();
-            //SendEmail.Sending(Email);
-            //if (txtemailaddress.Text != "")
-            //    lblStatusMessage.Text = "Successful.";
+            if (txtemailaddress.Text != "")
+            {
+                String Email = txtemailaddress.Text.Trim();
+                SendEmail.Sending(Email);
+            }
+            else
+                lblStatusMessage.Text = "Enter your email address.";
         }
     }
 }
