@@ -101,6 +101,22 @@ namespace StationeryStoreInventorySystemModel.broker
             return requisitionCollectionList;
         }
 
+        public RequisitionCollection GetAllRequisitionCollectionByRequisitionCollectionID(string RCId)
+        {
+            RequisitionCollection requisitionCollectionList;
+            try
+            {
+                int rcID = Converter.objToInt(RCId);
+                requisitionCollectionList = inventory.RequisitionCollections.Where(requisitionCollection => requisitionCollection.Id == rcID).First();
+            }
+            catch (Exception e)
+            {
+                requisitionCollectionList = null;
+            }
+
+            return requisitionCollectionList;
+        }
+
         public List<RequisitionCollection> GetAllRequisitionCollection(Department department, Constants.COLLECTION_STATUS collectionStatus)
         {
             try
@@ -115,6 +131,7 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return requisitionCollectionList;
         }
+
         /// <summary>
         /// Insert the RequistionCollection data to the Requistion Table
         /// </summary>
@@ -257,6 +274,27 @@ namespace StationeryStoreInventorySystemModel.broker
             } 
                 return requisitionCollectionDetailList;
         }
+
+        /// <summary>
+        /// Get the RequisitionCollectionDetail list from the RequistionCollectionDetail Table
+        /// </summary>
+        /// <returns>
+        /// Return RequisitionCollectionDetail list
+        /// </returns>
+        public RequisitionCollectionDetail GetAllRequisitionCollectionDetail(string requisitionID)
+        {
+            RequisitionCollectionDetail requisitionCollectionDetailList;
+            try
+            {
+                requisitionCollectionDetailList = inventory.RequisitionCollectionDetails.Where(reqObj => reqObj.Requisition.Id.Contains(requisitionID)).First();
+            }
+            catch (Exception e)
+            {
+                requisitionCollectionDetailList = null;
+            }
+            return requisitionCollectionDetailList;
+        }
+
         /// <summary>
         /// Insert the RequisitionCollectionDetail data from the parameter
         /// </summary>
