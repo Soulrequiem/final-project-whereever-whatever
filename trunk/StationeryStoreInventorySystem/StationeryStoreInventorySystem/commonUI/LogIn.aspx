@@ -11,7 +11,7 @@
                 return false;
             }
             return true;
-        }
+//        }
 //    function forgot() {
 //        if (document.getElementById('FirstContent_WebGroupBox1_txtUsername').value == "") {
 //            document.getElementById('FirstContent_WebGroupBox1_lblStatusMessage').innerHTML = "Enter user name.";
