@@ -163,12 +163,27 @@ namespace StationeryStoreInventorySystemController.departmentController
 
         private void setRequisitionCollection(int collectionId, List<RequisitionCollection> requisitionCollectionList)
         {
-            foreach (RequisitionCollection requisitionCollection in requisitionCollectionList)
+            if (null != requisitionCollectionList)
             {
-                if (requisitionCollection.Id == collectionId)
+                foreach (RequisitionCollection requisitionCollection in requisitionCollectionList)
                 {
-                    this.requisitionCollection = requisitionCollection;
-                    break;
+                    if (requisitionCollection.Id == collectionId)
+                    {
+                        this.requisitionCollection = requisitionCollection;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                requisitionCollectionList = requisitionCollectionBroker.GetAllRequisitionCollection(currentEmployee.Department, Constants.COLLECTION_STATUS.NEED_TO_COLLECT);
+                foreach (RequisitionCollection requisitionCollection in requisitionCollectionList)
+                {
+                    if (requisitionCollection.Id == collectionId)
+                    {
+                        this.requisitionCollection = requisitionCollection;
+                        break;
+                    }
                 }
             }
         }
