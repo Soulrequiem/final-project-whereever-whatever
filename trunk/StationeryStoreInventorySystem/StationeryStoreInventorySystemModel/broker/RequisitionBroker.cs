@@ -141,7 +141,7 @@ namespace StationeryStoreInventorySystemModel.broker
             {
 
                 int status = Converter.objToInt(requisitionStatus);
-                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status && reqObj.Department.Id.Contains(department.Id)).ToList<Requisition>();
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == status && reqObj.Department.Id.Contains(department.Id)).OrderByDescending(reqObj => reqObj.CreatedDate).ToList<Requisition>();
             }
             catch (Exception e)
             {
