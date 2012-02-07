@@ -46,7 +46,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
     <ig:WebDocumentExporter ID="PDFExporter" runat="server"/>
     <ig:WebExcelExporter ID="ExcelExporter" runat="server"/>
     <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
-            Text="Reports" /></h1>
+            Text="<%$Resources:WebResources,GenerateReports_Header %>" /></h1>
     <div style="float:left; height: 21px;width:100%">
         <div style="float:left">
             <asp:Label ID="Label1" runat="server" Text="Select Report : " CssClass="DefaultLabelstyle"/>
@@ -280,7 +280,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                                 </ig:Sorting>
                                 <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                 </ig:Selection>
-                                <ig:Paging>  
+                                <ig:Paging PageSize="15">  
                                 </ig:Paging>
                                 <ig:Filtering >
                                     <ColumnSettings>
