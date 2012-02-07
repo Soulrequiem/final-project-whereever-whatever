@@ -252,7 +252,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                         dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value = false;
                         //quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(), SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequiredQty").FindControl("RequiredQty")).Text));
                         quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(),
-                            SystemStoreInventorySystemUtil.Converter.objToInt(dgvStationeryDetailsList.Rows[0].Items[3].Text));
+                            SystemStoreInventorySystemUtil.Converter.objToInt(dgvStationeryDetailsList.Rows[i].Items[3].Text));
                     }
                 }
 
