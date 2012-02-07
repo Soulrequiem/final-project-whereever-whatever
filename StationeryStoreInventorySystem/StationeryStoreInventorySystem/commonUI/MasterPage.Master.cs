@@ -81,8 +81,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         NavigationBar.Groups[4].Visible = false;
                         SetDefaultMenuSelection(3, 0);
                     }
-                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD ||
-                        Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_HEAD)
                     {
                         NavigationBar.Groups[0].Visible = true;
                         NavigationBar.Groups[1].Visible = true;
@@ -90,10 +89,30 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         NavigationBar.Groups[3].Visible = false;
                         NavigationBar.Groups[4].Visible = false;
                         SetDefaultMenuSelection(0, 2);
-                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptHeadMapProvider"];
                     }
-                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE ||
-                        Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
+                    {
+                        NavigationBar.Groups[0].Visible = true;
+                        NavigationBar.Groups[1].Visible = true;
+                        NavigationBar.Groups[2].Visible = true;
+                        NavigationBar.Groups[2].Items[1].Visible = false;
+                        NavigationBar.Groups[2].Items[2].Visible = false;
+                        NavigationBar.Groups[3].Visible = false;
+                        NavigationBar.Groups[4].Visible = false;
+                        SetDefaultMenuSelection(0, 2);
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_REPRESENTATIVE)
+                    {
+                        NavigationBar.Groups[0].Visible = true;
+                        NavigationBar.Groups[1].Visible = true;
+                        NavigationBar.Groups[1].Items[4].Visible = false;
+                        NavigationBar.Groups[2].Visible = false;
+                        NavigationBar.Groups[3].Visible = false;
+                        NavigationBar.Groups[4].Visible = false;
+                        SetDefaultMenuSelection(0, 1);
+                        //SSISSiteMapDataSource.Provider = SiteMap.Providers["DeptRepSiteMapProvider"];
+                    }
+                    else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.DEPARTMENT_REPRESENTATIVE)
                     {
                         NavigationBar.Groups[0].Visible = true;
                         NavigationBar.Groups[1].Visible = true;
@@ -110,7 +129,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         NavigationBar.Groups[2].Visible = false;
                         NavigationBar.Groups[3].Visible = true;
                         NavigationBar.Groups[4].Visible = false;
-                        SetDefaultMenuSelection(7, 3);
+                        SetDefaultMenuSelection(8, 3);
                         //SSISSiteMapDataSource.Provider = SiteMap.Providers["StoreClerkSiteMapProvider"];
                     }
                     else if (Util.GetEmployeeRole() == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
@@ -146,6 +165,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         SetDefaultMenuSelection(2, 4);
                     }
                 }
+
+                
             }
             //NavigationBar.DataSource = null;
             //NavigationBar.DataSource = SSISSiteMapDataSource;
