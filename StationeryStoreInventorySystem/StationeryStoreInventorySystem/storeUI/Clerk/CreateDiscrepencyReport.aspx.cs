@@ -15,8 +15,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         private static readonly string sessionKey = "CreateDiscrepancy";
         private CreateDiscrepencyReportControl createDiscrepancyReportControl;
         
-        private DataTable dtGridItems;
-        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -34,21 +32,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             }
             FillItemsGridView();
         }
+
+        public void removeSession()
+        {
+            StationeryStoreInventorySystemController.Util.RemoveSession(sessionKey);
+        }
+
         private CreateDiscrepencyReportControl GetControl()
         {
             if (createDiscrepancyReportControl == null)
                 createDiscrepancyReportControl = new CreateDiscrepencyReportControl();
             return createDiscrepancyReportControl;
         }
-
-        private void FillDataTable()
-        {
-            //if (dtGridItems == null)
-            //{
-            //    dtGridItems = (DataTable)dgvItemList.DataSource;
-            //}
-        }
-
 
         /// <summary>
         /// Fills item drop down
@@ -67,27 +62,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void drdItemList_SelectionChanged(object sender,
-        Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
-        {
-            //string selectedItem = drdItemList.SelectedItem.Text;
-
-            //if (createDiscrepancyReportControl.SelectItemDescription(drdItemList.SelectedItem.Text) == Constants.ACTION_STATUS.SUCCESS)
-            //{
-            //    lblItemNumber.Text = createDiscrepancyReportControl.ItemId;
-            //}
-            //else
-            //{
-            //    // print error message
-            //}
-            //Pass to the controller
-
-        }
-        /// <summary>
         /// Adds item in the gridview
         /// CreatedBy Priyanka
         /// </summary>
@@ -95,36 +69,43 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         /// <param name="e"></param>
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            DataTable dtGridItems = (DataTable)Session["DiscrepencyItems"];
-            if (dtGridItems == null)
-            {
-                dtGridItems = new DataTable();
+            //DataTable dtGridItems = (DataTable)Session["DiscrepencyItems"];
+            //if (dtGridItems == null)
+            //{
+            //    dtGridItems = new DataTable();
 
-                foreach (string columnName in dgvItemList.Columns)
-                {
-                    dtGridItems.Columns.Add(columnName);
-                }
-            }
+            //    foreach (string columnName in dgvItemList.Columns)
+            //    {
+            //        dtGridItems.Columns.Add(columnName);
+            //    }
+            //}
 
-            DataRow dr = dtGridItems.NewRow();
-            dr[0] = false;
-            dr[1] = lblItemNumber.Text;
-            dr[2] = drdItemList.SelectedItem.Text;
-            dr[3] = txtQuantity.Text;
-            dr[4] = lblItemPrice.Text;
-            dr[5] = txtReason.Text;
+
+            //DataRow dr = dtGridItems.NewRow();
+            //dr[0] = false;
+            //dr[1] = lblItemNumber.Text;
+            //dr[2] = drdItemList.SelectedItem.Text;
+            //dr[3] = txtQuantity.Text;
+            //dr[4] = lblItemPrice.Text;
+            //dr[5] = txtReason.Text;
            
-            dtGridItems.Rows.Add(dr);
+            //dtGridItems.Rows.Add(dr);
             createDiscrepancyReportControl.SelectAdd(lblItemNumber.Text, Converter.objToInt(txtQuantity.Text), txtReason.Text);
-            Session["DiscrepencyItems"] = dtGridItems;
+            //Session["DiscrepencyItems"] = dtGridItems;
             FillItemsGridView();
+
+            drdItemList.CurrentValue = "";
+            txtQuantity.Text = "";
+            txtReason.Text = "";
+            lblItemNumber.Text = "";
+            lblItemPrice.Text = "";
         }
         
 
         private void FillItemsGridView()
         {
-            dgvItemList.ClearDataSource();
-            dgvItemList.DataSource = (DataTable)Session["DiscrepencyItems"];
+            dgvItemList.Rows.Clear();
+            dgvItemList.DataSource = createDiscrepancyReportControl.DiscrepancyDetailList;
             dgvItemList.DataBind();
         }
 
@@ -136,14 +117,13 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             Constants.ACTION_STATUS status = createDiscrepancyReportControl.SelectCreate();
             if (status == Constants.ACTION_STATUS.SUCCESS)
             {
-                Response.Write("Sucess.....");
+                btnAdd.Visible = false;
+                btnApprove.Visible = false;
+                btnDelete.Visible = false;
+                btnGetItem.Visible = false;
+
+                // add success message
             }
-            else
-            {
-                Response.Write("Fail.........");
-            }
-            
-            
         }
         /// <summary>
         /// To remove the selected row
@@ -154,41 +134,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
-           // ArrayList productToDelete = new ArrayList();
-            DataTable dtGridItems = (DataTable)Session["DiscrepencyItems"];
             int deletedItem = 0;
             for (int i = 0; i < dgvItemList.Rows.Count; i++)
             {
                 if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvItemList.Rows[i].Items.FindItemByKey("CreateDiscrepancyReportCheckBox").Value) == true)
                 {
                     createDiscrepancyReportControl.SelectRemove(i - (deletedItem++));
-                    refresh();
-                    dtGridItems.Rows.RemoveAt(i);
-
                 }
             }
-            Session["DiscrepencyItems"] = dtGridItems;
-           
-           
-            
+            FillItemsGridView();
         }
-        private void refresh()
-        {
-            //selectedIndexList = new List<int>();
-            dgvItemList.Rows.Clear();
-            FillDataTable();
-        }
-        //private void prepareData()
-        //{
-        //    for (int i = 0; i < dgvItemList.Rows.Count; i++)
-        //    {
-        //        if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvItemList.Rows[i].Items.FindItemByKey("CreateDiscrepancyReportCheckBox").Value) == true)
-        //        {
-        //        }
-        //    }
-
-
-        //}
 
         protected void dgvItemList_RowUpdated(object sender,
             Infragistics.Web.UI.GridControls.RowUpdatedEventArgs e)
@@ -207,6 +162,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             FillItemsGridView();
         }
+        
         /// <summary>
         /// Display the itemNo. & Item Price according to the item Reference
         /// createdby Priyanka

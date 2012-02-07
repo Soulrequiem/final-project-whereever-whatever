@@ -34,28 +34,6 @@
                                     AutoFilterResultSize="5" AutoFilterSortOrder="Ascending">
                                     <Button Visible="False" />
                                     <Items>
-                                        <ig:DropDownItem Selected="False" Text="Hello" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Awesome" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Super" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Admin" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="namaskar" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Namaste" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Hiiii" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="wowwwww" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Mast" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Aiyaaaaa" Value="">
-                                        </ig:DropDownItem>
-                                        <ig:DropDownItem Selected="False" Text="Hello1" Value="">
-                                        </ig:DropDownItem>
                                     </Items>
                                 </ig:WebDropDown>
                                 </div>
@@ -115,15 +93,14 @@
                 TitleAlignment="Left" Text="<%$ Resources:WebResources, CreateDiscrepencyReport_GropuBoxHeader%>">
                 <Template>
                     <br />
-                    <ig:WebDataGrid ID="dgvItemList" runat="server" Height="400px" Width="700px" 
-                        AutoGenerateColumns="False" DefaultColumnWidth="50px" 
-                        DataKeyFields="Reason"
+                    <ig:WebDataGrid ID="dgvItemList" runat="server" 
+                        DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
-                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
+                        ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="ItemNo"
+                        Height="400px" Width="700px">                    
                         <Columns>
-                            <ig:BoundCheckBoxField Key="CreateDiscrepancyReportCheckBox" Width="80px" DataFieldName="CreateDiscrepancyReportCheckBox">
-                                <Header Text="Select" />
-                            </ig:BoundCheckBoxField>
+                            <ig:UnboundCheckBoxField Key="CreateDiscrepancyReportCheckBox" HeaderCheckBoxMode="Off" Width="80px" HeaderChecked="false">
+                            </ig:UnboundCheckBoxField>
                             <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                 <Header Text="Item No." />
                             </ig:BoundDataField>
