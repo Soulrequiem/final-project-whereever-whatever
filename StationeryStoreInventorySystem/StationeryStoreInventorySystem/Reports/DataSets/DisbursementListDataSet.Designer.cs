@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
+namespace StationeryStoreInventorySystem.Reports.DataSets {
     
     
     /// <summary>
@@ -20,17 +20,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSRoles")]
+    [global::System.Xml.Serialization.XmlRootAttribute("DisbursementListDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSRoles : global::System.Data.DataSet {
+    public partial class DisbursementListDataSet : global::System.Data.DataSet {
         
-        private RolesDataTable tableRoles;
+        private DisbursementListDataTable tableDisbursementList;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DSRoles() {
+        public DisbursementListDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSRoles(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected DisbursementListDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Roles"] != null)) {
-                    base.Tables.Add(new RolesDataTable(ds.Tables["Roles"]));
+                if ((ds.Tables["DisbursementList"] != null)) {
+                    base.Tables.Add(new DisbursementListDataTable(ds.Tables["DisbursementList"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public RolesDataTable Roles {
+        public DisbursementListDataTable DisbursementList {
             get {
-                return this.tableRoles;
+                return this.tableDisbursementList;
             }
         }
         
@@ -127,7 +127,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DSRoles cln = ((DSRoles)(base.Clone()));
+            DisbursementListDataSet cln = ((DisbursementListDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Roles"] != null)) {
-                    base.Tables.Add(new RolesDataTable(ds.Tables["Roles"]));
+                if ((ds.Tables["DisbursementList"] != null)) {
+                    base.Tables.Add(new DisbursementListDataTable(ds.Tables["DisbursementList"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableRoles = ((RolesDataTable)(base.Tables["Roles"]));
+            this.tableDisbursementList = ((DisbursementListDataTable)(base.Tables["DisbursementList"]));
             if ((initTable == true)) {
-                if ((this.tableRoles != null)) {
-                    this.tableRoles.InitVars();
+                if ((this.tableDisbursementList != null)) {
+                    this.tableDisbursementList.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DSRoles";
+            this.DataSetName = "DisbursementListDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DSRoles.xsd";
+            this.Namespace = "http://tempuri.org/DisbursementListDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableRoles = new RolesDataTable();
-            base.Tables.Add(this.tableRoles);
+            this.tableDisbursementList = new DisbursementListDataTable();
+            base.Tables.Add(this.tableDisbursementList);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeRoles() {
+        private bool ShouldSerializeDisbursementList() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DSRoles ds = new DSRoles();
+            DisbursementListDataSet ds = new DisbursementListDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,23 +270,23 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void RolesRowChangeEventHandler(object sender, RolesRowChangeEvent e);
+        public delegate void DisbursementListRowChangeEventHandler(object sender, DisbursementListRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class RolesDataTable : global::System.Data.TypedTableBase<RolesRow> {
+        public partial class DisbursementListDataTable : global::System.Data.TypedTableBase<DisbursementListRow> {
             
-            private global::System.Data.DataColumn columnRoleId;
+            private global::System.Data.DataColumn columnStationeryDescription;
             
-            private global::System.Data.DataColumn columnRoleName;
+            private global::System.Data.DataColumn columnQuantity;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RolesDataTable() {
-                this.TableName = "Roles";
+            public DisbursementListDataTable() {
+                this.TableName = "DisbursementList";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -294,7 +294,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal RolesDataTable(global::System.Data.DataTable table) {
+            internal DisbursementListDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -311,24 +311,24 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected RolesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected DisbursementListDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RoleIdColumn {
+            public global::System.Data.DataColumn StationeryDescriptionColumn {
                 get {
-                    return this.columnRoleId;
+                    return this.columnStationeryDescription;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RoleNameColumn {
+            public global::System.Data.DataColumn QuantityColumn {
                 get {
-                    return this.columnRoleName;
+                    return this.columnQuantity;
                 }
             }
             
@@ -343,46 +343,46 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RolesRow this[int index] {
+            public DisbursementListRow this[int index] {
                 get {
-                    return ((RolesRow)(this.Rows[index]));
+                    return ((DisbursementListRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RolesRowChangeEventHandler RolesRowChanging;
+            public event DisbursementListRowChangeEventHandler DisbursementListRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RolesRowChangeEventHandler RolesRowChanged;
+            public event DisbursementListRowChangeEventHandler DisbursementListRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RolesRowChangeEventHandler RolesRowDeleting;
+            public event DisbursementListRowChangeEventHandler DisbursementListRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event RolesRowChangeEventHandler RolesRowDeleted;
+            public event DisbursementListRowChangeEventHandler DisbursementListRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddRolesRow(RolesRow row) {
+            public void AddDisbursementListRow(DisbursementListRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RolesRow AddRolesRow(string RoleId, string RoleName) {
-                RolesRow rowRolesRow = ((RolesRow)(this.NewRow()));
+            public DisbursementListRow AddDisbursementListRow(string StationeryDescription, string Quantity) {
+                DisbursementListRow rowDisbursementListRow = ((DisbursementListRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        RoleId,
-                        RoleName};
-                rowRolesRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowRolesRow);
-                return rowRolesRow;
+                        StationeryDescription,
+                        Quantity};
+                rowDisbursementListRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDisbursementListRow);
+                return rowDisbursementListRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                RolesDataTable cln = ((RolesDataTable)(base.Clone()));
+                DisbursementListDataTable cln = ((DisbursementListDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -390,49 +390,49 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new RolesDataTable();
+                return new DisbursementListDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnRoleId = base.Columns["RoleId"];
-                this.columnRoleName = base.Columns["RoleName"];
+                this.columnStationeryDescription = base.Columns["StationeryDescription"];
+                this.columnQuantity = base.Columns["Quantity"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnRoleId = new global::System.Data.DataColumn("RoleId", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRoleId);
-                this.columnRoleName = new global::System.Data.DataColumn("RoleName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRoleName);
+                this.columnStationeryDescription = new global::System.Data.DataColumn("StationeryDescription", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStationeryDescription);
+                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantity);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RolesRow NewRolesRow() {
-                return ((RolesRow)(this.NewRow()));
+            public DisbursementListRow NewDisbursementListRow() {
+                return ((DisbursementListRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new RolesRow(builder);
+                return new DisbursementListRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(RolesRow);
+                return typeof(DisbursementListRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.RolesRowChanged != null)) {
-                    this.RolesRowChanged(this, new RolesRowChangeEvent(((RolesRow)(e.Row)), e.Action));
+                if ((this.DisbursementListRowChanged != null)) {
+                    this.DisbursementListRowChanged(this, new DisbursementListRowChangeEvent(((DisbursementListRow)(e.Row)), e.Action));
                 }
             }
             
@@ -440,8 +440,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.RolesRowChanging != null)) {
-                    this.RolesRowChanging(this, new RolesRowChangeEvent(((RolesRow)(e.Row)), e.Action));
+                if ((this.DisbursementListRowChanging != null)) {
+                    this.DisbursementListRowChanging(this, new DisbursementListRowChangeEvent(((DisbursementListRow)(e.Row)), e.Action));
                 }
             }
             
@@ -449,8 +449,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.RolesRowDeleted != null)) {
-                    this.RolesRowDeleted(this, new RolesRowChangeEvent(((RolesRow)(e.Row)), e.Action));
+                if ((this.DisbursementListRowDeleted != null)) {
+                    this.DisbursementListRowDeleted(this, new DisbursementListRowChangeEvent(((DisbursementListRow)(e.Row)), e.Action));
                 }
             }
             
@@ -458,14 +458,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.RolesRowDeleting != null)) {
-                    this.RolesRowDeleting(this, new RolesRowChangeEvent(((RolesRow)(e.Row)), e.Action));
+                if ((this.DisbursementListRowDeleting != null)) {
+                    this.DisbursementListRowDeleting(this, new DisbursementListRowChangeEvent(((DisbursementListRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveRolesRow(RolesRow row) {
+            public void RemoveDisbursementListRow(DisbursementListRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -474,7 +474,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DSRoles ds = new DSRoles();
+                DisbursementListDataSet ds = new DisbursementListDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -492,7 +492,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "RolesDataTable";
+                attribute2.FixedValue = "DisbursementListDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -536,71 +536,72 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class RolesRow : global::System.Data.DataRow {
+        public partial class DisbursementListRow : global::System.Data.DataRow {
             
-            private RolesDataTable tableRoles;
+            private DisbursementListDataTable tableDisbursementList;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal RolesRow(global::System.Data.DataRowBuilder rb) : 
+            internal DisbursementListRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableRoles = ((RolesDataTable)(this.Table));
+                this.tableDisbursementList = ((DisbursementListDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string RoleId {
+            public string StationeryDescription {
                 get {
                     try {
-                        return ((string)(this[this.tableRoles.RoleIdColumn]));
+                        return ((string)(this[this.tableDisbursementList.StationeryDescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RoleId\' in table \'Roles\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'StationeryDescription\' in table \'DisbursementList\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableRoles.RoleIdColumn] = value;
+                    this[this.tableDisbursementList.StationeryDescriptionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string RoleName {
+            public string Quantity {
                 get {
                     try {
-                        return ((string)(this[this.tableRoles.RoleNameColumn]));
+                        return ((string)(this[this.tableDisbursementList.QuantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RoleName\' in table \'Roles\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Quantity\' in table \'DisbursementList\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableRoles.RoleNameColumn] = value;
+                    this[this.tableDisbursementList.QuantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRoleIdNull() {
-                return this.IsNull(this.tableRoles.RoleIdColumn);
+            public bool IsStationeryDescriptionNull() {
+                return this.IsNull(this.tableDisbursementList.StationeryDescriptionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRoleIdNull() {
-                this[this.tableRoles.RoleIdColumn] = global::System.Convert.DBNull;
+            public void SetStationeryDescriptionNull() {
+                this[this.tableDisbursementList.StationeryDescriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRoleNameNull() {
-                return this.IsNull(this.tableRoles.RoleNameColumn);
+            public bool IsQuantityNull() {
+                return this.IsNull(this.tableDisbursementList.QuantityColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRoleNameNull() {
-                this[this.tableRoles.RoleNameColumn] = global::System.Convert.DBNull;
+            public void SetQuantityNull() {
+                this[this.tableDisbursementList.QuantityColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -608,22 +609,22 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class RolesRowChangeEvent : global::System.EventArgs {
+        public class DisbursementListRowChangeEvent : global::System.EventArgs {
             
-            private RolesRow eventRow;
+            private DisbursementListRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RolesRowChangeEvent(RolesRow row, global::System.Data.DataRowAction action) {
+            public DisbursementListRowChangeEvent(DisbursementListRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RolesRow Row {
+            public DisbursementListRow Row {
                 get {
                     return this.eventRow;
                 }
