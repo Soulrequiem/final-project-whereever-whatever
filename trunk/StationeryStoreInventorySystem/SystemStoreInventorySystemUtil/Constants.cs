@@ -31,12 +31,14 @@ namespace SystemStoreInventorySystemUtil
         public const string RolesReport = "Roles List";
         public const string ReportViewPath = "../commonUI/ReportView.aspx";
         public const string PrintViewPath = "../commonUI/PrintView.aspx";
-        public const string RequisitionDetailsReportPath = "\\Reports\\SSISReports\\RequisitionReport.rpt";
+        public const string RequisitionDetailsReportPath = "\\Reports\\SSISReports\\StationeryRequisitionReport.rpt";
         public const string ItemConsumptionReport = "Item Consumption Report";
         public const string ByRequsitions = "By Requisitions";
         public const string ByItems = "By Items";
-        public const string stockCardReportPath = "\\Reports\\SSISReports\\StockCardReport.rpt";
-        public const string purchaseOrderReportPath = "\\Reports\\SSISReports\\PurchaseOrderReport.rpt";
+        public const string stockCardReportPath = "\\Reports\\SSISReports\\ViewStockCardReport.rpt";
+        public const string purchaseOrderReportPath = "\\Reports\\SSISReports\\StationeryPurchaseOrderReport.rpt";
+        public const string deliverOrderReportPatch = "\\Reports\\SSISReports\\DeliveryOrderFormReport.rpt";
+        public const string adjustmentOrderReportPath = "\\Reports\\SSISReports\\InventoryAdjustmentVoucherReport.rpt";
         public enum VISIBILITY_STATUS
         {
             UNKNOWN = 0,
