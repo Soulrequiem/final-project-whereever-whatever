@@ -63,7 +63,7 @@
                             Width="110px">
                             <Header Text="Requisition ID" />
                         </ig:BoundDataField>--%>
-                        <ig:TemplateDataField Key="requisitionID" Width="120px">
+                        <ig:TemplateDataField Key="requisitionID" Width="130px">
                             <ItemTemplate>
                                 <asp:HyperLink ID="requisitionID" runat="server"
                                  Text='<%# Eval("requisitionID" ) %>'
@@ -74,17 +74,17 @@
                            <Header Text="Requisition ID" />
                 </ig:TemplateDataField>
                         <ig:BoundDataField DataFieldName="requisitionDate" 
-                            Key="requisitionDate" Width="130px">
+                            Key="requisitionDate" Width="170px">
                             <Header Text="Requisition Date/Time" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="status" Key="status" Width="110px">
+                        <ig:BoundDataField DataFieldName="status" Key="status" Width="130px">
                             <Header Text="status" />
                         </ig:BoundDataField>
                         <ig:BoundDataField DataFieldName="remainingQty" Key="remainingQty" Hidden="True"
                             Width="100px">
                             <Header Text="Remaining Qty" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="100px">
+                        <ig:BoundDataField DataFieldName="Remarks" Key="Remarks" Width="180px">
                             <Header Text="Remarks" />
                         </ig:BoundDataField>
                         <%--<ig:TemplateDataField  Key="remarks" Width="150px" Hidden="True">
