@@ -16,13 +16,15 @@ namespace StationeryStoreInventorySystemController.storeController
         private IItemBroker itemBroker;
         private IItemPriceBroker itemPriceBroker;
         private IPurchaseOrderBroker purchaseOrderBroker;
+        private ISupplierBroker supplierBroker;
+        private IEmployeeBroker employeeBroker;
 
         private DataTable SupplierList;
-        private ISupplierBroker supplierBroker;
         private DataTable table;
         private int purchaseOrderId;
         private List<PurchaseOrderDetail> poDetailList;
         private List<Item> reorderList;
+        private Dictionary<Item, List<double>> addedItemList;
 
         public int PurchaseOrderId
         {
@@ -82,11 +84,17 @@ namespace StationeryStoreInventorySystemController.storeController
             itemBroker = new ItemBroker(inventory);
             purchaseOrderBroker = new PurchaseOrderBroker(inventory);
             itemPriceBroker = new ItemPriceBroker(inventory);
+            employeeBroker = new EmployeeBroker(inventory);
 
-            reorderList = GetReorderItemList();
+            //reorderList = GetReorderItemList();
             purchaseOrder = new PurchaseOrder();
             purchaseOrder.Id = purchaseOrderBroker.GetPurchaseOrderId();
+            purchaseOrder.CreatedBy = Util.GetEmployee(employeeBroker);
+            purchaseOrder.CreatedDate = DateTime.Now;
+            purchaseOrder.Status = Converter.objToInt(Constants.VISIBILITY_STATUS.SHOW);
+
             poDetailList = new List<PurchaseOrderDetail>();
+            addedItemList = new Dictionary<Item, List<double>>();
             //purchaseOrderDetailList = new System.Data.Objects.DataClasses.EntityCollection<PurchaseOrderDetail>();
             
             // need to load reorder quantity
@@ -113,6 +121,7 @@ namespace StationeryStoreInventorySystemController.storeController
                     dt.Rows.Clear();
                 }
                 
+                // reorder item
                 foreach (Item temp in reorderList)
                 {
                     dr = dt.NewRow();
@@ -123,6 +132,19 @@ namespace StationeryStoreInventorySystemController.storeController
                     dr[columnName[4]] = temp.ReorderQty * temp.Cost;
                     dt.Rows.Add(dr);
                 }
+
+                // manually added item
+                foreach (Item item in addedItemList.Keys)
+                {
+                    dr = dt.NewRow();
+                    dr[columnName[0]] = item.Id;
+                    dr[columnName[1]] = item.Description;
+                    dr[columnName[2]] = Converter.objToInt(addedItemList[item][0]);
+                    dr[columnName[3]] = Converter.objToDouble(addedItemList[item][1]);
+                    dr[columnName[4]] = Converter.objToDouble(Converter.objToInt(dr[columnName[2]]) * Converter.objToDouble(dr[columnName[3]]));
+                    dt.Rows.Add(dr);
+                }
+
                 return dt;
             }
         }
@@ -153,21 +175,123 @@ namespace StationeryStoreInventorySystemController.storeController
             return selectStatus;
         }
 
-        private List<Item> GetReorderItemList()
+        public void SetSupplier(string supplierCode)
+        {
+            reorderList = GetReorderItemList(supplierCode);
+        }
+
+        private List<Item> GetReorderItemList(string supplierCode)
         {
             List<Item> reorderList = new List<Item>();
             List<Item> itemList = itemBroker.GetAllItem();
+            ItemPrice itemPrice;
+
             foreach (Item item in itemList)
             {
-                int bal = itemBroker.GetCurrentBalance(item);
-                if (bal < item.ReorderLevel)
+                itemPrice = new ItemPrice();
+                itemPrice.ItemId = item.Id;
+                itemPrice.SupplierId = supplierCode;
+                itemPrice = itemPriceBroker.GetItemPrice(itemPrice);
+
+                if (itemPrice != null)
                 {
-                    reorderList.Add(item);
+                    int bal = itemBroker.GetCurrentBalance(item);
+
+                    decimal price = (decimal)Converter.objToDouble(itemPrice.Price);
+
+                    item.Cost = price; // set the price
+
+                    if (bal + purchaseOrderBroker.GetPendingQuantity(item) < item.ReorderLevel)
+                    {
+                        reorderList.Add(item);
+                    }
                 }
 
             }
 
             return reorderList;
+        }
+
+        public Constants.ACTION_STATUS AddItem(string itemId, int qty, double price)
+        {
+            Constants.ACTION_STATUS addStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            Item item = new Item();
+            item.Id = itemId;
+            item = itemBroker.GetItem(item);
+
+            if (item != null && qty > 0 && price > 0)
+            {
+
+                if (!addedItemList.ContainsKey(item))
+                {
+                    List<double> other = new List<double>();
+                    other.Add(qty);
+                    other.Add(price);
+
+                    addedItemList.Add(item, other);
+
+                    addStatus = Constants.ACTION_STATUS.SUCCESS;
+                }
+                else
+                {
+                    addStatus = Constants.ACTION_STATUS.FAIL;
+                }
+            }
+            else
+            {
+                addStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return addStatus;
+        }
+
+        public Constants.ACTION_STATUS SelectSave(string supplierCode, string deliveryAddress, string attn, DateTime expectedDate)
+        {
+            Constants.ACTION_STATUS saveStatus = Constants.ACTION_STATUS.UNKNOWN;
+
+            Supplier supplier = new Supplier();
+            supplier.Id = supplierCode;
+            supplier = supplierBroker.GetSupplier(supplier);
+            purchaseOrder.Supplier = supplier;
+
+            purchaseOrder.DeliverAddress = deliveryAddress;
+            purchaseOrder.Attn = attn;
+            purchaseOrder.ExpectedDate = expectedDate;
+
+            PurchaseOrderDetail purchaseOrderDetail;
+            int addedDetail = 0;
+
+            // reorder item
+            foreach (Item temp in reorderList)
+            {
+                item = new Item();
+                item.Id = temp.Id;
+                item = itemBroker.GetItem(item);
+
+                purchaseOrderDetail = new PurchaseOrderDetail(purchaseOrderBroker.GetPurchaseOrderDetailId() + (addedDetail++), purchaseOrder, item, temp.Cost, temp.ReorderQty, 0);
+
+                purchaseOrder.PurchaseOrderDetails.Add(purchaseOrderDetail);
+            }
+
+            // manually added item
+            foreach (Item item in addedItemList.Keys)
+            {
+                purchaseOrderDetail = new PurchaseOrderDetail(purchaseOrderBroker.GetPurchaseOrderDetailId() + (addedDetail++), purchaseOrder, item, (decimal)Converter.objToDouble(addedItemList[item][1]), Converter.objToInt(addedItemList[item][0]), 0);
+
+                purchaseOrder.PurchaseOrderDetails.Add(purchaseOrderDetail);
+            }
+
+            if (purchaseOrderBroker.Insert(purchaseOrder) == Constants.DB_STATUS.SUCCESSFULL)
+            {
+                saveStatus = Constants.ACTION_STATUS.SUCCESS;
+            }
+            else
+            {
+                saveStatus = Constants.ACTION_STATUS.FAIL;
+            }
+
+            return saveStatus;
         }
 
         //public Constants.ACTION_STATUS SelectAdd()
