@@ -204,13 +204,16 @@ namespace SystemStoreInventorySystemUtil
                     status = "Need to Retrieve";
                     break;
                 case Constants.COLLECTION_STATUS.NEED_TO_COLLECT:
-                    status = "Incomplete";
+                    status = "Need to Collect";
                     break;
                 case Constants.COLLECTION_STATUS.COLLECTED:
                     status = "Collected";
                     break;
                 case Constants.COLLECTION_STATUS.UNCOLLECTED:
                     status = "Uncollected";
+                    break;
+                case Constants.COLLECTION_STATUS.INCOMPLETE:
+                    status = "Incomplete";
                     break;
             }
             return status;

@@ -73,7 +73,8 @@ namespace SystemStoreInventorySystemUtil
             NEED_TO_RETRIEVE,
             NEED_TO_COLLECT,
             COLLECTED,
-            UNCOLLECTED
+            UNCOLLECTED,
+            INCOMPLETE
         }
 
         public enum ITEM_CATEGORY
