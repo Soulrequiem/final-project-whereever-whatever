@@ -1864,6 +1864,30 @@ namespace StationeryStoreInventorySystemModel.entity
         private global::System.String _Remarks;
         partial void OnRemarksChanging(global::System.String value);
         partial void OnRemarksChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Status;
+        partial void OnStatusChanging(Nullable<global::System.Int32> value);
+        partial void OnStatusChanged();
 
         #endregion
     
@@ -3070,6 +3094,30 @@ namespace StationeryStoreInventorySystemModel.entity
         private global::System.Int32 _Status;
         partial void OnStatusChanging(global::System.Int32 value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Bin
+        {
+            get
+            {
+                return _Bin;
+            }
+            set
+            {
+                OnBinChanging(value);
+                ReportPropertyChanging("Bin");
+                _Bin = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Bin");
+                OnBinChanged();
+            }
+        }
+        private global::System.String _Bin;
+        partial void OnBinChanging(global::System.String value);
+        partial void OnBinChanged();
 
         #endregion
     
@@ -3877,6 +3925,30 @@ namespace StationeryStoreInventorySystemModel.entity
         private Nullable<global::System.DateTime> _DeliveryDate;
         partial void OnDeliveryDateChanging(Nullable<global::System.DateTime> value);
         partial void OnDeliveryDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
 
         #endregion
     
@@ -4185,6 +4257,30 @@ namespace StationeryStoreInventorySystemModel.entity
         private Nullable<global::System.Int32> _AcceptedQty;
         partial void OnAcceptedQtyChanging(Nullable<global::System.Int32> value);
         partial void OnAcceptedQtyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
 
         #endregion
     
@@ -4687,6 +4783,54 @@ namespace StationeryStoreInventorySystemModel.entity
         private global::System.Int32 _Status;
         partial void OnStatusChanging(global::System.Int32 value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DeliveryDate
+        {
+            get
+            {
+                return _DeliveryDate;
+            }
+            set
+            {
+                OnDeliveryDateChanging(value);
+                ReportPropertyChanging("DeliveryDate");
+                _DeliveryDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DeliveryDate");
+                OnDeliveryDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DeliveryDate;
+        partial void OnDeliveryDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnDeliveryDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DeliveryBy
+        {
+            get
+            {
+                return _DeliveryBy;
+            }
+            set
+            {
+                OnDeliveryByChanging(value);
+                ReportPropertyChanging("DeliveryBy");
+                _DeliveryBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DeliveryBy");
+                OnDeliveryByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DeliveryBy;
+        partial void OnDeliveryByChanging(Nullable<global::System.Int32> value);
+        partial void OnDeliveryByChanged();
 
         #endregion
     
