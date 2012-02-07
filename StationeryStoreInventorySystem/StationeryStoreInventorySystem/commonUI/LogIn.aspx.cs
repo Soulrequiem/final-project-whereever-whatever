@@ -49,6 +49,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                     Session["userName"] = txtUsername.Text.Trim();
                     Session["LoadFirstTime"] = true;
                     removeSession();
+					
+					if ((int)Constants.DEPARTMENT_STATUS.BLACKLIST ==
+                        Util.GetCurrentDepartmentStatus())
+                    {
+                        Response.Redirect("~/commonUI/ChangePassword.aspx");
+                    }
+                    else
+					{
+					
                     int UserRole = Util.GetEmployeeRole();
 
                     if(UserRole == (int)Constants.EMPLOYEE_ROLE.EMPLOYEE)
@@ -66,6 +75,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         Response.Redirect("~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx");
                     else if(UserRole == (int)Constants.EMPLOYEE_ROLE.ADMIN)
                         Response.Redirect("~/commonUI/Report.aspx");
+						}
                 }
                 else
                     lblStatusMessage.Text = "Login failed.";
