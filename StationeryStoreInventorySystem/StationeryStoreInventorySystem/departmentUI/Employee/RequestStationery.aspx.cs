@@ -178,8 +178,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         protected void btnGetItem_Click(object sender, EventArgs e)
         {
-            string sItem = drdItemList.CurrentValue.ToString();
-            FillDetails(sItem);
+            if (drdItemList.CurrentValue != null)
+            {
+                string sItem = drdItemList.CurrentValue.ToString();
+                FillDetails(sItem);
+            }
         }
 
         protected void dgvStationeryList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
