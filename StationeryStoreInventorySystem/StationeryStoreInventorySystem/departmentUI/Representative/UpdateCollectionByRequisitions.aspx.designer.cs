@@ -103,24 +103,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative 
         protected global::System.Web.UI.WebControls.Label lblCollectionPoint;
         
         /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// lblDateTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDateTime;
-        
-        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>
