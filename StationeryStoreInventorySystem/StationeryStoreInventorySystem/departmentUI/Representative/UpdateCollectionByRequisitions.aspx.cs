@@ -47,7 +47,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
                     {
                         FillRequisitionDetails(ucdbrControl.RequestDetail);
                         lblCollectionID.Text = ucdbrControl.RequestDetailCollectionId;
-                        lblDateTime.Text = ucdbrControl.RequestDetailCollectionDateTime;
+                        //lblDateTime.Text = ucdbrControl.RequestDetailCollectionDateTime;
                         lblCollectionPoint.Text = ucdbrControl.RequestDetailCollectionPoint;
 
                         Util.PutSession("CollectionIdIndex", Request.QueryString["CollectionIdIndex"]);
