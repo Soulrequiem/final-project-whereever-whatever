@@ -108,6 +108,11 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 lblRetrievalNo.Text = disbursement;
             }
         }
+
+        protected void btnGenerateDisbursement_Click(object sender, EventArgs e)
+        {
+            generateDisbursementControl.SetDeliveryDate(SystemStoreInventorySystemUtil.Converter.objToInt(lblRetrievalNo.Text), Calendar1.SelectedDate);
+        }
     }
 }
 /****************************************/

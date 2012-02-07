@@ -87,7 +87,7 @@
                     <tr>
                         <td colspan="2" align="right">
                             <asp:Button ID="btnGenerateDisbursement" runat="server" CssClass="DefaultLargebutton"
-                                Text="Generate" />
+                                Text="Generate" onclick="btnGenerateDisbursement_Click" />
                         </td>
                     </tr>
                 </table>

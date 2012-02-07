@@ -27,7 +27,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 FillSupplier();
                 FillItems();
                 lblPONumber.Text = purchaseOrderControl.PurchaseOrderId.ToString();
-                FillDataGrid();
+                //FillDataGrid();
             }
             else
             {
@@ -89,10 +89,21 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            string supplier = DrdSupplier.SelectedItem.Text;
-            string expectedDate = txtSupplyDate.Text;
-            string address = txtaDeliverTo.Text;
-            string attn = txtAttn.Text;
+            if (lblItemNumber.Text != String.Empty && txtQuantity.Text != String.Empty && txtPrice.Text != String.Empty)
+            {
+                if (purchaseOrderControl.AddItem(lblItemNumber.Text, SystemStoreInventorySystemUtil.Converter.objToInt(txtQuantity.Text), SystemStoreInventorySystemUtil.Converter.objToDouble(txtPrice.Text)) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+                {
+                    FillDataGrid();
+                    txtQuantity.Text = "";
+                    txtPrice.Text = "";
+                    lblItemNumber.Text = "";
+                    drdItemList.CurrentValue = "";
+                }
+            }
+            else
+            {
+                // print message
+            }
 
             //purchaseOrderControl.SelectAdd();
         }
@@ -116,6 +127,32 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             {
                 lblItemNumber.Text = purchaseOrderControl.ItemCode;
                 txtPrice.Text = purchaseOrderControl.Price;
+            }
+        }
+
+        protected void DrdSupplier_SelectionChanged(object sender, Infragistics.Web.UI.ListControls.DropDownSelectionChangedEventArgs e)
+        {
+            purchaseOrderControl.SetSupplier(DrdSupplier.SelectedItem.Value);
+            FillDataGrid();
+        }
+
+        protected void btnOrder_Click(object sender, EventArgs e)
+        {
+            if (DrdSupplier.SelectedItem.Value != String.Empty && txtaDeliverTo.Text != String.Empty && txtAttn.Text != String.Empty && txtSupplyDate.Text != String.Empty)
+            {
+                string[] supplyDate = txtSupplyDate.Text.Split('/');
+                if (purchaseOrderControl.SelectSave(DrdSupplier.SelectedItem.Value, txtaDeliverTo.Text, txtAttn.Text, new DateTime(SystemStoreInventorySystemUtil.Converter.objToInt(supplyDate[2]), SystemStoreInventorySystemUtil.Converter.objToInt(supplyDate[1]), SystemStoreInventorySystemUtil.Converter.objToInt(supplyDate[0]))) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.SUCCESS)
+                {
+                    // print success message
+                }
+                else
+                {
+                    // print error message
+                }
+            }
+            else
+            {
+                // print error message
             }
         }
 

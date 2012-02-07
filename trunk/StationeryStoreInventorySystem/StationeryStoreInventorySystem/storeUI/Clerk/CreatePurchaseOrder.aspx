@@ -40,7 +40,8 @@
                                      DropDownAnimationType="EaseIn"
                                      StyleSetName="Office2010Blue" 
                                      AutoFilterQueryType="Contains"
-                                     NullText="Select Supplier" ViewStateMode="Enabled" EnableViewState="true" >
+                                     NullText="Select Supplier" ViewStateMode="Enabled" 
+                            EnableViewState="true" onselectionchanged="DrdSupplier_SelectionChanged" >
                                      <AutoPostBackFlags SelectionChanged="On" />
                                 </ig:WebDropDown>
                     </td>
@@ -169,21 +170,21 @@
                     CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" EnableDataViewState = "true"
                     ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue">
                     <Columns>
-                        <ig:UnboundCheckBoxField Key="CreatePurchaseOrderCheckBox" Width="50px">
+                        <ig:UnboundCheckBoxField Key="CreatePurchaseOrderCheckBox" HeaderCheckBoxMode="Off" Width="50px">
                         </ig:UnboundCheckBoxField>
-                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="50px">
+                        <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                             <Header Text="Item No" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Description" Key="Description" Width="100px">
+                        <ig:BoundDataField DataFieldName="Description" Key="Description" Width="200px">
                             <Header Text="Description" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="50px">
+                        <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" Width="100px">
                             <Header Text="Quantity" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Price" Key="Price" Width="50px">
+                        <ig:BoundDataField DataFieldName="Price" Key="Price" Width="100px">
                             <Header Text="Price" />
                         </ig:BoundDataField>
-                        <ig:BoundDataField DataFieldName="Amount" Key="Amount" Width="50px">
+                        <ig:BoundDataField DataFieldName="Amount" Key="Amount" Width="100px">
                             <Header Text="Amount" />
                         </ig:BoundDataField>
                     </Columns>
@@ -192,8 +193,6 @@
                         </ig:ColumnFixing>
                         <ig:Filtering>
                         </ig:Filtering>
-                        <ig:Paging PageSize="10">
-                        </ig:Paging>
                         <ig:Selection CellClickAction="Row" RowSelectType="Single">
                         </ig:Selection>
                         <ig:Sorting>
@@ -203,12 +202,12 @@
                 <div style="float:right">
                      <%--<a class="button" href="" style="float:right">Delete</a>--%>
                      <asp:Button ID="btnDelete" runat="server" CssClass="DefaultLargebutton"
-                                Text="Delete" />
+                                Text="Remove" />
                 </div>
                 <div style="float:right;margin-right:10px">
                      <%--<a class="buttonlarge" href="" style="float:right">Make Order</a>--%>
                      <asp:Button ID="btnOrder" runat="server" CssClass="DefaultLargebutton"
-                                Text="Create Order" />
+                                Text="Create Order" onclick="btnOrder_Click" />
                 </div>
             </Template>
         </igmisc:WebGroupBox>
