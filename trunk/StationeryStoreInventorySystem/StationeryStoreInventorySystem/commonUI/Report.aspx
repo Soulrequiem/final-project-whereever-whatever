@@ -267,7 +267,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
     <asp:Panel ID="reportpanel" runat="server" Visible="false">
     <div style="float:left;margin-top:20px;width:100%">
         <ig:WebTab ID="WebTab1" runat="server" Height="500px" Width="100%" 
-            StyleSetName="Office2010Blue" SelectedIndex="1">
+            StyleSetName="Office2010Blue">
             <Tabs>
                 <ig:ContentTabItem runat="server" Text="List View">
                     <Template>
