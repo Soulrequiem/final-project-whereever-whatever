@@ -57,7 +57,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                     {
                         // print error message
                     }
-
+                    else
+                    {
+                        FillItemList();
+                    }
                     lblRequisitionDate.Text = SystemStoreInventorySystemUtil.Converter.dateTimeToString(SystemStoreInventorySystemUtil.Converter.DATE_CONVERTER.DATETIME, DateTime.Now);
                     lblRequisitionID.Text = resCtrl.RequisitionId;
                     lblDepartmentCode.Text = resCtrl.DepartmentCode;
@@ -69,7 +72,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                     FillItems();
                 }
 
-                FillItemList();
+                
             }
             else
             {
