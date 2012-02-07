@@ -33,6 +33,8 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         //Constants.DB_STATUS Update(Boolean isSaved);
         //Constants.DB_STATUS Delete(RequisitionCollection requisitionCollection,Boolean isSaved);
 
+        RequisitionCollectionDetail GetRequisitionCollectionDetail(Requisition requisition);
+
         //RequisitionCollectionItem GetRequisitionCollectionItem(RequisitionCollectionItem requisitionCollectionItem);
         //List<RequisitionCollectionItem> GetAllRequisitionCollectionItem();
         //Constants.DB_STATUS Insert(RequisitionCollectionItem newRequisitionCollectionItem);
