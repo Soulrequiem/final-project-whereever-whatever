@@ -58,7 +58,7 @@
                                 <asp:CheckBox runat="server" OnCheckedChanged="chk_changed" />
                             </ItemTemplate>
                             </ig:TemplateDataField>--%>
-                            <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" HeaderChecked="false" 
+                            <ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" HeaderChecked="false" HeaderCheckBoxMode="Off"
                                 Width="85px">
                             </ig:UnboundCheckBoxField>
                         <%--<ig:UnboundCheckBoxField Key="CheckRequisitionCheckBox" Width="85px">
