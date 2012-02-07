@@ -24,7 +24,7 @@ namespace StationeryStoreInventorySystem
             Session["chartData"] = new DataTable();
             Session["ReportType"] = string.Empty;
             Session["ReportData"] = new DataTable();
-            Session["WebExplorerState"] = new bool[5]{true,true,true,true,true};
+            Session["WebExplorerState"] = new bool[6]{true,true,true,true,true,true};
             Session["SelectedIndex"] = 0;
             Session["SelectedGroup"] = 0;
             //Session["VisibleState"] = new bool[5] { true, true, true, true, true };
