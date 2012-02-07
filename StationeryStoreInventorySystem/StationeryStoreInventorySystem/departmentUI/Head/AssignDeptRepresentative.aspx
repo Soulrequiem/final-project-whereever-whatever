@@ -54,8 +54,6 @@
                                     </ig:Sorting>
                                     <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                     </ig:Selection>
-                                    <ig:Filtering>
-                                    </ig:Filtering>
                                     <ig:EditingCore>
                                         <Behaviors>
                                             <ig:CellEditing>
@@ -116,8 +114,6 @@
                             Width="500px" DefaultColumnWidth="50px" AutoGenerateColumns="False" 
                             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue"
-                            ondatafiltering="DgvRepSearchDetails_DataFiltering" 
-                            onpageindexchanged="DgvRepSearchDetails_PageIndexChanged" 
                             EnableDataViewState="True">
                             <Columns>
                                 <%--<ig:BoundCheckBoxField DataFieldName="BoundCheckBoxField_0" 
@@ -137,10 +133,6 @@
                                 </ig:Sorting>
                                 <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                 </ig:Selection>
-                                <ig:Paging>
-                                </ig:Paging>
-                                <ig:Filtering>
-                                </ig:Filtering>
                             </Behaviors>
                         </ig:WebDataGrid>
                         <div style="float:right">

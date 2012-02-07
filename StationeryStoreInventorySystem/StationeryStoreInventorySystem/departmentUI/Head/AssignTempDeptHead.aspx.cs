@@ -178,18 +178,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
                 //print something
             }
         }
-
-        protected void DgvTempDepteHeadSearchDetails_DataFiltering(object sender,
-            Infragistics.Web.UI.GridControls.FilteringEventArgs e)
-        {
-            FillHeadList();
-        }
-
-        protected void DgvTempDepteHeadSearchDetails_PageIndexChanged(object sender,
-            Infragistics.Web.UI.GridControls.PagingEventArgs e)
-        {
-            FillHeadList();
-        }
     }
 }
 /********************************************/

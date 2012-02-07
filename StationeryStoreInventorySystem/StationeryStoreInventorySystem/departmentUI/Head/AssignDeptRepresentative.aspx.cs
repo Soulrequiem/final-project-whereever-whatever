@@ -185,18 +185,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Head
                //print error
            }
        }
-
-       protected void DgvRepSearchDetails_DataFiltering(object sender,
-           Infragistics.Web.UI.GridControls.FilteringEventArgs e)
-       {
-           FillRepresentativeList();
-       }
-
-       protected void DgvRepSearchDetails_PageIndexChanged(object sender,
-           Infragistics.Web.UI.GridControls.PagingEventArgs e)
-       {
-           FillRepresentativeList();
-       }
     }
 }
 /********************************************/
