@@ -42,7 +42,7 @@ namespace StationeryStoreInventorySystemModel.broker
             }
             else
             {
-                departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id).First();
+                departmentObj = inventory.Departments.Where(iObj => iObj.Id == department.Id || iObj.Name.Contains(department.Name)).First();
             }
             if (!departmentObj.Equals(null))
             {

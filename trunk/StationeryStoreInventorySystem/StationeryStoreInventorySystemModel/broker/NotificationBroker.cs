@@ -55,7 +55,14 @@ namespace StationeryStoreInventorySystemModel.broker
         {
             try
             {
-                notificationList = inventory.Notifications.Where(e => e.Employee.Id == employee.Id).OrderByDescending(n=> n.CreatedDate).ToList<Notification>();
+                if (inventory.Notifications.Where(e => e.Employee.Id == employee.Id).OrderByDescending(n => n.CreatedDate).Count() > 0)
+                {
+                    notificationList = inventory.Notifications.Where(e => e.Employee.Id == employee.Id).OrderByDescending(n => n.CreatedDate).ToList<Notification>();
+                }
+                else
+                {
+                    notificationList = null;
+                }
             }
             catch (Exception e)
             {

@@ -96,12 +96,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 inventory.AddToDiscrepancies(newdiscrepancy);
-                foreach (DiscrepancyDetail discrepancyDetail in newdiscrepancy.DiscrepancyDetails)
-                {
-                    this.Insert(discrepancyDetail);
-                }
-
-
+                
                 inventory.SaveChanges();
                 status = Constants.DB_STATUS.SUCCESSFULL;
 
