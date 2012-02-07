@@ -226,10 +226,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         private bool ValidateScreen()
         {
-            int isNumber = 0;
+            decimal isNumber = 0;
             for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
             {
-                if(int.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out isNumber) == false ||
+                if (decimal.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out isNumber) == false ||
                     Convert.ToInt16(dgvStationeryDetailsList.Rows[i].Items[3].Text) <= 0)
                 {
                     lblStatusMessage.Text = "Invalid quantity.";
@@ -249,6 +249,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                 {
                     if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value) == true)
                     {
+                        decimal number = 0;
+                        if (decimal.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out number))
+                        {
+                            if(number > 1000)
+                            {
+                                lblStatusMessage.Text = "Invalid quantity!";
+                                return;
+                            }
+                        }
                         dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value = false;
                         //quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(), SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequiredQty").FindControl("RequiredQty")).Text));
                         quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(),
