@@ -35,7 +35,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Representative
                     FillItemDetails(ucdbriControl.ItemDetail);
 
                     lblCollectionID.Text = ucdbriControl.RequestDetailCollectionId;
-                    lblDateTime.Text = ucdbriControl.RequestDetailCollectionDateTime;
+                    //lblDateTime.Text = ucdbriControl.RequestDetailCollectionDateTime;
                     lblCollectionPoint.Text = ucdbriControl.RequestDetailCollectionPoint;
                 }
                 else
