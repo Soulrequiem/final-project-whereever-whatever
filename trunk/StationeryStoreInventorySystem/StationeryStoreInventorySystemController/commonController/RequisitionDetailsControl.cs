@@ -12,7 +12,9 @@ namespace StationeryStoreInventorySystemController.commonController
 {
     public class RequisitionDetailsControl
     {
+        private List<RequisitionCollection> requisitionCollectionList;
         private IRequisitionBroker requisitionBroker;
+        private IRequisitionCollectionBroker requisitionCollectionBroker;
         private List<Requisition> RequisitionList;
         private List<Requisition> submittedRequisitionList;
         private Employee currentEmployee;
@@ -26,6 +28,7 @@ namespace StationeryStoreInventorySystemController.commonController
             currentEmployee = Util.ValidateUser();
             InventoryEntities inventory = new InventoryEntities();
             requisitionBroker = new RequisitionBroker(inventory);
+            requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
             RequisitionList = requisitionBroker.GetAllRequisition(currentEmployee.Department);
         }
 
@@ -200,9 +203,34 @@ namespace StationeryStoreInventorySystemController.commonController
                 }
             }
             
+
+
             requisition.Remarks = remarks;
             requisition.Status = (int)(Reqstatus);
             requisitionBroker.Update(requisition);
+
+            if(Reqstatus == Constants.REQUISITION_STATUS.COMPLETE)
+            {
+                RequisitionCollection RC = null;
+    
+                //Get all submitted requisitions
+                RequisitionCollectionDetail rcDetails = requisitionCollectionBroker.GetAllRequisitionCollectionDetail(requisitionId);
+
+                if(rcDetails != null)
+                {
+                    RC = requisitionCollectionBroker.GetAllRequisitionCollectionByRequisitionCollectionID(rcDetails.RequisitionCollection.Id.ToString());
+                }
+                
+                foreach(RequisitionCollectionDetail rcd in RC.RequisitionCollectionDetails)
+                {
+                    if(rcd.Requisition.Status == (int)Constants.REQUISITION_STATUS.COMPLETE)
+                        RC.Status = (int)Constants.COLLECTION_STATUS.COLLECTED;
+                    else
+                        RC.Status = (int)Constants.COLLECTION_STATUS.NEED_TO_COLLECT;
+                }
+
+                requisitionCollectionBroker.Update(RC);
+            }
             return status;
         }
     }
