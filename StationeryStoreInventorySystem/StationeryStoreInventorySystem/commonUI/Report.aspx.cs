@@ -60,7 +60,6 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                 drdReportList.Items.Add(new DropDownItem("Reorder Report"));
                 drdReportList.Items.Add(new DropDownItem("Item Consumption Report"));
                 drdReportList.Items.Add(new DropDownItem("Stock Item Movement Report"));
-                drdReportList.Items.Add(new DropDownItem("Disbursement List"));
                 drdReportList.Items.Add(new DropDownItem("Stationery Catalogue"));
                 drdReportList.Items.Add(new DropDownItem("Stationery Supply Tender Form"));
                 drdReportList.Items.Add(new DropDownItem("Collection List"));
