@@ -17,14 +17,15 @@
                 TitleAlignment="Left">
                 <Template>
                     <ig:WebDataGrid ID="dgvCollections" runat="server" Height="400px" Width="700px" 
-                        AutoGenerateColumns="False" DefaultColumnWidth="50px" 
+                        AutoGenerateColumns="False" DefaultColumnWidth="50px" DataKeyFields="CollectionID"
                         CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
                         ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
-                        onrowselectionchanged="dgvCollections_RowSelectionChanged">
+                        oninitializerow="dgvCollections_InitializeRow">
                         <Columns>
-                            <ig:UnboundCheckBoxField Key="UpdateStationeryRetrievalCheckBox" Width="50px">
-                            </ig:UnboundCheckBoxField>
-                            <ig:BoundDataField DataFieldName="CollectionID" Key="collectionId" Width="80px">
+                             <ig:UnboundCheckBoxField Key="UpdateStationeryRetrievalCheckBox" Width="50px">
+                             </ig:UnboundCheckBoxField>
+                           
+                            <ig:BoundDataField DataFieldName="CollectionID" Key="CollectionID" Width="80px" >
                                 <Header Text="Collection ID" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="CollectionPoint" Key="collectionPoint" 
@@ -57,17 +58,33 @@
                             </ig:Selection>
                             <ig:Sorting>
                             </ig:Sorting>
+                            <ig:EditingCore>
+                                <Behaviors>
+                                    <ig:CellEditing>
+                                        <ColumnSettings>
+                                            <ig:EditingColumnSetting ColumnKey="UpdateStationeryRetrievalCheckBox" />
+                                            <ig:EditingColumnSetting ColumnKey="collectionId" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="collectionPoint" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="collectionDate/Time" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="departmentRepresentativeName" 
+                                                ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="departmentName" ReadOnly="True" />
+                                            <ig:EditingColumnSetting ColumnKey="collectionStatus" ReadOnly="True" />
+                                        </ColumnSettings>
+                                    </ig:CellEditing>
+                                </Behaviors>
+                            </ig:EditingCore>
                         </Behaviors>
                     </ig:WebDataGrid>
                     <br>
                     <div style="float:right" class="buttons">
                          <asp:Button id="btnCollected" CssClass="DefaultLargebutton"  runat="server" 
-                             Text="Not Collected" onclick="btnCollected_Click"/>
+                             Text="Collected" onclick="btnCollected_Click"/>
                          <!--<a class="button" href="" style="float:right">Reset</a>-->
                      <%--</div>
                          <div style="float:right" class="button">--%>
                          <asp:Button ID="btnNotCollected" CssClass="DefaultLargebutton" runat="server" 
-                             Text="Collected" onclick="btnNotCollected_Click" />
+                             Text="Not Collected" onclick="btnNotCollected_Click" />
                          <!--<a class="button" href="" style="float:right">Change</a>-->
                       </div>
                 </Template>
