@@ -7,17 +7,17 @@
     <script type = "text/javascript">
         function check() {
             if (document.getElementById('FirstContent_WebGroupBox1_txtUsername').value == "" || document.getElementById('FirstContent_WebGroupBox1_txtPassword').value == "") {
-                document.getElementById('FirstContent_WebGroupBox1_lblStatusMessage').innerHTML = "Enter required feilds.";
+                document.getElementById('FirstContent_WebGroupBox1_lblStatusMessage').innerHTML = "Enter required fields.";
                 return false;
             }
             return true;
         }
-    function forgot() {
-        if (document.getElementById('FirstContent_WebGroupBox1_txtUsername').value == "") {
-            document.getElementById('FirstContent_WebGroupBox1_lblStatusMessage').innerHTML = "Enter user name.";
-            return false;
-        }
-        return true;
+//    function forgot() {
+//        if (document.getElementById('FirstContent_WebGroupBox1_txtUsername').value == "") {
+//            document.getElementById('FirstContent_WebGroupBox1_lblStatusMessage').innerHTML = "Enter user name.";
+//            return false;
+//        }
+//        return true;
     }
 </script>
 <%--<script type="text/javascript">
@@ -77,7 +77,7 @@
                                 <asp:Label CssClass="ErrorLabelstyle" 
                                 ID="lblStatusMessage" runat="server"/>
                                 <br />
-                                <a href="ForgotPassword.aspx?"+  style="float:left; font-size: small;" onclick="forgot();">Forgot your password?</a>
+                                <a href="ForgotPassword.aspx?"+  style="float:left; font-size: small;">Forgot your password?</a>
                                 <div style="float:right">
                                     <asp:Button ID="btnSignIn" CssClass="Defaultbutton"
                                         runat="server" OnClientClick="return check();" 
