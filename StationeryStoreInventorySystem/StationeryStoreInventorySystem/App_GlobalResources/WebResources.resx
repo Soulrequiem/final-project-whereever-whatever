@@ -139,7 +139,7 @@
     <value>Stationery Store Inventory System</value>
   </data>
   <data name="ApproveRequisition_Title" xml:space="preserve">
-    <value>Approve Requisition</value>
+    <value>Approve/Reject Requisition</value>
   </data>
   <data name="AssignDeptRespresentative_Title" xml:space="preserve">
     <value>Assign Department Representative</value>
