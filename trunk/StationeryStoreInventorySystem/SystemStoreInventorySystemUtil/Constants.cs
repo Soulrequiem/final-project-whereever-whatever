@@ -20,7 +20,7 @@ namespace SystemStoreInventorySystemUtil
         public const string DepartmentReportPath = "\\Reports\\SSISReports\\DepartmentsReport.rpt";
         public const string DepartmentReport = "Department List";
         public const string RequisitionReportPath = "\\Reports\\SSISReports\\RequisitionReport.rpt";
-        public const string RequisitionReport = "Requisitions List";
+        public const string RequisitionReport = "Requisition List";
         public const string SupplierReportPath = "\\Reports\\SSISReports\\SupplierReport.rpt";
         public const string SupplierReport = "Supplier List";
         public const string UserReportPath = "\\Reports\\SSISReports\\UserReport.rpt";
