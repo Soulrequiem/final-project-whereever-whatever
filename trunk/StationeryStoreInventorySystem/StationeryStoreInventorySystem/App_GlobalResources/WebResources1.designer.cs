@@ -133,7 +133,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Approve Requisition.
+        ///   Looks up a localized string similar to Approve/Reject Requisition.
         /// </summary>
         internal static string ApproveRequisition_Title {
             get {
