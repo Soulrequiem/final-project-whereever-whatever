@@ -30,6 +30,8 @@ namespace StationeryStoreInventorySystemController.storeController
         private Discrepancy discrepancy;
         private Item item;
         private ItemPrice itemprice;
+
+        private List<DiscrepancyDetail> discrepancyDetails;
         
         private DataTable dt;
         private DataRow dr;

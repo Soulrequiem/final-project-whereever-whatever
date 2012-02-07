@@ -15,11 +15,14 @@ namespace StationeryStoreInventorySystemController.storeController
         private InventoryEntities inventory;
 
         private IRetrievalBroker retrievalBroker;
-        private ICollectionPointBroker collectionPointBroker;
-
+        private IRequisitionBroker requisitionBroker;
+        private IRequisitionCollectionBroker requisitionCollectionBroker;
+        private IEmployeeBroker employeeBroker;
+        
         private Employee currentEmployee;
 
         private List<Retrieval> retrievalList;
+        private Dictionary<RequisitionCollection, DateTime> requisitionCollectionList;
         //private List<CollectionPoint> collectionPointList;
 
         private DataTable dt;//, dtCollectionPoint;
@@ -37,11 +40,14 @@ namespace StationeryStoreInventorySystemController.storeController
 
             inventory = new InventoryEntities();
             retrievalBroker = new RetrievalBroker(inventory);
-            collectionPointBroker = new CollectionPointBroker(inventory);
-
+            requisitionCollectionBroker = new RequisitionCollectionBroker(inventory);
+            requisitionBroker = new RequisitionBroker(inventory);
+            employeeBroker = new EmployeeBroker(inventory);
+            
             retrievalList = retrievalBroker.GetAllRetrieval();
-            //collectionPointList = collectionPointBroker.GetAllCollectionPoint();
-
+            
+            requisitionCollectionList = new Dictionary<RequisitionCollection, DateTime>();
+            
             dataColumn = new DataColumn[]{ new DataColumn(columnName[0]),
                                            new DataColumn(columnName[1]),
                                            new DataColumn(columnName[2]),
@@ -79,30 +85,31 @@ namespace StationeryStoreInventorySystemController.storeController
             }
         }
 
-        //public DataTable CollectionPointList
-        //{
-        //    get
-        //    {
-        //        if (dtCollectionPoint == null)
-        //        {
-        //            dtCollectionPoint = new DataTable();
-        //            dtCollectionPoint.Columns.AddRange(collectionDataColumn);
-        //        }
-        //        else
-        //        {
-        //            dtCollectionPoint.Rows.Clear();
-        //        }
+        public Constants.ACTION_STATUS SetDeliveryDate(int retrievalNo, DateTime deliveryDate)
+        {
+            Constants.ACTION_STATUS setStatus = Constants.ACTION_STATUS.UNKNOWN;
 
-        //        foreach (CollectionPoint collectionPoint in collectionPointList)
-        //        {
-        //            dr = dtCollectionPoint.NewRow();
-        //            dr[collectionColumnName[0]] = collectionPoint.Id;
-        //            dr[collectionColumnName[1]] = collectionPoint.Name;
-        //            dtCollectionPoint.Rows.Add(dr);
-        //        }
+            Retrieval retrieval = retrievalList.Find(delegate(Retrieval r) { return r.Id == retrievalNo; });
 
-        //        return dtCollectionPoint;
-        //    }
-        //}
+            
+            foreach (RetrievalDetail retrievalDetail in retrieval.RetrievalDetails)
+            {
+                Requisition requisition = new Requisition();
+                requisition.Id = retrievalDetail.Requisition.Id;
+                requisition = requisitionBroker.GetRequisition(requisition);
+
+                RequisitionCollectionDetail requisitionCollectionDetail = requisitionCollectionBroker.GetRequisitionCollectionDetail(requisition);
+
+                RequisitionCollection requisitionCollection = new RequisitionCollection();
+                requisitionCollection.Id = requisitionCollectionDetail.RequisitionCollection.Id;
+                requisitionCollection = requisitionCollectionBroker.GetRequisitionCollection(requisitionCollection);
+                requisitionCollection.DeliveryDate = DateTime.Now;
+                requisitionCollection.DeliveryBy = Util.GetEmployee(employeeBroker);
+
+                requisitionCollectionBroker.Update(requisitionCollection);
+            }
+
+            return setStatus;
+        }
     }
 }
