@@ -111,6 +111,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             {
                 lblItemNo.Text = dtItem.Rows[0][0].ToString();
                 lblUOM.Text = dtItem.Rows[0][5].ToString();
+                lblBin.Text = dtItem.Rows[0][6].ToString();
             }
 
             FillStockCardDetails(vsCtrl.GetStockCardDetails(itemDescription));

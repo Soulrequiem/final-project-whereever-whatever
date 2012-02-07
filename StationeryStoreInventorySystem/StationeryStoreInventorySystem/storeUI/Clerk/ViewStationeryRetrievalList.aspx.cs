@@ -59,7 +59,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         protected void DgvViewStationeryRetrievalList_InitializeRow(object sender, Infragistics.Web.UI.GridControls.RowEventArgs e)
         {
             HyperLink link = (HyperLink)e.Row.Items.FindItemByKey("retrievalNo").FindControl("retrievalNo");
-            link.NavigateUrl = "~/storeUI/Clerk/ViewStationeryRetrievalList.aspx?RetrievalNo=" + link.Text;
+            link.NavigateUrl = "~/storeUI/Clerk/ManageStationeryRetrievalList.aspx?retrievalId=" + link.Text;
         }
     }
 }
