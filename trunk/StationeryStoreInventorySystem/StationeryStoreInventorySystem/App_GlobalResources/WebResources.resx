@@ -564,4 +564,10 @@
   <data name="ManageStationeryRetrievalList_Title" xml:space="preserve">
     <value>Manage Stationery Retrieval List</value>
   </data>
+  <data name="GenerateDisbursement_DisbursementDateTime" xml:space="preserve">
+    <value>Disbursement Date</value>
+  </data>
+  <data name="GenerateDisbursement_RetrievalNo" xml:space="preserve">
+    <value>Retrieval No</value>
+  </data>
 </root>
