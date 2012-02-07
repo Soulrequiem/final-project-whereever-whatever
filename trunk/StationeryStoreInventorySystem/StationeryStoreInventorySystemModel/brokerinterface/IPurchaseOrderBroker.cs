@@ -22,5 +22,7 @@ namespace StationeryStoreInventorySystemModel.brokerinterface
         Constants.DB_STATUS Update(PurchaseOrderDetail purchaseOrderDetail);
         Constants.DB_STATUS Delete(PurchaseOrderDetail purchaseOrderDetail);
         int GetPurchaseOrderDetailId();
+
+        int GetPendingQuantity(Item item);
     }
 }
