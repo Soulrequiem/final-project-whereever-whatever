@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SA34_Team9_StationeryStoreInventorySystem.Reports;
+using StationeryStoreInventorySystem.Reports;
 using System.Data;
 using CrystalDecisions.CrystalReports.Engine;
 using SystemStoreInventorySystemUtil;
 using CrystalDecisions.Shared;
 using StationeryStoreInventorySystemController;
+using StationeryStoreInventorySystem.Reports.SSISReports;
 
 namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 {
@@ -38,8 +39,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
         private void loadPrintData()
         {
-            SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports.RequisitionReport RR =
-               new Reports.SSISReports.RequisitionReport();
+            StationeryStoreInventorySystem.Reports.SSISReports.StationeryRequisitionReport RR =
+               new StationeryStoreInventorySystem.Reports.SSISReports.StationeryRequisitionReport();
             RR.SetDataSource((DataTable)Session["PrintData"]);
             PrintReportViewer.ReportSource = RR;
         }
