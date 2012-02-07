@@ -94,7 +94,7 @@
                             </td>
                         </tr>
                         <tr>
-                             <td>
+                             <%--<td>
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="Label1" runat="server" 
                                     Text="<%$ Resources:WebResources, UpdateCollectionByRequisions_CollectionDateTimeLabel %>"/>
@@ -103,7 +103,7 @@
                                 <asp:Label CssClass="DefaultLabelstyle" 
                                     ID="lblDateTime" runat="server" 
                                     Text="Monday 20-01-2012 11.35 AM"/>
-                            </td>
+                            </td>--%>
                             <td></td>
                             <td></td>
                         </tr>
