@@ -17,7 +17,7 @@
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" DataKeyFields="RequisitionID"
             Height="400px" Width="700px">
             <Columns>
-                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" HeaderChecked="false" 
+                <ig:UnboundCheckBoxField Key="ApproveRequisitionCheckBox" HeaderChecked="false" HeaderCheckBoxMode="Off" 
                     Width="50px">
                 </ig:UnboundCheckBoxField>
                 <%--<ig:BoundDataField DataFieldName="RequisitionID" Key="RequisitionID" 
