@@ -226,16 +226,29 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
         private bool ValidateScreen()
         {
+            bool isChecked = true;
             decimal isNumber = 0;
             for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
             {
-                if (decimal.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out isNumber) == false ||
-                    Convert.ToInt16(dgvStationeryDetailsList.Rows[i].Items[3].Text) <= 0)
-                {
-                    lblStatusMessage.Text = "Invalid quantity.";
-                    return false;
-                }
+                if ((bool)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value == false)
+                    isChecked = false;
+                else
+                    isChecked = true;
+
+
+                    if (decimal.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out isNumber) == false ||
+                        Convert.ToInt16(dgvStationeryDetailsList.Rows[i].Items[3].Text) <= 0)
+                    {
+                        lblStatusMessage.Text = "Invalid quantity.";
+                        return false;
+                    }
             }
+            if (isChecked == false)
+            {
+                lblStatusMessage.Text = "Please select items.";
+                return false;
+            }
+
             return true;
         }
 
