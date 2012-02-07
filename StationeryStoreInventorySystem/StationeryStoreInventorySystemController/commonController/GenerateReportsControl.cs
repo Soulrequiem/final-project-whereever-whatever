@@ -132,7 +132,7 @@ namespace StationeryStoreInventorySystemController.commonController
                 (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER != roleId &&
                 (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR != roleId)
             {
-                sbQuery.Append(" AND E.DepartmentId = '" + emp.Department.Id + "'");
+                sbQuery.Append(" AND E.DepartmentId = '" + emp.Department.Id + "' AND D.Id = E.DepartmentId ");
             }
             else
             {
