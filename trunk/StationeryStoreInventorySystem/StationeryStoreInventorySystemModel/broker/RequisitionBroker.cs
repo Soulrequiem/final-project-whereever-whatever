@@ -97,7 +97,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
 
-                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == 1 || reqObj.Status == 2 && reqObj.CreatedBy.Id == employeeID).OrderByDescending(reqObj => reqObj.Id).ToList<Requisition>();
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.Status == 1 || reqObj.Status == 2 && reqObj.CreatedBy.Id == employeeID).OrderByDescending(reqObj => reqObj.CreatedDate).ToList<Requisition>();
             }
             catch (Exception e)
             {
@@ -119,7 +119,7 @@ namespace StationeryStoreInventorySystemModel.broker
             try
             {
                 int status = Converter.objToInt(requisitionStatus);
-                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.CreatedBy.Id == employeeID && reqObj.Status != status).OrderByDescending(reqObj => reqObj.Id).ToList<Requisition>();
+                requisitionList = inventory.Requisitions.Where(reqObj => reqObj.CreatedBy.Id == employeeID && reqObj.Status != status).OrderByDescending(reqObj => reqObj.CreatedDate).ToList<Requisition>();
             }
             catch (Exception e)
             {
