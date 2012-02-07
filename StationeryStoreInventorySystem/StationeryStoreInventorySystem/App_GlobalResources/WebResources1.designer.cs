@@ -529,11 +529,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disbursement Date.
+        /// </summary>
+        internal static string GenerateDisbursement_DisbursementDateTime {
+            get {
+                return ResourceManager.GetString("GenerateDisbursement_DisbursementDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Representative Name:.
         /// </summary>
         internal static string GenerateDisbursement_RepName {
             get {
                 return ResourceManager.GetString("GenerateDisbursement_RepName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieval No.
+        /// </summary>
+        internal static string GenerateDisbursement_RetrievalNo {
+            get {
+                return ResourceManager.GetString("GenerateDisbursement_RetrievalNo", resourceCulture);
             }
         }
         
