@@ -175,6 +175,17 @@ namespace StationeryStoreInventorySystemModel.broker
 
             return status;
         }
+
+        #region ICollectionMissedBroker Members
+
+
+        public int GetCollectionMissedId()
+        {
+            var maxCollectionMissedId = inventory.CollectionMisseds.Max(xObj => xObj.Id) + 1;
+            return maxCollectionMissedId;
+        }
+
+        #endregion
     }
 }
 /****************************************/
