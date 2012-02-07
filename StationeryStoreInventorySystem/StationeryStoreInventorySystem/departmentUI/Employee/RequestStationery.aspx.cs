@@ -260,8 +260,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
 
                 for (int i = 0; i < dgvStationeryDetailsList.Rows.Count; i++)
                 {
-                    if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value) == true)
-                    {
+                    //if (SystemStoreInventorySystemUtil.Converter.objToBool(dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequestStationeryCheckBox").Value) == true)
+                    //{
                         decimal number = 0;
                         if (decimal.TryParse(dgvStationeryDetailsList.Rows[i].Items[3].Text, out number))
                         {
@@ -275,7 +275,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.departmentUI.Employee
                         //quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(), SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)dgvStationeryDetailsList.Rows[i].Items.FindItemByKey("RequiredQty").FindControl("RequiredQty")).Text));
                         quantity.Add(dgvStationeryDetailsList.Rows[i].DataKey[0].ToString(),
                             SystemStoreInventorySystemUtil.Converter.objToInt(dgvStationeryDetailsList.Rows[i].Items[3].Text));
-                    }
+                    //}
                 }
 
                 if (resCtrl.SelectRequest(quantity) == SystemStoreInventorySystemUtil.Constants.ACTION_STATUS.FAIL)
