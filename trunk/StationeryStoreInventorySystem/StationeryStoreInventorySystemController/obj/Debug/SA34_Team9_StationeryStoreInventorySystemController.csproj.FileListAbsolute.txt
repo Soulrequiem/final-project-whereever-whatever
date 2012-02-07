@@ -25,3 +25,4 @@ C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInvent
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\StationeryStoreInventorySystemController.dll
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\StationeryStoreInventorySystemController.pdb
+D:\SA_NOTE\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\StationeryStoreInventorySystemController\obj\Debug\ResolveAssemblyReference.cache

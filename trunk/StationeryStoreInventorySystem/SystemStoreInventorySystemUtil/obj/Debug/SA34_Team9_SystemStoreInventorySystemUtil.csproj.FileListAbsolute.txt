@@ -23,3 +23,8 @@ C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInvent
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\obj\Debug\SystemStoreInventorySystemUtil.dll
 C:\Users\su\Desktop\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\obj\Debug\SystemStoreInventorySystemUtil.pdb
+D:\SA_NOTE\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\bin\Debug\SystemStoreInventorySystemUtil.dll
+D:\SA_NOTE\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\bin\Debug\SystemStoreInventorySystemUtil.pdb
+D:\SA_NOTE\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\obj\Debug\ResolveAssemblyReference.cache
+D:\SA_NOTE\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\obj\Debug\SystemStoreInventorySystemUtil.dll
+D:\SA_NOTE\final-project-whereever-whatever\trunk\StationeryStoreInventorySystem\SystemStoreInventorySystemUtil\obj\Debug\SystemStoreInventorySystemUtil.pdb

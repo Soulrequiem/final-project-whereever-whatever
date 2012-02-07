@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InventoryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="InventoryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="InventoryModelStoreContainer">
           <EntitySet Name="CollectionMissed" EntityType="InventoryModel.Store.CollectionMissed" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CollectionPoint" EntityType="InventoryModel.Store.CollectionPoint" store:Type="Tables" Schema="dbo" />
@@ -117,14 +117,6 @@
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_purchaseorderdetails_item1" Association="InventoryModel.Store.FK_purchaseorderdetails_item1">
-            <End Role="Item" EntitySet="Item" />
-            <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_purchaseorderdetails_purchaseorder1" Association="InventoryModel.Store.FK_purchaseorderdetails_purchaseorder1">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-            <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_requisition_department1" Association="InventoryModel.Store.FK_requisition_department1">
             <End Role="Department" EntitySet="Department" />
             <End Role="Requisition" EntitySet="Requisition" />
@@ -136,18 +128,6 @@
           <AssociationSet Name="FK_requisition_employee2" Association="InventoryModel.Store.FK_requisition_employee2">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Requisition" EntitySet="Requisition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_requisitioncollection_collectionpoint1" Association="InventoryModel.Store.FK_requisitioncollection_collectionpoint1">
-            <End Role="CollectionPoint" EntitySet="CollectionPoint" />
-            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_requisitioncollection_department1" Association="InventoryModel.Store.FK_requisitioncollection_department1">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
-          </AssociationSet>
-          <AssociationSet Name="FK_requisitioncollection_employee1" Association="InventoryModel.Store.FK_requisitioncollection_employee1">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="RequisitionCollection" EntitySet="RequisitionCollection" />
           </AssociationSet>
           <AssociationSet Name="FK_requisitioncollectiondetails_requisition1" Association="InventoryModel.Store.FK_requisitioncollectiondetails_requisition1">
             <End Role="Requisition" EntitySet="Requisition" />
@@ -238,8 +218,8 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="Time" Type="time" Nullable="false" />
-          <Property Name="ClerkId" Type="int" Nullable="false" />
+          <Property Name="Time" Type="time" Nullable="false" Precision="0" />
+          <Property Name="ClerkId" Type="int" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -276,15 +256,16 @@
           <Property Name="DiscrepancyType" Type="int" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="Remarks" Type="text" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
           <Property Name="RoleId" Type="int" Nullable="false" />
-          <Property Name="DepartmentId" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="DepartmentId" Type="nvarchar" MaxLength="4" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
           <Property Name="Designation" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -306,6 +287,7 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Bin" Type="nvarchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="ItemPrice">
           <Key>
@@ -346,6 +328,7 @@
           <Property Name="DeliveryOrderNumber" Type="nvarchar" MaxLength="15" />
           <Property Name="DeliveryDate" Type="datetime" />
           <Property Name="AcceptedBy" Type="int" />
+          <Property Name="Remarks" Type="text" />
         </EntityType>
         <EntityType Name="PurchaseOrderDetails">
           <Key>
@@ -357,6 +340,7 @@
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="AcceptedQty" Type="int" />
+          <Property Name="Remarks" Type="text" />
         </EntityType>
         <EntityType Name="Requisition">
           <Key>
@@ -381,6 +365,8 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DeliveryDate" Type="date" />
+          <Property Name="DeliveryBy" Type="int" />
         </EntityType>
         <EntityType Name="RequisitionCollectionDetails">
           <Key>
@@ -447,7 +433,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="15" />
-          <Property Name="DiscrepancyId" Type="int" Nullable="false" />
+          <Property Name="DiscrepancyId" Type="int" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
@@ -517,7 +503,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CollectionPoint_Employee1">
-          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
+          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="0..1" />
           <End Role="CollectionPoint" Type="InventoryModel.Store.CollectionPoint" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
@@ -625,7 +611,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_employee_department1">
-          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
+          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="0..1" />
           <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
@@ -661,7 +647,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_employee_user1">
-          <End Role="User" Type="InventoryModel.Store.User" Multiplicity="1" />
+          <End Role="User" Type="InventoryModel.Store.User" Multiplicity="0..1" />
           <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -756,30 +742,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_purchaseorderdetails_item1">
-          <End Role="Item" Type="InventoryModel.Store.Item" Multiplicity="1" />
-          <End Role="PurchaseOrderDetails" Type="InventoryModel.Store.PurchaseOrderDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetails">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_purchaseorderdetails_purchaseorder1">
-          <End Role="PurchaseOrder" Type="InventoryModel.Store.PurchaseOrder" Multiplicity="1" />
-          <End Role="PurchaseOrderDetails" Type="InventoryModel.Store.PurchaseOrderDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetails">
-              <PropertyRef Name="PurchaseOrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_requisition_department1">
           <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
           <End Role="Requisition" Type="InventoryModel.Store.Requisition" Multiplicity="*" />
@@ -813,42 +775,6 @@
             </Principal>
             <Dependent Role="Requisition">
               <PropertyRef Name="ApprovedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_requisitioncollection_collectionpoint1">
-          <End Role="CollectionPoint" Type="InventoryModel.Store.CollectionPoint" Multiplicity="1" />
-          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CollectionPoint">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RequisitionCollection">
-              <PropertyRef Name="CollectionPointId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_requisitioncollection_department1">
-          <End Role="Department" Type="InventoryModel.Store.Department" Multiplicity="1" />
-          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RequisitionCollection">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_requisitioncollection_employee1">
-          <End Role="Employee" Type="InventoryModel.Store.Employee" Multiplicity="1" />
-          <End Role="RequisitionCollection" Type="InventoryModel.Store.RequisitionCollection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RequisitionCollection">
-              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -997,7 +923,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_stockadjustment_discrepancy1">
-          <End Role="Discrepancy" Type="InventoryModel.Store.Discrepancy" Multiplicity="1" />
+          <End Role="Discrepancy" Type="InventoryModel.Store.Discrepancy" Multiplicity="0..1" />
           <End Role="StockAdjustment" Type="InventoryModel.Store.StockAdjustment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Discrepancy">
@@ -1068,8 +994,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InventoryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -1353,6 +1278,7 @@
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Discrepancy" Relationship="InventoryModel.FK_discrepancydetails_discrepancy1" FromRole="DiscrepancyDetails" ToRole="Discrepancy" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_discrepancydetails_item1" FromRole="DiscrepancyDetails" ToRole="Item" />
+          <Property Type="Int32" Name="Status" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -1413,6 +1339,7 @@
           <NavigationProperty Name="RequisitionDetails" Relationship="InventoryModel.FK_requisitiondetails_item1" FromRole="Item" ToRole="RequisitionDetails" />
           <NavigationProperty Name="RetrievalDetails" Relationship="InventoryModel.FK_retrievaldetails_item1" FromRole="Item" ToRole="RetrievalDetails" />
           <NavigationProperty Name="StockCardDetails" Relationship="InventoryModel.FK_StockCardDetails_Item1" FromRole="Item" ToRole="StockCardDetails" />
+          <Property Type="String" Name="Bin" MaxLength="4" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ItemPrice">
           <Key>
@@ -1454,6 +1381,7 @@
           <NavigationProperty Name="AcceptedBy" Relationship="InventoryModel.FK_PurchaseOrder_Employee3" FromRole="PurchaseOrder" ToRole="Employee" />
           <NavigationProperty Name="Supplier" Relationship="InventoryModel.FK_purchaseorder_supplier1" FromRole="PurchaseOrder" ToRole="Supplier" />
           <NavigationProperty Name="PurchaseOrderDetails" Relationship="InventoryModel.FK_purchaseorderdetails_purchaseorder1" FromRole="PurchaseOrder" ToRole="PurchaseOrderDetails" />
+          <Property Type="String" Name="Remarks" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PurchaseOrderDetail">
           <Key>
@@ -1465,6 +1393,7 @@
           <Property Name="AcceptedQty" Type="Int32" />
           <NavigationProperty Name="Item" Relationship="InventoryModel.FK_purchaseorderdetails_item1" FromRole="PurchaseOrderDetails" ToRole="Item" />
           <NavigationProperty Name="PurchaseOrder" Relationship="InventoryModel.FK_purchaseorderdetails_purchaseorder1" FromRole="PurchaseOrderDetails" ToRole="PurchaseOrder" />
+          <Property Type="String" Name="Remarks" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Requisition">
           <Key>
@@ -1493,6 +1422,8 @@
           <NavigationProperty Name="CreatedBy" Relationship="InventoryModel.FK_requisitioncollection_employee1" FromRole="RequisitionCollection" ToRole="Employee" />
           <NavigationProperty Name="RequisitionCollectionDetails" Relationship="InventoryModel.FK_RequisitionCollectionDetails_RequisitionCollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionDetails" />
           <NavigationProperty Name="RequisitionCollectionItems" Relationship="InventoryModel.FK_requisitioncollectionitems_requisitioncollection1" FromRole="RequisitionCollection" ToRole="RequisitionCollectionItems" />
+          <Property Type="DateTime" Name="DeliveryDate" />
+          <Property Type="Int32" Name="DeliveryBy" />
         </EntityType>
         <EntityType Name="RequisitionCollectionDetail">
           <Key>
@@ -1834,7 +1765,8 @@
             <ScalarProperty Name="Status" ColumnName="Status" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="DiscrepancyDetails"><EntityTypeMapping TypeName="InventoryModel.DiscrepancyDetail"><MappingFragment StoreEntitySet="DiscrepancyDetails">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="DiscrepancyType" ColumnName="DiscrepancyType" />
             <ScalarProperty Name="Qty" ColumnName="Qty" />
             <ScalarProperty Name="Remarks" ColumnName="Remarks" />
@@ -1848,7 +1780,8 @@
             <ScalarProperty Name="Status" ColumnName="Status" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Items"><EntityTypeMapping TypeName="InventoryModel.Item"><MappingFragment StoreEntitySet="Item">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Bin" ColumnName="Bin" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
             <ScalarProperty Name="Description" ColumnName="Description" />
             <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
@@ -1872,7 +1805,8 @@
             <ScalarProperty Name="Status" ColumnName="Status" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PurchaseOrders"><EntityTypeMapping TypeName="InventoryModel.PurchaseOrder"><MappingFragment StoreEntitySet="PurchaseOrder">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="DeliverAddress" ColumnName="DeliverAddress" />
             <ScalarProperty Name="Attn" ColumnName="Attn" />
             <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
@@ -1883,7 +1817,8 @@
             <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PurchaseOrderDetails"><EntityTypeMapping TypeName="InventoryModel.PurchaseOrderDetail"><MappingFragment StoreEntitySet="PurchaseOrderDetails">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Price" ColumnName="Price" />
             <ScalarProperty Name="Qty" ColumnName="Qty" />
             <ScalarProperty Name="AcceptedQty" ColumnName="AcceptedQty" />
@@ -1900,7 +1835,9 @@
             </EntityTypeMapping>
             </EntitySetMapping>
           <EntitySetMapping Name="RequisitionCollections"><EntityTypeMapping TypeName="InventoryModel.RequisitionCollection"><MappingFragment StoreEntitySet="RequisitionCollection">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="DeliveryBy" ColumnName="DeliveryBy" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
             <ScalarProperty Name="Status" ColumnName="Status" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
