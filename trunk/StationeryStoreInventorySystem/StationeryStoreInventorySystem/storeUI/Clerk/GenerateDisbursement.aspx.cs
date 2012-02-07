@@ -34,7 +34,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 //GenerateDisbursementControl GDobj = new GenerateDisbursementControl();
                 //DataTable dt = GDobj.GetDisbursementList();
                 FillDisbursementList(generateDisbursementControl.RetrievalList);
-                FillCollectionList(generateDisbursementControl.CollectionPointList);
+                //FillCollectionList(generateDisbursementControl.CollectionPointList);
 
                 StationeryStoreInventorySystemController.Util.PutSession(sessionKey, generateDisbursementControl);
             }
@@ -72,27 +72,27 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
             }
         }
 
-        /// <summary>
-        /// Fills Collection list to DataGrid
-        /// </summary>
-        /// <param name="dtCollection"></param>
-        private void FillCollectionList(DataTable dtCollection)
-        {
-            try
-            {
-                if (dtCollection != null)
-                {
-                    drdCollectionPoint.TextField = "CollectionPoint";
-                    drdCollectionPoint.ValueField = "CollectionID";
-                    drdCollectionPoint.DataSource = dtCollection;
-                    drdCollectionPoint.DataBind();
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.WriteErrorLog(e);
-            }
-        }
+        ///// <summary>
+        ///// Fills Collection list to DataGrid
+        ///// </summary>
+        ///// <param name="dtCollection"></param>
+        //private void FillCollectionList(DataTable dtCollection)
+        //{
+        //    try
+        //    {
+        //        if (dtCollection != null)
+        //        {
+        //            //drdCollectionPoint.TextField = "CollectionPoint";
+        //            //drdCollectionPoint.ValueField = "CollectionID";
+        //            //drdCollectionPoint.DataSource = dtCollection;
+        //            //drdCollectionPoint.DataBind();
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Logger.WriteErrorLog(e);
+        //    }
+        //}
 
         protected void btnGenerate_Click(object sender, EventArgs e)
         {
@@ -111,5 +111,5 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
     }
 }
 /****************************************/
-/********* End of the Class *****************/
+/********* End of the Class *************/
 /****************************************/

@@ -77,18 +77,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label CssClass="DefaultLabelstyle" ID="lCollectionPoint" runat="server" 
-                                Text="<%$ Resources:WebResources, GenerateDisbursement_CollectionPoint%>"/>
-                        </td>
-                        <td>
-                            <ig:WebDropDown ID="drdCollectionPoint" runat="server" Width="250px" 
-                            DropDownAnimationType="EaseIn" NullText="Enter or Select Collection Point" 
-                            StyleSetName="Office2010Blue">
-                         </ig:WebDropDown>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <asp:Label CssClass="DefaultLabelstyle" ID="lDisbursementDate" runat="server" 
                                 Text="<%$ Resources:WebResources, GenerateDisbursement_DisbursementDateTime%>"/>
                         </td>
