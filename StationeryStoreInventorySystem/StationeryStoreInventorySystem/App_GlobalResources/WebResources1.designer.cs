@@ -547,6 +547,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate Reports.
+        /// </summary>
+        internal static string GenerateReports_Header {
+            get {
+                return ResourceManager.GetString("GenerateReports_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authorized By:.
         /// </summary>
         internal static string IssueAdjustmentVoucher_AuthorizedBy {
@@ -1051,7 +1060,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Collection By Items.
+        ///   Looks up a localized string similar to Update Collection Details By Items.
         /// </summary>
         internal static string UpdateCollectionByItems_Header {
             get {
@@ -1123,7 +1132,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Collection By Requisitions.
+        ///   Looks up a localized string similar to Update Collection Details By Requisitions.
         /// </summary>
         internal static string UpdateCollectionByRequisitions {
             get {

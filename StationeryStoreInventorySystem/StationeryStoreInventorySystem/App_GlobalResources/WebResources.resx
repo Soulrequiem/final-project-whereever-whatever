@@ -256,7 +256,7 @@
     <value>Item Details</value>
   </data>
   <data name="UpdateCollectionByItems_Header" xml:space="preserve">
-    <value>Update Collection By Items</value>
+    <value>Update Collection Details By Items</value>
   </data>
   <data name="UpdateCollectionByRequisions_CollectionDateTimeLabel" xml:space="preserve">
     <value>Collection Date/Time :</value>
@@ -280,7 +280,7 @@
     <value>Please Select Collection </value>
   </data>
   <data name="UpdateCollectionByRequisitions" xml:space="preserve">
-    <value>Update Collection By Requisitions</value>
+    <value>Update Collection Details By Requisitions</value>
   </data>
   <data name="ReceiveOrderForm_DeliverDate" xml:space="preserve">
     <value>Delivery Date:</value>
@@ -545,5 +545,8 @@
   </data>
   <data name="Back_Link_Text" xml:space="preserve">
     <value>Back to Approve/Reject Requisitions</value>
+  </data>
+  <data name="GenerateReports_Header" xml:space="preserve">
+    <value>Generate Reports</value>
   </data>
 </root>
