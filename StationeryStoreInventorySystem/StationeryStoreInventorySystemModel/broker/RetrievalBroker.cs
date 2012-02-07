@@ -292,20 +292,30 @@ namespace StationeryStoreInventorySystemModel.broker
         /// <returns></returns>
         public int GetRetrievalId()
         {
-            List<Retrieval> list = GetAllRetrieval();
-            Retrieval retrieval = list.Last();
-            int id = retrieval.Id;
-            id++;
-            return id;
+            int retrievalId = 0;
+            try
+            {
+                retrievalId = inventory.Retrievals.Max(x => x.Id) + 1;
+            }
+            catch (Exception e)
+            {
+                retrievalId = 1;
+            }
+            return retrievalId;
         }
 
         public int GetRetrievalDetailId()
         {
-            List<RetrievalDetail> list = GetAllRetrievalDetail();
-            RetrievalDetail retrievalDetail = list.Last();
-            int id = retrievalDetail.Id;
-            id++;
-            return id;
+            int retrievalDetailId = 0;
+            try
+            {
+                retrievalDetailId = inventory.RetrievalDetails.Max(x => x.Id) + 1;
+            }
+            catch (Exception e)
+            {
+                retrievalDetailId = 1;
+            }
+            return retrievalDetailId;
         }
     }
 }
