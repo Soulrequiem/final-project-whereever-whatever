@@ -21,6 +21,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.SuperVisor_Manager
         private static readonly string sessionKey = "ViewAdjustmentVoucherList";
         private ViewAdjustmentVoucherListControl vavlCtrl;
         private string voucherNo;
+
         /// <summary>
         /// Loads the ViewAdjustmentVoucherList form
         /// </summary>
