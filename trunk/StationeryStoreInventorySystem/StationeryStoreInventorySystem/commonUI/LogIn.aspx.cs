@@ -69,14 +69,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
                         UserRole == (int)Constants.EMPLOYEE_ROLE.TEMPORARY_DEPARTMENT_HEAD)
                         Response.Redirect("~/departmentUI/Head/ApproveRequisition.aspx");
                     else if(UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_CLERK)
-                        Response.Redirect("~/storeUI/Clerk/ViewStationeryRetrievalList.aspx");
+                        Response.Redirect("~/commonUI/ViewStationeryCatalogue.aspx");
                     else if (UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER ||
                         UserRole == (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR)
                     {
                         if(Util.CheckAdjustment())
                             Response.Redirect("~/storeUI/SuperVisor_Manager/IssueAdjustmentVoucher.aspx");
                         else
-                            Response.Redirect("~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucher.aspx");
+                            Response.Redirect("~/storeUI/SuperVisor_Manager/ViewAdjustmentVoucherList.aspx");
                     }
                     else if (UserRole == (int)Constants.EMPLOYEE_ROLE.ADMIN)
                         Response.Redirect("~/commonUI/Report.aspx");
