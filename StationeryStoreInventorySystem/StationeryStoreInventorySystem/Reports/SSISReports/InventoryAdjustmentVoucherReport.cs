@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
+namespace StationeryStoreInventorySystem.Reports.SSISReports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RequisitionReport : ReportClass {
+    public class InventoryAdjustmentVoucherReport : ReportClass {
         
-        public RequisitionReport() {
+        public InventoryAdjustmentVoucherReport() {
         }
         
         public override string ResourceName {
             get {
-                return "RequisitionReport.rpt";
+                return "InventoryAdjustmentVoucherReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,8 +41,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         public override string FullResourceName {
             get {
-                return "SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports.RequisitionReport.r" +
-                    "pt";
+                return "StationeryStoreInventorySystem.Reports.SSISReports.InventoryAdjustmentVoucherRepo" +
+                    "rt.rpt";
             }
             set {
                 // Do nothing
@@ -91,7 +91,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_RequisitionID {
+        public CrystalDecisions.Shared.IParameterField Parameter_VoucherNo {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -99,7 +99,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DeptName {
+        public CrystalDecisions.Shared.IParameterField Parameter_Supervisor {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -107,7 +107,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DeptCode {
+        public CrystalDecisions.Shared.IParameterField Parameter_date {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
@@ -115,33 +115,17 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeName {
+        public CrystalDecisions.Shared.IParameterField Parameter_authorizedBy {
             get {
                 return this.DataDefinition.ParameterFields[3];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_EmployeeNumber {
-            get {
-                return this.DataDefinition.ParameterFields[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Email {
-            get {
-                return this.DataDefinition.ParameterFields[5];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRequisitionReport : Component, ICachedReport {
+    public class CachedInventoryAdjustmentVoucherReport : Component, ICachedReport {
         
-        public CachedRequisitionReport() {
+        public CachedInventoryAdjustmentVoucherReport() {
         }
         
         [Browsable(false)]
@@ -178,7 +162,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RequisitionReport rpt = new RequisitionReport();
+            InventoryAdjustmentVoucherReport rpt = new InventoryAdjustmentVoucherReport();
             rpt.Site = this.Site;
             return rpt;
         }

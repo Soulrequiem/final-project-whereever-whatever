@@ -16,14 +16,14 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RolesReport : ReportClass {
+    public class StationeryPurchaseOrderReport : ReportClass {
         
-        public RolesReport() {
+        public StationeryPurchaseOrderReport() {
         }
         
         public override string ResourceName {
             get {
-                return "RolesReport.rpt";
+                return "StationeryPurchaseOrderReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,8 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         
         public override string FullResourceName {
             get {
-                return "StationeryStoreInventorySystem.Reports.SSISReports.RolesReport.rpt";
+                return "StationeryStoreInventorySystem.Reports.SSISReports.StationeryPurchaseOrderReport." +
+                    "rpt";
             }
             set {
                 // Do nothing
@@ -87,12 +88,52 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
                 return this.ReportDefinition.Sections[4];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_supplier {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_PONumber {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DeliverTo {
+            get {
+                return this.DataDefinition.ParameterFields[2];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Attention {
+            get {
+                return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_date {
+            get {
+                return this.DataDefinition.ParameterFields[4];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRolesReport : Component, ICachedReport {
+    public class CachedStationeryPurchaseOrderReport : Component, ICachedReport {
         
-        public CachedRolesReport() {
+        public CachedStationeryPurchaseOrderReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +170,7 @@ namespace StationeryStoreInventorySystem.Reports.SSISReports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RolesReport rpt = new RolesReport();
+            StationeryPurchaseOrderReport rpt = new StationeryPurchaseOrderReport();
             rpt.Site = this.Site;
             return rpt;
         }

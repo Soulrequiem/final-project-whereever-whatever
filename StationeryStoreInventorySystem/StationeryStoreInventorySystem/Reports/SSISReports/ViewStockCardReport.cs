@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
+namespace StationeryStoreInventorySystem.Reports.SSISReports {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RolesReport : ReportClass {
+    public class ViewStockCardReport : ReportClass {
         
-        public RolesReport() {
+        public ViewStockCardReport() {
         }
         
         public override string ResourceName {
             get {
-                return "RolesReport.rpt";
+                return "ViewStockCardReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         
         public override string FullResourceName {
             get {
-                return "SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports.RolesReport.rpt";
+                return "StationeryStoreInventorySystem.Reports.SSISReports.ViewStockCardReport.rpt";
             }
             set {
                 // Do nothing
@@ -87,12 +87,68 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
                 return this.ReportDefinition.Sections[4];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_ItemCode {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_ItemDes {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Bin {
+            get {
+                return this.DataDefinition.ParameterFields[2];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_UOM {
+            get {
+                return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_firstSupp {
+            get {
+                return this.DataDefinition.ParameterFields[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_secondSupp {
+            get {
+                return this.DataDefinition.ParameterFields[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_thirdSupp {
+            get {
+                return this.DataDefinition.ParameterFields[6];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRolesReport : Component, ICachedReport {
+    public class CachedViewStockCardReport : Component, ICachedReport {
         
-        public CachedRolesReport() {
+        public CachedViewStockCardReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +185,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.Reports.SSISReports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RolesReport rpt = new RolesReport();
+            ViewStockCardReport rpt = new ViewStockCardReport();
             rpt.Site = this.Site;
             return rpt;
         }
