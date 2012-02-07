@@ -79,8 +79,7 @@
                             </td>
                             <td width="100px">
                                 <asp:Label CssClass="DefaultLabelstyle" 
-                                    ID="lblCollectionID" runat="server" 
-                                    Text="C0019"/>
+                                    ID="lblCollectionID" runat="server"/>
                             </td>
                             <td>
                                 <asp:Label CssClass="DefaultLabelstyle" 
@@ -89,8 +88,7 @@
                             </td>
                             <td>
                                 <asp:Label CssClass="DefaultLabelstyle" 
-                                    ID="lblCollectionPoint" runat="server" 
-                                    Text="University Hospital"/>&nbsp;&nbsp;
+                                    ID="lblCollectionPoint" runat="server"/>&nbsp;&nbsp;
                             </td>
                         </tr>
                         <tr>
