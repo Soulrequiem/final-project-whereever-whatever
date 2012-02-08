@@ -280,7 +280,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                                 </ig:Sorting>
                                 <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                 </ig:Selection>
-                                <ig:Paging PageSize="15">  
+                                <ig:Paging PageSize="15" PagerMode="NextPrevious">  
                                 </ig:Paging>
                                 <ig:Filtering >
                                     <ColumnSettings>
@@ -406,7 +406,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
         <div style="float:left">
             <asp:ImageButton ID="PrintButton" runat="server" 
             ImageUrl="~/Images/Common/iconPrint.gif" Width="35px" Height="35px" 
-                ToolTip="Print" onclick="PrintButton_Click" />
+                ToolTip="Print" onclick="PrintButton_Click" Visible="false" />
         </div>
         <div style="float:right">
             <asp:Label ID="lblTotalCount" runat="server" Text="Total Count :" CssClass="DefaultLabelstyle"/>

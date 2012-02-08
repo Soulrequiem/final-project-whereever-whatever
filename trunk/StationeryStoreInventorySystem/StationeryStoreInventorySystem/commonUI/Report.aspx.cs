@@ -212,9 +212,12 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         }
         private string getDate(string date)
         {
-            string[] str = date.Split('/');
-            return str[2].Substring(0,4)+"-"+str[0]+"-"+str[1];
-
+            if (date.Contains("/"))
+            {
+                string[] str = date.Split('/');
+                return str[2].Substring(0, 4) + "-" + str[0] + "-" + str[1];
+            }
+            return string.Empty;
         }
         private void PrepareData()
         {
@@ -340,7 +343,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
 
         private void SetLabel(bool flag)
         {
-            WebTab1.Tabs[1].Enabled = Constants.ItemConsumptionReport == drdReportList.CurrentValue ? true : false;
+            WebTab1.Tabs[1].Enabled = Constants.ItemConsumptionReport == drdReportList.CurrentValue ||
+                                        Constants.ItemMovementReport == drdReportList.CurrentValue ? true : false;
             lblNoDataAvailable.Visible = flag;
             reportpanel.Visible = !flag;
             FilterPanel.Visible = Constants.ItemConsumptionReport == drdReportList.CurrentValue ? true : false;
