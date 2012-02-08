@@ -10,15 +10,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="ContentDivStyle">
-    <div class="print">
-        <%--<asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
+    <%--div class="print">
+        <asp:HyperLink ID="HyperLink1" runat="server" onmouseover="javascript:this.style.cursor='hand'" 
           onmouseout="javascript:this.style.cursor='pointer'"  ImageUrl="~/Images/Common/print.png" 
-          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>--%>
-        <%--<img alt="Print" src="../../Images/Common/print.png" />--%>
+          Target="_blank" Text="<%$ Resources:WebResources, PrintImage_text %>"></asp:HyperLink>
+        <img alt="Print" src="../../Images/Common/print.png" />
         <asp:ImageButton ID="Print" runat="server" 
             ImageUrl="~/Images/Common/print.png" Width="30px" Height="45px" 
             ToolTip="Print" />
-    </div>
+    </div>--%>
     <asp:ScriptManager ID="ScriptManager1" runat="server"/>
             <br />
     <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
@@ -61,22 +61,22 @@
                             <ig:BoundDataField DataFieldName="ItemNo" Key="ItemNo" Width="100px">
                                 <Header Text="Item No." />
                             </ig:BoundDataField>
-                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="120px">
+                            <ig:BoundDataField DataFieldName="Category" Key="Category" Width="125px">
                                 <Header Text="Category" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                                Width="250px">
+                                Width="255px">
                                 <Header Text="Item Description" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="UnitOfMeasure" Key="UnitOfMeasure" 
-                                Width="100px">
+                                Width="120px">
                                 <Header Text="UnitOfMeasure" />
                             </ig:BoundDataField>
                         </Columns>
                         <Behaviors>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
-                            <ig:Paging PageSize="10">
+                            <ig:Paging PageSize="15">
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
@@ -84,7 +84,7 @@
                             </ig:Sorting>
                         </Behaviors>
                  </ig:WebDataGrid>
-                 <ig:WebDataGrid ID="dgvClerkStationeryList" runat="server" Width="720px" 
+                 <ig:WebDataGrid ID="dgvClerkStationeryList" runat="server" Width="700px" 
                         Height="640px" DefaultColumnWidth="50px" StyleSetName="Office2010Blue" 
                         AutoGenerateColumns="False" CssClass="DefaultGridViewStyle" 
                         HeaderCaptionCssClass="HeaderGridViewStyle" 
@@ -106,7 +106,7 @@
                                 <Header Text="Category" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ItemDescription" Key="ItemDescription" 
-                                Width="250px">
+                                Width="230px">
                                 <Header Text="Item Description" />
                             </ig:BoundDataField>
                             <ig:BoundDataField DataFieldName="ReorderLevel" Key="ReorderLevel" 
@@ -125,7 +125,7 @@
                         <Behaviors>
                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
-                            <ig:Paging PageSize="10">
+                            <ig:Paging PageSize="15">
                             </ig:Paging>
                             <ig:Filtering>
                             </ig:Filtering>
