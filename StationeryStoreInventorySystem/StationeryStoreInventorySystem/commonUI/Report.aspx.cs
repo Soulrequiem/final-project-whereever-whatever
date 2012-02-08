@@ -255,8 +255,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             //To load specific requisition IDs only in requisitions drop down
             if (reportDT != null && reportDT.Columns.Contains("Requisition ID"))
             {
+                DataView view = new DataView(reportDT);
+                DataTable dt = view.ToTable(true, "Requisition ID");
                 drdRequisitions.DataSource = null;
-                drdRequisitions.DataSource = reportDT;
+                drdRequisitions.DataSource = dt;
                 drdRequisitions.DataBind();
             }
 
@@ -522,8 +524,10 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
         }
         private void fillItems()
         {
+            DataView view = new DataView(getControl().getItems());
+            DataTable distinctValues = view.ToTable(true, "Description");
             drdItems.DataSource = null;
-            drdItems.DataSource = getControl().getItems();
+            drdItems.DataSource = distinctValues;
         }
         private void fillEmployeesByDepartment()
         {
@@ -654,7 +658,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.commonUI
             dgvReport.ClearDataSource();
             dgvReport.DataSource = reportDT;
             dgvReport.DataBind();
-            lblTotalCount.Text = "Total Count : " + reportDT.Rows.Count;
+
+            if (reportDT != null && reportDT.Rows.Count > 0)
+                lblTotalCount.Text = "Total Count : " + reportDT.Rows.Count;
             BindChart();
             Session["ReportData"] = reportDT;
         }
