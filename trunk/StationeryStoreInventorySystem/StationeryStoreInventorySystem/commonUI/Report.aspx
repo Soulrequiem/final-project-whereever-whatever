@@ -280,7 +280,7 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                                 </ig:Sorting>
                                 <ig:Selection CellClickAction="Row" RowSelectType="Single">
                                 </ig:Selection>
-                                <ig:Paging PageSize="15" PagerMode="NextPrevious">  
+                                <ig:Paging PageSize="15" PagerMode="NumericFirstLast">  
                                 </ig:Paging>
                                 <ig:Filtering >
                                     <ColumnSettings>
