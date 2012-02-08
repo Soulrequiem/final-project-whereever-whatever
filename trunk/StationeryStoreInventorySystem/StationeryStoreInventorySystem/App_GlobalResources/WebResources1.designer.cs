@@ -754,6 +754,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Top 10 Notification.
+        /// </summary>
+        internal static string Notification_Title {
+            get {
+                return ResourceManager.GetString("Notification_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Print.
         /// </summary>
         internal static string PrintImage_text {
