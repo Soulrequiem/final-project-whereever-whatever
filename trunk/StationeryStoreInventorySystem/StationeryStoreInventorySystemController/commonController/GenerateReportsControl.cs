@@ -39,12 +39,16 @@ namespace StationeryStoreInventorySystemController.commonController
             sbQuery.Append(" E.Name as 'DepartmentHead' ");
             sbQuery.Append(" from Department D, Employee E ");
             sbQuery.Append(" where D.HeadId = E.Id ");
-            if ((int)Constants.EMPLOYEE_ROLE.STORE_CLERK != roleId  &&
+            if ((int)Constants.EMPLOYEE_ROLE.STORE_CLERK != roleId &&
                 (int)Constants.EMPLOYEE_ROLE.ADMIN != roleId &&
                 (int)Constants.EMPLOYEE_ROLE.STORE_MANAGER != roleId &&
-                (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR != roleId )
+                (int)Constants.EMPLOYEE_ROLE.STORE_SUPERVISOR != roleId)
             {
-                sbQuery.Append(" AND E.DepartmentId = '" + emp.Department.Id+"'");
+                sbQuery.Append(" AND E.DepartmentId = '" + emp.Department.Id + "'");
+            }
+            else
+            {
+                sbQuery.Append(" AND D.Id != 'STR' "); 
             }
             return ReturnResultSet(sbQuery.ToString());
         }
@@ -443,6 +447,20 @@ namespace StationeryStoreInventorySystemController.commonController
                 sbQuery.Append(" ) ");
             }
             return sbQuery.ToString();
+        }
+
+        public DataTable getDisbursment(string date, string retrivalID)
+        {
+            StringBuilder sbQuery = new StringBuilder();
+
+            sbQuery.Append(" select D.Name as 'Department', CP.Name as 'CollectionPoint', I.Description as 'StationeryDescription' , RD.ActualQty as 'Quantity' ");
+            sbQuery.Append(" from RetrievalDetails RD, Item I, Retrieval RT, ");
+            sbQuery.Append(" Requisition RQ, RequisitionCollectionDetails RCD, RequisitionCollection RC, CollectionPoint CP, Department D   ");
+            sbQuery.Append(" where RD.ItemId = I.Id AND RD.RetrievalId = RT.Id AND RC.Id = RCD.RequisitionCollectionId AND RQ.DepartmentId = D.Id AND ");
+            sbQuery.Append(" RD.RequisitionId = RQ.Id AND RCD.RequisitionId = RD.RequisitionId AND RT.Id = '" + retrivalID + "' AND ");
+            sbQuery.Append(" RC.CollectionPointId = CP.Id AND RC.DeliveryDate = '" + date + "'");
+
+            return ReturnResultSet(sbQuery.ToString());
         }
     }
 }
