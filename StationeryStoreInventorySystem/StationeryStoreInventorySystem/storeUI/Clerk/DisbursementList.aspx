@@ -8,50 +8,51 @@
     <div class="ContentDivStyle">
         <asp:ScriptManager ID="ScriptManager1" runat="server"/>
              <h1 class="HeaderStyle"><asp:Literal ID="Literal1" runat="server" 
-             Text="<%$ Resources:WebResources, DisbursementList_Title %>" /></h1>
+             Text="Disbursement List" /></h1>
              <br />
              <div>
                 <table>
                     <tr>
                         <td>
-                            <asp:Label CssClass="DefaultLabelstyle" ID="Label8" runat="server"
-                                Text = "Duisbursement List at " />
+                            <asp:Label CssClass="DefaultTextStyle" ID="Label8" runat="server"
+                                Text = "Disbursement List at " />
                         </td>
                         <td>
                             <asp:Label CssClass="DefaultLabelstyle" ID = "lblDate" runat="server" />
                         </td>
                         <td>
-                            <asp:Label CssClass="DefaultLabelstyle" ID = "Label9" runat="server"
-                                Text = "for " />
-                        </td>
+                            &nbsp;</td>
                         <td>
-                            <asp:Label CssClass= "DefaultLabelstyle" ID = "lblCompany" runat="server" />
-                        </td>
+                            &nbsp;</td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label CssClass="DefaultLabelstyle" ID = "Label10" runat="server"
-                                Text = "Collection Point: " />
-                        </td>
+                            &nbsp;</td>
                         <td>
-                            <asp:Label CssClass="DefaultLabelstyle" ID = "lblCollection" runat="server" />
-                        </td>
+                            &nbsp;</td>
                     </tr>
                 </table>
              </div>
              <asp:Panel ID="RetrievalPanel" runat="server">
             <ig:WebDataGrid ID="DgvDisbursementList" runat="server" Height="300px" 
-            Width="500px" DefaultColumnWidth="50px" AutoGenerateColumns="False" DataKeyFields="RetrievalNo"
+            Width="700px" DefaultColumnWidth="50px" AutoGenerateColumns="False" DataKeyFields="StationeryDescription"
             CssClass="DefaultGridViewStyle" HeaderCaptionCssClass="HeaderGridViewStyle" 
             ItemCssClass="ItemGridViewStyle" StyleSetName="Office2010Blue" 
             EnableDataViewState="True">
                 <Columns>
+                    <ig:BoundDataField DataFieldName="Department" Key="Department" 
+                        Width="180px">
+                        <Header Text="Department" />
+                    </ig:BoundDataField>
+                    <ig:BoundDataField DataFieldName="CollectionPoint" Key="CollectionPoint" Width="190px"> 
+                        <Header Text="Collection Point" />
+                    </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="StationeryDescription" Key="StationeryDescription" 
-                        Width="300px">
+                        Width="190px">
                         <Header Text="Stationery Description" />
                     </ig:BoundDataField>
                     <ig:BoundDataField DataFieldName="Quantity" Key="Quantity" 
-                        Width="200px">
+                        Width="80px">
                         <Header Text="Quantity" />
                     </ig:BoundDataField>
                 </Columns>
