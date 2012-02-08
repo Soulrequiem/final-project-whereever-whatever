@@ -282,11 +282,6 @@ namespace="Infragistics.UltraChart.Data" tagprefix="igchartdata" %>
                                 </ig:Selection>
                                 <ig:Paging PageSize="15" PagerMode="NumericFirstLast">  
                                 </ig:Paging>
-                                <ig:Filtering >
-                                    <ColumnSettings>
-                                        <ig:ColumnFilteringSetting />
-                                    </ColumnSettings>
-                                </ig:Filtering>
                             </Behaviors>
                         </ig:WebDataGrid>
                     </Template>
