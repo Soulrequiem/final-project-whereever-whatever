@@ -111,7 +111,8 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         protected void btnGenerateDisbursement_Click(object sender, EventArgs e)
         {
-            generateDisbursementControl.SetDeliveryDate(SystemStoreInventorySystemUtil.Converter.objToInt(lblRetrievalNo.Text), Calendar1.SelectedDate);
+            //generateDisbursementControl.SetDeliveryDate(SystemStoreInventorySystemUtil.Converter.objToInt(lblRetrievalNo.Text), Calendar1.SelectedDate);
+            Response.Redirect("~/storeUI/Clerk/DisbursementList.aspx?retrievalID="+lblRetrievalNo.Text+"&date="+Calendar1.SelectedDate.ToString("yyyy-MM-dd"));
         }
     }
 }
