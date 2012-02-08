@@ -19,6 +19,9 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
         private ManageStationeryRetrievalListControl manageStationeryRetrievalListControl;
 
+        private Dictionary<string, List<object>> unfulfilledRetrievalList;
+        private Dictionary<string, List<object>> retrievalList;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -88,7 +91,7 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
         {
             lblRetrievalNo.Text = manageStationeryRetrievalListControl.RetrievalId;
 
-            Dictionary<string, List<object>> retrievalList = manageStationeryRetrievalListControl.RetrievalList;
+            retrievalList = manageStationeryRetrievalListControl.RetrievalList;
 
             int index = 0;
             int group = 0;
@@ -144,11 +147,16 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
                 }
             }
 
+            if (retrievalList.Count() == 0)
+            {
+                fulfilledPanel.Visible = false;
+            }
+
             index = 0;
             group = 0;
             int unfulfillPage = SystemStoreInventorySystemUtil.Converter.objToInt(StationeryStoreInventorySystemController.Util.GetSession(unfulfillPageSessionKey));
             startingShowIndex = unfulfillPage > 1 ? unfulfillPage * ManageStationeryRetrievalListControl.totalRetrievalToSet : 0;
-            Dictionary<string, List<object>> unfulfilledRetrievalList = manageStationeryRetrievalListControl.UnfulfilledRetrievalList;
+            unfulfilledRetrievalList = manageStationeryRetrievalListControl.UnfulfilledRetrievalList;
             
             foreach (string key in unfulfilledRetrievalList.Keys)
             {
@@ -200,35 +208,107 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk
 
                 }
             }
+
+            if (unfulfilledRetrievalList.Count() == 0)
+            {
+                unfulfilledPanel.Visible = false;
+            }
         }
 
         protected void btnGenerate_Click(object sender, EventArgs e)
         {
             if (((Button)sender).Equals(btnSet1))
             {
-                //WebDataGrid webDataGrid = (WebDataGrid)this.FindControl("ctl00$MainContent$WebGroupBox1$DgvManageStationeryRetrievalList1");
-                //RetrievalTable retrievalTable = 
                 manageStationeryRetrievalListControl.SetBasedOnRequestSequence(((WebGroupBox)this.FindControl("ctl00$MainContent$WebGroupBox1")).Text, SystemStoreInventorySystemUtil.Converter.objToInt(((Label)this.FindControl("ctl00$MainContent$WebGroupBox1$lblActualQty1")).Text));
                 StationeryStoreInventorySystemController.Util.GoToPage("ManageStationeryRetrievalList.aspx");
-                //Display();
             }
             else if (((Button)sender).Equals(btnSet2))
             {
+                manageStationeryRetrievalListControl.SetBasedOnRequestSequence(((WebGroupBox)this.FindControl("ctl00$MainContent$WebGroupBox2")).Text, SystemStoreInventorySystemUtil.Converter.objToInt(((Label)this.FindControl("ctl00$MainContent$WebGroupBox2$lblActualQty2")).Text));
+                StationeryStoreInventorySystemController.Util.GoToPage("ManageStationeryRetrievalList.aspx");
             }
             else if (((Button)sender).Equals(btnSet3))
             {
+                manageStationeryRetrievalListControl.SetBasedOnRequestSequence(((WebGroupBox)this.FindControl("ctl00$MainContent$WebGroupBox3")).Text, SystemStoreInventorySystemUtil.Converter.objToInt(((Label)this.FindControl("ctl00$MainContent$WebGroupBox3$lblActualQty3")).Text));
+                StationeryStoreInventorySystemController.Util.GoToPage("ManageStationeryRetrievalList.aspx");
             }
             else if (((Button)sender).Equals(btnSet4))
             {
+                manageStationeryRetrievalListControl.SetBasedOnRequestSequence(((WebGroupBox)this.FindControl("ctl00$MainContent$WebGroupBox4")).Text, SystemStoreInventorySystemUtil.Converter.objToInt(((Label)this.FindControl("ctl00$MainContent$WebGroupBox4$lblActualQty4")).Text));
+                StationeryStoreInventorySystemController.Util.GoToPage("ManageStationeryRetrievalList.aspx");
             }
             else if (((Button)sender).Equals(btnSet5))
             {
+                manageStationeryRetrievalListControl.SetBasedOnRequestSequence(((WebGroupBox)this.FindControl("ctl00$MainContent$WebGroupBox5")).Text, SystemStoreInventorySystemUtil.Converter.objToInt(((Label)this.FindControl("ctl00$MainContent$WebGroupBox5$lblActualQty5")).Text));
+                StationeryStoreInventorySystemController.Util.GoToPage("ManageStationeryRetrievalList.aspx");
             }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            retrievalList = manageStationeryRetrievalListControl.RetrievalList;
+            unfulfilledRetrievalList = manageStationeryRetrievalListControl.UnfulfilledRetrievalList;
 
+            int index = 0;
+            int group = 0;
+            int fulfillPage = SystemStoreInventorySystemUtil.Converter.objToInt(StationeryStoreInventorySystemController.Util.GetSession(fulfillPageSessionKey));
+            int startingShowIndex = fulfillPage > 1 ? fulfillPage * ManageStationeryRetrievalListControl.totalRetrievalToSet : 0;
+            foreach (string key in retrievalList.Keys)
+            {
+                if (index++ >= startingShowIndex && group < ManageStationeryRetrievalListControl.totalRetrievalToSet)
+                {
+                    WebGroupBox webGroupBox = (WebGroupBox)this.FindControl("ctl00$MainContent$FulfillWebGroupBox" + (++group));
+
+                    if (webGroupBox != null)
+                    {
+                        WebDataGrid webDataGrid = (WebDataGrid)this.FindControl("ctl00$MainContent$FulfillWebGroupBox" + group + "$FulfillWebDataGrid" + group);
+
+                        DataTable dt = (DataTable)retrievalList[key][COLUMN_TABLE];
+
+                        for (int i = 0; i < webDataGrid.Rows.Count; i++)
+                        {
+                            if (SystemStoreInventorySystemUtil.Converter.objToInt(((Infragistics.Web.UI.EditorControls.WebTextEditor)webDataGrid.Rows[i].Items.FindItemByKey("ActualQty").FindControl("ActualQty")).Text) <= SystemStoreInventorySystemUtil.Converter.objToInt(dt.Rows[i][1]))
+                            {
+                                dt.Rows[i][2] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)webDataGrid.Rows[i].Items.FindItemByKey("ActualQty").FindControl("ActualQty")).Text;
+                            }
+                            else
+                            {
+                                dt.Rows[i][2] = dt.Rows[i][1];
+                            }
+                        }
+                    }
+                }
+            }
+
+            index = 0;
+            group = 0;
+            int unfulfillPage = SystemStoreInventorySystemUtil.Converter.objToInt(StationeryStoreInventorySystemController.Util.GetSession(unfulfillPageSessionKey));
+            startingShowIndex = unfulfillPage > 1 ? unfulfillPage * ManageStationeryRetrievalListControl.totalRetrievalToSet : 0;
+            
+            foreach (string key in unfulfilledRetrievalList.Keys)
+            {
+                if (index++ >= startingShowIndex && group < ManageStationeryRetrievalListControl.totalRetrievalToSet)
+                {
+                    WebGroupBox webGroupBox = (WebGroupBox)this.FindControl("ctl00$MainContent$WebGroupBox" + (++group));
+
+                    if (webGroupBox != null)
+                    {
+                        WebDataGrid webDataGrid = (WebDataGrid)this.FindControl("ctl00$MainContent$WebGroupBox" + group + "$DgvManageStationeryRetrievalList" + group);
+
+                        //manageStationeryRetrievalListControl.SelectSave(((WebGroupBox)this.FindControl("ctl00$MainContent$WebGroupBox" + group)).Text, (DataTable)webDataGrid.DataSource);
+
+                        DataTable dt = (DataTable)unfulfilledRetrievalList[key][COLUMN_TABLE];
+
+                        for (int i = 0; i < webDataGrid.Rows.Count; i++)
+                        {
+                            dt.Rows[i][2] = ((Infragistics.Web.UI.EditorControls.WebTextEditor)webDataGrid.Rows[i].Items.FindItemByKey("ActualQty").FindControl("ActualQty")).Text;
+                        }
+
+                    }
+                }
+            }
+
+            manageStationeryRetrievalListControl.SelectSave();
         }
     }
 }

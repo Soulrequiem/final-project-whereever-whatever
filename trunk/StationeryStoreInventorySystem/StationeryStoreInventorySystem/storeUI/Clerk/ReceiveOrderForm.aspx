@@ -118,9 +118,7 @@
                         <Behaviors>
                             <ig:Filtering>
                             </ig:Filtering>
-                            <ig:Paging PageSize="10">
-                            </ig:Paging>
-                            <ig:Selection CellClickAction="Row" RowSelectType="Single">
+                             <ig:Selection CellClickAction="Row" RowSelectType="Single">
                             </ig:Selection>
                             <ig:Sorting>
                             </ig:Sorting>

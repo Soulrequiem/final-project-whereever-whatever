@@ -49,6 +49,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         protected global::System.Web.UI.WebControls.Label lblRetrievalNo;
         
         /// <summary>
+        /// fulfilledPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel fulfilledPanel;
+        
+        /// <summary>
         /// FulfillWebGroupBox1 control.
         /// </summary>
         /// <remarks>
@@ -416,6 +425,15 @@ namespace SA34_Team9_StationeryStoreInventorySystem.storeUI.Clerk {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel FulfilledPaginating;
+        
+        /// <summary>
+        /// unfulfilledPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel unfulfilledPanel;
         
         /// <summary>
         /// WebGroupBox1 control.

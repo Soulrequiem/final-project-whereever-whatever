@@ -32,6 +32,7 @@
     <br />
     <br />
 
+    <asp:Panel ID="fulfilledPanel" runat="server">
     <a href="javascript:showHiddenFulfill()">Show automatically fulfilled items</a>
 
     <div id="fulfillRetrieval" style="display: none;">
@@ -465,6 +466,10 @@
     </asp:Panel>
     </div>
 
+    </asp:Panel>
+
+
+    <asp:Panel ID="unfulfilledPanel" runat="server">
     <br />
     <br />
 
@@ -898,6 +903,8 @@
     
     <asp:Panel ID="UnfulfilledPaginating" HorizontalAlign="Right" runat="server">
         
+    </asp:Panel>
+
     </asp:Panel>
 
     <br />
