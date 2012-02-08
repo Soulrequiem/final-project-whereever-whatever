@@ -240,7 +240,7 @@ namespace StationeryStoreInventorySystemController.commonController
 	        sbQuery.Append(" Requisition RQ, Employee E, Item I, Department D ");
             sbQuery.Append(" where RD.ItemId = I.Id AND E.Id = RQ.EmployeeId AND RD.RequisitionId = RQ.Id  ");
             sbQuery.Append(" AND D.Id = E.DepartmentId ");
-            if (departmentID != string.Empty)
+            if (departmentID != string.Empty && !departmentID.Contains("STR")) 
                 sbQuery.Append(" AND D.Id = '" + departmentID + "' ");
             if (employeeID != string.Empty)
                 sbQuery.Append(" AND E.Id = '" + employeeID + "'  ");
@@ -269,7 +269,7 @@ namespace StationeryStoreInventorySystemController.commonController
 	        sbQuery.Append(" Requisition RQ, Employee E, Item I, Department D ");
             sbQuery.Append(" where RD.ItemId = I.Id AND E.Id = RQ.EmployeeId AND RD.RequisitionId = RQ.Id  ");
 		    sbQuery.Append(" AND D.Id = E.DepartmentId  ");
-            if (departmentID != string.Empty)
+            if (departmentID != string.Empty && !departmentID.Contains("STR"))
                 sbQuery.Append(" AND D.Id = '" + departmentID + "'  ");
             if (employeeID != string.Empty)
                 sbQuery.Append(" AND E.Id = '" + employeeID + "'  ");
@@ -324,7 +324,7 @@ namespace StationeryStoreInventorySystemController.commonController
                             sb.Append(" AND ( ");
                         else
                             sb.Append(" OR ");
-                        sb.Append(" I.Id = '" + item + "' ");
+                        sb.Append(" CAST(I.Description as varchar(200)) = '" + item + "' ");
                     }
                     if (i == itemArr.Length - 1)
                         sb.Append(" ) ");
@@ -397,7 +397,7 @@ namespace StationeryStoreInventorySystemController.commonController
                 sbQuery.Append(" Requisition RQ, Employee E, Item I, Department D ");
                 sbQuery.Append(" where RD.ItemId = I.Id AND E.Id = RQ.EmployeeId AND RD.RequisitionId = RQ.Id  ");
                 sbQuery.Append(" AND D.Id = E.DepartmentId  ");
-                if (departmentID != string.Empty)
+                if (departmentID != string.Empty && !departmentID.Contains("STR"))
                     sbQuery.Append(" AND D.Id = '" + departmentID + "'  ");
                 if (employeeID != string.Empty)
                     sbQuery.Append(" AND E.Id = '" + employeeID + "'  ");
